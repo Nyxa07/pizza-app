@@ -204,6 +204,9 @@ export class TranslationKeys {
       FRENCH: 'app.language.selector.french',
       ITALIAN: 'app.language.selector.italian',
       SPANISH: 'app.language.selector.spanish',
+      HINDI: 'app.language.selector.hindi',
+      JAPANESE: 'app.language.selector.japanese',
+      CHINESE: 'app.language.selector.chinese',
       CANCEL: 'app.language.selector.cancel',
     },
   };

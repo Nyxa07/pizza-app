@@ -1,0 +1,118 @@
+{
+  "app": {
+    "common": {
+      "actions": {
+        "save": "保存",
+        "cancel": "キャンセル",
+        "delete": "削除",
+        "edit": "編集",
+        "add": "追加"
+      },
+      "status": {
+        "loading": "読み込み中...",
+        "error": "エラー",
+        "success": "成功",
+        "warning": "警告"
+      },
+      "navigation": {
+        "back": "戻る",
+        "next": "次へ",
+        "previous": "前へ"
+      }
+    },
+    "pizza": {
+      "form": {
+        "pizzasNumber": "ピザの数",
+        "yeastType": "イーストの種類",
+        "hydration": "水分",
+        "temperature": "温度",
+        "poolishRatio": "プーリッシュの比率"
+      },
+      "ingredients": {
+        "flour": "小麦粉",
+        "water": "水",
+        "yeast": "イースト",
+        "honey": "はちみつ",
+        "salt": "塩",
+        "dryYeast": "ドライ",
+        "freshYeast": "生"
+      },
+      "calculations": {
+        "toAdd": "追加",
+        "total": "合計",
+        "poolish": "プーリッシュ",
+        "dough": "生地",
+        "weight": "重量",
+        "percentage": "パーセンテージ"
+      },
+      "types": {
+        "poolish": "プーリッシュスタイル",
+        "direct": "直接法",
+        "biga": "ビガ法"
+      },
+      "recipe": {
+        "poolishPreparation": {
+          "title": "プーリッシュの準備",
+          "subtitle": "第1段階：スターターの準備",
+          "step1Title": "ステップ1:",
+          "step1Description": "すべての材料を計量する:",
+          "ingredientsList": "材料リスト",
+          "step2Description": "大きなボウルで、水にイーストを溶かし、はちみつを加える",
+          "step3Description": "小麦粉を加え、木のスプーンで均一な混合物になるまで混ぜる。その後、ラップで覆って室温で1時間置き、冷蔵庫で16-24時間置く"
+        },
+        "doughPreparation": {
+          "title": "生地の準備",
+          "subtitle": "第2段階：こね上げと成形",
+          "step1Description": "使用1時間前にプーリッシュを取り出す",
+          "step2Title": "ステップ2:",
+          "step2Description": "プーリッシュに加える量を計量する:",
+          "ingredientsList": "材料リスト",
+          "step3Description": "プーリッシュのボウルに水と塩を加える。スプーンで混ぜて水が吸収されるまで混ぜる",
+          "step4Description": "小麦粉を少しずつ加え、スプーンで混ぜる",
+          "step5Description": "スプーンが使えなくなったら、生地を作業台に移す",
+          "step6Description": "生地をこねて作業する。小麦粉が完全に統合される必要がある",
+          "step7Description": "生地でいくつかの折り目を作り、美しいボール（柔らかくて柔軟）を形成する",
+          "step8Description": "ボウルの下で10-15分休ませる",
+          "step9Description": "美しいボールを再形成し、密閉容器でさらに1時間休ませる",
+          "step10Description": "プレートに細かいセモリナの薄い層を置く",
+          "step11Description": "生地を回収し、生地カッターまたはスパチュラで生地のボール（よく伸ばされた）を形成する、約",
+          "step12Description": "生地のボールをプレートに置き、各ボールの間にスペースを残す（まだ成長する）",
+          "step13Description": "プレートを閉じるか、ラップをかけて2時間休ませる",
+          "tipsTitle": "💡 ヒント:",
+          "tipsDescription": "生地が粘りすぎる場合は、ボールを形成し、ボウルの下で10分休ませる",
+          "successMessage": "🎉 そして、ピザに変身する準備ができました！"
+        },
+        "storage": {
+          "title": "保存",
+          "subtitle": "保存のヒント",
+          "refrigerator": "冷蔵庫：生地のボールは2-3日間保存可能",
+          "freezer": "冷凍庫：非常によく冷凍される。2-3ヶ月以上保存しない"
+        }
+      }
+    },
+    "navigation": {
+      "tabs": {
+        "poolishStyle": "プーリッシュスタイル",
+        "tab2": "タブ2",
+        "tab3": "タブ3"
+      },
+      "header": {
+        "title": "ピザアプリ",
+        "language": "言語"
+      }
+    },
+    "language": {
+      "selector": {
+        "title": "言語を選択",
+        "english": "英語",
+        "french": "フランス語",
+        "italian": "イタリア語",
+        "spanish": "スペイン語",
+        "hindi": "ヒンディー語",
+        "japanese": "日本語",
+        "chinese": "中国語",
+        "cancel": "キャンセル"
+      }
+    }
+  }
+}

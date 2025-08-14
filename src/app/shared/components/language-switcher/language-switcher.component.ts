@@ -47,6 +47,12 @@ export class LanguageSwitcherComponent {
         return 'IT';
       case 'es':
         return 'ES';
+      case 'hi':
+        return 'HI';
+      case 'ja':
+        return 'JA';
+      case 'zh':
+        return 'ZH';
       default:
         return 'EN';
     }
@@ -91,6 +97,27 @@ export class LanguageSwitcherComponent {
           ),
           icon: this.getFlagIcon('es'),
           handler: () => this.switchLanguage('es'),
+        },
+        {
+          text: this.translateService.instant(
+            TranslationKeys.LANGUAGE.SELECTOR.HINDI,
+          ),
+          icon: this.getFlagIcon('hi'),
+          handler: () => this.switchLanguage('hi'),
+        },
+        {
+          text: this.translateService.instant(
+            TranslationKeys.LANGUAGE.SELECTOR.JAPANESE,
+          ),
+          icon: this.getFlagIcon('ja'),
+          handler: () => this.switchLanguage('ja'),
+        },
+        {
+          text: this.translateService.instant(
+            TranslationKeys.LANGUAGE.SELECTOR.CHINESE,
+          ),
+          icon: this.getFlagIcon('zh'),
+          handler: () => this.switchLanguage('zh'),
         },
         {
           text: this.translateService.instant(
