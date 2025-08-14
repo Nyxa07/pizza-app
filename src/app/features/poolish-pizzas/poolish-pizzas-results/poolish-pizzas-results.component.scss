@@ -1,22 +1,22 @@
 ion-badge {
   &.water {
-    background-color: var(--ion-color-primary);
-    color: var(--ion-color-primary-contrast);
+    background-color: var(--piz-color-water);
+    color: var(--piz-color-water-contrast);
   }
   &.yeast {
-    background-color: var(--ion-color-secondary);
-    color: var(--ion-color-secondary-contrast);
+    background-color: var(--piz-color-yeast);
+    color: var(--piz-color-yeast-contrast);
   }
   &.honey {
-    background-color: var(--ion-color-tertiary);
-    color: var(--ion-color-tertiary-contrast);
+    background-color: var(--piz-color-honey);
+    color: var(--piz-color-honey-contrast);
   }
   &.flour {
-    background-color: var(--ion-color-primary);
-    color: var(--ion-color-primary-contrast);
+    background-color: var(--piz-color-flour);
+    color: var(--piz-color-flour-contrast);
   }
   &.salt {
-    background-color: var(--ion-color-secondary);
-    color: var(--ion-color-secondary-contrast);
+    background-color: var(--piz-color-salt);
+    color: var(--piz-color-salt-contrast);
   }
 }
