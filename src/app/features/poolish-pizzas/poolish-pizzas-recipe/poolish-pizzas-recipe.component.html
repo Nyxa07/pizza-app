@@ -1,0 +1,216 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{
+      TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.TITLE | translate
+    }}</ion-card-title>
+    <ion-card-subtitle>{{
+      TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.SUBTITLE | translate
+    }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <p>
+      <strong>{{
+        TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.STEP_1_TITLE
+          | translate
+      }}</strong>
+      {{
+        TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.STEP_1_DESCRIPTION
+          | translate
+      }}
+    </p>
+    <ul>
+      <li>
+        {{ TranslationKeys.PIZZA.INGREDIENTS.FLOUR | translate }}:
+        <strong>{{ result().poolishFlour }}g</strong>
+      </li>
+      <li>
+        {{ TranslationKeys.PIZZA.INGREDIENTS.WATER | translate }}:
+        <strong>{{ result().poolishWater }}g</strong>
+      </li>
+      <li>
+        {{ TranslationKeys.PIZZA.INGREDIENTS.YEAST | translate }}:
+        <strong>{{ result().poolishYeast }}g</strong>
+      </li>
+      <li>
+        {{ TranslationKeys.PIZZA.INGREDIENTS.HONEY | translate }}:
+        <strong>{{ result().poolishHoney }}g</strong>
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.STEP_2_DESCRIPTION
+            | translate
+        }}
+      </li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.STEP_3_DESCRIPTION
+            | translate
+        }}
+      </li>
+    </ul>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{
+      TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.TITLE | translate
+    }}</ion-card-title>
+    <ion-card-subtitle>{{
+      TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.SUBTITLE | translate
+    }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <p>
+      <strong>{{
+        TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.STEP_1_TITLE
+          | translate
+      }}</strong>
+      {{
+        TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_1_DESCRIPTION
+          | translate
+      }}
+    </p>
+
+    <p>
+      <strong>{{
+        TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_2_TITLE | translate
+      }}</strong>
+      {{
+        TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_2_DESCRIPTION
+          | translate
+      }}
+    </p>
+    <ul>
+      <li>
+        <strong>{{ result().flourToAdd }}g</strong>
+        {{ TranslationKeys.PIZZA.INGREDIENTS.FLOUR | translate | lowercase }}
+      </li>
+      <li>
+        <strong>{{ result().waterToAdd }}g</strong>
+        {{ TranslationKeys.PIZZA.INGREDIENTS.WATER | translate | lowercase }}
+      </li>
+      <li>
+        <strong>{{ result().saltWeight }}g</strong>
+        {{ TranslationKeys.PIZZA.INGREDIENTS.SALT | translate | lowercase }}
+      </li>
+    </ul>
+
+    <ul>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_3_DESCRIPTION
+            | translate
+        }}
+      </li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_4_DESCRIPTION
+            | translate
+        }}
+      </li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_5_DESCRIPTION
+            | translate
+        }}
+      </li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_6_DESCRIPTION
+            | translate
+        }}
+      </li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_7_DESCRIPTION
+            | translate
+        }}
+      </li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_8_DESCRIPTION
+            | translate
+        }}
+      </li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_9_DESCRIPTION
+            | translate
+        }}
+      </li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_10_DESCRIPTION
+            | translate
+        }}
+      </li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_11_DESCRIPTION
+            | translate
+        }}
+        <strong>{{ pizzaWeight }} g</strong>
+      </li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_12_DESCRIPTION
+            | translate
+        }}
+      </li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_13_DESCRIPTION
+            | translate
+        }}
+      </li>
+    </ul>
+
+    <div class="tips">
+      <p>
+        <strong>{{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.TIPS_TITLE | translate
+        }}</strong>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.TIPS_DESCRIPTION
+            | translate
+        }}
+      </p>
+    </div>
+
+    <p class="success-message">
+      <strong>{{
+        TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.SUCCESS_MESSAGE
+          | translate
+      }}</strong>
+    </p>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{
+      TranslationKeys.PIZZA.RECIPE.STORAGE.TITLE | translate
+    }}</ion-card-title>
+    <ion-card-subtitle>{{
+      TranslationKeys.PIZZA.RECIPE.STORAGE.SUBTITLE | translate
+    }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ul>
+      <li>
+        <strong>{{
+          TranslationKeys.PIZZA.RECIPE.STORAGE.REFRIGERATOR | translate
+        }}</strong>
+      </li>
+      <li>
+        <strong>{{
+          TranslationKeys.PIZZA.RECIPE.STORAGE.FREEZER | translate
+        }}</strong>
+      </li>
+    </ul>
+  </ion-card-content>
+</ion-card>

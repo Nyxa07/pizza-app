@@ -1,0 +1,120 @@
+@if (result) {
+  <!-- Poolish Ingredients -->
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-label>{{
+        TranslationKeys.PIZZA.CALCULATIONS.POOLISH | translate
+      }}</ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>{{
+        TranslationKeys.PIZZA.INGREDIENTS.FLOUR | translate
+      }}</ion-label>
+      <ion-badge slot="end" color="primary"
+        >{{ result.poolishFlour }}g</ion-badge
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{
+        TranslationKeys.PIZZA.INGREDIENTS.WATER | translate
+      }}</ion-label>
+      <ion-badge slot="end" color="tertiary"
+        >{{ result.poolishWater }}g</ion-badge
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{
+        TranslationKeys.PIZZA.INGREDIENTS.YEAST | translate
+      }}</ion-label>
+      <ion-badge slot="end" color="medium"
+        >{{ result.poolishYeast }}g</ion-badge
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{
+        TranslationKeys.PIZZA.INGREDIENTS.HONEY | translate
+      }}</ion-label>
+      <ion-badge slot="end" color="warning"
+        >{{ result.poolishHoney }}g</ion-badge
+      >
+    </ion-item>
+  </ion-item-group>
+
+  <!-- Additional Ingredients -->
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-label>{{
+        TranslationKeys.PIZZA.CALCULATIONS.TO_ADD | translate
+      }}</ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>{{
+        TranslationKeys.PIZZA.INGREDIENTS.FLOUR | translate
+      }}</ion-label>
+      <ion-badge slot="end" color="secondary"
+        >{{ result.flourToAdd }}g</ion-badge
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{
+        TranslationKeys.PIZZA.INGREDIENTS.WATER | translate
+      }}</ion-label>
+      <ion-badge slot="end" color="primary">{{ result.waterToAdd }}g</ion-badge>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-label>{{
+        TranslationKeys.PIZZA.CALCULATIONS.TOTAL | translate
+      }}</ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>{{
+        TranslationKeys.PIZZA.INGREDIENTS.FLOUR | translate
+      }}</ion-label>
+      <ion-badge slot="end" color="secondary"
+        >{{ result.totalFlour }}g</ion-badge
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{
+        TranslationKeys.PIZZA.INGREDIENTS.WATER | translate
+      }}</ion-label>
+      <ion-badge slot="end" color="primary">{{ result.totalWater }}g</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{
+        TranslationKeys.PIZZA.INGREDIENTS.YEAST | translate
+      }}</ion-label>
+      <ion-badge slot="end" color="medium"
+        >{{ result.poolishYeast }}g</ion-badge
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{
+        TranslationKeys.PIZZA.INGREDIENTS.HONEY | translate
+      }}</ion-label>
+      <ion-badge slot="end" color="warning"
+        >{{ result.poolishHoney }}g</ion-badge
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{
+        TranslationKeys.PIZZA.INGREDIENTS.SALT | translate
+      }}</ion-label>
+      <ion-badge slot="end" color="warning">{{ result.saltWeight }}g</ion-badge>
+    </ion-item>
+  </ion-item-group>
+}

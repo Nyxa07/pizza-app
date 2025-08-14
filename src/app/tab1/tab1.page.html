@@ -1,0 +1,37 @@
+<ion-content [fullscreen]="true">
+  <ion-segment-view>
+    <ion-segment-content id="data">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Configuration</ion-card-title>
+          <ion-card-subtitle>Configure your pizzas recipe</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <app-poolish-pizzas-form
+            (onChange)="data.set($event)"
+          ></app-poolish-pizzas-form>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Ingredient</ion-card-title>
+          <ion-card-subtitle>Ingredient quantities</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <app-poolish-pizzas-results
+            [result]="result()"
+          ></app-poolish-pizzas-results>
+        </ion-card-content>
+      </ion-card>
+    </ion-segment-content>
+
+    <ion-segment-content id="recipe">
+      @if (result()) {
+      <app-poolish-pizzas-recipe
+        [result]="result()"
+      ></app-poolish-pizzas-recipe>
+      }
+    </ion-segment-content>
+  </ion-segment-view>
+</ion-content>

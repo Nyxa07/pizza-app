@@ -1,0 +1,77 @@
+<form [formGroup]="form">
+  <ion-list>
+    <ion-item>
+      <ion-range
+        aria-label="Range with pin"
+        [pin]="true"
+        [pinFormatter]="nbPizzasPinFormatter"
+        formControlName="nbPizzas"
+        labelPlacement="start"
+        [label]="TranslationKeys.PIZZA.FORM.PIZZAS_NUMBER | translate"
+      ></ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-select
+        [label]="TranslationKeys.PIZZA.FORM.YEAST_TYPE | translate"
+        formControlName="yeastType"
+      >
+        <ion-select-option value="dry">
+          {{ TranslationKeys.PIZZA.INGREDIENTS.DRY_YEAST | translate }}
+        </ion-select-option>
+        <ion-select-option value="fresh">{{
+          TranslationKeys.PIZZA.INGREDIENTS.FRESH_YEAST | translate
+        }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select
+        [label]="TranslationKeys.PIZZA.FORM.HYDRATION | translate"
+        formControlName="hydrationRatio"
+      >
+        <ion-select-option [value]="0.62">62%</ion-select-option>
+        <ion-select-option [value]="0.63">63%</ion-select-option>
+        <ion-select-option [value]="0.64">64%</ion-select-option>
+        <ion-select-option [value]="0.65">65%</ion-select-option>
+        <ion-select-option [value]="0.66">66%</ion-select-option>
+        <ion-select-option [value]="0.67">67%</ion-select-option>
+        <ion-select-option [value]="0.68">68%</ion-select-option>
+        <ion-select-option [value]="0.69">69%</ion-select-option>
+        <ion-select-option [value]="0.7">70%</ion-select-option>
+        <ion-select-option [value]="0.71">71%</ion-select-option>
+        <ion-select-option [value]="0.72">72%</ion-select-option>
+        <ion-select-option [value]="0.73">73%</ion-select-option>
+        <ion-select-option [value]="0.74">74%</ion-select-option>
+        <ion-select-option [value]="0.75">75%</ion-select-option>
+        <ion-select-option [value]="0.76">76%</ion-select-option>
+        <ion-select-option [value]="0.77">77%</ion-select-option>
+        <ion-select-option [value]="0.78">78%</ion-select-option>
+        <ion-select-option [value]="0.79">79%</ion-select-option>
+        <ion-select-option [value]="0.8">80%</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select
+        [label]="TranslationKeys.PIZZA.FORM.TEMPERATURE | translate"
+        formControlName="temperature"
+      >
+        @for (temperature of temperatureOptions; track temperature.value) {
+          <ion-select-option [value]="temperature.value">
+            {{ temperature.name }}
+          </ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select
+        [label]="TranslationKeys.PIZZA.FORM.POOLISH_RATIO | translate"
+        formControlName="poolishRatio"
+      >
+        @for (poolishRatio of poolishRatioOptions; track poolishRatio.value) {
+          <ion-select-option [value]="poolishRatio.value">
+            {{ poolishRatio.name }}
+          </ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</form>

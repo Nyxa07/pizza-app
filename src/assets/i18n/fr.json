@@ -1,0 +1,115 @@
+{
+  "app": {
+    "common": {
+      "actions": {
+        "save": "Sauvegarder",
+        "cancel": "Annuler",
+        "delete": "Supprimer",
+        "edit": "Modifier",
+        "add": "Ajouter"
+      },
+      "status": {
+        "loading": "Chargement...",
+        "error": "Erreur",
+        "success": "Succès",
+        "warning": "Attention"
+      },
+      "navigation": {
+        "back": "Retour",
+        "next": "Suivant",
+        "previous": "Précédent"
+      }
+    },
+    "pizza": {
+      "form": {
+        "pizzasNumber": "Nombre de pizzas",
+        "yeastType": "Type de levure",
+        "hydration": "Hydratation",
+        "temperature": "Température",
+        "poolishRatio": "Ratio poolish"
+      },
+      "ingredients": {
+        "flour": "Farine",
+        "water": "Eau",
+        "yeast": "Levure",
+        "honey": "Miel",
+        "salt": "Sel",
+        "dryYeast": "Séche",
+        "freshYeast": "Fraîche"
+      },
+      "calculations": {
+        "toAdd": "À ajouter",
+        "total": "Total",
+        "poolish": "Pré-fermentation",
+        "dough": "Pâte",
+        "weight": "Poids",
+        "percentage": "Pourcentage"
+      },
+      "types": {
+        "poolish": "Style poolish",
+        "direct": "Méthode directe",
+        "biga": "Méthode biga"
+      },
+      "recipe": {
+        "poolishPreparation": {
+          "title": "PRÉPARATION DE LA POOLISH",
+          "subtitle": "Première étape : préparation du levain",
+          "step1Title": "Étape 1 :",
+          "step1Description": "Peser tous les ingrédients :",
+          "ingredientsList": "liste des ingrédients",
+          "step2Description": "Dans un grand bol, délayer les levures dans l'eau et ajouter le miel",
+          "step3Description": "Ajouter la farine et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène, puis laisser reposer 1 heure à température ambiante couvert d'un film plastique, puis 16-24 heures au réfrigérateur"
+        },
+        "doughPreparation": {
+          "title": "PRÉPARATION DE LA PÂTE",
+          "subtitle": "Deuxième étape : pétrissage et formation",
+          "step1Description": "Sortir la poolish 1H avant utilisation",
+          "step2Title": "Étape 2 :",
+          "step2Description": "Peser les quantités à ajouter dans la poolish :",
+          "ingredientsList": "liste des ingrédients",
+          "step3Description": "Dans le bol de la poolish, ajouter l'eau et le sel. Mélanger à la cuillère jusqu'à l'absorption de l'eau",
+          "step4Description": "Ajouter petit à petit la farine et mélanger à la cuillère",
+          "step5Description": "Lorsque ce n'est plus possible d'utiliser une cuillère, transférer la pâte sur le plan de travail",
+          "step6Description": "Travailler la pâte en la malaxant, il faut que la farine soit complètement intégrée",
+          "step7Description": "Faire quelques rabat avec la pâte et former une belle boule (douce et souple)",
+          "step8Description": "Faire reposer 10-15 min sous le saladier",
+          "step9Description": "Reformer une belle boule et laisser reposer encore 1H dans un récipient hermétique",
+          "step10Description": "Mettre une fine couche de semoule fine dans un plat",
+          "step11Description": "Récupérer la pâte et avec un coupe pâte ou une spatule former des pâtons (bien tendu) d'environ",
+          "step12Description": "Déposer les pâtons dans le plat en laissant de l'espace entre chaque (ils vont encore grossir)",
+          "step13Description": "Fermer le plat ou mettre un film plastique sur celui-ci et laisser reposer 2H",
+          "tipsTitle": "💡 Tips :",
+          "tipsDescription": "Si la pâte colle trop, former une boule et laisser reposer 10 min sous un saladier",
+          "successMessage": "🎉 Et voilà, ils sont prêt à être transformé en PIZZA !"
+        },
+        "storage": {
+          "title": "CONSERVATION",
+          "subtitle": "Conseils de stockage",
+          "refrigerator": "Réfrigérateur : Les pâtons se gardent 2-3 jours",
+          "freezer": "Congélateur : Se congèle très bien, ne pas garder plus de 2-3 mois"
+        }
+      }
+    },
+    "navigation": {
+      "tabs": {
+        "poolishStyle": "Style poolish",
+        "tab2": "Onglet 2",
+        "tab3": "Onglet 3"
+      },
+      "header": {
+        "title": "App Pizza",
+        "language": "Langue"
+      }
+    },
+    "language": {
+      "selector": {
+        "title": "Choisir la langue",
+        "english": "Anglais",
+        "french": "Français",
+        "italian": "Italien",
+        "spanish": "Espagnol",
+        "cancel": "Annuler"
+      }
+    }
+  }
+}
