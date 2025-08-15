@@ -18,6 +18,7 @@ import { informationCircle } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslationKeys } from 'src/app/shared/services/translation-keys.service';
+import { KeyValuePipe } from '@angular/common';
 
 @Component({
   selector: 'app-faq',
@@ -38,12 +39,13 @@ import { TranslationKeys } from 'src/app/shared/services/translation-keys.servic
     IonCardTitle,
     IonCardContent,
     IonCardSubtitle,
+    KeyValuePipe,
   ],
 })
 export class FaqComponent implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
   TranslationKeys = TranslationKeys;
-  questionsData = []
+  questionsData = TranslationKeys.FAQ.QUESTIONS;
 
   constructor() {
     addIcons({ informationCircle });
