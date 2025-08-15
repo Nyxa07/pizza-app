@@ -60,6 +60,25 @@ export class YeastService {
     return 2.0;
   }
 
+  private convertYeastType(weight: number, yeastType: YeastType): number {
+    switch (yeastType) {
+      case YeastType.FRESH:
+        // Fresh yeast: more water, less concentrated
+        return weight * FRESH_YEAST_COEF;
+
+      case YeastType.DRY_ACTIVE:
+        // Active dry yeast: requires activation
+        return weight * DRY_ACTIVE_YEAST_COEF;
+
+      case YeastType.DRY_INSTANT:
+        // Instant dry yeast: reference (1:1)
+        return weight * DRY_INSTANT_YEAST_COEF;
+
+      default:
+        return weight;
+    }
+  }
+
   yeastQuantity(
     temperature: number,
     yeastType: YeastType,
@@ -69,13 +88,14 @@ export class YeastService {
   ) {
     const tEquivalent = this.tEquivalent(rtRestTime, coldRestTime);
     const temperatureFactor = this.temperatureFactor(temperature);
-    const kFactor = this.kFactor(tEquivalent); // Add 1 hour, time for the yeast to be stopped
+    const kFactor = this.kFactor(tEquivalent);
     const percentYeast = this.percentYeast(
       tEquivalent,
       temperatureFactor,
       kFactor,
     );
 
-    return Math.max(0.1, Math.round(percentYeast * flour * 10) / 10);
+    const yeastWeight = this.convertYeastType(percentYeast * flour, yeastType);
+    return Math.max(0.1, Math.round(yeastWeight * 100) / 100);
   }
 }
