@@ -16,6 +16,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationKeys } from '../../../shared/services/translation-keys.service';
 import { LowerCasePipe } from '@angular/common';
+import { debounceTime } from 'rxjs';
 
 export interface PoolishPizzaFormData {
   nbPizzas: number;
@@ -66,6 +67,7 @@ export class PoolishPizzasFormComponent implements OnInit {
       value: Number(key),
     }),
   );
+  protected storedData = localStorage.getItem('PoolishPizzaForm:formData');
   protected formBuilder = inject(FormBuilder);
   protected form = this.formBuilder.group({
     nbPizzas: [5, [Validators.required, Validators.min(1)]],
@@ -96,12 +98,21 @@ export class PoolishPizzasFormComponent implements OnInit {
   protected onChange = output<PoolishPizzaFormData>();
 
   constructor() {
-    this.form.valueChanges.pipe(takeUntilDestroyed()).subscribe((value) => {
-      if (this.form.invalid) {
-        return;
-      }
-      this.onChange.emit(value as PoolishPizzaFormData);
-    });
+    if (this.storedData) {
+      this.form.patchValue(JSON.parse(this.storedData));
+    }
+    this.form.valueChanges
+      .pipe(takeUntilDestroyed(), debounceTime(250))
+      .subscribe((value) => {
+        if (this.form.invalid) {
+          return;
+        }
+        this.onChange.emit(value as PoolishPizzaFormData);
+        localStorage.setItem(
+          'PoolishPizzaForm:formData',
+          JSON.stringify(value),
+        );
+      });
   }
 
   ngOnInit() {
