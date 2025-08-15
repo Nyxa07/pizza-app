@@ -240,44 +240,50 @@ export class TranslationKeys {
 
   static readonly FAQ = {
     TITLE: 'app.faq.title',
-    QUESTIONS: {
-      QUESTION_1: {
-        TITLE: 'app.faq.questions.question1.title',
-        SUBTITLE: 'app.faq.questions.question1.subtitle',
-        ANSWER: {
-          PART_1: 'app.faq.questions.question1.answer.part1',
-          PART_2: 'app.faq.questions.question1.answer.part2',
-        },
+    QUESTIONS: [
+      {
+        TITLE: 'app.faq.questions.0.title',
+        SUBTITLE: 'app.faq.questions.0.subtitle',
+        ANSWERS: [
+          'app.faq.questions.0.answers.0',
+          'app.faq.questions.0.answers.1',
+        ],
       },
-      QUESTION_2: {
-        TITLE: 'app.faq.questions.question2.title',
-        SUBTITLE: 'app.faq.questions.question2.subtitle',
-        ANSWER: {
-          PART_1: 'app.faq.questions.question2.answer.part1',
-          PART_2: 'app.faq.questions.question2.answer.part2',
-          PART_3: 'app.faq.questions.question2.answer.part3',
-        },
-      }, 
-      QUESTION_3: {
-        TITLE: 'app.faq.questions.question3.title',
-        SUBTITLE: 'app.faq.questions.question3.subtitle',
-        ANSWER: {
-          PART_1: 'app.faq.questions.question3.answer.part1',
-          PART_2: 'app.faq.questions.question3.answer.part2',
-        },
+      {
+        TITLE: 'app.faq.questions.1.title',
+        SUBTITLE: 'app.faq.questions.1.subtitle',
+        ANSWERS: [
+          'app.faq.questions.1.answers.0',
+          'app.faq.questions.1.answers.1',
+          'app.faq.questions.1.answers.2',
+        ],
       },
-      QUESTION_4: {
-        TITLE: 'app.faq.questions.question4.title',
-        SUBTITLE: 'app.faq.questions.question4.subtitle',
-        ANSWER: {
-          PART_1: 'app.faq.questions.question4.answer.part1',
-          PART_2: 'app.faq.questions.question4.answer.part2',
-        },
-        TIPS: {
-          TITLE: 'app.faq.questions.question4.tips.title',
-          DESCRIPTION: 'app.faq.questions.question4.tips.description'
-        }
+      {
+        TITLE: 'app.faq.questions.2.title',
+        SUBTITLE: 'app.faq.questions.2.subtitle',
+        ANSWERS: [
+          'app.faq.questions.2.answers.0',
+          'app.faq.questions.2.answers.1',
+        ],
       },
-    },
+      {
+        TITLE: 'app.faq.questions.3.title',
+        SUBTITLE: 'app.faq.questions.3.subtitle',
+        ANSWERS: [
+          'app.faq.questions.3.answers.0',
+          'app.faq.questions.3.answers.1',
+        ],
+        TIPS: [
+          {
+            TITLE: 'app.faq.questions.3.tips.0.title',
+            DESCRIPTION: 'app.faq.questions.3.tips.0.description',
+          },
+          {
+            TITLE: 'app.faq.questions.3.tips.1.title',
+            DESCRIPTION: 'app.faq.questions.3.tips.1.description',
+          },
+        ],
+      },
+    ],
   };
 }

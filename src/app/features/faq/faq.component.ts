@@ -18,7 +18,6 @@ import { informationCircle } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslationKeys } from 'src/app/shared/services/translation-keys.service';
-import { KeyValuePipe } from '@angular/common';
 
 @Component({
   selector: 'app-faq',
@@ -39,7 +38,6 @@ import { KeyValuePipe } from '@angular/common';
     IonCardTitle,
     IonCardContent,
     IonCardSubtitle,
-    KeyValuePipe,
   ],
 })
 export class FaqComponent implements OnInit {

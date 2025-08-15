@@ -13,27 +13,29 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      @for (question of questionsData | keyvalue; track question.key) {
+      @for (question of questionsData; track question) {
         <ion-card>
           <ion-card-header>
             <ion-card-title>
-              {{ question.value.TITLE | translate }}
+              {{ question.TITLE | translate }}
             </ion-card-title>
             <ion-card-subtitle>
-              {{ question.value.SUBTITLE | translate }}
+              {{ question.SUBTITLE | translate }}
             </ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            @for (
-              answer of question.value.ANSWER | keyvalue;
-              track answer.key
-            ) {
+            @for (answer of question.ANSWERS; track answer) {
               <p>
-                {{ answer.value | translate }}
+                {{ answer | translate }}
               </p>
             }
-            @if (question.value.TIPS) {
-              
+            @for (tip of question.TIPS; track tip) {
+              <div class="tips">
+                <p>
+                  <strong>{{ tip.TITLE | translate }}</strong>
+                  {{ tip.DESCRIPTION | translate }}
+                </p>
+              </div>
             }
           </ion-card-content>
         </ion-card>
