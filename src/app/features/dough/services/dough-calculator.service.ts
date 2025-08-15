@@ -23,6 +23,7 @@ export interface DoughResult {
   total: Quantity;
   poolish: Quantity | null;
   dough: Quantity;
+  pizzaBallWeight: number;
 }
 
 @Injectable({
@@ -34,12 +35,12 @@ export class DoughCalculatorService {
   // Compute the flour (and water) weight used in the poolish.
   // Definition: `ratio` is the fraction of TOTAL FLOUR that will go into the poolish.
   // Water in the poolish equals that flour weight (100 % hydration).
-  private computePoolishQuantity(ratio: number, totalFlour: number) {
-    return this.round(ratio * totalFlour);
+  private computePoolishQuantity(ratio: number, totalFlourAndWater: number) {
+    return ratio * totalFlourAndWater; // no rounding here
   }
 
   private round(value: number) {
-    return Math.round(value * 10) / 10; // 0.1 g precision for bulk ingredients
+    return Math.round(value); // 1 g precision for bulk ingredients
   }
 
   private roundYeast(value: number) {
@@ -54,22 +55,21 @@ export class DoughCalculatorService {
     // Ingredients
     const flourPerPizza = PIZZA_WEIGHT / (1 + hydration);
     const waterPerPizza = PIZZA_WEIGHT - flourPerPizza;
-    const totalFlour = this.round(data.nbPizzas * flourPerPizza);
-    const totalWater = this.round(data.nbPizzas * waterPerPizza);
-    const poolishQuantity = this.computePoolishQuantity(
+    const totalFlour = data.nbPizzas * flourPerPizza;
+    const totalWater = data.nbPizzas * waterPerPizza;
+    const poolishTotal = this.computePoolishQuantity(
       poolishRatio,
-      totalFlour,
+      totalFlour + totalWater,
     );
+    const poolishQuantity = poolishTotal / 2;
 
     // Salt: baker's percentage
-    const salt = this.round(SALT_RATIO * totalFlour);
-    const flourPerDough = this.round(totalFlour - poolishQuantity);
-    const waterPerDough = this.round(totalWater - poolishQuantity);
-    const honey = this.round(
-      Math.max(
-        BASE_HONEY_AMOUNT,
-        BASE_HONEY_AMOUNT + (data.nbPizzas - 60) * HONEY_RATIO,
-      ),
+    const salt = SALT_RATIO * totalFlour;
+    const flourPerDough = totalFlour - poolishQuantity;
+    const waterPerDough = totalWater - poolishQuantity;
+    const honey = Math.max(
+      BASE_HONEY_AMOUNT,
+      BASE_HONEY_AMOUNT + (data.nbPizzas - 60) * HONEY_RATIO,
     );
 
     const yeast =
@@ -97,37 +97,38 @@ export class DoughCalculatorService {
 
     const result: DoughResult = {
       total: {
-        flour: totalFlour,
-        water: totalWater,
+        flour: this.round(totalFlour),
+        water: this.round(totalWater),
         yeast: yeastRounded,
-        salt,
+        salt: this.round(salt),
         coldRestTime: data.coldRestTime,
         rtRestTime: data.rtRestTime,
-        honey: honey,
+        honey: this.round(honey),
       },
 
       poolish:
         data.doughType === DoughType.POOLISH
           ? {
-              flour: poolishQuantity,
-              water: poolishQuantity,
+              flour: this.round(poolishQuantity),
+              water: this.round(poolishQuantity),
               yeast: yeastRounded,
               salt: 0,
               coldRestTime: data.coldRestTime,
               rtRestTime: data.rtRestTime,
-              honey: honey,
+              honey: this.round(honey),
             }
           : null,
 
       dough: {
         yeast: data.doughType === DoughType.POOLISH ? 0 : yeastRounded,
-        flour: flourPerDough,
-        water: waterPerDough,
-        salt,
+        flour: this.round(flourPerDough),
+        water: this.round(waterPerDough),
+        salt: this.round(salt),
         coldRestTime: data.coldRestTime,
         rtRestTime: data.rtRestTime,
-        honey,
+        honey: this.round(honey),
       },
+      pizzaBallWeight: PIZZA_WEIGHT,
     };
 
     return result;

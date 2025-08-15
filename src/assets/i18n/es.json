@@ -55,9 +55,8 @@
         "ingredients": "Ingredientes"
       },
       "doughTypes": {
-        "poolish": "Estilo poolish",
-        "direct": "Método directo",
-        "biga": "Método biga"
+        "poolish": "Con poolish",
+        "direct": "Método directo"
       },
       "recipe": {
         "quantity": {
@@ -67,34 +66,51 @@
           "honey": "<strong>{{ quantity }} g</strong> de miel",
           "salt": "<strong>{{ quantity }} g</strong> de sal"
         },
-        "poolishPreparation": {
-          "title": "PREPARACIÓN DE LA POOLISH",
-          "subtitle": "Primer paso: preparación de la masa madre",
-          "step1Description": "Pesar todos los ingredientes:",
-          "ingredientsList": "lista de ingredientes",
-          "step2Description": "En un bol grande, disolver la levadura en agua y añadir miel",
-          "step3Description": "Añadir harina y mezclar con una cuchara de madera hasta obtener una mezcla homogénea, luego dejar reposar <strong>{{ rtRestTime }} hora(s)</strong> a temperatura ambiente cubierto con film transparente, luego <strong>{{ coldRestTime }} horas</strong> en el frigorífico"
+        "direct": {
+          "title": "Préparation de la pâte",
+          "subtitle": "Pétrissage et formation",
+          "step1Description": "Peser tous les ingrédients",
+          "step2Description": "Mélanger la levure et le miel à l’eau",
+          "step3Description": "Ajouter le sel et la farine et mélanger à la cuillère en bois",
+          "step4Description": "Une fois que tous les ingrédients sont bien mélangés et que l’on commence à avoir une boule, on peut la déposer sur le plan de travail",
+          "step5Description": "Terminer le pétrissage à la main environ 10 min (possibilité d’utiliser un robot pâtissier avec son crochet pétrisseur). Bien pétrir pour hydrater correctement la farine",
+          "step6Description": "Une fois que la pâte à une belle structure, former une boule et laisser la reposer pendant 25 min sous un saladier (la pâte va se tendre et devenir plus lisse)",
+          "step7Description": "Procéder à quelques rabats sur la pâte et lui donner une belle forme de boule (bien lisse et qui ne colle plus)",
+          "step8Description": "Déposer la boule dans un récipient hermétique et la laisser reposer 24 heures",
+          "step9Description": "Récupérer la pâte et, avec un coupe-pâte ou une spatule, former des pâtons (bien tendus) d’environ <strong>{{ pizzaWeight }} g</strong>",
+          "step10Description": "Déposer les pâtons dans un plat en laissant de l’espace entre chaque (ils vont encore grossir)",
+          "step11Description": "Fermer le plat ou le couvrir d’un film plastique et laisser reposer 3 heures"
         },
-        "doughPreparation": {
-          "title": "PREPARACIÓN DE LA MASA",
-          "subtitle": "Segundo paso: amasado y formado",
-          "step1Description": "Sacar la poolish 1 hora antes de usar",
-          "step2Description": "Pesar las cantidades a añadir a la poolish:",
-          "ingredientsList": "lista de ingredientes",
-          "step3Description": "En el bol de la poolish, añadir agua y sal. Mezclar con cuchara hasta absorber el agua",
-          "step4Description": "Añadir harina poco a poco y mezclar con cuchara",
-          "step5Description": "Cuando ya no sea posible usar cuchara, transferir la masa a la superficie de trabajo",
-          "step6Description": "Trabajar la masa amasándola, la harina debe estar completamente integrada",
-          "step7Description": "Hacer algunos pliegues con la masa y formar una bola bonita (suave y flexible)",
-          "step8Description": "Dejar reposar 10-15 minutos bajo un bol",
-          "step9Description": "Reformar una bola bonita y dejar reposar otra 1 hora en un recipiente hermético",
-          "step10Description": "Poner una capa fina de sémola fina en un plato",
-          "step11Description": "Recuperar la masa y con un cortador de masa o espátula formar bolas de masa (bien estiradas) de aproximadamente",
-          "step12Description": "Colocar las bolas de masa en el plato dejando espacio entre cada una (todavía crecerán)",
-          "step13Description": "Cerrar el plato o poner film transparente sobre él y dejar reposar entre 1 y 3 horas",
-          "tipsTitle": "💡 Consejos:",
-          "tipsDescription": "Si la masa se pega demasiado, formar una bola y dejar reposar 10 minutos bajo un bol",
-          "successMessage": "🎉 ¡Y ahí tienes, están listos para ser transformados en PIZZA!"
+        "poolish": {
+          "poolish": {
+            "title": "PREPARACIÓN DE LA POOLISH",
+            "subtitle": "Primer paso: preparación de la masa madre",
+            "step1Description": "Pesar todos los ingredientes:",
+            "ingredientsList": "lista de ingredientes",
+            "step2Description": "En un bol grande, disolver la levadura en agua y añadir miel",
+            "step3Description": "Añadir harina y mezclar con una cuchara de madera hasta obtener una mezcla homogénea, luego dejar reposar <strong>{{ rtRestTime }} hora(s)</strong> a temperatura ambiente cubierto con film transparente, luego <strong>{{ coldRestTime }} horas</strong> en el frigorífico"
+          },
+          "dough": {
+            "title": "PREPARACIÓN DE LA MASA",
+            "subtitle": "Segundo paso: amasado y formado",
+            "step1Description": "Sacar la poolish 1 hora antes de usar",
+            "step2Description": "Pesar las cantidades a añadir a la poolish:",
+            "ingredientsList": "lista de ingredientes",
+            "step3Description": "En el bol de la poolish, añadir agua y sal. Mezclar con cuchara hasta absorber el agua",
+            "step4Description": "Añadir harina poco a poco y mezclar con cuchara",
+            "step5Description": "Cuando ya no sea posible usar cuchara, transferir la masa a la superficie de trabajo",
+            "step6Description": "Trabajar la masa amasándola, la harina debe estar completamente integrada",
+            "step7Description": "Hacer algunos pliegues con la masa y formar una bola bonita (suave y flexible)",
+            "step8Description": "Dejar reposar 10-15 minutos bajo un bol",
+            "step9Description": "Reformar una bola bonita y dejar reposar otra 1 hora en un recipiente hermético",
+            "step10Description": "Poner una capa fina de sémola fina en un plato",
+            "step11Description": "Recuperar la masa y con un cortador de masa o espátula formar bolas de masa (bien estiradas) de aproximadamente",
+            "step12Description": "Colocar las bolas de masa en el plato dejando espacio entre cada una (todavía crecerán)",
+            "step13Description": "Cerrar el plato o poner film transparente sobre él y dejar reposar entre 1 y 3 horas",
+            "tipsTitle": "💡 Consejos:",
+            "tipsDescription": "Si la masa se pega demasiado, formar una bola y dejar reposar 10 minutos bajo un bol",
+            "successMessage": "🎉 ¡Y ahí tienes, están listos para ser transformados en PIZZA!"
+          }
         },
         "storage": {
           "title": "CONSERVACIÓN",
@@ -116,6 +132,10 @@
       }
     },
     "tab1": {
+      "segments": {
+        "data": "Datos",
+        "recipe": "Preparación"
+      },
       "configuration": {
         "title": "Configuración",
         "subtitle": "Configura tu receta de pizzas"
@@ -123,10 +143,6 @@
       "ingredients": {
         "title": "Ingredientes",
         "subtitle": "Cantidades de ingredientes en gramos (g)"
-      },
-      "segments": {
-        "data": "Datos",
-        "recipe": "Preparación"
       }
     },
     "language": {
@@ -138,6 +154,54 @@
         "spanish": "Español",
         "german": "Alemán"
       }
+    },
+    "faq": {
+      "title": "FAQ",
+      "questions": [
+        {
+          "title": "La méthode Directe",
+          "subtitle": "Préparation directe de la pâte",
+          "answers": [
+            "C'est une méthode de préparation plus simple que les méthodes indirectes",
+            "On incorpore directement tous les ingrédients et après un repos plus ou moins long on peut l'utiliser"
+          ]
+        },
+        {
+          "title": "La Poolish",
+          "subtitle": "La poolish est une pâte liquide à base de farine, d'eau et de levure",
+          "answers": [
+            "La poolish est une pré-fermentation de la pâte qui repose pendant plusieurs heures avant d'être utilisée pour la pâte à pizza.",
+            "Elle se prépare en mélangeant 1 part de farine et 1 part d'eau ainsi qu'une petite quantité de levure.",
+            "C'est une méthode indirecte de préparation de pâte à pizza 🍕"
+          ]
+        },
+        {
+          "title": "La Biga",
+          "subtitle": "La Biga est une préparation dite sèche à base de farine, d'eau et de levure",
+          "answers": [
+            "La Biga est une pré-fermentation de la pâte qui repose pendant plusieurs heures avant d'être utilisée pour la pâte à pizza.",
+            "BlaBlaBla, encore jamais fait donc je ne vais pas mettre n'importe quoi 😉"
+          ]
+        },
+        {
+          "title": " 💦 Hydratation",
+          "subtitle": "Ratio entre la quantité d’eau totale sur la quantité de farine totale",
+          "answers": [
+            "Ex 1 : Pour 100 g d’eau au total je vais avoir 151,5 g de farine totale ce qui donne une hydratation de la pâte à 66 %. Calcul : 100 ÷ 151,5 = 0,66 soit 66 %.",
+            "Ex 2 : Si je veux connaître la quantité d’eau à ajouter lorsque j’ai 151,5 g de farine  et que je veux une hydratation à 66 % le calcul sera : 0,66 x 151,5 = 100 g d’eau au total à ajouter"
+          ],
+          "tips": [
+            {
+              "title": "💡 Astuce :",
+              "description": "Plus la pâte est hydratée plus difficile elle sera à manipuler, elle sera plus liquide et donc plus collante. Hydratation recommandée: Entre 62 & 75 %"
+            },
+            {
+              "title": "💡 Astuce :",
+              "description": "Plus la pâte est hydratée plus difficile elle sera à manipuler, elle sera plus liquide et donc plus collante. Hydratation recommandée: Entre 62 & 75 %"
+            }
+          ]
+        }
+      ]
     }
   }
 }

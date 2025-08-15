@@ -1,0 +1,80 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{
+      TranslationKeys.PIZZA.RECIPE.DIRECT.TITLE | translate
+    }}</ion-card-title>
+    <ion-card-subtitle>{{
+      TranslationKeys.PIZZA.RECIPE.DIRECT.SUBTITLE | translate
+    }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ul>
+      <li>
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_1_DESCRIPTION | translate }}
+        <ul>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.FLOUR
+                | translate: { quantity: result().dough.flour }
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.WATER
+                | translate: { quantity: result().dough.water }
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.YEAST
+                | translate: { quantity: result().dough.yeast }
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.HONEY
+                | translate: { quantity: result().dough.honey }
+            "
+          ></li>
+        </ul>
+      </li>
+      <li>
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_2_DESCRIPTION | translate }}
+      </li>
+      <li>
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_3_DESCRIPTION | translate }}
+      </li>
+      <li>
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_4_DESCRIPTION | translate }}
+      </li>
+      <li>
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_5_DESCRIPTION | translate }}
+      </li>
+      <li>
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_6_DESCRIPTION | translate }}
+      </li>
+      <li>
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_7_DESCRIPTION | translate }}
+      </li>
+      <li>
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_8_DESCRIPTION | translate }}
+      </li>
+      <li
+        [innerHTML]="
+          TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_9_DESCRIPTION
+            | translate: { pizzaWeight: pizzaWeight }
+        "
+      ></li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_10_DESCRIPTION | translate
+        }}
+      </li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_11_DESCRIPTION | translate
+        }}
+      </li>
+    </ul>
+  </ion-card-content>
+</ion-card>
