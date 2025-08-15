@@ -18,25 +18,25 @@
           <li
             [innerHTML]="
               TranslationKeys.PIZZA.RECIPE.QUANTITY.FLOUR
-                | translate: { quantity: result().poolish.flour }
+                | translate: { quantity: result().poolish?.flour }
             "
           ></li>
           <li
             [innerHTML]="
               TranslationKeys.PIZZA.RECIPE.QUANTITY.WATER
-                | translate: { quantity: result().poolish.water }
+                | translate: { quantity: result().poolish?.water }
             "
           ></li>
           <li
             [innerHTML]="
               TranslationKeys.PIZZA.RECIPE.QUANTITY.YEAST
-                | translate: { quantity: result().poolish.yeast }
+                | translate: { quantity: result().poolish?.yeast }
             "
           ></li>
           <li
             [innerHTML]="
               TranslationKeys.PIZZA.RECIPE.QUANTITY.HONEY
-                | translate: { quantity: result().poolish.honey }
+                | translate: { quantity: result().poolish?.honey }
             "
           ></li>
         </ul>
@@ -55,8 +55,8 @@
           TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.STEP_3_DESCRIPTION
             | translate
               : {
-                  coldRestTime: result().poolish.coldRestTime,
-                  rtRestTime: result().poolish.rtRestTime,
+                  coldRestTime: result().poolish?.coldRestTime ?? 0,
+                  rtRestTime: result().poolish?.rtRestTime ?? 0,
                 }
         "
       ></li>

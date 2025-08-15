@@ -3,7 +3,7 @@ import {
   BASE_HONEY_AMOUNT,
   HONEY_RATIO,
   PIZZA_WEIGHT,
-  SALT_WEIGHT_PER_PIZZA,
+  SALT_RATIO,
 } from '../constants';
 import { PoolishPizzaFormData } from '../dough-form/dough-form.component';
 import { YeastService } from 'src/app/features/dough/services/yeast.service';
@@ -21,7 +21,7 @@ interface Quantity {
 
 export interface DoughResult {
   total: Quantity;
-  poolish: Quantity;
+  poolish: Quantity | null;
   dough: Quantity;
 }
 
@@ -31,32 +31,40 @@ export interface DoughResult {
 export class DoughCalculatorService {
   private yeastService = inject(YeastService);
 
-  private computePoolishQuantity(
-    ratio: number,
-    totalFlour: number,
-    totalWater: number,
-  ) {
-    return this.round((ratio * (totalFlour + totalWater)) / 2);
+  // Compute the flour (and water) weight used in the poolish.
+  // Definition: `ratio` is the fraction of TOTAL FLOUR that will go into the poolish.
+  // Water in the poolish equals that flour weight (100 % hydration).
+  private computePoolishQuantity(ratio: number, totalFlour: number) {
+    return this.round(ratio * totalFlour);
   }
 
   private round(value: number) {
-    return Math.round(value * 10) / 10;
+    return Math.round(value * 10) / 10; // 0.1 g precision for bulk ingredients
+  }
+
+  private roundYeast(value: number) {
+    return Math.round(value * 100) / 100; // 0.01 g precision for yeast
   }
 
   compute(data: PoolishPizzaFormData): DoughResult {
-    const salt = SALT_WEIGHT_PER_PIZZA * data.nbPizzas;
-    const flourPerPizza = PIZZA_WEIGHT / (1 + data.hydrationRatio);
+    // Clamp user inputs to safe range
+    const hydration = Math.max(0, Math.min(data.hydrationRatio, 1));
+    const poolishRatio = Math.max(0, Math.min(data.poolishRatio ?? 0, 0.6));
+
+    // Ingredients
+    const flourPerPizza = PIZZA_WEIGHT / (1 + hydration);
     const waterPerPizza = PIZZA_WEIGHT - flourPerPizza;
     const totalFlour = this.round(data.nbPizzas * flourPerPizza);
     const totalWater = this.round(data.nbPizzas * waterPerPizza);
     const poolishQuantity = this.computePoolishQuantity(
-      data.poolishRatio ?? 0,
+      poolishRatio,
       totalFlour,
-      totalWater,
     );
 
-    const doughFlour = this.round(totalFlour - poolishQuantity);
-    const doughWater = this.round(totalWater - poolishQuantity);
+    // Salt: baker's percentage
+    const salt = this.round(SALT_RATIO * totalFlour);
+    const flourPerDough = this.round(totalFlour - poolishQuantity);
+    const waterPerDough = this.round(totalWater - poolishQuantity);
     const honey = this.round(
       Math.max(
         BASE_HONEY_AMOUNT,
@@ -77,42 +85,51 @@ export class DoughCalculatorService {
         : this.yeastService.yeastForDough(
             data.temperature,
             data.yeastType,
-            doughFlour,
-            data.hydrationRatio,
+            flourPerDough,
+            hydration,
             honey,
             salt,
             data.rtRestTime,
             data.coldRestTime,
           );
 
-    return {
+    const yeastRounded = this.roundYeast(yeast);
+
+    const result: DoughResult = {
       total: {
         flour: totalFlour,
         water: totalWater,
-        yeast: yeast,
+        yeast: yeastRounded,
         salt,
         coldRestTime: data.coldRestTime,
         rtRestTime: data.rtRestTime,
         honey: honey,
       },
-      poolish: {
-        flour: poolishQuantity,
-        water: poolishQuantity,
-        yeast: yeast,
-        salt: 0,
-        coldRestTime: data.coldRestTime,
-        rtRestTime: data.rtRestTime,
-        honey: honey,
-      },
+
+      poolish:
+        data.doughType === DoughType.POOLISH
+          ? {
+              flour: poolishQuantity,
+              water: poolishQuantity,
+              yeast: yeastRounded,
+              salt: 0,
+              coldRestTime: data.coldRestTime,
+              rtRestTime: data.rtRestTime,
+              honey: honey,
+            }
+          : null,
+
       dough: {
-        yeast: data.doughType === DoughType.POOLISH ? 0 : yeast,
-        flour: doughFlour,
-        water: doughWater,
+        yeast: data.doughType === DoughType.POOLISH ? 0 : yeastRounded,
+        flour: flourPerDough,
+        water: waterPerDough,
         salt,
         coldRestTime: data.coldRestTime,
         rtRestTime: data.rtRestTime,
         honey,
       },
     };
+
+    return result;
   }
 }
