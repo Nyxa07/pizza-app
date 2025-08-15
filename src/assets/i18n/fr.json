@@ -142,28 +142,40 @@
       "title": "FAQ",
       "questions": {
         "question1": {
+          "title": "La méthode Directe",
+          "subtitle": "Préparation directe de la pâte",
+          "answer": {
+            "part1": "C'est une méthode de préparation plus simple que les méthodes indirectes",
+            "part2": "On incorpore directement tous les ingrédients et après un repos plus ou moins long on peut l'utiliser"
+          }
+        },
+        "question2": {
           "title": "La Poolish",
           "subtitle": "La poolish est une pâte liquide à base de farine, d'eau et de levure",
           "answer": {
-            "part1": "La poolish est une pré-fermentation à la pâte qui repose pendant plusieurs heures avant d'être utilisée pour la pâte à pizza.",
+            "part1": "La poolish est une pré-fermentation de la pâte qui repose pendant plusieurs heures avant d'être utilisée pour la pâte à pizza.",
             "part2": "Elle se prépare en mélangeant 1 part de farine et 1 part d'eau ainsi qu'une petite quantité de levure.",
             "part3": "C'est une méthode indirecte de préparation de pâte à pizza 🍕"
           }
         },
-        "question2": {
-          "title": "La méthode Directe",
-          "subtitle": "Préparation directe de la pâte",
+        "question3": {
+          "title": "La Biga",
+          "subtitle": "La Biga est une préparation dite sèche à base de farine, d'eau et de levure",
           "answer": {
-            "part1": "C'est une méthode de préparation plus simple que les méthodes indirectes",
-            "part2": "On incorpore directement tous les ingrédients et après un repos plus ou moins long on peut l'utiliser"
+            "part1": "La Biga est une pré-fermentation de la pâte qui repose pendant plusieurs heures avant d'être utilisée pour la pâte à pizza.",
+            "part2": "BlaBlaBla, encore jamais fait donc je ne vais pas mettre n'importe quoi 😉"
           }
         },
-        "question3": {
-          "title": "La méthode Directe",
-          "subtitle": "Préparation directe de la pâte",
+        "question4": {
+          "title": " 💦 Hydratation",
+          "subtitle": "Ratio entre la quantité d’eau totale sur la quantité de farine totale",
           "answer": {
-            "part1": "C'est une méthode de préparation plus simple que les méthodes indirectes",
-            "part2": "On incorpore directement tous les ingrédients et après un repos plus ou moins long on peut l'utiliser"
+            "part1": "Ex 1 : Pour 100 g d’eau au total je vais avoir 151,5 g de farine totale ce qui donne une hydratation de la pâte à 66 %. Calcul : 100 ÷ 151,5 = 0,66 soit 66 %.",
+            "part2": "Ex 2 : Si je veux connaître la quantité d’eau à ajouter lorsque j’ai 151,5 g de farine  et que je veux une hydratation à 66 % le calcul sera : 0,66 x 151,5 = 100 g d’eau au total à ajouter"
+          },
+          "tips": {
+           "title": "💡 Tips :",
+            "description": "Plus la pâte est hydratée plus difficile elle sera à manipuler, elle sera plus liquide et donc plus collante. Hydratation recommandée: Entre 62 & 75 %" 
           }
         }
       }

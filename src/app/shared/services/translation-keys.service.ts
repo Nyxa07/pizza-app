@@ -247,7 +247,6 @@ export class TranslationKeys {
         ANSWER: {
           PART_1: 'app.faq.questions.question1.answer.part1',
           PART_2: 'app.faq.questions.question1.answer.part2',
-          PART_3: 'app.faq.questions.question1.answer.part3',
         },
       },
       QUESTION_2: {
@@ -256,15 +255,28 @@ export class TranslationKeys {
         ANSWER: {
           PART_1: 'app.faq.questions.question2.answer.part1',
           PART_2: 'app.faq.questions.question2.answer.part2',
+          PART_3: 'app.faq.questions.question2.answer.part3',
         },
       }, 
       QUESTION_3: {
-        TITLE: 'app.faq.questions.question2.title',
-        SUBTITLE: 'app.faq.questions.question2.subtitle',
+        TITLE: 'app.faq.questions.question3.title',
+        SUBTITLE: 'app.faq.questions.question3.subtitle',
         ANSWER: {
-          PART_1: 'app.faq.questions.question2.answer.part1',
-          PART_2: 'app.faq.questions.question2.answer.part2',
+          PART_1: 'app.faq.questions.question3.answer.part1',
+          PART_2: 'app.faq.questions.question3.answer.part2',
         },
+      },
+      QUESTION_4: {
+        TITLE: 'app.faq.questions.question4.title',
+        SUBTITLE: 'app.faq.questions.question4.subtitle',
+        ANSWER: {
+          PART_1: 'app.faq.questions.question4.answer.part1',
+          PART_2: 'app.faq.questions.question4.answer.part2',
+        },
+        TIPS: {
+          TITLE: 'app.faq.questions.question4.tips.title',
+          DESCRIPTION: 'app.faq.questions.question4.tips.description'
+        }
       },
     },
   };
