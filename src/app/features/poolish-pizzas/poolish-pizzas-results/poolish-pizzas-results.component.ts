@@ -1,12 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PoolishPizzaResult } from '../services/poolish-pizza-maker.service';
-import {
-  IonItemGroup,
-  IonItemDivider,
-  IonLabel,
-  IonBadge,
-  IonItem,
-} from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationKeys } from '../../../shared/services/translation-keys.service';
 
@@ -14,14 +7,7 @@ import { TranslationKeys } from '../../../shared/services/translation-keys.servi
   selector: 'app-poolish-pizzas-results',
   templateUrl: './poolish-pizzas-results.component.html',
   styleUrls: ['./poolish-pizzas-results.component.scss'],
-  imports: [
-    IonItemGroup,
-    IonItemDivider,
-    IonLabel,
-    IonBadge,
-    IonItem,
-    TranslateModule,
-  ],
+  imports: [TranslateModule],
   standalone: true,
 })
 export class PoolishPizzasResultsComponent implements OnInit {
@@ -30,5 +16,6 @@ export class PoolishPizzasResultsComponent implements OnInit {
   // Make TranslationKeys available in template
   protected TranslationKeys = TranslationKeys;
 
+  constructor() {}
   ngOnInit() {}
 }

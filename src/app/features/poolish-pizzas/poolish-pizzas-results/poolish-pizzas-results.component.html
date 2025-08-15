@@ -1,104 +1,46 @@
 @if (result) {
-  <!-- Poolish Ingredients -->
-  <ion-item-group>
-    <ion-item-divider>
-      <ion-label>{{
-        TranslationKeys.PIZZA.CALCULATIONS.POOLISH | translate
-      }}</ion-label>
-    </ion-item-divider>
-
-    <ion-item>
-      <ion-label>{{
-        TranslationKeys.PIZZA.INGREDIENTS.FLOUR | translate
-      }}</ion-label>
-      <ion-badge slot="end" class="flour">{{ result.poolishFlour }}g</ion-badge>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>{{
-        TranslationKeys.PIZZA.INGREDIENTS.WATER | translate
-      }}</ion-label>
-      <ion-badge slot="end" class="water">{{ result.poolishWater }}g</ion-badge>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>{{
-        TranslationKeys.PIZZA.INGREDIENTS.YEAST | translate
-      }}</ion-label>
-      <ion-badge slot="end" class="yeast">{{ result.poolishYeast }}g</ion-badge>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>{{
-        TranslationKeys.PIZZA.INGREDIENTS.HONEY | translate
-      }}</ion-label>
-      <ion-badge slot="end" class="honey">{{ result.poolishHoney }}g</ion-badge>
-    </ion-item>
-  </ion-item-group>
-
-  <!-- Additional Ingredients -->
-  <ion-item-group>
-    <ion-item-divider>
-      <ion-label>{{
-        TranslationKeys.PIZZA.CALCULATIONS.TO_ADD | translate
-      }}</ion-label>
-    </ion-item-divider>
-
-    <ion-item>
-      <ion-label>{{
-        TranslationKeys.PIZZA.INGREDIENTS.FLOUR | translate
-      }}</ion-label>
-      <ion-badge slot="end" class="flour">{{ result.flourToAdd }}g</ion-badge>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>{{
-        TranslationKeys.PIZZA.INGREDIENTS.WATER | translate
-      }}</ion-label>
-      <ion-badge slot="end" class="water">{{ result.waterToAdd }}g</ion-badge>
-    </ion-item>
-  </ion-item-group>
-
-  <ion-item-group>
-    <ion-item-divider>
-      <ion-label>{{
-        TranslationKeys.PIZZA.CALCULATIONS.TOTAL | translate
-      }}</ion-label>
-    </ion-item-divider>
-
-    <ion-item>
-      <ion-label>{{
-        TranslationKeys.PIZZA.INGREDIENTS.FLOUR | translate
-      }}</ion-label>
-      <ion-badge slot="end" class="flour">{{ result.totalFlour }}g</ion-badge>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>{{
-        TranslationKeys.PIZZA.INGREDIENTS.WATER | translate
-      }}</ion-label>
-      <ion-badge slot="end" class="water">{{ result.totalWater }}g</ion-badge>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>{{
-        TranslationKeys.PIZZA.INGREDIENTS.YEAST | translate
-      }}</ion-label>
-      <ion-badge slot="end" class="yeast">{{ result.poolishYeast }}g</ion-badge>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>{{
-        TranslationKeys.PIZZA.INGREDIENTS.HONEY | translate
-      }}</ion-label>
-      <ion-badge slot="end" class="honey">{{ result.poolishHoney }}g</ion-badge>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>{{
-        TranslationKeys.PIZZA.INGREDIENTS.SALT | translate
-      }}</ion-label>
-      <ion-badge slot="end" class="salt">{{ result.saltWeight }}g</ion-badge>
-    </ion-item>
-  </ion-item-group>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          {{ TranslationKeys.PIZZA.CALCULATIONS.INGREDIENTS | translate }}
+        </th>
+        <th>{{ TranslationKeys.PIZZA.CALCULATIONS.POOLISH | translate }}</th>
+        <th>{{ TranslationKeys.PIZZA.CALCULATIONS.DOUGH | translate }}</th>
+        <th>{{ TranslationKeys.PIZZA.CALCULATIONS.TOTAL | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ TranslationKeys.PIZZA.INGREDIENTS.FLOUR | translate }}</td>
+        <td>{{ result.poolishFlour }}</td>
+        <td>{{ result.flourToAdd }}</td>
+        <td>{{ result.totalFlour }}</td>
+      </tr>
+      <tr>
+        <td>{{ TranslationKeys.PIZZA.INGREDIENTS.WATER | translate }}</td>
+        <td>{{ result.poolishWater }}</td>
+        <td>{{ result.waterToAdd }}</td>
+        <td>{{ result.totalWater }}</td>
+      </tr>
+      <tr>
+        <td>{{ TranslationKeys.PIZZA.INGREDIENTS.YEAST | translate }}</td>
+        <td>{{ result.poolishYeast }}</td>
+        <td>0</td>
+        <td>{{ result.totalYeast }}</td>
+      </tr>
+      <tr>
+        <td>{{ TranslationKeys.PIZZA.INGREDIENTS.SALT | translate }}</td>
+        <td>0</td>
+        <td>{{ result.saltWeight }}</td>
+        <td>{{ result.saltWeight }}</td>
+      </tr>
+      <tr>
+        <td>{{ TranslationKeys.PIZZA.INGREDIENTS.HONEY | translate }}</td>
+        <td>{{ result.poolishHoney }}</td>
+        <td>0</td>
+        <td>{{ result.totalHoney }}</td>
+      </tr>
+    </tbody>
+  </table>
 }

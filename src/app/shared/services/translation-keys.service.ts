@@ -1,4 +1,8 @@
 export class TranslationKeys {
+  static getPluralizationKey(key: string, isPlural: boolean = false) {
+    return isPlural ? `${key}.plural` : `${key}.singular`;
+  }
+
   // Common translations
   static readonly COMMON = {
     ACTIONS: {
@@ -29,6 +33,9 @@ export class TranslationKeys {
       HYDRATION: 'app.pizza.form.hydration',
       TEMPERATURE: 'app.pizza.form.temperature',
       POOLISH_RATIO: 'app.pizza.form.poolishRatio',
+      RT_REST_TIME: 'app.pizza.form.rtRestTime',
+      COLD_REST_TIME: 'app.pizza.form.coldRestTime',
+      REST_TIME_UNIT: 'app.pizza.form.restTimeUnit',
     },
     INGREDIENTS: {
       FLOUR: 'app.pizza.ingredients.flour',
@@ -36,11 +43,12 @@ export class TranslationKeys {
       YEAST: 'app.pizza.ingredients.yeast',
       HONEY: 'app.pizza.ingredients.honey',
       SALT: 'app.pizza.ingredients.salt',
-      DRY_YEAST: 'app.pizza.ingredients.dryYeast',
+      DRY_ACTIVE_YEAST: 'app.pizza.ingredients.dryActiveYeast',
+      DRY_INSTANT_YEAST: 'app.pizza.ingredients.dryInstantYeast',
       FRESH_YEAST: 'app.pizza.ingredients.freshYeast',
     },
     CALCULATIONS: {
-      TO_ADD: 'app.pizza.calculations.toAdd',
+      INGREDIENTS: 'app.pizza.calculations.ingredients',
       TOTAL: 'app.pizza.calculations.total',
       POOLISH: 'app.pizza.calculations.poolish',
       DOUGH: 'app.pizza.calculations.dough',
@@ -53,10 +61,16 @@ export class TranslationKeys {
       BIGA: 'app.pizza.types.biga',
     },
     RECIPE: {
+      QUANTITY: {
+        FLOUR: 'app.pizza.recipe.quantity.flour',
+        WATER: 'app.pizza.recipe.quantity.water',
+        YEAST: 'app.pizza.recipe.quantity.yeast',
+        HONEY: 'app.pizza.recipe.quantity.honey',
+        SALT: 'app.pizza.recipe.quantity.salt',
+      },
       POOLISH_PREPARATION: {
         TITLE: 'app.pizza.recipe.poolishPreparation.title',
         SUBTITLE: 'app.pizza.recipe.poolishPreparation.subtitle',
-        STEP_1_TITLE: 'app.pizza.recipe.poolishPreparation.step1Title',
         STEP_1_DESCRIPTION:
           'app.pizza.recipe.poolishPreparation.step1Description',
         INGREDIENTS_LIST: 'app.pizza.recipe.poolishPreparation.ingredientsList',
@@ -70,7 +84,6 @@ export class TranslationKeys {
         SUBTITLE: 'app.pizza.recipe.doughPreparation.subtitle',
         STEP_1_DESCRIPTION:
           'app.pizza.recipe.doughPreparation.step1Description',
-        STEP_2_TITLE: 'app.pizza.recipe.doughPreparation.step2Title',
         STEP_2_DESCRIPTION:
           'app.pizza.recipe.doughPreparation.step2Description',
         INGREDIENTS_LIST: 'app.pizza.recipe.doughPreparation.ingredientsList',
@@ -196,6 +209,22 @@ export class TranslationKeys {
     },
   };
 
+  // Tab1 page translations
+  static readonly TAB1 = {
+    SEGMENTS: {
+      DATA: 'app.tab1.segments.data',
+      RECIPE: 'app.tab1.segments.recipe',
+    },
+    CONFIGURATION: {
+      TITLE: 'app.tab1.configuration.title',
+      SUBTITLE: 'app.tab1.configuration.subtitle',
+    },
+    INGREDIENTS: {
+      TITLE: 'app.tab1.ingredients.title',
+      SUBTITLE: 'app.tab1.ingredients.subtitle',
+    },
+  };
+
   // Language selector translations
   static readonly LANGUAGE = {
     SELECTOR: {
@@ -207,6 +236,7 @@ export class TranslationKeys {
       HINDI: 'app.language.selector.hindi',
       JAPANESE: 'app.language.selector.japanese',
       CHINESE: 'app.language.selector.chinese',
+      GERMAN: 'app.language.selector.german',
       CANCEL: 'app.language.selector.cancel',
     },
   };

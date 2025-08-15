@@ -26,7 +26,13 @@
         "yeastType": "イーストの種類",
         "hydration": "水分",
         "temperature": "温度",
-        "poolishRatio": "プーリッシュの比率"
+        "poolishRatio": "プーリッシュの比率",
+        "rtRestTime": "温かい休憩",
+        "coldRestTime": "冷蔵休憩",
+        "restTimeUnit": {
+          "singular": "時間",
+          "plural": "時間"
+        }
       },
       "ingredients": {
         "flour": "小麦粉",
@@ -34,16 +40,17 @@
         "yeast": "イースト",
         "honey": "はちみつ",
         "salt": "塩",
-        "dryYeast": "ドライ",
+        "dryActiveYeast": "アクティブドライ",
+        "dryInstantYeast": "インスタントドライ",
         "freshYeast": "生"
       },
       "calculations": {
-        "toAdd": "追加",
         "total": "合計",
         "poolish": "プーリッシュ",
         "dough": "生地",
         "weight": "重量",
-        "percentage": "パーセンテージ"
+        "percentage": "パーセンテージ",
+        "ingredients": "材料"
       },
       "types": {
         "poolish": "プーリッシュスタイル",
@@ -51,20 +58,25 @@
         "biga": "ビガ法"
       },
       "recipe": {
+        "quantity": {
+          "flour": "<strong>{{ quantity }} g</strong> の小麦粉",
+          "water": "<strong>{{ quantity }} ml</strong> の水",
+          "yeast": "<strong>{{ quantity }} g</strong> のイースト",
+          "honey": "<strong>{{ quantity }} g</strong> のはちみつ",
+          "salt": "<strong>{{ quantity }} g</strong> の塩"
+        },
         "poolishPreparation": {
           "title": "プーリッシュの準備",
           "subtitle": "第1段階：スターターの準備",
-          "step1Title": "ステップ1:",
           "step1Description": "すべての材料を計量する:",
           "ingredientsList": "材料リスト",
           "step2Description": "大きなボウルで、水にイーストを溶かし、はちみつを加える",
-          "step3Description": "小麦粉を加え、木のスプーンで均一な混合物になるまで混ぜる。その後、ラップで覆って室温で1時間置き、冷蔵庫で16-24時間置く"
+          "step3Description": "小麦粉を加え、木のスプーンで均一な混合物になるまで混ぜる。その後、ラップで覆って室温で<strong>{{ rtRestTime }}時間</strong>置き、冷蔵庫で<strong>{{ coldRestTime }}時間</strong>置く"
         },
         "doughPreparation": {
           "title": "生地の準備",
           "subtitle": "第2段階：こね上げと成形",
           "step1Description": "使用1時間前にプーリッシュを取り出す",
-          "step2Title": "ステップ2:",
           "step2Description": "プーリッシュに加える量を計量する:",
           "ingredientsList": "材料リスト",
           "step3Description": "プーリッシュのボウルに水と塩を加える。スプーンで混ぜて水が吸収されるまで混ぜる",
@@ -101,6 +113,20 @@
         "language": "言語"
       }
     },
+    "tab1": {
+      "configuration": {
+        "title": "設定",
+        "subtitle": "ピザのレシピを設定"
+      },
+      "ingredients": {
+        "title": "材料",
+        "subtitle": "材料の量（グラム (g)）"
+      },
+      "segments": {
+        "data": "データ",
+        "recipe": "準備"
+      }
+    },
     "language": {
       "selector": {
         "title": "言語を選択",
@@ -111,6 +137,7 @@
         "hindi": "ヒンディー語",
         "japanese": "日本語",
         "chinese": "中国語",
+        "german": "ドイツ語",
         "cancel": "キャンセル"
       }
     }

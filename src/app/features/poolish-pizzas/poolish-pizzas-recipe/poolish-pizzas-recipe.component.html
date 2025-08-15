@@ -8,32 +8,38 @@
     }}</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
-    <p>
-      <strong>{{
-        TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.STEP_1_TITLE
-          | translate
-      }}</strong>
-      {{
-        TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.STEP_1_DESCRIPTION
-          | translate
-      }}
-    </p>
     <ul>
       <li>
-        {{ TranslationKeys.PIZZA.INGREDIENTS.FLOUR | translate }}:
-        <strong>{{ result().poolishFlour }}g</strong>
-      </li>
-      <li>
-        {{ TranslationKeys.PIZZA.INGREDIENTS.WATER | translate }}:
-        <strong>{{ result().poolishWater }}g</strong>
-      </li>
-      <li>
-        {{ TranslationKeys.PIZZA.INGREDIENTS.YEAST | translate }}:
-        <strong>{{ result().poolishYeast }}g</strong>
-      </li>
-      <li>
-        {{ TranslationKeys.PIZZA.INGREDIENTS.HONEY | translate }}:
-        <strong>{{ result().poolishHoney }}g</strong>
+        {{
+          TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.STEP_1_DESCRIPTION
+            | translate
+        }}
+        <ul>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.FLOUR
+                | translate: { quantity: result().poolishFlour }
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.WATER
+                | translate: { quantity: result().poolishWater }
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.YEAST
+                | translate: { quantity: result().poolishYeast }
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.HONEY
+                | translate: { quantity: result().poolishHoney }
+            "
+          ></li>
+        </ul>
       </li>
     </ul>
 
@@ -44,12 +50,16 @@
             | translate
         }}
       </li>
-      <li>
-        {{
+      <li
+        [innerHTML]="
           TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.STEP_3_DESCRIPTION
             | translate
-        }}
-      </li>
+              : {
+                  coldRestTime: result().coldRestTime,
+                  rtRestTime: result().rtRestTime,
+                }
+        "
+      ></li>
     </ul>
   </ion-card-content>
 </ion-card>
@@ -64,38 +74,38 @@
     }}</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
-    <p>
-      <strong>{{
-        TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.STEP_1_TITLE
-          | translate
-      }}</strong>
-      {{
-        TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_1_DESCRIPTION
-          | translate
-      }}
-    </p>
-
-    <p>
-      <strong>{{
-        TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_2_TITLE | translate
-      }}</strong>
-      {{
-        TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_2_DESCRIPTION
-          | translate
-      }}
-    </p>
     <ul>
       <li>
-        <strong>{{ result().flourToAdd }}g</strong>
-        {{ TranslationKeys.PIZZA.INGREDIENTS.FLOUR | translate | lowercase }}
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_1_DESCRIPTION
+            | translate
+        }}
       </li>
       <li>
-        <strong>{{ result().waterToAdd }}g</strong>
-        {{ TranslationKeys.PIZZA.INGREDIENTS.WATER | translate | lowercase }}
-      </li>
-      <li>
-        <strong>{{ result().saltWeight }}g</strong>
-        {{ TranslationKeys.PIZZA.INGREDIENTS.SALT | translate | lowercase }}
+        {{
+          TranslationKeys.PIZZA.RECIPE.DOUGH_PREPARATION.STEP_2_DESCRIPTION
+            | translate
+        }}
+        <ul>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.FLOUR
+                | translate: { quantity: result().flourToAdd }
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.WATER
+                | translate: { quantity: result().waterToAdd }
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.SALT
+                | translate: { quantity: result().saltWeight }
+            "
+          ></li>
+        </ul>
       </li>
     </ul>
 

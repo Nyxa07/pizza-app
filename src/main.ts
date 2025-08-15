@@ -28,6 +28,9 @@ function getLocaleId(): string {
 
   // Fallback to browser/device language
   const browserLang = navigator.language;
+  if (browserLang.startsWith('de')) {
+    return 'de';
+  }
   if (browserLang.startsWith('hi')) {
     return 'hi';
   }

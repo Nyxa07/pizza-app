@@ -25,8 +25,10 @@ import { PoolishPizzasResultsComponent } from '../features/poolish-pizzas/poolis
 import { addIcons } from 'ionicons';
 import { pizza, settings } from 'ionicons/icons';
 import { PoolishPizzasRecipeComponent } from '../features/poolish-pizzas/poolish-pizzas-recipe/poolish-pizzas-recipe.component';
-import { LanguageSwitcherComponent } from '../shared/components/language-switcher/language-switcher.component';
 import { ToolbarSegmentsService } from '../shared/services/toolbar-segments.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslationKeys } from '../shared/services/translation-keys.service';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -43,16 +45,27 @@ import { ToolbarSegmentsService } from '../shared/services/toolbar-segments.serv
     IonCardSubtitle,
     IonCardContent,
     PoolishPizzasRecipeComponent,
+    TranslateModule,
   ],
 })
 export class Tab1Page {
   protected toolbarSegmentsService = inject(ToolbarSegmentsService);
 
+  // Make TranslationKeys available in template
+  protected TranslationKeys = TranslationKeys;
+  protected translateService = inject(TranslateService);
+
   constructor() {
     addIcons({ settings, pizza });
     this.toolbarSegmentsService.setSegments([
-      { name: 'Données', value: 'data' },
-      { name: 'Préparation', value: 'recipe' },
+      {
+        name: TranslationKeys.TAB1.SEGMENTS.DATA,
+        value: 'data',
+      },
+      {
+        name: TranslationKeys.TAB1.SEGMENTS.RECIPE,
+        value: 'recipe',
+      },
     ]);
   }
 

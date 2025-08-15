@@ -8,11 +8,14 @@ import {
   IonSelectOption,
   IonList,
   IonRange,
+  IonInput,
+  IonNote,
 } from '@ionic/angular/standalone';
 import { PoolishPizzaMakerService } from '../services/poolish-pizza-maker.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationKeys } from '../../../shared/services/translation-keys.service';
+import { LowerCasePipe } from '@angular/common';
 
 export interface PoolishPizzaFormData {
   nbPizzas: number;
@@ -20,6 +23,8 @@ export interface PoolishPizzaFormData {
   hydrationRatio: number;
   temperature: number;
   poolishRatio: number;
+  rtRestTime: number;
+  coldRestTime: number;
 }
 
 @Component({
@@ -34,6 +39,7 @@ export interface PoolishPizzaFormData {
     IonList,
     IonRange,
     TranslateModule,
+    LowerCasePipe,
   ],
   standalone: true,
 })
@@ -63,7 +69,7 @@ export class PoolishPizzasFormComponent implements OnInit {
   protected formBuilder = inject(FormBuilder);
   protected form = this.formBuilder.group({
     nbPizzas: [5, [Validators.required, Validators.min(1)]],
-    yeastType: [YeastType.DRY, [Validators.required]],
+    yeastType: [YeastType.DRY_ACTIVE, [Validators.required]],
     hydrationRatio: [
       0.62,
       [Validators.required, Validators.min(0), Validators.max(1)],
@@ -75,6 +81,14 @@ export class PoolishPizzasFormComponent implements OnInit {
     poolishRatio: [
       0,
       [Validators.required, Validators.min(0), Validators.max(1)],
+    ],
+    rtRestTime: [
+      1,
+      [Validators.required, Validators.min(1), Validators.max(24)],
+    ],
+    coldRestTime: [
+      16,
+      [Validators.required, Validators.min(0), Validators.max(72)],
     ],
   });
 
@@ -94,7 +108,15 @@ export class PoolishPizzasFormComponent implements OnInit {
     this.onChange.emit(this.form.value as PoolishPizzaFormData);
   }
 
-  protected nbPizzasPinFormatter(value: number) {
+  protected pinFormatter(value: number) {
     return `${value}`;
+  }
+
+  protected pinHoursFormatter(value: number) {
+    return `${value}`;
+  }
+
+  protected range(start: number, end: number) {
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }
 }

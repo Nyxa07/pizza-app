@@ -26,7 +26,13 @@
         "yeastType": "Tipo de levadura",
         "hydration": "Hidratación",
         "temperature": "Temperatura",
-        "poolishRatio": "Proporción poolish"
+        "poolishRatio": "Proporción poolish",
+        "rtRestTime": "Reposo caliente",
+        "coldRestTime": "Reposo frío",
+        "restTimeUnit": {
+          "singular": "Hora",
+          "plural": "Horas"
+        }
       },
       "ingredients": {
         "flour": "Harina",
@@ -34,16 +40,17 @@
         "yeast": "Levadura",
         "honey": "Miel",
         "salt": "Sal",
-        "dryYeast": "Seca",
+        "dryActiveYeast": "Seca activa",
+        "dryInstantYeast": "Seca instantánea",
         "freshYeast": "Fresca"
       },
       "calculations": {
-        "toAdd": "Añadir",
         "total": "Total",
         "poolish": "Poolish",
         "dough": "Masa",
         "weight": "Peso",
-        "percentage": "Porcentaje"
+        "percentage": "Porcentaje",
+        "ingredients": "Ingredientes"
       },
       "types": {
         "poolish": "Estilo poolish",
@@ -51,20 +58,25 @@
         "biga": "Método biga"
       },
       "recipe": {
+        "quantity": {
+          "flour": "<strong>{{ quantity }} g</strong> de harina",
+          "water": "<strong>{{ quantity }} ml</strong> de agua",
+          "yeast": "<strong>{{ quantity }} g</strong> de levadura",
+          "honey": "<strong>{{ quantity }} g</strong> de miel",
+          "salt": "<strong>{{ quantity }} g</strong> de sal"
+        },
         "poolishPreparation": {
           "title": "PREPARACIÓN DE LA POOLISH",
           "subtitle": "Primer paso: preparación de la masa madre",
-          "step1Title": "Paso 1:",
           "step1Description": "Pesar todos los ingredientes:",
           "ingredientsList": "lista de ingredientes",
           "step2Description": "En un bol grande, disolver la levadura en agua y añadir miel",
-          "step3Description": "Añadir harina y mezclar con una cuchara de madera hasta obtener una mezcla homogénea, luego dejar reposar 1 hora a temperatura ambiente cubierto con film transparente, luego 16-24 horas en el frigorífico"
+          "step3Description": "Añadir harina y mezclar con una cuchara de madera hasta obtener una mezcla homogénea, luego dejar reposar <strong>{{ rtRestTime }} hora(s)</strong> a temperatura ambiente cubierto con film transparente, luego <strong>{{ coldRestTime }} horas</strong> en el frigorífico"
         },
         "doughPreparation": {
           "title": "PREPARACIÓN DE LA MASA",
           "subtitle": "Segundo paso: amasado y formado",
           "step1Description": "Sacar la poolish 1 hora antes de usar",
-          "step2Title": "Paso 2:",
           "step2Description": "Pesar las cantidades a añadir a la poolish:",
           "ingredientsList": "lista de ingredientes",
           "step3Description": "En el bol de la poolish, añadir agua y sal. Mezclar con cuchara hasta absorber el agua",
@@ -101,6 +113,20 @@
         "language": "Idioma"
       }
     },
+    "tab1": {
+      "configuration": {
+        "title": "Configuración",
+        "subtitle": "Configura tu receta de pizzas"
+      },
+      "ingredients": {
+        "title": "Ingredientes",
+        "subtitle": "Cantidades de ingredientes en gramos (g)"
+      },
+      "segments": {
+        "data": "Datos",
+        "recipe": "Preparación"
+      }
+    },
     "language": {
       "selector": {
         "title": "Seleccionar idioma",
@@ -111,6 +137,7 @@
         "hindi": "Hindi",
         "japanese": "Japonés",
         "chinese": "Chino",
+        "german": "Alemán",
         "cancel": "Cancelar"
       }
     }

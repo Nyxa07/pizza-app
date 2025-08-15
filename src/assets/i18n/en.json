@@ -26,7 +26,13 @@
         "yeastType": "Yeast type",
         "hydration": "Hydration",
         "temperature": "Temperature",
-        "poolishRatio": "Poolish ratio"
+        "poolishRatio": "Poolish ratio",
+        "rtRestTime": "Warm rest",
+        "coldRestTime": "Cold rest",
+        "restTimeUnit": {
+          "singular": "Hour",
+          "plural": "Hours"
+        }
       },
       "ingredients": {
         "flour": "Flour",
@@ -34,16 +40,17 @@
         "yeast": "Yeast",
         "honey": "Honey",
         "salt": "Salt",
-        "dryYeast": "Dry",
+        "dryActiveYeast": "Active dry",
+        "dryInstantYeast": "Instant dry",
         "freshYeast": "Fresh"
       },
       "calculations": {
-        "toAdd": "To add",
         "total": "Total",
         "poolish": "Poolish",
         "dough": "Dough",
         "weight": "Weight",
-        "percentage": "Percentage"
+        "percentage": "Percentage",
+        "ingredients": "Ingredients"
       },
       "types": {
         "poolish": "Poolish style",
@@ -51,36 +58,41 @@
         "biga": "Biga method"
       },
       "recipe": {
+        "quantity": {
+          "flour": "<strong>{{ quantity }} g</strong> of flour",
+          "water": "<strong>{{ quantity }} ml</strong> of water",
+          "yeast": "<strong>{{ quantity }} g</strong> of yeast",
+          "honey": "<strong>{{ quantity }} g</strong> of honey",
+          "salt": "<strong>{{ quantity }} g</strong> of salt"
+        },
         "poolishPreparation": {
           "title": "POOLISH PREPARATION",
           "subtitle": "First step: starter preparation",
-          "step1Title": "Step 1:",
           "step1Description": "Weigh all ingredients:",
           "ingredientsList": "ingredients list",
-          "step2Description": "In a large bowl, dissolve the yeast in water and add honey",
-          "step3Description": "Add flour and mix with a wooden spoon until homogeneous, then let rest 1 hour at room temperature covered with plastic wrap, then 16-24 hours in the refrigerator"
+          "step2Description": "In a large bowl, dissolve yeast in water and add honey",
+          "step3Description": "Add flour and mix with a wooden spoon until you get a homogeneous mixture, then let rest <strong>{{ rtRestTime }} hour(s)</strong> at room temperature covered with plastic wrap, then <strong>{{ coldRestTime }} hour(s)</strong> in the refrigerator"
         },
         "doughPreparation": {
           "title": "DOUGH PREPARATION",
-          "subtitle": "Second step: kneading and forming",
+          "subtitle": "Second step: kneading and shaping",
           "step1Description": "Take out the poolish 1 hour before use",
-          "step2Title": "Step 2:",
           "step2Description": "Weigh the quantities to add to the poolish:",
           "ingredientsList": "ingredients list",
-          "step3Description": "In the poolish bowl, add water and salt. Mix with a spoon until water is absorbed",
-          "step4Description": "Add flour little by little and mix with a spoon",
+          "step3Description": "In the poolish bowl, add water and salt. Mix with spoon until water is absorbed",
+          "step4Description": "Add flour little by little and mix with spoon",
           "step5Description": "When it's no longer possible to use a spoon, transfer the dough to the work surface",
           "step6Description": "Work the dough by kneading it, the flour must be completely integrated",
-          "step7Description": "Make a few folds with the dough and form a nice ball (soft and supple)",
+          "step7Description": "Make some folds with the dough and form a nice ball (soft and flexible)",
           "step8Description": "Let rest 10-15 minutes under a bowl",
-          "step9Description": "Reform a nice ball and let rest for another 1 hour in an airtight container",
-          "step10Description": "Put a thin layer of fine semolina in a dish",
-          "step11Description": "Retrieve the dough and with a dough cutter or spatula form dough balls (well stretched) of about",
-          "step12Description": "Place the dough balls in the dish leaving space between each (they will still grow)",
-          "step13Description": "Close the dish or put plastic wrap on it and let rest for 2 hours",
+          "step9Description": "Reform a nice ball and let rest another 1 hour in an airtight container",
+          "step10Description": "Put a thin layer of fine semolina on a plate",
+          "step11Description": "Retrieve the dough and with a dough cutter or spatula form dough balls (well stretched) of approximately",
+          "step12Description": "Place the dough balls on the plate leaving space between each one (they will still grow)",
+          "step13Description": "Close the plate or put plastic wrap over it and let rest 2 hours",
           "tipsTitle": "💡 Tips:",
-          "tipsDescription": "If the dough sticks too much, form a ball and let rest 10 minutes under a bowl",
-          "successMessage": "🎉 And there you go, they're ready to be transformed into PIZZA!"
+          "tipsDescription": "If the dough is too sticky, form a ball and let rest 10 minutes under a bowl",
+          "successMessage": "🎉 And there you have it, they are ready to be transformed into PIZZA!"
         },
         "storage": {
           "title": "STORAGE",
@@ -92,13 +104,27 @@
     },
     "navigation": {
       "tabs": {
-        "poolishStyle": "Poolish style",
+        "poolishStyle": "Poolish Style",
         "tab2": "Tab 2",
         "tab3": "Tab 3"
       },
       "header": {
         "title": "Pizza App",
         "language": "Language"
+      }
+    },
+    "tab1": {
+      "configuration": {
+        "title": "Configuration",
+        "subtitle": "Configure your pizzas recipe"
+      },
+      "ingredients": {
+        "title": "Ingredients",
+        "subtitle": "Ingredient quantities in grams (g)"
+      },
+      "segments": {
+        "data": "Data",
+        "recipe": "Preparation"
       }
     },
     "language": {
@@ -111,6 +137,7 @@
         "hindi": "Hindi",
         "japanese": "Japanese",
         "chinese": "Chinese",
+        "german": "German",
         "cancel": "Cancel"
       }
     }

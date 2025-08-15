@@ -1,4 +1,4 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, input, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   IonCard,
@@ -8,9 +8,9 @@ import {
   IonCardTitle,
 } from '@ionic/angular/standalone';
 import { PoolishPizzaResult } from '../services/poolish-pizza-maker.service';
-import { PIZZA_WEIGHT } from '../constants';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationKeys } from '../../../shared/services/translation-keys.service';
+import { PIZZA_WEIGHT } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-poolish-pizzas-recipe',
@@ -26,6 +26,7 @@ import { TranslationKeys } from '../../../shared/services/translation-keys.servi
     IonCardTitle,
     TranslateModule,
   ],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PoolishPizzasRecipeComponent implements OnInit {
   result = input.required<PoolishPizzaResult>();
