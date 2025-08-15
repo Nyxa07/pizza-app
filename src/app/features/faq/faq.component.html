@@ -5,10 +5,7 @@
 <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
   <ng-template>
     <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-button (click)="cancel()">Cancel</ion-button>
-        </ion-buttons>
+      <ion-toolbar color="primary">
         <ion-title>{{ TranslationKeys.FAQ.TITLE | translate }}</ion-title>
         <ion-buttons slot="end">
           <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
@@ -36,6 +33,11 @@
               TranslationKeys.FAQ.QUESTIONS.QUESTION_1.ANSWER.PART_2 | translate
             }}
           </p>
+           <p>
+            {{
+              TranslationKeys.FAQ.QUESTIONS.QUESTION_1.ANSWER.PART_3 | translate
+            }}
+          </p>
         </ion-card-content>
       </ion-card>
 
@@ -61,6 +63,30 @@
           </p>
         </ion-card-content>
       </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            {{ TranslationKeys.FAQ.QUESTIONS.QUESTION_3.TITLE | translate }}
+          </ion-card-title>
+          <ion-card-subtitle>
+            {{ TranslationKeys.FAQ.QUESTIONS.QUESTION_3.SUBTITLE | translate }}
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>
+            {{
+              TranslationKeys.FAQ.QUESTIONS.QUESTION_3.ANSWER.PART_1 | translate
+            }}
+          </p>
+          <p>
+            {{
+              TranslationKeys.FAQ.QUESTIONS.QUESTION_3.ANSWER.PART_2 | translate
+            }}
+          </p>
+        </ion-card-content>
+      </ion-card>
+
     </ion-content>
   </ng-template>
 </ion-modal>

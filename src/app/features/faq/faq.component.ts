@@ -43,6 +43,7 @@ import { TranslationKeys } from 'src/app/shared/services/translation-keys.servic
 export class FaqComponent implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
   TranslationKeys = TranslationKeys;
+  questionsData = []
 
   constructor() {
     addIcons({ informationCircle });

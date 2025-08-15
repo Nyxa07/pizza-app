@@ -247,9 +247,18 @@ export class TranslationKeys {
         ANSWER: {
           PART_1: 'app.faq.questions.question1.answer.part1',
           PART_2: 'app.faq.questions.question1.answer.part2',
+          PART_3: 'app.faq.questions.question1.answer.part3',
         },
       },
       QUESTION_2: {
+        TITLE: 'app.faq.questions.question2.title',
+        SUBTITLE: 'app.faq.questions.question2.subtitle',
+        ANSWER: {
+          PART_1: 'app.faq.questions.question2.answer.part1',
+          PART_2: 'app.faq.questions.question2.answer.part2',
+        },
+      }, 
+      QUESTION_3: {
         TITLE: 'app.faq.questions.question2.title',
         SUBTITLE: 'app.faq.questions.question2.subtitle',
         ANSWER: {
