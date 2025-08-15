@@ -5,7 +5,7 @@ import {
   DRY_INSTANT_YEAST_COEF,
   FRESH_YEAST_COEF,
   YEAST_COLD_COEF,
-} from '../constants';
+} from '../../../shared/constants';
 
 @Injectable({
   providedIn: 'root',
