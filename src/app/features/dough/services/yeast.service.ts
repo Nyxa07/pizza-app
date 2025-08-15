@@ -3,7 +3,10 @@ import { YeastType } from 'src/app/features/dough/enums/yeast-type.enum';
 import {
   DRY_ACTIVE_YEAST_COEF,
   DRY_INSTANT_YEAST_COEF,
+  FERMENTATION_OPTIMAL_RANGE,
   FRESH_YEAST_COEF,
+  BASE_TEMPERATURE,
+  TEMPERATURE_FACTOR_COEF,
   YEAST_COLD_COEF,
 } from '../constants';
 
@@ -16,40 +19,45 @@ export class YeastService {
   }
 
   private temperatureFactor(temperature: number) {
-    return 1 + 0.03 * (temperature - 20);
+    return 1 + TEMPERATURE_FACTOR_COEF * (temperature - BASE_TEMPERATURE);
   }
 
   private percentYeast(
     tEquivalent: number,
     temperatureFactor: number,
     kFactor: number,
-    yeastType: YeastType,
   ) {
-    const res = kFactor / (tEquivalent * temperatureFactor) / 100;
-    return (
-      res *
-      (yeastType === YeastType.FRESH
-        ? FRESH_YEAST_COEF
-        : yeastType === YeastType.DRY_ACTIVE
-          ? DRY_ACTIVE_YEAST_COEF
-          : DRY_INSTANT_YEAST_COEF)
-    );
+    return kFactor / (tEquivalent * temperatureFactor) / 100;
   }
 
-  private kFactor(tEquivalent: number) {
-    if (tEquivalent > 24) {
-      return 0.4;
+  private kFactor(equivalentTime: number) {
+    // Very long fermentation (>24h): minimal yeast to avoid acidity
+    if (equivalentTime > FERMENTATION_OPTIMAL_RANGE.MAX) {
+      return 0.35;
     }
-    if (tEquivalent > 16) {
-      return 0.8;
+
+    // Long fermentation (16-24h): reduced yeast for slow development
+    if (equivalentTime > 16) {
+      return 0.7;
     }
-    if (tEquivalent > 12) {
-      return 1;
+
+    // Standard fermentation (12-16h): balanced yeast
+    if (equivalentTime > 12) {
+      return 1.0;
     }
-    if (tEquivalent > 4) {
-      return 1.2;
+
+    // Fast fermentation (8-12h): increased yeast
+    if (equivalentTime > 8) {
+      return 1.3;
     }
-    return 1.5;
+
+    // Very fast fermentation (4-8h): important yeast
+    if (equivalentTime > FERMENTATION_OPTIMAL_RANGE.MIN) {
+      return 1.6;
+    }
+
+    // Ultra-fast fermentation (<4h): maximum yeast
+    return 2.0;
   }
 
   yeastQuantity(
@@ -66,7 +74,6 @@ export class YeastService {
       tEquivalent,
       temperatureFactor,
       kFactor,
-      yeastType,
     );
 
     return Math.max(0.1, Math.round(percentYeast * flour * 10) / 10);
