@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   IonButton,
   IonIcon,
@@ -8,6 +8,11 @@ import {
   IonTitle,
   IonButtons,
   IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
+  IonCardSubtitle,
 } from '@ionic/angular/standalone';
 import { informationCircle } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
@@ -28,6 +33,11 @@ import { TranslationKeys } from 'src/app/shared/services/translation-keys.servic
     IonButtons,
     IonContent,
     TranslatePipe,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
+    IonCardSubtitle,
   ],
 })
 export class FaqComponent implements OnInit {

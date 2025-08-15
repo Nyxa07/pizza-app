@@ -15,8 +15,52 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
-      <p>Coucou</p>
+    <ion-content>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            {{ TranslationKeys.FAQ.QUESTIONS.QUESTION_1.TITLE | translate }}
+          </ion-card-title>
+          <ion-card-subtitle>
+            {{ TranslationKeys.FAQ.QUESTIONS.QUESTION_1.SUBTITLE | translate }}
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>
+            {{
+              TranslationKeys.FAQ.QUESTIONS.QUESTION_1.ANSWER.PART_1 | translate
+            }}
+          </p>
+          <p>
+            {{
+              TranslationKeys.FAQ.QUESTIONS.QUESTION_1.ANSWER.PART_2 | translate
+            }}
+          </p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            {{ TranslationKeys.FAQ.QUESTIONS.QUESTION_2.TITLE | translate }}
+          </ion-card-title>
+          <ion-card-subtitle>
+            {{ TranslationKeys.FAQ.QUESTIONS.QUESTION_2.SUBTITLE | translate }}
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>
+            {{
+              TranslationKeys.FAQ.QUESTIONS.QUESTION_2.ANSWER.PART_1 | translate
+            }}
+          </p>
+          <p>
+            {{
+              TranslationKeys.FAQ.QUESTIONS.QUESTION_2.ANSWER.PART_2 | translate
+            }}
+          </p>
+        </ion-card-content>
+      </ion-card>
     </ion-content>
   </ng-template>
 </ion-modal>

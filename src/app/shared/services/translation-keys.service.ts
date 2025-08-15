@@ -240,5 +240,23 @@ export class TranslationKeys {
 
   static readonly FAQ = {
     TITLE: 'app.faq.title',
+    QUESTIONS: {
+      QUESTION_1: {
+        TITLE: 'app.faq.questions.question1.title',
+        SUBTITLE: 'app.faq.questions.question1.subtitle',
+        ANSWER: {
+          PART_1: 'app.faq.questions.question1.answer.part1',
+          PART_2: 'app.faq.questions.question1.answer.part2',
+        },
+      },
+      QUESTION_2: {
+        TITLE: 'app.faq.questions.question2.title',
+        SUBTITLE: 'app.faq.questions.question2.subtitle',
+        ANSWER: {
+          PART_1: 'app.faq.questions.question2.answer.part1',
+          PART_2: 'app.faq.questions.question2.answer.part2',
+        },
+      },
+    },
   };
 }
