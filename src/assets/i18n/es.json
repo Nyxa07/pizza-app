@@ -23,6 +23,7 @@
     "pizza": {
       "form": {
         "pizzasNumber": "Número de pizzas",
+        "doughType": "Tipo de masa",
         "yeastType": "Tipo de levadura",
         "hydration": "Hidratación",
         "temperature": "Temperatura",
@@ -52,7 +53,7 @@
         "percentage": "Porcentaje",
         "ingredients": "Ingredientes"
       },
-      "types": {
+      "doughTypes": {
         "poolish": "Estilo poolish",
         "direct": "Método directo",
         "biga": "Método biga"

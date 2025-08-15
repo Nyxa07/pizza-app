@@ -83,10 +83,10 @@ pizza-app/
 ├── src/
 │   ├── app/
 │   │   ├── features/
-│   │   │   └── poolish-pizzas/          # Pizza recipe feature
-│   │   │       ├── poolish-pizzas-form/     # Recipe form component
-│   │   │       ├── poolish-pizzas-recipe/   # Recipe display component
-│   │   │       └── poolish-pizzas-results/  # Calculation results
+│   │   │   └── dough/                     # Dough recipe feature
+│   │   │       ├── dough-form/                # Recipe form component
+│   │   │       ├── dough-poolish-recipe/      # Recipe display component
+│   │   │       └── dough-quantity/            # Calculation results
 │   │   ├── shared/
 │   │   │   ├── components/
 │   │   │   │   ├── language-switcher/       # Language selection

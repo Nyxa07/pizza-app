@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { DoughFormComponent } from './dough-form.component';
+import { DoughPoolishRecipeComponent } from './dough-poolish-recipe.component';
 
-describe('DoughFormComponent', () => {
-  let component: DoughFormComponent;
-  let fixture: ComponentFixture<DoughFormComponent>;
+describe('DoughPoolishRecipeComponent', () => {
+  let component: DoughPoolishRecipeComponent;
+  let fixture: ComponentFixture<DoughPoolishRecipeComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DoughFormComponent],
+      declarations: [DoughPoolishRecipeComponent],
       imports: [IonicModule.forRoot()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DoughFormComponent);
+    fixture = TestBed.createComponent(DoughPoolishRecipeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

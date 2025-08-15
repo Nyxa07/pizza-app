@@ -5,7 +5,7 @@ import {
   DRY_INSTANT_YEAST_COEF,
   FRESH_YEAST_COEF,
   YEAST_COLD_COEF,
-} from '../../../shared/constants';
+} from '../constants';
 
 @Injectable({
   providedIn: 'root',
@@ -37,29 +37,31 @@ export class YeastService {
   }
 
   private kFactor(tEquivalent: number) {
-    if (tEquivalent >= 48) {
+    if (tEquivalent > 24) {
       return 0.4;
     }
-    if (tEquivalent >= 24) {
+    if (tEquivalent > 16) {
       return 0.8;
     }
-    if (tEquivalent >= 16) {
+    if (tEquivalent > 12) {
+      return 1;
+    }
+    if (tEquivalent > 4) {
       return 1.2;
     }
-
     return 1.5;
   }
 
   yeastQuantity(
     temperature: number,
     yeastType: YeastType,
-    poolishFlour: number,
+    flour: number,
     rtRestTime: number,
     coldRestTime: number,
   ) {
     const tEquivalent = this.tEquivalent(rtRestTime, coldRestTime);
     const temperatureFactor = this.temperatureFactor(temperature);
-    const kFactor = this.kFactor(tEquivalent);
+    const kFactor = this.kFactor(tEquivalent); // Add 1 hour, time for the yeast to be stopped
     const percentYeast = this.percentYeast(
       tEquivalent,
       temperatureFactor,
@@ -67,6 +69,6 @@ export class YeastService {
       yeastType,
     );
 
-    return Math.max(0.1, Math.round(percentYeast * poolishFlour * 10) / 10);
+    return Math.max(0.1, Math.round(percentYeast * flour * 10) / 10);
   }
 }

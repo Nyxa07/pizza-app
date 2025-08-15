@@ -23,6 +23,7 @@
     "pizza": {
       "form": {
         "pizzasNumber": "Anzahl der Pizzen",
+        "doughType": "Teigtyp",
         "yeastType": "Hefetyp",
         "hydration": "Hydratation",
         "temperature": "Temperatur",
@@ -52,7 +53,7 @@
         "percentage": "Prozent",
         "ingredients": "Zutaten"
       },
-      "types": {
+      "doughTypes": {
         "poolish": "Poolish-Stil",
         "direct": "Direktmethode",
         "biga": "Biga-Methode"
