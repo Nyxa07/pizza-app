@@ -1,5 +1,3 @@
-/// <reference types="@angular/localize" />
-
 import { bootstrapApplication } from '@angular/platform-browser';
 import {
   RouteReuseStrategy,
@@ -14,45 +12,11 @@ import {
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
-import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-
-// Function to get the preferred locale
-function getLocaleId(): string {
-  // Check localStorage first
-  const storedLocale = localStorage.getItem('preferredLocale');
-  if (storedLocale) {
-    return storedLocale;
-  }
-
-  // Fallback to browser/device language
-  const browserLang = navigator.language;
-  if (browserLang.startsWith('de')) {
-    return 'de';
-  }
-  if (browserLang.startsWith('hi')) {
-    return 'hi';
-  }
-  if (browserLang.startsWith('ja')) {
-    return 'ja';
-  }
-  if (browserLang.startsWith('zh')) {
-    return 'zh';
-  }
-  if (browserLang.startsWith('es')) {
-    return 'es';
-  }
-  if (browserLang.startsWith('it')) {
-    return 'it';
-  }
-  if (browserLang.startsWith('fr')) {
-    return 'fr';
-  }
-
-  // Default to English
-  return 'en';
-}
+import { inject, provideAppInitializer } from '@angular/core';
+import { LocaleManagerService } from './app/shared/services/locale-manager.service';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -66,7 +30,11 @@ bootstrapApplication(AppComponent, {
         suffix: '.json',
       }),
       fallbackLang: 'en',
-      lang: getLocaleId(),
+      // lang: getLocaleId(),
+    }),
+    provideAppInitializer(() => {
+      const localeInitService = inject(LocaleManagerService);
+      return localeInitService.init();
     }),
   ],
 });
