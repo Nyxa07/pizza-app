@@ -5,7 +5,7 @@ import {
   POOLISH_RATIO_BY_TEMPERATURE,
 } from '../constants';
 import { PoolishPizzaFormData } from '../dough-form/dough-form.component';
-import { YeastService } from 'src/app/shared/services/yeast.service';
+import { YeastService } from 'src/app/features/dough/services/yeast.service';
 import { PIZZA_WEIGHT, SALT_WEIGHT_PER_PIZZA } from 'src/app/shared/constants';
 
 export interface PoolishPizzaResult {
