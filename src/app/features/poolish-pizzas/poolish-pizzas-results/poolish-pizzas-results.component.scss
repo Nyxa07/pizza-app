@@ -1,22 +1,43 @@
 ion-badge {
-  &.water {
-    background-color: var(--piz-color-water);
-    color: var(--piz-color-water-contrast);
+  background-color: var(--ion-color-secondary);
+  color: var(--ion-color-secondary-contrast);
+}
+
+div[slot="content"] {
+  background-color: var(--ion-card-background);
+}
+// ion-list-header {
+//   color: var(--ion-color-primary);
+//   font-weight: bold;
+// }
+
+// ion-card {
+//   box-shadow: none !important;
+// }
+
+table {
+  width: 100%;
+  border: 1px solid var(--ion-color-primary);
+  border-radius: 5px;
+  overflow: hidden;
+  th,
+  td {
+    text-align: center;
+    padding: 0.5rem;
+    // border: 1px solid var(--ion-color-medium);
+    // border-top: 1px solid var(--ion-color-primary);
   }
-  &.yeast {
-    background-color: var(--piz-color-yeast);
-    color: var(--piz-color-yeast-contrast);
+
+  thead {
+    background-color: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
   }
-  &.honey {
-    background-color: var(--piz-color-honey);
-    color: var(--piz-color-honey-contrast);
-  }
-  &.flour {
-    background-color: var(--piz-color-flour);
-    color: var(--piz-color-flour-contrast);
-  }
-  &.salt {
-    background-color: var(--piz-color-salt);
-    color: var(--piz-color-salt-contrast);
+}
+
+@media (prefers-color-scheme: dark) {
+  table {
+    tbody {
+      color: var(--ion-color-light-shade);
+    }
   }
 }

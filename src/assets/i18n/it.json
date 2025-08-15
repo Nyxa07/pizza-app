@@ -26,7 +26,13 @@
         "yeastType": "Tipo di lievito",
         "hydration": "Idratazione",
         "temperature": "Temperatura",
-        "poolishRatio": "Rapporto poolish"
+        "poolishRatio": "Rapporto poolish",
+        "rtRestTime": "Riposo caldo",
+        "coldRestTime": "Riposo freddo",
+        "restTimeUnit": {
+          "singular": "Ora",
+          "plural": "Ore"
+        }
       },
       "ingredients": {
         "flour": "Farina",
@@ -34,16 +40,17 @@
         "yeast": "Lievito",
         "honey": "Miele",
         "salt": "Sale",
-        "dryYeast": "Secco",
+        "dryActiveYeast": "Secco attivo",
+        "dryInstantYeast": "Secco istantaneo",
         "freshYeast": "Fresco"
       },
       "calculations": {
-        "toAdd": "Da aggiungere",
         "total": "Totale",
         "poolish": "Poolish",
         "dough": "Impasto",
         "weight": "Peso",
-        "percentage": "Percentuale"
+        "percentage": "Percentuale",
+        "ingredients": "Ingredienti"
       },
       "types": {
         "poolish": "Stile poolish",
@@ -51,35 +58,40 @@
         "biga": "Metodo biga"
       },
       "recipe": {
+        "quantity": {
+          "flour": "<strong>{{ quantity }} g</strong> di farina",
+          "water": "<strong>{{ quantity }} ml</strong> di acqua",
+          "yeast": "<strong>{{ quantity }} g</strong> di lievito",
+          "honey": "<strong>{{ quantity }} g</strong> di miele",
+          "salt": "<strong>{{ quantity }} g</strong> di sale"
+        },
         "poolishPreparation": {
           "title": "PREPARAZIONE DELLA POOLISH",
           "subtitle": "Primo passo: preparazione del lievito madre",
-          "step1Title": "Passo 1:",
           "step1Description": "Pesare tutti gli ingredienti:",
           "ingredientsList": "lista degli ingredienti",
-          "step2Description": "In una grande ciotola, sciogliere il lievito nell'acqua e aggiungere il miele",
-          "step3Description": "Aggiungere la farina e mescolare con un cucchiaio di legno fino a ottenere un composto omogeneo, poi lasciar riposare 1 ora a temperatura ambiente coperto con pellicola trasparente, poi 16-24 ore in frigorifero"
+          "step2Description": "In una ciotola grande, sciogliere il lievito in acqua e aggiungere il miele",
+          "step3Description": "Aggiungere la farina e mescolare con un cucchiaio di legno fino a ottenere una miscela omogenea, poi lasciar riposare <strong>{{ rtRestTime }} ora(e)</strong> a temperatura ambiente coperto con pellicola trasparente, poi <strong>{{ coldRestTime }} ore</strong> in frigorifero"
         },
         "doughPreparation": {
           "title": "PREPARAZIONE DELL'IMPASTO",
-          "subtitle": "Secondo passo: impastamento e formatura",
+          "subtitle": "Secondo passo: impastatura e formatura",
           "step1Description": "Tirare fuori la poolish 1 ora prima dell'uso",
-          "step2Title": "Passo 2:",
           "step2Description": "Pesare le quantità da aggiungere alla poolish:",
           "ingredientsList": "lista degli ingredienti",
-          "step3Description": "Nella ciotola della poolish, aggiungere l'acqua e il sale. Mescolare con un cucchiaio fino all'assorbimento dell'acqua",
-          "step4Description": "Aggiungere la farina poco alla volta e mescolare con un cucchiaio",
-          "step5Description": "Quando non è più possibile usare un cucchiaio, trasferire l'impasto sul piano di lavoro",
+          "step3Description": "Nella ciotola della poolish, aggiungere acqua e sale. Mescolare con cucchiaio fino a quando l'acqua è assorbita",
+          "step4Description": "Aggiungere la farina poco alla volta e mescolare con cucchiaio",
+          "step5Description": "Quando non è più possibile usare il cucchiaio, trasferire l'impasto sulla superficie di lavoro",
           "step6Description": "Lavorare l'impasto impastandolo, la farina deve essere completamente integrata",
           "step7Description": "Fare alcune pieghe con l'impasto e formare una bella palla (morbida e flessibile)",
           "step8Description": "Lasciar riposare 10-15 minuti sotto una ciotola",
-          "step9Description": "Riformare una bella palla e lasciar riposare per un'altra 1 ora in un contenitore ermetico",
-          "step10Description": "Mettere uno strato sottile di semola fine in un piatto",
-          "step11Description": "Recuperare l'impasto e con un tagliapasta o una spatola formare palline di impasto (ben tese) di circa",
-          "step12Description": "Depositare le palline di impasto nel piatto lasciando spazio tra ciascuna (cresceranno ancora)",
-          "step13Description": "Chiudere il piatto o mettere della pellicola trasparente su di esso e lasciar riposare per 2 ore",
+          "step9Description": "Riformare una bella palla e lasciar riposare un'altra 1 ora in un contenitore ermetico",
+          "step10Description": "Mettere uno strato sottile di semolino fine su un piatto",
+          "step11Description": "Recuperare l'impasto e con un taglia-impasto o spatola formare palline di impasto (ben distese) di circa",
+          "step12Description": "Posizionare le palline di impasto sul piatto lasciando spazio tra ciascuna (cresceranno ancora)",
+          "step13Description": "Chiudere il piatto o mettere pellicola trasparente sopra e lasciar riposare 2 ore",
           "tipsTitle": "💡 Suggerimenti:",
-          "tipsDescription": "Se l'impasto si attacca troppo, formare una palla e lasciar riposare 10 minuti sotto una ciotola",
+          "tipsDescription": "Se l'impasto è troppo appiccicoso, formare una palla e lasciar riposare 10 minuti sotto una ciotola",
           "successMessage": "🎉 Ed ecco fatto, sono pronti per essere trasformati in PIZZA!"
         },
         "storage": {
@@ -101,6 +113,20 @@
         "language": "Lingua"
       }
     },
+    "tab1": {
+      "configuration": {
+        "title": "Configurazione",
+        "subtitle": "Configura la tua ricetta di pizze"
+      },
+      "ingredients": {
+        "title": "Ingredienti",
+        "subtitle": "Quantità degli ingredienti in grammi (g)"
+      },
+      "segments": {
+        "data": "Dati",
+        "recipe": "Preparazione"
+      }
+    },
     "language": {
       "selector": {
         "title": "Seleziona la lingua",
@@ -111,6 +137,7 @@
         "hindi": "Hindi",
         "japanese": "Giapponese",
         "chinese": "Cinese",
+        "german": "Tedesco",
         "cancel": "Annulla"
       }
     }

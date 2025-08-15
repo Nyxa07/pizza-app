@@ -1,19 +1,18 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   BASE_HONEY_AMOUNT,
   HONEY_RATIO,
-  PIZZA_WEIGHT,
   POOLISH_RATIO_BY_TEMPERATURE,
 } from '../constants';
-import { SALT_WEIGHT_PER_PIZZA } from '../constants';
-import { YeastType } from '../enums/yeast-type.enum';
-import { FRESH_YEAST_AMOUNT } from '../constants';
-import { DRY_YEAST_AMOUNT } from '../constants';
 import { PoolishPizzaFormData } from '../poolish-pizzas-form/poolish-pizzas-form.component';
+import { YeastService } from 'src/app/shared/services/yeast.service';
+import { PIZZA_WEIGHT, SALT_WEIGHT_PER_PIZZA } from 'src/app/shared/constants';
 
 export interface PoolishPizzaResult {
   totalFlour: number;
   totalWater: number;
+  totalYeast: number;
+  totalHoney: number;
   poolishFlour: number;
   poolishWater: number;
   poolishYeast: number;
@@ -21,22 +20,22 @@ export interface PoolishPizzaResult {
   flourToAdd: number;
   waterToAdd: number;
   saltWeight: number;
+  coldRestTime: number;
+  rtRestTime: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class PoolishPizzaMakerService {
-  compute(data: PoolishPizzaFormData): PoolishPizzaResult {
-    const isDryYeast = data.yeastType === YeastType.DRY;
-    const yeastAmount = isDryYeast ? DRY_YEAST_AMOUNT : FRESH_YEAST_AMOUNT;
-    const saltWeight = SALT_WEIGHT_PER_PIZZA * data.nbPizzas;
+  private yeastService = inject(YeastService);
 
+  compute(data: PoolishPizzaFormData): PoolishPizzaResult {
+    const saltWeight = SALT_WEIGHT_PER_PIZZA * data.nbPizzas;
     const poolishRatio =
       data.poolishRatio > 0
         ? data.poolishRatio
         : POOLISH_RATIO_BY_TEMPERATURE[data.temperature];
-
     const flourPerPizza = PIZZA_WEIGHT / (1 + data.hydrationRatio);
     const waterPerPizza = PIZZA_WEIGHT - flourPerPizza;
     const totalFlour = Math.round(data.nbPizzas * flourPerPizza);
@@ -45,13 +44,13 @@ export class PoolishPizzaMakerService {
       Math.round(poolishRatio * (totalFlour + totalWater)) / 2;
     const poolishWater = poolishFlour;
 
-    const poolishYeast =
-      Math.round(
-        Math.min(
-          10,
-          Math.max(yeastAmount, totalFlour / (isDryYeast ? 1000 : 333)),
-        ) * 100,
-      ) / 100;
+    const poolishYeast = this.yeastService.yeastQuantity(
+      data.temperature,
+      data.yeastType,
+      poolishFlour,
+      data.rtRestTime,
+      data.coldRestTime,
+    );
 
     const poolishHoney = Math.round(
       Math.max(
@@ -65,6 +64,8 @@ export class PoolishPizzaMakerService {
     const result = {
       totalFlour,
       totalWater,
+      totalYeast: poolishYeast,
+      totalHoney: poolishHoney,
       poolishFlour,
       poolishWater,
       poolishYeast,
@@ -72,6 +73,8 @@ export class PoolishPizzaMakerService {
       flourToAdd,
       waterToAdd,
       saltWeight,
+      coldRestTime: data.coldRestTime,
+      rtRestTime: data.rtRestTime,
     };
 
     return result;

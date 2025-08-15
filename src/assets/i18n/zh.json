@@ -26,7 +26,13 @@
         "yeastType": "酵母类型",
         "hydration": "含水量",
         "temperature": "温度",
-        "poolishRatio": "波兰种比例"
+        "poolishRatio": "波兰种比例",
+        "rtRestTime": "温热静置",
+        "coldRestTime": "冷藏静置",
+        "restTimeUnit": {
+          "singular": "小时",
+          "plural": "小时"
+        }
       },
       "ingredients": {
         "flour": "面粉",
@@ -34,16 +40,17 @@
         "yeast": "酵母",
         "honey": "蜂蜜",
         "salt": "盐",
-        "dryYeast": "干酵母",
+        "dryActiveYeast": "活性干酵母",
+        "dryInstantYeast": "即发干酵母",
         "freshYeast": "鲜酵母"
       },
       "calculations": {
-        "toAdd": "添加",
         "total": "总计",
         "poolish": "波兰种",
         "dough": "面团",
         "weight": "重量",
-        "percentage": "百分比"
+        "percentage": "百分比",
+        "ingredients": "配料"
       },
       "types": {
         "poolish": "波兰种风格",
@@ -51,20 +58,25 @@
         "biga": "比加种法"
       },
       "recipe": {
+        "quantity": {
+          "flour": "<strong>{{ quantity }} g</strong> 面粉",
+          "water": "<strong>{{ quantity }} ml</strong> 水",
+          "yeast": "<strong>{{ quantity }} g</strong> 酵母",
+          "honey": "<strong>{{ quantity }} g</strong> 蜂蜜",
+          "salt": "<strong>{{ quantity }} g</strong> 盐"
+        },
         "poolishPreparation": {
           "title": "波兰种准备",
           "subtitle": "第一步：酵种准备",
-          "step1Title": "步骤1:",
           "step1Description": "称量所有配料:",
           "ingredientsList": "配料清单",
           "step2Description": "在大碗中，将酵母溶解在水中并加入蜂蜜",
-          "step3Description": "加入面粉，用木勺搅拌直到获得均匀混合物，然后在室温下用保鲜膜覆盖静置1小时，接着在冰箱中静置16-24小时"
+          "step3Description": "加入面粉，用木勺搅拌直到获得均匀混合物，然后在室温下用保鲜膜覆盖静置<strong>{{ rtRestTime }}小时</strong>，接着在冰箱中静置<strong>{{ coldRestTime }}小时</strong>"
         },
         "doughPreparation": {
           "title": "面团准备",
           "subtitle": "第二步：揉面和整形",
           "step1Description": "使用前1小时取出波兰种",
-          "step2Title": "步骤2:",
           "step2Description": "称量要添加到波兰种中的配料:",
           "ingredientsList": "配料清单",
           "step3Description": "在波兰种碗中，加入水和盐。用勺子搅拌直到水被吸收",
@@ -101,6 +113,20 @@
         "language": "语言"
       }
     },
+    "tab1": {
+      "configuration": {
+        "title": "配置",
+        "subtitle": "配置您的披萨配方"
+      },
+      "ingredients": {
+        "title": "配料",
+        "subtitle": "配料数量（克 (g)）"
+      },
+      "segments": {
+        "data": "数据",
+        "recipe": "准备"
+      }
+    },
     "language": {
       "selector": {
         "title": "选择语言",
@@ -111,6 +137,7 @@
         "hindi": "印地语",
         "japanese": "日语",
         "chinese": "中文",
+        "german": "德语",
         "cancel": "取消"
       }
     }

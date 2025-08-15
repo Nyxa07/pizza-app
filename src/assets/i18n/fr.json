@@ -26,7 +26,13 @@
         "yeastType": "Type de levure",
         "hydration": "Hydratation",
         "temperature": "Température",
-        "poolishRatio": "Ratio poolish"
+        "poolishRatio": "Ratio poolish",
+        "rtRestTime": "Repos à chaud",
+        "coldRestTime": "Repos à froid",
+        "restTimeUnit": {
+          "singular": "Heure",
+          "plural": "Heures"
+        }
       },
       "ingredients": {
         "flour": "Farine",
@@ -34,16 +40,17 @@
         "yeast": "Levure",
         "honey": "Miel",
         "salt": "Sel",
-        "dryYeast": "Séche",
+        "dryActiveYeast": "Sèche active",
+        "dryInstantYeast": "Sèche instantanée",
         "freshYeast": "Fraîche"
       },
       "calculations": {
-        "toAdd": "À ajouter",
         "total": "Total",
-        "poolish": "Pré-fermentation",
+        "poolish": "Poolish",
         "dough": "Pâte",
         "weight": "Poids",
-        "percentage": "Pourcentage"
+        "percentage": "Pourcentage",
+        "ingredients": "Ingrédients"
       },
       "types": {
         "poolish": "Style poolish",
@@ -51,20 +58,25 @@
         "biga": "Méthode biga"
       },
       "recipe": {
+        "quantity": {
+          "flour": "<strong>{{ quantity }} g</strong> de farine",
+          "water": "<strong>{{ quantity }} ml</strong> d'eau",
+          "yeast": "<strong>{{ quantity }} g</strong> de levure",
+          "honey": "<strong>{{ quantity }} g</strong> de miel",
+          "salt": "<strong>{{ quantity }} g</strong> de sel"
+        },
         "poolishPreparation": {
           "title": "PRÉPARATION DE LA POOLISH",
           "subtitle": "Première étape : préparation du levain",
-          "step1Title": "Étape 1 :",
           "step1Description": "Peser tous les ingrédients :",
           "ingredientsList": "liste des ingrédients",
           "step2Description": "Dans un grand bol, délayer les levures dans l'eau et ajouter le miel",
-          "step3Description": "Ajouter la farine et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène, puis laisser reposer 1 heure à température ambiante couvert d'un film plastique, puis 16-24 heures au réfrigérateur"
+          "step3Description": "Ajouter la farine et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène, puis laisser reposer <strong>{{ rtRestTime }} heure(s)</strong> à température ambiante couvert d'un film plastique, puis <strong>{{ coldRestTime }} heure(s)</strong> au réfrigérateur"
         },
         "doughPreparation": {
           "title": "PRÉPARATION DE LA PÂTE",
           "subtitle": "Deuxième étape : pétrissage et formation",
           "step1Description": "Sortir la poolish 1H avant utilisation",
-          "step2Title": "Étape 2 :",
           "step2Description": "Peser les quantités à ajouter dans la poolish :",
           "ingredientsList": "liste des ingrédients",
           "step3Description": "Dans le bol de la poolish, ajouter l'eau et le sel. Mélanger à la cuillère jusqu'à l'absorption de l'eau",
@@ -101,6 +113,20 @@
         "language": "Langue"
       }
     },
+    "tab1": {
+      "segments": {
+        "data": "Données",
+        "recipe": "Préparation"
+      },
+      "configuration": {
+        "title": "Configuration",
+        "subtitle": "Configurez votre recette de pizzas"
+      },
+      "ingredients": {
+        "title": "Ingrédients",
+        "subtitle": "Quantités des ingrédients en grammes (g)"
+      }
+    },
     "language": {
       "selector": {
         "title": "Choisir la langue",
@@ -111,6 +137,7 @@
         "hindi": "Hindi",
         "japanese": "Japonais",
         "chinese": "Chinois",
+        "german": "Allemand",
         "cancel": "Annuler"
       }
     }

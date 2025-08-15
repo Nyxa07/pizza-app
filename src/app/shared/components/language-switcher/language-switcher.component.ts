@@ -53,6 +53,8 @@ export class LanguageSwitcherComponent {
         return 'JA';
       case 'zh':
         return 'ZH';
+      case 'de':
+        return 'DE';
       default:
         return 'EN';
     }
@@ -118,6 +120,13 @@ export class LanguageSwitcherComponent {
           ),
           icon: this.getFlagIcon('zh'),
           handler: () => this.switchLanguage('zh'),
+        },
+        {
+          text: this.translateService.instant(
+            TranslationKeys.LANGUAGE.SELECTOR.GERMAN,
+          ),
+          icon: this.getFlagIcon('de'),
+          handler: () => this.switchLanguage('de'),
         },
         {
           text: this.translateService.instant(

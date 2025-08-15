@@ -4,10 +4,12 @@
       <ion-range
         aria-label="Range with pin"
         [pin]="true"
-        [pinFormatter]="nbPizzasPinFormatter"
+        [pinFormatter]="pinFormatter"
         formControlName="nbPizzas"
         labelPlacement="start"
         [label]="TranslationKeys.PIZZA.FORM.PIZZAS_NUMBER | translate"
+        [min]="1"
+        [max]="25"
       ></ion-range>
     </ion-item>
     <ion-item>
@@ -15,8 +17,11 @@
         [label]="TranslationKeys.PIZZA.FORM.YEAST_TYPE | translate"
         formControlName="yeastType"
       >
-        <ion-select-option value="dry">
-          {{ TranslationKeys.PIZZA.INGREDIENTS.DRY_YEAST | translate }}
+        <ion-select-option value="dry_active">
+          {{ TranslationKeys.PIZZA.INGREDIENTS.DRY_ACTIVE_YEAST | translate }}
+        </ion-select-option>
+        <ion-select-option value="dry_instant">
+          {{ TranslationKeys.PIZZA.INGREDIENTS.DRY_INSTANT_YEAST | translate }}
         </ion-select-option>
         <ion-select-option value="fresh">{{
           TranslationKeys.PIZZA.INGREDIENTS.FRESH_YEAST | translate
@@ -69,6 +74,48 @@
         @for (poolishRatio of poolishRatioOptions; track poolishRatio.value) {
           <ion-select-option [value]="poolishRatio.value">
             {{ poolishRatio.name }}
+          </ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select
+        [label]=""
+        formControlName="rtRestTime"
+        [label]="TranslationKeys.PIZZA.FORM.RT_REST_TIME | translate"
+      >
+        @for (i of range(1, 24); track i) {
+          <ion-select-option [value]="i"
+            >{{ i }}
+            {{
+              TranslationKeys.getPluralizationKey(
+                TranslationKeys.PIZZA.FORM.REST_TIME_UNIT,
+                i > 1 ? true : false
+              )
+                | translate
+                | lowercase
+            }}
+          </ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select
+        [label]=""
+        formControlName="coldRestTime"
+        [label]="TranslationKeys.PIZZA.FORM.COLD_REST_TIME | translate"
+      >
+        @for (i of range(0, 72); track i) {
+          <ion-select-option [value]="i"
+            >{{ i }}
+            {{
+              TranslationKeys.getPluralizationKey(
+                TranslationKeys.PIZZA.FORM.REST_TIME_UNIT,
+                i > 1 ? true : false
+              )
+                | translate
+                | lowercase
+            }}
           </ion-select-option>
         }
       </ion-select>

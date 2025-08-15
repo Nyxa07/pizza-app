@@ -1,0 +1,145 @@
+{
+  "app": {
+    "common": {
+      "actions": {
+        "save": "Speichern",
+        "cancel": "Abbrechen",
+        "delete": "Löschen",
+        "edit": "Bearbeiten",
+        "add": "Hinzufügen"
+      },
+      "status": {
+        "loading": "Lädt...",
+        "error": "Fehler",
+        "success": "Erfolg",
+        "warning": "Warnung"
+      },
+      "navigation": {
+        "back": "Zurück",
+        "next": "Weiter",
+        "previous": "Zurück"
+      }
+    },
+    "pizza": {
+      "form": {
+        "pizzasNumber": "Anzahl der Pizzen",
+        "yeastType": "Hefetyp",
+        "hydration": "Hydratation",
+        "temperature": "Temperatur",
+        "poolishRatio": "Poolish-Verhältnis",
+        "rtRestTime": "Warme-Ruhe",
+        "coldRestTime": "Kälte-Ruhe",
+        "restTimeUnit": {
+          "singular": "Stunde",
+          "plural": "Stunden"
+        }
+      },
+      "ingredients": {
+        "flour": "Mehl",
+        "water": "Wasser",
+        "yeast": "Hefe",
+        "honey": "Honig",
+        "salt": "Salz",
+        "dryActiveYeast": "Aktive Trockenhefe",
+        "dryInstantYeast": "Instant-Trockenhefe",
+        "freshYeast": "Frisch"
+      },
+      "calculations": {
+        "total": "Gesamt",
+        "poolish": "Poolish",
+        "dough": "Teig",
+        "weight": "Gewicht",
+        "percentage": "Prozent",
+        "ingredients": "Zutaten"
+      },
+      "types": {
+        "poolish": "Poolish-Stil",
+        "direct": "Direktmethode",
+        "biga": "Biga-Methode"
+      },
+      "recipe": {
+        "quantity": {
+          "flour": "<strong>{{ quantity }} g</strong> Mehl",
+          "water": "<strong>{{ quantity }} ml</strong> Wasser",
+          "yeast": "<strong>{{ quantity }} g</strong> Hefe",
+          "honey": "<strong>{{ quantity }} g</strong> Honig",
+          "salt": "<strong>{{ quantity }} g</strong> Salz"
+        },
+        "poolishPreparation": {
+          "title": "POOLISH-VORBEREITUNG",
+          "subtitle": "Erster Schritt: Sauerteig-Vorbereitung",
+          "step1Description": "Alle Zutaten abwiegen:",
+          "ingredientsList": "Zutatenliste",
+          "step2Description": "In einer großen Schüssel Hefe in Wasser auflösen und Honig hinzufügen",
+          "step3Description": "Mehl hinzufügen und mit einem Holzlöffel mischen, bis eine homogene Mischung entsteht, dann <strong>{{ rtRestTime }} Stunde(n)</strong> bei Raumtemperatur mit Frischhaltefolie abgedeckt ruhen lassen, dann <strong>{{ coldRestTime }} Stunden</strong> im Kühlschrank"
+        },
+        "doughPreparation": {
+          "title": "TEIG-VORBEREITUNG",
+          "subtitle": "Zweiter Schritt: Kneten und Formen",
+          "step1Description": "Poolish 1 Stunde vor der Verwendung herausnehmen",
+          "step2Description": "Die Mengen abwiegen, die zur Poolish hinzugefügt werden sollen:",
+          "ingredientsList": "Zutatenliste",
+          "step3Description": "In die Poolish-Schüssel Wasser und Salz hinzufügen. Mit Löffel mischen, bis das Wasser aufgesaugt ist",
+          "step4Description": "Mehl nach und nach hinzufügen und mit Löffel mischen",
+          "step5Description": "Wenn es nicht mehr möglich ist, einen Löffel zu verwenden, den Teig auf die Arbeitsfläche übertragen",
+          "step6Description": "Den Teig durch Kneten bearbeiten, das Mehl muss vollständig integriert sein",
+          "step7Description": "Mit dem Teig einige Falten machen und eine schöne Kugel (weich und flexibel) formen",
+          "step8Description": "10-15 Minuten unter einer Schüssel ruhen lassen",
+          "step9Description": "Eine schöne Kugel neu formen und weitere 1 Stunde in einem luftdichten Behälter ruhen lassen",
+          "step10Description": "Eine dünne Schicht feinen Grieß auf einen Teller legen",
+          "step11Description": "Den Teig zurückholen und mit einem Teigschneider oder Spatel Teigkugeln (gut gedehnt) von etwa",
+          "step12Description": "Die Teigkugeln auf den Teller legen und zwischen jeder Platz lassen (sie werden noch wachsen)",
+          "step13Description": "Den Teller schließen oder Frischhaltefolie darüber legen und 2 Stunden ruhen lassen",
+          "tipsTitle": "💡 Tipps:",
+          "tipsDescription": "Wenn der Teig zu klebrig ist, eine Kugel formen und 10 Minuten unter einer Schüssel ruhen lassen",
+          "successMessage": "🎉 Und da haben Sie es, sie sind bereit, in PIZZA verwandelt zu werden!"
+        },
+        "storage": {
+          "title": "LAGERUNG",
+          "subtitle": "Lagerungstipps",
+          "refrigerator": "Kühlschrank: Teigkugeln sind 2-3 Tage haltbar",
+          "freezer": "Gefrierschrank: Gefriert sehr gut, nicht länger als 2-3 Monate aufbewahren"
+        }
+      }
+    },
+    "navigation": {
+      "tabs": {
+        "poolishStyle": "Poolish-Stil",
+        "tab2": "Tab 2",
+        "tab3": "Tab 3"
+      },
+      "header": {
+        "title": "Pizza-App",
+        "language": "Sprache"
+      }
+    },
+    "tab1": {
+      "configuration": {
+        "title": "Konfiguration",
+        "subtitle": "Konfigurieren Sie Ihr Pizzarezept"
+      },
+      "ingredients": {
+        "title": "Zutaten",
+        "subtitle": "Zutatenmengen in Gramm (g)"
+      },
+      "segments": {
+        "data": "Daten",
+        "recipe": "Zubereitung"
+      }
+    },
+    "language": {
+      "selector": {
+        "title": "Sprache auswählen",
+        "english": "Englisch",
+        "french": "Französisch",
+        "italian": "Italienisch",
+        "spanish": "Spanisch",
+        "hindi": "Hindi",
+        "japanese": "Japanisch",
+        "chinese": "Chinesisch",
+        "german": "Deutsch",
+        "cancel": "Abbrechen"
+      }
+    }
+  }
+}
