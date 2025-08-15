@@ -18,6 +18,7 @@ import { LanguageSwitcherComponent } from '../shared/components/language-switche
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationKeys } from '../shared/services/translation-keys.service';
 import { ToolbarSegmentsService } from '../shared/services/toolbar-segments.service';
+import { FaqComponent } from '../features/faq/faq.component';
 
 @Component({
   selector: 'app-tabs',
@@ -38,6 +39,7 @@ import { ToolbarSegmentsService } from '../shared/services/toolbar-segments.serv
     IonSegment,
     IonSegmentButton,
     IonLabel,
+    FaqComponent,
   ],
 })
 export class TabsPage {

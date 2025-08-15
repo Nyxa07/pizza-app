@@ -42,9 +42,24 @@ ion-card {
       text-transform: uppercase;
       font-weight: 600;
       color: var(--ion-color-primary);
+      font-size: 1.2rem;
     }
     ion-card-subtitle {
       font-style: italic;
     }
+  }
+}
+
+.tips {
+  background: var(--ion-color-step-50);
+  border-left: 4px solid var(--ion-color-secondary);
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  p {
+    margin: 0;
+    color: var(--ion-text-color);
   }
 }

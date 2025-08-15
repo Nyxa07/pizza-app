@@ -235,4 +235,53 @@ export class TranslationKeys {
       GERMAN: 'app.language.selector.german',
     },
   };
+
+  static readonly FAQ = {
+    TITLE: 'app.faq.title',
+    QUESTIONS: [
+      {
+        TITLE: 'app.faq.questions.0.title',
+        SUBTITLE: 'app.faq.questions.0.subtitle',
+        ANSWERS: [
+          'app.faq.questions.0.answers.0',
+          'app.faq.questions.0.answers.1',
+        ],
+      },
+      {
+        TITLE: 'app.faq.questions.1.title',
+        SUBTITLE: 'app.faq.questions.1.subtitle',
+        ANSWERS: [
+          'app.faq.questions.1.answers.0',
+          'app.faq.questions.1.answers.1',
+          'app.faq.questions.1.answers.2',
+        ],
+      },
+      {
+        TITLE: 'app.faq.questions.2.title',
+        SUBTITLE: 'app.faq.questions.2.subtitle',
+        ANSWERS: [
+          'app.faq.questions.2.answers.0',
+          'app.faq.questions.2.answers.1',
+        ],
+      },
+      {
+        TITLE: 'app.faq.questions.3.title',
+        SUBTITLE: 'app.faq.questions.3.subtitle',
+        ANSWERS: [
+          'app.faq.questions.3.answers.0',
+          'app.faq.questions.3.answers.1',
+        ],
+        TIPS: [
+          {
+            TITLE: 'app.faq.questions.3.tips.0.title',
+            DESCRIPTION: 'app.faq.questions.3.tips.0.description',
+          },
+          {
+            TITLE: 'app.faq.questions.3.tips.1.title',
+            DESCRIPTION: 'app.faq.questions.3.tips.1.description',
+          },
+        ],
+      },
+    ],
+  };
 }
