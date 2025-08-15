@@ -11,6 +11,8 @@ import {
 } from '@ionic/angular/standalone';
 import { informationCircle } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { TranslatePipe } from '@ngx-translate/core';
+import { TranslationKeys } from 'src/app/shared/services/translation-keys.service';
 
 @Component({
   selector: 'app-faq',
@@ -25,10 +27,12 @@ import { addIcons } from 'ionicons';
     IonTitle,
     IonButtons,
     IonContent,
+    TranslatePipe,
   ],
 })
 export class FaqComponent implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
+  TranslationKeys = TranslationKeys;
 
   constructor() {
     addIcons({ informationCircle });

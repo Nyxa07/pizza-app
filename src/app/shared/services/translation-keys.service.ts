@@ -239,4 +239,8 @@ export class TranslationKeys {
       GERMAN: 'app.language.selector.german',
     },
   };
+
+  static readonly FAQ = {
+    TITLE: 'app.faq.title',
+  };
 }
