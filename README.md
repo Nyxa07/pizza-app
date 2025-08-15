@@ -12,7 +12,7 @@ A modern, multi-language Ionic/Angular application for calculating and managing 
 - **Multiple yeast types** support (dry and fresh yeast)
 
 ### 🌍 **Multi-Language Support**
-- **7 Languages**: English, French, Italian, Spanish, Hindi, Japanese, Chinese
+- **5 Languages**: English, French, Italian, Spanish, German
 - **Dynamic language switching** at runtime
 - **Localized content** for all app sections
 - **Automatic language detection** based on browser/device settings
@@ -100,9 +100,7 @@ pizza-app/
 │   │       ├── fr.json                     # French translations
 │   │       ├── it.json                     # Italian translations
 │   │       ├── es.json                     # Spanish translations
-│   │       ├── hi.json                     # Hindi translations
-│   │       ├── ja.json                     # Japanese translations
-│   │       └── zh.json                     # Chinese translations
+│   │       └── de.json                     # German translations
 │   └── locale/                             # Angular i18n files (legacy)
 ├── android/                                # Android native code
 ├── ios/                                    # iOS native code (if added)
@@ -124,9 +122,7 @@ pizza-app/
 | French   | `fr` | 🇫🇷 | ✅ Complete |
 | Italian  | `it` | 🇮🇹 | ✅ Complete |
 | Spanish  | `es` | 🇪🇸 | ✅ Complete |
-| Hindi    | `hi` | 🇮🇳 | ✅ Complete |
-| Japanese | `ja` | 🇯🇵 | ✅ Complete |
-| Chinese  | `zh` | 🇨🇳 | ✅ Complete |
+| German   | `de` | 🇩🇪 | ✅ Complete |
 
 ### **Adding New Languages**
 1. Create new translation file: `src/assets/i18n/[lang].json`

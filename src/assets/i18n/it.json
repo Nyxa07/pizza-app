@@ -6,7 +6,8 @@
         "cancel": "Annulla",
         "delete": "Elimina",
         "edit": "Modifica",
-        "add": "Aggiungi"
+        "add": "Aggiungi",
+        "ok": "OK"
       },
       "status": {
         "loading": "Caricamento...",
@@ -135,9 +136,6 @@
         "french": "Francese",
         "italian": "Italiano",
         "spanish": "Spagnolo",
-        "hindi": "Hindi",
-        "japanese": "Giapponese",
-        "chinese": "Cinese",
         "german": "Tedesco"
       }
     }

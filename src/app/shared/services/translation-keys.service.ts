@@ -11,6 +11,7 @@ export class TranslationKeys {
       DELETE: 'app.common.actions.delete',
       EDIT: 'app.common.actions.edit',
       ADD: 'app.common.actions.add',
+      OK: 'app.common.actions.ok',
     },
     STATUS: {
       LOADING: 'app.common.status.loading',
@@ -233,9 +234,6 @@ export class TranslationKeys {
       FRENCH: 'app.language.selector.french',
       ITALIAN: 'app.language.selector.italian',
       SPANISH: 'app.language.selector.spanish',
-      HINDI: 'app.language.selector.hindi',
-      JAPANESE: 'app.language.selector.japanese',
-      CHINESE: 'app.language.selector.chinese',
       GERMAN: 'app.language.selector.german',
     },
   };

@@ -3,23 +3,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { Platform } from '@ionic/angular';
 import { Device } from '@capacitor/device';
 
-export const SUPPORTED_LANGUAGES = [
-  'en',
-  'de',
-  'hi',
-  'ja',
-  'zh',
-  'es',
-  'it',
-  'fr',
-];
+export const SUPPORTED_LANGUAGES = ['en', 'de', 'es', 'it', 'fr'];
 
 export const SUPPORTED_LANGUAGES_MAP = {
   en: 'english',
   de: 'german',
-  hi: 'hindi',
-  ja: 'japanese',
-  zh: 'chinese',
   es: 'spanish',
   it: 'italian',
   fr: 'french',
