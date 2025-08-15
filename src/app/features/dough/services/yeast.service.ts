@@ -3,11 +3,17 @@ import { YeastType } from 'src/app/features/dough/enums/yeast-type.enum';
 import {
   DRY_ACTIVE_YEAST_COEF,
   DRY_INSTANT_YEAST_COEF,
-  FERMENTATION_OPTIMAL_RANGE,
   FRESH_YEAST_COEF,
   BASE_TEMPERATURE,
   TEMPERATURE_FACTOR_COEF,
   YEAST_COLD_COEF,
+  REFERENCE_HYDRATION,
+  HYDRATION_FACTOR_COEF,
+  SUGAR_FACTOR_COEF,
+  MINIMUM_YEAST_PERCENTAGE,
+  MAXIMUM_YEAST_PERCENTAGE,
+  K_FACTOR_CONSTANTS,
+  SALT_INHIBITION_COEF,
 } from '../constants';
 
 @Injectable({
@@ -22,42 +28,17 @@ export class YeastService {
     return 1 + TEMPERATURE_FACTOR_COEF * (temperature - BASE_TEMPERATURE);
   }
 
-  private percentYeast(
-    tEquivalent: number,
-    temperatureFactor: number,
-    kFactor: number,
-  ) {
-    return kFactor / (tEquivalent * temperatureFactor) / 100;
-  }
-
-  private kFactor(equivalentTime: number) {
-    // Very long fermentation (>24h): minimal yeast to avoid acidity
-    if (equivalentTime > FERMENTATION_OPTIMAL_RANGE.MAX) {
-      return 0.35;
-    }
-
-    // Long fermentation (16-24h): reduced yeast for slow development
-    if (equivalentTime > 16) {
-      return 0.7;
-    }
-
-    // Standard fermentation (12-16h): balanced yeast
-    if (equivalentTime > 12) {
-      return 1.0;
-    }
-
-    // Fast fermentation (8-12h): increased yeast
-    if (equivalentTime > 8) {
-      return 1.3;
-    }
-
-    // Very fast fermentation (4-8h): important yeast
-    if (equivalentTime > FERMENTATION_OPTIMAL_RANGE.MIN) {
-      return 1.6;
-    }
-
-    // Ultra-fast fermentation (<4h): maximum yeast
-    return 2.0;
+  /**
+   * Continuous logistic model for the base yeast coefficient.
+   * Provides a smooth transition between ultra-fast and very long fermentations.
+   *
+   * k(t) = K_MIN + (K_MAX - K_MIN) / [1 + (t / REF)^α]
+   */
+  private kFactor(equivalentTime: number): number {
+    const { K_MIN, K_MAX, REF_FERM_TIME, K_EXPONENT } = K_FACTOR_CONSTANTS;
+    const logisticPart =
+      1 / (1 + Math.pow(equivalentTime / REF_FERM_TIME, K_EXPONENT));
+    return K_MIN + (K_MAX - K_MIN) * logisticPart;
   }
 
   private convertYeastType(weight: number, yeastType: YeastType): number {
@@ -79,23 +60,122 @@ export class YeastService {
     }
   }
 
-  yeastQuantity(
+  private hydrationFactor(hydration: number) {
+    // Hydration is expressed as a decimal (e.g. 0.65 for 65 %)
+    return 1 + HYDRATION_FACTOR_COEF * (hydration - REFERENCE_HYDRATION);
+  }
+
+  private sugarFactor(sugar: number, flour: number) {
+    // Baker's percentage: sugar / flour
+    const sugarRatio = sugar / flour;
+    return 1 + SUGAR_FACTOR_COEF * sugarRatio;
+  }
+
+  private saltFactor(salt: number, flour: number) {
+    // Baker's percentage: salt / flour
+    const saltRatio = salt / flour;
+    // Inhibition factor: <1 slows fermentation; ensure it never reaches 0
+    return 1 / (1 + SALT_INHIBITION_COEF * saltRatio);
+  }
+
+  private computePercentYeast(
+    tEquivalent: number,
+    temperatureFactor: number,
+    hydrationFactor: number,
+    sugarFactor: number,
+    saltFactor: number,
+    kFactor: number,
+  ) {
+    // Core scientific model – inversely proportional to accelerating factors
+    // and directly proportional to inhibiting factors (saltFactor < 1 increases yeast)
+    const denominator =
+      tEquivalent *
+      temperatureFactor *
+      hydrationFactor *
+      sugarFactor *
+      saltFactor;
+    return kFactor / denominator / 100;
+  }
+
+  private normalizeYeastWeight(yeastWeight: number, flour: number) {
+    const min = (MINIMUM_YEAST_PERCENTAGE / 100) * flour;
+    const max = (MAXIMUM_YEAST_PERCENTAGE / 100) * flour;
+    const clamped = Math.max(min, Math.min(yeastWeight, max));
+    return Math.round(clamped * 100) / 100; // round to 0.01 g
+  }
+
+  /**
+   * Compute yeast quantity for a liquid poolish (100 % hydration).
+   * @param temperature – dough temperature (°C)
+   * @param yeastType – type of yeast (fresh, dry active, dry instant)
+   * @param flour – flour weight in the poolish (g)
+   * @param rtRestTime – room-temperature maturation (h)
+   * @param coldRestTime – cold maturation (h)
+   * @param sugar – simple sugar or honey weight in the poolish (g)
+   */
+  yeastForPoolish(
     temperature: number,
     yeastType: YeastType,
     flour: number,
     rtRestTime: number,
     coldRestTime: number,
+    sugar: number,
   ) {
-    const tEquivalent = this.tEquivalent(rtRestTime, coldRestTime);
-    const temperatureFactor = this.temperatureFactor(temperature);
-    const kFactor = this.kFactor(tEquivalent);
-    const percentYeast = this.percentYeast(
-      tEquivalent,
-      temperatureFactor,
+    const tEq = this.tEquivalent(rtRestTime, coldRestTime);
+    const tempFactor = this.temperatureFactor(temperature);
+    const hydFactor = this.hydrationFactor(1.0); // Poolish = 100 % hydration
+    const sugFactor = this.sugarFactor(sugar, flour);
+    const kFactor = this.kFactor(tEq);
+    const percentYeast = this.computePercentYeast(
+      tEq,
+      tempFactor,
+      hydFactor,
+      sugFactor,
+      1, // no salt in poolish
       kFactor,
     );
 
     const yeastWeight = this.convertYeastType(percentYeast * flour, yeastType);
-    return Math.max(0.1, Math.round(yeastWeight * 100) / 100);
+    return this.normalizeYeastWeight(yeastWeight, flour);
+  }
+
+  /**
+   * Compute yeast quantity for a direct-method dough (variable hydration).
+   * @param temperature – dough temperature (°C)
+   * @param yeastType – type of yeast (fresh, dry active, dry instant)
+   * @param flour – total flour weight (g)
+   * @param hydration – water ratio (e.g. 0.65 for 65 %)
+   * @param sugar – sugar weight in the dough (g)
+   * @param salt – salt weight in the dough (g)
+   * @param rtRestTime – room-temperature maturation (h)
+   * @param coldRestTime – cold maturation (h)
+   */
+  yeastForDough(
+    temperature: number,
+    yeastType: YeastType,
+    flour: number,
+    hydration: number,
+    sugar: number,
+    salt: number,
+    rtRestTime: number,
+    coldRestTime: number,
+  ) {
+    const tEq = this.tEquivalent(rtRestTime, coldRestTime);
+    const tempFactor = this.temperatureFactor(temperature);
+    const hydFactor = this.hydrationFactor(hydration);
+    const sugFactor = this.sugarFactor(sugar, flour);
+    const sltFactor = this.saltFactor(salt, flour);
+    const kFactor = this.kFactor(tEq);
+    const percentYeast = this.computePercentYeast(
+      tEq,
+      tempFactor,
+      hydFactor,
+      sugFactor,
+      sltFactor,
+      kFactor,
+    );
+
+    const yeastWeight = this.convertYeastType(percentYeast * flour, yeastType);
+    return this.normalizeYeastWeight(yeastWeight, flour);
   }
 }

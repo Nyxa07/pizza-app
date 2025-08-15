@@ -57,21 +57,33 @@ export class DoughCalculatorService {
 
     const doughFlour = this.round(totalFlour - poolishQuantity);
     const doughWater = this.round(totalWater - poolishQuantity);
-
-    const yeast = this.yeastService.yeastQuantity(
-      data.temperature,
-      data.yeastType,
-      data.doughType === DoughType.POOLISH ? poolishQuantity : doughFlour,
-      data.rtRestTime,
-      data.coldRestTime,
-    );
-
     const honey = this.round(
       Math.max(
         BASE_HONEY_AMOUNT,
         BASE_HONEY_AMOUNT + (data.nbPizzas - 60) * HONEY_RATIO,
       ),
     );
+
+    const yeast =
+      data.doughType === DoughType.POOLISH
+        ? this.yeastService.yeastForPoolish(
+            data.temperature,
+            data.yeastType,
+            poolishQuantity,
+            data.rtRestTime,
+            data.coldRestTime,
+            honey,
+          )
+        : this.yeastService.yeastForDough(
+            data.temperature,
+            data.yeastType,
+            doughFlour,
+            data.hydrationRatio,
+            honey,
+            salt,
+            data.rtRestTime,
+            data.coldRestTime,
+          );
 
     return {
       total: {
