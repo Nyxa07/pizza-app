@@ -6,7 +6,8 @@
         "cancel": "Cancel",
         "delete": "Delete",
         "edit": "Edit",
-        "add": "Add"
+        "add": "Add",
+        "ok": "OK"
       },
       "status": {
         "loading": "Loading...",
@@ -135,9 +136,6 @@
         "french": "French",
         "italian": "Italian",
         "spanish": "Spanish",
-        "hindi": "Hindi",
-        "japanese": "Japanese",
-        "chinese": "Chinese",
         "german": "German"
       }
     }
