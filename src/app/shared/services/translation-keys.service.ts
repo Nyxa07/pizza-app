@@ -72,6 +72,17 @@ export class TranslationKeys {
       DIRECT: {
         TITLE: 'app.pizza.recipe.direct.title',
         SUBTITLE: 'app.pizza.recipe.direct.subtitle',
+        STEP_1_DESCRIPTION: 'app.pizza.recipe.direct.step1Description',
+        STEP_2_DESCRIPTION: 'app.pizza.recipe.direct.step2Description',
+        STEP_3_DESCRIPTION: 'app.pizza.recipe.direct.step3Description',
+        STEP_4_DESCRIPTION: 'app.pizza.recipe.direct.step4Description',
+        STEP_5_DESCRIPTION: 'app.pizza.recipe.direct.step5Description',
+        STEP_6_DESCRIPTION: 'app.pizza.recipe.direct.step6Description',
+        STEP_7_DESCRIPTION: 'app.pizza.recipe.direct.step7Description',
+        STEP_8_DESCRIPTION: 'app.pizza.recipe.direct.step8Description',
+        STEP_9_DESCRIPTION: 'app.pizza.recipe.direct.step9Description',
+        STEP_10_DESCRIPTION: 'app.pizza.recipe.direct.step10Description',
+        STEP_11_DESCRIPTION: 'app.pizza.recipe.direct.step11Description',
       },
       POOLISH: {
         POOLISH: {

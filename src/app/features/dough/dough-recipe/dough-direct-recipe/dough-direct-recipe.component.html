@@ -8,45 +8,72 @@
     }}</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
-    Et voilà Préparation de la pâte
-
     <ul>
-      <li>Peser tous les ingrédients</li>
-      <li>Mélanger la levure et le miel à l’eau</li>
-      <li>Ajouter le sel et la farine et mélanger à la cuillère en bois</li>
       <li>
-        Une fois que tous les ingrédients sont bien mélangés et que l’on
-        commence à avoir une boule, la déposer sur le plan de travail
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_1_DESCRIPTION | translate }}
+        <ul>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.FLOUR
+                | translate: { quantity: result().dough.flour }
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.WATER
+                | translate: { quantity: result().dough.water }
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.YEAST
+                | translate: { quantity: result().dough.yeast }
+            "
+          ></li>
+          <li
+            [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.HONEY
+                | translate: { quantity: result().dough.honey }
+            "
+          ></li>
+        </ul>
       </li>
       <li>
-        Terminer le pétrissage à la main environ 10&nbsp;min (possibilité
-        d’utiliser un robot pâtissier avec son crochet pétrisseur). Bien pétrir
-        pour hydrater correctement la farine
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_2_DESCRIPTION | translate }}
       </li>
       <li>
-        Lorsque la pâte possède une belle structure, former une boule et la
-        laisser reposer 25&nbsp;min sous un saladier (la pâte va se tendre et
-        devenir plus lisse)
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_3_DESCRIPTION | translate }}
       </li>
       <li>
-        Procéder à quelques rabats sur la pâte et lui donner une belle forme de
-        boule (bien lisse et qui ne colle plus)
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_4_DESCRIPTION | translate }}
       </li>
       <li>
-        Déposer la boule dans un récipient hermétique et la laisser reposer
-        24&nbsp;heures
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_5_DESCRIPTION | translate }}
       </li>
       <li>
-        Récupérer la pâte et, avec un coupe-pâte ou une spatule, former des
-        pâtons (bien tendus) d’environ 250&nbsp;g
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_6_DESCRIPTION | translate }}
       </li>
       <li>
-        Déposer les pâtons dans un plat en laissant de l’espace entre eux (ils
-        vont encore grossir)
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_7_DESCRIPTION | translate }}
       </li>
       <li>
-        Fermer le plat ou le couvrir d’un film plastique et laisser reposer
-        3&nbsp;heures
+        {{ TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_8_DESCRIPTION | translate }}
+      </li>
+      <li
+        [innerHTML]="
+          TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_9_DESCRIPTION
+            | translate: { pizzaWeight: pizzaWeight }
+        "
+      ></li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_10_DESCRIPTION | translate
+        }}
+      </li>
+      <li>
+        {{
+          TranslationKeys.PIZZA.RECIPE.DIRECT.STEP_11_DESCRIPTION | translate
+        }}
       </li>
     </ul>
   </ion-card-content>

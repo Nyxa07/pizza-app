@@ -1,0 +1,26 @@
+ion-card {
+  margin-bottom: 1rem;
+
+  strong {
+    color: var(--ion-color-primary);
+  }
+
+  ion-card-content {
+    ul {
+      margin: 1rem 0;
+      padding-left: 1rem;
+
+      li {
+        margin-bottom: 0.8rem;
+        line-height: 1.5;
+        color: var(--ion-text-color);
+        text-align: justify;
+      }
+    }
+
+    .success-message {
+      text-align: center;
+      margin: 1rem 0;
+    }
+  }
+}

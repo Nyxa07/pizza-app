@@ -158,13 +158,12 @@
             | translate
         }}
       </li>
-      <li>
-        {{
+      <li
+        [innerHTML]="
           TranslationKeys.PIZZA.RECIPE.POOLISH.DOUGH.STEP_11_DESCRIPTION
-            | translate
-        }}
-        <strong>{{ pizzaWeight }} g</strong>
-      </li>
+            | translate: { pizzaWeight: result().pizzaBallWeight }
+        "
+      ></li>
       <li>
         {{
           TranslationKeys.PIZZA.RECIPE.POOLISH.DOUGH.STEP_12_DESCRIPTION

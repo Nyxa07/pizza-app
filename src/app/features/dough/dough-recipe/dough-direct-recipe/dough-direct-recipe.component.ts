@@ -10,11 +10,15 @@ import {
   IonCardContent,
 } from '@ionic/angular/standalone';
 import { TranslationKeys } from '../../../../shared/services/translation-keys.service';
+import { PIZZA_WEIGHT } from '../../constants';
 
 @Component({
   selector: 'app-dough-direct-recipe',
   templateUrl: './dough-direct-recipe.component.html',
-  styleUrls: ['./dough-direct-recipe.component.scss'],
+  styleUrls: [
+    './dough-direct-recipe.component.scss',
+    '../dough-recipe.component.scss',
+  ],
   standalone: true,
   imports: [
     CommonModule,
@@ -29,6 +33,7 @@ import { TranslationKeys } from '../../../../shared/services/translation-keys.se
 export class DoughDirectRecipeComponent implements OnInit {
   result = input.required<DoughResult>();
   TranslationKeys = TranslationKeys;
+  protected pizzaWeight = PIZZA_WEIGHT;
 
   constructor() {}
 

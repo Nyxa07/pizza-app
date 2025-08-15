@@ -15,7 +15,10 @@ import { PIZZA_WEIGHT } from '../../constants';
 @Component({
   selector: 'app-dough-poolish-recipe',
   templateUrl: './dough-poolish-recipe.component.html',
-  styleUrls: ['./dough-poolish-recipe.component.scss'],
+  styleUrls: [
+    './dough-poolish-recipe.component.scss',
+    '../dough-recipe.component.scss',
+  ],
   standalone: true,
   imports: [
     CommonModule,
@@ -31,8 +34,6 @@ import { PIZZA_WEIGHT } from '../../constants';
 export class DoughPoolishRecipeComponent implements OnInit {
   result = input.required<DoughResult>();
   constructor() {}
-
-  protected pizzaWeight = PIZZA_WEIGHT;
 
   // Make TranslationKeys available in template
   protected TranslationKeys = TranslationKeys;
