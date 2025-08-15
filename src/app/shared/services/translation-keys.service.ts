@@ -272,16 +272,63 @@ export class TranslationKeys {
         ANSWERS: [
           'app.faq.questions.3.answers.0',
           'app.faq.questions.3.answers.1',
+          'app.faq.questions.3.answers.2',
         ],
         TIPS: [
           {
             TITLE: 'app.faq.questions.3.tips.0.title',
             DESCRIPTION: 'app.faq.questions.3.tips.0.description',
           },
+        ],
+      },
+      {
+        TITLE: 'app.faq.questions.4.title',
+        SUBTITLE: 'app.faq.questions.4.subtitle',
+        ANSWERS: [
+          'app.faq.questions.4.answers.0',
+          'app.faq.questions.4.answers.1',
+        ],
+        TIPS: [
           {
-            TITLE: 'app.faq.questions.3.tips.1.title',
-            DESCRIPTION: 'app.faq.questions.3.tips.1.description',
+            TITLE: 'app.faq.questions.4.tips.0.title',
+            DESCRIPTION: 'app.faq.questions.4.tips.0.description',
           },
+        ],
+      },
+      {
+        TITLE: 'app.faq.questions.5.title',
+        SUBTITLE: 'app.faq.questions.5.subtitle',
+        ANSWERS: [
+          'app.faq.questions.5.answers.0',
+          'app.faq.questions.5.answers.1',
+        ],
+        TIPS: [
+          {
+            TITLE: 'app.faq.questions.5.tips.0.title',
+            DESCRIPTION: 'app.faq.questions.5.tips.0.description',
+          },
+        ],
+      },
+      {
+        TITLE: 'app.faq.questions.6.title',
+        SUBTITLE: 'app.faq.questions.6.subtitle',
+        ANSWERS: [
+          'app.faq.questions.6.answers.0',
+          'app.faq.questions.6.answers.1',
+        ],
+      },
+      {
+        TITLE: 'app.faq.questions.7.title',
+        SUBTITLE: 'app.faq.questions.7.subtitle',
+        ANSWERS: [
+          'app.faq.questions.7.answers.0',
+        ],
+      },
+      {
+        TITLE: 'app.faq.questions.8.title',
+        SUBTITLE: 'app.faq.questions.8.subtitle',
+        ANSWERS: [
+          'app.faq.questions.8.answers.0',
         ],
       },
     ],
