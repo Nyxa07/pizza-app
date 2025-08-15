@@ -16,11 +16,11 @@ import {
 import { DoughQuantityComponent } from '../features/dough/dough-quantity/dough-quantity.component';
 import { addIcons } from 'ionicons';
 import { pizza, settings } from 'ionicons/icons';
-import { DoughPoolishRecipeComponent } from '../features/dough/dough-poolish-recipe/dough-poolish-recipe.component';
 import { ToolbarSegmentsService } from '../shared/services/toolbar-segments.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslationKeys } from '../shared/services/translation-keys.service';
 import { DoughCalculatorService } from '../features/dough/services/dough-calculator.service';
+import { DoughRecipeComponent } from '../features/dough/dough-recipe/dough-recipe.component';
 
 @Component({
   selector: 'app-tab1',
@@ -37,8 +37,8 @@ import { DoughCalculatorService } from '../features/dough/services/dough-calcula
     IonCardTitle,
     IonCardSubtitle,
     IonCardContent,
-    DoughPoolishRecipeComponent,
     TranslateModule,
+    DoughRecipeComponent,
   ],
 })
 export class Tab1Page {

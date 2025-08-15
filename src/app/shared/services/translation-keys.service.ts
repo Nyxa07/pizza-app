@@ -69,125 +69,123 @@ export class TranslationKeys {
         HONEY: 'app.pizza.recipe.quantity.honey',
         SALT: 'app.pizza.recipe.quantity.salt',
       },
-      POOLISH_PREPARATION: {
-        TITLE: 'app.pizza.recipe.poolishPreparation.title',
-        SUBTITLE: 'app.pizza.recipe.poolishPreparation.subtitle',
-        STEP_1_DESCRIPTION:
-          'app.pizza.recipe.poolishPreparation.step1Description',
-        INGREDIENTS_LIST: 'app.pizza.recipe.poolishPreparation.ingredientsList',
-        STEP_2_DESCRIPTION:
-          'app.pizza.recipe.poolishPreparation.step2Description',
-        STEP_3_DESCRIPTION:
-          'app.pizza.recipe.poolishPreparation.step3Description',
+      DIRECT: {
+        TITLE: 'app.pizza.recipe.direct.title',
+        SUBTITLE: 'app.pizza.recipe.direct.subtitle',
       },
-      DOUGH_PREPARATION: {
-        TITLE: 'app.pizza.recipe.doughPreparation.title',
-        SUBTITLE: 'app.pizza.recipe.doughPreparation.subtitle',
-        STEP_1_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step1Description',
-        STEP_2_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step2Description',
-        INGREDIENTS_LIST: 'app.pizza.recipe.doughPreparation.ingredientsList',
-        STEP_3_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step3Description',
-        STEP_4_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step4Description',
-        STEP_5_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step5Description',
-        STEP_6_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step6Description',
-        STEP_7_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step7Description',
-        STEP_8_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step8Description',
-        STEP_9_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step9Description',
-        STEP_10_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step10Description',
-        STEP_11_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step11Description',
-        STEP_12_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step12Description',
-        STEP_13_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step13Description',
-        STEP_14_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step14Description',
-        STEP_15_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step15Description',
-        STEP_16_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step16Description',
-        STEP_17_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step17Description',
-        STEP_18_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step18Description',
-        STEP_19_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step19Description',
-        STEP_20_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step20Description',
-        STEP_21_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step21Description',
-        STEP_22_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step22Description',
-        STEP_23_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step23Description',
-        STEP_24_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step24Description',
-        STEP_25_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step25Description',
-        STEP_26_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step26Description',
-        STEP_27_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step27Description',
-        STEP_28_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step28Description',
-        STEP_29_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step29Description',
-        STEP_30_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step30Description',
-        STEP_31_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step31Description',
-        STEP_32_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step32Description',
-        STEP_33_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step33Description',
-        STEP_34_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step34Description',
-        STEP_35_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step35Description',
-        STEP_36_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step36Description',
-        STEP_37_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step37Description',
-        STEP_38_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step38Description',
-        STEP_39_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step39Description',
-        STEP_40_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step40Description',
-        STEP_41_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step41Description',
-        STEP_42_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step42Description',
-        STEP_43_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step43Description',
-        STEP_44_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step44Description',
-        STEP_45_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step45Description',
-        STEP_46_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step46Description',
-        STEP_47_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step47Description',
-        STEP_48_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step48Description',
-        STEP_49_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step49Description',
-        STEP_50_DESCRIPTION:
-          'app.pizza.recipe.doughPreparation.step50Description',
-        TIPS_TITLE: 'app.pizza.recipe.doughPreparation.tipsTitle',
-        TIPS_DESCRIPTION: 'app.pizza.recipe.doughPreparation.tipsDescription',
-        SUCCESS_MESSAGE: 'app.pizza.recipe.doughPreparation.successMessage',
+      POOLISH: {
+        POOLISH: {
+          TITLE: 'app.pizza.recipe.poolish.poolish.title',
+          SUBTITLE: 'app.pizza.recipe.poolish.poolish.subtitle',
+          STEP_1_DESCRIPTION:
+            'app.pizza.recipe.poolish.poolish.step1Description',
+          INGREDIENTS_LIST: 'app.pizza.recipe.poolish.poolish.ingredientsList',
+          STEP_2_DESCRIPTION:
+            'app.pizza.recipe.poolish.poolish.step2Description',
+          STEP_3_DESCRIPTION:
+            'app.pizza.recipe.poolish.poolish.step3Description',
+        },
+        DOUGH: {
+          TITLE: 'app.pizza.recipe.poolish.dough.title',
+          SUBTITLE: 'app.pizza.recipe.poolish.dough.subtitle',
+          STEP_1_DESCRIPTION: 'app.pizza.recipe.poolish.dough.step1Description',
+          STEP_2_DESCRIPTION: 'app.pizza.recipe.poolish.dough.step2Description',
+          INGREDIENTS_LIST: 'app.pizza.recipe.poolish.dough.ingredientsList',
+          STEP_3_DESCRIPTION: 'app.pizza.recipe.poolish.dough.step3Description',
+          STEP_4_DESCRIPTION: 'app.pizza.recipe.poolish.dough.step4Description',
+          STEP_5_DESCRIPTION: 'app.pizza.recipe.poolish.dough.step5Description',
+          STEP_6_DESCRIPTION: 'app.pizza.recipe.poolish.dough.step6Description',
+          STEP_7_DESCRIPTION: 'app.pizza.recipe.poolish.dough.step7Description',
+          STEP_8_DESCRIPTION: 'app.pizza.recipe.poolish.dough.step8Description',
+          STEP_9_DESCRIPTION: 'app.pizza.recipe.poolish.dough.step9Description',
+          STEP_10_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step10Description',
+          STEP_11_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step11Description',
+          STEP_12_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step12Description',
+          STEP_13_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step13Description',
+          STEP_14_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step14Description',
+          STEP_15_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step15Description',
+          STEP_16_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step16Description',
+          STEP_17_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step17Description',
+          STEP_18_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step18Description',
+          STEP_19_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step19Description',
+          STEP_20_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step20Description',
+          STEP_21_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step21Description',
+          STEP_22_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step22Description',
+          STEP_23_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step23Description',
+          STEP_24_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step24Description',
+          STEP_25_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step25Description',
+          STEP_26_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step26Description',
+          STEP_27_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step27Description',
+          STEP_28_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step28Description',
+          STEP_29_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step29Description',
+          STEP_30_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step30Description',
+          STEP_31_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step31Description',
+          STEP_32_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step32Description',
+          STEP_33_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step33Description',
+          STEP_34_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step34Description',
+          STEP_35_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step35Description',
+          STEP_36_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step36Description',
+          STEP_37_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step37Description',
+          STEP_38_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step38Description',
+          STEP_39_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step39Description',
+          STEP_40_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step40Description',
+          STEP_41_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step41Description',
+          STEP_42_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step42Description',
+          STEP_43_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step43Description',
+          STEP_44_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step44Description',
+          STEP_45_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step45Description',
+          STEP_46_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step46Description',
+          STEP_47_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step47Description',
+          STEP_48_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step48Description',
+          STEP_49_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step49Description',
+          STEP_50_DESCRIPTION:
+            'app.pizza.recipe.poolish.dough.step50Description',
+          TIPS_TITLE: 'app.pizza.recipe.poolish.dough.tipsTitle',
+          TIPS_DESCRIPTION: 'app.pizza.recipe.poolish.dough.tipsDescription',
+          SUCCESS_MESSAGE: 'app.pizza.recipe.poolish.dough.successMessage',
+        },
       },
+
       STORAGE: {
         TITLE: 'app.pizza.recipe.storage.title',
         SUBTITLE: 'app.pizza.recipe.storage.subtitle',

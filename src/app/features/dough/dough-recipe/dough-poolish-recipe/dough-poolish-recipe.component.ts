@@ -7,10 +7,10 @@ import {
   IonCardSubtitle,
   IonCardTitle,
 } from '@ionic/angular/standalone';
-import { DoughResult } from '../services/dough-calculator.service';
+import { DoughResult } from '../../services/dough-calculator.service';
 import { TranslateModule } from '@ngx-translate/core';
-import { TranslationKeys } from '../../../shared/services/translation-keys.service';
-import { PIZZA_WEIGHT } from '../constants';
+import { TranslationKeys } from '../../../../shared/services/translation-keys.service';
+import { PIZZA_WEIGHT } from '../../constants';
 
 @Component({
   selector: 'app-dough-poolish-recipe',
