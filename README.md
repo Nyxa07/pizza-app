@@ -276,6 +276,6 @@ ionic capacitor build ios
 
 ---
 
-**Made with ❤️ and 🍕 by [Your Name/Team]**
+**Made with ❤️ and 🍕 by [Bryo]**
 
 *For questions, issues, or contributions, please open an issue or pull request.*
