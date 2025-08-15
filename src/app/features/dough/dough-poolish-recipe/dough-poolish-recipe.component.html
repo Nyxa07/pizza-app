@@ -18,25 +18,25 @@
           <li
             [innerHTML]="
               TranslationKeys.PIZZA.RECIPE.QUANTITY.FLOUR
-                | translate: { quantity: result().poolishFlour }
+                | translate: { quantity: result().poolish?.flour }
             "
           ></li>
           <li
             [innerHTML]="
               TranslationKeys.PIZZA.RECIPE.QUANTITY.WATER
-                | translate: { quantity: result().poolishWater }
+                | translate: { quantity: result().poolish?.water }
             "
           ></li>
           <li
             [innerHTML]="
               TranslationKeys.PIZZA.RECIPE.QUANTITY.YEAST
-                | translate: { quantity: result().poolishYeast }
+                | translate: { quantity: result().poolish?.yeast }
             "
           ></li>
           <li
             [innerHTML]="
               TranslationKeys.PIZZA.RECIPE.QUANTITY.HONEY
-                | translate: { quantity: result().poolishHoney }
+                | translate: { quantity: result().poolish?.honey }
             "
           ></li>
         </ul>
@@ -55,8 +55,8 @@
           TranslationKeys.PIZZA.RECIPE.POOLISH_PREPARATION.STEP_3_DESCRIPTION
             | translate
               : {
-                  coldRestTime: result().coldRestTime,
-                  rtRestTime: result().rtRestTime,
+                  coldRestTime: result().poolish?.coldRestTime ?? 0,
+                  rtRestTime: result().poolish?.rtRestTime ?? 0,
                 }
         "
       ></li>
@@ -90,19 +90,19 @@
           <li
             [innerHTML]="
               TranslationKeys.PIZZA.RECIPE.QUANTITY.FLOUR
-                | translate: { quantity: result().flourToAdd }
+                | translate: { quantity: result().dough.flour }
             "
           ></li>
           <li
             [innerHTML]="
               TranslationKeys.PIZZA.RECIPE.QUANTITY.WATER
-                | translate: { quantity: result().waterToAdd }
+                | translate: { quantity: result().dough.water }
             "
           ></li>
           <li
             [innerHTML]="
               TranslationKeys.PIZZA.RECIPE.QUANTITY.SALT
-                | translate: { quantity: result().saltWeight }
+                | translate: { quantity: result().dough.salt }
             "
           ></li>
         </ul>

@@ -23,6 +23,7 @@
     "pizza": {
       "form": {
         "pizzasNumber": "ピザの数",
+        "doughType": "生地の種類",
         "yeastType": "イーストの種類",
         "hydration": "水分",
         "temperature": "温度",
@@ -52,7 +53,7 @@
         "percentage": "パーセンテージ",
         "ingredients": "材料"
       },
-      "types": {
+      "doughTypes": {
         "poolish": "プーリッシュスタイル",
         "direct": "直接法",
         "biga": "ビガ法"

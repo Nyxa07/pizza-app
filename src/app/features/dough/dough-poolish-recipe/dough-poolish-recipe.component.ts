@@ -7,15 +7,15 @@ import {
   IonCardSubtitle,
   IonCardTitle,
 } from '@ionic/angular/standalone';
-import { PoolishPizzaResult } from '../services/poolish-pizza-maker.service';
+import { DoughResult } from '../services/dough-calculator.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationKeys } from '../../../shared/services/translation-keys.service';
-import { PIZZA_WEIGHT } from 'src/app/shared/constants';
+import { PIZZA_WEIGHT } from '../constants';
 
 @Component({
-  selector: 'app-poolish-pizzas-recipe',
-  templateUrl: './poolish-pizzas-recipe.component.html',
-  styleUrls: ['./poolish-pizzas-recipe.component.scss'],
+  selector: 'app-dough-poolish-recipe',
+  templateUrl: './dough-poolish-recipe.component.html',
+  styleUrls: ['./dough-poolish-recipe.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -28,8 +28,8 @@ import { PIZZA_WEIGHT } from 'src/app/shared/constants';
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class PoolishPizzasRecipeComponent implements OnInit {
-  result = input.required<PoolishPizzaResult>();
+export class DoughPoolishRecipeComponent implements OnInit {
+  result = input.required<DoughResult>();
   constructor() {}
 
   protected pizzaWeight = PIZZA_WEIGHT;

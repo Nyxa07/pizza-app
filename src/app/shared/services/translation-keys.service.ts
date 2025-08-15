@@ -29,6 +29,7 @@ export class TranslationKeys {
   static readonly PIZZA = {
     FORM: {
       PIZZAS_NUMBER: 'app.pizza.form.pizzasNumber',
+      DOUGH_TYPE: 'app.pizza.form.doughType',
       YEAST_TYPE: 'app.pizza.form.yeastType',
       HYDRATION: 'app.pizza.form.hydration',
       TEMPERATURE: 'app.pizza.form.temperature',
@@ -55,10 +56,9 @@ export class TranslationKeys {
       WEIGHT: 'app.pizza.calculations.weight',
       PERCENTAGE: 'app.pizza.calculations.percentage',
     },
-    TYPES: {
-      POOLISH: 'app.pizza.types.poolish',
-      DIRECT: 'app.pizza.types.direct',
-      BIGA: 'app.pizza.types.biga',
+    DOUGH_TYPES: {
+      POOLISH: 'app.pizza.doughTypes.poolish',
+      DIRECT: 'app.pizza.doughTypes.direct',
     },
     RECIPE: {
       QUANTITY: {

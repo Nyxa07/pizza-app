@@ -23,6 +23,7 @@
     "pizza": {
       "form": {
         "pizzasNumber": "पिज़्ज़ा की संख्या",
+        "doughType": "आटे का प्रकार",
         "yeastType": "खमीर का प्रकार",
         "hydration": "जलयोजन",
         "temperature": "तापमान",
@@ -52,7 +53,7 @@
         "percentage": "प्रतिशत",
         "ingredients": "सामग्री"
       },
-      "types": {
+      "doughTypes": {
         "poolish": "पूलिश शैली",
         "direct": "सीधी विधि",
         "biga": "बिगा विधि"

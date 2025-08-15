@@ -1,33 +1,26 @@
-import { Component, computed, inject, model } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import {
-  IonHeader,
-  IonToolbar,
   IonContent,
-  IonTitle,
-  IonSegment,
-  IonSegmentButton,
-  IonLabel,
   IonSegmentView,
   IonSegmentContent,
-  IonButtons,
   IonCard,
   IonCardHeader,
   IonCardTitle,
   IonCardSubtitle,
   IonCardContent,
 } from '@ionic/angular/standalone';
-import { PoolishPizzaMakerService } from '../features/poolish-pizzas/services/poolish-pizza-maker.service';
 import {
   PoolishPizzaFormData,
-  PoolishPizzasFormComponent,
-} from '../features/poolish-pizzas/poolish-pizzas-form/poolish-pizzas-form.component';
-import { PoolishPizzasResultsComponent } from '../features/poolish-pizzas/poolish-pizzas-results/poolish-pizzas-results.component';
+  DoughFormComponent,
+} from '../features/dough/dough-form/dough-form.component';
+import { DoughQuantityComponent } from '../features/dough/dough-quantity/dough-quantity.component';
 import { addIcons } from 'ionicons';
 import { pizza, settings } from 'ionicons/icons';
-import { PoolishPizzasRecipeComponent } from '../features/poolish-pizzas/poolish-pizzas-recipe/poolish-pizzas-recipe.component';
+import { DoughPoolishRecipeComponent } from '../features/dough/dough-poolish-recipe/dough-poolish-recipe.component';
 import { ToolbarSegmentsService } from '../shared/services/toolbar-segments.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslationKeys } from '../shared/services/translation-keys.service';
+import { DoughCalculatorService } from '../features/dough/services/dough-calculator.service';
 
 @Component({
   selector: 'app-tab1',
@@ -35,8 +28,8 @@ import { TranslationKeys } from '../shared/services/translation-keys.service';
   styleUrls: ['tab1.page.scss'],
   imports: [
     IonContent,
-    PoolishPizzasFormComponent,
-    PoolishPizzasResultsComponent,
+    DoughFormComponent,
+    DoughQuantityComponent,
     IonSegmentView,
     IonSegmentContent,
     IonCard,
@@ -44,7 +37,7 @@ import { TranslationKeys } from '../shared/services/translation-keys.service';
     IonCardTitle,
     IonCardSubtitle,
     IonCardContent,
-    PoolishPizzasRecipeComponent,
+    DoughPoolishRecipeComponent,
     TranslateModule,
   ],
 })
@@ -69,12 +62,9 @@ export class Tab1Page {
     ]);
   }
 
-  protected makePizzaService = inject(PoolishPizzaMakerService);
-  data = model<PoolishPizzaFormData | null>(null);
+  protected doughCalculatorService = inject(DoughCalculatorService);
+  data = signal<PoolishPizzaFormData | null>(null);
   result = computed(() => {
-    // if (this.data() === null) {
-    //   return null;
-    // }
-    return this.makePizzaService.compute(this.data()!);
+    return this.doughCalculatorService.compute(this.data()!);
   });
 }

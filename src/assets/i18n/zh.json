@@ -23,6 +23,7 @@
     "pizza": {
       "form": {
         "pizzasNumber": "披萨数量",
+        "doughType": "面团类型",
         "yeastType": "酵母类型",
         "hydration": "含水量",
         "temperature": "温度",
@@ -52,7 +53,7 @@
         "percentage": "百分比",
         "ingredients": "配料"
       },
-      "types": {
+      "doughTypes": {
         "poolish": "波兰种风格",
         "direct": "直接法",
         "biga": "比加种法"

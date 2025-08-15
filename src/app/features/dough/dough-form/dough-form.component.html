@@ -14,6 +14,21 @@
     </ion-item>
     <ion-item>
       <ion-select
+        mode="ios"
+        [label]="TranslationKeys.PIZZA.FORM.DOUGH_TYPE | translate"
+        formControlName="doughType"
+      >
+        <ion-select-option value="direct">{{
+          TranslationKeys.PIZZA.DOUGH_TYPES.DIRECT | translate
+        }}</ion-select-option>
+        <ion-select-option value="poolish">{{
+          TranslationKeys.PIZZA.DOUGH_TYPES.POOLISH | translate
+        }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select
+        mode="ios"
         [label]="TranslationKeys.PIZZA.FORM.YEAST_TYPE | translate"
         formControlName="yeastType"
       >
@@ -30,6 +45,7 @@
     </ion-item>
     <ion-item>
       <ion-select
+        mode="ios"
         [label]="TranslationKeys.PIZZA.FORM.HYDRATION | translate"
         formControlName="hydrationRatio"
       >
@@ -56,30 +72,36 @@
     </ion-item>
     <ion-item>
       <ion-select
+        mode="ios"
         [label]="TranslationKeys.PIZZA.FORM.TEMPERATURE | translate"
         formControlName="temperature"
       >
-        @for (temperature of temperatureOptions; track temperature.value) {
-          <ion-select-option [value]="temperature.value">
-            {{ temperature.name }}
+        <ion-select-option [value]="0"></ion-select-option>
+        @for (temperature of range(19, 36); track temperature) {
+          <ion-select-option [value]="temperature">
+            {{ temperature }}°C
           </ion-select-option>
         }
       </ion-select>
     </ion-item>
+    @if (this.form.get("poolishRatio")?.enabled) {
+      <ion-item>
+        <ion-select
+          mode="ios"
+          [label]="TranslationKeys.PIZZA.FORM.POOLISH_RATIO | translate"
+          formControlName="poolishRatio"
+        >
+          @for (poolishRatio of range(30, 60); track poolishRatio) {
+            <ion-select-option [value]="poolishRatio / 100">
+              {{ poolishRatio }}%
+            </ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+    }
     <ion-item>
       <ion-select
-        [label]="TranslationKeys.PIZZA.FORM.POOLISH_RATIO | translate"
-        formControlName="poolishRatio"
-      >
-        @for (poolishRatio of poolishRatioOptions; track poolishRatio.value) {
-          <ion-select-option [value]="poolishRatio.value">
-            {{ poolishRatio.name }}
-          </ion-select-option>
-        }
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-select
+        mode="ios"
         [label]=""
         formControlName="rtRestTime"
         [label]="TranslationKeys.PIZZA.FORM.RT_REST_TIME | translate"
@@ -101,11 +123,12 @@
     </ion-item>
     <ion-item>
       <ion-select
+        mode="ios"
         [label]=""
         formControlName="coldRestTime"
         [label]="TranslationKeys.PIZZA.FORM.COLD_REST_TIME | translate"
       >
-        @for (i of range(0, 72); track i) {
+        @for (i of range(0, 24); track i) {
           <ion-select-option [value]="i"
             >{{ i }}
             {{

@@ -1,17 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PoolishPizzaResult } from '../services/poolish-pizza-maker.service';
+import { DoughResult } from '../services/dough-calculator.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationKeys } from '../../../shared/services/translation-keys.service';
 
 @Component({
-  selector: 'app-poolish-pizzas-results',
-  templateUrl: './poolish-pizzas-results.component.html',
-  styleUrls: ['./poolish-pizzas-results.component.scss'],
+  selector: 'app-dough-quantity',
+  templateUrl: './dough-quantity.component.html',
+  styleUrls: ['./dough-quantity.component.scss'],
   imports: [TranslateModule],
   standalone: true,
 })
-export class PoolishPizzasResultsComponent implements OnInit {
-  @Input({ required: true }) result!: PoolishPizzaResult | null;
+export class DoughQuantityComponent implements OnInit {
+  @Input({ required: true }) result!: DoughResult | null;
 
   // Make TranslationKeys available in template
   protected TranslationKeys = TranslationKeys;

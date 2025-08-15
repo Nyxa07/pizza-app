@@ -23,6 +23,7 @@
     "pizza": {
       "form": {
         "pizzasNumber": "Number of pizzas",
+        "doughType": "Dough type",
         "yeastType": "Yeast type",
         "hydration": "Hydration",
         "temperature": "Temperature",
@@ -52,7 +53,7 @@
         "percentage": "Percentage",
         "ingredients": "Ingredients"
       },
-      "types": {
+      "doughTypes": {
         "poolish": "Poolish style",
         "direct": "Direct method",
         "biga": "Biga method"

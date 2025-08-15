@@ -1,0 +1,58 @@
+@if (result) {
+  <table>
+    <thead>
+      <tr>
+        <th>
+          {{ TranslationKeys.PIZZA.CALCULATIONS.INGREDIENTS | translate }}
+        </th>
+        @if (result.poolish) {
+          <th>{{ TranslationKeys.PIZZA.CALCULATIONS.POOLISH | translate }}</th>
+        }
+        <th>{{ TranslationKeys.PIZZA.CALCULATIONS.DOUGH | translate }}</th>
+        <th>{{ TranslationKeys.PIZZA.CALCULATIONS.TOTAL | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ TranslationKeys.PIZZA.INGREDIENTS.FLOUR | translate }}</td>
+        @if (result.poolish) {
+          <td>{{ result.poolish.flour }}</td>
+        }
+        <td>{{ result.dough.flour }}</td>
+        <td>{{ result.total.flour }}</td>
+      </tr>
+      <tr>
+        <td>{{ TranslationKeys.PIZZA.INGREDIENTS.WATER | translate }}</td>
+        @if (result.poolish) {
+          <td>{{ result.poolish.water }}</td>
+        }
+        <td>{{ result.dough.water }}</td>
+        <td>{{ result.total.water }}</td>
+      </tr>
+      <tr>
+        <td>{{ TranslationKeys.PIZZA.INGREDIENTS.YEAST | translate }}</td>
+        @if (result.poolish) {
+          <td>{{ result.poolish.yeast }}</td>
+        }
+        <td>{{ result.dough.yeast }}</td>
+        <td>{{ result.total.yeast }}</td>
+      </tr>
+      <tr>
+        <td>{{ TranslationKeys.PIZZA.INGREDIENTS.SALT | translate }}</td>
+        @if (result.poolish) {
+          <td>{{ result.poolish.salt }}</td>
+        }
+        <td>{{ result.dough.salt }}</td>
+        <td>{{ result.total.salt }}</td>
+      </tr>
+      <tr>
+        <td>{{ TranslationKeys.PIZZA.INGREDIENTS.HONEY | translate }}</td>
+        @if (result.poolish) {
+          <td>{{ result.poolish.honey }}</td>
+        }
+        <td>{{ result.dough.honey }}</td>
+        <td>{{ result.total.honey }}</td>
+      </tr>
+    </tbody>
+  </table>
+}

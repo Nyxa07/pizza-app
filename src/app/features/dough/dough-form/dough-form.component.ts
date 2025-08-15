@@ -1,37 +1,36 @@
 import { Component, inject, OnInit, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { YeastType } from '../enums/yeast-type.enum';
-import { POOLISH_RATIO_BY_TEMPERATURE } from '../constants';
 import {
   IonItem,
   IonSelect,
   IonSelectOption,
   IonList,
   IonRange,
-  IonInput,
-  IonNote,
 } from '@ionic/angular/standalone';
-import { PoolishPizzaMakerService } from '../services/poolish-pizza-maker.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslationKeys } from '../../../shared/services/translation-keys.service';
 import { LowerCasePipe } from '@angular/common';
-import { debounceTime } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { DoughType } from '../enums/dough-type.enum';
+import { DoughCalculatorService } from '../services/dough-calculator.service';
 
 export interface PoolishPizzaFormData {
   nbPizzas: number;
+  doughType: DoughType;
   yeastType: YeastType;
   hydrationRatio: number;
   temperature: number;
-  poolishRatio: number;
+  poolishRatio?: number;
   rtRestTime: number;
   coldRestTime: number;
 }
 
 @Component({
-  selector: 'app-poolish-pizzas-form',
-  templateUrl: './poolish-pizzas-form.component.html',
-  styleUrls: ['./poolish-pizzas-form.component.scss'],
+  selector: 'app-dough-form',
+  templateUrl: './dough-form.component.html',
+  styleUrls: ['./dough-form.component.scss'],
   imports: [
     ReactiveFormsModule,
     IonItem,
@@ -44,33 +43,14 @@ export interface PoolishPizzaFormData {
   ],
   standalone: true,
 })
-export class PoolishPizzasFormComponent implements OnInit {
+export class DoughFormComponent implements OnInit {
   // Make TranslationKeys available in template
   protected TranslationKeys = TranslationKeys;
-
-  protected poolishRatioOptions = [
-    {
-      name: 'Auto',
-      value: 0,
-    },
-    ...[...new Set(Object.values(POOLISH_RATIO_BY_TEMPERATURE))].map(
-      (value) => ({
-        name: `${Math.round(value * 100)}%`,
-        value: value,
-      }),
-    ),
-  ];
-
-  protected temperatureOptions = Object.keys(POOLISH_RATIO_BY_TEMPERATURE).map(
-    (key) => ({
-      name: `${key}°C`,
-      value: Number(key),
-    }),
-  );
   protected storedData = localStorage.getItem('PoolishPizzaForm:formData');
   protected formBuilder = inject(FormBuilder);
   protected form = this.formBuilder.group({
     nbPizzas: [5, [Validators.required, Validators.min(1)]],
+    doughType: [DoughType.DIRECT, [Validators.required]],
     yeastType: [YeastType.DRY_ACTIVE, [Validators.required]],
     hydrationRatio: [
       0.62,
@@ -78,11 +58,11 @@ export class PoolishPizzasFormComponent implements OnInit {
     ],
     temperature: [
       20,
-      [Validators.required, Validators.min(0), Validators.max(30)],
+      [Validators.required, Validators.min(0), Validators.max(36)],
     ],
     poolishRatio: [
-      0,
-      [Validators.required, Validators.min(0), Validators.max(1)],
+      0.3,
+      [Validators.required, Validators.min(0), Validators.max(0.6)],
     ],
     rtRestTime: [
       1,
@@ -90,29 +70,45 @@ export class PoolishPizzasFormComponent implements OnInit {
     ],
     coldRestTime: [
       16,
-      [Validators.required, Validators.min(0), Validators.max(72)],
+      [Validators.required, Validators.min(0), Validators.max(24)],
     ],
   });
 
-  protected makePizzaService = inject(PoolishPizzaMakerService);
+  protected doughCalculatorService = inject(DoughCalculatorService);
   protected onChange = output<PoolishPizzaFormData>();
 
   constructor() {
-    if (this.storedData) {
-      this.form.patchValue(JSON.parse(this.storedData));
-    }
     this.form.valueChanges
       .pipe(takeUntilDestroyed(), debounceTime(250))
       .subscribe((value) => {
         if (this.form.invalid) {
           return;
         }
-        this.onChange.emit(value as PoolishPizzaFormData);
         localStorage.setItem(
           'PoolishPizzaForm:formData',
           JSON.stringify(value),
         );
+        this.onChange.emit(value as PoolishPizzaFormData);
       });
+
+    this.form
+      .get('doughType')
+      ?.valueChanges.pipe(
+        debounceTime(150),
+        takeUntilDestroyed(),
+        distinctUntilChanged(),
+      )
+      .subscribe((value) => {
+        if (value === DoughType.DIRECT) {
+          this.form.get('poolishRatio')?.disable();
+        } else {
+          this.form.get('poolishRatio')?.enable();
+        }
+      });
+
+    this.form.patchValue(
+      this.storedData ? JSON.parse(this.storedData) : this.form.value,
+    );
   }
 
   ngOnInit() {

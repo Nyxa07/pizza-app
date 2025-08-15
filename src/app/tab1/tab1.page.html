@@ -13,9 +13,7 @@
           >
         </ion-card-header>
         <ion-card-content>
-          <app-poolish-pizzas-form
-            (onChange)="data.set($event)"
-          ></app-poolish-pizzas-form>
+          <app-dough-form (onChange)="data.set($event)"></app-dough-form>
         </ion-card-content>
       </ion-card>
 
@@ -31,18 +29,14 @@
           >
         </ion-card-header>
         <ion-card-content>
-          <app-poolish-pizzas-results
-            [result]="result()"
-          ></app-poolish-pizzas-results>
+          <app-dough-quantity [result]="result()"></app-dough-quantity>
         </ion-card-content>
       </ion-card>
     </ion-segment-content>
 
     <ion-segment-content id="recipe">
       @if (result()) {
-      <app-poolish-pizzas-recipe
-        [result]="result()"
-      ></app-poolish-pizzas-recipe>
+      <app-dough-poolish-recipe [result]="result()"></app-dough-poolish-recipe>
       }
     </ion-segment-content>
   </ion-segment-view>
