@@ -1,4 +1,4 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, input, OnInit, ViewEncapsulation } from '@angular/core';
 import { DoughResult } from '../../services/dough-calculator.service';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
@@ -29,6 +29,7 @@ import { PIZZA_WEIGHT } from '../../constants';
     IonCardSubtitle,
     IonCardContent,
   ],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DoughDirectRecipeComponent implements OnInit {
   result = input.required<DoughResult>();
