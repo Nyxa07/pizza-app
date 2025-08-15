@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { PoolishPizzasFormComponent } from './poolish-pizzas-form.component';
+import { PoolishPizzasFormComponent } from './dough-form.component';
 
 describe('PoolishPizzasFormComponent', () => {
   let component: PoolishPizzasFormComponent;

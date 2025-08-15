@@ -8,8 +8,6 @@ import {
   IonSelectOption,
   IonList,
   IonRange,
-  IonInput,
-  IonNote,
 } from '@ionic/angular/standalone';
 import { PoolishPizzaMakerService } from '../services/poolish-pizza-maker.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -29,9 +27,9 @@ export interface PoolishPizzaFormData {
 }
 
 @Component({
-  selector: 'app-poolish-pizzas-form',
-  templateUrl: './poolish-pizzas-form.component.html',
-  styleUrls: ['./poolish-pizzas-form.component.scss'],
+  selector: 'app-dough-form',
+  templateUrl: './dough-form.component.html',
+  styleUrls: ['./dough-form.component.scss'],
   imports: [
     ReactiveFormsModule,
     IonItem,
@@ -44,7 +42,7 @@ export interface PoolishPizzaFormData {
   ],
   standalone: true,
 })
-export class PoolishPizzasFormComponent implements OnInit {
+export class DoughFormComponent implements OnInit {
   // Make TranslationKeys available in template
   protected TranslationKeys = TranslationKeys;
 

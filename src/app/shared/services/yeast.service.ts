@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { YeastType } from 'src/app/features/poolish-pizzas/enums/yeast-type.enum';
+import { YeastType } from 'src/app/features/dough/enums/yeast-type.enum';
 import {
   DRY_ACTIVE_YEAST_COEF,
   DRY_INSTANT_YEAST_COEF,

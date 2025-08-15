@@ -16,15 +16,15 @@ import {
   IonCardSubtitle,
   IonCardContent,
 } from '@ionic/angular/standalone';
-import { PoolishPizzaMakerService } from '../features/poolish-pizzas/services/poolish-pizza-maker.service';
+import { PoolishPizzaMakerService } from '../features/dough/services/poolish-pizza-maker.service';
 import {
   PoolishPizzaFormData,
-  PoolishPizzasFormComponent,
-} from '../features/poolish-pizzas/poolish-pizzas-form/poolish-pizzas-form.component';
-import { PoolishPizzasResultsComponent } from '../features/poolish-pizzas/poolish-pizzas-results/poolish-pizzas-results.component';
+  DoughFormComponent,
+} from '../features/dough/dough-form/dough-form.component';
+import { PoolishPizzasResultsComponent } from '../features/dough/poolish-pizzas-results/poolish-pizzas-results.component';
 import { addIcons } from 'ionicons';
 import { pizza, settings } from 'ionicons/icons';
-import { PoolishPizzasRecipeComponent } from '../features/poolish-pizzas/poolish-pizzas-recipe/poolish-pizzas-recipe.component';
+import { PoolishPizzasRecipeComponent } from '../features/dough/poolish-pizzas-recipe/poolish-pizzas-recipe.component';
 import { ToolbarSegmentsService } from '../shared/services/toolbar-segments.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslationKeys } from '../shared/services/translation-keys.service';
@@ -35,7 +35,7 @@ import { TranslationKeys } from '../shared/services/translation-keys.service';
   styleUrls: ['tab1.page.scss'],
   imports: [
     IonContent,
-    PoolishPizzasFormComponent,
+    DoughFormComponent,
     PoolishPizzasResultsComponent,
     IonSegmentView,
     IonSegmentContent,
