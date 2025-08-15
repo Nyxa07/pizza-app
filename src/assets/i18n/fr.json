@@ -162,8 +162,8 @@
           "title": "La méthode Directe",
           "subtitle": "Préparation directe de la pâte",
           "answers": [
-            "C'est une méthode de préparation plus simple que les méthodes indirectes",
-            "On incorpore directement tous les ingrédients et après un repos plus ou moins long on peut l'utiliser"
+            "C'est une méthode de préparation plus simple que les méthodes indirectes.",
+            "On incorpore directement tous les ingrédients et après un repos plus ou moins long on peut l'utiliser."
           ]
         },
         {
@@ -172,7 +172,7 @@
           "answers": [
             "La poolish est une pré-fermentation de la pâte qui repose pendant plusieurs heures avant d'être utilisée pour la pâte à pizza.",
             "Elle se prépare en mélangeant 1 part de farine et 1 part d'eau ainsi qu'une petite quantité de levure.",
-            "C'est une méthode indirecte de préparation de pâte à pizza 🍕"
+            "C'est une méthode indirecte de préparation de pâte à pizza."
           ]
         },
         {
@@ -184,21 +184,68 @@
           ]
         },
         {
-          "title": " 💦 Hydratation",
-          "subtitle": "Ratio entre la quantité d’eau totale sur la quantité de farine totale",
+          "title": " Les Levures",
+          "subtitle": "Ici nous utilisons 3 types de levures",
           "answers": [
-            "Ex 1 : Pour 100 g d’eau au total je vais avoir 151,5 g de farine totale ce qui donne une hydratation de la pâte à 66 %. Calcul : 100 ÷ 151,5 = 0,66 soit 66 %.",
-            "Ex 2 : Si je veux connaître la quantité d’eau à ajouter lorsque j’ai 151,5 g de farine  et que je veux une hydratation à 66 % le calcul sera : 0,66 x 151,5 = 100 g d’eau au total à ajouter"
+            "La levure sèche active est la levure que l'on trouve dans le commerce sous forme de levure de boulanger dite classique et non pas rapide.",
+            "La levure sèche instantannée est la levure lyophilisée sous forme de fines paillettes. Elle n'a pas besoin d'être hydratée avant d'être utilisée et permet de faire des pousses rapides.",
+            "La levure fraîche est la levure que l'on trouve dans le commerce sous forme de levure de boulanger dite fraîche sous forme de pâte en cube."
           ],
           "tips": [
             {
               "title": "💡 Astuce :",
-              "description": "Plus la pâte est hydratée plus difficile elle sera à manipuler, elle sera plus liquide et donc plus collante. Hydratation recommandée: Entre 62 & 75 %"
-            },
+              "description": "Le calculateur permet facilement de passer à l'une ou l'autre des levures"
+            }
+          ]
+        },
+        {
+          "title": " 💦 Hydratation",
+          "subtitle": "Ratio entre la quantité d’eau totale sur la quantité de farine totale",
+          "answers": [
+            "Ex 1 : Pour 100 g d’eau au total je vais avoir 151,5 g de farine totale ce qui donne une hydratation de la pâte à 66 %. Calcul : 100 ÷ 151,5 = 0,66 soit 66 %.",
+            "Ex 2 : Si je veux connaître la quantité d’eau à ajouter lorsque j’ai 151,5 g de farine  et que je veux une hydratation à 66 % le calcul sera : 0,66 x 151,5 = 100 g d’eau au total à ajouter."
+          ],
+          "tips": [
             {
               "title": "💡 Astuce :",
-              "description": "Plus la pâte est hydratée plus difficile elle sera à manipuler, elle sera plus liquide et donc plus collante. Hydratation recommandée: Entre 62 & 75 %"
+              "description": "Plus la pâte est hydratée plus difficile elle sera à manipuler, elle sera plus liquide et donc plus collante. Hydratation recommandée : Entre 62 & 75 %"
             }
+          ]
+        },
+         {
+          "title": " 🍚 Ratio Poolish",
+          "subtitle": "Ratio entre la quantité de poolish et la quantité totale de pâte",
+          "answers": [
+            "On utilise couramment entre 30 et 60 % de poolish dans la quantité de pâte finale.",
+            "Ex : Si je veux 30 % de poolish dans ma pâte et 1 kg de pâte finale, le calcul sera : 1000 x 0,3 = 300 g. La poolish fera donc 300 g et sera composée de 150 g de farine et 150 g d'eau.  "
+          ],
+          "tips": [
+            {
+              "title": "💡 Astuce :",
+              "description": "En général on met un ratio plus élevé de poolish l’hiver que l’été car la fermentation est en partie influencée par la température. Donc mettre plus de poolish en hiver que l’été peut aider au développement finale de la pâte."
+            }
+          ]
+        },
+          {
+          "title": " 🌡️ La Température",
+          "subtitle": "C'est la température ambiante de la pièce, celle en dehors du frigo",
+          "answers": [
+            "Température de la pièce où l'on va faire reposer la poolish / la pâte / la biga / les pâtons.",
+            "Sers dans le calcul de repos à chaud."
+          ]   
+        },
+          {
+          "title": " 🔥 Repos à Chaud",
+          "subtitle": "",
+          "answers": [
+            "Temps de repos des diverses préparation à la température sélectionnée."     
+          ]
+        },
+          {
+          "title": " ❄️ Repos à Froid",
+          "subtitle": "",
+          "answers": [
+            "Temps de repos des diverses préparation au frigo."
           ]
         }
       ]
