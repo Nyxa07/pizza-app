@@ -237,7 +237,6 @@ export class TranslationKeys {
       JAPANESE: 'app.language.selector.japanese',
       CHINESE: 'app.language.selector.chinese',
       GERMAN: 'app.language.selector.german',
-      CANCEL: 'app.language.selector.cancel',
     },
   };
 }
