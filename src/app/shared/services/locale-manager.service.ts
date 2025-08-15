@@ -44,7 +44,7 @@ export class LocaleManagerService {
       return;
     }
     const locale = await this.detectLocale();
-    await this.setLocale(locale);
+    await this.switchLocale(locale);
     this.isInitialized = true;
   }
 
@@ -57,16 +57,6 @@ export class LocaleManagerService {
       SUPPORTED_LANGUAGES.find((lang) => locale.startsWith(lang)) ?? 'en',
     );
     localStorage.setItem('LanguageManager:locale', locale);
-  }
-
-  /**
-   * Set the locale for the app without saving it in local storage
-   * @param locale - The locale to set
-   */
-  private setLocale(locale: string) {
-    this.translateService.use(
-      SUPPORTED_LANGUAGES.find((lang) => locale.startsWith(lang)) ?? 'en',
-    );
   }
 
   private async detectLocale(): Promise<string> {
