@@ -76,7 +76,6 @@
         [label]="TranslationKeys.PIZZA.FORM.TEMPERATURE | translate"
         formControlName="temperature"
       >
-        <ion-select-option [value]="0"></ion-select-option>
         @for (temperature of range(19, 36); track temperature) {
           <ion-select-option [value]="temperature">
             {{ temperature }}°C
