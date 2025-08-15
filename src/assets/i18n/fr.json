@@ -67,20 +67,20 @@
           "salt": "<strong>{{ quantity }} g</strong> de sel"
         },
         "direct": {
-            "title": "Préparation de la pâte",
-            "subtitle": "Pétrissage et formation",
-            "step1Description": "Peser tous les ingrédients",
-            "step2Description": "Mélanger la levure et le miel à l’eau",
-            "step3Description": "Ajouter le sel et la farine et mélanger à la cuillère en bois",
-            "step4Description": "Une fois que tous les ingrédients sont bien mélangés et que l’on commence à avoir une boule, on peut la déposer sur le plan de travail",
-            "step5Description": "Terminer le pétrissage à la main environ 10 min (possibilité d’utiliser un robot pâtissier avec son crochet pétrisseur). Bien pétrir pour hydrater correctement la farine",
-            "step6Description": "Une fois que la pâte à une belle structure, former une boule et laisser la reposer pendant 25 min sous un saladier (la pâte va se tendre et devenir plus lisse)",
-            "step7Description": "Procéder à quelques rabats sur la pâte et lui donner une belle forme de boule (bien lisse et qui ne colle plus)",
-            "step8Description": "Déposer la boule dans un récipient hermétique et la laisser reposer 24 heures",
-            "step9Description": "Récupérer la pâte et, avec un coupe-pâte ou une spatule, former des pâtons (bien tendus) d’environ <strong>{{ pizzaWeight }} g</strong>",
-            "step10Description": "Déposer les pâtons dans un plat en laissant de l’espace entre chaque (ils vont encore grossir)",
-            "step11Description": "Fermer le plat ou le couvrir d’un film plastique et laisser reposer 3 heures"
-          },
+          "title": "Préparation de la pâte",
+          "subtitle": "Pétrissage et formation",
+          "step1Description": "Peser tous les ingrédients",
+          "step2Description": "Mélanger la levure et le miel à l’eau",
+          "step3Description": "Ajouter le sel et la farine et mélanger à la cuillère en bois",
+          "step4Description": "Une fois que tous les ingrédients sont bien mélangés et que l’on commence à avoir une boule, on peut la déposer sur le plan de travail",
+          "step5Description": "Terminer le pétrissage à la main environ 10 min (possibilité d’utiliser un robot pâtissier avec son crochet pétrisseur). Bien pétrir pour hydrater correctement la farine",
+          "step6Description": "Une fois que la pâte à une belle structure, former une boule et laisser la reposer pendant 25 min sous un saladier (la pâte va se tendre et devenir plus lisse)",
+          "step7Description": "Procéder à quelques rabats sur la pâte et lui donner une belle forme de boule (bien lisse et qui ne colle plus)",
+          "step8Description": "Déposer la boule dans un récipient hermétique et la laisser reposer 24 heures",
+          "step9Description": "Récupérer la pâte et, avec un coupe-pâte ou une spatule, former des pâtons (bien tendus) d’environ <strong>{{ pizzaWeight }} g</strong>",
+          "step10Description": "Déposer les pâtons dans un plat en laissant de l’espace entre chaque (ils vont encore grossir)",
+          "step11Description": "Fermer le plat ou le couvrir d’un film plastique et laisser reposer 3 heures"
+        },
         "poolish": {
           "poolish": {
             "title": "PRÉPARATION DE LA POOLISH",
@@ -212,7 +212,7 @@
             }
           ]
         },
-         {
+        {
           "title": " 🍚 Ratio Poolish",
           "subtitle": "Ratio entre la quantité de poolish et la quantité totale de pâte",
           "answers": [
@@ -226,27 +226,25 @@
             }
           ]
         },
-          {
+        {
           "title": " 🌡️ La Température",
           "subtitle": "C'est la température ambiante de la pièce, celle en dehors du frigo",
           "answers": [
             "Température de la pièce où l'on va faire reposer la poolish / la pâte / la biga / les pâtons.",
             "Sers dans le calcul de repos à chaud."
-          ]   
+          ]
         },
-          {
+        {
           "title": " 🔥 Repos à Chaud",
           "subtitle": "",
           "answers": [
-            "Temps de repos des diverses préparation à la température sélectionnée."     
+            "Temps de repos des diverses préparation à la température sélectionnée."
           ]
         },
-          {
+        {
           "title": " ❄️ Repos à Froid",
           "subtitle": "",
-          "answers": [
-            "Temps de repos des diverses préparation au frigo."
-          ]
+          "answers": ["Temps de repos des diverses préparation au frigo."]
         }
       ]
     }

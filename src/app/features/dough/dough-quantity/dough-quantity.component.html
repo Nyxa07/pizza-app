@@ -58,30 +58,34 @@
         @if (result.poolish) {
           <td>
             {{
-              result.poolish.flour +
-                result.poolish.water +
-                result.poolish.yeast +
-                result.poolish.honey +
-                result.poolish.salt | number: "1.0-0"
+              round(
+                result.poolish.flour +
+                  result.poolish.water +
+                  result.poolish.yeast +
+                  result.poolish.honey +
+                  result.poolish.salt
+              )
             }}
           </td>
         }
         <td>
           {{
-            result.dough.flour +
-              result.dough.water +
-              result.dough.yeast +
-              result.dough.honey +
-              result.dough.salt | number: "1.0-0"
+            round(
+              result.dough.flour +
+                result.dough.water +
+                result.dough.yeast +
+                result.dough.honey +
+                result.dough.salt
+            )
           }}
         </td>
         <td>
           {{
-            result.total.flour +
+            round(result.total.flour) +
               result.total.water +
-              result.total.yeast +
-              result.total.honey +
-              result.total.salt | number: "1.0-0"
+              round(result.total.yeast) +
+              round(result.total.honey) +
+              round(result.total.salt)
           }}
         </td>
       </tr>
