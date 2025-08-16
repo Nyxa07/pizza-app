@@ -1,82 +1,84 @@
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>{{
-      "dough.recipe.direct.title" | translate
-    }}</ion-card-title>
-    <ion-card-subtitle>{{
-      "dough.recipe.direct.subtitle" | translate
-    }}</ion-card-subtitle>
-  </ion-card-header>
-  <ion-card-content>
-    <ul>
-      <li>
-        {{ "dough.recipe.direct.step1Description" | translate }}
-        <ul>
-          <li
-            [innerHTML]="
-              'dough.recipe.quantity.flour'
-                | translate: { quantity: result().dough.flour }
-            "
-          ></li>
-          <li
-            [innerHTML]="
-              'dough.recipe.quantity.water'
-                | translate: { quantity: result().dough.water }
-            "
-          ></li>
-          <li
-            [innerHTML]="
-              'dough.recipe.quantity.yeast'
-                | translate: { quantity: result().dough.yeast }
-            "
-          ></li>
-          <li
-            [innerHTML]="
-              'dough.recipe.quantity.salt'
-                | translate: { quantity: result().dough.salt }
-            "
-          ></li>
-          <li
-            [innerHTML]="
-              'dough.recipe.quantity.honey'
-                | translate: { quantity: result().dough.honey }
-            "
-          ></li>
-        </ul>
-      </li>
-      <li>
-        {{ "dough.recipe.direct.step2Description" | translate }}
-      </li>
-      <li>
-        {{ "dough.recipe.direct.step3Description" | translate }}
-      </li>
-      <li>
-        {{ "dough.recipe.direct.step4Description" | translate }}
-      </li>
-      <li>
-        {{ "dough.recipe.direct.step5Description" | translate }}
-      </li>
-      <li>
-        {{ "dough.recipe.direct.step6Description" | translate }}
-      </li>
-      <li>
-        {{ "dough.recipe.direct.step7Description" | translate }}
-      </li>
-      <li>
-        {{ "dough.recipe.direct.step8Description" | translate }}
-      </li>
-      <li
-        [innerHTML]="
-          'dough.recipe.direct.step9Description'
-            | translate: { pizzaWeight: pizzaWeight }
-        "
-      ></li>
-      <li>
-        {{ "dough.recipe.direct.step10Description" | translate }}
-      </li>
-      <li>
-        {{ "dough.recipe.direct.step11Description" | translate }}
-      </li>
-    </ul>
-  </ion-card-content>
-</ion-card>
+@if (result) {
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{
+        "dough.recipe.direct.title" | translate
+      }}</ion-card-title>
+      <ion-card-subtitle>{{
+        "dough.recipe.direct.subtitle" | translate
+      }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ul>
+        <li>
+          {{ "dough.recipe.direct.step1Description" | translate }}
+          <ul>
+            <li
+              [innerHTML]="
+                'dough.recipe.quantity.flour'
+                  | translate: { quantity: result.dough.flour }
+              "
+            ></li>
+            <li
+              [innerHTML]="
+                'dough.recipe.quantity.water'
+                  | translate: { quantity: result.dough.water }
+              "
+            ></li>
+            <li
+              [innerHTML]="
+                'dough.recipe.quantity.yeast'
+                  | translate: { quantity: result.dough.yeast }
+              "
+            ></li>
+            <li
+              [innerHTML]="
+                'dough.recipe.quantity.salt'
+                  | translate: { quantity: result.dough.salt }
+              "
+            ></li>
+            <li
+              [innerHTML]="
+                'dough.recipe.quantity.honey'
+                  | translate: { quantity: result.dough.honey }
+              "
+            ></li>
+          </ul>
+        </li>
+        <li>
+          {{ "dough.recipe.direct.step2Description" | translate }}
+        </li>
+        <li>
+          {{ "dough.recipe.direct.step3Description" | translate }}
+        </li>
+        <li>
+          {{ "dough.recipe.direct.step4Description" | translate }}
+        </li>
+        <li>
+          {{ "dough.recipe.direct.step5Description" | translate }}
+        </li>
+        <li>
+          {{ "dough.recipe.direct.step6Description" | translate }}
+        </li>
+        <li>
+          {{ "dough.recipe.direct.step7Description" | translate }}
+        </li>
+        <li>
+          {{ "dough.recipe.direct.step8Description" | translate }}
+        </li>
+        <li
+          [innerHTML]="
+            'dough.recipe.direct.step9Description'
+              | translate: { pizzaWeight: pizzaWeight }
+          "
+        ></li>
+        <li>
+          {{ "dough.recipe.direct.step10Description" | translate }}
+        </li>
+        <li>
+          {{ "dough.recipe.direct.step11Description" | translate }}
+        </li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+}

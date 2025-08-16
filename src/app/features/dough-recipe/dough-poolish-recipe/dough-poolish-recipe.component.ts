@@ -1,4 +1,11 @@
-import { Component, input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  input,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   IonCard,
@@ -7,8 +14,8 @@ import {
   IonCardSubtitle,
   IonCardTitle,
 } from '@ionic/angular/standalone';
-import { DoughResult } from '../../dough/services/dough-calculator.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { DoughResult } from '../../dough/services/dough-calculator.service';
 
 @Component({
   selector: 'app-dough-poolish-recipe',
@@ -30,7 +37,6 @@ import { TranslateModule } from '@ngx-translate/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class DoughPoolishRecipeComponent implements OnInit {
-  result = input.required<DoughResult>();
-  constructor() {}
+  @Input({ required: true }) result!: DoughResult;
   ngOnInit() {}
 }

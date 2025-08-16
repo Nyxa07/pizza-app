@@ -1,5 +1,4 @@
-import { Component, input, OnInit, ViewEncapsulation } from '@angular/core';
-import { DoughResult } from '../../dough/services/dough-calculator.service';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -9,7 +8,8 @@ import {
   IonCardSubtitle,
   IonCardContent,
 } from '@ionic/angular/standalone';
-import { PIZZA_WEIGHT } from '../../dough/constants';
+import { DoughResult } from '../../dough/services/dough-calculator.service';
+import { DoughConfigService } from '../../dough/services/dough-config.service';
 
 @Component({
   selector: 'app-dough-direct-recipe',
@@ -31,10 +31,10 @@ import { PIZZA_WEIGHT } from '../../dough/constants';
   encapsulation: ViewEncapsulation.None,
 })
 export class DoughDirectRecipeComponent implements OnInit {
-  result = input.required<DoughResult>();
-  protected pizzaWeight = PIZZA_WEIGHT;
+  constructor(private doughConfigService: DoughConfigService) {}
 
-  constructor() {}
+  @Input({ required: true }) result!: DoughResult;
+  protected pizzaWeight = this.doughConfigService.constants.pizzaWeight;
 
   ngOnInit() {}
 }

@@ -1,17 +1,66 @@
 <form [formGroup]="form">
-  <ion-item>
-    <ion-select
-      formControlName="locale"
-      mode="ios"
-      [cancelText]="'common.actions.cancel' | translate"
-      [okText]="'common.actions.ok' | translate"
-      [label]="'language.selector.title' | translate"
-    >
-      @for (locale of availableLocales; track locale) {
-        <ion-select-option [value]="locale.value">
-          {{ locale.translateKey | translate }}
-        </ion-select-option>
-      }
-    </ion-select>
-  </ion-item>
+  <ion-list-header>Language</ion-list-header>
+  <ion-list [inset]="true">
+    <ion-item>
+      <ion-select
+        formControlName="locale"
+        mode="ios"
+        [cancelText]="'common.actions.cancel' | translate"
+        [okText]="'common.actions.ok' | translate"
+        [label]="'language.selector.title' | translate"
+      >
+        @for (locale of availableLocales; track locale) {
+          <ion-select-option [value]="locale.value">
+            {{ locale.translateKey | translate }}
+          </ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-list-header>Appearance</ion-list-header>
+  <ion-list [inset]="true">
+    <ion-item>
+      <ion-toggle formControlName="paletteToggle" justify="space-between"
+        >Dark Mode</ion-toggle
+      >
+    </ion-item>
+  </ion-list>
+
+  <ion-list-header>Dough parameters</ion-list-header>
+  <ion-list [inset]="true">
+    <ion-item>
+      <ion-input
+        label="Pizza weight"
+        type="number"
+        formControlName="pizzaWeight"
+        [max]="400"
+        [min]="200"
+        labelPlacement="stacked"
+        helperText="Valeur en grammes. Une valeur entre 250 et 280 est recommandée (~30cm)."
+      />
+    </ion-item>
+    <ion-item>
+      <ion-input
+        helperText="Valeur en % de la farine totale. Une valeur entre 2.8 et 3.2 est recommandée."
+        label="Salt ratio"
+        type="number"
+        formControlName="saltRatio"
+        [max]="3.2"
+        [min]="2.8"
+        labelPlacement="stacked"
+      />
+    </ion-item>
+    <ion-item>
+      <ion-input
+        helperText="Valeur en % de la farine totale. Une valeur entre 0 et 0.5 est recommandée."
+        label="Honey ratio"
+        type="number"
+        formControlName="honeyRatio"
+        [max]="0.5"
+        [min]="0"
+        labelPlacement="stacked"
+      />
+    </ion-item>
+  </ion-list>
 </form>

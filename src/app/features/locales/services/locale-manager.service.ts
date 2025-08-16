@@ -3,16 +3,19 @@ import { TranslateService } from '@ngx-translate/core';
 import { Platform } from '@ionic/angular';
 import { Device } from '@capacitor/device';
 import { Locales } from '../enums/locales.enum';
+import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocaleManagerService {
   private isInitialized = false;
+  private readonly STORAGE_KEY = 'locale:current';
 
   constructor(
     private translateService: TranslateService,
     private platform: Platform,
+    private prefsStorage: PrefsStorage,
   ) {}
 
   /**
@@ -36,11 +39,11 @@ export class LocaleManagerService {
       Object.values(Locales).find((lang) => locale.startsWith(lang)) ??
         Locales.EN,
     );
-    localStorage.setItem('LanguageManager:locale', locale);
+    this.prefsStorage.set(this.STORAGE_KEY, locale);
   }
 
   private async detectLocale(): Promise<string> {
-    const preferredLanguage = localStorage.getItem('LanguageManager:locale');
+    const preferredLanguage = this.prefsStorage.get<string>(this.STORAGE_KEY);
     if (preferredLanguage) {
       return preferredLanguage;
     }
@@ -54,6 +57,6 @@ export class LocaleManagerService {
   }
 
   getLocale() {
-    return localStorage.getItem('LanguageManager:locale');
+    return this.prefsStorage.get<string>(this.STORAGE_KEY) ?? Locales.EN;
   }
 }

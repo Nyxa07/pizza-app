@@ -11,20 +11,13 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
 import { LowerCasePipe } from '@angular/common';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { debounceTime, first } from 'rxjs';
 import { DoughType } from '../enums/dough-type.enum';
-import { DoughCalculatorService } from '../services/dough-calculator.service';
-
-export interface PoolishPizzaFormData {
-  nbPizzas: number;
-  doughType: DoughType;
-  yeastType: YeastType;
-  hydrationRatio: number;
-  temperature: number;
-  poolishRatio?: number;
-  rtRestTime: number;
-  coldRestTime: number;
-}
+import {
+  DoughFormStateService,
+  DoughInput,
+} from '../services/dough-form-state.service';
+import { DEFAULT_INPUT } from '../services/dough-form-state.service';
 
 @Component({
   selector: 'app-dough-form',
@@ -43,58 +36,15 @@ export interface PoolishPizzaFormData {
   standalone: true,
 })
 export class DoughFormComponent implements OnInit {
-  protected storedData = localStorage.getItem('PoolishPizzaForm:formData');
-  protected formBuilder = inject(FormBuilder);
-  protected form = this.formBuilder.group({
-    nbPizzas: [5, [Validators.required, Validators.min(1)]],
-    doughType: [DoughType.DIRECT, [Validators.required]],
-    yeastType: [YeastType.DRY_ACTIVE, [Validators.required]],
-    hydrationRatio: [
-      0.62,
-      [Validators.required, Validators.min(0), Validators.max(1)],
-    ],
-    temperature: [
-      20,
-      [Validators.required, Validators.min(0), Validators.max(36)],
-    ],
-    poolishRatio: [
-      0.3,
-      [Validators.required, Validators.min(0), Validators.max(0.6)],
-    ],
-    rtRestTime: [
-      1,
-      [Validators.required, Validators.min(1), Validators.max(24)],
-    ],
-    coldRestTime: [
-      16,
-      [Validators.required, Validators.min(0), Validators.max(24)],
-    ],
-  });
+  protected form = this.formBuilder.group<DoughInput>(DEFAULT_INPUT);
 
-  protected doughCalculatorService = inject(DoughCalculatorService);
-  protected onChange = output<PoolishPizzaFormData>();
-
-  constructor() {
-    this.form.valueChanges
-      .pipe(takeUntilDestroyed(), debounceTime(250))
-      .subscribe((value) => {
-        if (this.form.invalid) {
-          return;
-        }
-        localStorage.setItem(
-          'PoolishPizzaForm:formData',
-          JSON.stringify(value),
-        );
-        this.onChange.emit(value as PoolishPizzaFormData);
-      });
-
+  constructor(
+    private formBuilder: FormBuilder,
+    private state: DoughFormStateService,
+  ) {
     this.form
       .get('doughType')
-      ?.valueChanges.pipe(
-        debounceTime(150),
-        takeUntilDestroyed(),
-        distinctUntilChanged(),
-      )
+      ?.valueChanges.pipe(takeUntilDestroyed())
       .subscribe((value) => {
         if (value === DoughType.DIRECT) {
           this.form.get('poolishRatio')?.disable();
@@ -103,14 +53,18 @@ export class DoughFormComponent implements OnInit {
         }
       });
 
-    this.form.patchValue(
-      this.storedData ? JSON.parse(this.storedData) : this.form.value,
-    );
+    this.state.input$.pipe(first(), takeUntilDestroyed()).subscribe((v) => {
+      this.form.patchValue(v);
+    });
+
+    this.form.valueChanges
+      .pipe(debounceTime(50), takeUntilDestroyed())
+      .subscribe((v) => {
+        this.state.update(v as DoughInput);
+      });
   }
 
-  ngOnInit() {
-    this.onChange.emit(this.form.value as PoolishPizzaFormData);
-  }
+  ngOnInit() {}
 
   protected pinFormatter(value: number) {
     return `${value}`;

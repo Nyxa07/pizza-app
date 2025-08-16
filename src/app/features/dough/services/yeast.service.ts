@@ -1,31 +1,23 @@
 import { Injectable } from '@angular/core';
 import { YeastType } from 'src/app/features/dough/enums/yeast-type.enum';
-import {
-  DRY_ACTIVE_YEAST_COEF,
-  DRY_INSTANT_YEAST_COEF,
-  FRESH_YEAST_COEF,
-  BASE_TEMPERATURE,
-  TEMPERATURE_FACTOR_COEF,
-  YEAST_COLD_COEF,
-  REFERENCE_HYDRATION,
-  HYDRATION_FACTOR_COEF,
-  SUGAR_FACTOR_COEF,
-  MINIMUM_YEAST_PERCENTAGE,
-  MAXIMUM_YEAST_PERCENTAGE,
-  K_FACTOR_CONSTANTS,
-  SALT_INHIBITION_COEF,
-} from '../constants';
+import { DoughConfigService } from './dough-config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class YeastService {
+  constructor(private doughConfigService: DoughConfigService) {}
+
   private tEquivalent(tHot: number, tCold: number) {
-    return tHot + tCold * YEAST_COLD_COEF;
+    return tHot + tCold * this.doughConfigService.constants.yeast.coldCoef;
   }
 
   private temperatureFactor(temperature: number) {
-    return 1 + TEMPERATURE_FACTOR_COEF * (temperature - BASE_TEMPERATURE);
+    return (
+      1 +
+      this.doughConfigService.constants.yeast.temperatureFactorCoef *
+        (temperature - this.doughConfigService.constants.yeast.baseTemperature)
+    );
   }
 
   /**
@@ -35,25 +27,26 @@ export class YeastService {
    * k(t) = K_MIN + (K_MAX - K_MIN) / [1 + (t / REF)^α]
    */
   private kFactor(equivalentTime: number): number {
-    const { K_MIN, K_MAX, REF_FERM_TIME, K_EXPONENT } = K_FACTOR_CONSTANTS;
+    const { kMin, kMax, refFermTime, kExponent } =
+      this.doughConfigService.constants.yeast.kFactor;
     const logisticPart =
-      1 / (1 + Math.pow(equivalentTime / REF_FERM_TIME, K_EXPONENT));
-    return K_MIN + (K_MAX - K_MIN) * logisticPart;
+      1 / (1 + Math.pow(equivalentTime / refFermTime, kExponent));
+    return kMin + (kMax - kMin) * logisticPart;
   }
 
   private convertYeastType(weight: number, yeastType: YeastType): number {
     switch (yeastType) {
       case YeastType.FRESH:
         // Fresh yeast: more water, less concentrated
-        return weight * FRESH_YEAST_COEF;
+        return weight * this.doughConfigService.constants.yeast.freshCoef;
 
       case YeastType.DRY_ACTIVE:
         // Active dry yeast: requires activation
-        return weight * DRY_ACTIVE_YEAST_COEF;
+        return weight * this.doughConfigService.constants.yeast.dryActiveCoef;
 
       case YeastType.DRY_INSTANT:
         // Instant dry yeast: reference (1:1)
-        return weight * DRY_INSTANT_YEAST_COEF;
+        return weight * this.doughConfigService.constants.yeast.dryInstantCoef;
 
       default:
         return weight;
@@ -62,20 +55,30 @@ export class YeastService {
 
   private hydrationFactor(hydration: number) {
     // Hydration is expressed as a decimal (e.g. 0.65 for 65 %)
-    return 1 + HYDRATION_FACTOR_COEF * (hydration - REFERENCE_HYDRATION);
+    return (
+      1 +
+      this.doughConfigService.constants.yeast.hydrationFactorCoef *
+        (hydration - this.doughConfigService.constants.yeast.referenceHydration)
+    );
   }
 
   private sugarFactor(sugar: number, flour: number) {
     // Baker's percentage: sugar / flour
     const sugarRatio = sugar / flour;
-    return 1 + SUGAR_FACTOR_COEF * sugarRatio;
+    return (
+      1 + this.doughConfigService.constants.yeast.sugarFactorCoef * sugarRatio
+    );
   }
 
   private saltFactor(salt: number, flour: number) {
     // Baker's percentage: salt / flour
     const saltRatio = salt / flour;
     // Inhibition factor: <1 slows fermentation; ensure it never reaches 0
-    return 1 / (1 + SALT_INHIBITION_COEF * saltRatio);
+    return (
+      1 /
+      (1 +
+        this.doughConfigService.constants.yeast.saltInhibitionCoef * saltRatio)
+    );
   }
 
   private computePercentYeast(
@@ -98,8 +101,10 @@ export class YeastService {
   }
 
   private normalizeYeastWeight(yeastWeight: number, flour: number) {
-    const min = (MINIMUM_YEAST_PERCENTAGE / 100) * flour;
-    const max = (MAXIMUM_YEAST_PERCENTAGE / 100) * flour;
+    const min =
+      (this.doughConfigService.constants.yeast.minimumPercentage / 100) * flour;
+    const max =
+      (this.doughConfigService.constants.yeast.maximumPercentage / 100) * flour;
     const clamped = Math.max(min, Math.min(yeastWeight, max));
     return Math.round(clamped * 100) / 100; // round to 0.01 g
   }

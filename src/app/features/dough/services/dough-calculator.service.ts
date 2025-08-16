@@ -1,13 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import {
-  BASE_HONEY_AMOUNT,
-  HONEY_RATIO,
-  PIZZA_WEIGHT,
-  SALT_RATIO,
-} from '../constants';
-import { PoolishPizzaFormData } from '../dough-form/dough-form.component';
 import { YeastService } from 'src/app/features/dough/services/yeast.service';
 import { DoughType } from '../enums/dough-type.enum';
+import { DoughInput } from './dough-form-state.service';
+import { DoughConfigService } from './dough-config.service';
 
 interface Quantity {
   yeast: number;
@@ -30,7 +25,10 @@ export interface DoughResult {
   providedIn: 'root',
 })
 export class DoughCalculatorService {
-  private yeastService = inject(YeastService);
+  constructor(
+    private doughConfigService: DoughConfigService,
+    private yeastService: YeastService,
+  ) {}
 
   // Compute the flour (and water) weight used in the poolish.
   // Definition: `ratio` is the fraction of TOTAL FLOUR that will go into the poolish.
@@ -47,14 +45,19 @@ export class DoughCalculatorService {
     return Math.round(value * 100) / 100; // 0.01 g precision for yeast
   }
 
-  compute(data: PoolishPizzaFormData): DoughResult {
+  compute(data: DoughInput): DoughResult {
     // Clamp user inputs to safe range
     const hydration = Math.max(0, Math.min(data.hydrationRatio, 1));
-    const poolishRatio = Math.max(0, Math.min(data.poolishRatio ?? 0, 0.6));
+    const hasPoolish = data.doughType === DoughType.POOLISH;
+    const poolishRatio = hasPoolish
+      ? Math.max(0, Math.min(data.poolishRatio ?? 0, 0.6))
+      : 0;
 
     // Ingredients
-    const flourPerPizza = PIZZA_WEIGHT / (1 + hydration);
-    const waterPerPizza = PIZZA_WEIGHT - flourPerPizza;
+    const flourPerPizza =
+      this.doughConfigService.constants.pizzaWeight / (1 + hydration);
+    const waterPerPizza =
+      this.doughConfigService.constants.pizzaWeight - flourPerPizza;
     const totalFlour = data.nbPizzas * flourPerPizza;
     const totalWater = data.nbPizzas * waterPerPizza;
     const poolishTotal = this.computePoolishQuantity(
@@ -64,13 +67,10 @@ export class DoughCalculatorService {
     const poolishQuantity = poolishTotal / 2;
 
     // Salt: baker's percentage
-    const salt = SALT_RATIO * totalFlour;
+    const salt = this.doughConfigService.constants.saltRatio * totalFlour;
     const flourPerDough = totalFlour - poolishQuantity;
     const waterPerDough = totalWater - poolishQuantity;
-    const honey = Math.max(
-      BASE_HONEY_AMOUNT,
-      BASE_HONEY_AMOUNT + (data.nbPizzas - 60) * HONEY_RATIO,
-    );
+    const honey = this.doughConfigService.constants.honeyRatio * totalFlour;
 
     const yeast =
       data.doughType === DoughType.POOLISH
@@ -106,21 +106,20 @@ export class DoughCalculatorService {
         honey: this.round(honey),
       },
 
-      poolish:
-        data.doughType === DoughType.POOLISH
-          ? {
-              flour: this.round(poolishQuantity),
-              water: this.round(poolishQuantity),
-              yeast: yeastRounded,
-              salt: 0,
-              coldRestTime: data.coldRestTime,
-              rtRestTime: data.rtRestTime,
-              honey: this.round(honey),
-            }
-          : null,
+      poolish: hasPoolish
+        ? {
+            flour: this.round(poolishQuantity),
+            water: this.round(poolishQuantity),
+            yeast: yeastRounded,
+            salt: 0,
+            coldRestTime: data.coldRestTime,
+            rtRestTime: data.rtRestTime,
+            honey: this.round(honey),
+          }
+        : null,
 
       dough: {
-        yeast: data.doughType === DoughType.POOLISH ? 0 : yeastRounded,
+        yeast: hasPoolish ? 0 : yeastRounded,
         flour: this.round(flourPerDough),
         water: this.round(waterPerDough),
         salt: this.round(salt),
@@ -128,7 +127,7 @@ export class DoughCalculatorService {
         rtRestTime: data.rtRestTime,
         honey: this.round(honey),
       },
-      pizzaBallWeight: PIZZA_WEIGHT,
+      pizzaBallWeight: this.doughConfigService.constants.pizzaWeight,
     };
 
     return result;

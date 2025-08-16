@@ -31,6 +31,21 @@
     <ion-item>
       <ion-select
         mode="ios"
+        [label]="'dough.form.poolishRatio' | translate"
+        formControlName="poolishRatio"
+        [cancelText]="'common.actions.cancel' | translate"
+        [okText]="'common.actions.ok' | translate"
+      >
+        @for (poolishRatio of range(30, 60); track poolishRatio) {
+          <ion-select-option [value]="poolishRatio / 100">
+            {{ poolishRatio }}%
+          </ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select
+        mode="ios"
         [label]="'dough.form.yeastType' | translate"
         formControlName="yeastType"
         [cancelText]="'common.actions.cancel' | translate"
@@ -91,23 +106,7 @@
         }
       </ion-select>
     </ion-item>
-    @if (this.form.get("poolishRatio")?.enabled) {
-      <ion-item>
-        <ion-select
-          mode="ios"
-          [label]="'dough.form.poolishRatio' | translate"
-          formControlName="poolishRatio"
-          [cancelText]="'common.actions.cancel' | translate"
-          [okText]="'common.actions.ok' | translate"
-        >
-          @for (poolishRatio of range(30, 60); track poolishRatio) {
-            <ion-select-option [value]="poolishRatio / 100">
-              {{ poolishRatio }}%
-            </ion-select-option>
-          }
-        </ion-select>
-      </ion-item>
-    }
+
     <ion-item>
       <ion-select
         mode="ios"

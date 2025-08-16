@@ -1,3 +1,4 @@
+@let result = result$ | async;
 @if (result) {
   <table>
     <thead>
@@ -5,7 +6,7 @@
         <th>
           {{ "dough.calculations.ingredients" | translate }}
         </th>
-        @if (result.poolish) {
+        @if (result?.poolish) {
           <th>{{ "dough.calculations.poolish" | translate }}</th>
         }
         <th>{{ "dough.calculations.dough" | translate }}</th>
@@ -15,55 +16,55 @@
     <tbody>
       <tr>
         <th>{{ "dough.ingredients.flour" | translate }}</th>
-        @if (result.poolish) {
-          <td>{{ result.poolish.flour }}</td>
+        @if (result?.poolish) {
+          <td>{{ result?.poolish?.flour }}</td>
         }
-        <td>{{ result.dough.flour }}</td>
-        <td>{{ result.total.flour }}</td>
+        <td>{{ result?.dough?.flour }}</td>
+        <td>{{ result?.total?.flour }}</td>
       </tr>
       <tr>
         <th>{{ "dough.ingredients.water" | translate }}</th>
-        @if (result.poolish) {
-          <td>{{ result.poolish.water }}</td>
+        @if (result?.poolish) {
+          <td>{{ result?.poolish?.water }}</td>
         }
-        <td>{{ result.dough.water }}</td>
-        <td>{{ result.total.water }}</td>
+        <td>{{ result?.dough?.water }}</td>
+        <td>{{ result?.total?.water }}</td>
       </tr>
       <tr>
         <th>{{ "dough.ingredients.yeast" | translate }}</th>
-        @if (result.poolish) {
-          <td>{{ result.poolish.yeast }}</td>
+        @if (result?.poolish) {
+          <td>{{ result?.poolish?.yeast }}</td>
         }
-        <td>{{ result.dough.yeast }}</td>
-        <td>{{ result.total.yeast }}</td>
+        <td>{{ result?.dough?.yeast }}</td>
+        <td>{{ result?.total?.yeast }}</td>
       </tr>
       <tr>
         <th>{{ "dough.ingredients.salt" | translate }}</th>
-        @if (result.poolish) {
-          <td>{{ result.poolish.salt }}</td>
+        @if (result?.poolish) {
+          <td>{{ result?.poolish?.salt }}</td>
         }
-        <td>{{ result.dough.salt }}</td>
-        <td>{{ result.total.salt }}</td>
+        <td>{{ result?.dough?.salt }}</td>
+        <td>{{ result?.total?.salt }}</td>
       </tr>
       <tr>
         <th>{{ "dough.ingredients.honey" | translate }}</th>
-        @if (result.poolish) {
-          <td>{{ result.poolish.honey }}</td>
+        @if (result?.poolish) {
+          <td>{{ result?.poolish?.honey }}</td>
         }
-        <td>{{ result.dough.honey }}</td>
-        <td>{{ result.total.honey }}</td>
+        <td>{{ result?.dough?.honey }}</td>
+        <td>{{ result?.total?.honey }}</td>
       </tr>
       <tr>
         <th>{{ "dough.calculations.total" | translate }}</th>
-        @if (result.poolish) {
+        @if (result?.poolish) {
           <td>
             {{
               round(
-                result.poolish.flour +
-                  result.poolish.water +
-                  result.poolish.yeast +
-                  result.poolish.honey +
-                  result.poolish.salt
+                (result?.poolish?.flour ?? 0) +
+                  (result?.poolish?.water ?? 0) +
+                  (result?.poolish?.yeast ?? 0) +
+                  (result?.poolish?.honey ?? 0) +
+                  (result?.poolish?.salt ?? 0)
               )
             }}
           </td>
@@ -71,21 +72,21 @@
         <td>
           {{
             round(
-              result.dough.flour +
-                result.dough.water +
-                result.dough.yeast +
-                result.dough.honey +
-                result.dough.salt
+              (result?.dough?.flour ?? 0) +
+                (result?.dough?.water ?? 0) +
+                (result?.dough?.yeast ?? 0) +
+                (result?.dough?.honey ?? 0) +
+                (result?.dough?.salt ?? 0)
             )
           }}
         </td>
         <td>
           {{
-            round(result.total.flour) +
-              result.total.water +
-              round(result.total.yeast) +
-              round(result.total.honey) +
-              round(result.total.salt)
+            round(result?.total?.flour ?? 0) +
+              (result?.total?.water ?? 0) +
+              round(result?.total?.yeast ?? 0) +
+              round(result?.total?.honey ?? 0) +
+              round(result?.total?.salt ?? 0)
           }}
         </td>
       </tr>

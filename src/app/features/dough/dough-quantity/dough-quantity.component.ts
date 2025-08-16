@@ -1,22 +1,24 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { DoughResult } from '../services/dough-calculator.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { LocaleManagerService } from '../../locales/services/locale-manager.service';
+import { DoughFormStateService } from '../services/dough-form-state.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dough-quantity',
   templateUrl: './dough-quantity.component.html',
   styleUrls: ['./dough-quantity.component.scss'],
-  imports: [TranslateModule],
+  imports: [TranslateModule, AsyncPipe],
   standalone: true,
 })
 export class DoughQuantityComponent implements OnInit {
-  @Input({ required: true }) result!: DoughResult | null;
-
-  protected localeManager = inject(LocaleManagerService);
   protected currentLocale = this.localeManager.getLocale();
+  protected result$ = this.resultDataStore.result$;
 
-  constructor() {}
+  constructor(
+    private localeManager: LocaleManagerService,
+    private resultDataStore: DoughFormStateService,
+  ) {}
   ngOnInit() {}
 
   round(value: number) {

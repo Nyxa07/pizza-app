@@ -12,11 +12,15 @@ import {
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
-import { provideTranslateService, TranslateService } from '@ngx-translate/core';
+import {
+  provideTranslateService,
+  TranslateCompiler,
+} from '@ngx-translate/core';
 import { provideHttpClient } from '@angular/common/http';
 import { inject, provideAppInitializer } from '@angular/core';
 import { LocaleManagerService } from './app/features/locales/services/locale-manager.service';
 import { provideMultiTranslateLoader } from './app/features/locales/services/translation.loader';
+import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -27,6 +31,10 @@ bootstrapApplication(AppComponent, {
     provideTranslateService({
       loader: provideMultiTranslateLoader(),
       fallbackLang: 'en',
+      compiler: {
+        provide: TranslateCompiler,
+        useClass: TranslateMessageFormatCompiler,
+      },
     }),
     provideAppInitializer(() => {
       const localeInitService = inject(LocaleManagerService);

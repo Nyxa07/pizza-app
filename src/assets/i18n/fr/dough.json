@@ -34,11 +34,11 @@
   },
   "recipe": {
     "quantity": {
-      "flour": "<strong>{{ quantity }} g</strong> de farine",
-      "water": "<strong>{{ quantity }} g</strong> d'eau",
-      "yeast": "<strong>{{ quantity }} g</strong> de levure",
-      "honey": "<strong>{{ quantity }} g</strong> de miel",
-      "salt": "<strong>{{ quantity }} g</strong> de sel"
+      "flour": "<strong>{ quantity } g</strong> de farine",
+      "water": "<strong>{ quantity } g</strong> d'eau",
+      "yeast": "<strong>{ quantity } g</strong> de levure",
+      "honey": "<strong>{ quantity } g</strong> de miel",
+      "salt": "<strong>{ quantity } g</strong> de sel"
     },
     "direct": {
       "title": "Préparation de la pâte",
@@ -51,7 +51,7 @@
       "step6Description": "Une fois que la pâte à une belle structure, former une boule et laisser la reposer pendant 25 min sous un saladier (la pâte va se tendre et devenir plus lisse)",
       "step7Description": "Procéder à quelques rabats sur la pâte et lui donner une belle forme de boule (bien lisse et qui ne colle plus)",
       "step8Description": "Déposer la boule dans un récipient hermétique et la laisser reposer 24 heures",
-      "step9Description": "Récupérer la pâte et, avec un coupe-pâte ou une spatule, former des pâtons (bien tendus) d’environ <strong>{{ pizzaWeight }} g</strong>",
+      "step9Description": "Récupérer la pâte et, avec un coupe-pâte ou une spatule, former des pâtons (bien tendus) d’environ <strong>{ pizzaWeight } g</strong>",
       "step10Description": "Déposer les pâtons dans un plat en laissant de l’espace entre chaque (ils vont encore grossir)",
       "step11Description": "Fermer le plat ou le couvrir d’un film plastique et laisser reposer 3 heures"
     },
@@ -62,7 +62,7 @@
         "step1Description": "Peser tous les ingrédients :",
         "ingredientsList": "liste des ingrédients",
         "step2Description": "Dans un grand bol, délayer la levure dans l'eau et ajouter le miel",
-        "step3Description": "Ajouter la farine et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène, puis laisser reposer <strong>{{ rtRestTime }} heure(s)</strong> à température ambiante couvert d'un film plastique, puis <strong>{{ coldRestTime }} heure(s)</strong> au réfrigérateur"
+        "step3Description": "Ajouter la farine et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène, puis laisser reposer <strong>{ rtRestTime } heure(s)</strong> à température ambiante couvert d'un film plastique, puis <strong>{ coldRestTime } heure(s)</strong> au réfrigérateur"
       },
       "dough": {
         "title": "PRÉPARATION DE LA PÂTE",
@@ -78,7 +78,7 @@
         "step8Description": "Faire reposer 10-15 min sous le saladier",
         "step9Description": "Reformer une belle boule et laisser reposer encore 1H dans un récipient hermétique",
         "step10Description": "Mettre une fine couche de semoule fine dans un plat",
-        "step11Description": "Récupérer la pâte et avec un coupe pâte ou une spatule former des pâtons (bien tendu) d'environ <strong>{{ pizzaWeight }} g</strong>",
+        "step11Description": "Récupérer la pâte et avec un coupe pâte ou une spatule former des pâtons (bien tendu) d'environ <strong>{ pizzaWeight } g</strong>",
         "step12Description": "Déposer les pâtons dans le plat en laissant de l'espace entre eux (ils vont encore grossir)",
         "step13Description": "Fermer le plat ou mettre un film plastique sur celui-ci et laisser reposer entre 1H & 3H",
         "tipsTitle": "💡 Tips :",

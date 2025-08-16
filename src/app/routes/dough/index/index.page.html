@@ -33,7 +33,7 @@
         </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <app-dough-form (onChange)="formData.set($event)"></app-dough-form>
+        <app-dough-form></app-dough-form>
       </ion-card-content>
     </ion-card>
 
@@ -47,18 +47,12 @@
         </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        @if (result()) {
-        <app-dough-quantity [result]="result()!"></app-dough-quantity>
-        }
+        <app-dough-quantity></app-dough-quantity>
       </ion-card-content>
     </ion-card>
   </ion-segment-content>
 
   <ion-segment-content id="recipe">
-    @if (result()?.poolish) {
-    <app-dough-poolish-recipe [result]="result()!"></app-dough-poolish-recipe>
-    } @else {
-    <app-dough-direct-recipe [result]="result()!"></app-dough-direct-recipe>
-    }
+    <app-dough-recipe></app-dough-recipe>
   </ion-segment-content>
 </ion-segment-view>
