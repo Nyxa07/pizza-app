@@ -1,5 +1,20 @@
 {
   "app": {
+    "menu": {
+      "settings": "Paramètres"
+    },
+    "unit": {
+      "mass": {
+        "selector": {
+          "title": "Unité de masse"
+        }
+      },
+      "temperature": {
+        "selector": {
+          "title": "Unité de température"
+        }
+      }
+    },
     "common": {
       "actions": {
         "save": "Sauvegarder",
@@ -61,7 +76,7 @@
       "recipe": {
         "quantity": {
           "flour": "<strong>{{ quantity }} g</strong> de farine",
-          "water": "<strong>{{ quantity }} ml</strong> d'eau",
+          "water": "<strong>{{ quantity }} g</strong> d'eau",
           "yeast": "<strong>{{ quantity }} g</strong> de levure",
           "honey": "<strong>{{ quantity }} g</strong> de miel",
           "salt": "<strong>{{ quantity }} g</strong> de sel"
@@ -120,39 +135,38 @@
         }
       }
     },
-    "navigation": {
-      "tabs": {
-        "poolishStyle": "Style poolish",
-        "tab2": "Onglet 2",
-        "tab3": "Onglet 3"
+    "routes": {
+      "dough": {
+        "index": {
+          "title": "Pâte à pizza",
+          "segments": {
+            "calculator": "Calculateur",
+            "recipe": "Recette"
+          },
+          "calculator": {
+            "title": "Configuration",
+            "subtitle": "Configurez votre recette de pizzas"
+          },
+          "ingredients": {
+            "title": "Ingrédients",
+            "subtitle": "Quantité d'ingrédients en grammes (g)"
+          }
+        }
       },
-      "header": {
-        "title": "App Pizza",
-        "language": "Langue"
-      }
-    },
-    "tab1": {
-      "segments": {
-        "data": "Données",
-        "recipe": "Préparation"
-      },
-      "configuration": {
-        "title": "Configuration",
-        "subtitle": "Configurez votre recette de pizzas"
-      },
-      "ingredients": {
-        "title": "Ingrédients",
-        "subtitle": "Quantités des ingrédients en grammes (g)"
+      "settings": {
+        "index": {
+          "title": "Paramètres"
+        }
       }
     },
     "language": {
       "selector": {
         "title": "Choisir la langue",
-        "english": "Anglais",
-        "french": "Français",
-        "italian": "Italien",
-        "spanish": "Espagnol",
-        "german": "Allemand"
+        "en": "Anglais",
+        "fr": "Français",
+        "it": "Italien",
+        "es": "Espagnol",
+        "de": "Allemand"
       }
     },
     "faq": {

@@ -1,5 +1,8 @@
 {
   "app": {
+    "menu": {
+      "settings": "Configuración"
+    },
     "common": {
       "actions": {
         "save": "Guardar",
@@ -67,49 +70,49 @@
           "salt": "<strong>{{ quantity }} g</strong> de sal"
         },
         "direct": {
-          "title": "Préparation de la pâte",
-          "subtitle": "Pétrissage et formation",
-          "step1Description": "Peser tous les ingrédients",
-          "step2Description": "Mélanger la levure et le miel à l’eau",
-          "step3Description": "Ajouter le sel et la farine et mélanger à la cuillère en bois",
-          "step4Description": "Une fois que tous les ingrédients sont bien mélangés et que l’on commence à avoir une boule, on peut la déposer sur le plan de travail",
-          "step5Description": "Terminer le pétrissage à la main environ 10 min (possibilité d’utiliser un robot pâtissier avec son crochet pétrisseur). Bien pétrir pour hydrater correctement la farine",
-          "step6Description": "Une fois que la pâte à une belle structure, former une boule et laisser la reposer pendant 25 min sous un saladier (la pâte va se tendre et devenir plus lisse)",
-          "step7Description": "Procéder à quelques rabats sur la pâte et lui donner une belle forme de boule (bien lisse et qui ne colle plus)",
-          "step8Description": "Déposer la boule dans un récipient hermétique et la laisser reposer 24 heures",
-          "step9Description": "Récupérer la pâte et, avec un coupe-pâte ou une spatule, former des pâtons (bien tendus) d’environ <strong>{{ pizzaWeight }} g</strong>",
-          "step10Description": "Déposer les pâtons dans un plat en laissant de l’espace entre chaque (ils vont encore grossir)",
-          "step11Description": "Fermer le plat ou le couvrir d’un film plastique et laisser reposer 3 heures"
+          "title": "Preparación de la masa",
+          "subtitle": "Amasado y formado",
+          "step1Description": "Pesar todos los ingredientes",
+          "step2Description": "Mezclar la levadura y la miel en el agua",
+          "step3Description": "Añadir la sal y la harina y mezclar con una cuchara de madera",
+          "step4Description": "Una vez que todos los ingredientes estén bien mezclados y empiece a formarse una bola, ponerla en la superficie de trabajo",
+          "step5Description": "Terminar el amasado a mano unos 10 min (posibilidad de usar una amasadora con gancho amasador). Amasar bien para hidratar correctamente la harina",
+          "step6Description": "Una vez que la masa tenga una estructura bonita, formar una bola y dejarla reposar 25 min bajo un bol (la masa se tensará y se volverá más lisa)",
+          "step7Description": "Hacer algunos pliegues en la masa y darle una forma de bola bonita (bien lisa y que no se pegue más)",
+          "step8Description": "Poner la bola en un recipiente hermético y dejarla reposar 24 horas",
+          "step9Description": "Recuperar la masa y, con un cortador de masa o una espátula, formar bolas de masa (bien tensas) de aproximadamente <strong>{{ pizzaWeight }} g</strong>",
+          "step10Description": "Poner las bolas de masa en un plato dejando espacio entre cada una (van a seguir creciendo)",
+          "step11Description": "Cerrar el plato o cubrirlo con film transparente y dejar reposar 3 horas"
         },
         "poolish": {
           "poolish": {
             "title": "PREPARACIÓN DE LA POOLISH",
-            "subtitle": "Primer paso: preparación de la masa madre",
+            "subtitle": "Primer paso: preparación de la pre-fermentación",
             "step1Description": "Pesar todos los ingredientes:",
             "ingredientsList": "lista de ingredientes",
-            "step2Description": "En un bol grande, disolver la levadura en agua y añadir miel",
-            "step3Description": "Añadir harina y mezclar con una cuchara de madera hasta obtener una mezcla homogénea, luego dejar reposar <strong>{{ rtRestTime }} hora(s)</strong> a temperatura ambiente cubierto con film transparente, luego <strong>{{ coldRestTime }} horas</strong> en el frigorífico"
+            "step2Description": "En un bol grande, disolver la levadura en agua y añadir la miel",
+            "step3Description": "Añadir la harina y mezclar con una cuchara de madera hasta obtener una mezcla homogénea, luego dejar reposar <strong>{{ rtRestTime }} hora(s)</strong> a temperatura ambiente cubierto con film transparente, luego <strong>{{ coldRestTime }} hora(s)</strong> en el frigorífico"
           },
           "dough": {
             "title": "PREPARACIÓN DE LA MASA",
             "subtitle": "Segundo paso: amasado y formado",
-            "step1Description": "Sacar la poolish 1 hora antes de usar",
-            "step2Description": "Pesar las cantidades a añadir a la poolish:",
+            "step1Description": "Sacar la poolish 1 hora antes del uso",
+            "step2Description": "Pesar las cantidades a añadir en la poolish:",
             "ingredientsList": "lista de ingredientes",
-            "step3Description": "En el bol de la poolish, añadir agua y sal. Mezclar con cuchara hasta absorber el agua",
-            "step4Description": "Añadir harina poco a poco y mezclar con cuchara",
-            "step5Description": "Cuando ya no sea posible usar cuchara, transferir la masa a la superficie de trabajo",
+            "step3Description": "En el bol de la poolish, añadir el agua y la sal. Mezclar con la cuchara hasta la absorción del agua",
+            "step4Description": "Añadir poco a poco la harina y mezclar con la cuchara",
+            "step5Description": "Cuando ya no sea posible usar una cuchara, transferir la masa a la superficie de trabajo",
             "step6Description": "Trabajar la masa amasándola, la harina debe estar completamente integrada",
             "step7Description": "Hacer algunos pliegues con la masa y formar una bola bonita (suave y flexible)",
-            "step8Description": "Dejar reposar 10-15 minutos bajo un bol",
+            "step8Description": "Dejar reposar 10-15 min bajo el bol",
             "step9Description": "Reformar una bola bonita y dejar reposar otra 1 hora en un recipiente hermético",
             "step10Description": "Poner una capa fina de sémola fina en un plato",
-            "step11Description": "Recuperar la masa y con un cortador de masa o espátula formar bolas de masa (bien estiradas) de aproximadamente",
-            "step12Description": "Colocar las bolas de masa en el plato dejando espacio entre cada una (todavía crecerán)",
+            "step11Description": "Recuperar la masa y con un cortador de masa o espátula formar bolas de masa (bien tensas) de aproximadamente <strong>{{ pizzaWeight }} g</strong>",
+            "step12Description": "Poner las bolas de masa en el plato dejando espacio entre ellas (van a seguir creciendo)",
             "step13Description": "Cerrar el plato o poner film transparente sobre él y dejar reposar entre 1 y 3 horas",
             "tipsTitle": "💡 Consejos:",
-            "tipsDescription": "Si la masa se pega demasiado, formar una bola y dejar reposar 10 minutos bajo un bol",
-            "successMessage": "🎉 ¡Y ahí tienes, están listos para ser transformados en PIZZA!"
+            "tipsDescription": "Si la masa se pega demasiado, formar una bola y dejar reposar 10 min bajo un bol",
+            "successMessage": "🎉 ¡Y ya está, están listos para ser transformados en PIZZA!"
           }
         },
         "storage": {
@@ -120,29 +123,28 @@
         }
       }
     },
-    "navigation": {
-      "tabs": {
-        "poolishStyle": "Estilo poolish",
-        "tab2": "Pestaña 2",
-        "tab3": "Pestaña 3"
+    "routes": {
+      "dough": {
+        "index": {
+          "title": "Masa de Pizza",
+          "segments": {
+            "calculator": "Calculadora",
+            "recipe": "Receta"
+          },
+          "calculator": {
+            "title": "Configuración",
+            "subtitle": "Configura tu receta de pizzas"
+          },
+          "ingredients": {
+            "title": "Ingredientes",
+            "subtitle": "Cantidades de ingredientes en gramos (g)"
+          }
+        }
       },
-      "header": {
-        "title": "App Pizza",
-        "language": "Idioma"
-      }
-    },
-    "tab1": {
-      "segments": {
-        "data": "Datos",
-        "recipe": "Preparación"
-      },
-      "configuration": {
-        "title": "Configuración",
-        "subtitle": "Configura tu receta de pizzas"
-      },
-      "ingredients": {
-        "title": "Ingredientes",
-        "subtitle": "Cantidades de ingredientes en gramos (g)"
+      "settings": {
+        "index": {
+          "title": "Configuración"
+        }
       }
     },
     "language": {
@@ -159,96 +161,92 @@
       "title": "FAQ",
       "questions": [
         {
-          "title": "La méthode Directe",
-          "subtitle": "Préparation directe de la pâte",
+          "title": "El Método Directo",
+          "subtitle": "Preparación directa de la masa",
           "answers": [
-            "C'est une méthode de préparation plus simple que les méthodes indirectes",
-            "On incorpore directement tous les ingrédients et après un repos plus ou moins long on peut l'utiliser"
+            "Es un método de preparación más simple que los métodos indirectos.",
+            "Se incorporan directamente todos los ingredientes y después de un reposo más o menos largo se puede usar."
           ]
         },
         {
           "title": "La Poolish",
-          "subtitle": "La poolish est une pâte liquide à base de farine, d'eau et de levure",
+          "subtitle": "La poolish es una masa líquida a base de harina, agua y levadura",
           "answers": [
-            "La poolish est une pré-fermentation de la pâte qui repose pendant plusieurs heures avant d'être utilisée pour la pâte à pizza.",
-            "Elle se prépare en mélangeant 1 part de farine et 1 part d'eau ainsi qu'une petite quantité de levure.",
-            "C'est une méthode indirecte de préparation de pâte à pizza 🍕"
+            "La poolish es una pre-fermentación de la masa que reposa durante varias horas antes de ser usada para la masa de pizza.",
+            "Se prepara mezclando 1 parte de harina y 1 parte de agua así como una pequeña cantidad de levadura.",
+            "Es un método indirecto de preparación de masa de pizza."
           ]
         },
         {
           "title": "La Biga",
-          "subtitle": "La Biga est une préparation dite sèche à base de farine, d'eau et de levure",
+          "subtitle": "La Biga es una preparación llamada seca a base de harina, agua y levadura",
           "answers": [
-            "La Biga est une pré-fermentation de la pâte qui repose pendant plusieurs heures avant d'être utilisée pour la pâte à pizza.",
-            "BlaBlaBla, encore jamais fait donc je ne vais pas mettre n'importe quoi 😉"
+            "La Biga es una pre-fermentación de la masa que reposa durante varias horas antes de ser usada para la masa de pizza.",
+            "BlaBlaBlá, nunca hecho así que no voy a poner cualquier cosa 😉"
           ]
         },
         {
-          "title": " Les Levures",
-          "subtitle": "Ici nous utilisons 3 types de levures",
+          "title": " Las Levaduras",
+          "subtitle": "Aquí usamos 3 tipos de levaduras",
           "answers": [
-            "La levure sèche active est la levure que l'on trouve dans le commerce sous forme de levure de boulanger dite classique et non pas rapide.",
-            "La levure sèche instantannée est la levure lyophilisée sous forme de fines paillettes. Elle n'a pas besoin d'être hydratée avant d'être utilisée et permet de faire des pousses rapides.",
-            "La levure fraîche est la levure que l'on trouve dans le commerce sous forme de levure de boulanger dite fraîche sous forme de pâte en cube."
+            "La levadura seca activa es la levadura que se encuentra en el comercio en forma de levadura de panadero llamada clásica y no rápida.",
+            "La levadura seca instantánea es la levadura liofilizada en forma de escamas finas. No necesita ser hidratada antes de ser usada y permite hacer crecimientos rápidos.",
+            "La levadura fresca es la levadura que se encuentra en el comercio en forma de levadura de panadero llamada fresca en forma de pasta en cubo."
           ],
           "tips": [
             {
-              "title": "💡 Astuce :",
-              "description": "Le calculateur permet facilement de passer à l'une ou l'autre des levures"
+              "title": "💡 Consejo:",
+              "description": "La calculadora permite fácilmente pasar de una levadura a otra"
             }
           ]
         },
         {
-          "title": " 💦 Hydratation",
-          "subtitle": "Ratio entre la quantité d’eau totale sur la quantité de farine totale",
+          "title": " 💦 Hidratación",
+          "subtitle": "Proporción entre la cantidad de agua total sobre la cantidad de harina total",
           "answers": [
-            "Ex 1 : Pour 100 g d’eau au total je vais avoir 151,5 g de farine totale ce qui donne une hydratation de la pâte à 66 %. Calcul : 100 ÷ 151,5 = 0,66 soit 66 %.",
-            "Ex 2 : Si je veux connaître la quantité d’eau à ajouter lorsque j’ai 151,5 g de farine  et que je veux une hydratation à 66 % le calcul sera : 0,66 x 151,5 = 100 g d’eau au total à ajouter"
+            "Ej 1: Para 100 g de agua en total voy a tener 151,5 g de harina total lo que da una hidratación de la masa del 66%. Cálculo: 100 ÷ 151,5 = 0,66 o sea 66%.",
+            "Ej 2: Si quiero conocer la cantidad de agua a añadir cuando tengo 151,5 g de harina y quiero una hidratación del 66% el cálculo será: 0,66 x 151,5 = 100 g de agua total a añadir."
           ],
           "tips": [
             {
-              "title": "💡 Astuce :",
-              "description": "Plus la pâte est hydratée plus difficile elle sera à manipuler, elle sera plus liquide et donc plus collante. Hydratation recommandée: Entre 62 & 75 %"
-            },
-            {
-              "title": "💡 Astuce :",
-              "description": "Plus la pâte est hydratée plus difficile elle sera à manipuler, elle sera plus liquide et donc plus collante. Hydratation recommandée: Entre 62 & 75 %"
+              "title": "💡 Consejo:",
+              "description": "Cuanto más hidratada esté la masa más difícil será de manipular, será más líquida y por tanto más pegajosa. Hidratación recomendada: Entre 62 & 75%"
             }
           ]
         },
         {
-          "title": " 🍚 Ratio Poolish",
-          "subtitle": "Ratio entre la quantité de poolish et la quantité totale de pâte",
+          "title": " 🍚 Proporción Poolish",
+          "subtitle": "Proporción entre la cantidad de poolish y la cantidad total de masa",
           "answers": [
-            "On utilise couramment entre 30 et 60 % de poolish dans la quantité de pâte finale.",
-            "Ex : Si je veux 30 % de poolish dans ma pâte et 1 kg de pâte finale, le calcul sera : 1000 x 0,3 = 300 g. La poolish fera donc 300 g et sera composée de 150 g de farine et 150 g d'eau.  "
+            "Se usa comúnmente entre 30 y 60% de poolish en la cantidad de masa final.",
+            "Ej: Si quiero 30% de poolish en mi masa y 1 kg de masa final, el cálculo será: 1000 x 0,3 = 300 g. La poolish hará por tanto 300 g y estará compuesta de 150 g de harina y 150 g de agua."
           ],
           "tips": [
             {
-              "title": "💡 Astuce :",
-              "description": "En général on met un ratio plus élevé de poolish l’hiver que l’été car la fermentation est en partie influencée par la température. Donc mettre plus de poolish en hiver que l’été peut aider au développement finale de la pâte."
+              "title": "💡 Consejo:",
+              "description": "En general se pone una proporción más elevada de poolish en invierno que en verano porque la fermentación está en parte influenciada por la temperatura. Así que poner más poolish en invierno que en verano puede ayudar al desarrollo final de la masa."
             }
           ]
         },
         {
-          "title": " 🌡️ La Température",
-          "subtitle": "C'est la température ambiante de la pièce, celle en dehors du frigo",
+          "title": " 🌡️ La Temperatura",
+          "subtitle": "Es la temperatura ambiente de la habitación, la de fuera del frigorífico",
           "answers": [
-            "Température de la pièce où l'on va faire reposer la poolish / la pâte / la biga / les pâtons.",
-            "Sers dans le calcul de repos à chaud."
+            "Temperatura de la habitación donde vamos a hacer reposar la poolish / la masa / la biga / las bolas de masa.",
+            "Sirve en el cálculo de reposo en caliente."
           ]
         },
         {
-          "title": " 🔥 Repos à Chaud",
+          "title": " 🔥 Reposo en Caliente",
           "subtitle": "",
           "answers": [
-            "Temps de repos des diverses préparation à la température sélectionnée."
+            "Tiempo de reposo de las diversas preparaciones a la temperatura seleccionada."
           ]
         },
         {
-          "title": " ❄️ Repos à Froid",
+          "title": " ❄️ Reposo en Frío",
           "subtitle": "",
-          "answers": ["Temps de repos des diverses préparation au frigo."]
+          "answers": ["Tiempo de reposo de las diversas preparaciones en el frigorífico."]
         }
       ]
     }

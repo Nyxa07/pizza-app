@@ -1,0 +1,66 @@
+<ion-header [translucent]="true" mode="ios">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ TranslationKeys.DOUGH_ROUTES.TITLE | translate }}</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-segment value="calculator">
+      <ion-segment-button value="calculator" content-id="calculator">
+        <ion-label
+          >{{ TranslationKeys.DOUGH_ROUTES.SEGMENTS.CALCULATOR | translate
+          }}</ion-label
+        >
+      </ion-segment-button>
+      <ion-segment-button value="recipe" content-id="recipe">
+        <ion-label
+          >{{ TranslationKeys.DOUGH_ROUTES.SEGMENTS.RECIPE | translate
+          }}</ion-label
+        >
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-segment-view>
+  <ion-segment-content id="calculator">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          {{ TranslationKeys.DOUGH_ROUTES.CALCULATOR.TITLE | translate }}
+        </ion-card-title>
+        <ion-card-subtitle>
+          {{ TranslationKeys.DOUGH_ROUTES.CALCULATOR.SUBTITLE | translate }}
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <app-dough-form (onChange)="formData.set($event)"></app-dough-form>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          {{ TranslationKeys.DOUGH_ROUTES.INGREDIENTS.TITLE | translate }}
+        </ion-card-title>
+        <ion-card-subtitle>
+          {{ TranslationKeys.DOUGH_ROUTES.INGREDIENTS.SUBTITLE | translate }}
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        @if (result()) {
+        <app-dough-quantity [result]="result()!"></app-dough-quantity>
+        }
+      </ion-card-content>
+    </ion-card>
+  </ion-segment-content>
+
+  <ion-segment-content id="recipe">
+    @if (result()?.poolish) {
+    <app-dough-poolish-recipe [result]="result()!"></app-dough-poolish-recipe>
+    } @else {
+    <app-dough-direct-recipe [result]="result()!"></app-dough-direct-recipe>
+    }
+  </ion-segment-content>
+</ion-segment-view>

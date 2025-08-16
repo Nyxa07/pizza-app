@@ -1,5 +1,5 @@
 import { Component, input, OnInit, ViewEncapsulation } from '@angular/core';
-import { DoughResult } from '../../services/dough-calculator.service';
+import { DoughResult } from '../../dough/services/dough-calculator.service';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -9,8 +9,8 @@ import {
   IonCardSubtitle,
   IonCardContent,
 } from '@ionic/angular/standalone';
-import { TranslationKeys } from '../../../../shared/services/translation-keys.service';
-import { PIZZA_WEIGHT } from '../../constants';
+import { TranslationKeys } from '../../../shared/services/translation-keys.service';
+import { PIZZA_WEIGHT } from '../../dough/constants';
 
 @Component({
   selector: 'app-dough-direct-recipe',

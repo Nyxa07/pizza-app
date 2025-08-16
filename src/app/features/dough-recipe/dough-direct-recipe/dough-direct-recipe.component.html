@@ -32,6 +32,12 @@
           ></li>
           <li
             [innerHTML]="
+              TranslationKeys.PIZZA.RECIPE.QUANTITY.SALT
+                | translate: { quantity: result().dough.salt }
+            "
+          ></li>
+          <li
+            [innerHTML]="
               TranslationKeys.PIZZA.RECIPE.QUANTITY.HONEY
                 | translate: { quantity: result().dough.honey }
             "

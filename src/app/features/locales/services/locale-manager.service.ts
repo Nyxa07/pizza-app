@@ -2,16 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Platform } from '@ionic/angular';
 import { Device } from '@capacitor/device';
-
-export const SUPPORTED_LANGUAGES = ['en', 'de', 'es', 'it', 'fr'];
-
-export const SUPPORTED_LANGUAGES_MAP = {
-  en: 'english',
-  de: 'german',
-  es: 'spanish',
-  it: 'italian',
-  fr: 'french',
-};
+import { Locales } from '../enums/locales.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +33,8 @@ export class LocaleManagerService {
    */
   async switchLocale(locale: string) {
     this.translateService.use(
-      SUPPORTED_LANGUAGES.find((lang) => locale.startsWith(lang)) ?? 'en',
+      Object.values(Locales).find((lang) => locale.startsWith(lang)) ??
+        Locales.EN,
     );
     localStorage.setItem('LanguageManager:locale', locale);
   }
@@ -59,5 +51,9 @@ export class LocaleManagerService {
       }
     }
     return navigator.language;
+  }
+
+  getLocale() {
+    return localStorage.getItem('LanguageManager:locale');
   }
 }

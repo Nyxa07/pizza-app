@@ -3,6 +3,19 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.routes').then((m) => m.routes),
+    redirectTo: 'dough',
+    pathMatch: 'full',
+  },
+  {
+    path: 'dough',
+    loadChildren: () =>
+      import('./routes/dough/dough.routes').then((m) => m.DOUGH_ROUTES),
+  },
+  {
+    path: 'settings',
+    loadChildren: () =>
+      import('./routes/settings/settings.routes').then(
+        (m) => m.SETTINGS_ROUTES,
+      ),
   },
 ];

@@ -1,5 +1,8 @@
 {
   "app": {
+    "menu": {
+      "settings": "Impostazioni"
+    },
     "common": {
       "actions": {
         "save": "Salva",
@@ -55,7 +58,7 @@
         "ingredients": "Ingredienti"
       },
       "doughTypes": {
-        "poolish": "Stile poolish",
+        "poolish": "Con poolish",
         "direct": "Metodo diretto"
       },
       "recipe": {
@@ -67,82 +70,81 @@
           "salt": "<strong>{{ quantity }} g</strong> di sale"
         },
         "direct": {
-          "title": "Préparation de la pâte",
-          "subtitle": "Pétrissage et formation",
-          "step1Description": "Peser tous les ingrédients",
-          "step2Description": "Mélanger la levure et le miel à l’eau",
-          "step3Description": "Ajouter le sel et la farine et mélanger à la cuillère en bois",
-          "step4Description": "Une fois que tous les ingrédients sont bien mélangés et que l’on commence à avoir une boule, on peut la déposer sur le plan de travail",
-          "step5Description": "Terminer le pétrissage à la main environ 10 min (possibilité d’utiliser un robot pâtissier avec son crochet pétrisseur). Bien pétrir pour hydrater correctement la farine",
-          "step6Description": "Une fois que la pâte à une belle structure, former une boule et laisser la reposer pendant 25 min sous un saladier (la pâte va se tendre et devenir plus lisse)",
-          "step7Description": "Procéder à quelques rabats sur la pâte et lui donner une belle forme de boule (bien lisse et qui ne colle plus)",
-          "step8Description": "Déposer la boule dans un récipient hermétique et la laisser reposer 24 heures",
-          "step9Description": "Récupérer la pâte et, avec un coupe-pâte ou une spatule, former des pâtons (bien tendus) d’environ <strong>{{ pizzaWeight }} g</strong>",
-          "step10Description": "Déposer les pâtons dans un plat en laissant de l’espace entre chaque (ils vont encore grossir)",
-          "step11Description": "Fermer le plat ou le couvrir d’un film plastique et laisser reposer 3 heures"
+          "title": "Preparazione dell'impasto",
+          "subtitle": "Impastatura e formatura",
+          "step1Description": "Pesare tutti gli ingredienti",
+          "step2Description": "Mescolare il lievito e il miele nell'acqua",
+          "step3Description": "Aggiungere il sale e la farina e mescolare con un cucchiaio di legno",
+          "step4Description": "Una volta che tutti gli ingredienti sono ben mescolati e si inizia ad avere una palla, si può deporre sul piano di lavoro",
+          "step5Description": "Terminare l'impastatura a mano per circa 10 min (possibilità di utilizzare un robot da cucina con il suo gancio impastatore). Impastare bene per idratare correttamente la farina",
+          "step6Description": "Una volta che l'impasto ha una bella struttura, formare una palla e lasciarla riposare per 25 min sotto una ciotola (l'impasto si tenderà e diventerà più liscio)",
+          "step7Description": "Procedere ad alcune pieghe sull'impasto e dargli una bella forma di palla (ben liscia e che non si attacca più)",
+          "step8Description": "Deporre la palla in un recipiente ermetico e lasciarla riposare 24 ore",
+          "step9Description": "Recuperare l'impasto e, con un taglia-impasto o una spatola, formare dei panetti (ben tesi) di circa <strong>{{ pizzaWeight }} g</strong>",
+          "step10Description": "Deporre i panetti in un piatto lasciando spazio tra ciascuno (cresceranno ancora)",
+          "step11Description": "Chiudere il piatto o coprirlo con pellicola trasparente e lasciar riposare 3 ore"
         },
         "poolish": {
           "poolish": {
             "title": "PREPARAZIONE DELLA POOLISH",
-            "subtitle": "Primo passo: preparazione del lievito madre",
+            "subtitle": "Primo passo: preparazione della pre-fermentazione",
             "step1Description": "Pesare tutti gli ingredienti:",
             "ingredientsList": "lista degli ingredienti",
-            "step2Description": "In una ciotola grande, sciogliere il lievito in acqua e aggiungere il miele",
-            "step3Description": "Aggiungere la farina e mescolare con un cucchiaio di legno fino a ottenere una miscela omogenea, poi lasciar riposare <strong>{{ rtRestTime }} ora(e)</strong> a temperatura ambiente coperto con pellicola trasparente, poi <strong>{{ coldRestTime }} ore</strong> in frigorifero"
+            "step2Description": "In una grande ciotola, sciogliere il lievito nell'acqua e aggiungere il miele",
+            "step3Description": "Aggiungere la farina e mescolare con un cucchiaio di legno fino all'ottenimento di un impasto omogeneo, poi lasciar riposare <strong>{{ rtRestTime }} ora(e)</strong> a temperatura ambiente coperto con pellicola trasparente, poi <strong>{{ coldRestTime }} ora(e)</strong> in frigorifero"
           },
           "dough": {
             "title": "PREPARAZIONE DELL'IMPASTO",
             "subtitle": "Secondo passo: impastatura e formatura",
-            "step1Description": "Tirare fuori la poolish 1 ora prima dell'uso",
-            "step2Description": "Pesare le quantità da aggiungere alla poolish:",
+            "step1Description": "Tirare fuori la poolish 1 ora prima dell'utilizzo",
+            "step2Description": "Pesare le quantità da aggiungere nella poolish:",
             "ingredientsList": "lista degli ingredienti",
-            "step3Description": "Nella ciotola della poolish, aggiungere acqua e sale. Mescolare con cucchiaio fino a quando l'acqua è assorbita",
-            "step4Description": "Aggiungere la farina poco alla volta e mescolare con cucchiaio",
-            "step5Description": "Quando non è più possibile usare il cucchiaio, trasferire l'impasto sulla superficie di lavoro",
+            "step3Description": "Nella ciotola della poolish, aggiungere l'acqua e il sale. Mescolare con il cucchiaio fino all'assorbimento dell'acqua",
+            "step4Description": "Aggiungere poco a poco la farina e mescolare con il cucchiaio",
+            "step5Description": "Quando non è più possibile utilizzare un cucchiaio, trasferire l'impasto sul piano di lavoro",
             "step6Description": "Lavorare l'impasto impastandolo, la farina deve essere completamente integrata",
             "step7Description": "Fare alcune pieghe con l'impasto e formare una bella palla (morbida e flessibile)",
-            "step8Description": "Lasciar riposare 10-15 minuti sotto una ciotola",
-            "step9Description": "Riformare una bella palla e lasciar riposare un'altra 1 ora in un contenitore ermetico",
-            "step10Description": "Mettere uno strato sottile di semolino fine su un piatto",
-            "step11Description": "Recuperare l'impasto e con un taglia-impasto o spatola formare palline di impasto (ben distese) di circa",
-            "step12Description": "Posizionare le palline di impasto sul piatto lasciando spazio tra ciascuna (cresceranno ancora)",
+            "step8Description": "Far riposare 10-15 min sotto la ciotola",
+            "step9Description": "Riformare una bella palla e lasciar riposare ancora 1 ora in un recipiente ermetico",
+            "step10Description": "Mettere un sottile strato di semolino fine in un piatto",
+            "step11Description": "Recuperare l'impasto e con un taglia-impasto o una spatola formare dei panetti (ben tesi) di circa <strong>{{ pizzaWeight }} g</strong>",
+            "step12Description": "Deporre i panetti nel piatto lasciando spazio tra loro (cresceranno ancora)",
             "step13Description": "Chiudere il piatto o mettere pellicola trasparente sopra e lasciar riposare tra 1 e 3 ore",
-            "tipsTitle": "💡 Suggerimenti:",
-            "tipsDescription": "Se l'impasto è troppo appiccicoso, formare una palla e lasciar riposare 10 minuti sotto una ciotola",
+            "tipsTitle": "💡 Consigli:",
+            "tipsDescription": "Se l'impasto si attacca troppo, formare una palla e lasciar riposare 10 min sotto una ciotola",
             "successMessage": "🎉 Ed ecco fatto, sono pronti per essere trasformati in PIZZA!"
           }
         },
         "storage": {
           "title": "CONSERVAZIONE",
           "subtitle": "Consigli per la conservazione",
-          "refrigerator": "Frigorifero: Le palline di impasto si conservano per 2-3 giorni",
+          "refrigerator": "Frigorifero: I panetti si conservano per 2-3 giorni",
           "freezer": "Congelatore: Si congela molto bene, non conservare più di 2-3 mesi"
         }
       }
     },
-    "navigation": {
-      "tabs": {
-        "poolishStyle": "Stile poolish",
-        "tab2": "Scheda 2",
-        "tab3": "Scheda 3"
+    "routes": {
+      "dough": {
+        "index": {
+          "title": "Impasto per Pizza",
+          "segments": {
+            "calculator": "Calcolatrice",
+            "recipe": "Ricetta"
+          },
+          "calculator": {
+            "title": "Configurazione",
+            "subtitle": "Configura la tua ricetta di pizze"
+          },
+          "ingredients": {
+            "title": "Ingredienti",
+            "subtitle": "Quantità degli ingredienti in grammi (g)"
+          }
+        }
       },
-      "header": {
-        "title": "App Pizza",
-        "language": "Lingua"
-      }
-    },
-    "tab1": {
-      "segments": {
-        "data": "Dati",
-        "recipe": "Preparazione"
-      },
-      "configuration": {
-        "title": "Configurazione",
-        "subtitle": "Configura la tua ricetta di pizze"
-      },
-      "ingredients": {
-        "title": "Ingredienti",
-        "subtitle": "Quantità degli ingredienti in grammi (g)"
+      "settings": {
+        "index": {
+          "title": "Impostazioni"
+        }
       }
     },
     "language": {
@@ -159,96 +161,92 @@
       "title": "FAQ",
       "questions": [
         {
-          "title": "La méthode Directe",
-          "subtitle": "Préparation directe de la pâte",
+          "title": "Il Metodo Diretto",
+          "subtitle": "Preparazione diretta dell'impasto",
           "answers": [
-            "C'est une méthode de préparation plus simple que les méthodes indirectes",
-            "On incorpore directement tous les ingrédients et après un repos plus ou moins long on peut l'utiliser"
+            "È un metodo di preparazione più semplice rispetto ai metodi indiretti.",
+            "Si incorporano direttamente tutti gli ingredienti e dopo un riposo più o meno lungo lo si può utilizzare."
           ]
         },
         {
           "title": "La Poolish",
-          "subtitle": "La poolish est une pâte liquide à base de farine, d'eau et de levure",
+          "subtitle": "La poolish è un impasto liquido a base di farina, acqua e lievito",
           "answers": [
-            "La poolish est une pré-fermentation de la pâte qui repose pendant plusieurs heures avant d'être utilisée pour la pâte à pizza.",
-            "Elle se prépare en mélangeant 1 part de farine et 1 part d'eau ainsi qu'une petite quantité de levure.",
-            "C'est une méthode indirecte de préparation de pâte à pizza 🍕"
+            "La poolish è una pre-fermentazione dell'impasto che riposa per diverse ore prima di essere utilizzata per l'impasto della pizza.",
+            "Si prepara mescolando 1 parte di farina e 1 parte di acqua oltre a una piccola quantità di lievito.",
+            "È un metodo indiretto di preparazione dell'impasto per pizza."
           ]
         },
         {
           "title": "La Biga",
-          "subtitle": "La Biga est une préparation dite sèche à base de farine, d'eau et de levure",
+          "subtitle": "La Biga è una preparazione detta secca a base di farina, acqua e lievito",
           "answers": [
-            "La Biga est une pré-fermentation de la pâte qui repose pendant plusieurs heures avant d'être utilisée pour la pâte à pizza.",
-            "BlaBlaBla, encore jamais fait donc je ne vais pas mettre n'importe quoi 😉"
+            "La Biga è una pre-fermentazione dell'impasto che riposa per diverse ore prima di essere utilizzata per l'impasto della pizza.",
+            "BlaBlaBlà, mai fatto ancora quindi non metterò qualunque cosa 😉"
           ]
         },
         {
-          "title": " Les Levures",
-          "subtitle": "Ici nous utilisons 3 types de levures",
+          "title": " I Lieviti",
+          "subtitle": "Qui utilizziamo 3 tipi di lieviti",
           "answers": [
-            "La levure sèche active est la levure que l'on trouve dans le commerce sous forme de levure de boulanger dite classique et non pas rapide.",
-            "La levure sèche instantannée est la levure lyophilisée sous forme de fines paillettes. Elle n'a pas besoin d'être hydratée avant d'être utilisée et permet de faire des pousses rapides.",
-            "La levure fraîche est la levure que l'on trouve dans le commerce sous forme de levure de boulanger dite fraîche sous forme de pâte en cube."
+            "Il lievito secco attivo è il lievito che si trova in commercio sotto forma di lievito di panettiere detto classico e non rapido.",
+            "Il lievito secco istantaneo è il lievito liofilizzato sotto forma di scaglie sottili. Non ha bisogno di essere idratato prima di essere utilizzato e permette di fare lievitazioni rapide.",
+            "Il lievito fresco è il lievito che si trova in commercio sotto forma di lievito di panettiere detto fresco sotto forma di pasta in cubetto."
           ],
           "tips": [
             {
-              "title": "💡 Astuce :",
-              "description": "Le calculateur permet facilement de passer à l'une ou l'autre des levures"
+              "title": "💡 Consiglio:",
+              "description": "La calcolatrice permette facilmente di passare dall'uno all'altro dei lieviti"
             }
           ]
         },
         {
-          "title": " 💦 Hydratation",
-          "subtitle": "Ratio entre la quantité d’eau totale sur la quantité de farine totale",
+          "title": " 💦 Idratazione",
+          "subtitle": "Rapporto tra la quantità di acqua totale sulla quantità di farina totale",
           "answers": [
-            "Ex 1 : Pour 100 g d’eau au total je vais avoir 151,5 g de farine totale ce qui donne une hydratation de la pâte à 66 %. Calcul : 100 ÷ 151,5 = 0,66 soit 66 %.",
-            "Ex 2 : Si je veux connaître la quantité d’eau à ajouter lorsque j’ai 151,5 g de farine  et que je veux une hydratation à 66 % le calcul sera : 0,66 x 151,5 = 100 g d’eau au total à ajouter"
+            "Es 1: Per 100 g di acqua in totale avrò 151,5 g di farina totale che dà un'idratazione dell'impasto al 66%. Calcolo: 100 ÷ 151,5 = 0,66 ovvero 66%.",
+            "Es 2: Se voglio conoscere la quantità di acqua da aggiungere quando ho 151,5 g di farina e voglio un'idratazione al 66% il calcolo sarà: 0,66 x 151,5 = 100 g di acqua totale da aggiungere."
           ],
           "tips": [
             {
-              "title": "💡 Astuce :",
-              "description": "Plus la pâte est hydratée plus difficile elle sera à manipuler, elle sera plus liquide et donc plus collante. Hydratation recommandée: Entre 62 & 75 %"
-            },
-            {
-              "title": "💡 Astuce :",
-              "description": "Plus la pâte est hydratée plus difficile elle sera à manipuler, elle sera plus liquide et donc plus collante. Hydratation recommandée: Entre 62 & 75 %"
+              "title": "💡 Consiglio:",
+              "description": "Più l'impasto è idratato più difficile sarà da manipolare, sarà più liquido e quindi più appiccicoso. Idratazione consigliata: Tra 62 & 75%"
             }
           ]
         },
         {
-          "title": " 🍚 Ratio Poolish",
-          "subtitle": "Ratio entre la quantité de poolish et la quantité totale de pâte",
+          "title": " 🍚 Rapporto Poolish",
+          "subtitle": "Rapporto tra la quantità di poolish e la quantità totale di impasto",
           "answers": [
-            "On utilise couramment entre 30 et 60 % de poolish dans la quantité de pâte finale.",
-            "Ex : Si je veux 30 % de poolish dans ma pâte et 1 kg de pâte finale, le calcul sera : 1000 x 0,3 = 300 g. La poolish fera donc 300 g et sera composée de 150 g de farine et 150 g d'eau.  "
+            "Si utilizza comunemente tra il 30 e il 60% di poolish nella quantità di impasto finale.",
+            "Es: Se voglio il 30% di poolish nel mio impasto e 1 kg di impasto finale, il calcolo sarà: 1000 x 0,3 = 300 g. La poolish farà quindi 300 g e sarà composta da 150 g di farina e 150 g di acqua."
           ],
           "tips": [
             {
-              "title": "💡 Astuce :",
-              "description": "En général on met un ratio plus élevé de poolish l’hiver que l’été car la fermentation est en partie influencée par la température. Donc mettre plus de poolish en hiver que l’été peut aider au développement finale de la pâte."
+              "title": "💡 Consiglio:",
+              "description": "In generale si mette un rapporto più elevato di poolish d'inverno che d'estate perché la fermentazione è in parte influenzata dalla temperatura. Quindi mettere più poolish d'inverno che d'estate può aiutare lo sviluppo finale dell'impasto."
             }
           ]
         },
         {
-          "title": " 🌡️ La Température",
-          "subtitle": "C'est la température ambiante de la pièce, celle en dehors du frigo",
+          "title": " 🌡️ La Temperatura",
+          "subtitle": "È la temperatura ambiente della stanza, quella fuori dal frigo",
           "answers": [
-            "Température de la pièce où l'on va faire reposer la poolish / la pâte / la biga / les pâtons.",
-            "Sers dans le calcul de repos à chaud."
+            "Temperatura della stanza dove faremo riposare la poolish / l'impasto / la biga / i panetti.",
+            "Serve nel calcolo di riposo al caldo."
           ]
         },
         {
-          "title": " 🔥 Repos à Chaud",
+          "title": " 🔥 Riposo al Caldo",
           "subtitle": "",
           "answers": [
-            "Temps de repos des diverses préparation à la température sélectionnée."
+            "Tempo di riposo delle varie preparazioni alla temperatura selezionata."
           ]
         },
         {
-          "title": " ❄️ Repos à Froid",
+          "title": " ❄️ Riposo al Freddo",
           "subtitle": "",
-          "answers": ["Temps de repos des diverses préparation au frigo."]
+          "answers": ["Tempo di riposo delle varie preparazioni in frigo."]
         }
       ]
     }

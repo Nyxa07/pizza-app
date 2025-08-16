@@ -16,7 +16,7 @@ import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { inject, provideAppInitializer } from '@angular/core';
-import { LocaleManagerService } from './app/shared/services/locale-manager.service';
+import { LocaleManagerService } from './app/features/locales/services/locale-manager.service';
 
 bootstrapApplication(AppComponent, {
   providers: [

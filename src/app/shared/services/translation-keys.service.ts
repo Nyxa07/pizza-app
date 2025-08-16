@@ -3,6 +3,28 @@ export class TranslationKeys {
     return isPlural ? `${key}.plural` : `${key}.singular`;
   }
 
+  // Dough routes index
+  static readonly DOUGH_ROUTES = {
+    TITLE: 'app.routes.dough.index.title',
+    SEGMENTS: {
+      CALCULATOR: 'app.routes.dough.index.segments.calculator',
+      RECIPE: 'app.routes.dough.index.segments.recipe',
+    },
+    CALCULATOR: {
+      TITLE: 'app.routes.dough.index.calculator.title',
+      SUBTITLE: 'app.routes.dough.index.calculator.subtitle',
+    },
+    INGREDIENTS: {
+      TITLE: 'app.routes.dough.index.ingredients.title',
+      SUBTITLE: 'app.routes.dough.index.ingredients.subtitle',
+    },
+  };
+
+  // Settings routes index
+  static readonly SETTINGS_ROUTES = {
+    TITLE: 'app.routes.settings.index.title',
+  };
+
   // Common translations
   static readonly COMMON = {
     ACTIONS: {
@@ -206,44 +228,28 @@ export class TranslationKeys {
     },
   };
 
-  // Navigation translations
-  static readonly NAVIGATION = {
-    TABS: {
-      POOLISH_STYLE: 'app.navigation.tabs.poolishStyle',
-      TAB2: 'app.navigation.tabs.tab2',
-      TAB3: 'app.navigation.tabs.tab3',
-    },
-    HEADER: {
-      TITLE: 'app.navigation.header.title',
-      LANGUAGE: 'app.navigation.header.language',
-    },
-  };
-
-  // Tab1 page translations
-  static readonly TAB1 = {
-    SEGMENTS: {
-      DATA: 'app.tab1.segments.data',
-      RECIPE: 'app.tab1.segments.recipe',
-    },
-    CONFIGURATION: {
-      TITLE: 'app.tab1.configuration.title',
-      SUBTITLE: 'app.tab1.configuration.subtitle',
-    },
-    INGREDIENTS: {
-      TITLE: 'app.tab1.ingredients.title',
-      SUBTITLE: 'app.tab1.ingredients.subtitle',
-    },
-  };
-
   // Language selector translations
   static readonly LANGUAGE = {
     SELECTOR: {
       TITLE: 'app.language.selector.title',
-      ENGLISH: 'app.language.selector.english',
-      FRENCH: 'app.language.selector.french',
-      ITALIAN: 'app.language.selector.italian',
-      SPANISH: 'app.language.selector.spanish',
-      GERMAN: 'app.language.selector.german',
+      EN: 'app.language.selector.en',
+      FR: 'app.language.selector.fr',
+      IT: 'app.language.selector.it',
+      ES: 'app.language.selector.es',
+      DE: 'app.language.selector.de',
+    },
+  };
+
+  static readonly UNIT = {
+    MASS: {
+      SELECTOR: {
+        TITLE: 'app.unit.mass.selector.title',
+      },
+    },
+    TEMPERATURE: {
+      SELECTOR: {
+        TITLE: 'app.unit.temperature.selector.title',
+      },
     },
   };
 

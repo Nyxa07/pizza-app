@@ -1,0 +1,17 @@
+<form [formGroup]="form">
+  <ion-item>
+    <ion-select
+      formControlName="locale"
+      mode="ios"
+      [cancelText]="TranslationKeys.COMMON.ACTIONS.CANCEL | translate"
+      [okText]="TranslationKeys.COMMON.ACTIONS.OK | translate"
+      [label]="TranslationKeys.LANGUAGE.SELECTOR.TITLE | translate"
+    >
+      @for (locale of availableLocales; track locale) {
+        <ion-select-option [value]="locale.value">
+          {{ locale.translateKey | translate }}
+        </ion-select-option>
+      }
+    </ion-select>
+  </ion-item>
+</form>
