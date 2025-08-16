@@ -1,21 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  IonButton,
-  IonIcon,
-  IonModal,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonButtons,
-  IonContent,
   IonCard,
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
   IonCardSubtitle,
 } from '@ionic/angular/standalone';
-import { informationCircle } from 'ionicons/icons';
-import { addIcons } from 'ionicons';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslationKeys } from 'src/app/shared/services/translation-keys.service';
 
@@ -24,14 +14,6 @@ import { TranslationKeys } from 'src/app/shared/services/translation-keys.servic
   templateUrl: './faq.component.html',
   styleUrls: ['./faq.component.scss'],
   imports: [
-    IonButton,
-    IonIcon,
-    IonModal,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonButtons,
-    IonContent,
     TranslatePipe,
     IonCard,
     IonCardHeader,
@@ -41,25 +23,8 @@ import { TranslationKeys } from 'src/app/shared/services/translation-keys.servic
   ],
 })
 export class FaqComponent implements OnInit {
-  @ViewChild(IonModal) modal!: IonModal;
   TranslationKeys = TranslationKeys;
   questionsData = TranslationKeys.FAQ.QUESTIONS;
 
-  constructor() {
-    addIcons({ informationCircle });
-  }
-
   ngOnInit() {}
-
-  onWillDismiss(event: any) {
-    console.log('onWillDismiss', event);
-  }
-
-  cancel() {
-    this.modal.dismiss();
-  }
-
-  confirm() {
-    this.modal.dismiss();
-  }
 }

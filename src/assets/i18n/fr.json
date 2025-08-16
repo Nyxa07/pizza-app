@@ -3,18 +3,6 @@
     "menu": {
       "settings": "Paramètres"
     },
-    "unit": {
-      "mass": {
-        "selector": {
-          "title": "Unité de masse"
-        }
-      },
-      "temperature": {
-        "selector": {
-          "title": "Unité de température"
-        }
-      }
-    },
     "common": {
       "actions": {
         "save": "Sauvegarder",
@@ -151,6 +139,11 @@
             "title": "Ingrédients",
             "subtitle": "Quantité d'ingrédients en grammes (g)"
           }
+        }
+      },
+      "faq": {
+        "index": {
+          "title": "FAQ"
         }
       },
       "settings": {

@@ -20,6 +20,10 @@ export class TranslationKeys {
     },
   };
 
+  static readonly FAQ_ROUTES = {
+    TITLE: 'app.routes.faq.index.title',
+  };
+
   // Settings routes index
   static readonly SETTINGS_ROUTES = {
     TITLE: 'app.routes.settings.index.title',
@@ -240,21 +244,7 @@ export class TranslationKeys {
     },
   };
 
-  static readonly UNIT = {
-    MASS: {
-      SELECTOR: {
-        TITLE: 'app.unit.mass.selector.title',
-      },
-    },
-    TEMPERATURE: {
-      SELECTOR: {
-        TITLE: 'app.unit.temperature.selector.title',
-      },
-    },
-  };
-
   static readonly FAQ = {
-    TITLE: 'app.faq.title',
     QUESTIONS: [
       {
         TITLE: 'app.faq.questions.0.title',

@@ -18,7 +18,7 @@ import { TranslationKeys } from './shared/services/translation-keys.service';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { addIcons } from 'ionicons';
-import { pizza, settings } from 'ionicons/icons';
+import { pizza, settings, helpCircle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -51,11 +51,17 @@ export class AppComponent implements OnInit {
       url: '/settings',
       icon: 'settings',
     },
+    {
+      title: TranslationKeys.FAQ_ROUTES.TITLE,
+      url: '/faq',
+      icon: 'help-circle',
+    },
   ];
   constructor() {
     addIcons({
       pizza,
       settings,
+      helpCircle,
     });
   }
   async ngOnInit() {}

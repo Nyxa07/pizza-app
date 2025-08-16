@@ -3,6 +3,18 @@
     "menu": {
       "settings": "Configuración"
     },
+    "unit": {
+      "mass": {
+        "selector": {
+          "title": "Unidad de Masa"
+        }
+      },
+      "temperature": {
+        "selector": {
+          "title": "Unidad de Temperatura"
+        }
+      }
+    },
     "common": {
       "actions": {
         "save": "Guardar",
@@ -150,11 +162,11 @@
     "language": {
       "selector": {
         "title": "Seleccionar idioma",
-        "english": "Inglés",
-        "french": "Francés",
-        "italian": "Italiano",
-        "spanish": "Español",
-        "german": "Alemán"
+        "en": "Inglés",
+        "fr": "Francés",
+        "it": "Italiano",
+        "es": "Español",
+        "de": "Alemán"
       }
     },
     "faq": {
