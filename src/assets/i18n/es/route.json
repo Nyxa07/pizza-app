@@ -20,5 +20,10 @@
     "index": {
       "title": "Configuración"
     }
+  },
+  "faq": {
+    "index": {
+      "title": "Preguntas frecuentes"
+    }
   }
 }

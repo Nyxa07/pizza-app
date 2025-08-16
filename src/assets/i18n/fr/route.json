@@ -16,14 +16,14 @@
       }
     }
   },
-  "faq": {
-    "index": {
-      "title": "FAQ"
-    }
-  },
   "settings": {
     "index": {
       "title": "Paramètres"
+    }
+  },
+  "faq": {
+    "index": {
+      "title": "FAQ"
     }
   }
 }

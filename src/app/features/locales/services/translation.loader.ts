@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import { Provider } from '@angular/core';
 import { TranslationObject } from '@ngx-translate/core';
 
+const domains = ['common', 'route', 'dough', 'language', 'faq'];
 /**
  * Custom loader able to merge several domain-specific JSON files per language
  * located under `assets/i18n/<lang>/<domain>.json`.
@@ -14,15 +15,7 @@ export class MultiFolderTranslateLoader implements TranslateLoader {
     private http: HttpClient,
     private basePath: string = '/assets/i18n/',
     private suffix: string = '.json',
-    private domains: string[] = [
-      'common',
-      'route',
-      'dough',
-      'language',
-      'faq',
-      'menu',
-      'unit',
-    ],
+    private domains: string[] = domains,
   ) {}
 
   /**
@@ -66,15 +59,7 @@ export function provideMultiTranslateLoader(config?: {
         http,
         config?.basePath ?? '/assets/i18n/',
         config?.suffix ?? '.json',
-        config?.domains ?? [
-          'common',
-          'route',
-          'dough',
-          'language',
-          'faq',
-          'menu',
-          'unit',
-        ],
+        config?.domains ?? domains,
       ),
     deps: [HttpClient],
   };

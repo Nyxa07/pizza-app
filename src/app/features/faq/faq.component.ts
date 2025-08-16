@@ -7,6 +7,7 @@ import {
   IonCardSubtitle,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
+import { LocaleManagerService } from '../locales/services/locale-manager.service';
 
 @Component({
   selector: 'app-faq',
@@ -28,8 +29,12 @@ export class FaqComponent implements OnInit {
     answers: string[];
     tips?: { title: string; description: string }[];
   }[] = [];
+  locale = this.localeManagerService.getLocale();
+
+  constructor(private localeManagerService: LocaleManagerService) {}
+
   async ngOnInit() {
-    const data = await import('../../../assets/i18n/fr/faq.json');
+    const data = await import(`../../../assets/i18n/${this.locale}/faq.json`);
     this.questionsData = data.questions;
   }
 }
