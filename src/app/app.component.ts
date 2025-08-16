@@ -14,7 +14,7 @@ import {
   IonToolbar,
   IonTitle,
 } from '@ionic/angular/standalone';
-import { TranslationKeys } from './shared/services/translation-keys.service';
+// Translation keys are now referenced directly as strings (see i18n re-organisation).
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { addIcons } from 'ionicons';
@@ -43,19 +43,10 @@ import { pizza, settings, helpCircle } from 'ionicons/icons';
   standalone: true,
 })
 export class AppComponent implements OnInit {
-  protected TranslationKeys = TranslationKeys;
   public appPages = [
-    { title: TranslationKeys.DOUGH_ROUTES.TITLE, url: '/dough', icon: 'pizza' },
-    {
-      title: TranslationKeys.SETTINGS_ROUTES.TITLE,
-      url: '/settings',
-      icon: 'settings',
-    },
-    {
-      title: TranslationKeys.FAQ_ROUTES.TITLE,
-      url: '/faq',
-      icon: 'help-circle',
-    },
+    { title: 'route.dough.index.title', url: '/dough', icon: 'pizza' },
+    { title: 'route.settings.index.title', url: '/settings', icon: 'settings' },
+    { title: 'route.faq.index.title', url: '/faq', icon: 'help-circle' },
   ];
   constructor() {
     addIcons({

@@ -1,0 +1,97 @@
+{
+  "form": {
+    "pizzasNumber": "Numero di pizze",
+    "doughType": "Tipo di impasto",
+    "yeastType": "Tipo di lievito",
+    "hydration": "Idratazione",
+    "temperature": "Temperatura",
+    "poolishRatio": "Rapporto poolish",
+    "rtRestTime": "Riposo caldo",
+    "coldRestTime": "Riposo freddo",
+    "restTimeUnit": "{count, plural, one {Ora} other {Ore}}"
+  },
+  "ingredients": {
+    "flour": "Farina",
+    "water": "Acqua",
+    "yeast": "Lievito",
+    "honey": "Miele",
+    "salt": "Sale",
+    "dryActiveYeast": "Secco attivo",
+    "dryInstantYeast": "Secco istantaneo",
+    "freshYeast": "Fresco"
+  },
+  "calculations": {
+    "total": "Totale",
+    "poolish": "Poolish",
+    "dough": "Impasto",
+    "weight": "Peso",
+    "percentage": "Percentuale",
+    "ingredients": "Ingredienti"
+  },
+  "doughTypes": {
+    "poolish": "Con poolish",
+    "direct": "Metodo diretto"
+  },
+  "recipe": {
+    "quantity": {
+      "flour": "<strong>{{ quantity }} g</strong> di farina",
+      "water": "<strong>{{ quantity }} ml</strong> di acqua",
+      "yeast": "<strong>{{ quantity }} g</strong> di lievito",
+      "honey": "<strong>{{ quantity }} g</strong> di miele",
+      "salt": "<strong>{{ quantity }} g</strong> di sale"
+    },
+    "direct": {
+      "title": "Preparazione dell'impasto",
+      "subtitle": "Impastatura e formatura",
+      "step1Description": "Pesare tutti gli ingredienti",
+      "step2Description": "Mescolare il lievito e il miele nell'acqua",
+      "step3Description": "Aggiungere il sale e la farina e mescolare con un cucchiaio di legno",
+      "step4Description": "Una volta che tutti gli ingredienti sono ben mescolati e si inizia ad avere una palla, si può deporre sul piano di lavoro",
+      "step5Description": "Terminare l'impastatura a mano per circa 10 min (possibilità di utilizzare un robot da cucina con il suo gancio impastatore). Impastare bene per idratare correttamente la farina",
+      "step6Description": "Una volta che l'impasto ha una bella struttura, formare una palla e lasciarla riposare per 25 min sotto una ciotola (l'impasto si tenderà e diventerà più liscio)",
+      "step7Description": "Procedere ad alcune pieghe sull'impasto e dargli una bella forma di palla (ben liscia e che non si attacca più)",
+      "step8Description": "Deporre la palla in un recipiente ermetico e lasciarla riposare 24 ore",
+      "step9Description": "Recuperare l'impasto e, con un taglia-impasto o una spatola, formare dei panetti (ben tesi) di circa <strong>{{ pizzaWeight }} g</strong>",
+      "step10Description": "Deporre i panetti in un piatto lasciando spazio tra ciascuno (cresceranno ancora)",
+      "step11Description": "Chiudere il piatto o coprirlo con pellicola trasparente e lasciar riposare 3 ore"
+    },
+    "poolish": {
+      "poolish": {
+        "title": "PREPARAZIONE DELLA POOLISH",
+        "subtitle": "Primo passo: preparazione della pre-fermentazione",
+        "step1Description": "Pesare tutti gli ingredienti:",
+        "ingredientsList": "lista degli ingredienti",
+        "step2Description": "In una grande ciotola, sciogliere il lievito nell'acqua e aggiungere il miele",
+        "step3Description": "Aggiungere la farina e mescolare con un cucchiaio di legno fino all'ottenimento di un impasto omogeneo, poi lasciar riposare <strong>{{ rtRestTime }} ora(e)</strong> a temperatura ambiente coperto con pellicola trasparente, poi <strong>{{ coldRestTime }} ora(e)</strong> in frigorifero"
+      },
+      "dough": {
+        "title": "PREPARAZIONE DELL'IMPASTO",
+        "subtitle": "Secondo passo: impastatura e formatura",
+        "step1Description": "Tirare fuori la poolish 1 ora prima dell'utilizzo",
+        "step2Description": "Pesare le quantità da aggiungere nella poolish:",
+        "ingredientsList": "lista degli ingredienti",
+        "step3Description": "Nella ciotola della poolish, aggiungere l'acqua e il sale. Mescolare con il cucchiaio fino all'assorbimento dell'acqua",
+        "step4Description": "Aggiungere poco a poco la farina e mescolare con il cucchiaio",
+        "step5Description": "Quando non è più possibile utilizzare un cucchiaio, trasferire l'impasto sul piano di lavoro",
+        "step6Description": "Lavorare l'impasto impastandolo, la farina deve essere completamente integrata",
+        "step7Description": "Fare alcune pieghe con l'impasto e formare una bella palla (morbida e flessibile)",
+        "step8Description": "Far riposare 10-15 min sotto la ciotola",
+        "step9Description": "Riformare una bella palla e lasciar riposare ancora 1 ora in un recipiente ermetico",
+        "step10Description": "Mettere un sottile strato di semolino fine in un piatto",
+        "step11Description": "Recuperare l'impasto e con un taglia-impasto o una spatola formare dei panetti (ben tesi) di circa <strong>{{ pizzaWeight }} g</strong>",
+        "step12Description": "Deporre i panetti nel piatto lasciando spazio tra loro (cresceranno ancora)",
+        "step13Description": "Chiudere il piatto o mettere pellicola trasparente sopra e lasciar riposare tra 1 e 3 ore",
+        "tipsTitle": "💡 Consigli:",
+        "tipsDescription": "Se l'impasto si attacca troppo, formare una palla e lasciar riposare 10 min sotto una ciotola",
+        "successMessage": "🎉 Ed ecco fatto, sono pronti per essere trasformati in PIZZA!"
+      }
+    },
+    "storage": {
+      "title": "CONSERVAZIONE",
+      "subtitle": "Consigli per la conservazione",
+      "refrigerator": "Frigorifero: I panetti si conservano per 2-3 giorni",
+      "freezer": "Congelatore: Si congela molto bene, non conservare più di 2-3 mesi"
+    }
+  }
+}
+

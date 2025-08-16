@@ -7,7 +7,6 @@ import {
   IonCardSubtitle,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
-import { TranslationKeys } from 'src/app/shared/services/translation-keys.service';
 
 @Component({
   selector: 'app-faq',
@@ -23,8 +22,14 @@ import { TranslationKeys } from 'src/app/shared/services/translation-keys.servic
   ],
 })
 export class FaqComponent implements OnInit {
-  TranslationKeys = TranslationKeys;
-  questionsData = TranslationKeys.FAQ.QUESTIONS;
-
-  ngOnInit() {}
+  questionsData: {
+    title: string;
+    subtitle: string;
+    answers: string[];
+    tips?: { title: string; description: string }[];
+  }[] = [];
+  async ngOnInit() {
+    const data = await import('../../../assets/i18n/fr/faq.json');
+    this.questionsData = data.questions;
+  }
 }

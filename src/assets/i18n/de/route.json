@@ -1,0 +1,24 @@
+{
+  "dough": {
+    "index": {
+      "title": "Pizzateig",
+      "segments": {
+        "calculator": "Rechner",
+        "recipe": "Rezept"
+      },
+      "calculator": {
+        "title": "Konfiguration",
+        "subtitle": "Konfigurieren Sie Ihr Pizzarezept"
+      },
+      "ingredients": {
+        "title": "Zutaten",
+        "subtitle": "Zutatenmengen in Gramm (g)"
+      }
+    }
+  },
+  "settings": {
+    "index": {
+      "title": "Einstellungen"
+    }
+  }
+}

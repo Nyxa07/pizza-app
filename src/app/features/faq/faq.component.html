@@ -2,23 +2,23 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>
-        {{ question.TITLE | translate }}
+        {{ question.title | translate }}
       </ion-card-title>
       <ion-card-subtitle>
-        {{ question.SUBTITLE | translate }}
+        {{ question.subtitle | translate }}
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      @for (answer of question.ANSWERS; track answer) {
+      @for (answer of question.answers; track answer) {
         <p>
           {{ answer | translate }}
         </p>
       }
-      @for (tip of question.TIPS; track tip) {
+      @for (tip of question.tips!; track tip) {
         <div class="tips">
           <p>
-            <strong>{{ tip.TITLE | translate }}</strong>
-            {{ tip.DESCRIPTION | translate }}
+            <strong>{{ tip.title | translate }}</strong>
+            {{ tip.description | translate }}
           </p>
         </div>
       }

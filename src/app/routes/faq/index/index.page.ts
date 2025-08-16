@@ -8,7 +8,6 @@ import {
   IonButtons,
   IonMenuButton,
 } from '@ionic/angular/standalone';
-import { TranslationKeys } from 'src/app/shared/services/translation-keys.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -26,6 +25,4 @@ import { TranslatePipe } from '@ngx-translate/core';
     IonMenuButton,
   ],
 })
-export class FaqIndexPage {
-  TranslationKeys = TranslationKeys;
-}
+export class FaqIndexPage {}

@@ -1,0 +1,29 @@
+{
+  "dough": {
+    "index": {
+      "title": "Pâte à pizza",
+      "segments": {
+        "calculator": "Calculateur",
+        "recipe": "Recette"
+      },
+      "calculator": {
+        "title": "Configuration",
+        "subtitle": "Configurez votre recette de pizzas"
+      },
+      "ingredients": {
+        "title": "Ingrédients",
+        "subtitle": "Quantité d'ingrédients en grammes (g)"
+      }
+    }
+  },
+  "faq": {
+    "index": {
+      "title": "FAQ"
+    }
+  },
+  "settings": {
+    "index": {
+      "title": "Paramètres"
+    }
+  }
+}

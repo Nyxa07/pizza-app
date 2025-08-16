@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonItem, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
-import { TranslationKeys } from 'src/app/shared/services/translation-keys.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { LocaleManagerService } from '../../locales/services/locale-manager.service';
@@ -22,15 +21,11 @@ import { Locales } from '../../locales/enums/locales.enum';
   ],
 })
 export class SettingsFormComponent implements OnInit {
-  TranslationKeys = TranslationKeys;
   fb = inject(FormBuilder);
   localeManager = inject(LocaleManagerService);
-  availableLocales = Object.entries(Locales).map(([key, value]) => ({
-    translateKey:
-      TranslationKeys.LANGUAGE.SELECTOR[
-        key as keyof typeof TranslationKeys.LANGUAGE.SELECTOR
-      ],
-    value: value,
+  availableLocales = Object.entries(Locales).map(([_, value]) => ({
+    translateKey: `language.selector.${value}`,
+    value,
   }));
   form = this.fb.group({
     locale: [this.localeManager.getLocale(), Validators.required],

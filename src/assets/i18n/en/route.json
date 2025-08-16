@@ -1,0 +1,24 @@
+{
+  "dough": {
+    "index": {
+      "title": "Pizza Dough",
+      "segments": {
+        "calculator": "Calculator",
+        "recipe": "Recipe"
+      },
+      "calculator": {
+        "title": "Configuration",
+        "subtitle": "Configure your pizza recipe"
+      },
+      "ingredients": {
+        "title": "Ingredients",
+        "subtitle": "Ingredient quantities in grams (g)"
+      }
+    }
+  },
+  "settings": {
+    "index": {
+      "title": "Settings"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "dough": {
+    "index": {
+      "title": "Masa de Pizza",
+      "segments": {
+        "calculator": "Calculadora",
+        "recipe": "Receta"
+      },
+      "calculator": {
+        "title": "Configuración",
+        "subtitle": "Configura tu receta de pizzas"
+      },
+      "ingredients": {
+        "title": "Ingredientes",
+        "subtitle": "Cantidades de ingredientes en gramos (g)"
+      }
+    }
+  },
+  "settings": {
+    "index": {
+      "title": "Configuración"
+    }
+  }
+}

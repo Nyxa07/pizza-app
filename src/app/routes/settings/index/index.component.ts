@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslationKeys } from 'src/app/shared/services/translation-keys.service';
 import {
   IonHeader,
   IonToolbar,
@@ -28,7 +27,5 @@ import { SettingsFormComponent } from 'src/app/features/settings/settings-form/s
   ],
 })
 export class SettingsIndexRouteComponent implements OnInit {
-  TranslationKeys = TranslationKeys;
-
   ngOnInit() {}
 }

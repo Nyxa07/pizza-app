@@ -3,9 +3,9 @@
     <ion-select
       formControlName="locale"
       mode="ios"
-      [cancelText]="TranslationKeys.COMMON.ACTIONS.CANCEL | translate"
-      [okText]="TranslationKeys.COMMON.ACTIONS.OK | translate"
-      [label]="TranslationKeys.LANGUAGE.SELECTOR.TITLE | translate"
+      [cancelText]="'common.actions.cancel' | translate"
+      [okText]="'common.actions.ok' | translate"
+      [label]="'language.selector.title' | translate"
     >
       @for (locale of availableLocales; track locale) {
         <ion-select-option [value]="locale.value">

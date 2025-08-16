@@ -1,0 +1,10 @@
+{
+  "selector": {
+    "title": "Select Language",
+    "en": "English",
+    "fr": "French",
+    "it": "Italian",
+    "es": "Spanish",
+    "de": "German"
+  }
+}

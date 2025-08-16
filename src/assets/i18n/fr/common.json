@@ -1,0 +1,21 @@
+{
+  "actions": {
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "ok": "OK"
+  },
+  "status": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "warning": "Attention"
+  },
+  "navigation": {
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent"
+  }
+}

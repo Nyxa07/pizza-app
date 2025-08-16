@@ -9,7 +9,6 @@ import {
   IonCardSubtitle,
   IonCardContent,
 } from '@ionic/angular/standalone';
-import { TranslationKeys } from '../../../shared/services/translation-keys.service';
 import { PIZZA_WEIGHT } from '../../dough/constants';
 
 @Component({
@@ -33,7 +32,6 @@ import { PIZZA_WEIGHT } from '../../dough/constants';
 })
 export class DoughDirectRecipeComponent implements OnInit {
   result = input.required<DoughResult>();
-  TranslationKeys = TranslationKeys;
   protected pizzaWeight = PIZZA_WEIGHT;
 
   constructor() {}

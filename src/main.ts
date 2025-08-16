@@ -14,9 +14,9 @@ import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { provideTranslateService, TranslateService } from '@ngx-translate/core';
 import { provideHttpClient } from '@angular/common/http';
-import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { inject, provideAppInitializer } from '@angular/core';
 import { LocaleManagerService } from './app/features/locales/services/locale-manager.service';
+import { provideMultiTranslateLoader } from './app/features/locales/services/translation.loader';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -25,12 +25,8 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(),
     provideTranslateService({
-      loader: provideTranslateHttpLoader({
-        prefix: '/assets/i18n/',
-        suffix: '.json',
-      }),
+      loader: provideMultiTranslateLoader(),
       fallbackLang: 'en',
-      // lang: getLocaleId(),
     }),
     provideAppInitializer(() => {
       const localeInitService = inject(LocaleManagerService);

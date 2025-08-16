@@ -1,0 +1,95 @@
+{
+  "title": "FAQ",
+  "questions": [
+    {
+      "title": "Die Direktmethode",
+      "subtitle": "Direkte Teigzubereitung",
+      "answers": [
+        "Es ist eine einfachere Zubereitungsmethode als indirekte Methoden.",
+        "Alle Zutaten werden direkt eingearbeitet und nach einer mehr oder weniger langen Ruhezeit kann man ihn verwenden."
+      ]
+    },
+    {
+      "title": "Poolish",
+      "subtitle": "Poolish ist ein flüssiger Teig aus Mehl, Wasser und Hefe",
+      "answers": [
+        "Poolish ist eine Vorfermentation des Teigs, die mehrere Stunden ruht, bevor sie für Pizzateig verwendet wird.",
+        "Er wird zubereitet, indem 1 Teil Mehl und 1 Teil Wasser sowie eine kleine Menge Hefe gemischt werden.",
+        "Es ist eine indirekte Methode der Pizzateigzubereitung."
+      ]
+    },
+    {
+      "title": "Biga",
+      "subtitle": "Biga ist eine sogenannte trockene Zubereitung aus Mehl, Wasser und Hefe",
+      "answers": [
+        "Biga ist eine Vorfermentation des Teigs, die mehrere Stunden ruht, bevor sie für Pizzateig verwendet wird.",
+        "BlaBlaBlah, noch nie gemacht, also werde ich nicht irgendetwas hinschreiben 😉"
+      ]
+    },
+    {
+      "title": " Hefen",
+      "subtitle": "Hier verwenden wir 3 Arten von Hefe",
+      "answers": [
+        "Aktive Trockenhefe ist die Hefe, die im Handel als klassische Bäckerhefe und nicht als schnelle zu finden ist.",
+        "Instant-Trockenhefe ist gefriergetrocknete Hefe in Form feiner Flocken. Sie muss vor Gebrauch nicht hydratisiert werden und ermöglicht schnelles Aufgehen.",
+        "Frischhefe ist die Hefe, die im Handel als frische Bäckerhefe in Würfelform zu finden ist."
+      ],
+      "tips": [
+        {
+          "title": "💡 Tipp:",
+          "description": "Der Rechner ermöglicht es einfach, von einer Hefe zur anderen zu wechseln"
+        }
+      ]
+    },
+    {
+      "title": " 💦 Hydratation",
+      "subtitle": "Verhältnis zwischen Gesamtwassermenge und Gesamtmehlmenge",
+      "answers": [
+        "Beispiel 1: Für 100 g Gesamtwasser habe ich 151,5 g Gesamtmehl, was eine Teighydratation von 66% ergibt. Berechnung: 100 ÷ 151,5 = 0,66 oder 66%.",
+        "Beispiel 2: Wenn ich wissen möchte, wie viel Wasser hinzuzufügen ist, wenn ich 151,5 g Mehl habe und 66% Hydratation möchte, ist die Berechnung: 0,66 x 151,5 = 100 g Gesamtwasser hinzuzufügen."
+      ],
+      "tips": [
+        {
+          "title": "💡 Tipp:",
+          "description": "Je hydratisierter der Teig, desto schwieriger wird er zu handhaben sein, er wird flüssiger und damit klebriger. Empfohlene Hydratation: Zwischen 62 & 75%"
+        }
+      ]
+    },
+    {
+      "title": " 🍚 Poolish-Verhältnis",
+      "subtitle": "Verhältnis zwischen Poolish-Menge und Gesamtteigmenge",
+      "answers": [
+        "Üblicherweise werden zwischen 30 und 60% Poolish in der finalen Teigmenge verwendet.",
+        "Beispiel: Wenn ich 30% Poolish in meinem Teig und 1 kg finalen Teig möchte, ist die Berechnung: 1000 x 0,3 = 300 g. Der Poolish wird also 300 g betragen und aus 150 g Mehl und 150 g Wasser bestehen."
+      ],
+      "tips": [
+        {
+          "title": "💡 Tipp:",
+          "description": "Im Allgemeinen wird im Winter ein höheres Poolish-Verhältnis als im Sommer verwendet, da die Fermentation teilweise von der Temperatur beeinflusst wird. Mehr Poolish im Winter als im Sommer kann der finalen Teigentwicklung helfen."
+        }
+      ]
+    },
+    {
+      "title": " 🌡️ Temperatur",
+      "subtitle": "Das ist die Raumtemperatur, außerhalb des Kühlschranks",
+      "answers": [
+        "Temperatur des Raumes, in dem wir Poolish / Teig / Biga / Teigkugeln ruhen lassen werden.",
+        "Wird in der Berechnung der warmen Ruhe verwendet."
+      ]
+    },
+    {
+      "title": " 🔥 Warme Ruhe",
+      "subtitle": "",
+      "answers": [
+        "Ruhezeit verschiedener Zubereitungen bei der gewählten Temperatur."
+      ]
+    },
+    {
+      "title": " ❄️ Kalte Ruhe",
+      "subtitle": "",
+      "answers": [
+        "Ruhezeit verschiedener Zubereitungen im Kühlschrank."
+      ]
+    }
+  ]
+}

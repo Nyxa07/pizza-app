@@ -10,7 +10,6 @@ import {
 } from '@ionic/angular/standalone';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
-import { TranslationKeys } from '../../../shared/services/translation-keys.service';
 import { LowerCasePipe } from '@angular/common';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { DoughType } from '../enums/dough-type.enum';
@@ -44,8 +43,6 @@ export interface PoolishPizzaFormData {
   standalone: true,
 })
 export class DoughFormComponent implements OnInit {
-  // Make TranslationKeys available in template
-  protected TranslationKeys = TranslationKeys;
   protected storedData = localStorage.getItem('PoolishPizzaForm:formData');
   protected formBuilder = inject(FormBuilder);
   protected form = this.formBuilder.group({

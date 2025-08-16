@@ -9,8 +9,6 @@ import {
 } from '@ionic/angular/standalone';
 import { DoughResult } from '../../dough/services/dough-calculator.service';
 import { TranslateModule } from '@ngx-translate/core';
-import { TranslationKeys } from '../../../shared/services/translation-keys.service';
-import { PIZZA_WEIGHT } from '../../dough/constants';
 
 @Component({
   selector: 'app-dough-poolish-recipe',
@@ -34,9 +32,5 @@ import { PIZZA_WEIGHT } from '../../dough/constants';
 export class DoughPoolishRecipeComponent implements OnInit {
   result = input.required<DoughResult>();
   constructor() {}
-
-  // Make TranslationKeys available in template
-  protected TranslationKeys = TranslationKeys;
-
   ngOnInit() {}
 }

@@ -3,7 +3,6 @@ import {
   IonSegment,
   IonSegmentButton,
   IonLabel,
-  IonRouterOutlet,
   IonSegmentView,
   IonSegmentContent,
   IonHeader,
@@ -19,9 +18,8 @@ import {
 } from '@ionic/angular/standalone';
 import { PoolishPizzaFormData } from 'src/app/features/dough/dough-form/dough-form.component';
 import { DoughCalculatorService } from 'src/app/features/dough/services/dough-calculator.service';
-import { TranslationKeys } from 'src/app/shared/services/translation-keys.service';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { DoughFormComponent } from 'src/app/features/dough/dough-form/dough-form.component';
 import { DoughQuantityComponent } from 'src/app/features/dough/dough-quantity/dough-quantity.component';
 import { DoughPoolishRecipeComponent } from 'src/app/features/dough-recipe/dough-poolish-recipe/dough-poolish-recipe.component';
@@ -48,8 +46,6 @@ import { DoughDirectRecipeComponent } from 'src/app/features/dough-recipe/dough-
     IonCardTitle,
     IonCardSubtitle,
     IonCardContent,
-    IonRouterOutlet,
-    RouterLink,
     DoughFormComponent,
     DoughQuantityComponent,
     DoughDirectRecipeComponent,
@@ -59,7 +55,6 @@ import { DoughDirectRecipeComponent } from 'src/app/features/dough-recipe/dough-
 export class DoughIndexPage {
   private readonly doughCalculatorService = inject(DoughCalculatorService);
   private readonly router = inject(Router);
-  TranslationKeys = TranslationKeys;
   formData = signal<PoolishPizzaFormData | null>(null);
   result = computed(() =>
     this.formData()

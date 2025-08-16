@@ -1,0 +1,97 @@
+{
+  "form": {
+    "pizzasNumber": "Anzahl der Pizzen",
+    "doughType": "Teigtyp",
+    "yeastType": "Hefetyp",
+    "hydration": "Hydratation",
+    "temperature": "Temperatur",
+    "poolishRatio": "Poolish-Verhältnis",
+    "rtRestTime": "Warme-Ruhe",
+    "coldRestTime": "Kälte-Ruhe",
+    "restTimeUnit": "{count, plural, one {Stunde} other {Stunden}}"
+  },
+  "ingredients": {
+    "flour": "Mehl",
+    "water": "Wasser",
+    "yeast": "Hefe",
+    "honey": "Honig",
+    "salt": "Salz",
+    "dryActiveYeast": "Aktive Trockenhefe",
+    "dryInstantYeast": "Instant-Trockenhefe",
+    "freshYeast": "Frisch"
+  },
+  "calculations": {
+    "total": "Gesamt",
+    "poolish": "Poolish",
+    "dough": "Teig",
+    "weight": "Gewicht",
+    "percentage": "Prozent",
+    "ingredients": "Zutaten"
+  },
+  "doughTypes": {
+    "poolish": "Mit Poolish",
+    "direct": "Direktmethode"
+  },
+  "recipe": {
+    "quantity": {
+      "flour": "<strong>{{ quantity }} g</strong> Mehl",
+      "water": "<strong>{{ quantity }} ml</strong> Wasser",
+      "yeast": "<strong>{{ quantity }} g</strong> Hefe",
+      "honey": "<strong>{{ quantity }} g</strong> Honig",
+      "salt": "<strong>{{ quantity }} g</strong> Salz"
+    },
+    "direct": {
+      "title": "Teigzubereitung",
+      "subtitle": "Kneten und Formen",
+      "step1Description": "Alle Zutaten abwiegen",
+      "step2Description": "Hefe und Honig ins Wasser einrühren",
+      "step3Description": "Salz und Mehl hinzufügen und mit einem Holzlöffel verrühren",
+      "step4Description": "Wenn alles gut vermischt ist und sich ein Ball zu bilden beginnt, auf die Arbeitsfläche legen",
+      "step5Description": "Das Kneten von Hand etwa 10 Min beenden (Küchenmaschine mit Knethaken möglich). Gut kneten, damit das Mehl richtig hydratisiert wird",
+      "step6Description": "Wenn der Teig eine schöne Struktur hat, einen Ball formen und 25 Min unter einer Schüssel ruhen lassen (er wird sich straffen und glatter werden)",
+      "step7Description": "Einige Falten durchführen und einen schönen glatten, nicht klebrigen Ball formen",
+      "step8Description": "Den Ball in einen luftdichten Behälter geben und 24 Stunden ruhen lassen",
+      "step9Description": "Den Teig herausholen und mit einem Teigschaber oder Spatel Teigkugeln (gut gespannt) von etwa <strong>{{ pizzaWeight }} g</strong> formen",
+      "step10Description": "Die Teigkugeln auf ein Blech legen und Abstand zwischen jeder lassen (sie werden weiter aufgehen)",
+      "step11Description": "Das Blech schließen oder mit Frischhaltefolie abdecken und 3 Stunden ruhen lassen"
+    },
+    "poolish": {
+      "poolish": {
+        "title": "POOLISH-ZUBEREITUNG",
+        "subtitle": "Erster Schritt: Vorteig-Zubereitung",
+        "step1Description": "Alle Zutaten abwiegen:",
+        "ingredientsList": "Zutatenliste",
+        "step2Description": "In einer großen Schüssel Hefe in Wasser auflösen und Honig hinzufügen",
+        "step3Description": "Mehl hinzufügen und mit einem Holzlöffel bis zur Homogenität verrühren, dann <strong>{{ rtRestTime }} Stunde(n)</strong> bei Raumtemperatur abgedeckt mit Frischhaltefolie ruhen lassen, dann <strong>{{ coldRestTime }} Stunde(n)</strong> im Kühlschrank"
+      },
+      "dough": {
+        "title": "TEIGZUBEREITUNG",
+        "subtitle": "Zweiter Schritt: Kneten und Formen",
+        "step1Description": "Poolish 1 Stunde vor Gebrauch herausnehmen",
+        "step2Description": "Die zur Poolish hinzuzufügenden Mengen abwiegen:",
+        "ingredientsList": "Zutatenliste",
+        "step3Description": "In die Poolish-Schüssel Wasser und Salz hinzufügen. Mit Löffel verrühren bis das Wasser aufgenommen ist",
+        "step4Description": "Nach und nach Mehl hinzufügen und mit Löffel verrühren",
+        "step5Description": "Wenn es nicht mehr möglich ist einen Löffel zu verwenden, den Teig auf die Arbeitsfläche übertragen",
+        "step6Description": "Den Teig kneten bis das Mehl vollständig eingearbeitet ist",
+        "step7Description": "Einige Falten machen und einen schönen weichen Ball formen",
+        "step8Description": "10-15 Min unter einer Schüssel ruhen lassen",
+        "step9Description": "Einen schönen Ball neu formen und weitere 1 Stunde in einem luftdichten Behälter ruhen lassen",
+        "step10Description": "Eine dünne Schicht feinen Grieß auf ein Blech geben",
+        "step11Description": "Den Teig herausholen und mit Teigschaber oder Spatel Teigkugeln (gut gespannt) von etwa <strong>{{ pizzaWeight }} g</strong> formen",
+        "step12Description": "Die Kugeln auf das Blech legen und Abstand zwischen ihnen lassen (sie werden weiter wachsen)",
+        "step13Description": "Das Blech schließen oder mit Frischhaltefolie abdecken und zwischen 1 und 3 Stunden ruhen lassen",
+        "tipsTitle": "💡 Tipps:",
+        "tipsDescription": "Wenn der Teig zu klebrig ist, einen Ball formen und 10 Minuten unter einer Schüssel ruhen lassen",
+        "successMessage": "🎉 Und da haben Sie es, bereit um zu PIZZA zu werden!"
+      }
+    },
+    "storage": {
+      "title": "LAGERUNG",
+      "subtitle": "Lagerungstipps",
+      "refrigerator": "Kühlschrank: Teigkugeln sind 2-3 Tage haltbar",
+      "freezer": "Gefrierschrank: Gefriert sehr gut, nicht länger als 2-3 Monate aufbewahren"
+    }
+  }
+}
+

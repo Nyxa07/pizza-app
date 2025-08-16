@@ -7,7 +7,7 @@
         [pinFormatter]="pinFormatter"
         formControlName="nbPizzas"
         labelPlacement="start"
-        [label]="TranslationKeys.PIZZA.FORM.PIZZAS_NUMBER | translate"
+        [label]="'dough.form.pizzasNumber' | translate"
         [min]="1"
         [max]="25"
       ></ion-range>
@@ -15,45 +15,45 @@
     <ion-item>
       <ion-select
         mode="ios"
-        [label]="TranslationKeys.PIZZA.FORM.DOUGH_TYPE | translate"
+        [label]="'dough.form.doughType' | translate"
         formControlName="doughType"
-        [cancelText]="TranslationKeys.COMMON.ACTIONS.CANCEL | translate"
-        [okText]="TranslationKeys.COMMON.ACTIONS.OK | translate"
+        [cancelText]="'common.actions.cancel' | translate"
+        [okText]="'common.actions.ok' | translate"
       >
         <ion-select-option value="direct">{{
-          TranslationKeys.PIZZA.DOUGH_TYPES.DIRECT | translate
+          "dough.doughTypes.direct" | translate
         }}</ion-select-option>
         <ion-select-option value="poolish">{{
-          TranslationKeys.PIZZA.DOUGH_TYPES.POOLISH | translate
+          "dough.doughTypes.poolish" | translate
         }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-select
         mode="ios"
-        [label]="TranslationKeys.PIZZA.FORM.YEAST_TYPE | translate"
+        [label]="'dough.form.yeastType' | translate"
         formControlName="yeastType"
-        [cancelText]="TranslationKeys.COMMON.ACTIONS.CANCEL | translate"
-        [okText]="TranslationKeys.COMMON.ACTIONS.OK | translate"
+        [cancelText]="'common.actions.cancel' | translate"
+        [okText]="'common.actions.ok' | translate"
       >
         <ion-select-option value="dry_active">
-          {{ TranslationKeys.PIZZA.INGREDIENTS.DRY_ACTIVE_YEAST | translate }}
+          {{ "dough.ingredients.dryActiveYeast" | translate }}
         </ion-select-option>
         <ion-select-option value="dry_instant">
-          {{ TranslationKeys.PIZZA.INGREDIENTS.DRY_INSTANT_YEAST | translate }}
+          {{ "dough.ingredients.dryInstantYeast" | translate }}
         </ion-select-option>
         <ion-select-option value="fresh">{{
-          TranslationKeys.PIZZA.INGREDIENTS.FRESH_YEAST | translate
+          "dough.ingredients.freshYeast" | translate
         }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-select
         mode="ios"
-        [label]="TranslationKeys.PIZZA.FORM.HYDRATION | translate"
+        [label]="'dough.form.hydration' | translate"
         formControlName="hydrationRatio"
-        [cancelText]="TranslationKeys.COMMON.ACTIONS.CANCEL | translate"
-        [okText]="TranslationKeys.COMMON.ACTIONS.OK | translate"
+        [cancelText]="'common.actions.cancel' | translate"
+        [okText]="'common.actions.ok' | translate"
       >
         <ion-select-option [value]="0.62">62%</ion-select-option>
         <ion-select-option [value]="0.63">63%</ion-select-option>
@@ -79,10 +79,10 @@
     <ion-item>
       <ion-select
         mode="ios"
-        [label]="TranslationKeys.PIZZA.FORM.TEMPERATURE | translate"
+        [label]="'dough.form.temperature' | translate"
         formControlName="temperature"
-        [cancelText]="TranslationKeys.COMMON.ACTIONS.CANCEL | translate"
-        [okText]="TranslationKeys.COMMON.ACTIONS.OK | translate"
+        [cancelText]="'common.actions.cancel' | translate"
+        [okText]="'common.actions.ok' | translate"
       >
         @for (temperature of range(19, 36); track temperature) {
           <ion-select-option [value]="temperature">
@@ -95,10 +95,10 @@
       <ion-item>
         <ion-select
           mode="ios"
-          [label]="TranslationKeys.PIZZA.FORM.POOLISH_RATIO | translate"
+          [label]="'dough.form.poolishRatio' | translate"
           formControlName="poolishRatio"
-          [cancelText]="TranslationKeys.COMMON.ACTIONS.CANCEL | translate"
-          [okText]="TranslationKeys.COMMON.ACTIONS.OK | translate"
+          [cancelText]="'common.actions.cancel' | translate"
+          [okText]="'common.actions.ok' | translate"
         >
           @for (poolishRatio of range(30, 60); track poolishRatio) {
             <ion-select-option [value]="poolishRatio / 100">
@@ -111,22 +111,17 @@
     <ion-item>
       <ion-select
         mode="ios"
-        [label]=""
+        [label]="'dough.form.rtRestTime' | translate"
         formControlName="rtRestTime"
-        [label]="TranslationKeys.PIZZA.FORM.RT_REST_TIME | translate"
-        [cancelText]="TranslationKeys.COMMON.ACTIONS.CANCEL | translate"
-        [okText]="TranslationKeys.COMMON.ACTIONS.OK | translate"
+        [label]="'dough.form.rtRestTime' | translate"
+        [cancelText]="'common.actions.cancel' | translate"
+        [okText]="'common.actions.ok' | translate"
       >
         @for (i of range(1, 24); track i) {
           <ion-select-option [value]="i"
             >{{ i }}
             {{
-              TranslationKeys.getPluralizationKey(
-                TranslationKeys.PIZZA.FORM.REST_TIME_UNIT,
-                i > 1 ? true : false
-              )
-                | translate
-                | lowercase
+              "dough.form.restTimeUnit" | translate: { count: i } | lowercase
             }}
           </ion-select-option>
         }
@@ -135,22 +130,17 @@
     <ion-item>
       <ion-select
         mode="ios"
-        [label]=""
+        [label]="'dough.form.coldRestTime' | translate"
         formControlName="coldRestTime"
-        [label]="TranslationKeys.PIZZA.FORM.COLD_REST_TIME | translate"
-        [cancelText]="TranslationKeys.COMMON.ACTIONS.CANCEL | translate"
-        [okText]="TranslationKeys.COMMON.ACTIONS.OK | translate"
+        [label]="'dough.form.coldRestTime' | translate"
+        [cancelText]="'common.actions.cancel' | translate"
+        [okText]="'common.actions.ok' | translate"
       >
         @for (i of range(0, 24); track i) {
           <ion-select-option [value]="i"
             >{{ i }}
             {{
-              TranslationKeys.getPluralizationKey(
-                TranslationKeys.PIZZA.FORM.REST_TIME_UNIT,
-                i > 1 ? true : false
-              )
-                | translate
-                | lowercase
+              "dough.form.restTimeUnit" | translate: { count: i } | lowercase
             }}
           </ion-select-option>
         }
