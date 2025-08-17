@@ -1,12 +1,12 @@
-android:
+android-build:
 	ionic cap sync
 	ionic cap build android
 
-ios:
+ios-build:
 	ionic cap sync
 	ionic cap build ios
 
-web:
+web-build:
 	npm run build:prod
 
 serve:
