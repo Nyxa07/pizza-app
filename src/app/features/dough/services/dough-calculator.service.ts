@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { YeastService } from 'src/app/features/dough/services/yeast.service';
 import { DoughType } from '../enums/dough-type.enum';
 import { DoughInput } from './dough-form-state.service';
@@ -18,7 +18,7 @@ export interface DoughResult {
   total: Quantity;
   poolish: Quantity | null;
   dough: Quantity;
-  pizzaBallWeight: number;
+  pizzaWeight: number;
 }
 
 @Injectable({
@@ -46,10 +46,8 @@ export class DoughCalculatorService {
       : 0;
 
     // Ingredients
-    const flourPerPizza =
-      this.doughConfigService.constants.pizzaWeight / (1 + hydration);
-    const waterPerPizza =
-      this.doughConfigService.constants.pizzaWeight - flourPerPizza;
+    const flourPerPizza = data.pizzaWeight / (1 + hydration);
+    const waterPerPizza = data.pizzaWeight - flourPerPizza;
     const totalFlour = data.nbPizzas * flourPerPizza;
     const totalWater = data.nbPizzas * waterPerPizza;
     const poolishTotal = this.computePoolishQuantity(
@@ -59,10 +57,10 @@ export class DoughCalculatorService {
     const poolishQuantity = poolishTotal / 2;
 
     // Salt: baker's percentage
-    const salt = this.doughConfigService.constants.saltRatio * totalFlour;
+    const salt = data.saltRatio * totalFlour;
     const flourPerDough = totalFlour - poolishQuantity;
     const waterPerDough = totalWater - poolishQuantity;
-    const honey = this.doughConfigService.constants.honeyRatio * totalFlour;
+    const honey = data.honeyRatio * totalFlour;
 
     const yeast =
       data.doughType === DoughType.POOLISH
@@ -73,6 +71,7 @@ export class DoughCalculatorService {
             data.rtRestTime,
             data.coldRestTime,
             honey,
+            data.flourStrength,
           )
         : this.yeastService.yeastForDough(
             data.temperature,
@@ -83,6 +82,7 @@ export class DoughCalculatorService {
             salt,
             data.rtRestTime,
             data.coldRestTime,
+            data.flourStrength,
           );
 
     const yeastValue = yeast;
@@ -119,7 +119,7 @@ export class DoughCalculatorService {
         rtRestTime: data.rtRestTime,
         honey: honey,
       },
-      pizzaBallWeight: this.doughConfigService.constants.pizzaWeight,
+      pizzaWeight: data.pizzaWeight,
     };
 
     return result;
