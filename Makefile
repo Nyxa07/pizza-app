@@ -10,4 +10,5 @@ web:
 	npm run build:prod
 
 serve:
+	npm i
 	ionic serve
