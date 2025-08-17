@@ -1,13 +1,11 @@
-import { Component, inject, OnInit, output, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { YeastType } from '../enums/yeast-type.enum';
 import {
   IonItem,
   IonSelect,
   IonSelectOption,
   IonList,
   IonRange,
-  IonButton,
 } from '@ionic/angular/standalone';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
@@ -39,7 +37,6 @@ import {
     LowerCasePipe,
     AsyncPipe,
     NumberPipe,
-    IonButton,
   ],
   standalone: true,
 })
@@ -100,8 +97,7 @@ export class DoughFormComponent implements OnInit {
     );
   }
 
-  protected reset() {
+  reset() {
     this.form.patchValue(DEFAULT_INPUT);
-    console.log('reset', DEFAULT_INPUT, this.form.value);
   }
 }
