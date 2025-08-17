@@ -1,13 +1,18 @@
 {
   "form": {
+    "titles": {
+      "quantity": "Teigmenge",
+      "doughType": "Teigart",
+      "rest": "Ruhe"
+    },
     "pizzasNumber": "Anzahl der Pizzen",
     "doughType": "Methode",
     "yeastType": "Hefeart",
     "hydration": "Hydratation",
     "temperature": "Temperatur",
     "poolishRatio": "Poolish-Verhältnis",
-    "rtRestTime": "Ruhe bei Raumtemperatur",
-    "coldRestTime": "Kältruhe",
+    "rtRestTime": "Bei Raumtemperatur",
+    "coldRestTime": "Kalt",
     "restTimeUnit": "{count, plural, one {Stunde} other {Stunden}}",
     "flourStrength": "Mehlstärke (W)",
     "saltRatio": "Salzverhältnis",
