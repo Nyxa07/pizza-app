@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
-  IonInput,
   IonItem,
   IonList,
   IonListHeader,
@@ -16,6 +15,7 @@ import { ThemeService } from '../../theme/services/theme.service';
 import { DoughConfigService } from '../../dough/services/dough-config.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
+import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
 @Component({
   selector: 'app-settings-form',
@@ -31,7 +31,7 @@ import { debounceTime } from 'rxjs';
     IonToggle,
     IonList,
     IonListHeader,
-    IonInput,
+    NumberPipe,
   ],
 })
 export class SettingsFormComponent implements OnInit {
@@ -49,12 +49,12 @@ export class SettingsFormComponent implements OnInit {
     ],
     saltRatio: [
       Math.round(this.doughConfigService.constants.saltRatio * 100 * 100) / 100,
-      [Validators.required, Validators.min(2.8), Validators.max(3.2)],
+      [Validators.required, Validators.min(2), Validators.max(4)],
     ],
     honeyRatio: [
       Math.round(this.doughConfigService.constants.honeyRatio * 100 * 100) /
         100,
-      [Validators.required, Validators.min(0), Validators.max(5)],
+      [Validators.required, Validators.min(0), Validators.max(0.5)],
     ],
   });
 
@@ -78,6 +78,13 @@ export class SettingsFormComponent implements OnInit {
           honeyRatio: (value.honeyRatio ?? 0) / 100,
         });
       });
+  }
+
+  range(start: number, end: number, step: number = 1) {
+    return Array.from(
+      { length: (end - start) / step + 1 },
+      (_, i) => start + i * step,
+    );
   }
 
   ngOnInit() {}
