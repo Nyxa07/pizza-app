@@ -1,0 +1,31 @@
+{
+  "form": {
+    "language": {
+      "title": "Lingua",
+      "selector": {
+        "title": "Seleziona lingua"
+      }
+    },
+    "appearance": {
+      "title": "Aspetto",
+      "paletteToggle": {
+        "title": "Modalità scura"
+      }
+    },
+    "dough": {
+      "title": "Impasto",
+      "pizzaWeight": {
+        "title": "Peso della pizza",
+        "helperText": "Valore in grammi. Si consiglia un valore tra 250 e 280 (~30cm)."
+      },
+      "saltRatio": {
+        "title": "Rapporto del sale",
+        "helperText": "Valore in % della farina totale. Si consiglia un valore tra 2.8 e 3.2."
+      },
+      "honeyRatio": {
+        "title": "Rapporto del miele",
+        "helperText": "Valore in % della farina totale. Si consiglia un valore tra 0 e 0.5."
+      }
+    }
+  }
+}
