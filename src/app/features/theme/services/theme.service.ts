@@ -8,7 +8,16 @@ export class ThemeService {
   private readonly STORAGE_KEY = 'theme';
   private darkMode = this.prefsStorage.get<string>(this.STORAGE_KEY) === 'dark';
 
-  constructor(private prefsStorage: PrefsStorage) {}
+  constructor(private prefsStorage: PrefsStorage) {
+    const theme = this.prefsStorage.get<string>(this.STORAGE_KEY);
+    if (theme) {
+      this.darkMode = theme === 'dark';
+      document.documentElement.classList.toggle(
+        'ion-palette-dark',
+        this.darkMode,
+      );
+    }
+  }
 
   setDarkMode(isDarkMode: boolean) {
     this.darkMode = isDarkMode;
