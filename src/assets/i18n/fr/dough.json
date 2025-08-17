@@ -57,7 +57,7 @@
     },
     "poolish": {
       "poolish": {
-        "title": "PRÉPARATION DE LA POOLISH",
+        "title": "Préparation de la poolish",
         "subtitle": "Première étape : préparation de la pré-fermentation",
         "step1Description": "Peser tous les ingrédients :",
         "ingredientsList": "liste des ingrédients",
@@ -65,7 +65,7 @@
         "step3Description": "Ajouter la farine et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène, puis laisser reposer <strong>{ rtRestTime } heure(s)</strong> à température ambiante couvert d'un film plastique, puis <strong>{ coldRestTime } heure(s)</strong> au réfrigérateur"
       },
       "dough": {
-        "title": "PRÉPARATION DE LA PÂTE",
+        "title": "Préparation de la pâte",
         "subtitle": "Deuxième étape : pétrissage et formation",
         "step1Description": "Sortir la poolish 1H avant utilisation",
         "step2Description": "Peser les quantités à ajouter dans la poolish :",
@@ -81,13 +81,13 @@
         "step11Description": "Récupérer la pâte et avec un coupe pâte ou une spatule former des pâtons (bien tendu) d'environ <strong>{ pizzaWeight } g</strong>",
         "step12Description": "Déposer les pâtons dans le plat en laissant de l'espace entre eux (ils vont encore grossir)",
         "step13Description": "Fermer le plat ou mettre un film plastique sur celui-ci et laisser reposer entre 1H & 3H",
-        "tipsTitle": "💡 Tips :",
+        "tipsTitle": "💡 Astuce :",
         "tipsDescription": "Si la pâte colle trop, former une boule et laisser reposer 10 min sous un saladier",
         "successMessage": "🎉 Et voilà, ils sont prêt à être transformé en PIZZA !"
       }
     },
     "storage": {
-      "title": "CONSERVATION",
+      "title": "Conservation",
       "subtitle": "Conseils de stockage",
       "refrigerator": "Réfrigérateur : Les pâtons se gardent 2-3 jours",
       "freezer": "Congélateur : Se congèle très bien, ne pas garder plus de 2-3 mois"
