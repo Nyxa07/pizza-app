@@ -16,6 +16,7 @@ import { DoughConfigService } from '../../dough/services/dough-config.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
+import { DoughFormStateService } from '../../dough/services/dough-form-state.service';
 
 @Component({
   selector: 'app-settings-form',
@@ -43,25 +44,18 @@ export class SettingsFormComponent implements OnInit {
   form = this.fb.group({
     locale: [this.localeManager.getLocale(), Validators.required],
     paletteToggle: [this.themeService.isDarkMode()],
-    pizzaWeight: [
-      this.doughConfigService.constants.pizzaWeight,
-      [Validators.required, Validators.min(200), Validators.max(400)],
-    ],
-    saltRatio: [
-      Math.round(this.doughConfigService.constants.saltRatio * 100 * 100) / 100,
-      [Validators.required, Validators.min(2), Validators.max(4)],
-    ],
-    honeyRatio: [
-      Math.round(this.doughConfigService.constants.honeyRatio * 100 * 100) /
-        100,
-      [Validators.required, Validators.min(0), Validators.max(0.5)],
+    pizzaWeightVisibility: [this.doughFormState.getVisibility('pizzaWeight')],
+    saltRatioVisibility: [this.doughFormState.getVisibility('saltRatio')],
+    honeyRatioVisibility: [this.doughFormState.getVisibility('honeyRatio')],
+    flourStrengthVisibility: [
+      this.doughFormState.getVisibility('flourStrength'),
     ],
   });
 
   constructor(
     private localeManager: LocaleManagerService,
     private themeService: ThemeService,
-    private doughConfigService: DoughConfigService,
+    private doughFormState: DoughFormStateService,
     private fb: FormBuilder,
   ) {
     this.form.valueChanges
@@ -72,19 +66,13 @@ export class SettingsFormComponent implements OnInit {
         }
         this.localeManager.switchLocale(value.locale ?? '');
         this.themeService.setDarkMode(value.paletteToggle ?? false);
-        this.doughConfigService.update({
-          pizzaWeight: value.pizzaWeight ?? 0,
-          saltRatio: (value.saltRatio ?? 0) / 100,
-          honeyRatio: (value.honeyRatio ?? 0) / 100,
+        this.doughFormState.updateVisibility({
+          pizzaWeight: value.pizzaWeightVisibility ?? false,
+          saltRatio: value.saltRatioVisibility ?? false,
+          honeyRatio: value.honeyRatioVisibility ?? false,
+          flourStrength: value.flourStrengthVisibility ?? false,
         });
       });
-  }
-
-  range(start: number, end: number, step: number = 1) {
-    return Array.from(
-      { length: (end - start) / step + 1 },
-      (_, i) => start + i * step,
-    );
   }
 
   ngOnInit() {}

@@ -81,22 +81,30 @@ export class YeastService {
     );
   }
 
+  private flourStrengthFactor(W: number) {
+    const { referenceW, coef } =
+      this.doughConfigService.constants.yeast.flourStrength;
+    // Stronger flour (higher W) should LOWER yeast. We want factor >1 when W > reference.
+    // Formula: 1 + coef * (W - referenceW) / referenceW
+    return 1 + (coef * (W - referenceW)) / referenceW;
+  }
+
   private computePercentYeast(
     tEquivalent: number,
     temperatureFactor: number,
     hydrationFactor: number,
     sugarFactor: number,
     saltFactor: number,
+    flourStrengthFactor: number,
     kFactor: number,
   ) {
-    // Core scientific model – inversely proportional to accelerating factors
-    // and directly proportional to inhibiting factors (saltFactor < 1 increases yeast)
     const denominator =
       tEquivalent *
       temperatureFactor *
       hydrationFactor *
       sugarFactor *
-      saltFactor;
+      saltFactor *
+      flourStrengthFactor;
     return kFactor / denominator / 100;
   }
 
@@ -117,6 +125,7 @@ export class YeastService {
    * @param rtRestTime – room-temperature maturation (h)
    * @param coldRestTime – cold maturation (h)
    * @param sugar – simple sugar or honey weight in the poolish (g)
+   * @param flourStrengthW – flour strength (W-value)
    */
   yeastForPoolish(
     temperature: number,
@@ -125,18 +134,21 @@ export class YeastService {
     rtRestTime: number,
     coldRestTime: number,
     sugar: number,
+    flourStrengthW: number,
   ) {
     const tEq = this.tEquivalent(rtRestTime, coldRestTime);
     const tempFactor = this.temperatureFactor(temperature);
     const hydFactor = this.hydrationFactor(1.0); // Poolish = 100 % hydration
     const sugFactor = this.sugarFactor(sugar, flour);
     const kFactor = this.kFactor(tEq);
+    const flrFactor = this.flourStrengthFactor(flourStrengthW);
     const percentYeast = this.computePercentYeast(
       tEq,
       tempFactor,
       hydFactor,
       sugFactor,
       1, // no salt in poolish
+      flrFactor,
       kFactor,
     );
 
@@ -154,6 +166,7 @@ export class YeastService {
    * @param salt – salt weight in the dough (g)
    * @param rtRestTime – room-temperature maturation (h)
    * @param coldRestTime – cold maturation (h)
+   * @param flourStrengthW – flour strength (W-value)
    */
   yeastForDough(
     temperature: number,
@@ -164,6 +177,7 @@ export class YeastService {
     salt: number,
     rtRestTime: number,
     coldRestTime: number,
+    flourStrengthW: number,
   ) {
     const tEq = this.tEquivalent(rtRestTime, coldRestTime);
     const tempFactor = this.temperatureFactor(temperature);
@@ -171,12 +185,14 @@ export class YeastService {
     const sugFactor = this.sugarFactor(sugar, flour);
     const sltFactor = this.saltFactor(salt, flour);
     const kFactor = this.kFactor(tEq);
+    const flrFactor = this.flourStrengthFactor(flourStrengthW);
     const percentYeast = this.computePercentYeast(
       tEq,
       tempFactor,
       hydFactor,
       sugFactor,
       sltFactor,
+      flrFactor,
       kFactor,
     );
 

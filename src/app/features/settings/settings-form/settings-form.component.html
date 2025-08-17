@@ -28,53 +28,46 @@
   </ion-list>
 
   <ion-list-header>{{
-    "settings.form.dough.title" | translate
+    "settings.form.doughCalculator.title" | translate
   }}</ion-list-header>
   <ion-list [inset]="true" lines="none">
     <ion-item>
-      <ion-select
-        mode="ios"
-        [label]="'settings.form.dough.pizzaWeight.title' | translate"
-        type="number"
-        formControlName="pizzaWeight"
-        [helperText]="'settings.form.dough.pizzaWeight.helperText' | translate"
+      <ion-toggle
+        formControlName="pizzaWeightVisibility"
+        justify="space-between"
+        >{{
+          "settings.form.doughCalculator.pizzaWeightVisibility.title"
+            | translate
+        }}</ion-toggle
       >
-        @for (weight of range(200, 400, 10); track weight) {
-          <ion-select-option [value]="weight">
-            {{ weight }} g
-          </ion-select-option>
-        }
-      </ion-select>
     </ion-item>
     <ion-item>
-      <ion-select
-        mode="ios"
-        [helperText]="'settings.form.dough.saltRatio.helperText' | translate"
-        [label]="'settings.form.dough.saltRatio.title' | translate"
-        type="number"
-        formControlName="saltRatio"
+      <ion-toggle
+        formControlName="saltRatioVisibility"
+        justify="space-between"
+        >{{
+          "settings.form.doughCalculator.saltRatioVisibility.title" | translate
+        }}</ion-toggle
       >
-        @for (ratio of range(2, 4, 0.1); track ratio) {
-          <ion-select-option [value]="ratio">
-            {{ ratio | number: "1.1-1" }} %
-          </ion-select-option>
-        }
-      </ion-select>
     </ion-item>
     <ion-item>
-      <ion-select
-        mode="ios"
-        [helperText]="'settings.form.dough.honeyRatio.helperText' | translate"
-        [label]="'settings.form.dough.honeyRatio.title' | translate"
-        type="number"
-        formControlName="honeyRatio"
+      <ion-toggle
+        formControlName="honeyRatioVisibility"
+        justify="space-between"
+        >{{
+          "settings.form.doughCalculator.honeyRatioVisibility.title" | translate
+        }}</ion-toggle
       >
-        @for (ratio of range(0, 0.5, 0.1); track ratio) {
-          <ion-select-option [value]="ratio">
-            {{ ratio | number: "1.1-1" }} %
-          </ion-select-option>
-        }
-      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-toggle
+        formControlName="flourStrengthVisibility"
+        justify="space-between"
+        >{{
+          "settings.form.doughCalculator.flourStrengthVisibility.title"
+            | translate
+        }}</ion-toggle
+      >
     </ion-item>
   </ion-list>
 </form>

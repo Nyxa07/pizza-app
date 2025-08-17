@@ -5,7 +5,8 @@
     "delete": "Supprimer",
     "edit": "Modifier",
     "add": "Ajouter",
-    "ok": "OK"
+    "ok": "OK",
+    "reset": "Réinitialiser"
   },
   "status": {
     "loading": "Chargement...",

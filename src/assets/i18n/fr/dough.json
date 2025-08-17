@@ -1,14 +1,19 @@
 {
   "form": {
     "pizzasNumber": "Nombre de pizzas",
-    "doughType": "Type de pâte",
+    "doughType": "Méthode",
     "yeastType": "Type de levure",
     "hydration": "Hydratation",
     "temperature": "Température",
     "poolishRatio": "Ratio poolish",
     "rtRestTime": "Repos à chaud",
     "coldRestTime": "Repos à froid",
-    "restTimeUnit": "{count, plural, one {Heure} other {Heures}}"
+    "restTimeUnit": "{count, plural, one {Heure} other {Heures}}",
+    "flourStrength": "Force de la farine (W)",
+    "saltRatio": "Ratio de sel",
+    "honeyRatio": "Ratio de miel",
+    "pizzaWeight": "Masse d'un pâton",
+    "hydrationHelperText": "Recommandée pour la force de la farine (W) : {minHydration}% - {maxHydration}%"
   },
   "ingredients": {
     "flour": "Farine",
@@ -29,8 +34,8 @@
     "ingredients": "Ingrédients"
   },
   "doughTypes": {
-    "poolish": "Avec poolish",
-    "direct": "Méthode directe"
+    "poolish": "Poolish",
+    "direct": "Directe"
   },
   "recipe": {
     "quantity": {

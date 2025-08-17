@@ -53,15 +53,27 @@ export interface DoughConstants {
 
     /** Parameters for the continuous k-factor logistic model. */
     kFactor: KFactorConstants;
+
+    /** Parameters governing how flour strength (W-value) affects yeast */
+    flourStrength: {
+      referenceW: number;
+      coef: number;
+    };
   };
 
-  /** Default salt ratio (baker’s percentage). */
-  saltRatio: number;
-  /** Reference pizza dough ball weight (grams). */
-  pizzaWeight: number;
-
-  /** Percentage of honey relative to yeast weight used to boost activity (e.g. 0.1 → 10 %) */
-  honeyRatio: number;
+  /** Parameters for recommended hydration based on flour strength */
+  hydrationRecommendation: {
+    /** Reference W at which base hydration applies */
+    referenceW: number;
+    /** Base hydration (decimal, e.g. 0.55 for 55 %) when W = referenceW */
+    baseHydration: number;
+    /** Linear slope applied per W point above/below reference (decimal per W) */
+    slope: number;
+    /** Hard lower bound */
+    minHydration: number;
+    /** Hard upper bound */
+    maxHydration: number;
+  };
 }
 
 export const DEFAULT_DOUGH_CONSTANTS: DoughConstants = {
@@ -89,12 +101,24 @@ export const DEFAULT_DOUGH_CONSTANTS: DoughConstants = {
       refFermTime: 12,
       kExponent: 2,
     },
+
+    flourStrength: {
+      referenceW: 300,
+      coef: 0.4,
+    },
   },
 
-  saltRatio: 0.028,
-  pizzaWeight: 250,
+  // saltRatio: 0.028,
+  // pizzaWeight: 250,
+  // honeyRatio: 0.004,
 
-  honeyRatio: 0.004,
+  hydrationRecommendation: {
+    referenceW: 160,
+    baseHydration: 0.55,
+    slope: 0.0007,
+    minHydration: 0.55,
+    maxHydration: 0.8,
+  },
 } as const;
 
 // --------------------------------------------------------------------------------

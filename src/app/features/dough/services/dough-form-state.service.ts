@@ -5,6 +5,7 @@ import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { DoughCalculatorService } from './dough-calculator.service';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
+import { HydrationService } from './hydration.service';
 
 export interface DoughInput {
   nbPizzas: number;
@@ -15,6 +16,25 @@ export interface DoughInput {
   poolishRatio?: number;
   rtRestTime: number;
   coldRestTime: number;
+  flourStrength: number;
+  saltRatio: number;
+  honeyRatio: number;
+  pizzaWeight: number;
+}
+
+export interface InputsVisibility {
+  nbPizzas: boolean;
+  doughType: boolean;
+  yeastType: boolean;
+  hydrationRatio: boolean;
+  temperature: boolean;
+  rtRestTime: boolean;
+  coldRestTime: boolean;
+  poolishRatio: boolean;
+  flourStrength: boolean;
+  saltRatio: boolean;
+  honeyRatio: boolean;
+  pizzaWeight: boolean;
 }
 
 export const DEFAULT_INPUT: DoughInput = {
@@ -26,13 +46,36 @@ export const DEFAULT_INPUT: DoughInput = {
   rtRestTime: 16,
   coldRestTime: 0,
   poolishRatio: 0.3,
+  flourStrength: 270,
+  saltRatio: 0.028,
+  honeyRatio: 0.004,
+  pizzaWeight: 250,
+};
+
+export const DEFAULT_VISIBILITY: InputsVisibility = {
+  nbPizzas: true,
+  doughType: true,
+  yeastType: true,
+  hydrationRatio: true,
+  temperature: true,
+  rtRestTime: true,
+  coldRestTime: true,
+  poolishRatio: false,
+  flourStrength: false,
+  saltRatio: false,
+  honeyRatio: false,
+  pizzaWeight: false,
 };
 
 @Injectable({ providedIn: 'root' })
 export class DoughFormStateService {
   private readonly STORAGE_KEY = 'dough:form';
+  private readonly STORAGE_KEY_VISIBILITY = this.STORAGE_KEY + ':visibility';
   private readonly _input = new BehaviorSubject<DoughInput>(
     this.loadFromStorage() ?? DEFAULT_INPUT,
+  );
+  private readonly _visibility = new BehaviorSubject<InputsVisibility>(
+    this.loadVisibilityFromStorage() ?? DEFAULT_VISIBILITY,
   );
 
   readonly input$ = this._input.asObservable();
@@ -40,15 +83,57 @@ export class DoughFormStateService {
     map((i) => this.calculator.compute(i)),
     shareReplay({ refCount: true, bufferSize: 1 }),
   );
+  readonly visibility$ = this._visibility.asObservable();
 
   constructor(
     private calculator: DoughCalculatorService,
     private prefs: PrefsStorage,
   ) {}
 
+  getVisibility(key: keyof InputsVisibility): boolean {
+    return this._visibility.value[key] ?? false;
+  }
+
   update(input: DoughInput): void {
     this._input.next(input);
     this.prefs.set(this.STORAGE_KEY, input);
+
+    // Update visibility of poolish ratio at the end because it triggers reset to default
+    if (input.doughType === DoughType.DIRECT) {
+      this.updateVisibility({ poolishRatio: false });
+    } else {
+      this.updateVisibility({ poolishRatio: true });
+    }
+  }
+
+  updateVisibility(visibility: Partial<InputsVisibility>): void {
+    const currentVisibility = this._visibility.value;
+    const newVisibility: InputsVisibility = {
+      ...currentVisibility,
+      ...visibility,
+    };
+
+    // When the visibility of a field changes, ensure its value is reset to the default
+    const currentInput = this._input.value;
+    let patchedInput: DoughInput = { ...currentInput };
+
+    (Object.keys(visibility) as (keyof InputsVisibility)[]).forEach((key) => {
+      // Keys of InputsVisibility and DoughInput are aligned by design
+      const inputKey = key as keyof DoughInput;
+      if (inputKey in DEFAULT_INPUT) {
+        patchedInput = {
+          ...patchedInput,
+          [inputKey]: DEFAULT_INPUT[inputKey],
+        } as DoughInput;
+      }
+    });
+
+    // Persist updated input and visibility states
+    this._input.next(patchedInput);
+    this.prefs.set(this.STORAGE_KEY, patchedInput);
+
+    this._visibility.next(newVisibility);
+    this.prefs.set(this.STORAGE_KEY_VISIBILITY, newVisibility);
   }
 
   reset(): void {
@@ -58,5 +143,9 @@ export class DoughFormStateService {
 
   private loadFromStorage(): DoughInput | null {
     return this.prefs.get<DoughInput>(this.STORAGE_KEY);
+  }
+
+  private loadVisibilityFromStorage(): InputsVisibility | null {
+    return this.prefs.get<InputsVisibility>(this.STORAGE_KEY_VISIBILITY);
   }
 }

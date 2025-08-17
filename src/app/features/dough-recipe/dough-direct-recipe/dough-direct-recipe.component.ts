@@ -9,8 +9,8 @@ import {
   IonCardContent,
 } from '@ionic/angular/standalone';
 import { DoughResult } from '../../dough/services/dough-calculator.service';
-import { DoughConfigService } from '../../dough/services/dough-config.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
+import { DoughInput } from '../../dough/services/dough-form-state.service';
 
 @Component({
   selector: 'app-dough-direct-recipe',
@@ -32,13 +32,9 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
   encapsulation: ViewEncapsulation.None,
 })
 export class DoughDirectRecipeComponent implements OnInit {
-  constructor(
-    private doughConfigService: DoughConfigService,
-    private numberPipe: NumberPipe,
-  ) {}
+  constructor(private numberPipe: NumberPipe) {}
 
   @Input({ required: true }) result!: DoughResult;
-  protected pizzaWeight = this.doughConfigService.constants.pizzaWeight;
 
   round(value: number, format: string) {
     return this.numberPipe.transform(value, format);
