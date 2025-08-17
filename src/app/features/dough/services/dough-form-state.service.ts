@@ -117,16 +117,18 @@ export class DoughFormStateService {
     const currentInput = this._input.value;
     let patchedInput: DoughInput = { ...currentInput };
 
-    (Object.keys(visibility) as (keyof InputsVisibility)[]).forEach((key) => {
-      // Keys of InputsVisibility and DoughInput are aligned by design
-      const inputKey = key as keyof DoughInput;
-      if (inputKey in DEFAULT_INPUT) {
-        patchedInput = {
-          ...patchedInput,
-          [inputKey]: DEFAULT_INPUT[inputKey],
-        } as DoughInput;
-      }
-    });
+    (Object.keys(visibility) as (keyof InputsVisibility)[])
+      .filter((key) => !visibility[key]) // Only reset fields that are made hidden
+      .forEach((key) => {
+        // Keys of InputsVisibility and DoughInput are aligned by design
+        const inputKey = key as keyof DoughInput;
+        if (inputKey in DEFAULT_INPUT) {
+          patchedInput = {
+            ...patchedInput,
+            [inputKey]: DEFAULT_INPUT[inputKey],
+          } as DoughInput;
+        }
+      });
 
     // Persist updated input and visibility states
     this._input.next(patchedInput);
