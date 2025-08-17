@@ -21,29 +21,31 @@
   <ion-list-header>Appearance</ion-list-header>
   <ion-list [inset]="true">
     <ion-item>
-      <ion-toggle formControlName="paletteToggle" justify="space-between"
-        >Dark Mode</ion-toggle
-      >
+      <ion-toggle formControlName="paletteToggle" justify="space-between">{{
+        "settings.form.appearance.paletteToggle.title" | translate
+      }}</ion-toggle>
     </ion-item>
   </ion-list>
 
-  <ion-list-header>Dough parameters</ion-list-header>
+  <ion-list-header>{{
+    "settings.form.dough.title" | translate
+  }}</ion-list-header>
   <ion-list [inset]="true">
     <ion-item>
       <ion-input
-        label="Pizza weight"
+        [label]="'settings.form.dough.pizzaWeight.title' | translate"
         type="number"
         formControlName="pizzaWeight"
         [max]="400"
         [min]="200"
         labelPlacement="stacked"
-        helperText="Valeur en grammes. Une valeur entre 250 et 280 est recommandée (~30cm)."
+        [helperText]="'settings.form.dough.pizzaWeight.helperText' | translate"
       />
     </ion-item>
     <ion-item>
       <ion-input
-        helperText="Valeur en % de la farine totale. Une valeur entre 2.8 et 3.2 est recommandée."
-        label="Salt ratio"
+        [helperText]="'settings.form.dough.saltRatio.helperText' | translate"
+        [label]="'settings.form.dough.saltRatio.title' | translate"
         type="number"
         formControlName="saltRatio"
         [max]="3.2"
@@ -53,8 +55,8 @@
     </ion-item>
     <ion-item>
       <ion-input
-        helperText="Valeur en % de la farine totale. Une valeur entre 0 et 0.5 est recommandée."
-        label="Honey ratio"
+        [helperText]="'settings.form.dough.honeyRatio.helperText' | translate"
+        [label]="'settings.form.dough.honeyRatio.title' | translate"
         type="number"
         formControlName="honeyRatio"
         [max]="0.5"

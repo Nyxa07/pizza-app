@@ -1,0 +1,31 @@
+{
+  "form": {
+    "language": {
+      "title": "Idioma",
+      "selector": {
+        "title": "Seleccionar idioma"
+      }
+    },
+    "appearance": {
+      "title": "Apariencia",
+      "paletteToggle": {
+        "title": "Modo oscuro"
+      }
+    },
+    "dough": {
+      "title": "Masa",
+      "pizzaWeight": {
+        "title": "Peso de la pizza",
+        "helperText": "Valor en gramos. Se recomienda un valor entre 250 y 280 (~30cm)."
+      },
+      "saltRatio": {
+        "title": "Proporción de sal",
+        "helperText": "Valor en % de la harina total. Se recomienda un valor entre 2.8 y 3.2."
+      },
+      "honeyRatio": {
+        "title": "Proporción de miel",
+        "helperText": "Valor en % de la harina total. Se recomienda un valor entre 0 y 0.5."
+      }
+    }
+  }
+}

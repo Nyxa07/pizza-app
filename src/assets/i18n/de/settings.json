@@ -1,0 +1,31 @@
+{
+  "form": {
+    "language": {
+      "title": "Sprache",
+      "selector": {
+        "title": "Sprache auswählen"
+      }
+    },
+    "appearance": {
+      "title": "Erscheinungsbild",
+      "paletteToggle": {
+        "title": "Dunkler Modus"
+      }
+    },
+    "dough": {
+      "title": "Teig",
+      "pizzaWeight": {
+        "title": "Pizza-Gewicht",
+        "helperText": "Wert in Gramm. Ein Wert zwischen 250 und 280 wird empfohlen (~30cm)."
+      },
+      "saltRatio": {
+        "title": "Salzverhältnis",
+        "helperText": "Wert in % vom Gesamtmehl. Ein Wert zwischen 2,8 und 3,2 wird empfohlen."
+      },
+      "honeyRatio": {
+        "title": "Honigverhältnis",
+        "helperText": "Wert in % vom Gesamtmehl. Ein Wert zwischen 0 und 0,5 wird empfohlen."
+      }
+    }
+  }
+}

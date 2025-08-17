@@ -1,0 +1,31 @@
+{
+  "form": {
+    "language": {
+      "title": "Language",
+      "selector": {
+        "title": "Select language"
+      }
+    },
+    "appearance": {
+      "title": "Appearance",
+      "paletteToggle": {
+        "title": "Dark mode"
+      }
+    },
+    "dough": {
+      "title": "Dough",
+      "pizzaWeight": {
+        "title": "Pizza weight",
+        "helperText": "Value in grams. A value between 250 and 280 is recommended (~30cm)."
+      },
+      "saltRatio": {
+        "title": "Salt ratio",
+        "helperText": "Value as % of total flour. A value between 2.8 and 3.2 is recommended."
+      },
+      "honeyRatio": {
+        "title": "Honey ratio",
+        "helperText": "Value as % of total flour. A value between 0 and 0.5 is recommended."
+      }
+    }
+  }
+}
