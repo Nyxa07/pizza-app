@@ -22,41 +22,23 @@
 </ion-header>
 <ion-segment-view>
   <ion-segment-content id="calculator">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          {{ "route.dough.index.calculator.title" | translate }}
-        </ion-card-title>
-        <ion-card-subtitle>
-          {{ "route.dough.index.calculator.subtitle" | translate }}
-        </ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <app-dough-form #form></app-dough-form>
-      </ion-card-content>
-      <ion-button
-        fill="clear"
-        expand="block"
-        (click)="form.reset()"
-        color="primary"
-      >
-        {{ "common.actions.reset" | translate }}
-      </ion-button>
-    </ion-card>
+    <app-dough-form></app-dough-form>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          {{ "route.dough.index.ingredients.title" | translate }}
-        </ion-card-title>
-        <ion-card-subtitle>
-          {{ "route.dough.index.ingredients.subtitle" | translate }}
-        </ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <app-dough-quantity></app-dough-quantity>
-      </ion-card-content>
-    </ion-card>
+    <div [style.padding]="'1rem'">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            {{ "route.dough.index.summary.title" | translate }}
+          </ion-card-title>
+          <ion-card-subtitle>
+            {{ "route.dough.index.summary.subtitle" | translate }}
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <app-dough-quantity></app-dough-quantity>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </ion-segment-content>
 
   <ion-segment-content id="recipe">

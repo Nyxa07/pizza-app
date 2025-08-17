@@ -6,13 +6,9 @@
         "calculator": "Rechner",
         "recipe": "Rezept"
       },
-      "calculator": {
-        "title": "Konfiguration",
-        "subtitle": "Konfigurieren Sie Ihr Pizza-Rezept"
-      },
-      "ingredients": {
-        "title": "Zutaten",
-        "subtitle": "Zutatenmengen in Gramm (g)"
+      "summary": {
+        "title": "Zusammenfassung",
+        "subtitle": "Mengenzusammenfassung (g)"
       }
     }
   },

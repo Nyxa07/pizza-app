@@ -6,13 +6,9 @@
         "calculator": "Calculateur",
         "recipe": "Recette"
       },
-      "calculator": {
-        "title": "Configuration",
-        "subtitle": "Configurez votre recette de pizzas"
-      },
-      "ingredients": {
-        "title": "Ingrédients",
-        "subtitle": "Quantité d'ingrédients en grammes (g)"
+      "summary": {
+        "title": "Récapitulatif",
+        "subtitle": "Récapitulatif des quantités (g)"
       }
     }
   },

@@ -1,13 +1,18 @@
 {
   "form": {
+    "titles": {
+      "quantity": "Quantità di impasto",
+      "doughType": "Tipo di impasto",
+      "rest": "Riposo"
+    },
     "pizzasNumber": "Numero di pizze",
     "doughType": "Metodo",
     "yeastType": "Tipo di lievito",
     "hydration": "Idratazione",
     "temperature": "Temperatura",
     "poolishRatio": "Rapporto poolish",
-    "rtRestTime": "Riposo a caldo",
-    "coldRestTime": "Riposo a freddo",
+    "rtRestTime": "A temperatura ambiente",
+    "coldRestTime": "A freddo",
     "restTimeUnit": "{count, plural, one {Ora} other {Ore}}",
     "flourStrength": "Forza della farina (W)",
     "saltRatio": "Rapporto del sale",

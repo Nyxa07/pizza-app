@@ -1,13 +1,18 @@
 {
   "form": {
+    "titles": {
+      "quantity": "Dough quantity",
+      "doughType": "Dough type",
+      "rest": "Rest"
+    },
     "pizzasNumber": "Number of pizzas",
     "doughType": "Method",
     "yeastType": "Yeast type",
     "hydration": "Hydration",
     "temperature": "Temperature",
     "poolishRatio": "Poolish ratio",
-    "rtRestTime": "Room temperature rest",
-    "coldRestTime": "Cold rest",
+    "rtRestTime": "At room temperature",
+    "coldRestTime": "Cold",
     "restTimeUnit": "{count, plural, one {Hour} other {Hours}}",
     "flourStrength": "Flour strength (W)",
     "saltRatio": "Salt ratio",

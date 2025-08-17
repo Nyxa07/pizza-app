@@ -6,6 +6,10 @@ import {
   IonSelectOption,
   IonList,
   IonRange,
+  IonButton,
+  IonListHeader,
+  IonIcon,
+  IonLabel,
 } from '@ionic/angular/standalone';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
@@ -37,6 +41,9 @@ import {
     LowerCasePipe,
     AsyncPipe,
     NumberPipe,
+    IonButton,
+    IonListHeader,
+    IonLabel,
   ],
   standalone: true,
 })
@@ -95,9 +102,5 @@ export class DoughFormComponent implements OnInit {
       { length: (end - start) / step + 1 },
       (_, i) => Math.round((start + i * step) * 10 ** decimal) / 10 ** decimal,
     );
-  }
-
-  reset() {
-    this.form.patchValue(DEFAULT_INPUT);
   }
 }

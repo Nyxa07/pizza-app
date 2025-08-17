@@ -1,13 +1,18 @@
 {
   "form": {
+    "titles": {
+      "quantity": "Quantité de pâte",
+      "doughType": "Type de pâte",
+      "rest": "Repos"
+    },
     "pizzasNumber": "Nombre de pizzas",
     "doughType": "Méthode",
     "yeastType": "Type de levure",
     "hydration": "Hydratation",
     "temperature": "Température",
     "poolishRatio": "Ratio poolish",
-    "rtRestTime": "Repos à chaud",
-    "coldRestTime": "Repos à froid",
+    "rtRestTime": "À température ambiante",
+    "coldRestTime": "À froid",
     "restTimeUnit": "{count, plural, one {Heure} other {Heures}}",
     "flourStrength": "Force de la farine (W)",
     "saltRatio": "Ratio de sel",

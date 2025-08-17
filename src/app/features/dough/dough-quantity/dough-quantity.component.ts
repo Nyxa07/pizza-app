@@ -4,12 +4,36 @@ import { LocaleManagerService } from '../../locales/services/locale-manager.serv
 import { DoughFormStateService } from '../services/dough-form-state.service';
 import { AsyncPipe } from '@angular/common';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
+import {
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
+  IonCol,
+  IonRow,
+  IonChip,
+  IonGrid,
+  IonLabel,
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-dough-quantity',
   templateUrl: './dough-quantity.component.html',
   styleUrls: ['./dough-quantity.component.scss'],
-  imports: [TranslateModule, AsyncPipe, NumberPipe],
+  imports: [
+    TranslateModule,
+    AsyncPipe,
+    NumberPipe,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
+    IonCol,
+    IonRow,
+    IonChip,
+    IonGrid,
+    IonLabel,
+  ],
   standalone: true,
 })
 export class DoughQuantityComponent implements OnInit {
