@@ -3,12 +3,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LocaleManagerService } from '../../locales/services/locale-manager.service';
 import { DoughFormStateService } from '../services/dough-form-state.service';
 import { AsyncPipe } from '@angular/common';
+import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
 @Component({
   selector: 'app-dough-quantity',
   templateUrl: './dough-quantity.component.html',
   styleUrls: ['./dough-quantity.component.scss'],
-  imports: [TranslateModule, AsyncPipe],
+  imports: [TranslateModule, AsyncPipe, NumberPipe],
   standalone: true,
 })
 export class DoughQuantityComponent implements OnInit {

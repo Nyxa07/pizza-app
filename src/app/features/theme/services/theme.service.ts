@@ -8,7 +8,9 @@ export class ThemeService {
   private readonly STORAGE_KEY = 'theme';
   private darkMode = this.prefsStorage.get<string>(this.STORAGE_KEY) === 'dark';
 
-  constructor(private prefsStorage: PrefsStorage) {
+  constructor(private prefsStorage: PrefsStorage) {}
+
+  init() {
     const theme = this.prefsStorage.get<string>(this.STORAGE_KEY);
     if (theme) {
       this.darkMode = theme === 'dark';

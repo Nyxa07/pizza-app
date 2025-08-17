@@ -17,42 +17,42 @@
       <tr>
         <th>{{ "dough.ingredients.flour" | translate }}</th>
         @if (result?.poolish) {
-          <td>{{ result?.poolish?.flour }}</td>
+          <td>{{ result?.poolish?.flour | number: "1.0-0" }}</td>
         }
-        <td>{{ result?.dough?.flour }}</td>
-        <td>{{ result?.total?.flour }}</td>
+        <td>{{ result?.dough?.flour | number: "1.0-0" }}</td>
+        <td>{{ result?.total?.flour | number: "1.0-0" }}</td>
       </tr>
       <tr>
         <th>{{ "dough.ingredients.water" | translate }}</th>
         @if (result?.poolish) {
-          <td>{{ result?.poolish?.water }}</td>
+          <td>{{ result?.poolish?.water | number: "1.0-0" }}</td>
         }
-        <td>{{ result?.dough?.water }}</td>
-        <td>{{ result?.total?.water }}</td>
+        <td>{{ result?.dough?.water | number: "1.0-0" }}</td>
+        <td>{{ result?.total?.water | number: "1.0-0" }}</td>
       </tr>
       <tr>
         <th>{{ "dough.ingredients.yeast" | translate }}</th>
         @if (result?.poolish) {
-          <td>{{ result?.poolish?.yeast }}</td>
+          <td>{{ result?.poolish?.yeast | number: "1.0-1" }}</td>
         }
-        <td>{{ result?.dough?.yeast }}</td>
-        <td>{{ result?.total?.yeast }}</td>
+        <td>{{ result?.dough?.yeast | number: "1.0-1" }}</td>
+        <td>{{ result?.total?.yeast | number: "1.0-1" }}</td>
       </tr>
       <tr>
         <th>{{ "dough.ingredients.salt" | translate }}</th>
         @if (result?.poolish) {
-          <td>{{ result?.poolish?.salt }}</td>
+          <td>{{ result?.poolish?.salt | number: "1.0-0" }}</td>
         }
-        <td>{{ result?.dough?.salt }}</td>
-        <td>{{ result?.total?.salt }}</td>
+        <td>{{ result?.dough?.salt | number: "1.0-0" }}</td>
+        <td>{{ result?.total?.salt | number: "1.0-0" }}</td>
       </tr>
       <tr>
         <th>{{ "dough.ingredients.honey" | translate }}</th>
         @if (result?.poolish) {
-          <td>{{ result?.poolish?.honey }}</td>
+          <td>{{ result?.poolish?.honey | number: "1.0-0" }}</td>
         }
-        <td>{{ result?.dough?.honey }}</td>
-        <td>{{ result?.total?.honey }}</td>
+        <td>{{ result?.dough?.honey | number: "1.0-0" }}</td>
+        <td>{{ result?.total?.honey | number: "1.0-0" }}</td>
       </tr>
       <tr>
         <th>{{ "dough.calculations.total" | translate }}</th>
@@ -65,7 +65,7 @@
                   (result?.poolish?.yeast ?? 0) +
                   (result?.poolish?.honey ?? 0) +
                   (result?.poolish?.salt ?? 0)
-              )
+              ) | number: "1.0-0"
             }}
           </td>
         }
@@ -77,7 +77,7 @@
                 (result?.dough?.yeast ?? 0) +
                 (result?.dough?.honey ?? 0) +
                 (result?.dough?.salt ?? 0)
-            )
+            ) | number: "1.0-0"
           }}
         </td>
         <td>
@@ -86,7 +86,7 @@
               (result?.total?.water ?? 0) +
               round(result?.total?.yeast ?? 0) +
               round(result?.total?.honey ?? 0) +
-              round(result?.total?.salt ?? 0)
+              round(result?.total?.salt ?? 0) | number: "1.0-0"
           }}
         </td>
       </tr>
