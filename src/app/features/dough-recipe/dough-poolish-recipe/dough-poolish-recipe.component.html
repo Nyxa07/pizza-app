@@ -16,25 +16,29 @@
             <li
               [innerHTML]="
                 'dough.recipe.quantity.flour'
-                  | translate: { quantity: result.poolish?.flour }
+                  | translate
+                    : { quantity: round(result.poolish?.flour, '1.0-0') }
               "
             ></li>
             <li
               [innerHTML]="
                 'dough.recipe.quantity.water'
-                  | translate: { quantity: result.poolish?.water }
+                  | translate
+                    : { quantity: round(result.poolish?.water, '1.0-0') }
               "
             ></li>
             <li
               [innerHTML]="
                 'dough.recipe.quantity.yeast'
-                  | translate: { quantity: result.poolish?.yeast }
+                  | translate
+                    : { quantity: round(result.poolish?.yeast, '1.0-1') }
               "
             ></li>
             <li
               [innerHTML]="
                 'dough.recipe.quantity.honey'
-                  | translate: { quantity: result.poolish?.honey }
+                  | translate
+                    : { quantity: round(result.poolish?.honey, '1.0-0') }
               "
             ></li>
           </ul>
@@ -79,19 +83,19 @@
             <li
               [innerHTML]="
                 'dough.recipe.quantity.flour'
-                  | translate: { quantity: result.dough.flour }
+                  | translate: { quantity: round(result.dough.flour, '1.0-0') }
               "
             ></li>
             <li
               [innerHTML]="
                 'dough.recipe.quantity.water'
-                  | translate: { quantity: result.dough.water }
+                  | translate: { quantity: round(result.dough.water, '1.0-0') }
               "
             ></li>
             <li
               [innerHTML]="
                 'dough.recipe.quantity.salt'
-                  | translate: { quantity: result.dough.salt }
+                  | translate: { quantity: round(result.dough.salt, '1.0-0') }
               "
             ></li>
           </ul>
@@ -124,7 +128,8 @@
         <li
           [innerHTML]="
             'dough.recipe.poolish.dough.step11Description'
-              | translate: { pizzaWeight: result.pizzaBallWeight }
+              | translate
+                : { pizzaWeight: round(result.pizzaBallWeight, '1.0-0') }
           "
         ></li>
         <li>
@@ -164,10 +169,10 @@
     <ion-card-content>
       <ul>
         <li>
-          <strong>{{ "dough.recipe.storage.refrigerator" | translate }}</strong>
+          {{ "dough.recipe.storage.refrigerator" | translate }}
         </li>
         <li>
-          <strong>{{ "dough.recipe.storage.freezer" | translate }}</strong>
+          {{ "dough.recipe.storage.freezer" | translate }}
         </li>
       </ul>
     </ion-card-content>

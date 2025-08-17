@@ -21,6 +21,7 @@ import { inject, provideAppInitializer } from '@angular/core';
 import { LocaleManagerService } from './app/features/locales/services/locale-manager.service';
 import { provideMultiTranslateLoader } from './app/features/locales/services/translation.loader';
 import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
+import { ThemeService } from './app/features/theme/services/theme.service';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -37,6 +38,9 @@ bootstrapApplication(AppComponent, {
       },
     }),
     provideAppInitializer(() => {
+      const themeService = inject(ThemeService);
+      themeService.init();
+
       const localeInitService = inject(LocaleManagerService);
       return localeInitService.init();
     }),

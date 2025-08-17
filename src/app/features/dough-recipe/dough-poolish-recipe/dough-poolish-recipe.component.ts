@@ -16,6 +16,7 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { DoughResult } from '../../dough/services/dough-calculator.service';
+import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
 @Component({
   selector: 'app-dough-poolish-recipe',
@@ -38,5 +39,10 @@ import { DoughResult } from '../../dough/services/dough-calculator.service';
 })
 export class DoughPoolishRecipeComponent implements OnInit {
   @Input({ required: true }) result!: DoughResult;
+  constructor(private numberPipe: NumberPipe) {}
   ngOnInit() {}
+
+  round(value: number | null | undefined, format: string = '1.0-0') {
+    return this.numberPipe.transform(value, format);
+  }
 }

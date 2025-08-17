@@ -37,14 +37,6 @@ export class DoughCalculatorService {
     return ratio * totalFlourAndWater; // no rounding here
   }
 
-  private round(value: number) {
-    return Math.round(value); // 1 g precision for bulk ingredients
-  }
-
-  private roundYeast(value: number) {
-    return Math.round(value * 100) / 100; // 0.01 g precision for yeast
-  }
-
   compute(data: DoughInput): DoughResult {
     // Clamp user inputs to safe range
     const hydration = Math.max(0, Math.min(data.hydrationRatio, 1));
@@ -93,39 +85,39 @@ export class DoughCalculatorService {
             data.coldRestTime,
           );
 
-    const yeastRounded = this.roundYeast(yeast);
+    const yeastValue = yeast;
 
     const result: DoughResult = {
       total: {
-        flour: this.round(totalFlour),
-        water: this.round(totalWater),
-        yeast: yeastRounded,
-        salt: this.round(salt),
+        flour: totalFlour,
+        water: totalWater,
+        yeast: yeastValue,
+        salt: salt,
         coldRestTime: data.coldRestTime,
         rtRestTime: data.rtRestTime,
-        honey: this.round(honey),
+        honey: honey,
       },
 
       poolish: hasPoolish
         ? {
-            flour: this.round(poolishQuantity),
-            water: this.round(poolishQuantity),
-            yeast: yeastRounded,
+            flour: poolishQuantity,
+            water: poolishQuantity,
+            yeast: yeastValue,
             salt: 0,
             coldRestTime: data.coldRestTime,
             rtRestTime: data.rtRestTime,
-            honey: this.round(honey),
+            honey: honey,
           }
         : null,
 
       dough: {
-        yeast: hasPoolish ? 0 : yeastRounded,
-        flour: this.round(flourPerDough),
-        water: this.round(waterPerDough),
-        salt: this.round(salt),
+        yeast: hasPoolish ? 0 : yeastValue,
+        flour: flourPerDough,
+        water: waterPerDough,
+        salt: salt,
         coldRestTime: data.coldRestTime,
         rtRestTime: data.rtRestTime,
-        honey: this.round(honey),
+        honey: honey,
       },
       pizzaBallWeight: this.doughConfigService.constants.pizzaWeight,
     };

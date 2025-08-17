@@ -106,7 +106,7 @@ export class YeastService {
     const max =
       (this.doughConfigService.constants.yeast.maximumPercentage / 100) * flour;
     const clamped = Math.max(min, Math.min(yeastWeight, max));
-    return Math.round(clamped * 100) / 100; // round to 0.01 g
+    return clamped;
   }
 
   /**
