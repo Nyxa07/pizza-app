@@ -5,10 +5,11 @@
     "delete": "Löschen",
     "edit": "Bearbeiten",
     "add": "Hinzufügen",
-    "ok": "OK"
+    "ok": "OK",
+    "reset": "Zurücksetzen"
   },
   "status": {
-    "loading": "Lädt...",
+    "loading": "Wird geladen...",
     "error": "Fehler",
     "success": "Erfolg",
     "warning": "Warnung"
@@ -16,6 +17,6 @@
   "navigation": {
     "back": "Zurück",
     "next": "Weiter",
-    "previous": "Zurück"
+    "previous": "Vorherige"
   }
 }

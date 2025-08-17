@@ -5,7 +5,8 @@
     "delete": "Eliminar",
     "edit": "Editar",
     "add": "Añadir",
-    "ok": "OK"
+    "ok": "OK",
+    "reset": "Restablecer"
   },
   "status": {
     "loading": "Cargando...",

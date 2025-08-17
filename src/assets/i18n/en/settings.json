@@ -12,19 +12,19 @@
         "title": "Dark mode"
       }
     },
-    "dough": {
-      "title": "Dough",
-      "pizzaWeight": {
-        "title": "Pizza weight",
-        "helperText": "Value in grams. A value between 250 and 280 is recommended (~30cm)."
+    "doughCalculator": {
+      "title": "Dough calculator",
+      "pizzaWeightVisibility": {
+        "title": "Choose pizza dough weight"
       },
-      "saltRatio": {
-        "title": "Salt ratio",
-        "helperText": "Value as % of total flour. A value between 2.8 and 3.2 is recommended."
+      "saltRatioVisibility": {
+        "title": "Choose salt ratio"
       },
-      "honeyRatio": {
-        "title": "Honey ratio",
-        "helperText": "Value as % of total flour. A value between 0 and 0.5 is recommended."
+      "honeyRatioVisibility": {
+        "title": "Choose honey ratio"
+      },
+      "flourStrengthVisibility": {
+        "title": "Choose flour strength"
       }
     }
   }

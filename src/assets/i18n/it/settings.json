@@ -12,19 +12,19 @@
         "title": "Modalità scura"
       }
     },
-    "dough": {
-      "title": "Impasto",
-      "pizzaWeight": {
-        "title": "Peso della pizza",
-        "helperText": "Valore in grammi. Si consiglia un valore tra 250 e 280 (~30cm)."
+    "doughCalculator": {
+      "title": "Calcolatore impasto",
+      "pizzaWeightVisibility": {
+        "title": "Scegli il peso di un impasto"
       },
-      "saltRatio": {
-        "title": "Rapporto del sale",
-        "helperText": "Valore in % della farina totale. Si consiglia un valore tra 2.8 e 3.2."
+      "saltRatioVisibility": {
+        "title": "Scegli il rapporto del sale"
       },
-      "honeyRatio": {
-        "title": "Rapporto del miele",
-        "helperText": "Valore in % della farina totale. Si consiglia un valore tra 0 e 0.5."
+      "honeyRatioVisibility": {
+        "title": "Scegli il rapporto del miele"
+      },
+      "flourStrengthVisibility": {
+        "title": "Scegli la forza della farina"
       }
     }
   }

@@ -1,14 +1,19 @@
 {
   "form": {
     "pizzasNumber": "Number of pizzas",
-    "doughType": "Dough type",
+    "doughType": "Method",
     "yeastType": "Yeast type",
     "hydration": "Hydration",
     "temperature": "Temperature",
     "poolishRatio": "Poolish ratio",
-    "rtRestTime": "Warm rest",
+    "rtRestTime": "Room temperature rest",
     "coldRestTime": "Cold rest",
-    "restTimeUnit": "{count, plural, one {Hour} other {Hours}}"
+    "restTimeUnit": "{count, plural, one {Hour} other {Hours}}",
+    "flourStrength": "Flour strength (W)",
+    "saltRatio": "Salt ratio",
+    "honeyRatio": "Honey ratio",
+    "pizzaWeight": "Dough ball weight",
+    "hydrationHelperText": "Recommended for flour strength (W): {minHydration}% - {maxHydration}%"
   },
   "ingredients": {
     "flour": "Flour",
@@ -16,8 +21,8 @@
     "yeast": "Yeast",
     "honey": "Honey",
     "salt": "Salt",
-    "dryActiveYeast": "Active dry",
-    "dryInstantYeast": "Instant dry",
+    "dryActiveYeast": "Dry active",
+    "dryInstantYeast": "Dry instant",
     "freshYeast": "Fresh"
   },
   "calculations": {
@@ -29,69 +34,68 @@
     "ingredients": "Ingredients"
   },
   "doughTypes": {
-    "poolish": "With poolish",
-    "direct": "Direct method"
+    "poolish": "Poolish",
+    "direct": "Direct"
   },
   "recipe": {
     "quantity": {
-      "flour": "<strong>{{ quantity }} g</strong> of flour",
-      "water": "<strong>{{ quantity }} ml</strong> of water",
-      "yeast": "<strong>{{ quantity }} g</strong> of yeast",
-      "honey": "<strong>{{ quantity }} g</strong> of honey",
-      "salt": "<strong>{{ quantity }} g</strong> of salt"
+      "flour": "<strong>{ quantity } g</strong> of flour",
+      "water": "<strong>{ quantity } g</strong> of water",
+      "yeast": "<strong>{ quantity } g</strong> of yeast",
+      "honey": "<strong>{ quantity } g</strong> of honey",
+      "salt": "<strong>{ quantity } g</strong> of salt"
     },
     "direct": {
       "title": "Dough preparation",
       "subtitle": "Kneading and shaping",
       "step1Description": "Weigh all ingredients",
-      "step2Description": "Mix yeast and honey into the water",
-      "step3Description": "Add salt and flour and mix with a wooden spoon",
-      "step4Description": "When everything is well mixed and a ball starts to form, place it on the work surface",
-      "step5Description": "Finish kneading by hand for about 10 min (you can use a stand mixer with dough hook). Knead well so the flour is properly hydrated",
-      "step6Description": "When the dough has a good structure, form a ball and let it rest for 25 min under a bowl (it will tighten and become smoother)",
-      "step7Description": "Perform a few folds and shape a smooth, non-sticky ball",
+      "step2Description": "Mix yeast and honey with water",
+      "step3Description": "Add salt and flour and mix with wooden spoon",
+      "step4Description": "Once all ingredients are well mixed and you start to have a ball, you can place it on the work surface",
+      "step5Description": "Finish kneading by hand for about 10 min (you can use a stand mixer with its dough hook). Knead well to properly hydrate the flour",
+      "step6Description": "Once the dough has a nice structure, form a ball and let it rest for 25 min under a bowl (the dough will tighten and become smoother)",
+      "step7Description": "Perform some folds on the dough and give it a nice ball shape (smooth and no longer sticky)",
       "step8Description": "Place the ball in an airtight container and let it rest for 24 hours",
-      "step9Description": "Retrieve the dough and, with a scraper or spatula, form dough balls (well tightened) of about <strong>{{ pizzaWeight }} g</strong>",
-      "step10Description": "Place the dough balls on a tray leaving space between each one (they will continue to rise)",
-      "step11Description": "Close the tray or cover with plastic wrap and let rest for 3 hours"
+      "step9Description": "Retrieve the dough and, with a dough cutter or spatula, form dough balls (well stretched) of about <strong>{ pizzaWeight } g</strong>",
+      "step10Description": "Place the dough balls in a dish leaving space between each (they will still grow)",
+      "step11Description": "Close the dish or cover it with plastic wrap and let rest for 3 hours"
     },
     "poolish": {
       "poolish": {
-        "title": "POOLISH PREPARATION",
-        "subtitle": "First step: starter preparation",
+        "title": "Poolish preparation",
+        "subtitle": "First step: pre-fermentation preparation",
         "step1Description": "Weigh all ingredients:",
         "ingredientsList": "ingredients list",
-        "step2Description": "In a large bowl, dissolve yeast in water and add honey",
-        "step3Description": "Add flour and mix with a wooden spoon until homogeneous, then let rest <strong>{{ rtRestTime }} hour(s)</strong> at room temperature covered with plastic wrap, then <strong>{{ coldRestTime }} hour(s)</strong> in the refrigerator"
+        "step2Description": "In a large bowl, dissolve the yeast in water and add honey",
+        "step3Description": "Add flour and mix with a wooden spoon until you get a homogeneous mixture, then let rest <strong>{ rtRestTime } hour(s)</strong> at room temperature covered with plastic wrap, then <strong>{ coldRestTime } hour(s)</strong> in the refrigerator"
       },
       "dough": {
-        "title": "DOUGH PREPARATION",
+        "title": "Dough preparation",
         "subtitle": "Second step: kneading and shaping",
-        "step1Description": "Take the poolish out 1 hour before use",
+        "step1Description": "Remove poolish 1H before use",
         "step2Description": "Weigh the quantities to add to the poolish:",
         "ingredientsList": "ingredients list",
-        "step3Description": "In the poolish bowl, add water and salt. Mix with a spoon until the water is absorbed",
-        "step4Description": "Add flour little by little and mix with a spoon",
-        "step5Description": "When it's no longer possible to use a spoon, transfer the dough to the work surface",
-        "step6Description": "Knead the dough until the flour is fully incorporated",
-        "step7Description": "Make a few folds and form a nice soft ball",
-        "step8Description": "Let rest 10-15 min under a bowl",
-        "step9Description": "Re-shape a smooth ball and let rest another 1 hour in an airtight container",
-        "step10Description": "Put a thin layer of fine semolina on a tray",
-        "step11Description": "Retrieve the dough and form dough balls (well tightened) of about <strong>{{ pizzaWeight }} g</strong>",
-        "step12Description": "Place the balls on the tray leaving space between them (they will keep growing)",
-        "step13Description": "Close the tray or cover with plastic wrap and let rest between 1 and 3 hours",
-        "tipsTitle": "💡 Tips:",
-        "tipsDescription": "If the dough is too sticky, form a ball and let it rest 10 minutes under a bowl",
-        "successMessage": "🎉 And there you have it, ready to become PIZZA!"
+        "step3Description": "In the poolish bowl, add water and salt. Mix with spoon until water is absorbed",
+        "step4Description": "Add flour gradually and mix with spoon",
+        "step5Description": "When it's no longer possible to use a spoon, transfer dough to work surface",
+        "step6Description": "Work the dough by kneading it, the flour must be completely integrated",
+        "step7Description": "Make some folds with the dough and form a nice ball (soft and supple)",
+        "step8Description": "Rest 10-15 min under the bowl",
+        "step9Description": "Reform a nice ball and let rest another 1H in an airtight container",
+        "step10Description": "Put a thin layer of fine semolina in a dish",
+        "step11Description": "Retrieve the dough and with a dough cutter or spatula form dough balls (well stretched) of about <strong>{ pizzaWeight } g</strong>",
+        "step12Description": "Place the dough balls in the dish leaving space between them (they will still grow)",
+        "step13Description": "Close the dish or put plastic wrap on it and let rest between 1H & 3H",
+        "tipsTitle": "💡 Tip:",
+        "tipsDescription": "If the dough is too sticky, form a ball and let rest 10 min under a bowl",
+        "successMessage": "🎉 And there you have it, they're ready to be transformed into PIZZA!"
       }
     },
     "storage": {
-      "title": "STORAGE",
+      "title": "Storage",
       "subtitle": "Storage tips",
       "refrigerator": "Refrigerator: Dough balls keep for 2-3 days",
-      "freezer": "Freezer: Freezes very well, do not keep more than 2-3 months"
+      "freezer": "Freezer: Freezes very well, don't keep more than 2-3 months"
     }
   }
 }
-

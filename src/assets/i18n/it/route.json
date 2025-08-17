@@ -1,24 +1,29 @@
 {
   "dough": {
     "index": {
-      "title": "Impasto per Pizza",
+      "title": "Impasto per pizza",
       "segments": {
-        "calculator": "Calcolatrice",
+        "calculator": "Calcolatore",
         "recipe": "Ricetta"
       },
       "calculator": {
         "title": "Configurazione",
-        "subtitle": "Configura la tua ricetta di pizze"
+        "subtitle": "Configura la tua ricetta per pizza"
       },
       "ingredients": {
         "title": "Ingredienti",
-        "subtitle": "Quantità degli ingredienti in grammi (g)"
+        "subtitle": "Quantità di ingredienti in grammi (g)"
       }
     }
   },
   "settings": {
     "index": {
       "title": "Impostazioni"
+    }
+  },
+  "faq": {
+    "index": {
+      "title": "Domande frequenti"
     }
   }
 }

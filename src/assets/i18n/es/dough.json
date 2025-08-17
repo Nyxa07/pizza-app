@@ -1,14 +1,19 @@
 {
   "form": {
     "pizzasNumber": "Número de pizzas",
-    "doughType": "Tipo de masa",
+    "doughType": "Método",
     "yeastType": "Tipo de levadura",
     "hydration": "Hidratación",
     "temperature": "Temperatura",
     "poolishRatio": "Proporción poolish",
-    "rtRestTime": "Reposo caliente",
-    "coldRestTime": "Reposo frío",
-    "restTimeUnit": "{count, plural, one {Hora} other {Horas}}"
+    "rtRestTime": "Reposo a temperatura ambiente",
+    "coldRestTime": "Reposo en frío",
+    "restTimeUnit": "{count, plural, one {Hora} other {Horas}}",
+    "flourStrength": "Fuerza de la harina (W)",
+    "saltRatio": "Proporción de sal",
+    "honeyRatio": "Proporción de miel",
+    "pizzaWeight": "Peso de una masa",
+    "hydrationHelperText": "Recomendada para la fuerza de la harina (W): {minHydration}% - {maxHydration}%"
   },
   "ingredients": {
     "flour": "Harina",
@@ -29,69 +34,68 @@
     "ingredients": "Ingredientes"
   },
   "doughTypes": {
-    "poolish": "Con poolish",
-    "direct": "Método directo"
+    "poolish": "Poolish",
+    "direct": "Directa"
   },
   "recipe": {
     "quantity": {
-      "flour": "<strong>{{ quantity }} g</strong> de harina",
-      "water": "<strong>{{ quantity }} ml</strong> de agua",
-      "yeast": "<strong>{{ quantity }} g</strong> de levadura",
-      "honey": "<strong>{{ quantity }} g</strong> de miel",
-      "salt": "<strong>{{ quantity }} g</strong> de sal"
+      "flour": "<strong>{ quantity } g</strong> de harina",
+      "water": "<strong>{ quantity } g</strong> de agua",
+      "yeast": "<strong>{ quantity } g</strong> de levadura",
+      "honey": "<strong>{ quantity } g</strong> de miel",
+      "salt": "<strong>{ quantity } g</strong> de sal"
     },
     "direct": {
       "title": "Preparación de la masa",
       "subtitle": "Amasado y formado",
       "step1Description": "Pesar todos los ingredientes",
-      "step2Description": "Mezclar la levadura y la miel en el agua",
-      "step3Description": "Añadir la sal y la harina y mezclar con una cuchara de madera",
-      "step4Description": "Una vez que todos los ingredientes estén bien mezclados y empiece a formarse una bola, ponerla en la superficie de trabajo",
-      "step5Description": "Terminar el amasado a mano unos 10 min (posibilidad de usar una amasadora con gancho amasador). Amasar bien para hidratar correctamente la harina",
-      "step6Description": "Una vez que la masa tenga una estructura bonita, formar una bola y dejarla reposar 25 min bajo un bol (la masa se tensará y se volverá más lisa)",
-      "step7Description": "Hacer algunos pliegues en la masa y darle una forma de bola bonita (bien lisa y que no se pegue más)",
-      "step8Description": "Poner la bola en un recipiente hermético y dejarla reposar 24 horas",
-      "step9Description": "Recuperar la masa y, con un cortador de masa o una espátula, formar bolas de masa (bien tensas) de aproximadamente <strong>{{ pizzaWeight }} g</strong>",
-      "step10Description": "Poner las bolas de masa en un plato dejando espacio entre cada una (van a seguir creciendo)",
+      "step2Description": "Mezclar la levadura y la miel con el agua",
+      "step3Description": "Añadir la sal y la harina y mezclar con cuchara de madera",
+      "step4Description": "Una vez que todos los ingredientes estén bien mezclados y comience a formarse una bola, se puede colocar sobre la superficie de trabajo",
+      "step5Description": "Terminar el amasado a mano durante unos 10 min (posibilidad de usar una amasadora con su gancho amasador). Amasar bien para hidratar correctamente la harina",
+      "step6Description": "Una vez que la masa tenga una buena estructura, formar una bola y dejarla reposar 25 min bajo un bol (la masa se tensará y se volverá más lisa)",
+      "step7Description": "Realizar algunos pliegues en la masa y darle una forma de bola bonita (lisa y que ya no se pegue)",
+      "step8Description": "Colocar la bola en un recipiente hermético y dejarla reposar 24 horas",
+      "step9Description": "Recuperar la masa y, con un cortador de masa o espátula, formar masas (bien tensas) de aproximadamente <strong>{ pizzaWeight } g</strong>",
+      "step10Description": "Colocar las masas en un plato dejando espacio entre cada una (van a crecer todavía)",
       "step11Description": "Cerrar el plato o cubrirlo con film transparente y dejar reposar 3 horas"
     },
     "poolish": {
       "poolish": {
-        "title": "PREPARACIÓN DE LA POOLISH",
-        "subtitle": "Primer paso: preparación de la pre-fermentación",
+        "title": "Preparación del poolish",
+        "subtitle": "Primera etapa: preparación de la pre-fermentación",
         "step1Description": "Pesar todos los ingredientes:",
         "ingredientsList": "lista de ingredientes",
         "step2Description": "En un bol grande, disolver la levadura en agua y añadir la miel",
-        "step3Description": "Añadir la harina y mezclar con una cuchara de madera hasta obtener una mezcla homogénea, luego dejar reposar <strong>{{ rtRestTime }} hora(s)</strong> a temperatura ambiente cubierto con film transparente, luego <strong>{{ coldRestTime }} hora(s)</strong> en el frigorífico"
+        "step3Description": "Añadir la harina y mezclar con una cuchara de madera hasta obtener una mezcla homogénea, luego dejar reposar <strong>{ rtRestTime } hora(s)</strong> a temperatura ambiente cubierto con film transparente, después <strong>{ coldRestTime } hora(s)</strong> en el refrigerador"
       },
       "dough": {
-        "title": "PREPARACIÓN DE LA MASA",
-        "subtitle": "Segundo paso: amasado y formado",
-        "step1Description": "Sacar la poolish 1 hora antes del uso",
-        "step2Description": "Pesar las cantidades a añadir en la poolish:",
+        "title": "Preparación de la masa",
+        "subtitle": "Segunda etapa: amasado y formado",
+        "step1Description": "Sacar el poolish 1H antes de usar",
+        "step2Description": "Pesar las cantidades a añadir al poolish:",
         "ingredientsList": "lista de ingredientes",
-        "step3Description": "En el bol de la poolish, añadir el agua y la sal. Mezclar con la cuchara hasta la absorción del agua",
-        "step4Description": "Añadir poco a poco la harina y mezclar con la cuchara",
+        "step3Description": "En el bol del poolish, añadir el agua y la sal. Mezclar con cuchara hasta la absorción del agua",
+        "step4Description": "Añadir poco a poco la harina y mezclar con cuchara",
         "step5Description": "Cuando ya no sea posible usar una cuchara, transferir la masa a la superficie de trabajo",
         "step6Description": "Trabajar la masa amasándola, la harina debe estar completamente integrada",
         "step7Description": "Hacer algunos pliegues con la masa y formar una bola bonita (suave y flexible)",
-        "step8Description": "Dejar reposar 10-15 min bajo el bol",
-        "step9Description": "Reformar una bola bonita y dejar reposar otra 1 hora en un recipiente hermético",
+        "step8Description": "Hacer reposar 10-15 min bajo el bol",
+        "step9Description": "Reformar una bola bonita y dejar reposar otra 1H en un recipiente hermético",
         "step10Description": "Poner una capa fina de sémola fina en un plato",
-        "step11Description": "Recuperar la masa y con un cortador de masa o espátula formar bolas de masa (bien tensas) de aproximadamente <strong>{{ pizzaWeight }} g</strong>",
-        "step12Description": "Poner las bolas de masa en el plato dejando espacio entre ellas (van a seguir creciendo)",
-        "step13Description": "Cerrar el plato o poner film transparente sobre él y dejar reposar entre 1 y 3 horas",
-        "tipsTitle": "💡 Consejos:",
+        "step11Description": "Recuperar la masa y con un cortador de masa o espátula formar masas (bien tensas) de aproximadamente <strong>{ pizzaWeight } g</strong>",
+        "step12Description": "Colocar las masas en el plato dejando espacio entre ellas (van a crecer todavía)",
+        "step13Description": "Cerrar el plato o poner film transparente sobre él y dejar reposar entre 1H y 3H",
+        "tipsTitle": "💡 Consejo:",
         "tipsDescription": "Si la masa se pega demasiado, formar una bola y dejar reposar 10 min bajo un bol",
-        "successMessage": "🎉 ¡Y ya está, están listos para ser transformados en PIZZA!"
+        "successMessage": "🎉 ¡Y listo, están listos para ser transformados en PIZZA!"
       }
     },
     "storage": {
-      "title": "CONSERVACIÓN",
+      "title": "Conservación",
       "subtitle": "Consejos de almacenamiento",
-      "refrigerator": "Frigorífico: Las bolas de masa se conservan 2-3 días",
+      "refrigerator": "Refrigerador: Las masas se conservan 2-3 días",
       "freezer": "Congelador: Se congela muy bien, no conservar más de 2-3 meses"
     }
   }
 }
-

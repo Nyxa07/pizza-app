@@ -1,11 +1,11 @@
 {
   "questions": [
     {
-      "title": "Die Direktmethode",
+      "title": "Die Direkte Methode",
       "subtitle": "Direkte Teigzubereitung",
       "answers": [
-        "Es ist eine einfachere Zubereitungsmethode als indirekte Methoden.",
-        "Alle Zutaten werden direkt eingearbeitet und nach einer mehr oder weniger langen Ruhezeit kann man ihn verwenden."
+        "Dies ist eine einfachere Zubereitungsmethode als indirekte Methoden.",
+        "Alle Zutaten werden direkt eingearbeitet und nach einer mehr oder weniger langen Ruhezeit kann er verwendet werden."
       ]
     },
     {
@@ -13,8 +13,8 @@
       "subtitle": "Poolish ist ein flüssiger Teig aus Mehl, Wasser und Hefe",
       "answers": [
         "Poolish ist eine Vorfermentation des Teigs, die mehrere Stunden ruht, bevor sie für Pizzateig verwendet wird.",
-        "Er wird zubereitet, indem 1 Teil Mehl und 1 Teil Wasser sowie eine kleine Menge Hefe gemischt werden.",
-        "Es ist eine indirekte Methode der Pizzateigzubereitung."
+        "Sie wird zubereitet, indem 1 Teil Mehl und 1 Teil Wasser sowie eine kleine Menge Hefe gemischt werden.",
+        "Dies ist eine indirekte Methode der Pizzateig-Zubereitung."
       ]
     },
     {
@@ -22,72 +22,72 @@
       "subtitle": "Biga ist eine sogenannte trockene Zubereitung aus Mehl, Wasser und Hefe",
       "answers": [
         "Biga ist eine Vorfermentation des Teigs, die mehrere Stunden ruht, bevor sie für Pizzateig verwendet wird.",
-        "BlaBlaBlah, noch nie gemacht, also werde ich nicht irgendetwas hinschreiben 😉"
+        "BlaBlaBla, habe es noch nie gemacht, also werde ich nicht irgendetwas schreiben 😉"
       ]
     },
     {
-      "title": " Hefen",
-      "subtitle": "Hier verwenden wir 3 Arten von Hefe",
+      "title": "Hefen",
+      "subtitle": "Hier verwenden wir 3 Arten von Hefen",
       "answers": [
-        "Aktive Trockenhefe ist die Hefe, die im Handel als klassische Bäckerhefe und nicht als schnelle zu finden ist.",
-        "Instant-Trockenhefe ist gefriergetrocknete Hefe in Form feiner Flocken. Sie muss vor Gebrauch nicht hydratisiert werden und ermöglicht schnelles Aufgehen.",
-        "Frischhefe ist die Hefe, die im Handel als frische Bäckerhefe in Würfelform zu finden ist."
+        "Trockenhefe aktiv ist die Hefe, die im Handel als sogenannte klassische Bäckerhefe und nicht als schnelle zu finden ist.",
+        "Trockenhefe instant ist gefriergetrocknete Hefe in Form von feinen Flocken. Sie muss vor der Verwendung nicht hydratisiert werden und ermöglicht schnelles Gehen.",
+        "Frische Hefe ist die Hefe, die im Handel als sogenannte frische Bäckerhefe in Teigform in Würfeln zu finden ist."
       ],
       "tips": [
         {
           "title": "💡 Tipp:",
-          "description": "Der Rechner ermöglicht es einfach, von einer Hefe zur anderen zu wechseln"
+          "description": "Der Rechner ermöglicht es einfach, zu einer oder der anderen Hefe zu wechseln"
         }
       ]
     },
     {
-      "title": " 💦 Hydratation",
-      "subtitle": "Verhältnis zwischen Gesamtwassermenge und Gesamtmehlmenge",
+      "title": "💦 Hydratation",
+      "subtitle": "Verhältnis zwischen der Gesamtwassermenge zur Gesamtmehlmenge",
       "answers": [
-        "Beispiel 1: Für 100 g Gesamtwasser habe ich 151,5 g Gesamtmehl, was eine Teighydratation von 66% ergibt. Berechnung: 100 ÷ 151,5 = 0,66 oder 66%.",
-        "Beispiel 2: Wenn ich wissen möchte, wie viel Wasser hinzuzufügen ist, wenn ich 151,5 g Mehl habe und 66% Hydratation möchte, ist die Berechnung: 0,66 x 151,5 = 100 g Gesamtwasser hinzuzufügen."
+        "Bsp. 1: Für 100 g Gesamtwasser werde ich 151,5 g Gesamtmehl haben, was eine Teighydratation von 66% ergibt. Berechnung: 100 ÷ 151,5 = 0,66 oder 66%.",
+        "Bsp. 2: Wenn ich die Wassermenge wissen möchte, die hinzuzufügen ist, wenn ich 151,5 g Mehl habe und eine Hydratation von 66% möchte, wird die Berechnung sein: 0,66 x 151,5 = 100 g Gesamtwasser hinzuzufügen."
       ],
       "tips": [
         {
           "title": "💡 Tipp:",
-          "description": "Je hydratisierter der Teig, desto schwieriger wird er zu handhaben sein, er wird flüssiger und damit klebriger. Empfohlene Hydratation: Zwischen 62 & 75%"
+          "description": "Je hydratisierter der Teig ist, desto schwieriger wird er zu handhaben sein, er wird flüssiger und daher klebriger sein. Empfohlene Hydratation: Zwischen 62 & 75%"
         }
       ]
     },
     {
-      "title": " 🍚 Poolish-Verhältnis",
-      "subtitle": "Verhältnis zwischen Poolish-Menge und Gesamtteigmenge",
+      "title": "🍚 Poolish-Verhältnis",
+      "subtitle": "Verhältnis zwischen der Poolish-Menge und der Gesamtteigmenge",
       "answers": [
-        "Üblicherweise werden zwischen 30 und 60% Poolish in der finalen Teigmenge verwendet.",
-        "Beispiel: Wenn ich 30% Poolish in meinem Teig und 1 kg finalen Teig möchte, ist die Berechnung: 1000 x 0,3 = 300 g. Der Poolish wird also 300 g betragen und aus 150 g Mehl und 150 g Wasser bestehen."
+        "Wir verwenden üblicherweise zwischen 30 und 60% Poolish in der endgültigen Teigmenge.",
+        "Bsp.: Wenn ich 30% Poolish in meinem Teig und 1 kg endgültigen Teig möchte, wird die Berechnung sein: 1000 x 0,3 = 300 g. Der Poolish wird daher 300 g betragen und aus 150 g Mehl und 150 g Wasser bestehen."
       ],
       "tips": [
         {
           "title": "💡 Tipp:",
-          "description": "Im Allgemeinen wird im Winter ein höheres Poolish-Verhältnis als im Sommer verwendet, da die Fermentation teilweise von der Temperatur beeinflusst wird. Mehr Poolish im Winter als im Sommer kann der finalen Teigentwicklung helfen."
+          "description": "Im Allgemeinen geben wir im Winter ein höheres Poolish-Verhältnis als im Sommer, da die Fermentation teilweise von der Temperatur beeinflusst wird. Daher kann mehr Poolish im Winter als im Sommer bei der endgültigen Entwicklung des Teigs helfen."
         }
       ]
     },
     {
-      "title": " 🌡️ Temperatur",
-      "subtitle": "Das ist die Raumtemperatur, außerhalb des Kühlschranks",
+      "title": "🌡️ Temperatur",
+      "subtitle": "Das ist die Raumtemperatur des Raums, die außerhalb des Kühlschranks",
       "answers": [
-        "Temperatur des Raumes, in dem wir Poolish / Teig / Biga / Teigkugeln ruhen lassen werden.",
-        "Wird in der Berechnung der warmen Ruhe verwendet."
+        "Temperatur des Raums, in dem wir den Poolish / Teig / Biga / Teiglinge ruhen lassen werden.",
+        "Wird in der Warmruhe-Berechnung verwendet."
       ]
     },
     {
-      "title": " 🔥 Warme Ruhe",
+      "title": "🔥 Warmruhe",
       "subtitle": "",
       "answers": [
-        "Ruhezeit verschiedener Zubereitungen bei der gewählten Temperatur."
+        "Ruhezeit der verschiedenen Zubereitungen bei der ausgewählten Temperatur."
       ]
     },
     {
-      "title": " ❄️ Kalte Ruhe",
+      "title": "❄️ Kältruhe",
       "subtitle": "",
       "answers": [
-        "Ruhezeit verschiedener Zubereitungen im Kühlschrank."
+        "Ruhezeit der verschiedenen Zubereitungen im Kühlschrank."
       ]
     }
   ]

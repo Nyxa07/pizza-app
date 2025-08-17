@@ -1,0 +1,12 @@
+{
+  "mass": {
+    "selector": {
+      "title": "Unité de Masse"
+    }
+  },
+  "temperature": {
+    "selector": {
+      "title": "Unité de Température"
+    }
+  }
+}

@@ -1,14 +1,14 @@
 {
   "dough": {
     "index": {
-      "title": "Masa de Pizza",
+      "title": "Masa de pizza",
       "segments": {
         "calculator": "Calculadora",
         "recipe": "Receta"
       },
       "calculator": {
         "title": "Configuración",
-        "subtitle": "Configura tu receta de pizzas"
+        "subtitle": "Configure su receta de pizza"
       },
       "ingredients": {
         "title": "Ingredientes",

@@ -12,19 +12,19 @@
         "title": "Modo oscuro"
       }
     },
-    "dough": {
-      "title": "Masa",
-      "pizzaWeight": {
-        "title": "Peso de la pizza",
-        "helperText": "Valor en gramos. Se recomienda un valor entre 250 y 280 (~30cm)."
+    "doughCalculator": {
+      "title": "Calculadora de masa",
+      "pizzaWeightVisibility": {
+        "title": "Elegir peso de una masa"
       },
-      "saltRatio": {
-        "title": "Proporción de sal",
-        "helperText": "Valor en % de la harina total. Se recomienda un valor entre 2.8 y 3.2."
+      "saltRatioVisibility": {
+        "title": "Elegir proporción de sal"
       },
-      "honeyRatio": {
-        "title": "Proporción de miel",
-        "helperText": "Valor en % de la harina total. Se recomienda un valor entre 0 y 0.5."
+      "honeyRatioVisibility": {
+        "title": "Elegir proporción de miel"
+      },
+      "flourStrengthVisibility": {
+        "title": "Elegir fuerza de la harina"
       }
     }
   }
