@@ -17,7 +17,7 @@ export class NumberPipe implements PipeTransform {
   constructor(private localeManager: LocaleManagerService) {}
 
   transform(value: number | null | undefined, format: string): string {
-    if (!value) {
+    if (value === null || value === undefined) {
       return '';
     }
 

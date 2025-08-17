@@ -30,39 +30,51 @@
   <ion-list-header>{{
     "settings.form.dough.title" | translate
   }}</ion-list-header>
-  <ion-list [inset]="true">
+  <ion-list [inset]="true" lines="none">
     <ion-item>
-      <ion-input
+      <ion-select
+        mode="ios"
         [label]="'settings.form.dough.pizzaWeight.title' | translate"
         type="number"
         formControlName="pizzaWeight"
-        [max]="400"
-        [min]="200"
-        labelPlacement="stacked"
         [helperText]="'settings.form.dough.pizzaWeight.helperText' | translate"
-      />
+      >
+        @for (weight of range(200, 400, 10); track weight) {
+          <ion-select-option [value]="weight">
+            {{ weight }} g
+          </ion-select-option>
+        }
+      </ion-select>
     </ion-item>
     <ion-item>
-      <ion-input
+      <ion-select
+        mode="ios"
         [helperText]="'settings.form.dough.saltRatio.helperText' | translate"
         [label]="'settings.form.dough.saltRatio.title' | translate"
         type="number"
         formControlName="saltRatio"
-        [max]="3.2"
-        [min]="2.8"
-        labelPlacement="stacked"
-      />
+      >
+        @for (ratio of range(2, 4, 0.1); track ratio) {
+          <ion-select-option [value]="ratio">
+            {{ ratio | number: "1.1-1" }} %
+          </ion-select-option>
+        }
+      </ion-select>
     </ion-item>
     <ion-item>
-      <ion-input
+      <ion-select
+        mode="ios"
         [helperText]="'settings.form.dough.honeyRatio.helperText' | translate"
         [label]="'settings.form.dough.honeyRatio.title' | translate"
         type="number"
         formControlName="honeyRatio"
-        [max]="0.5"
-        [min]="0"
-        labelPlacement="stacked"
-      />
+      >
+        @for (ratio of range(0, 0.5, 0.1); track ratio) {
+          <ion-select-option [value]="ratio">
+            {{ ratio | number: "1.1-1" }} %
+          </ion-select-option>
+        }
+      </ion-select>
     </ion-item>
   </ion-list>
 </form>
