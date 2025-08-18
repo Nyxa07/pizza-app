@@ -12,10 +12,8 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { LocaleManagerService } from '../../locales/services/locale-manager.service';
 import { Locales } from '../../locales/enums/locales.enum';
 import { ThemeService } from '../../theme/services/theme.service';
-import { DoughConfigService } from '../../dough/services/dough-config.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
-import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 import { DoughFormStateService } from '../../dough/services/dough-form-state.service';
 
 @Component({
@@ -32,7 +30,6 @@ import { DoughFormStateService } from '../../dough/services/dough-form-state.ser
     IonToggle,
     IonList,
     IonListHeader,
-    NumberPipe,
   ],
 })
 export class SettingsFormComponent implements OnInit {

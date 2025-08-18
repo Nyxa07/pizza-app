@@ -1,14 +1,12 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
   IonItem,
   IonSelect,
   IonSelectOption,
   IonList,
   IonRange,
-  IonButton,
   IonListHeader,
-  IonIcon,
   IonLabel,
 } from '@ionic/angular/standalone';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -41,7 +39,6 @@ import {
     LowerCasePipe,
     AsyncPipe,
     NumberPipe,
-    IonButton,
     IonListHeader,
     IonLabel,
   ],
