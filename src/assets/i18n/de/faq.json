@@ -1,56 +1,56 @@
 {
   "questions": [
     {
-      "title": "Die Direkte Methode",
-      "subtitle": "Direkte Teigzubereitung",
+      "title": "Die direkte Methode",
+      "subtitle": "Direkte Zubereitung des Teigs",
       "answers": [
-        "Dies ist eine einfachere Zubereitungsmethode als indirekte Methoden.",
-        "Alle Zutaten werden direkt eingearbeitet und nach einer mehr oder weniger langen Ruhezeit kann er verwendet werden."
+        "Dies ist eine einfachere Zubereitungsmethode als die indirekten Methoden.",
+        "Alle Zutaten werden direkt eingearbeitet und nach einer mehr oder weniger langen Ruhezeit kann der Teig verwendet werden."
       ]
     },
     {
-      "title": "Poolish",
-      "subtitle": "Poolish ist ein flüssiger Teig aus Mehl, Wasser und Hefe",
+      "title": "Der Poolish",
+      "subtitle": "Der Poolish ist ein flüssiger Vorteig aus Mehl, Wasser und Hefe",
       "answers": [
-        "Poolish ist eine Vorfermentation des Teigs, die mehrere Stunden ruht, bevor sie für Pizzateig verwendet wird.",
-        "Sie wird zubereitet, indem 1 Teil Mehl und 1 Teil Wasser sowie eine kleine Menge Hefe gemischt werden.",
-        "Dies ist eine indirekte Methode der Pizzateig-Zubereitung."
+        "Der Poolish ist eine Vorfermentation des Teigs, der mehrere Stunden ruht, bevor er für den Pizzateig verwendet wird.",
+        "Er wird durch Mischen von 1 Teil Mehl und 1 Teil Wasser sowie einer kleinen Menge Hefe hergestellt.",
+        "Dies ist eine indirekte Methode zur Zubereitung von Pizzateig."
       ]
     },
     {
-      "title": "Biga",
-      "subtitle": "Biga ist eine sogenannte trockene Zubereitung aus Mehl, Wasser und Hefe",
+      "title": "Die Biga",
+      "subtitle": "Die Biga ist ein sogenannter trockener Vorteig aus Mehl, Wasser und Hefe",
       "answers": [
-        "Biga ist eine Vorfermentation des Teigs, die mehrere Stunden ruht, bevor sie für Pizzateig verwendet wird.",
-        "BlaBlaBla, habe es noch nie gemacht, also werde ich nicht irgendetwas schreiben 😉"
+        "Die Biga ist eine Vorfermentation des Teigs, der mehrere Stunden ruht, bevor er für den Pizzateig verwendet wird.",
+        "BlaBlaBla, noch nie gemacht, also werde ich keinen Unsinn schreiben 😉"
       ]
     },
     {
-      "title": "Hefen",
-      "subtitle": "Hier verwenden wir 3 Arten von Hefen",
+      "title": "Die Hefen",
+      "subtitle": "Hier verwenden wir 3 Arten von Hefe",
       "answers": [
-        "Trockenhefe aktiv ist die Hefe, die im Handel als sogenannte klassische Bäckerhefe und nicht als schnelle zu finden ist.",
-        "Trockenhefe instant ist gefriergetrocknete Hefe in Form von feinen Flocken. Sie muss vor der Verwendung nicht hydratisiert werden und ermöglicht schnelles Gehen.",
-        "Frische Hefe ist die Hefe, die im Handel als sogenannte frische Bäckerhefe in Teigform in Würfeln zu finden ist."
+        "Die aktive Trockenhefe ist die Hefe, die im Handel als klassische Bäckerhefe und nicht als schnelle Hefe erhältlich ist.",
+        "Die Instant-Trockenhefe ist die gefriergetrocknete Hefe in Form von feinen Flocken. Sie muss vor der Verwendung nicht rehydriert werden und ermöglicht ein schnelles Aufgehen.",
+        "Die frische Hefe ist die Hefe, die im Handel als frische Bäckerhefe in Form von Würfelpaste erhältlich ist."
       ],
       "tips": [
         {
           "title": "💡 Tipp:",
-          "description": "Der Rechner ermöglicht es einfach, zu einer oder der anderen Hefe zu wechseln"
+          "description": "Der Rechner ermöglicht einen einfachen Wechsel zwischen den verschiedenen Hefesorten."
         }
       ]
     },
     {
       "title": "💦 Hydratation",
-      "subtitle": "Verhältnis zwischen der Gesamtwassermenge zur Gesamtmehlmenge",
+      "subtitle": "Verhältnis zwischen der Gesamtmenge an Wasser und der Gesamtmenge an Mehl",
       "answers": [
-        "Bsp. 1: Für 100 g Gesamtwasser werde ich 151,5 g Gesamtmehl haben, was eine Teighydratation von 66% ergibt. Berechnung: 100 ÷ 151,5 = 0,66 oder 66%.",
-        "Bsp. 2: Wenn ich die Wassermenge wissen möchte, die hinzuzufügen ist, wenn ich 151,5 g Mehl habe und eine Hydratation von 66% möchte, wird die Berechnung sein: 0,66 x 151,5 = 100 g Gesamtwasser hinzuzufügen."
+        "Bsp. 1: Für insgesamt 100 g Wasser benötige ich insgesamt 151,5 g Mehl, was einer Teighydratation von 66 % entspricht. Berechnung: 100 ÷ 151,5 = 0,66, also 66 %.",
+        "Bsp. 2: Wenn ich die hinzuzufügende Wassermenge bei 151,5 g Mehl wissen möchte und eine Hydratation von 66 % wünsche, lautet die Berechnung: 0,66 x 151,5 = 100 g Wasser insgesamt."
       ],
       "tips": [
         {
           "title": "💡 Tipp:",
-          "description": "Je hydratisierter der Teig ist, desto schwieriger wird er zu handhaben sein, er wird flüssiger und daher klebriger sein. Empfohlene Hydratation: Zwischen 62 & 75%"
+          "description": "Je höher der Wassergehalt des Teigs, desto schwieriger ist er zu handhaben, er wird flüssiger und damit klebriger. Empfohlene Hydratation: Zwischen 62 & 75 %"
         }
       ]
     },
@@ -58,33 +58,33 @@
       "title": "🍚 Poolish-Verhältnis",
       "subtitle": "Verhältnis zwischen der Poolish-Menge und der Gesamtteigmenge",
       "answers": [
-        "Wir verwenden üblicherweise zwischen 30 und 60% Poolish in der endgültigen Teigmenge.",
-        "Bsp.: Wenn ich 30% Poolish in meinem Teig und 1 kg endgültigen Teig möchte, wird die Berechnung sein: 1000 x 0,3 = 300 g. Der Poolish wird daher 300 g betragen und aus 150 g Mehl und 150 g Wasser bestehen."
+        "Üblicherweise werden zwischen 30 und 60 % Poolish in der endgültigen Teigmenge verwendet.",
+        "Bsp.: Wenn ich 30 % Poolish in meinem Teig und 1 kg Endteig haben möchte, lautet die Berechnung: 1000 x 0,3 = 300 g. Der Poolish wird also 300 g wiegen und aus 150 g Mehl und 150 g Wasser bestehen."
       ],
       "tips": [
         {
           "title": "💡 Tipp:",
-          "description": "Im Allgemeinen geben wir im Winter ein höheres Poolish-Verhältnis als im Sommer, da die Fermentation teilweise von der Temperatur beeinflusst wird. Daher kann mehr Poolish im Winter als im Sommer bei der endgültigen Entwicklung des Teigs helfen."
+          "description": "Im Allgemeinen wird im Winter ein höheres Poolish-Verhältnis als im Sommer verwendet, da die Gärung teilweise von der Temperatur beeinflusst wird. Daher kann die Zugabe von mehr Poolish im Winter als im Sommer die endgültige Entwicklung des Teigs unterstützen."
         }
       ]
     },
     {
-      "title": "🌡️ Temperatur",
-      "subtitle": "Das ist die Raumtemperatur des Raums, die außerhalb des Kühlschranks",
+      "title": "🌡️ Die Temperatur",
+      "subtitle": "Dies ist die Raumtemperatur des Raumes, die außerhalb des Kühlschranks",
       "answers": [
-        "Temperatur des Raums, in dem wir den Poolish / Teig / Biga / Teiglinge ruhen lassen werden.",
-        "Wird in der Warmruhe-Berechnung verwendet."
+        "Temperatur des Raumes, in dem der Poolish / der Teig / die Biga / die Teiglinge ruhen gelassen werden.",
+        "Wird bei der Berechnung der warmen Ruhezeit verwendet."
       ]
     },
     {
-      "title": "🔥 Warmruhe",
+      "title": "🔥 Warme Ruhezeit",
       "subtitle": "",
       "answers": [
-        "Ruhezeit der verschiedenen Zubereitungen bei der ausgewählten Temperatur."
+        "Ruhezeit der verschiedenen Zubereitungen bei der gewählten Temperatur."
       ]
     },
     {
-      "title": "❄️ Kältruhe",
+      "title": "❄️ Kalte Ruhezeit",
       "subtitle": "",
       "answers": [
         "Ruhezeit der verschiedenen Zubereitungen im Kühlschrank."

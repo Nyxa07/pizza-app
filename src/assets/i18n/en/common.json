@@ -18,5 +18,20 @@
     "back": "Back",
     "next": "Next",
     "previous": "Previous"
+  },
+  "ingredients": {
+    "flour": "Flour",
+    "water": "Water",
+    "yeast": "Yeast",
+    "honey": "Honey",
+    "salt": "Salt",
+    "dryActiveYeast": "Dry active yeast",
+    "dryInstantYeast": "Dry instant yeast",
+    "freshYeast": "Fresh yeast"
+  },
+  "yeastTypes": {
+    "dryActive": "Dry active",
+    "dryInstant": "Instant",
+    "fresh": "Fresh"
   }
 }

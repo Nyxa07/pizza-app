@@ -9,7 +9,7 @@
     "reset": "Zurücksetzen"
   },
   "status": {
-    "loading": "Wird geladen...",
+    "loading": "Laden...",
     "error": "Fehler",
     "success": "Erfolg",
     "warning": "Warnung"
@@ -17,6 +17,21 @@
   "navigation": {
     "back": "Zurück",
     "next": "Weiter",
-    "previous": "Vorherige"
+    "previous": "Zurück"
+  },
+  "ingredients": {
+    "flour": "Mehl",
+    "water": "Wasser",
+    "yeast": "Hefe",
+    "honey": "Honig",
+    "salt": "Salz",
+    "dryActiveYeast": "Aktive Trockenhefe",
+    "dryInstantYeast": "Instant-Trockenhefe",
+    "freshYeast": "Frische Hefe"
+  },
+  "yeastTypes": {
+    "dryActive": "Trocken aktiv",
+    "dryInstant": "Instant",
+    "fresh": "Frisch"
   }
 }

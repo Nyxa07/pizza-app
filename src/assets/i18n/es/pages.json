@@ -1,0 +1,35 @@
+{
+  "calculator": {
+    "title": "Calculadora",
+    "compute": "Calcular",
+    "results": {
+      "title": "Resultados del cálculo"
+    },
+    "settings": {
+      "title": "Configuración de la calculadora"
+    }
+  },
+  "guides": {
+    "title": "Guías",
+    "faq": {
+      "title": "FAQ",
+      "description": "Preguntas frecuentes"
+    }
+  },
+  "home": {
+    "title": "Pizza Maker",
+    "settings": {
+      "title": "Configuración global"
+    },
+    "calculator": {
+      "title": "Calculadora",
+      "subtitle": "Calculadora de masa de pizza",
+      "content": "Calcule las cantidades de los ingredientes en función de una multitud de parámetros (Temperatura, Harina, Hidratación, Levadura, etc.)."
+    },
+    "faq": {
+      "title": "FAQ",
+      "subtitle": "Preguntas frecuentes",
+      "content": "Preguntas frecuentes"
+    }
+  }
+}

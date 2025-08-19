@@ -1,11 +1,11 @@
 {
   "questions": [
     {
-      "title": "Il Metodo Diretto",
+      "title": "Il metodo diretto",
       "subtitle": "Preparazione diretta dell'impasto",
       "answers": [
         "È un metodo di preparazione più semplice dei metodi indiretti.",
-        "Si incorporano direttamente tutti gli ingredienti e dopo un riposo più o meno lungo può essere utilizzato."
+        "Si incorporano direttamente tutti gli ingredienti e, dopo un riposo più o meno lungo, si può utilizzare."
       ]
     },
     {
@@ -13,44 +13,44 @@
       "subtitle": "Il poolish è un impasto liquido a base di farina, acqua e lievito",
       "answers": [
         "Il poolish è una pre-fermentazione dell'impasto che riposa per diverse ore prima di essere utilizzato per l'impasto della pizza.",
-        "Si prepara mescolando 1 parte di farina e 1 parte di acqua così come una piccola quantità di lievito.",
-        "È un metodo indiretto di preparazione dell'impasto per pizza."
+        "Si prepara mescolando 1 parte di farina e 1 parte di acqua e una piccola quantità di lievito.",
+        "È un metodo indiretto di preparazione dell'impasto della pizza."
       ]
     },
     {
       "title": "La Biga",
       "subtitle": "La Biga è una preparazione detta secca a base di farina, acqua e lievito",
       "answers": [
-        "La Biga è una pre-fermentazione dell'impasto che riposa per diverse ore prima di essere utilizzata per l'impasto della pizza.",
-        "BlaBlaBla, non l'ho mai fatta quindi non metterò cose a caso 😉"
+        "La Biga è una pre-fermentazione dell'impasto che riposa per diverse ore prima di essere utilizzato per l'impasto della pizza.",
+        "BlaBlaBla, non l'ho mai fatta, quindi non scriverò sciocchezze 😉"
       ]
     },
     {
-      "title": "I Lieviti",
-      "subtitle": "Qui utilizziamo 3 tipi di lieviti",
+      "title": "I lieviti",
+      "subtitle": "Qui utilizziamo 3 tipi di lievito",
       "answers": [
-        "Il lievito secco attivo è il lievito che si trova in commercio sotto forma di lievito di birra detto classico e non rapido.",
-        "Il lievito secco istantaneo è il lievito liofilizzato sotto forma di fini scaglie. Non ha bisogno di essere idratato prima di essere utilizzato e permette di fare lievitazioni rapide.",
-        "Il lievito fresco è il lievito che si trova in commercio sotto forma di lievito di birra detto fresco sotto forma di pasta in cubi."
+        "Il lievito secco attivo è quello che si trova in commercio come lievito di birra classico e non rapido.",
+        "Il lievito secco istantaneo è il lievito liofilizzato in forma di fini scaglie. Non ha bisogno di essere idratato prima dell'uso e permette una rapida lievitazione.",
+        "Il lievito fresco è quello che si trova in commercio come lievito di birra fresco in forma di pasta in cubetti."
       ],
       "tips": [
         {
-          "title": "💡 Consiglio:",
-          "description": "Il calcolatore permette facilmente di passare all'uno o all'altro dei lieviti"
+          "title": "💡 Suggerimento:",
+          "description": "Il calcolatore consente di passare facilmente da un lievito all'altro."
         }
       ]
     },
     {
       "title": "💦 Idratazione",
-      "subtitle": "Rapporto tra la quantità di acqua totale sulla quantità di farina totale",
+      "subtitle": "Rapporto tra la quantità totale di acqua e la quantità totale di farina",
       "answers": [
-        "Es 1: Per 100 g di acqua in totale avrò 151,5 g di farina totale il che dà un'idratazione dell'impasto al 66%. Calcolo: 100 ÷ 151,5 = 0,66 ovvero 66%.",
-        "Es 2: Se voglio conoscere la quantità di acqua da aggiungere quando ho 151,5 g di farina e voglio un'idratazione al 66% il calcolo sarà: 0,66 x 151,5 = 100 g di acqua in totale da aggiungere."
+        "Es 1: Per un totale di 100 g di acqua, avrò un totale di 151,5 g di farina, il che dà un'idratazione dell'impasto del 66%. Calcolo: 100 ÷ 151,5 = 0,66 o 66%.",
+        "Es 2: Se voglio sapere la quantità di acqua da aggiungere quando ho 151,5 g di farina e voglio un'idratazione del 66%, il calcolo sarà: 0,66 x 151,5 = 100 g di acqua in totale da aggiungere."
       ],
       "tips": [
         {
-          "title": "💡 Consiglio:",
-          "description": "Più l'impasto è idratato più difficile sarà da manipolare, sarà più liquido e quindi più appiccicoso. Idratazione raccomandata: Tra 62 e 75%"
+          "title": "💡 Suggerimento:",
+          "description": "Più l'impasto è idratato, più sarà difficile da maneggiare, sarà più liquido e quindi più appiccicoso. Idratazione consigliata: tra il 62 e il 75%"
         }
       ]
     },
@@ -58,36 +58,36 @@
       "title": "🍚 Rapporto Poolish",
       "subtitle": "Rapporto tra la quantità di poolish e la quantità totale di impasto",
       "answers": [
-        "Utilizziamo comunemente tra il 30 e il 60% di poolish nella quantità di impasto finale.",
-        "Es: Se voglio il 30% di poolish nel mio impasto e 1 kg di impasto finale, il calcolo sarà: 1000 x 0,3 = 300 g. Il poolish farà quindi 300 g e sarà composto da 150 g di farina e 150 g di acqua."
+        "Si utilizza comunemente tra il 30 e il 60% di poolish nella quantità finale di impasto.",
+        "Es: Se voglio il 30% di poolish nel mio impasto e 1 kg di impasto finale, il calcolo sarà: 1000 x 0,3 = 300 g. Il poolish sarà quindi di 300 g e sarà composto da 150 g di farina e 150 g di acqua."
       ],
       "tips": [
         {
-          "title": "💡 Consiglio:",
-          "description": "In generale mettiamo un rapporto più elevato di poolish d'inverno che d'estate perché la fermentazione è in parte influenzata dalla temperatura. Quindi mettere più poolish d'inverno che d'estate può aiutare lo sviluppo finale dell'impasto."
+          "title": "💡 Suggerimento:",
+          "description": "In generale, si utilizza un rapporto di poolish più elevato in inverno che in estate perché la fermentazione è in parte influenzata dalla temperatura. Quindi, mettere più poolish in inverno che in estate può aiutare lo sviluppo finale dell'impasto."
         }
       ]
     },
     {
-      "title": "🌡️ La Temperatura",
-      "subtitle": "È la temperatura ambiente della stanza, quella fuori dal frigo",
+      "title": "🌡️ La temperatura",
+      "subtitle": "È la temperatura ambiente della stanza, quella fuori dal frigorifero",
       "answers": [
-        "Temperatura della stanza dove faremo riposare il poolish / l'impasto / la biga / i panetti.",
-        "Serve nel calcolo del riposo a caldo."
+        "Temperatura della stanza in cui si lascerà riposare il poolish / l'impasto / la biga / i panetti.",
+        "Utilizzata nel calcolo del riposo a caldo."
       ]
     },
     {
-      "title": "🔥 Riposo a Caldo",
+      "title": "🔥 Riposo a caldo",
       "subtitle": "",
       "answers": [
-        "Tempo di riposo delle diverse preparazioni alla temperatura selezionata."
+        "Tempo di riposo delle varie preparazioni alla temperatura selezionata."
       ]
     },
     {
-      "title": "❄️ Riposo a Freddo",
+      "title": "❄️ Riposo a freddo",
       "subtitle": "",
       "answers": [
-        "Tempo di riposo delle diverse preparazioni in frigorifero."
+        "Tempo di riposo delle varie preparazioni in frigorifero."
       ]
     }
   ]

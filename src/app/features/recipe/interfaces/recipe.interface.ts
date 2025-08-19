@@ -5,7 +5,7 @@ export interface IRecipeHelper {
   descriptions: string[];
 }
 
-export interface IRecipeItem {
+export interface IRecipeIngredientItem {
   icon: LucideIconData;
   value: number;
   label: string;
@@ -26,7 +26,7 @@ export interface IRecipeMethodItem {
 export interface IRecipe {
   ingredients: {
     title: string;
-    items: IRecipeItem[];
+    items: IRecipeIngredientItem[];
   };
   method: {
     title: string;

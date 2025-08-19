@@ -9,22 +9,7 @@
     "appearance": {
       "title": "Erscheinungsbild",
       "paletteToggle": {
-        "title": "Dunkler Modus"
-      }
-    },
-    "doughCalculator": {
-      "title": "Teigrechner",
-      "pizzaWeightVisibility": {
-        "title": "Gewicht eines Teiglings wählen"
-      },
-      "saltRatioVisibility": {
-        "title": "Salzverhältnis wählen"
-      },
-      "honeyRatioVisibility": {
-        "title": "Honigverhältnis wählen"
-      },
-      "flourStrengthVisibility": {
-        "title": "Mehlstärke wählen"
+        "title": "Dunkelmodus"
       }
     }
   }

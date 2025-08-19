@@ -11,21 +11,6 @@
       "paletteToggle": {
         "title": "Dark mode"
       }
-    },
-    "doughCalculator": {
-      "title": "Dough calculator",
-      "pizzaWeightVisibility": {
-        "title": "Choose pizza dough weight"
-      },
-      "saltRatioVisibility": {
-        "title": "Choose salt ratio"
-      },
-      "honeyRatioVisibility": {
-        "title": "Choose honey ratio"
-      },
-      "flourStrengthVisibility": {
-        "title": "Choose flour strength"
-      }
     }
   }
 }

@@ -5,8 +5,8 @@ import {
   IonLabel,
   IonList,
   IonListHeader,
-  IonNote,
   IonModal,
+  IonNote,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';

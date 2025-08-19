@@ -1,0 +1,35 @@
+{
+  "calculator": {
+    "title": "Rechner",
+    "compute": "Berechnen",
+    "results": {
+      "title": "Ergebnisse der Berechnung"
+    },
+    "settings": {
+      "title": "Rechnerkonfiguration"
+    }
+  },
+  "guides": {
+    "title": "Anleitungen",
+    "faq": {
+      "title": "FAQ",
+      "description": "Häufig gestellte Fragen"
+    }
+  },
+  "home": {
+    "title": "Pizza Maker",
+    "settings": {
+      "title": "Globale Konfiguration"
+    },
+    "calculator": {
+      "title": "Rechner",
+      "subtitle": "Pizzateig-Rechner",
+      "content": "Berechnen Sie die Zutatenmengen basierend auf einer Vielzahl von Parametern (Temperatur, Mehl, Hydratation, Hefe usw.)."
+    },
+    "faq": {
+      "title": "FAQ",
+      "subtitle": "Häufig gestellte Fragen",
+      "content": "Häufig gestellte Fragen"
+    }
+  }
+}

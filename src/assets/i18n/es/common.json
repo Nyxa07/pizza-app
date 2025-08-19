@@ -6,7 +6,7 @@
     "edit": "Editar",
     "add": "Añadir",
     "ok": "OK",
-    "reset": "Restablecer"
+    "reset": "Reiniciar"
   },
   "status": {
     "loading": "Cargando...",
@@ -18,5 +18,20 @@
     "back": "Atrás",
     "next": "Siguiente",
     "previous": "Anterior"
+  },
+  "ingredients": {
+    "flour": "Harina",
+    "water": "Agua",
+    "yeast": "Levadura",
+    "honey": "Miel",
+    "salt": "Sal",
+    "dryActiveYeast": "Levadura seca activa",
+    "dryInstantYeast": "Levadura seca instantánea",
+    "freshYeast": "Levadura fresca"
+  },
+  "yeastTypes": {
+    "dryActive": "Seca activa",
+    "dryInstant": "Instantánea",
+    "fresh": "Fresco"
   }
 }
