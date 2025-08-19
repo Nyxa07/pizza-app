@@ -1,25 +1,35 @@
 {
-  "dough": {
-    "index": {
-      "title": "Pizza dough",
-      "segments": {
-        "calculator": "Calculator",
-        "recipe": "Recipe"
-      },
-      "summary": {
-        "title": "Summary",
-        "subtitle": "Quantity summary (g)"
-      }
+  "calculator": {
+    "title": "Calculator",
+    "compute": "Calculate",
+    "results": {
+      "title": "Calculation results"
+    },
+    "settings": {
+      "title": "Calculator configuration"
     }
   },
-  "settings": {
-    "index": {
-      "title": "Settings"
+  "guides": {
+    "title": "Guides",
+    "faq": {
+      "title": "FAQ",
+      "description": "Frequently Asked Questions"
     }
   },
-  "faq": {
-    "index": {
-      "title": "FAQ"
+  "home": {
+    "title": "Pizza Maker",
+    "settings": {
+      "title": "Global configuration"
+    },
+    "calculator": {
+      "title": "Calculator",
+      "subtitle": "Pizza dough calculator",
+      "content": "Calculate the quantities of ingredients based on a multitude of parameters (Temperature, Flour, Hydration, Yeast, etc.)."
+    },
+    "faq": {
+      "title": "FAQ",
+      "subtitle": "Frequently Asked Questions",
+      "content": "Frequently Asked Questions"
     }
   }
 }

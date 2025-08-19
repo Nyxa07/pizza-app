@@ -5,52 +5,52 @@
       "subtitle": "Direct dough preparation",
       "answers": [
         "This is a simpler preparation method than indirect methods.",
-        "All ingredients are incorporated directly and after a more or less long rest it can be used."
+        "All the ingredients are incorporated directly and after a more or less long rest, it can be used."
       ]
     },
     {
-      "title": "Poolish",
-      "subtitle": "Poolish is a liquid dough made from flour, water and yeast",
+      "title": "The Poolish",
+      "subtitle": "The poolish is a liquid dough made of flour, water and yeast",
       "answers": [
-        "Poolish is a pre-fermentation of the dough that rests for several hours before being used for pizza dough.",
+        "The poolish is a pre-fermentation of the dough that rests for several hours before being used for the pizza dough.",
         "It is prepared by mixing 1 part flour and 1 part water as well as a small amount of yeast.",
-        "This is an indirect pizza dough preparation method."
+        "This is an indirect method of preparing pizza dough."
       ]
     },
     {
-      "title": "Biga",
-      "subtitle": "Biga is a so-called dry preparation made from flour, water and yeast",
+      "title": "The Biga",
+      "subtitle": "The Biga is a so-called dry preparation made of flour, water and yeast",
       "answers": [
-        "Biga is a pre-fermentation of the dough that rests for several hours before being used for pizza dough.",
-        "BlaBlaBla, never made it so I won't put just anything 😉"
+        "The Biga is a pre-fermentation of the dough that rests for several hours before being used for the pizza dough.",
+        "BlaBlaBla, never done it before so I'm not going to write any nonsense 😉"
       ]
     },
     {
-      "title": "Yeasts",
-      "subtitle": "Here we use 3 types of yeasts",
+      "title": "The Yeasts",
+      "subtitle": "Here we use 3 types of yeast",
       "answers": [
-        "Dry active yeast is the yeast found commercially as so-called classic baker's yeast and not rapid.",
-        "Dry instant yeast is freeze-dried yeast in the form of fine flakes. It does not need to be hydrated before use and allows for rapid rising.",
-        "Fresh yeast is the yeast found commercially as so-called fresh baker's yeast in paste form in cubes."
+        "Dry active yeast is the yeast found in stores as so-called classic baker's yeast and not fast-acting.",
+        "Instant dry yeast is freeze-dried yeast in the form of fine flakes. It does not need to be hydrated before use and allows for rapid rising.",
+        "Fresh yeast is the yeast found in stores as so-called fresh baker's yeast in the form of a cube paste."
       ],
       "tips": [
         {
           "title": "💡 Tip:",
-          "description": "The calculator easily allows switching to one or the other of the yeasts"
+          "description": "The calculator makes it easy to switch from one yeast to another."
         }
       ]
     },
     {
       "title": "💦 Hydration",
-      "subtitle": "Ratio between the total amount of water to the total amount of flour",
+      "subtitle": "Ratio between the total amount of water and the total amount of flour",
       "answers": [
-        "Ex 1: For 100 g of total water I will have 151.5 g of total flour which gives a dough hydration of 66%. Calculation: 100 ÷ 151.5 = 0.66 or 66%.",
-        "Ex 2: If I want to know the amount of water to add when I have 151.5 g of flour and I want 66% hydration, the calculation will be: 0.66 x 151.5 = 100 g of total water to add."
+        "Ex 1: For a total of 100 g of water, I will have a total of 151.5 g of flour, which gives a dough hydration of 66%. Calculation: 100 ÷ 151.5 = 0.66 or 66%.",
+        "Ex 2: If I want to know the amount of water to add when I have 151.5 g of flour and I want a hydration of 66%, the calculation will be: 0.66 x 151.5 = 100 g of water in total to add."
       ],
       "tips": [
         {
           "title": "💡 Tip:",
-          "description": "The more hydrated the dough, the more difficult it will be to handle, it will be more liquid and therefore stickier. Recommended hydration: Between 62 & 75%"
+          "description": "The more hydrated the dough, the more difficult it will be to handle, it will be more liquid and therefore more sticky. Recommended hydration: Between 62 & 75%"
         }
       ]
     },
@@ -58,36 +58,36 @@
       "title": "🍚 Poolish Ratio",
       "subtitle": "Ratio between the amount of poolish and the total amount of dough",
       "answers": [
-        "We commonly use between 30 and 60% poolish in the final dough quantity.",
-        "Ex: If I want 30% poolish in my dough and 1 kg of final dough, the calculation will be: 1000 x 0.3 = 300 g. The poolish will therefore be 300 g and will be composed of 150 g of flour and 150 g of water."
+        "We commonly use between 30 and 60% of poolish in the final amount of dough.",
+        "Ex: If I want 30% of poolish in my dough and 1 kg of final dough, the calculation will be: 1000 x 0.3 = 300 g. The poolish will therefore be 300 g and will be composed of 150 g of flour and 150 g of water."
       ],
       "tips": [
         {
           "title": "💡 Tip:",
-          "description": "Generally we put a higher ratio of poolish in winter than in summer because fermentation is partly influenced by temperature. So putting more poolish in winter than in summer can help the final development of the dough."
+          "description": "In general, a higher ratio of poolish is used in winter than in summer because fermentation is partly influenced by temperature. So putting more poolish in winter than in summer can help the final development of the dough."
         }
       ]
     },
     {
-      "title": "🌡️ Temperature",
+      "title": "🌡️ The Temperature",
       "subtitle": "This is the ambient temperature of the room, the one outside the fridge",
       "answers": [
-        "Temperature of the room where we will let the poolish / dough / biga / dough balls rest.",
-        "Used in the warm rest calculation."
+        "Temperature of the room where the poolish / dough / biga / dough balls will be left to rest.",
+        "Used in the calculation of warm rest."
       ]
     },
     {
       "title": "🔥 Warm Rest",
       "subtitle": "",
       "answers": [
-        "Rest time of the various preparations at the selected temperature."
+        "Resting time of the various preparations at the selected temperature."
       ]
     },
     {
       "title": "❄️ Cold Rest",
       "subtitle": "",
       "answers": [
-        "Rest time of the various preparations in the fridge."
+        "Resting time of the various preparations in the fridge."
       ]
     }
   ]

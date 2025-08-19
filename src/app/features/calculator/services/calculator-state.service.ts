@@ -51,6 +51,13 @@ export const DEFAULT_INPUT: CalculatorInput = {
   pizzaWeight: 250,
 };
 
+export const DEFAULT_POOLISH_INPUT: CalculatorInput = {
+  ...DEFAULT_INPUT,
+  doughType: DoughType.POOLISH,
+  coldRestTime: 24,
+  rtRestTime: 1,
+};
+
 export const DEFAULT_VISIBILITY: InputsVisibility = {
   nbPizzas: true,
   doughType: true,
@@ -105,14 +112,19 @@ export class CalculatorStateService {
   }
 
   private beforeUpdateInput(input: CalculatorInput): CalculatorInput {
-    if (
-      this._input.value.doughType !== input.doughType &&
-      input.doughType === DoughType.POOLISH
-    ) {
+    const doughTypeChanged = input.doughType !== this._input.value.doughType;
+    if (doughTypeChanged && input.doughType === DoughType.POOLISH) {
       input = {
         ...input,
-        coldRestTime: 24,
-        rtRestTime: 1,
+        coldRestTime: DEFAULT_POOLISH_INPUT.coldRestTime,
+        rtRestTime: DEFAULT_POOLISH_INPUT.rtRestTime,
+      };
+    }
+    if (doughTypeChanged && input.doughType === DoughType.DIRECT) {
+      input = {
+        ...input,
+        coldRestTime: DEFAULT_INPUT.coldRestTime,
+        rtRestTime: DEFAULT_INPUT.rtRestTime,
       };
     }
     return input;

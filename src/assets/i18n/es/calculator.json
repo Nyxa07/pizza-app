@@ -1,0 +1,336 @@
+{
+  "form": {
+    "titles": {
+      "quantity": "Cantidad de masa",
+      "doughType": "Tipo de masa",
+      "rest": "Reposo"
+    },
+    "pizzasNumber": "Número de pizzas",
+    "doughType": "Método",
+    "yeastType": "Tipo de levadura",
+    "hydration": "Hidratación",
+    "temperature": "Temperatura",
+    "poolishRatio": "Ratio de poolish",
+    "rtRestTime": "A temperatura ambiente",
+    "coldRestTime": "En frío",
+    "restTimeUnit": "{count, plural, one {Hora} other {Horas}}",
+    "flourStrength": "Fuerza de la harina (W)",
+    "saltRatio": "Ratio de sal",
+    "honeyRatio": "Ratio de miel",
+    "pizzaWeight": "Peso del bollo",
+    "hydrationHelperText": "Recomendado para la fuerza de la harina (W): {minHydration}% - {maxHydration}%"
+  },
+  "recipe": {
+    "poolish": {
+      "ingredients": {
+        "title": "Ingredientes del poolish"
+      },
+      "method": {
+        "title": "Preparación del poolish",
+        "steps": [
+          {
+            "title": "Mezclar agua, levadura y miel",
+            "description": "",
+            "helper": {
+              "title": "Mezclar agua, levadura y miel",
+              "descriptions": [
+                "Pesar todos los ingredientes.",
+                "En un bol grande, disolver la levadura en el agua y añadir la miel."
+              ]
+            }
+          },
+          {
+            "title": "Añadir la harina",
+            "description": "",
+            "helper": {
+              "title": "Añadir la harina",
+              "descriptions": [
+                "Añadir la harina y mezclar con una cuchara de madera hasta obtener una mezcla homogénea."
+              ]
+            }
+          },
+          {
+            "title": "Reposo de <strong>{ rtRestTime } hora(s)</strong> a temperatura ambiente",
+            "description": "",
+            "helper": {
+              "title": "Reposo a temperatura ambiente",
+              "descriptions": [
+                "Dejar reposar <strong>{ rtRestTime } hora(s)</strong> a temperatura ambiente cubierto con film transparente."
+              ]
+            }
+          },
+          {
+            "title": "Reposo de <strong>{ coldRestTime } hora(s)</strong> en el frigorífico",
+            "description": "",
+            "helper": {
+              "title": "Reposo en el frigorífico",
+              "descriptions": [
+                "Dejar reposar <strong>{ coldRestTime } hora(s)</strong> en el frigorífico cubierto con film transparente."
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "poolishDough": {
+      "ingredients": {
+        "title": "Ingredientes de la masa"
+      },
+      "method": {
+        "title": "Preparación de la masa",
+        "steps": [
+          {
+            "title": "Sacar el poolish 1 hora antes de usarlo",
+            "description": "",
+            "helper": {
+              "title": "Cómo usar el poolish",
+              "descriptions": [
+                "Sacar el poolish 1 hora antes de usarlo, para que tenga tiempo de volver a temperatura ambiente."
+              ]
+            }
+          },
+          {
+            "title": "En el poolish, añadir el agua y la sal",
+            "description": "",
+            "helper": {
+              "title": "Preparación de la masa",
+              "descriptions": [
+                "Pesar las cantidades a añadir en el poolish.",
+                "En el bol del poolish, añadir el agua y la sal. Mezclar con una cuchara de madera hasta que el agua se absorba."
+              ]
+            }
+          },
+          {
+            "title": "Añadir la harina poco a poco",
+            "description": "",
+            "helper": {
+              "title": "Cómo añadir la harina",
+              "descriptions": [
+                "Añadir la harina poco a poco y mezclar con una cuchara de madera."
+              ]
+            }
+          },
+          {
+            "title": "Transferir la masa a la superficie de trabajo",
+            "description": "",
+            "helper": {
+              "title": "Transferencia de la masa",
+              "descriptions": [
+                "Con la ayuda de una rasqueta de panadero, transferir la masa a la superficie de trabajo."
+              ]
+            }
+          },
+          {
+            "title": "Amasar la masa",
+            "description": "",
+            "helper": {
+              "title": "Amasado",
+              "descriptions": [
+                "Trabajar la masa amasándola, la harina debe estar completamente integrada."
+              ]
+            }
+          },
+          {
+            "title": "Hacer algunos pliegues y formar una bola",
+            "description": "",
+            "helper": {
+              "title": "Pliegues",
+              "descriptions": [
+                "Para hacer un pliegue, cogemos la masa y la doblamos sobre sí misma.",
+                "Podemos hacer tantos pliegues como queramos, pero la masa debe ser suave y flexible.",
+                "El pliegue permite introducir aire en la masa.",
+                "Una vez que hemos terminado, podemos darle forma de una bonita bola."
+              ]
+            }
+          },
+          {
+            "title": "Reposo 10 - 15 min bajo un bol",
+            "description": "",
+            "helper": {
+              "title": "Reposo",
+              "descriptions": []
+            }
+          },
+          {
+            "title": "Volver a formar una bola",
+            "description": "",
+            "helper": {
+              "title": "Volver a formar una bola",
+              "descriptions": [
+                "No trabajar demasiado la masa.",
+                "Estirar la masa y haciéndole dar unas cuantas vueltas entre las manos volver a formar una bola."
+              ]
+            }
+          },
+          {
+            "title": "Reposo 1H en un recipiente hermético",
+            "description": "",
+            "helper": {
+              "title": "Reposo",
+              "descriptions": []
+            }
+          },
+          {
+            "title": "Formar los bollos",
+            "description": "",
+            "helper": {
+              "title": "Formar los bollos",
+              "descriptions": [
+                "Recuperar la masa y con un cortador de masa o una espátula",
+                "Formar bollos (bien tensos) de unos <strong>{ pizzaWeight } g</strong>.",
+                "Poner una fina capa de sémola fina en un plato.",
+                "Colocar los bollos en un plato dejando espacio entre ellos (todavía crecerán).",
+                "Cerrar el plato o poner un film transparente."
+              ]
+            }
+          },
+          {
+            "title": "Reposo para que duplique su volumen",
+            "description": "",
+            "helper": {
+              "title": "Reposo del bollo",
+              "descriptions": [
+                "El tiempo de reposo del bollo varía en función de la temperatura.",
+                "Puede tardar entre 1H y 3H, por lo que hay que tenerlo en cuenta 😉."
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "directDough": {
+      "ingredients": {
+        "title": "Ingredientes de la masa"
+      },
+      "method": {
+        "title": "Preparación de la masa",
+        "steps": [
+          {
+            "title": "Mezclar agua, levadura y miel",
+            "description": "",
+            "helper": {
+              "title": "Preparación de la masa",
+              "descriptions": [
+                "Pesar todos los ingredientes.",
+                "Mezclar la levadura y la miel con el agua."
+              ]
+            }
+          },
+          {
+            "title": "Añadir la harina y la sal",
+            "description": "",
+            "helper": {
+              "title": "Introducción de la harina",
+              "descriptions": [
+                "Añadir la harina y la sal y mezclar con una cuchara de madera hasta obtener una mezcla homogénea."
+              ]
+            }
+          },
+          {
+            "title": "Amasar 10 min",
+            "description": "",
+            "helper": {
+              "title": "Amasado",
+              "descriptions": [
+                "Una vez que todos los ingredientes estén bien mezclados y empecemos a tener una bola, podemos depositarla en la superficie de trabajo.",
+                "Terminar el amasado a mano unos 10 min (posibilidad de utilizar un robot de cocina con su gancho de amasar). Amasar bien para hidratar correctamente la harina."
+              ]
+            }
+          },
+          {
+            "title": "Formar una bola",
+            "description": "",
+            "helper": {
+              "title": "Bola de masa",
+              "descriptions": [
+                "Una vez que la masa tenga una bonita estructura, formar una bola."
+              ]
+            }
+          },
+          {
+            "title": "Reposo 25 min bajo un bol",
+            "description": "",
+            "helper": {
+              "title": "Reposo",
+              "descriptions": [
+                "La masa se tensará y se volverá más lisa."
+              ]
+            }
+          },
+          {
+            "title": "Hacer algunos pliegues y formar una bola",
+            "description": "",
+            "helper": {
+              "title": "Pliegues",
+              "descriptions": [
+                "Para hacer un pliegue, cogemos la masa y la doblamos sobre sí misma.",
+                "Podemos hacer tantos pliegues como queramos, pero la masa debe ser suave y flexible.",
+                "El pliegue permite introducir aire en la masa.",
+                "Una vez que hemos terminado, podemos darle forma de una bonita bola."
+              ]
+            }
+          },
+          {
+            "title": "Reposo a temperatura ambiente <strong>{ rtRestTime } hora(s)</strong> en un recipiente hermético",
+            "description": "",
+            "helper": {
+              "title": "Reposo",
+              "descriptions": [
+                "La masa se tensará y se volverá más lisa."
+              ]
+            }
+          },
+          {
+            "title": "Reposo en frío <strong>{ coldRestTime } hora(s)</strong> en un recipiente hermético",
+            "description": "",
+            "helper": {
+              "title": "Reposo",
+              "descriptions": [
+                "La masa se tensará y se volverá más lisa."
+              ]
+            }
+          },
+          {
+            "title": "Formar los bollos",
+            "description": "",
+            "helper": {
+              "title": "Formar los bollos",
+              "descriptions": [
+                "Recuperar la masa y con un cortador de masa o una espátula",
+                "Formar bollos (bien tensos) de unos <strong>{ pizzaWeight } g</strong>.",
+                "Poner una fina capa de sémola fina en un plato.",
+                "Colocar los bollos en un plato dejando espacio entre ellos (todavía crecerán).",
+                "Cerrar el plato o poner un film transparente."
+              ]
+            }
+          },
+          {
+            "title": "Reposo para que duplique su volumen",
+            "description": "",
+            "helper": {
+              "title": "Reposo del bollo",
+              "descriptions": [
+                "El tiempo de reposo del bollo varía en función de la temperatura.",
+                "Puede tardar entre 1H y 3H, por lo que hay que tenerlo en cuenta 😉."
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "doughTypes": {
+    "poolish": "Poolish",
+    "direct": "Directa"
+  },
+  "settings": {
+    "visibility": {
+      "title": "Campos adicionales",
+      "pizzaWeight": "Peso del bollo",
+      "saltRatio": "Ratio de sal",
+      "honeyRatio": "Ratio de miel",
+      "flourStrength": "Fuerza de la harina",
+      "all": "Activar todo"
+    }
+  }
+}

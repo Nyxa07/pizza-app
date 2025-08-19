@@ -5,8 +5,9 @@ import {
   IonLabel,
   IonList,
   IonListHeader,
-  IonNote,
   IonModal,
+  IonNote,
+  IonText,
 } from '@ionic/angular/standalone';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
@@ -27,6 +28,7 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
     IonList,
     IonItem,
     IonLabel,
+    IonText,
     IonNote,
     NumberPipe,
     TranslatePipe,

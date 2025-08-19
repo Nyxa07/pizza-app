@@ -3,28 +3,13 @@
     "language": {
       "title": "Lingua",
       "selector": {
-        "title": "Seleziona lingua"
+        "title": "Seleziona la lingua"
       }
     },
     "appearance": {
       "title": "Aspetto",
       "paletteToggle": {
         "title": "Modalità scura"
-      }
-    },
-    "doughCalculator": {
-      "title": "Calcolatore impasto",
-      "pizzaWeightVisibility": {
-        "title": "Scegli il peso di un impasto"
-      },
-      "saltRatioVisibility": {
-        "title": "Scegli il rapporto del sale"
-      },
-      "honeyRatioVisibility": {
-        "title": "Scegli il rapporto del miele"
-      },
-      "flourStrengthVisibility": {
-        "title": "Scegli la forza della farina"
       }
     }
   }

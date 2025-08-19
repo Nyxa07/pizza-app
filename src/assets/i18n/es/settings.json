@@ -11,21 +11,6 @@
       "paletteToggle": {
         "title": "Modo oscuro"
       }
-    },
-    "doughCalculator": {
-      "title": "Calculadora de masa",
-      "pizzaWeightVisibility": {
-        "title": "Elegir peso de una masa"
-      },
-      "saltRatioVisibility": {
-        "title": "Elegir proporción de sal"
-      },
-      "honeyRatioVisibility": {
-        "title": "Elegir proporción de miel"
-      },
-      "flourStrengthVisibility": {
-        "title": "Elegir fuerza de la harina"
-      }
     }
   }
 }

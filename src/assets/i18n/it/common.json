@@ -9,7 +9,7 @@
     "reset": "Ripristina"
   },
   "status": {
-    "loading": "Caricamento...",
+    "loading": "Caricamento in corso...",
     "error": "Errore",
     "success": "Successo",
     "warning": "Attenzione"
@@ -18,5 +18,20 @@
     "back": "Indietro",
     "next": "Avanti",
     "previous": "Precedente"
+  },
+  "ingredients": {
+    "flour": "Farina",
+    "water": "Acqua",
+    "yeast": "Lievito",
+    "honey": "Miele",
+    "salt": "Sale",
+    "dryActiveYeast": "Lievito secco attivo",
+    "dryInstantYeast": "Lievito secco istantaneo",
+    "freshYeast": "Lievito fresco"
+  },
+  "yeastTypes": {
+    "dryActive": "Secco attivo",
+    "dryInstant": "Istantaneo",
+    "fresh": "Fresco"
   }
 }
