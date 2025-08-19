@@ -9,4 +9,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title>{{ "pages.home.title" | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  @for (item of items; track item.title) {
+    <ion-card [routerLink]="item.routerLink">
+      <ion-card-header>
+        <ion-card-title>
+          {{ item.title | translate }}
+        </ion-card-title>
+        <ion-card-subtitle>
+          {{ item.subtitle | translate }}
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{ item.content | translate }}
+      </ion-card-content>
+    </ion-card>
+  }
+</ion-content>

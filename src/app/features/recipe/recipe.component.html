@@ -7,9 +7,6 @@
       <i-lucide slot="start" [img]="item.icon"></i-lucide>
       <ion-label>
         {{ item.label | translate }}
-        <p>
-          <small>{{ item.description | translate }}</small>
-        </p>
       </ion-label>
       <ion-note slot="end">
         {{ item.value | number: item.numberFormat ?? "1.0-0" }}
@@ -24,13 +21,10 @@
 </ion-list-header>
 <ion-list lines="none">
   @for (item of recipe.method.items; track item) {
-    <ion-item (click)="openHelperModal(item.helper)" button>
+    <ion-item (click)="openHelperModal(item)" button>
       <i-lucide slot="start" [img]="item.icon"></i-lucide>
       <ion-label>
         {{ item.label | translate }}
-        <p>
-          <small>{{ item.description | translate }}</small>
-        </p>
       </ion-label>
     </ion-item>
   }
@@ -38,7 +32,6 @@
 
 <ion-modal
   #helperModal
-  trigger="helper-modal"
   [initialBreakpoint]="0.5"
   [breakpoints]="[0, 0.25, 0.5, 0.75]"
   handleBehavior="cycle"
@@ -46,11 +39,14 @@
   <ng-template>
     <div class="ion-padding">
       <h2>
-        {{ currentHelper?.title | translate }}
+        {{ currentMethodItem?.helper?.title | translate }}
       </h2>
-      <p>
-        {{ currentHelper?.description | translate }}
-      </p>
+      <p
+        [innerHTML]="
+          currentMethodItem?.helper?.description
+            | translate: currentMethodItem?.variables ?? {}
+        "
+      ></p>
     </div>
   </ng-template>
 </ion-modal>

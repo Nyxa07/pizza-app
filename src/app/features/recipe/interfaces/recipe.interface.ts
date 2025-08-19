@@ -17,8 +17,10 @@ export interface IRecipeItem {
 export interface IRecipeMethodItem {
   icon: LucideIconData;
   label: string;
-  description?: string;
   helper?: IRecipeHelper;
+  variables?: {
+    [key: string]: number | string | undefined;
+  };
 }
 
 export interface IRecipe {

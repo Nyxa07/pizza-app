@@ -20,6 +20,16 @@
     "title": "Accueil",
     "settings": {
       "title": "Configuration"
+    },
+    "calculator": {
+      "title": "Calculateur",
+      "subtitle": "Calculateur de pâte à pizza",
+      "content": "Calculer les quantités des ingrédients en fonction d'une multitudes de paramètres (Témperature, Farine, Hydratation, Levure, etc.)"
+    },
+    "faq": {
+      "title": "FAQ",
+      "subtitle": "Foire aux questions",
+      "content": "Foire aux questions"
     }
   }
 }

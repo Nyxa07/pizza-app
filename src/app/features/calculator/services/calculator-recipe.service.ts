@@ -7,6 +7,13 @@ import {
   BeerIcon,
   CandyCaneIcon,
   WheatIcon,
+  WandIcon,
+  ThermometerSunIcon,
+  ThermometerSnowflakeIcon,
+  CookingPotIcon,
+  BubblesIcon,
+  UndoDotIcon,
+  HandIcon,
 } from 'lucide-angular';
 import { IRecipe } from 'src/app/features/recipe/interfaces/recipe.interface';
 import { Quantity } from './calculator.service';
@@ -20,6 +27,13 @@ export class CalculatorRecipeService {
   readonly BeerIcon = BeerIcon;
   readonly CandyCaneIcon = CandyCaneIcon;
   readonly SpotlightIcon = SpotlightIcon;
+  readonly WandIcon = WandIcon;
+  readonly ThermometerSunIcon = ThermometerSunIcon;
+  readonly ThermometerSnowflakeIcon = ThermometerSnowflakeIcon;
+  readonly CookingPotIcon = CookingPotIcon;
+  readonly BubblesIcon = BubblesIcon;
+  readonly UndoDotIcon = UndoDotIcon;
+  readonly HandIcon = HandIcon;
 
   constructor(private calculatorState: CalculatorStateService) {}
 
@@ -70,18 +84,24 @@ export class CalculatorRecipeService {
         method: {
           title: 'calculator.recipe.poolish.method.title',
           items: [
-            this.WheatIcon,
-            this.WheatIcon,
-            this.WheatIcon,
-            this.WheatIcon,
-          ].map((icon, index) => ({
-            icon,
+            { icon: this.WandIcon },
+            { icon: this.WheatIcon },
+            {
+              icon: this.ThermometerSunIcon,
+              variables: { rtRestTime: result.poolish?.rtRestTime },
+            },
+            {
+              icon: this.ThermometerSnowflakeIcon,
+              variables: { coldRestTime: result.poolish?.coldRestTime },
+            },
+          ].map((data, index) => ({
+            icon: data.icon,
             label: `calculator.recipe.poolish.method.steps.${index}.title`,
-            description: `calculator.recipe.poolish.method.steps.${index}.description`,
             helper: {
-              title: `calculator.recipe.poolish.method.steps.${index}.title`,
+              title: `calculator.recipe.poolish.method.steps.${index}.helper.title`,
               description: `calculator.recipe.poolish.method.steps.${index}.helper.description`,
             },
+            variables: data.variables,
           })),
         },
       };
@@ -98,23 +118,22 @@ export class CalculatorRecipeService {
       method: {
         title: 'calculator.recipe.poolishDough.method.title',
         items: [
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-        ].map((icon, index) => ({
-          icon,
+          { icon: this.CookingPotIcon },
+          { icon: this.BubblesIcon },
+          { icon: this.WheatIcon },
+          { icon: this.UndoDotIcon },
+          { icon: this.HandIcon },
+          { icon: this.UndoDotIcon },
+          { icon: this.ThermometerSunIcon },
+          { icon: this.UndoDotIcon },
+          { icon: this.ThermometerSunIcon },
+          { icon: this.UndoDotIcon },
+          { icon: this.ThermometerSunIcon },
+        ].map((data, index) => ({
+          icon: data.icon,
           label: `calculator.recipe.poolishDough.method.steps.${index}.title`,
-          description: `calculator.recipe.poolishDough.method.steps.${index}.description`,
           helper: {
-            title: `calculator.recipe.poolishDough.method.steps.${index}.title`,
+            title: `calculator.recipe.poolishDough.method.steps.${index}.helper.title`,
             description: `calculator.recipe.poolishDough.method.steps.${index}.helper.description`,
           },
         })),
@@ -131,21 +150,20 @@ export class CalculatorRecipeService {
       method: {
         title: 'calculator.recipe.directDough.method.title',
         items: [
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-          this.WheatIcon,
-        ].map((icon, index) => ({
-          icon,
+          { icon: this.WandIcon },
+          { icon: this.WheatIcon },
+          { icon: this.HandIcon },
+          { icon: this.UndoDotIcon },
+          { icon: this.ThermometerSunIcon },
+          { icon: this.UndoDotIcon },
+          { icon: this.ThermometerSunIcon },
+          { icon: this.UndoDotIcon },
+          { icon: this.ThermometerSunIcon },
+        ].map((data, index) => ({
+          icon: data.icon,
           label: `calculator.recipe.directDough.method.steps.${index}.title`,
-          description: `calculator.recipe.directDough.method.steps.${index}.description`,
           helper: {
-            title: `calculator.recipe.directDough.method.steps.${index}.title`,
+            title: `calculator.recipe.directDough.method.steps.${index}.helper.title`,
             description: `calculator.recipe.directDough.method.steps.${index}.helper.description`,
           },
         })),

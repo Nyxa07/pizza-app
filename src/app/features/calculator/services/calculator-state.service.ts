@@ -94,10 +94,31 @@ export class CalculatorStateService {
   }
 
   update(input: CalculatorInput): void {
+    // Before changine _input
+    input = this.beforeUpdateInput(input);
+
     this._input.next(input);
     this.prefs.set(this.STORAGE_KEY, input);
 
     // Update visibility of poolish ratio at the end because it triggers reset to default
+    this.afterUpdateInput(input);
+  }
+
+  private beforeUpdateInput(input: CalculatorInput): CalculatorInput {
+    if (
+      this._input.value.doughType !== input.doughType &&
+      input.doughType === DoughType.POOLISH
+    ) {
+      input = {
+        ...input,
+        coldRestTime: 24,
+        rtRestTime: 1,
+      };
+    }
+    return input;
+  }
+
+  private afterUpdateInput(input: CalculatorInput): void {
     if (input.doughType === DoughType.DIRECT) {
       this.updateVisibility({ poolishRatio: false });
     } else {

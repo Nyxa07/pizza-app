@@ -12,6 +12,7 @@ import { LucideAngularModule } from 'lucide-angular';
 import {
   IRecipe,
   IRecipeHelper,
+  IRecipeMethodItem,
 } from 'src/app/features/recipe/interfaces/recipe.interface';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
@@ -35,18 +36,18 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 export class RecipeComponent implements OnInit {
   @Input({ required: true }) recipe!: IRecipe;
   @ViewChild('helperModal') helperModal!: IonModal;
-  currentHelper: IRecipeHelper | null = null;
+  currentMethodItem: IRecipeMethodItem | null = null;
 
   constructor() {}
 
   ngOnInit() {}
 
-  openHelperModal(helper?: IRecipeHelper) {
-    if (!helper) {
+  openHelperModal(methodItem?: IRecipeMethodItem) {
+    if (!methodItem) {
       return;
     }
 
-    this.currentHelper = helper;
+    this.currentMethodItem = methodItem;
     this.helperModal.present();
   }
 }
