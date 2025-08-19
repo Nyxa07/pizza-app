@@ -33,7 +33,7 @@
             "description": "",
             "helper": {
               "title": "Mélanger l’eau, la levure et le miel",
-              "description": "Peser tous les ingrédients. Dans un grand bol, délayer la levure dans l'eau et ajouter le miel."
+              "description": "Peser tous les ingrédients. <br/> Dans un grand bol, délayer la levure dans l'eau et ajouter le miel."
             }
           },
           {
@@ -74,8 +74,8 @@
             "title": "Sortir la poolish 1H avant utilisation",
             "description": "",
             "helper": {
-              "title": "Préparation de la pâte",
-              "description": ""
+              "title": "Comment utiliser la poolish",
+              "description": "Sortir la poolish 1H avant utilisation, pour qu'elle est le temps de revenir à température ambiante"
             }
           },
           {
@@ -83,7 +83,7 @@
             "description": "",
             "helper": {
               "title": "Préparation de la pâte",
-              "description": ""
+              "description": "Peser les quantités à ajouter dans la poolish"
             }
           },
           {
