@@ -33,7 +33,10 @@
             "description": "",
             "helper": {
               "title": "Mélanger l’eau, la levure et le miel",
-              "description": "Peser tous les ingrédients. <br/> Dans un grand bol, délayer la levure dans l'eau et ajouter le miel."
+              "descriptions": [
+                "Peser tous les ingrédients.",
+                "Dans un grand bol, délayer la levure dans l'eau et ajouter le miel."
+              ]
             }
           },
           {
@@ -41,7 +44,9 @@
             "description": "",
             "helper": {
               "title": "Ajouter la farine",
-              "description": "Ajouter la farine et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène"
+              "descriptions": [
+                "Ajouter la farine et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène"
+              ]
             }
           },
           {
@@ -49,7 +54,9 @@
             "description": "",
               "helper": {
               "title": "Repos à température ambiante",
-              "description": "Laisser reposer <strong>{ rtRestTime } heure(s)</strong> à température ambiante couvert d'un film plastique"
+              "descriptions": [
+                "Laisser reposer <strong>{ rtRestTime } heure(s)</strong> à température ambiante couvert d'un film plastique"
+              ]
             }
           },
           {
@@ -57,7 +64,9 @@
             "description": "",
             "helper": {
               "title": "Repos au réfrigérateur",
-              "description": "Laisser reposer <strong>{ coldRestTime } heure(s)</strong> au réfrigérateur couvert d'un film plastique"
+              "descriptions": [
+                "Laisser reposer <strong>{ coldRestTime } heure(s)</strong> au réfrigérateur couvert d'un film plastique"
+              ]
             }
           }
         ]

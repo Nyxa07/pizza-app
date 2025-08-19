@@ -100,7 +100,8 @@ export class CalculatorRecipeService {
             helper: {
               title: `calculator.recipe.poolish.method.steps.${index}.helper.title`,
               descriptions: [
-                `calculator.recipe.poolish.method.steps.${index}.helper.description`,
+                `calculator.recipe.poolish.method.steps.${index}.helper.descriptions.0`,
+                `calculator.recipe.poolish.method.steps.${index}.helper.descriptions.1`,
               ],
             },
             variables: data.variables,
