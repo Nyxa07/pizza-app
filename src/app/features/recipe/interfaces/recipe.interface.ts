@@ -2,7 +2,7 @@ import { LucideIconData } from 'lucide-angular';
 
 export interface IRecipeHelper {
   title: string;
-  description: string;
+  descriptions: string[];
 }
 
 export interface IRecipeItem {

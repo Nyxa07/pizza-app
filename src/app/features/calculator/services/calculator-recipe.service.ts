@@ -99,7 +99,9 @@ export class CalculatorRecipeService {
             label: `calculator.recipe.poolish.method.steps.${index}.title`,
             helper: {
               title: `calculator.recipe.poolish.method.steps.${index}.helper.title`,
-              description: `calculator.recipe.poolish.method.steps.${index}.helper.description`,
+              descriptions: [
+                `calculator.recipe.poolish.method.steps.${index}.helper.description`,
+              ],
             },
             variables: data.variables,
           })),
@@ -134,7 +136,9 @@ export class CalculatorRecipeService {
           label: `calculator.recipe.poolishDough.method.steps.${index}.title`,
           helper: {
             title: `calculator.recipe.poolishDough.method.steps.${index}.helper.title`,
-            description: `calculator.recipe.poolishDough.method.steps.${index}.helper.description`,
+            descriptions: [
+              `calculator.recipe.poolishDough.method.steps.${index}.helper.description`,
+            ],
           },
         })),
       },
@@ -164,7 +168,9 @@ export class CalculatorRecipeService {
           label: `calculator.recipe.directDough.method.steps.${index}.title`,
           helper: {
             title: `calculator.recipe.directDough.method.steps.${index}.helper.title`,
-            description: `calculator.recipe.directDough.method.steps.${index}.helper.description`,
+            descriptions: [
+              `calculator.recipe.directDough.method.steps.${index}.helper.description`,
+            ],
           },
         })),
       },

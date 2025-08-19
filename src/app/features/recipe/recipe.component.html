@@ -41,12 +41,16 @@
       <h2>
         {{ currentMethodItem?.helper?.title | translate }}
       </h2>
-      <p
-        [innerHTML]="
-          currentMethodItem?.helper?.description
-            | translate: currentMethodItem?.variables ?? {}
-        "
-      ></p>
+      @for (
+        description of currentMethodItem?.helper?.descriptions;
+        track description
+      ) {
+        <p
+          [innerHTML]="
+            description | translate: currentMethodItem?.variables ?? {}
+          "
+        ></p>
+      }
     </div>
   </ng-template>
 </ion-modal>
