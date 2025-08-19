@@ -11,6 +11,7 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { SettingsFormComponent } from 'src/app/features/settings/settings-form/settings-form.component';
+import { CalculatorSettingsFormComponent } from 'src/app/features/calculator/calculator-settings-form/calculator-settings-form.component';
 
 @Component({
   selector: 'home-settings-page',
@@ -28,6 +29,7 @@ import { SettingsFormComponent } from 'src/app/features/settings/settings-form/s
     SettingsFormComponent,
     IonButtons,
     IonBackButton,
+    CalculatorSettingsFormComponent,
   ],
 })
 export class HomeSettingsPage implements OnInit {

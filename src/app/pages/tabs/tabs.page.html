@@ -4,11 +4,19 @@
       <i-lucide [img]="HouseIcon"></i-lucide>
       <ion-label>{{ 'pages.home.title' | translate }}</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="calculator" routerLink="/tabs/calculator">
+    <ion-tab-button
+      tab="calculator"
+      routerLink="/tabs/calculator"
+      routerDirection="root"
+    >
       <i-lucide [img]="CalculatorIcon"></i-lucide>
       <ion-label>{{ 'pages.calculator.title' | translate }}</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="guides" routerLink="/tabs/guides">
+    <ion-tab-button
+      tab="guides"
+      routerLink="/tabs/guides"
+      routerDirection="root"
+    >
       <i-lucide [img]="BookIcon"></i-lucide>
       <ion-label>{{ 'pages.guides.title' | translate }}</ion-label>
     </ion-tab-button>
