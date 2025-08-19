@@ -23,44 +23,32 @@
   "recipe": {
     "poolish": {
       "ingredients": "Ingrédients de la poolish",
-      "method": "Préparation de la poolish",
-      "steps": {
-        "step1": "Préparation de la poolish",
-        "step2": "Préparation de la pâte",
-        "step3": "Pétrissage et formation",
-        "step4": "Repos"
+      "method": {
+        "title": "Préparation de la poolish",
+        "step1": {
+          "title": "Préparation de la poolish",
+          "description": "Préparer la poolish en mélangeant la farine et l'eau"
+        }
       }
     },
     "poolishDough": {
       "ingredients": "Ingrédients de la pâte",
-      "method": "Préparation de la pâte",
-      "steps": {
-        "step1": "1",
-        "step2": "2",
-        "step3": "Pétrissage et formation",
-        "step4": "Repos",
-        "step5": "Formation des pâtons",
-        "step6": "Repos",
-        "step7": "Formation des pâtons",
-        "step8": "Repos",
-        "step9": "Formation des pâtons",
-        "step10": "Repos",
-        "step11": "Formation des pâtons"
-      }
+      "method": {
+        "title": "Préparation de la pâte",
+        "step1": {
+          "title": "Préparation de la pâte",
+          "description": "Préparer la pâte en mélangeant la poolish et la farine"
+        }
+      },
     },
     "directDough": {
       "ingredients": "Ingrédients de la pâte",
-      "method": "Préparation de la pâte",
-      "steps": {
-        "step1": "Préparation de la pâte",
-        "step2": "Pétrissage et formation",
-        "step3": "Repos",
-        "step4": "Formation des pâtons",
-        "step5": "Repos",
-        "step6": "Formation des pâtons",
-        "step7": "Repos",
-        "step8": "Formation des pâtons",
-        "step9": "Repos"
+      "method": {
+        "title": "Préparation de la pâte",
+        "step1": {
+          "title": "Préparation de la pâte",
+          "description": "Préparer la pâte en mélangeant la poolish et la farine"
+        }
       }
     }
   },
