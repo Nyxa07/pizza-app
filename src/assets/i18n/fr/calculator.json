@@ -29,10 +29,35 @@
         "title": "Préparation de la poolish",
         "steps": [
           {
-            "title": "Préparation de la poolish",
-            "description": "Préparer la poolish en mélangeant la farine et l'eau",
+            "title": "Mélanger l’eau, la levure et le miel",
+            "description": "",
             "helper": {
-              "description": "Préparer la poolish en mélangeant la farine et l'eau"
+              "title": "Mélanger l’eau, la levure et le miel",
+              "description": "Peser tous les ingrédients. Dans un grand bol, délayer la levure dans l'eau et ajouter le miel."
+            }
+          },
+          {
+            "title": "Ajouter la farine",
+            "description": "",
+            "helper": {
+              "title": "Ajouter la farine",
+              "description": "Ajouter la farine et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène"
+            }
+          },
+          {
+            "title": "Repos <strong>{ rtRestTime } heure(s)</strong> à température ambiante",
+            "description": "",
+              "helper": {
+              "title": "Repos à température ambiante",
+              "description": "Laisser reposer <strong>{ rtRestTime } heure(s)</strong> à température ambiante couvert d'un film plastique"
+            }
+          },
+          {
+            "title": "Repos <strong>{ coldRestTime } heure(s)</strong> au réfrigérateur",
+            "description": "",
+            "helper": {
+              "title": "Repos au réfrigérateur",
+              "description": "Laisser reposer <strong>{ coldRestTime } heure(s)</strong> au réfrigérateur couvert d'un film plastique"
             }
           }
         ]
@@ -46,8 +71,92 @@
         "title": "Préparation de la pâte",
         "steps": [
           {
-            "title": "Préparation de la pâte",
-            "description": "Préparer la pâte en mélangeant la poolish et la farine"
+            "title": "Sortir la poolish 1H avant utilisation",
+            "description": "",
+            "helper": {
+              "title": "Préparation de la pâte",
+              "description": ""
+            }
+          },
+          {
+            "title": "Dans la poolish, ajouter l’eau et le sel",
+            "description": "",
+            "helper": {
+              "title": "Préparation de la pâte",
+              "description": ""
+            }
+          },
+          {
+            "title": "Ajouter la farine petit à petit",
+            "description": "",
+            "helper": {
+              "title": "Préparation de la pâte",
+              "description": ""
+            }
+          },
+          {
+            "title": "Transférer la pâte sur le plan de travail",
+            "description": "",
+            "helper": {
+              "title": "Préparation de la pâte",
+              "description": ""
+            }
+          },
+          {
+            "title": "Pétrir la pâte",
+            "description": "",
+            "helper": {
+              "title": "Préparation de la pâte",
+              "description": ""
+            }
+          },
+          {
+            "title": "Faire quelques rabats et former une boule",
+            "description": "",
+            "helper": {
+              "title": "Préparation de la pâte",
+              "description": ""
+            }
+          },
+          {
+            "title": "Repos 10 – 15 min sous une saladier",
+            "description": "",
+            "helper": {
+              "title": "Préparation de la pâte",
+              "description": ""
+            }
+          },
+          {
+            "title": "Reformer une boule",
+            "description": "",
+            "helper": {
+              "title": "Préparation de la pâte",
+              "description": ""
+            }
+          },
+          {
+            "title": "Repos 1H dans un récipient hermétique",
+            "description": "",
+            "helper": {
+              "title": "Préparation de la pâte",
+              "description": ""
+            }
+          },
+          {
+            "title": "Former les pâtons",
+            "description": "",
+            "helper": {
+              "title": "Préparation de la pâte",
+              "description": ""
+            }
+          },
+          {
+            "title": "Repos pour faire doubler de volume",
+            "description": "",
+            "helper": {
+              "title": "Préparation de la pâte",
+              "description": ""
+            }
           }
         ]
       }
