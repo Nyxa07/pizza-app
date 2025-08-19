@@ -67,23 +67,11 @@ export class CalculatorRecipeService {
         items: result.poolish ? this.getIngredients(result.poolish) : [],
       },
       method: {
-        title: 'calculator.recipe.poolish.method',
+        title: 'calculator.recipe.poolish.method.title',
         items: [
           {
             icon: this.WheatIcon,
-            label: 'calculator.recipe.poolish.steps.step1',
-          },
-          {
-            icon: this.WheatIcon,
-            label: 'calculator.recipe.poolish.steps.step2',
-          },
-          {
-            icon: this.WheatIcon,
-            label: 'calculator.recipe.poolish.steps.step3',
-          },
-          {
-            icon: this.WheatIcon,
-            label: 'calculator.recipe.poolish.steps.step4',
+            label: 'calculator.recipe.poolish.method.step1.title',
           },
         ],
       },
@@ -98,15 +86,11 @@ export class CalculatorRecipeService {
         items: result.dough ? this.getIngredients(result.dough) : [],
       },
       method: {
-        title: 'calculator.recipe.poolishDough.method',
+        title: 'calculator.recipe.poolishDough.method.title',
         items: [
           {
             icon: this.WheatIcon,
-            label: 'calculator.recipe.poolishDough.steps.step1',
-          },
-          {
-            icon: this.WheatIcon,
-            label: 'calculator.recipe.poolishDough.steps.step2',
+            label: 'calculator.recipe.poolishDough.method.step1.title',
           },
         ],
       },
@@ -120,23 +104,11 @@ export class CalculatorRecipeService {
         items: result.dough ? this.getIngredients(result.dough) : [],
       },
       method: {
-        title: 'calculator.recipe.directDough.method',
+        title: 'calculator.recipe.directDough.method.title',
         items: [
           {
             icon: this.WheatIcon,
-            label: 'calculator.recipe.directDough.steps.step1',
-          },
-          {
-            icon: this.WheatIcon,
-            label: 'calculator.recipe.directDough.steps.step2',
-          },
-          {
-            icon: this.WheatIcon,
-            label: 'calculator.recipe.directDough.steps.step3',
-          },
-          {
-            icon: this.WheatIcon,
-            label: 'calculator.recipe.directDough.steps.step4',
+            label: 'calculator.recipe.directDough.method.step1.title',
           },
         ],
       },
