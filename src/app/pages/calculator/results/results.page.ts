@@ -31,7 +31,12 @@ import { RecipeComponent } from 'src/app/features/recipe/recipe.component';
 })
 export class CalculatorResultsPage implements OnInit {
   protected poolishRecipe$ = this.calculatorRecipeService.poolishRecipe$;
-  protected doughRecipe$ = this.calculatorRecipeService.doughRecipe$;
+
+  protected poolishDoughRecipe$ =
+    this.calculatorRecipeService.poolishDoughRecipe$;
+
+  protected directDoughRecipe$ =
+    this.calculatorRecipeService.directDoughRecipe$;
 
   constructor(private calculatorRecipeService: CalculatorRecipeService) {}
 

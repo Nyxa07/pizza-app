@@ -1,4 +1,5 @@
-@let poolishRecipe = poolishRecipe$ | async; @let doughRecipe = doughRecipe$ |
+@let poolishRecipe = poolishRecipe$ | async; @let poolishDoughRecipe =
+poolishDoughRecipe$ | async; @let directDoughRecipe = directDoughRecipe$ |
 async;
 
 <ion-header [translucent]="false">
@@ -19,9 +20,10 @@ async;
     </ion-toolbar>
   </ion-header>
 
-  @if (poolishRecipe) {
+  @if (poolishRecipe && poolishDoughRecipe) {
   <app-recipe [recipe]="poolishRecipe"></app-recipe>
-  } @if (doughRecipe) {
-  <app-recipe [recipe]="doughRecipe"></app-recipe>
+  <app-recipe [recipe]="poolishDoughRecipe"></app-recipe>
+  } @else if (directDoughRecipe) {
+  <app-recipe [recipe]="directDoughRecipe"></app-recipe>
   }
 </ion-content>

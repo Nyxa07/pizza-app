@@ -20,11 +20,49 @@
     "pizzaWeight": "Poids du pâton",
     "hydrationHelperText": "Recommandée pour la force de la farine (W) : {minHydration}% - {maxHydration}%"
   },
-  "results": {
-    "poolishIngredients": "Ingrédients de la poolish",
-    "doughIngredients": "Ingrédients de la pâte",
-    "poolishMethod": "Méthode de la poolish",
-    "doughMethod": "Méthode de la pâte"
+  "recipe": {
+    "poolish": {
+      "ingredients": "Ingrédients de la poolish",
+      "method": "Préparation de la poolish",
+      "steps": {
+        "step1": "Préparation de la poolish",
+        "step2": "Préparation de la pâte",
+        "step3": "Pétrissage et formation",
+        "step4": "Repos"
+      }
+    },
+    "poolishDough": {
+      "ingredients": "Ingrédients de la pâte",
+      "method": "Préparation de la pâte",
+      "steps": {
+        "step1": "1",
+        "step2": "2",
+        "step3": "Pétrissage et formation",
+        "step4": "Repos",
+        "step5": "Formation des pâtons",
+        "step6": "Repos",
+        "step7": "Formation des pâtons",
+        "step8": "Repos",
+        "step9": "Formation des pâtons",
+        "step10": "Repos",
+        "step11": "Formation des pâtons"
+      }
+    },
+    "directDough": {
+      "ingredients": "Ingrédients de la pâte",
+      "method": "Préparation de la pâte",
+      "steps": {
+        "step1": "Préparation de la pâte",
+        "step2": "Pétrissage et formation",
+        "step3": "Repos",
+        "step4": "Formation des pâtons",
+        "step5": "Repos",
+        "step6": "Formation des pâtons",
+        "step7": "Repos",
+        "step8": "Formation des pâtons",
+        "step9": "Repos"
+      }
+    }
   },
   "doughTypes": {
     "poolish": "Poolish",
@@ -40,7 +78,7 @@
       "all": "Tout activer"
     }
   },
-  "recipe": {
+  "recipOld": {
     "quantity": {
       "flour": "<strong>{ quantity } g</strong> de farine",
       "water": "<strong>{ quantity } g</strong> d'eau",

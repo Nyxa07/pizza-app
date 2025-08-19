@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CalculatorStateService } from './calculator-state.service';
-import { map, Observable } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
 import {
   DropletsIcon,
   SpotlightIcon,
@@ -9,6 +9,7 @@ import {
   WheatIcon,
 } from 'lucide-angular';
 import { IRecipe } from 'src/app/features/recipe/interfaces/recipe.interface';
+import { DoughResult, Quantity } from './calculator.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,91 +23,122 @@ export class CalculatorRecipeService {
 
   constructor(private calculatorState: CalculatorStateService) {}
 
+  getIngredients(quantity: Quantity) {
+    return [
+      {
+        icon: this.WheatIcon,
+        value: quantity.flour,
+        label: 'common.ingredients.flour',
+        unit: 'g',
+      },
+      {
+        icon: this.DropletsIcon,
+        value: quantity.water,
+        label: 'common.ingredients.water',
+        unit: 'g',
+      },
+      {
+        icon: this.BeerIcon,
+        value: quantity.yeast,
+        label: 'common.ingredients.yeast',
+        unit: 'g',
+        numberFormat: '1.0-2',
+      },
+      {
+        icon: this.CandyCaneIcon,
+        value: quantity.honey,
+        label: 'common.ingredients.honey',
+        unit: 'g',
+      },
+      {
+        icon: this.SpotlightIcon,
+        value: quantity.salt,
+        label: 'common.ingredients.salt',
+        unit: 'g',
+      },
+    ];
+  }
+
   poolishRecipe$: Observable<IRecipe> = this.calculatorState.result$.pipe(
+    filter((result) => !!result?.poolish),
     map((result) => ({
       ingredients: {
-        title: 'calculator.results.poolishIngredients',
-        items: [
-          {
-            icon: this.WheatIcon,
-            value: result?.poolish?.flour ?? 0,
-            label: 'common.ingredients.flour',
-            unit: 'g',
-          },
-          {
-            icon: this.DropletsIcon,
-            value: result?.poolish?.water ?? 0,
-            label: 'common.ingredients.water',
-            unit: 'g',
-          },
-          {
-            icon: this.BeerIcon,
-            value: result?.poolish?.yeast ?? 0,
-            label: 'common.ingredients.yeast',
-            unit: 'g',
-            numberFormat: '1.0-2',
-          },
-          {
-            icon: this.CandyCaneIcon,
-            value: result?.poolish?.honey ?? 0,
-            label: 'common.ingredients.honey',
-            unit: 'g',
-          },
-        ],
+        title: 'calculator.recipe.poolish.ingredients',
+        items: result.poolish ? this.getIngredients(result.poolish) : [],
       },
       method: {
-        title: 'calculator.results.poolishMethod',
+        title: 'calculator.recipe.poolish.method',
         items: [
           {
             icon: this.WheatIcon,
-            label: 'calculator.results.poolishMethod.flour',
+            label: 'calculator.recipe.poolish.steps.step1',
+          },
+          {
+            icon: this.WheatIcon,
+            label: 'calculator.recipe.poolish.steps.step2',
+          },
+          {
+            icon: this.WheatIcon,
+            label: 'calculator.recipe.poolish.steps.step3',
+          },
+          {
+            icon: this.WheatIcon,
+            label: 'calculator.recipe.poolish.steps.step4',
           },
         ],
       },
     })),
   );
 
-  doughRecipe$: Observable<IRecipe> = this.calculatorState.result$.pipe(
+  poolishDoughRecipe$: Observable<IRecipe> = this.calculatorState.result$.pipe(
+    filter((result) => !!result?.poolish),
     map((result) => ({
       ingredients: {
-        title: 'calculator.results.doughIngredients',
+        title: 'calculator.recipe.poolishDough.ingredients',
+        items: result.dough ? this.getIngredients(result.dough) : [],
+      },
+      method: {
+        title: 'calculator.recipe.poolishDough.method',
         items: [
           {
             icon: this.WheatIcon,
-            value: result?.dough?.flour,
-            label: 'common.ingredients.flour',
-            unit: 'g',
+            label: 'calculator.recipe.poolishDough.steps.step1',
           },
           {
-            icon: this.DropletsIcon,
-            value: result?.dough?.water,
-            label: 'common.ingredients.water',
-            unit: 'g',
-          },
-          {
-            icon: this.BeerIcon,
-            value: result?.dough?.yeast,
-            label: 'common.ingredients.yeast',
-            unit: 'g',
-            numberFormat: '1.0-2',
-          },
-          {
-            icon: this.CandyCaneIcon,
-            value: result?.dough?.honey,
-            label: 'common.ingredients.honey',
-            unit: 'g',
-          },
-          {
-            icon: this.SpotlightIcon,
-            value: result?.dough?.salt,
-            label: 'common.ingredients.salt',
-            unit: 'g',
+            icon: this.WheatIcon,
+            label: 'calculator.recipe.poolishDough.steps.step2',
           },
         ],
       },
+    })),
+  );
+
+  directDoughRecipe$: Observable<IRecipe> = this.calculatorState.result$.pipe(
+    map((result) => ({
+      ingredients: {
+        title: 'calculator.recipe.directDough.ingredients',
+        items: result.dough ? this.getIngredients(result.dough) : [],
+      },
       method: {
-        title: 'calculator.results.doughMethod',
-        items: [],
+        title: 'calculator.recipe.directDough.method',
+        items: [
+          {
+            icon: this.WheatIcon,
+            label: 'calculator.recipe.directDough.steps.step1',
+          },
+          {
+            icon: this.WheatIcon,
+            label: 'calculator.recipe.directDough.steps.step2',
+          },
+          {
+            icon: this.WheatIcon,
+            label: 'calculator.recipe.directDough.steps.step3',
+          },
+          {
+            icon: this.WheatIcon,
+            label: 'calculator.recipe.directDough.steps.step4',
+          },
+        ],
       },
     })),
   );
