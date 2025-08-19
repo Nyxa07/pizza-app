@@ -23,9 +23,9 @@
   @for (item of recipe.method.items; track item) {
     <ion-item (click)="openHelperModal(item)" button>
       <i-lucide slot="start" [img]="item.icon"></i-lucide>
-      <ion-label>
-        {{ item.label | translate }}
-      </ion-label>
+      <ion-label
+        [innerHTML]="item.label | translate: item.variables ?? {}"
+      ></ion-label>
     </ion-item>
   }
 </ion-list>

@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
   IonItem,
@@ -7,11 +8,10 @@ import {
   IonNote,
   IonModal,
 } from '@ionic/angular/standalone';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
 import {
   IRecipe,
-  IRecipeHelper,
   IRecipeMethodItem,
 } from 'src/app/features/recipe/interfaces/recipe.interface';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
@@ -31,6 +31,7 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
     NumberPipe,
     TranslatePipe,
     IonModal,
+    TranslateModule,
   ],
 })
 export class RecipeComponent implements OnInit {
