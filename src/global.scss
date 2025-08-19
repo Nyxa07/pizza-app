@@ -63,3 +63,87 @@ ion-card {
     color: var(--ion-text-color);
   }
 }
+
+@font-face {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  src: url(".//assets/fonts/Kodchasan-ExtraLight.ttf");
+}
+
+@font-face {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  src: url("./assets/fonts/Kodchasan-Light.ttf");
+}
+
+@font-face {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  src: url("./assets/fonts/Kodchasan-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  src: url("./assets/fonts/Kodchasan-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  src: url("./assets/fonts/Kodchasan-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  src: url("./assets/fonts/Kodchasan-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+  src: url("./assets/fonts/Kodchasan-ExtraLightItalic.ttf");
+}
+
+@font-face {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  src: url("./assets/fonts/Kodchasan-LightItalic.ttf");
+}
+
+@font-face {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  src: url("./assets/fonts/Kodchasan-Italic.ttf");
+}
+
+@font-face {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  src: url("./assets/fonts/Kodchasan-MediumItalic.ttf");
+}
+
+@font-face {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+  src: url("./assets/fonts/Kodchasan-SemiBoldItalic.ttf");
+}
+
+@font-face {
+  font-family: "Kodchasan", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  src: url("./assets/fonts/Kodchasan-BoldItalic.ttf");
+}
