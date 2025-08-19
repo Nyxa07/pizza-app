@@ -8,11 +8,12 @@ import {
   IonRange,
   IonListHeader,
   IonLabel,
+  IonButton,
 } from '@ionic/angular/standalone';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
 import { AsyncPipe, LowerCasePipe } from '@angular/common';
-import { debounceTime, first } from 'rxjs';
+import { debounceTime } from 'rxjs';
 import {
   CalculatorStateService,
   CalculatorInput,
@@ -63,7 +64,7 @@ export class CalculatorFormComponent implements OnInit {
     });
 
     this.form.valueChanges
-      .pipe(debounceTime(50), takeUntilDestroyed())
+      .pipe(debounceTime(250), takeUntilDestroyed())
       .subscribe((v) => {
         this.state.update(v as CalculatorInput);
       });

@@ -3,11 +3,13 @@ import {
   IonHeader,
   IonToolbar,
   IonButtons,
-  IonMenuButton,
   IonTitle,
   IonContent,
+  IonButton,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
+import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'home-index-page',
@@ -18,12 +20,16 @@ import { TranslatePipe } from '@ngx-translate/core';
     IonHeader,
     IonToolbar,
     IonButtons,
-    IonMenuButton,
     IonTitle,
     TranslatePipe,
     IonContent,
+    IonButton,
+    IonButtons,
+    LucideAngularModule,
+    RouterLink,
   ],
 })
 export class HomeIndexPage implements OnInit {
+  readonly SettingsIcon = SettingsIcon;
   ngOnInit() {}
 }

@@ -1,9 +1,11 @@
-<ion-header>
+<ion-header [translucent]="false">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
     <ion-title>{{ "pages.home.title" | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/tabs/home/settings']">
+        <i-lucide slot="icon-only" [img]="SettingsIcon"></i-lucide>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

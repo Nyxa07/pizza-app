@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -12,6 +12,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { CalculatorFormComponent } from 'src/app/features/calculator/calculator-form/calculator-form.component';
 import { RouterLink } from '@angular/router';
 import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
+import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
 
 @Component({
   selector: 'calculator-index-page',
@@ -26,9 +27,12 @@ import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/ca
     CalculatorFormComponent,
     IonContent,
     IonButton,
-    RouterLink,
     IonBackButton,
     CalculatorRefreshButtonComponent,
+    RouterLink,
+    LucideAngularModule,
   ],
 })
-export class CalculatorIndexPage {}
+export class CalculatorIndexPage {
+  readonly SettingsIcon = SettingsIcon;
+}

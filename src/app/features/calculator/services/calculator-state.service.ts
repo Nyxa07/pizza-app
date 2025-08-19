@@ -63,7 +63,7 @@ export const DEFAULT_VISIBILITY: InputsVisibility = {
   flourStrength: false,
   saltRatio: false,
   honeyRatio: false,
-  pizzaWeight: false,
+  pizzaWeight: true,
 };
 
 @Injectable({ providedIn: 'root' })

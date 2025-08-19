@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { DoughDirectRecipeComponent } from './dough-direct-recipe.component';
+import { CalculatorSettingsFormComponent } from './calculator-settings-form.component';
 
-describe('DoughDirectRecipeComponent', () => {
-  let component: DoughDirectRecipeComponent;
-  let fixture: ComponentFixture<DoughDirectRecipeComponent>;
+describe('CalculatorSettingsFormComponent', () => {
+  let component: CalculatorSettingsFormComponent;
+  let fixture: ComponentFixture<CalculatorSettingsFormComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DoughDirectRecipeComponent ],
+      declarations: [ CalculatorSettingsFormComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DoughDirectRecipeComponent);
+    fixture = TestBed.createComponent(CalculatorSettingsFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

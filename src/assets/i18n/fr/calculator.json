@@ -17,20 +17,28 @@
     "flourStrength": "Force de la farine (W)",
     "saltRatio": "Ratio de sel",
     "honeyRatio": "Ratio de miel",
-    "pizzaWeight": "Masse d'un pâton",
+    "pizzaWeight": "Poids du pâton",
     "hydrationHelperText": "Recommandée pour la force de la farine (W) : {minHydration}% - {maxHydration}%"
   },
   "results": {
-    "calculations": {
-      "total": "Total",
-      "poolishIngredients": "Ingrédients Poolish",
-      "doughIngredients": "Ingrédients Pâte",
-      "weight": "Poids"
-    }
+    "poolishIngredients": "Ingrédients de la poolish",
+    "doughIngredients": "Ingrédients de la pâte",
+    "poolishMethod": "Méthode de la poolish",
+    "doughMethod": "Méthode de la pâte"
   },
   "doughTypes": {
     "poolish": "Poolish",
     "direct": "Directe"
+  },
+  "settings": {
+    "visibility": {
+      "title": "Champs supplémentaires",
+      "pizzaWeight": "Poids du pâton",
+      "saltRatio": "Ratio de sel",
+      "honeyRatio": "Ratio de miel",
+      "flourStrength": "Force de la farine",
+      "all": "Tout activer"
+    }
   },
   "recipe": {
     "quantity": {

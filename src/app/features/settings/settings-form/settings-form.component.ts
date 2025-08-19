@@ -14,7 +14,6 @@ import { Locales } from '../../locales/enums/locales.enum';
 import { ThemeService } from '../../theme/services/theme.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
-import { DoughFormStateService } from '../../calculator/services/calculator-state.service';
 
 @Component({
   selector: 'app-settings-form',
@@ -41,18 +40,11 @@ export class SettingsFormComponent implements OnInit {
   form = this.fb.group({
     locale: [this.localeManager.getLocale(), Validators.required],
     paletteToggle: [this.themeService.isDarkMode()],
-    pizzaWeightVisibility: [this.doughFormState.getVisibility('pizzaWeight')],
-    saltRatioVisibility: [this.doughFormState.getVisibility('saltRatio')],
-    honeyRatioVisibility: [this.doughFormState.getVisibility('honeyRatio')],
-    flourStrengthVisibility: [
-      this.doughFormState.getVisibility('flourStrength'),
-    ],
   });
 
   constructor(
     private localeManager: LocaleManagerService,
     private themeService: ThemeService,
-    private doughFormState: DoughFormStateService,
     private fb: FormBuilder,
   ) {
     this.form.valueChanges
@@ -63,12 +55,6 @@ export class SettingsFormComponent implements OnInit {
         }
         this.localeManager.switchLocale(value.locale ?? '');
         this.themeService.setDarkMode(value.paletteToggle ?? false);
-        this.doughFormState.updateVisibility({
-          pizzaWeight: value.pizzaWeightVisibility ?? false,
-          saltRatio: value.saltRatioVisibility ?? false,
-          honeyRatio: value.honeyRatioVisibility ?? false,
-          flourStrength: value.flourStrengthVisibility ?? false,
-        });
       });
   }
 

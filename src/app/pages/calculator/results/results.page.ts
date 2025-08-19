@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import {
   IonContent,
   IonHeader,
@@ -10,12 +9,12 @@ import {
   IonBackButton,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
-import { CalculatorResultsComponent } from 'src/app/features/calculator/calculator-results/calculator-results.component';
+import { CalculatorRecipeService } from 'src/app/features/calculator/services/calculator-recipe.service';
+import { RecipeComponent } from 'src/app/features/recipe/recipe.component';
 
 @Component({
   selector: 'calculator-results-page',
   templateUrl: './results.page.html',
-  styleUrls: ['./results.page.scss'],
   standalone: true,
   imports: [
     IonContent,
@@ -23,15 +22,18 @@ import { CalculatorResultsComponent } from 'src/app/features/calculator/calculat
     IonTitle,
     IonToolbar,
     CommonModule,
-    FormsModule,
     IonButtons,
     TranslatePipe,
     IonBackButton,
-    CalculatorResultsComponent,
+    AsyncPipe,
+    RecipeComponent,
   ],
 })
 export class CalculatorResultsPage implements OnInit {
-  constructor() {}
+  protected poolishRecipe$ = this.calculatorRecipeService.poolishRecipe$;
+  protected doughRecipe$ = this.calculatorRecipeService.doughRecipe$;
+
+  constructor(private calculatorRecipeService: CalculatorRecipeService) {}
 
   ngOnInit() {}
 }

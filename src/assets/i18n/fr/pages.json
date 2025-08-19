@@ -3,7 +3,10 @@
     "title": "Calculateur",
     "compute": "Calculer",
     "results": {
-      "title": "Résultats"
+      "title": "Résultats calcul"
+    },
+    "settings": {
+      "title": "Configuration calculateur"
     }
   },
   "guides": {
@@ -14,6 +17,9 @@
     }
   },
   "home": {
-    "title": "Accueil"
+    "title": "Accueil",
+    "settings": {
+      "title": "Configuration"
+    }
   }
 }

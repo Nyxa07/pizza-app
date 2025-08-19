@@ -1,0 +1,50 @@
+<ion-list-header>{{
+  "calculator.settings.visibility.title" | translate
+}}</ion-list-header>
+<ion-list lines="none">
+  <ion-item>
+    <i-lucide slot="start" [img]="CheckCheckIcon"></i-lucide>
+    <ion-toggle
+      (ionChange)="onAllVisibilityChange($event)"
+      [checked]="allVisibility$ | async"
+      justify="space-between"
+      >{{ "calculator.settings.visibility.all" | translate }}</ion-toggle
+    >
+  </ion-item>
+</ion-list>
+<ion-list lines="none" [formGroup]="form">
+  <ion-item>
+    <i-lucide slot="start" [img]="AnvilIcon"></i-lucide>
+    <ion-toggle
+      formControlName="pizzaWeightVisibility"
+      justify="space-between"
+      >{{
+        "calculator.settings.visibility.pizzaWeight" | translate
+      }}</ion-toggle
+    >
+  </ion-item>
+  <ion-item>
+    <i-lucide slot="start" [img]="SpotlightIcon"></i-lucide>
+    <ion-toggle formControlName="saltRatioVisibility" justify="space-between">{{
+      "calculator.settings.visibility.saltRatio" | translate
+    }}</ion-toggle>
+  </ion-item>
+  <ion-item>
+    <i-lucide slot="start" [img]="CandyCaneIcon"></i-lucide>
+    <ion-toggle
+      formControlName="honeyRatioVisibility"
+      justify="space-between"
+      >{{ "calculator.settings.visibility.honeyRatio" | translate }}</ion-toggle
+    >
+  </ion-item>
+  <ion-item>
+    <i-lucide slot="start" [img]="HandFistIcon"></i-lucide>
+    <ion-toggle
+      formControlName="flourStrengthVisibility"
+      justify="space-between"
+      >{{
+        "calculator.settings.visibility.flourStrength" | translate
+      }}</ion-toggle
+    >
+  </ion-item>
+</ion-list>

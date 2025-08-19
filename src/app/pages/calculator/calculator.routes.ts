@@ -11,4 +11,9 @@ export const CALCULATOR_ROUTES: Route[] = [
     loadComponent: () =>
       import('./results/results.page').then((m) => m.CalculatorResultsPage),
   },
+  {
+    path: 'settings',
+    loadComponent: () =>
+      import('./settings/settings.page').then((m) => m.CalculatorSettingsPage),
+  },
 ];

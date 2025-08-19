@@ -28,5 +28,10 @@
     "dryActiveYeast": "Levure sèche active",
     "dryInstantYeast": "Levure sèche instantanée",
     "freshYeast": "Levure fraîche"
+  },
+  "yeastTypes": {
+    "dryActive": "Sèche active",
+    "dryInstant": "Instantanée",
+    "fresh": "Fraîche"
   }
 }

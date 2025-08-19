@@ -11,21 +11,6 @@
       "paletteToggle": {
         "title": "Mode sombre"
       }
-    },
-    "doughCalculator": {
-      "title": "Calculateur de pâte",
-      "pizzaWeightVisibility": {
-        "title": "Choix du poids d'un pâton"
-      },
-      "saltRatioVisibility": {
-        "title": "Choix du ratio de sel"
-      },
-      "honeyRatioVisibility": {
-        "title": "Choix du ratio de miel"
-      },
-      "flourStrengthVisibility": {
-        "title": "Choix de la force de la farine"
-      }
     }
   }
 }

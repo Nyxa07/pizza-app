@@ -4,7 +4,7 @@ import { DoughType } from '../enums/dough-type.enum';
 import { CalculatorInput } from './calculator-state.service';
 import { CalculatorConfigService } from './calculator-config.service';
 
-interface Quantity {
+export interface Quantity {
   yeast: number;
   flour: number;
   water: number;

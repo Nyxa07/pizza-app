@@ -4,7 +4,7 @@
   <ion-list-header>
     {{ "calculator.form.titles.quantity" | translate }}
   </ion-list-header>
-  <ion-list lines="none" [inset]="true">
+  <ion-list lines="none">
     @if (visibility?.nbPizzas) {
       <ion-item>
         <ion-range
@@ -41,7 +41,7 @@
   <ion-list-header>
     {{ "calculator.form.titles.doughType" | translate }}
   </ion-list-header>
-  <ion-list lines="none" [inset]="true">
+  <ion-list lines="none">
     @if (visibility?.doughType) {
       <ion-item>
         <ion-select
@@ -84,13 +84,13 @@
           [okText]="'common.actions.ok' | translate"
         >
           <ion-select-option value="dry_active">
-            {{ "common.ingredients.dryActiveYeast" | translate }}
+            {{ "common.yeastTypes.dryActive" | translate }}
           </ion-select-option>
           <ion-select-option value="dry_instant">
-            {{ "common.ingredients.dryInstantYeast" | translate }}
+            {{ "common.yeastTypes.dryInstant" | translate }}
           </ion-select-option>
           <ion-select-option value="fresh">{{
-            "common.ingredients.freshYeast" | translate
+            "common.yeastTypes.fresh" | translate
           }}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -174,7 +174,7 @@
   <ion-list-header>{{
     "calculator.form.titles.rest" | translate
   }}</ion-list-header>
-  <ion-list [inset]="true" lines="none">
+  <ion-list lines="none">
     @if (visibility?.temperature) {
       <ion-item>
         <ion-select
