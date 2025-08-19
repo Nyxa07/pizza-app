@@ -27,7 +27,10 @@
         "title": "Préparation de la poolish",
         "step1": {
           "title": "Préparation de la poolish",
-          "description": "Préparer la poolish en mélangeant la farine et l'eau"
+          "description": "Préparer la poolish en mélangeant la farine et l'eau",
+          "helper": {
+            "description": "Préparer la poolish en mélangeant la farine et l'eau"
+          }
         }
       }
     },

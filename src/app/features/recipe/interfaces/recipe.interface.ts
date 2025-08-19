@@ -1,5 +1,10 @@
 import { LucideIconData } from 'lucide-angular';
 
+export interface IRecipeHelper {
+  title: string;
+  description: string;
+}
+
 export interface IRecipeItem {
   icon: LucideIconData;
   value: number;
@@ -13,6 +18,7 @@ export interface IRecipeMethodItem {
   icon: LucideIconData;
   label: string;
   description?: string;
+  helper?: IRecipeHelper;
 }
 
 export interface IRecipe {

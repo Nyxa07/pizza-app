@@ -72,6 +72,12 @@ export class CalculatorRecipeService {
           {
             icon: this.WheatIcon,
             label: 'calculator.recipe.poolish.method.step1.title',
+            description: 'calculator.recipe.poolish.method.step1.description',
+            helper: {
+              title: 'calculator.recipe.poolish.method.step1.helper.title',
+              description:
+                'calculator.recipe.poolish.method.step1.helper.description',
+            },
           },
         ],
       },

@@ -1,14 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
   IonItem,
   IonLabel,
   IonList,
   IonListHeader,
   IonNote,
+  IonModal,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
-import { IRecipe } from 'src/app/features/recipe/interfaces/recipe.interface';
+import {
+  IRecipe,
+  IRecipeHelper,
+} from 'src/app/features/recipe/interfaces/recipe.interface';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
 @Component({
@@ -25,12 +29,24 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
     IonNote,
     NumberPipe,
     TranslatePipe,
+    IonModal,
   ],
 })
 export class RecipeComponent implements OnInit {
   @Input({ required: true }) recipe!: IRecipe;
+  @ViewChild('helperModal') helperModal!: IonModal;
+  currentHelper: IRecipeHelper | null = null;
 
   constructor() {}
 
   ngOnInit() {}
+
+  openHelperModal(helper?: IRecipeHelper) {
+    if (!helper) {
+      return;
+    }
+
+    this.currentHelper = helper;
+    this.helperModal.present();
+  }
 }
