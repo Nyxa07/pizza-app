@@ -1,45 +1,12 @@
-import { Component, inject, OnInit } from '@angular/core';
-import {
-  IonApp,
-  IonRouterOutlet,
-  IonList,
-  IonItem,
-  IonIcon,
-  IonLabel,
-  IonMenu,
-  IonContent,
-  IonSplitPane,
-  IonMenuToggle,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-} from '@ionic/angular/standalone';
-// Translation keys are now referenced directly as strings (see i18n re-organisation).
-import { RouterLink } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { Component, OnInit } from '@angular/core';
+import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { pizza, settings, helpCircle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [
-    IonApp,
-    IonRouterOutlet,
-    IonList,
-    IonItem,
-    IonIcon,
-    IonLabel,
-    IonMenu,
-    IonContent,
-    IonSplitPane,
-    IonMenuToggle,
-    RouterLink,
-    TranslatePipe,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-  ],
+  imports: [IonApp, IonRouterOutlet],
   standalone: true,
 })
 export class AppComponent implements OnInit {

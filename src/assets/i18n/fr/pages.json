@@ -1,0 +1,35 @@
+{
+  "calculator": {
+    "title": "Calculateur",
+    "compute": "Calculer",
+    "results": {
+      "title": "Résultats calcul"
+    },
+    "settings": {
+      "title": "Configuration calculateur"
+    }
+  },
+  "guides": {
+    "title": "Guides",
+    "faq": {
+      "title": "FAQ",
+      "description": "Foire aux questions"
+    }
+  },
+  "home": {
+    "title": "Accueil",
+    "settings": {
+      "title": "Configuration globale"
+    },
+    "calculator": {
+      "title": "Calculateur",
+      "subtitle": "Calculateur de pâte à pizza",
+      "content": "Calculer les quantités des ingrédients en fonction d'une multitudes de paramètres (Témperature, Farine, Hydratation, Levure, etc.)"
+    },
+    "faq": {
+      "title": "FAQ",
+      "subtitle": "Foire aux questions",
+      "content": "Foire aux questions"
+    }
+  }
+}

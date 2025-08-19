@@ -1,0 +1,29 @@
+@let poolishRecipe = poolishRecipe$ | async; @let poolishDoughRecipe =
+poolishDoughRecipe$ | async; @let directDoughRecipe = directDoughRecipe$ |
+async;
+
+<ion-header [translucent]="false">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/calculator"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ "pages.calculator.results.title" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"
+        >{{ "pages.calculator.results.title" | translate }}</ion-title
+      >
+    </ion-toolbar>
+  </ion-header>
+
+  @if (poolishRecipe && poolishDoughRecipe) {
+  <app-recipe [recipe]="poolishRecipe"></app-recipe>
+  <app-recipe [recipe]="poolishDoughRecipe"></app-recipe>
+  } @else if (directDoughRecipe) {
+  <app-recipe [recipe]="directDoughRecipe"></app-recipe>
+  }
+</ion-content>

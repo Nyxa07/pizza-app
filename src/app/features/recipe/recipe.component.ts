@@ -1,0 +1,54 @@
+import { JsonPipe } from '@angular/common';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  IonItem,
+  IonLabel,
+  IonList,
+  IonListHeader,
+  IonNote,
+  IonModal,
+} from '@ionic/angular/standalone';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { LucideAngularModule } from 'lucide-angular';
+import {
+  IRecipe,
+  IRecipeMethodItem,
+} from 'src/app/features/recipe/interfaces/recipe.interface';
+import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
+
+@Component({
+  selector: 'app-recipe',
+  templateUrl: './recipe.component.html',
+  styleUrls: ['./recipe.component.scss'],
+  standalone: true,
+  imports: [
+    LucideAngularModule,
+    IonListHeader,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonNote,
+    NumberPipe,
+    TranslatePipe,
+    IonModal,
+    TranslateModule,
+  ],
+})
+export class RecipeComponent implements OnInit {
+  @Input({ required: true }) recipe!: IRecipe;
+  @ViewChild('helperModal') helperModal!: IonModal;
+  currentMethodItem: IRecipeMethodItem | null = null;
+
+  constructor() {}
+
+  ngOnInit() {}
+
+  openHelperModal(methodItem?: IRecipeMethodItem) {
+    if (!methodItem) {
+      return;
+    }
+
+    this.currentMethodItem = methodItem;
+    this.helperModal.present();
+  }
+}

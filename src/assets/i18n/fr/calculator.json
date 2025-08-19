@@ -1,0 +1,366 @@
+{
+  "form": {
+    "titles": {
+      "quantity": "Quantité de pâte",
+      "doughType": "Type de pâte",
+      "rest": "Repos"
+    },
+    "pizzasNumber": "Nombre de pizzas",
+    "doughType": "Méthode",
+    "yeastType": "Type de levure",
+    "hydration": "Hydratation",
+    "temperature": "Température",
+    "poolishRatio": "Ratio poolish",
+    "rtRestTime": "À température ambiante",
+    "coldRestTime": "À froid",
+    "restTimeUnit": "{count, plural, one {Heure} other {Heures}}",
+    "flourStrength": "Force de la farine (W)",
+    "saltRatio": "Ratio de sel",
+    "honeyRatio": "Ratio de miel",
+    "pizzaWeight": "Poids du pâton",
+    "hydrationHelperText": "Recommandée pour la force de la farine (W) : {minHydration}% - {maxHydration}%"
+  },
+  "recipe": {
+    "poolish": {
+      "ingredients": {
+        "title": "Ingrédients de la poolish"
+      },
+      "method": {
+        "title": "Préparation de la poolish",
+        "steps": [
+          {
+            "title": "Mélanger l’eau, la levure et le miel",
+            "description": "",
+            "helper": {
+              "title": "Mélanger l’eau, la levure et le miel",
+              "descriptions": [
+                "Peser tous les ingrédients.",
+                "Dans un grand bol, délayer la levure dans l'eau et ajouter le miel."
+              ]
+            }
+          },
+          {
+            "title": "Ajouter la farine",
+            "description": "",
+            "helper": {
+              "title": "Ajouter la farine",
+              "description": "Ajouter la farine et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène"
+            }
+          },
+          {
+            "title": "Repos <strong>{ rtRestTime } heure(s)</strong> à température ambiante",
+            "description": "",
+            "helper": {
+              "title": "Repos à température ambiante",
+              "description": "Laisser reposer <strong>{ rtRestTime } heure(s)</strong> à température ambiante couvert d'un film plastique"
+            }
+          },
+          {
+            "title": "Repos <strong>{ coldRestTime } heure(s)</strong> au réfrigérateur",
+            "description": "",
+            "helper": {
+              "title": "Repos au réfrigérateur",
+              "description": "Laisser reposer <strong>{ coldRestTime } heure(s)</strong> au réfrigérateur couvert d'un film plastique"
+            }
+          }
+        ]
+      }
+    },
+    "poolishDough": {
+      "ingredients": {
+        "title": "Ingrédients de la pâte"
+      },
+      "method": {
+        "title": "Préparation de la pâte",
+        "steps": [
+          {
+            "title": "Sortir la poolish 1H avant utilisation",
+            "description": "",
+            "helper": {
+              "title": "Comment utiliser la poolish",
+              "description": "Sortir la poolish 1H avant utilisation, pour qu'elle est le temps de revenir à température ambiante"
+            }
+          },
+          {
+            "title": "Dans la poolish, ajouter l’eau et le sel",
+            "description": "",
+            "helper": {
+              "title": "Préparation de la pâte",
+              "descriptions": [
+                "Peser les quantités à ajouter dans la poolish",
+                "Dans le bol de la poolish, ajouter l'eau et le sel. Mélanger à la cuillère en bois jusqu'à l'absorption de l'eau"
+              ]
+            }
+          },
+          {
+            "title": "Ajouter la farine petit à petit",
+            "description": "",
+            "helper": {
+              "title": "Comment ajouter la farine",
+              "description": "Ajouter la farine petit à petit et mélanger à la cuillère en bois"
+            }
+          },
+          {
+            "title": "Transférer la pâte sur le plan de travail",
+            "description": "",
+            "helper": {
+              "title": "Transfert de la pâte",
+              "description": "A l'aide d'une corne à pâtisserie, transférer la pâte sur le plan de travail"
+            }
+          },
+          {
+            "title": "Pétrir la pâte",
+            "description": "",
+            "helper": {
+              "title": "Pétrissage",
+              "description": "Travailler la pâte en la pétrissant, il faut que la farine soit complètement intégrée"
+            }
+          },
+          {
+            "title": "Faire quelques rabats et former une boule",
+            "description": "",
+            "helper": {
+              "title": "Rabats",
+              "descriptions": [
+                "Pour faire un rabat, on prend la pâte et on la plie sur elle-même",
+                "On peut faire autant de rabats que l'on veut, mais il faut que la pâte soit douce et souple",
+                "Le rabat permet d'introduire de l'air dans la pâte",
+                "Une fois que l'on a fini, on peut la former en une belle boule"
+              ]
+            }
+          },
+          {
+            "title": "Repos 10 – 15 min sous une saladier",
+            "description": "",
+            "helper": {
+              "title": "Repos",
+              "description": ""
+            }
+          },
+          {
+            "title": "Reformer une boule",
+            "description": "",
+            "helper": {
+              "title": "Reformer une boule",
+              "descriptions": [
+                "Ne pas trop travailler la pâte",
+                "Tendre la pâte et en lui faisant faire quelques tours entre les mains reformer une boule"
+              ]
+            }
+          },
+          {
+            "title": "Repos 1H dans un récipient hermétique",
+            "description": "",
+            "helper": {
+              "title": "Repos",
+              "description": ""
+            }
+          },
+          {
+            "title": "Former les pâtons",
+            "description": "",
+            "helper": {
+              "title": "Former les pâtons",
+              "descriptions": [
+                "Récupérer la pâte et avec un coupe pâte ou une spatule",
+                "Former des pâtons (bien tendu) d'environ <strong>{ pizzaWeight } g</strong>",
+                "Mettre une fine couche de semoule fine dans un plat",
+                "Déposer les pâtons dans un plat en laissant de l’espace entre eux (ils vont encore grossir)",
+                "Fermer le plat ou mettre un film plastique"
+              ]
+            }
+          },
+          {
+            "title": "Repos pour faire doubler de volume",
+            "description": "",
+            "helper": {
+              "title": "Repos du pâton",
+              "descriptions": [
+                "Le temps de repos du pâton varie en fonction de la température",
+                "Ca peut prendre entre 1H et 3H, il faut donc penser à en tenir compte 😉"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "directDough": {
+      "ingredients": {
+        "title": "Ingrédients de la pâte"
+      },
+      "method": { 
+        "title": "Préparation de la pâte",
+        "steps": [
+          {
+            "title": "Mélanger l’eau, la levure et le miel",
+            "description": "",
+            "helper": {
+              "title": "Préparation de la pâte",
+              "descriptions": [
+                "Peser tous les ingrédients",
+                "Mélanger la levure et le miel à l’eau"
+              ]
+            }
+          },
+          {
+            "title": "Ajouter la farine et le sel",
+            "description": "",
+            "helper": {
+              "title": "Introduction de la farine",
+              "description": "Ajouter la farine et le sel et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène"
+            }
+          },
+          {
+            "title": "Pétrir 10 min",
+            "description": "",
+            "helper": {
+              "title": "Pétrissage",
+              "descriptions": [
+                "Une fois que tous les ingrédients sont bien mélangés et que l’on commence à avoir une boule, on peut la déposer sur le plan de travail",
+                "Terminer le pétrissage à la main environ 10 min (possibilité d’utiliser un robot pâtissier avec son crochet pétrisseur). Bien pétrir pour hydrater correctement la farine"
+              ]
+            }
+          },
+          {
+            "title": "Former une boule",
+            "description": "",
+            "helper": {
+              "title": "Boule de pâte",
+              "description": "Une fois que la pâte à une belle structure, former une boule"
+            }
+          },
+          {
+            "title": "Repos 25 min sous un saladier",
+            "description": "",
+            "helper": {
+              "title": "Repos",
+              "description": "La pâte va se tendre et devenir plus lisse"
+            }
+          },
+          {
+            "title": "Faire quelques rabats et former une boule",
+            "description": "",
+            "helper": {
+              "title": "Rabats",
+              "descriptions": [
+                "Pour faire un rabat, on prend la pâte et on la plie sur elle-même",
+                "On peut faire autant de rabats que l'on veut, mais il faut que la pâte soit douce et souple",
+                "Le rabat permet d'introduire de l'air dans la pâte",
+                "Une fois que l'on a fini, on peut la former en une belle boule"
+              ]
+            }
+          },
+          {
+            "title": "Repos <strong>{ rtRestTime } heure(s)</strong> et <strong>{ coldRestTime } heure(s)</strong> dans un récipient hermétique",
+            "description": "",
+            "helper": {
+              "title": "Repos",
+              "description": "La pâte va se tendre et devenir plus lisse"
+            }
+          },
+          {
+            "title": "Former les pâtons",
+            "description": "",
+            "helper": {
+              "title": "Former les pâtons",
+              "descriptions": [
+                "Récupérer la pâte et avec un coupe pâte ou une spatule",
+                "Former des pâtons (bien tendu) d'environ <strong>{ pizzaWeight } g</strong>",
+                "Mettre une fine couche de semoule fine dans un plat",
+                "Déposer les pâtons dans un plat en laissant de l’espace entre eux (ils vont encore grossir)",
+                "Fermer le plat ou mettre un film plastique"
+              ]
+            }     
+          },
+          {
+            "title": "Repos pour faire doubler de volume",
+            "description": "",
+            "helper": {
+              "title": "Repos du pâton",
+              "descriptions": [
+                "Le temps de repos du pâton varie en fonction de la température",
+                "Ca peut prendre entre 1H et 3H, il faut donc penser à en tenir compte 😉"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "doughTypes": {
+    "poolish": "Poolish",
+    "direct": "Directe"
+  },
+  "settings": {
+    "visibility": {
+      "title": "Champs supplémentaires",
+      "pizzaWeight": "Poids du pâton",
+      "saltRatio": "Ratio de sel",
+      "honeyRatio": "Ratio de miel",
+      "flourStrength": "Force de la farine",
+      "all": "Tout activer"
+    }
+  },
+  "recipOld": {
+    "quantity": {
+      "flour": "<strong>{ quantity } g</strong> de farine",
+      "water": "<strong>{ quantity } g</strong> d'eau",
+      "yeast": "<strong>{ quantity } g</strong> de levure",
+      "honey": "<strong>{ quantity } g</strong> de miel",
+      "salt": "<strong>{ quantity } g</strong> de sel"
+    },
+    "direct": {
+      "title": "Préparation de la pâte",
+      "subtitle": "Pétrissage et formation",
+      "step1Description": "Peser tous les ingrédients",
+      "step2Description": "Mélanger la levure et le miel à l’eau",
+      "step3Description": "Ajouter le sel et la farine et mélanger à la cuillère en bois",
+      "step4Description": "Une fois que tous les ingrédients sont bien mélangés et que l’on commence à avoir une boule, on peut la déposer sur le plan de travail",
+      "step5Description": "Terminer le pétrissage à la main environ 10 min (possibilité d’utiliser un robot pâtissier avec son crochet pétrisseur). Bien pétrir pour hydrater correctement la farine",
+      "step6Description": "Une fois que la pâte à une belle structure, former une boule et laisser la reposer pendant 25 min sous un saladier (la pâte va se tendre et devenir plus lisse)",
+      "step7Description": "Procéder à quelques rabats sur la pâte et lui donner une belle forme de boule (bien lisse et qui ne colle plus)",
+      "step8Description": "Déposer la boule dans un récipient hermétique et la laisser reposer 24 heures",
+      "step9Description": "Récupérer la pâte et, avec un coupe-pâte ou une spatule, former des pâtons (bien tendus) d’environ <strong>{ pizzaWeight } g</strong>",
+      "step10Description": "Déposer les pâtons dans un plat en laissant de l’espace entre chaque (ils vont encore grossir)",
+      "step11Description": "Fermer le plat ou le couvrir d’un film plastique et laisser reposer 3 heures"
+    },
+    "poolish": {
+      "poolish": {
+        "title": "Préparation de la poolish",
+        "subtitle": "Première étape : préparation de la pré-fermentation",
+        "step1Description": "Peser tous les ingrédients :",
+        "ingredientsList": "liste des ingrédients",
+        "step2Description": "Dans un grand bol, délayer la levure dans l'eau et ajouter le miel",
+        "step3Description": "Ajouter la farine et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène, puis laisser reposer <strong>{ rtRestTime } heure(s)</strong> à température ambiante couvert d'un film plastique, puis <strong>{ coldRestTime } heure(s)</strong> au réfrigérateur"
+      },
+      "dough": {
+        "title": "Préparation de la pâte",
+        "subtitle": "Deuxième étape : pétrissage et formation",
+        "step1Description": "Sortir la poolish 1H avant utilisation",
+        "step2Description": "Peser les quantités à ajouter dans la poolish :",
+        "ingredientsList": "liste des ingrédients",
+        "step3Description": "Dans le bol de la poolish, ajouter l'eau et le sel. Mélanger à la cuillère jusqu'à l'absorption de l'eau",
+        "step4Description": "Ajouter petit à petit la farine et mélanger à la cuillère",
+        "step5Description": "Lorsque ce n'est plus possible d'utiliser une cuillère, transférer la pâte sur le plan de travail",
+        "step6Description": "Travailler la pâte en la pétrissant, il faut que la farine soit complètement intégrée",
+        "step7Description": "Faire quelques rabat avec la pâte et former une belle boule (douce et souple)",
+        "step8Description": "Faire reposer 10-15 min sous le saladier",
+        "step9Description": "Reformer une belle boule et laisser reposer encore 1H dans un récipient hermétique",
+        "step10Description": "Mettre une fine couche de semoule fine dans un plat",
+        "step11Description": "Récupérer la pâte et avec un coupe pâte ou une spatule former des pâtons (bien tendu) d'environ <strong>{ pizzaWeight } g</strong>",
+        "step12Description": "Déposer les pâtons dans le plat en laissant de l'espace entre eux (ils vont encore grossir)",
+        "step13Description": "Fermer le plat ou mettre un film plastique sur celui-ci et laisser reposer entre 1H & 3H",
+        "tipsTitle": "💡 Astuce :",
+        "tipsDescription": "Si la pâte colle trop, former une boule et laisser reposer 10 min sous un saladier",
+        "successMessage": "🎉 Et voilà, ils sont prêt à être transformé en PIZZA !"
+      }
+    },
+    "storage": {
+      "title": "Conservation",
+      "subtitle": "Conseils de stockage",
+      "refrigerator": "Réfrigérateur : Les pâtons se gardent 2-3 jours",
+      "freezer": "Congélateur : Se congèle très bien, ne pas garder plus de 2-3 mois"
+    }
+  }
+}
+
