@@ -64,23 +64,25 @@ export class CalculatorRecipeService {
     map((result) => {
       return {
         ingredients: {
-          title: 'calculator.recipe.poolish.ingredients',
+          title: 'calculator.recipe.poolish.ingredients.title',
           items: result.poolish ? this.getIngredientItems(result.poolish) : [],
         },
         method: {
           title: 'calculator.recipe.poolish.method.title',
           items: [
-            {
-              icon: this.WheatIcon,
-              label: 'calculator.recipe.poolish.method.step1.title',
-              description: 'calculator.recipe.poolish.method.step1.description',
-              helper: {
-                title: 'calculator.recipe.poolish.method.step1.title',
-                description:
-                  'calculator.recipe.poolish.method.step1.helper.description',
-              },
+            this.WheatIcon,
+            this.WheatIcon,
+            this.WheatIcon,
+            this.WheatIcon,
+          ].map((icon, index) => ({
+            icon,
+            label: `calculator.recipe.poolish.method.steps.${index}.title`,
+            description: `calculator.recipe.poolish.method.steps.${index}.description`,
+            helper: {
+              title: `calculator.recipe.poolish.method.steps.${index}.title`,
+              description: `calculator.recipe.poolish.method.steps.${index}.helper.description`,
             },
-          ],
+          })),
         },
       };
     }),
@@ -90,17 +92,32 @@ export class CalculatorRecipeService {
     filter((result) => !!result?.poolish),
     map((result) => ({
       ingredients: {
-        title: 'calculator.recipe.poolishDough.ingredients',
+        title: 'calculator.recipe.poolishDough.ingredients.title',
         items: result.dough ? this.getIngredientItems(result.dough) : [],
       },
       method: {
         title: 'calculator.recipe.poolishDough.method.title',
         items: [
-          {
-            icon: this.WheatIcon,
-            label: 'calculator.recipe.poolishDough.method.step1.title',
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+        ].map((icon, index) => ({
+          icon,
+          label: `calculator.recipe.poolishDough.method.steps.${index}.title`,
+          description: `calculator.recipe.poolishDough.method.steps.${index}.description`,
+          helper: {
+            title: `calculator.recipe.poolishDough.method.steps.${index}.title`,
+            description: `calculator.recipe.poolishDough.method.steps.${index}.helper.description`,
           },
-        ],
+        })),
       },
     })),
   );
@@ -108,17 +125,30 @@ export class CalculatorRecipeService {
   directDoughRecipe$: Observable<IRecipe> = this.calculatorState.result$.pipe(
     map((result) => ({
       ingredients: {
-        title: 'calculator.recipe.directDough.ingredients',
+        title: 'calculator.recipe.directDough.ingredients.title',
         items: result.dough ? this.getIngredientItems(result.dough) : [],
       },
       method: {
         title: 'calculator.recipe.directDough.method.title',
         items: [
-          {
-            icon: this.WheatIcon,
-            label: 'calculator.recipe.directDough.method.step1.title',
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+          this.WheatIcon,
+        ].map((icon, index) => ({
+          icon,
+          label: `calculator.recipe.directDough.method.steps.${index}.title`,
+          description: `calculator.recipe.directDough.method.steps.${index}.description`,
+          helper: {
+            title: `calculator.recipe.directDough.method.steps.${index}.title`,
+            description: `calculator.recipe.directDough.method.steps.${index}.helper.description`,
           },
-        ],
+        })),
       },
     })),
   );
