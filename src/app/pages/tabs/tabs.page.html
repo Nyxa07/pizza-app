@@ -1,0 +1,16 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" routerLink="/tabs/home">
+      <i-lucide [img]="HouseIcon"></i-lucide>
+      <ion-label>{{ 'pages.home.title' | translate }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="calculator" routerLink="/tabs/calculator">
+      <i-lucide [img]="CalculatorIcon"></i-lucide>
+      <ion-label>{{ 'pages.calculator.title' | translate }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="guides" routerLink="/tabs/guides">
+      <i-lucide [img]="BookIcon"></i-lucide>
+      <ion-label>{{ 'pages.guides.title' | translate }}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

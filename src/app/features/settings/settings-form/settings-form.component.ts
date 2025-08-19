@@ -14,7 +14,7 @@ import { Locales } from '../../locales/enums/locales.enum';
 import { ThemeService } from '../../theme/services/theme.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
-import { DoughFormStateService } from '../../dough/services/dough-form-state.service';
+import { DoughFormStateService } from '../../calculator/services/calculator-state.service';
 
 @Component({
   selector: 'app-settings-form',

@@ -1,0 +1,48 @@
+@let poolishData = poolishData$ | async;
+@let doughData = doughData$ | async;
+
+@if (poolishData) {
+  <ion-list-header>
+    {{ "calculator.results.calculations.poolishIngredients" | translate }}
+  </ion-list-header>
+  <ion-list lines="none" [inset]="true">
+    @for (item of poolishData; track item) {
+      <ion-item>
+        <i-lucide slot="start" [img]="item.icon"></i-lucide>
+        <ion-label>{{ item.label | translate }}</ion-label>
+        <!-- <ion-badge slot="end">
+          {{ item.value | number: item.numberFormat ?? "1.0-0" }}
+          {{ item.unit }}
+        </ion-badge> -->
+        <ion-note
+          slot="end"
+          [style.fontWeight]="'bold'"
+          [style.fontSize]="'0.8rem'"
+        >
+          {{ item.value | number: item.numberFormat ?? "1.0-0" }}
+          {{ item.unit }}
+        </ion-note>
+      </ion-item>
+    }
+  </ion-list>
+}
+
+<ion-list-header>
+  {{ "calculator.results.calculations.doughIngredients" | translate }}
+</ion-list-header>
+<ion-list lines="none" [inset]="true">
+  @for (item of doughData; track item) {
+    <ion-item>
+      <i-lucide slot="start" [img]="item.icon"></i-lucide>
+      <ion-label>{{ item.label | translate }}</ion-label>
+      <ion-note
+        slot="end"
+        [style.fontWeight]="'bold'"
+        [style.fontSize]="'0.8rem'"
+      >
+        {{ item.value | number: item.numberFormat ?? "1.0-0" }}
+        {{ item.unit }}
+      </ion-note>
+    </ion-item>
+  }
+</ion-list>

@@ -18,5 +18,15 @@
     "back": "Retour",
     "next": "Suivant",
     "previous": "Précédent"
+  },
+  "ingredients": {
+    "flour": "Farine",
+    "water": "Eau",
+    "yeast": "Levure",
+    "honey": "Miel",
+    "salt": "Sel",
+    "dryActiveYeast": "Levure sèche active",
+    "dryInstantYeast": "Levure sèche instantanée",
+    "freshYeast": "Levure fraîche"
   }
 }

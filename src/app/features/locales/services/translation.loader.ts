@@ -5,7 +5,14 @@ import { map, catchError } from 'rxjs/operators';
 import { Provider } from '@angular/core';
 import { TranslationObject } from '@ngx-translate/core';
 
-const domains = ['common', 'route', 'dough', 'language', 'faq', 'settings'];
+const domains = [
+  'common',
+  'pages',
+  'calculator',
+  'language',
+  'faq',
+  'settings',
+];
 /**
  * Custom loader able to merge several domain-specific JSON files per language
  * located under `assets/i18n/<lang>/<domain>.json`.

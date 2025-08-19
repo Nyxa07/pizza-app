@@ -1,0 +1,19 @@
+{
+  "calculator": {
+    "title": "Calculateur",
+    "compute": "Calculer",
+    "results": {
+      "title": "Résultats"
+    }
+  },
+  "guides": {
+    "title": "Guides",
+    "faq": {
+      "title": "FAQ",
+      "description": "Foire aux questions"
+    }
+  },
+  "home": {
+    "title": "Accueil"
+  }
+}
