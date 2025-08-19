@@ -9,7 +9,7 @@ import {
   WheatIcon,
 } from 'lucide-angular';
 import { IRecipe } from 'src/app/features/recipe/interfaces/recipe.interface';
-import { DoughResult, Quantity } from './calculator.service';
+import { Quantity } from './calculator.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +23,7 @@ export class CalculatorRecipeService {
 
   constructor(private calculatorState: CalculatorStateService) {}
 
-  getIngredients(quantity: Quantity) {
+  getIngredientItems(quantity: Quantity) {
     return [
       {
         icon: this.WheatIcon,
@@ -61,27 +61,29 @@ export class CalculatorRecipeService {
 
   poolishRecipe$: Observable<IRecipe> = this.calculatorState.result$.pipe(
     filter((result) => !!result?.poolish),
-    map((result) => ({
-      ingredients: {
-        title: 'calculator.recipe.poolish.ingredients',
-        items: result.poolish ? this.getIngredients(result.poolish) : [],
-      },
-      method: {
-        title: 'calculator.recipe.poolish.method.title',
-        items: [
-          {
-            icon: this.WheatIcon,
-            label: 'calculator.recipe.poolish.method.step1.title',
-            description: 'calculator.recipe.poolish.method.step1.description',
-            helper: {
-              title: 'calculator.recipe.poolish.method.step1.helper.title',
-              description:
-                'calculator.recipe.poolish.method.step1.helper.description',
+    map((result) => {
+      return {
+        ingredients: {
+          title: 'calculator.recipe.poolish.ingredients',
+          items: result.poolish ? this.getIngredientItems(result.poolish) : [],
+        },
+        method: {
+          title: 'calculator.recipe.poolish.method.title',
+          items: [
+            {
+              icon: this.WheatIcon,
+              label: 'calculator.recipe.poolish.method.step1.title',
+              description: 'calculator.recipe.poolish.method.step1.description',
+              helper: {
+                title: 'calculator.recipe.poolish.method.step1.title',
+                description:
+                  'calculator.recipe.poolish.method.step1.helper.description',
+              },
             },
-          },
-        ],
-      },
-    })),
+          ],
+        },
+      };
+    }),
   );
 
   poolishDoughRecipe$: Observable<IRecipe> = this.calculatorState.result$.pipe(
@@ -89,7 +91,7 @@ export class CalculatorRecipeService {
     map((result) => ({
       ingredients: {
         title: 'calculator.recipe.poolishDough.ingredients',
-        items: result.dough ? this.getIngredients(result.dough) : [],
+        items: result.dough ? this.getIngredientItems(result.dough) : [],
       },
       method: {
         title: 'calculator.recipe.poolishDough.method.title',
@@ -107,7 +109,7 @@ export class CalculatorRecipeService {
     map((result) => ({
       ingredients: {
         title: 'calculator.recipe.directDough.ingredients',
-        items: result.dough ? this.getIngredients(result.dough) : [],
+        items: result.dough ? this.getIngredientItems(result.dough) : [],
       },
       method: {
         title: 'calculator.recipe.directDough.method.title',

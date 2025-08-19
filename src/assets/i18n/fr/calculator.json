@@ -22,36 +22,48 @@
   },
   "recipe": {
     "poolish": {
-      "ingredients": "Ingrédients de la poolish",
+      "ingredients": {
+        "title": "Ingrédients de la poolish"
+      },
       "method": {
         "title": "Préparation de la poolish",
-        "step1": {
-          "title": "Préparation de la poolish",
-          "description": "Préparer la poolish en mélangeant la farine et l'eau",
-          "helper": {
-            "description": "Préparer la poolish en mélangeant la farine et l'eau"
+        "steps": [
+          {
+            "title": "Préparation de la poolish",
+            "description": "Préparer la poolish en mélangeant la farine et l'eau",
+            "helper": {
+              "description": "Préparer la poolish en mélangeant la farine et l'eau"
+            }
           }
-        }
+        ]
       }
     },
     "poolishDough": {
-      "ingredients": "Ingrédients de la pâte",
+      "ingredients": {
+        "title": "Ingrédients de la pâte"
+      },
       "method": {
         "title": "Préparation de la pâte",
-        "step1": {
-          "title": "Préparation de la pâte",
-          "description": "Préparer la pâte en mélangeant la poolish et la farine"
-        }
+        "steps": [
+          {
+            "title": "Préparation de la pâte",
+            "description": "Préparer la pâte en mélangeant la poolish et la farine"
+          }
+        ]
       }
     },
     "directDough": {
-      "ingredients": "Ingrédients de la pâte",
+      "ingredients": {
+        "title": "Ingrédients de la pâte"
+      },
       "method": {
         "title": "Préparation de la pâte",
-        "step1": {
-          "title": "Préparation de la pâte",
-          "description": "Préparer la pâte en mélangeant la poolish et la farine"
-        }
+        "steps": [
+          {
+            "title": "Préparation de la pâte",
+            "description": "Préparer la pâte en mélangeant la poolish et la farine"
+          }
+        ]
       }
     }
   },
