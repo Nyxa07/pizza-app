@@ -27,6 +27,8 @@
         <ion-select
           [label]="'calculator.form.pizzaWeight' | translate"
           formControlName="pizzaWeight"
+          [cancelText]="'common.actions.cancel' | translate"
+          [okText]="'common.actions.ok' | translate"
         >
           @for (pizzaWeight of range(200, 400, 10); track pizzaWeight) {
             <ion-select-option [value]="pizzaWeight">
@@ -116,6 +118,8 @@
         <ion-select
           [label]="'calculator.form.honeyRatio' | translate"
           formControlName="honeyRatio"
+          [cancelText]="'common.actions.cancel' | translate"
+          [okText]="'common.actions.ok' | translate"
         >
           @for (honeyRatio of range(0, 0.005, 0.001, 3); track honeyRatio) {
             <ion-select-option [value]="honeyRatio">
