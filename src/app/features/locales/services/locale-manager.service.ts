@@ -115,7 +115,7 @@ export class LocaleManagerService {
         return deviceLang.value;
       }
     }
-    return navigator.language;
+    return navigator.language.substring(0, 2);
   }
 
   getLocale() {

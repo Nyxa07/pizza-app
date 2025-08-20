@@ -8,10 +8,10 @@ import {
   ThermometerSunIcon,
   ThermometerSnowflakeIcon,
 } from 'lucide-angular';
-import { IRecipe } from '../../recipe/interfaces/recipe.interface';
 import { DoughResult } from '../services/calculator.service';
+import { IRecipeDef } from '../../recipe/interfaces/recipe-def.interface';
 
-export class PoolishRecipe implements IRecipe {
+export class PoolishRecipe implements IRecipeDef {
   readonly WheatIcon = WheatIcon;
   readonly DropletsIcon = DropletsIcon;
   readonly BeerIcon = BeerIcon;
@@ -28,9 +28,9 @@ export class PoolishRecipe implements IRecipe {
       this.result.poolish ?? { flour: 0, water: 0, yeast: 0, honey: 0, salt: 0 }
     );
   }
+  baseTranslationKey = 'calculator.recipe.poolish';
 
   ingredients = {
-    title: 'calculator.recipe.poolish.ingredients.title',
     items: [
       {
         icon: this.WheatIcon,
@@ -67,51 +67,15 @@ export class PoolishRecipe implements IRecipe {
   };
 
   method = {
-    title: 'calculator.recipe.poolish.method.title',
+    variables: {
+      rtRestTime: this.result.poolish?.rtRestTime,
+      coldRestTime: this.result.poolish?.coldRestTime,
+    },
     items: [
-      {
-        icon: this.WandIcon,
-        label: 'calculator.recipe.poolish.method.steps.0.title',
-        helper: {
-          title: 'calculator.recipe.poolish.method.steps.0.helper.title',
-          descriptions: [
-            'calculator.recipe.poolish.method.steps.0.helper.descriptions.0',
-            'calculator.recipe.poolish.method.steps.0.helper.descriptions.1',
-          ],
-        },
-      },
-      {
-        icon: this.WheatIcon,
-        label: 'calculator.recipe.poolish.method.steps.1.title',
-        helper: {
-          title: 'calculator.recipe.poolish.method.steps.1.helper.title',
-          descriptions: [
-            'calculator.recipe.poolish.method.steps.1.helper.description',
-          ],
-        },
-      },
-      {
-        icon: this.ThermometerSunIcon,
-        label: 'calculator.recipe.poolish.method.steps.2.title',
-        helper: {
-          title: 'calculator.recipe.poolish.method.steps.2.helper.title',
-          descriptions: [
-            'calculator.recipe.poolish.method.steps.2.helper.descriptions.0',
-          ],
-        },
-        variables: { rtRestTime: this.result.poolish?.rtRestTime },
-      },
-      {
-        icon: this.ThermometerSnowflakeIcon,
-        label: 'calculator.recipe.poolish.method.steps.3.title',
-        helper: {
-          title: 'calculator.recipe.poolish.method.steps.3.helper.title',
-          descriptions: [
-            'calculator.recipe.poolish.method.steps.3.helper.descriptions.0',
-          ],
-        },
-        variables: { coldRestTime: this.result.poolish?.coldRestTime },
-      },
+      {icon: this.WandIcon, helperDescriptions: 2},
+      {icon: this.WandIcon, helperDescriptions: 1},
+      {icon: this.ThermometerSunIcon, helperDescriptions: 1},
+      {icon: this.ThermometerSnowflakeIcon, helperDescriptions: 1},
     ],
   };
 }
