@@ -6,6 +6,7 @@ import { CalculatorService } from './calculator.service';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
 import { HydrationService } from './hydration.service';
+import { RestTimeService } from './rest-time.service';
 
 export interface CalculatorInput {
   nbPizzas: number;
@@ -14,12 +15,15 @@ export interface CalculatorInput {
   hydrationRatio: number;
   temperature: number;
   poolishRatio?: number;
-  rtRestTime: number;
-  coldRestTime: number;
+  rtRestTime: number | null;
+  coldRestTime: number | null;
   flourStrength: number;
   saltRatio: number;
   honeyRatio: number;
   pizzaWeight: number;
+  preparationDate: number | null;
+  cookingDate: number | null;
+  pizzaBallsRestTime: number | null;
 }
 
 export interface InputsAutoCompute {
@@ -35,6 +39,9 @@ export interface InputsAutoCompute {
   saltRatio: boolean;
   honeyRatio: boolean;
   pizzaWeight: boolean;
+  preparationDate: boolean;
+  cookingDate: boolean;
+  pizzaBallsRestTime: boolean;
 }
 
 export const DEFAULT_INPUT: CalculatorInput = {
@@ -50,9 +57,12 @@ export const DEFAULT_INPUT: CalculatorInput = {
   saltRatio: 0.028,
   honeyRatio: 0.004,
   pizzaWeight: 250,
+  preparationDate: null,
+  cookingDate: null,
+  pizzaBallsRestTime: null,
 };
 
-export const AUTO_COMPUTE_COMPLEX_INPUTS: InputsAutoCompute = {
+export const AUTO_COMPUTE_INPUTS: InputsAutoCompute = {
   nbPizzas: false,
   doughType: false,
   yeastType: false,
@@ -65,21 +75,9 @@ export const AUTO_COMPUTE_COMPLEX_INPUTS: InputsAutoCompute = {
   saltRatio: true,
   honeyRatio: true,
   pizzaWeight: false,
-};
-
-export const AUTO_COMPUTE_SIMPLE_INPUTS: InputsAutoCompute = {
-  nbPizzas: false,
-  rtRestTime: false,
-  saltRatio: true,
-  honeyRatio: true,
-  poolishRatio: true,
-  doughType: true,
-  yeastType: false,
-  hydrationRatio: true,
-  temperature: false,
-  coldRestTime: true,
-  flourStrength: true,
-  pizzaWeight: true,
+  preparationDate: true,
+  cookingDate: true,
+  pizzaBallsRestTime: true,
 };
 
 @Injectable({ providedIn: 'root' })
@@ -90,7 +88,7 @@ export class CalculatorStateService {
     this.loadFromStorage() ?? DEFAULT_INPUT,
   );
   private readonly _autoCompute = new BehaviorSubject<InputsAutoCompute>(
-    this.loadAutoComputeFromStorage() ?? AUTO_COMPUTE_COMPLEX_INPUTS,
+    this.loadAutoComputeFromStorage() ?? AUTO_COMPUTE_INPUTS,
   );
 
   readonly input$ = this._input.asObservable();
@@ -100,36 +98,31 @@ export class CalculatorStateService {
   );
   readonly autoCompute$ = this._autoCompute.asObservable();
 
+  private _initInput: CalculatorInput | null = null;
+
   constructor(
     private calculator: CalculatorService,
     private prefs: PrefsStorage,
     private hydrationService: HydrationService,
+    private restTimeService: RestTimeService,
   ) {}
-
-  setSimpleMode(): void {
-    this.updateAutoCompute(AUTO_COMPUTE_SIMPLE_INPUTS);
-    this.reset();
-  }
-
-  setComplexMode(): void {
-    this.updateAutoCompute(AUTO_COMPUTE_COMPLEX_INPUTS);
-    this.reset();
-  }
 
   getAutoCompute(key: keyof InputsAutoCompute): boolean {
     return this._autoCompute.value[key] ?? false;
   }
 
-  update(input: CalculatorInput): void {
-    this._input.next(input);
-    this.prefs.set(this.STORAGE_KEY, input);
+  update(input: Partial<CalculatorInput>): void {
+    this._input.next({ ...this._input.value, ...input } as CalculatorInput);
+    this.prefs.set(this.STORAGE_KEY, this._input.value);
 
     // Update visibility of poolish ratio at the end because it triggers reset to default
-    this.afterUpdateInput(input);
+    this.afterUpdateInput();
   }
 
-  private afterUpdateInput(input: CalculatorInput): void {
-    if (input.doughType === DoughType.DIRECT) {
+  private afterUpdateInput(): void {
+    const inputValue = this._input.value;
+
+    if (inputValue.doughType === DoughType.DIRECT) {
       this.updateAutoCompute({ poolishRatio: true });
     } else {
       this.updateAutoCompute({ poolishRatio: false });
@@ -175,12 +168,38 @@ export class CalculatorStateService {
         ) / 100;
     }
 
+    if (autoCompute.pizzaBallsRestTime) {
+      input.pizzaBallsRestTime = this.restTimeService.computePizzaBallsRestTime(
+        input.temperature,
+      );
+    }
+
+    if (autoCompute.rtRestTime && autoCompute.coldRestTime) {
+      const restTimes = this.restTimeService.compute(input);
+
+      input.rtRestTime = restTimes.rtRestTime;
+      input.coldRestTime = restTimes.coldRestTime;
+    }
+
+    if (autoCompute.preparationDate && autoCompute.cookingDate) {
+      input.preparationDate = null;
+      input.cookingDate = null;
+    }
+
     this._input.next(input);
     this.prefs.set(this.STORAGE_KEY, input);
   }
 
+  init(input?: Partial<CalculatorInput>): void {
+    this._initInput = {
+      ...(this.loadFromStorage() ?? DEFAULT_INPUT),
+      ...input,
+    } as CalculatorInput;
+    this.update(this._initInput);
+  }
+
   reset(): void {
-    this.update(DEFAULT_INPUT);
+    this.update(this._initInput ?? DEFAULT_INPUT);
   }
 
   private loadFromStorage(): CalculatorInput | null {

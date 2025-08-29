@@ -196,7 +196,7 @@
               "title": "Repos du pâton",
               "descriptions": [
                 "Le temps de repos du pâton varie en fonction de la température",
-                "Ca peut prendre entre 1H et 3H, il faut donc penser à en tenir compte 😉"
+                "Ca prend environ <strong>{ rtRestTime } heure(s)</strong>, il faut donc penser à en tenir compte 😉"
               ]
             }
           }
@@ -321,7 +321,7 @@
               "title": "Repos du pâton",
               "descriptions": [
                 "Le temps de repos du pâton varie en fonction de la température",
-                "Ca peut prendre entre 1H et 3H, il faut donc penser à en tenir compte 😉"
+                "Ca prend environ <strong>{ rtRestTime } heure(s)</strong>, il faut donc penser à en tenir compte 😉"
               ]
             }
           }

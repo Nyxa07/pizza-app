@@ -6,8 +6,13 @@ import {
   IonTitle,
   IonToolbar,
   IonBackButton,
+  IonButton,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
+import { PlannerFormComponent } from 'src/app/features/calculator/planner-form/planner-form.component';
+import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
+import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'calculator-planner-page',
@@ -22,9 +27,15 @@ import { TranslatePipe } from '@ngx-translate/core';
     TranslatePipe,
     IonButtons,
     IonBackButton,
+    PlannerFormComponent,
+    CalculatorRefreshButtonComponent,
+    IonButton,
+    LucideAngularModule,
+    RouterLink,
   ],
 })
 export class CalculatorPlannerPage implements OnInit {
+  readonly SettingsIcon = SettingsIcon;
   constructor() {}
 
   ngOnInit() {}

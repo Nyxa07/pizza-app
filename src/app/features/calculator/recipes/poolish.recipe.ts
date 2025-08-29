@@ -62,14 +62,14 @@ export class PoolishRecipe implements IRecipeDef {
 
   method = {
     variables: {
-      rtRestTime: this.result.poolish?.rtRestTime,
-      coldRestTime: this.result.poolish?.coldRestTime,
+      rtRestTime: Math.round(this.result.poolish?.rtRestTime ?? 0),
+      coldRestTime: Math.round(this.result.poolish?.coldRestTime ?? 0),
     },
     items: [
-      {icon: this.WandIcon, helperDescriptions: 2},
-      {icon: this.WheatIcon, helperDescriptions: 1},
-      {icon: this.ThermometerSunIcon, helperDescriptions: 1},
-      {icon: this.ThermometerSnowflakeIcon, helperDescriptions: 1},
+      { icon: this.WandIcon, helperDescriptions: 2 },
+      { icon: this.WheatIcon, helperDescriptions: 1 },
+      { icon: this.ThermometerSunIcon, helperDescriptions: 1 },
+      { icon: this.ThermometerSnowflakeIcon, helperDescriptions: 1 },
     ],
   };
 }

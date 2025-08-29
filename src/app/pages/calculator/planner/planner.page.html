@@ -4,10 +4,16 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>{{ "pages.calculator.planner.title" | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <app-calculator-refresh-button></app-calculator-refresh-button>
+      <ion-button [routerLink]="['/tabs/calculator/settings']">
+        <i-lucide slot="icon-only" [img]="SettingsIcon"></i-lucide>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large"
@@ -15,4 +21,15 @@
       >
     </ion-toolbar>
   </ion-header>
+
+  <app-planner-form></app-planner-form>
+
+  <ion-button
+    class="ion-margin-top"
+    expand="block"
+    color="primary"
+    [routerLink]="['/tabs/calculator/results']"
+  >
+    {{ "pages.calculator.compute" | translate }}
+  </ion-button>
 </ion-content>
