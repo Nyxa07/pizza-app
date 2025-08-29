@@ -7,12 +7,17 @@ import {
   IonDatetimeButton,
   IonModal,
 } from '@ionic/angular/standalone';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CalculatorStateService } from '../services/calculator-state.service';
 import { CalculatorFormComponent } from '../calculator-form/calculator-form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RestTimeService } from '../services/rest-time.service';
+import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 
 @Component({
   selector: 'app-planner-form',
@@ -32,15 +37,8 @@ import { RestTimeService } from '../services/rest-time.service';
   ],
 })
 export class PlannerFormComponent implements OnInit {
-  protected form = this.formBuilder.group({
-    preparationDate: [this.toLocalISOString(new Date()), [Validators.required]],
-    cookingDate: [
-      this.toLocalISOString(
-        new Date(new Date().getTime() + 4 * 60 * 60 * 1000),
-      ),
-      [Validators.required],
-    ],
-  });
+  protected form: FormGroup;
+  protected storageKey = 'planner:form';
 
   private toLocalISOString(date: Date): string {
     const offset = date.getTimezoneOffset();
@@ -61,7 +59,7 @@ export class PlannerFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private state: CalculatorStateService,
-    private restTimeService: RestTimeService,
+    private prefStorage: PrefsStorage,
   ) {
     // this.form.get('preparationDate')?.valueChanges.subscribe((value) => {
     //   this.form
@@ -73,6 +71,24 @@ export class PlannerFormComponent implements OnInit {
     //       { emitEvent: false },
     //     );
     // });
+
+    this.form = this.formBuilder.group({
+      preparationDate: [
+        this.toLocalISOString(new Date()),
+        [Validators.required],
+      ],
+      cookingDate: [
+        this.toLocalISOString(
+          new Date(new Date().getTime() + 4 * 60 * 60 * 1000),
+        ),
+        [Validators.required],
+      ],
+    });
+
+    const values = this.prefStorage.get('planner:form');
+    if (values) {
+      this.form.patchValue(values);
+    }
 
     this.form.valueChanges.pipe(takeUntilDestroyed()).subscribe((value) => {
       if (
@@ -99,6 +115,15 @@ export class PlannerFormComponent implements OnInit {
       }
 
       if (this.form.valid) {
+        this.prefStorage.set(
+          'planner:form',
+          {
+            preparationDate: value.preparationDate,
+            cookingDate: value.cookingDate,
+          },
+          3600 * 1000, // 1 hour
+        );
+
         this.state.update({
           preparationDate: new Date(value.preparationDate ?? '').getTime(),
           cookingDate: new Date(value.cookingDate ?? '').getTime(),

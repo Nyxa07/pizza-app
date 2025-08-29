@@ -14,15 +14,27 @@ export class PrefsStorage {
 
   get<T>(key: string): T | null {
     try {
-      const value = this.storage.getItem(`${this.cacheVersion}:${key}`);
-      return value ? (JSON.parse(value) as T) : null;
+      const item = this.storage.getItem(`${this.cacheVersion}:${key}`);
+      if (!item) {
+        return null;
+      }
+      const parsed = JSON.parse(item) as { value: T; expiresAt: number | null };
+      if (parsed.expiresAt && parsed.expiresAt < Date.now()) {
+        this.remove(key);
+        return null;
+      }
+      return parsed.value;
     } catch {
       return null;
     }
   }
 
-  set<T>(key: string, value: T): void {
-    this.storage.setItem(`${this.cacheVersion}:${key}`, JSON.stringify(value));
+  set<T>(key: string, value: T, expiresIn?: number): void {
+    const item = {
+      value,
+      expiresAt: expiresIn ? Date.now() + expiresIn : null,
+    };
+    this.storage.setItem(`${this.cacheVersion}:${key}`, JSON.stringify(item));
   }
 
   remove(key: string): void {
