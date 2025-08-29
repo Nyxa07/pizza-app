@@ -191,7 +191,10 @@ export class CalculatorStateService {
   }
 
   init(input?: Partial<CalculatorInput>): void {
-    this._initInput = { ...DEFAULT_INPUT, ...input } as CalculatorInput;
+    this._initInput = {
+      ...(this.loadFromStorage() ?? DEFAULT_INPUT),
+      ...input,
+    } as CalculatorInput;
     this.update(this._initInput);
   }
 
