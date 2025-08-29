@@ -206,29 +206,17 @@ export class CalculatorStateService {
     } as CalculatorInput;
 
     // With stored values if any
-    this.update({
-      ...this._initInput,
-      ...this.loadFromStorage(),
-    });
-
-    // this._input.next({
-    //   ...this._initInput,
-    //   ...this.loadFromStorage(),
-    // });
-
-    this.updateAutoCompute({
+    this._autoCompute.next({
       ...AUTO_COMPUTE_INPUTS,
       ...autoCompute,
       ...this.loadAutoComputeFromStorage(),
     });
 
-    // this._autoCompute.next({
-    //   ...AUTO_COMPUTE_INPUTS,
-    //   ...autoCompute,
-    //   ...this.loadAutoComputeFromStorage(),
-    // });
-
-    // this.computeAutoComputedInputs();
+    // Will trigger auto computed inputs
+    this.update({
+      ...this._initInput,
+      ...this.loadFromStorage(),
+    });
   }
 
   reset(): void {
