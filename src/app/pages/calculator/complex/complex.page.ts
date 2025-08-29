@@ -13,6 +13,7 @@ import { CalculatorFormComponent } from 'src/app/features/calculator/calculator-
 import { RouterLink } from '@angular/router';
 import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
 import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
+import { CalculatorStateService } from 'src/app/features/calculator/services/calculator-state.service';
 
 @Component({
   selector: 'calculator-complex-page',
@@ -36,4 +37,7 @@ import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
 })
 export class CalculatorComplexPage {
   readonly SettingsIcon = SettingsIcon;
+  constructor(calculatorState: CalculatorStateService) {
+    calculatorState.init('complex', { rtRestTime: 16 });
+  }
 }

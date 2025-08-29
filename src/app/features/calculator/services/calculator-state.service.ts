@@ -82,13 +82,12 @@ export const AUTO_COMPUTE_INPUTS: InputsAutoCompute = {
 
 @Injectable({ providedIn: 'root' })
 export class CalculatorStateService {
+  private INIT_KEY: string = 'default';
   private readonly STORAGE_KEY = 'calculator';
   private readonly STORAGE_KEY_AUTO_COMPUTE = this.STORAGE_KEY + ':autoCompute';
-  private readonly _input = new BehaviorSubject<CalculatorInput>(
-    this.loadFromStorage() ?? DEFAULT_INPUT,
-  );
+  private readonly _input = new BehaviorSubject<CalculatorInput>(DEFAULT_INPUT);
   private readonly _autoCompute = new BehaviorSubject<InputsAutoCompute>(
-    this.loadAutoComputeFromStorage() ?? AUTO_COMPUTE_INPUTS,
+    AUTO_COMPUTE_INPUTS,
   );
 
   readonly input$ = this._input.asObservable();
@@ -113,7 +112,7 @@ export class CalculatorStateService {
 
   update(input: Partial<CalculatorInput>): void {
     this._input.next({ ...this._input.value, ...input } as CalculatorInput);
-    this.prefs.set(this.STORAGE_KEY, this._input.value);
+    this.prefs.set(this.INIT_KEY + ':' + this.STORAGE_KEY, this._input.value);
 
     // Update visibility of poolish ratio at the end because it triggers reset to default
     this.afterUpdateInput();
@@ -137,7 +136,10 @@ export class CalculatorStateService {
     };
 
     this._autoCompute.next(newAutoCompute);
-    this.prefs.set(this.STORAGE_KEY_AUTO_COMPUTE, newAutoCompute);
+    this.prefs.set(
+      this.INIT_KEY + ':' + this.STORAGE_KEY_AUTO_COMPUTE,
+      newAutoCompute,
+    );
     this.computeAutoComputedInputs();
   }
 
@@ -187,15 +189,46 @@ export class CalculatorStateService {
     }
 
     this._input.next(input);
-    this.prefs.set(this.STORAGE_KEY, input);
+    this.prefs.set(this.INIT_KEY + ':' + this.STORAGE_KEY, input);
   }
 
-  init(input?: Partial<CalculatorInput>): void {
+  init(
+    key: string,
+    input?: Partial<CalculatorInput>,
+    autoCompute?: Partial<InputsAutoCompute>,
+  ): void {
+    this.INIT_KEY = key;
+
+    // To be able to reset to default
     this._initInput = {
-      ...(this.loadFromStorage() ?? DEFAULT_INPUT),
+      ...DEFAULT_INPUT,
       ...input,
     } as CalculatorInput;
-    this.update(this._initInput);
+
+    // With stored values if any
+    this.update({
+      ...this._initInput,
+      ...this.loadFromStorage(),
+    });
+
+    // this._input.next({
+    //   ...this._initInput,
+    //   ...this.loadFromStorage(),
+    // });
+
+    this.updateAutoCompute({
+      ...AUTO_COMPUTE_INPUTS,
+      ...autoCompute,
+      ...this.loadAutoComputeFromStorage(),
+    });
+
+    // this._autoCompute.next({
+    //   ...AUTO_COMPUTE_INPUTS,
+    //   ...autoCompute,
+    //   ...this.loadAutoComputeFromStorage(),
+    // });
+
+    // this.computeAutoComputedInputs();
   }
 
   reset(): void {
@@ -203,10 +236,14 @@ export class CalculatorStateService {
   }
 
   private loadFromStorage(): CalculatorInput | null {
-    return this.prefs.get<CalculatorInput>(this.STORAGE_KEY);
+    return this.prefs.get<CalculatorInput>(
+      this.INIT_KEY + ':' + this.STORAGE_KEY,
+    );
   }
 
   private loadAutoComputeFromStorage(): InputsAutoCompute | null {
-    return this.prefs.get<InputsAutoCompute>(this.STORAGE_KEY_AUTO_COMPUTE);
+    return this.prefs.get<InputsAutoCompute>(
+      this.INIT_KEY + ':' + this.STORAGE_KEY_AUTO_COMPUTE,
+    );
   }
 }

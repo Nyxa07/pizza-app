@@ -16,7 +16,7 @@
     </ion-toolbar>
   </ion-header>
   @for (item of items; track item.title) {
-  <ion-card (click)="item.action()">
+  <ion-card [routerLink]="item.link">
     <ion-card-header>
       <ion-card-title>{{ item.title | translate }}</ion-card-title>
     </ion-card-header>

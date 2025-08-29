@@ -20,8 +20,8 @@ export class RestTimeService {
     const pizzaBallsRestTime = this.computePizzaBallsRestTime(
       input.temperature,
     );
-    let paddingPoolish = 4 * 3600 + pizzaBallsRestTime;
-    let paddingDirect = 3600 + pizzaBallsRestTime;
+    let paddingPoolish = 4 * 3600 + pizzaBallsRestTime * 3600;
+    let paddingDirect = 3600 + pizzaBallsRestTime * 3600;
     const timeUntilCooking =
       (cookingDate.getTime() - preparationDate.getTime()) / 1000;
     let rtRestTime =

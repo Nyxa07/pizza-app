@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -13,6 +13,8 @@ import { CalculatorFormComponent } from 'src/app/features/calculator/calculator-
 import { RouterLink } from '@angular/router';
 import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
 import { LucideAngularModule } from 'lucide-angular';
+import { CalculatorStateService } from 'src/app/features/calculator/services/calculator-state.service';
+import { DoughType } from 'src/app/features/calculator/enums/dough-type.enum';
 
 @Component({
   selector: 'calculator-simple-page',
@@ -35,5 +37,19 @@ import { LucideAngularModule } from 'lucide-angular';
   ],
 })
 export class CalculatorSimplePage {
-  constructor() {}
+  constructor(private calculatorState: CalculatorStateService) {
+    this.calculatorState.init(
+      'simple',
+      {
+        doughType: DoughType.DIRECT,
+        rtRestTime: 4,
+        coldRestTime: 0,
+      },
+      {
+        hydrationRatio: true,
+        pizzaWeight: true,
+        doughType: true,
+      },
+    );
+  }
 }

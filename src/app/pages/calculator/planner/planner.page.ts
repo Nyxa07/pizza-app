@@ -13,6 +13,7 @@ import { PlannerFormComponent } from 'src/app/features/calculator/planner-form/p
 import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
 import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
+import { CalculatorStateService } from 'src/app/features/calculator/services/calculator-state.service';
 
 @Component({
   selector: 'calculator-planner-page',
@@ -34,9 +35,18 @@ import { RouterLink } from '@angular/router';
     RouterLink,
   ],
 })
-export class CalculatorPlannerPage implements OnInit {
+export class CalculatorPlannerPage {
   readonly SettingsIcon = SettingsIcon;
-  constructor() {}
-
-  ngOnInit() {}
+  constructor(calculatorState: CalculatorStateService) {
+    calculatorState.init(
+      'planner',
+      {},
+      {
+        rtRestTime: true,
+        coldRestTime: true,
+        preparationDate: false,
+        cookingDate: false,
+      },
+    );
+  }
 }
