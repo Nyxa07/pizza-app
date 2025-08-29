@@ -15,6 +15,7 @@ import { PoolishDoughRecipe } from 'src/app/features/calculator/recipes/poolish-
 import { filter, map } from 'rxjs/operators';
 import { DirectDoughRecipe } from 'src/app/features/calculator/recipes/direct-dough.recipe';
 import { PoolishRecipe } from 'src/app/features/calculator/recipes/poolish.recipe';
+import { RecipeDefConverterService } from 'src/app/features/recipe/services/recipe-def-converter.service';
 
 @Component({
   selector: 'calculator-results-page',
@@ -36,20 +37,20 @@ import { PoolishRecipe } from 'src/app/features/calculator/recipes/poolish.recip
 export class CalculatorResultsPage implements OnInit {
   protected poolishDoughRecipe$ = this.calculatorState.result$.pipe(
     filter((result) => !!result?.poolish),
-    map((result) => new PoolishDoughRecipe(result)),
+    map((result) => this.recipeDefConverter.convert(new PoolishDoughRecipe(result))),
   );
 
   protected directDoughRecipe$ = this.calculatorState.result$.pipe(
     filter((result) => !!result?.dough),
-    map((result) => new DirectDoughRecipe(result)),
+    map((result) => this.recipeDefConverter.convert(new DirectDoughRecipe(result))),
   );
 
   protected poolishRecipe$ = this.calculatorState.result$.pipe(
     filter((result) => !!result?.poolish),
-    map((result) => new PoolishRecipe(result)),
+    map((result) => this.recipeDefConverter.convert(new PoolishRecipe(result))),
   );
 
-  constructor(private calculatorState: CalculatorStateService) {}
+  constructor(private calculatorState: CalculatorStateService, private recipeDefConverter: RecipeDefConverterService) {}
 
   ngOnInit() {}
 }

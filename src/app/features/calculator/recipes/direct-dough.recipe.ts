@@ -12,10 +12,10 @@ import {
   CircleIcon,
   EclipseIcon,
 } from 'lucide-angular';
-import { IRecipe } from '../../recipe/interfaces/recipe.interface';
 import { DoughResult } from '../services/calculator.service';
+import { IRecipeDef } from '../../recipe/interfaces/recipe-def.interface';
 
-export class DirectDoughRecipe implements IRecipe {
+export class DirectDoughRecipe implements IRecipeDef {
   readonly WheatIcon = WheatIcon;
   readonly DropletsIcon = DropletsIcon;
   readonly BeerIcon = BeerIcon;
@@ -36,8 +36,9 @@ export class DirectDoughRecipe implements IRecipe {
     );
   }
 
+  baseTranslationKey = 'calculator.recipe.directDough';
+
   ingredients = {
-    title: 'calculator.recipe.directDough.ingredients.title',
     items: [
       {
         icon: this.WheatIcon,
@@ -74,126 +75,51 @@ export class DirectDoughRecipe implements IRecipe {
   };
 
   method = {
-    title: 'calculator.recipe.directDough.method.title',
+    variables: {
+      rtRestTime: this.result.dough?.rtRestTime,
+      coldRestTime: this.result.dough?.coldRestTime,
+      pizzaWeight: this.result.pizzaWeight,
+    },
     items: [
       {
         icon: this.WandIcon,
-        label: 'calculator.recipe.directDough.method.steps.0.title',
-        helper: {
-          title: 'calculator.recipe.directDough.method.steps.0.helper.title',
-          descriptions: [
-            'calculator.recipe.directDough.method.steps.0.helper.descriptions.0',
-            'calculator.recipe.directDough.method.steps.0.helper.descriptions.1',
-          ],
-        },
+        helperDescriptions: 2,
       },
       {
         icon: this.WheatIcon,
-        label: 'calculator.recipe.directDough.method.steps.1.title',
-        helper: {
-          title: 'calculator.recipe.directDough.method.steps.1.helper.title',
-          descriptions: [
-            'calculator.recipe.directDough.method.steps.1.helper.descriptions.0',
-          ],
-        },
+        helperDescriptions: 1,
       },
       {
         icon: this.HandIcon,
-        label: 'calculator.recipe.directDough.method.steps.2.title',
-        helper: {
-          title: 'calculator.recipe.directDough.method.steps.2.helper.title',
-          descriptions: [
-            'calculator.recipe.directDough.method.steps.2.helper.descriptions.0',
-            'calculator.recipe.directDough.method.steps.2.helper.descriptions.1',
-          ],
-        },
+        helperDescriptions: 2,
       },
       {
         icon: this.CircleIcon,
-        label: 'calculator.recipe.directDough.method.steps.3.title',
-        helper: {
-          title: 'calculator.recipe.directDough.method.steps.3.helper.title',
-          descriptions: [
-            'calculator.recipe.directDough.method.steps.3.helper.descriptions.0',
-          ],
-        },
+        helperDescriptions: 1,
       },
       {
         icon: this.ThermometerSunIcon,
-        label: 'calculator.recipe.directDough.method.steps.4.title',
-        helper: {
-          title: 'calculator.recipe.directDough.method.steps.4.helper.title',
-          descriptions: [
-            'calculator.recipe.directDough.method.steps.4.helper.descriptions.0',
-          ],
-        },
+        helperDescriptions: 1,
       },
       {
         icon: this.UndoDotIcon,
-        label: 'calculator.recipe.directDough.method.steps.5.title',
-        helper: {
-          title: 'calculator.recipe.directDough.method.steps.5.helper.title',
-          descriptions: [
-            'calculator.recipe.directDough.method.steps.5.helper.descriptions.0',
-            'calculator.recipe.directDough.method.steps.5.helper.descriptions.1',
-            'calculator.recipe.directDough.method.steps.5.helper.descriptions.2',
-            'calculator.recipe.directDough.method.steps.5.helper.descriptions.3',
-          ],
-        },
+        helperDescriptions: 4,
       },
       {
         icon: this.ThermometerSunIcon,
-        label: 'calculator.recipe.directDough.method.steps.6.title',
-        helper: {
-          title: 'calculator.recipe.directDough.method.steps.6.helper.title',
-          descriptions: [
-            'calculator.recipe.directDough.method.steps.6.helper.descriptions.0',
-          ],
-        },
-        variables: {
-          rtRestTime: this.result.dough?.rtRestTime,
-        },
+        helperDescriptions: 1,
       },
       {
         icon: this.ThermometerSnowflakeIcon,
-        label: 'calculator.recipe.directDough.method.steps.7.title',
-        helper: {
-          title: 'calculator.recipe.directDough.method.steps.7.helper.title',
-          descriptions: [
-            'calculator.recipe.directDough.method.steps.7.helper.descriptions.0',
-          ],
-        },
-        variables: {
-          coldRestTime: this.result.dough?.coldRestTime,
-        },
+        helperDescriptions: 1,
       },
       {
         icon: this.EclipseIcon,
-        label: 'calculator.recipe.directDough.method.steps.8.title',
-        helper: {
-          title: 'calculator.recipe.directDough.method.steps.8.helper.title',
-          descriptions: [
-            'calculator.recipe.directDough.method.steps.8.helper.descriptions.0',
-            'calculator.recipe.directDough.method.steps.8.helper.descriptions.1',
-            'calculator.recipe.directDough.method.steps.8.helper.descriptions.2',
-            'calculator.recipe.directDough.method.steps.8.helper.descriptions.3',
-            'calculator.recipe.directDough.method.steps.8.helper.descriptions.4',
-          ],
-        },
-        variables: {
-          pizzaWeight: this.result.pizzaWeight,
-        },
+        helperDescriptions: 5,
       },
       {
         icon: this.ThermometerSunIcon,
-        label: 'calculator.recipe.directDough.method.steps.9.title',
-        helper: {
-          title: 'calculator.recipe.directDough.method.steps.9.helper.title',
-          descriptions: [
-            'calculator.recipe.directDough.method.steps.9.helper.descriptions.0',
-            'calculator.recipe.directDough.method.steps.9.helper.descriptions.1',
-          ],
-        },
+        helperDescriptions: 2,
       },
     ],
   };

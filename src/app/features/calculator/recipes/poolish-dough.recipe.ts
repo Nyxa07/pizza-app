@@ -15,10 +15,10 @@ import {
   ArrowDownUpIcon,
   EclipseIcon,
 } from 'lucide-angular';
-import { IRecipe } from '../../recipe/interfaces/recipe.interface';
 import { DoughResult } from '../services/calculator.service';
+import { IRecipeDef } from '../../recipe/interfaces/recipe-def.interface';
 
-export class PoolishDoughRecipe implements IRecipe {
+export class PoolishDoughRecipe implements IRecipeDef {
   readonly WheatIcon = WheatIcon;
   readonly DropletsIcon = DropletsIcon;
   readonly BeerIcon = BeerIcon;
@@ -41,9 +41,9 @@ export class PoolishDoughRecipe implements IRecipe {
       this.result.dough ?? { flour: 0, water: 0, yeast: 0, honey: 0, salt: 0 }
     );
   }
+  baseTranslationKey = 'calculator.recipe.poolishDough';
 
   ingredients = {
-    title: 'calculator.recipe.poolishDough.ingredients.title',
     items: [
       {
         icon: this.WheatIcon,
@@ -67,126 +67,55 @@ export class PoolishDoughRecipe implements IRecipe {
   };
 
   method = {
-    title: 'calculator.recipe.poolishDough.method.title',
+    variables: {
+      rtRestTime: this.result.dough?.rtRestTime,
+      coldRestTime: this.result.dough?.coldRestTime,
+      pizzaWeight: this.result.pizzaWeight,
+    },
     items: [
       {
         icon: this.CookingPotIcon,
-        label: 'calculator.recipe.poolishDough.method.steps.0.title',
-        helper: {
-          title: 'calculator.recipe.poolishDough.method.steps.0.helper.title',
-          descriptions: [
-            'calculator.recipe.poolishDough.method.steps.0.helper.descriptions.0',
-          ],
-        },
+        helperDescriptions: 1,
       },
       {
         icon: this.BubblesIcon,
-        label: 'calculator.recipe.poolishDough.method.steps.1.title',
-        helper: {
-          title: 'calculator.recipe.poolishDough.method.steps.1.helper.title',
-          descriptions: [
-            'calculator.recipe.poolishDough.method.steps.1.helper.descriptions.0',
-            'calculator.recipe.poolishDough.method.steps.1.helper.descriptions.1',
-          ],
-        },
+        helperDescriptions: 2,
       },
       {
         icon: this.WheatIcon,
-        label: 'calculator.recipe.poolishDough.method.steps.2.title',
-        helper: {
-          title: 'calculator.recipe.poolishDough.method.steps.2.helper.title',
-          descriptions: [
-            'calculator.recipe.poolishDough.method.steps.2.helper.descriptions.0',
-          ],
-        },
+        helperDescriptions: 1,
       },
       {
         icon: this.ArrowDownUpIcon,
-        label: 'calculator.recipe.poolishDough.method.steps.3.title',
-        helper: {
-          title: 'calculator.recipe.poolishDough.method.steps.3.helper.title',
-          descriptions: [
-            'calculator.recipe.poolishDough.method.steps.3.helper.descriptions.0',
-          ],
-        },
+        helperDescriptions: 1,
       },
       {
         icon: this.HandIcon,
-        label: 'calculator.recipe.poolishDough.method.steps.4.title',
-        helper: {
-          title: 'calculator.recipe.poolishDough.method.steps.4.helper.title',
-          descriptions: [
-            'calculator.recipe.poolishDough.method.steps.4.helper.descriptions.0',
-          ],
-        },
+        helperDescriptions: 1,
       },
       {
         icon: this.UndoDotIcon,
-        label: 'calculator.recipe.poolishDough.method.steps.5.title',
-        helper: {
-          title: 'calculator.recipe.poolishDough.method.steps.5.helper.title',
-          descriptions: [
-            'calculator.recipe.poolishDough.method.steps.5.helper.descriptions.0',
-            'calculator.recipe.poolishDough.method.steps.5.helper.descriptions.1',
-            'calculator.recipe.poolishDough.method.steps.5.helper.descriptions.2',
-            'calculator.recipe.poolishDough.method.steps.5.helper.descriptions.3',
-          ],
-        },
+        helperDescriptions: 4,
       },
       {
         icon: this.ThermometerSunIcon,
-        label: 'calculator.recipe.poolishDough.method.steps.6.title',
-        helper: {
-          title: 'calculator.recipe.poolishDough.method.steps.6.helper.title',
-          descriptions: [],
-        },
+        helperDescriptions: 0,
       },
       {
         icon: this.CircleIcon,
-        label: 'calculator.recipe.poolishDough.method.steps.7.title',
-        helper: {
-          title: 'calculator.recipe.poolishDough.method.steps.7.helper.title',
-          descriptions: [
-            'calculator.recipe.poolishDough.method.steps.7.helper.descriptions.0',
-            'calculator.recipe.poolishDough.method.steps.7.helper.descriptions.1',
-          ],
-        },
+        helperDescriptions: 2,
       },
       {
         icon: this.ThermometerSunIcon,
-        label: 'calculator.recipe.poolishDough.method.steps.8.title',
-        helper: {
-          title: 'calculator.recipe.poolishDough.method.steps.8.helper.title',
-          descriptions: [],
-        },
+        helperDescriptions: 0,
       },
       {
         icon: this.EclipseIcon,
-        label: 'calculator.recipe.poolishDough.method.steps.9.title',
-        helper: {
-          title: 'calculator.recipe.poolishDough.method.steps.9.helper.title',
-          descriptions: [
-            'calculator.recipe.poolishDough.method.steps.9.helper.descriptions.0',
-            'calculator.recipe.poolishDough.method.steps.9.helper.descriptions.1',
-            'calculator.recipe.poolishDough.method.steps.9.helper.descriptions.2',
-            'calculator.recipe.poolishDough.method.steps.9.helper.descriptions.3',
-            'calculator.recipe.poolishDough.method.steps.9.helper.descriptions.4',
-          ],
-        },
-        variables: {
-          pizzaWeight: this.result.pizzaWeight,
-        },
+        helperDescriptions: 5,
       },
       {
         icon: this.ThermometerSunIcon,
-        label: 'calculator.recipe.poolishDough.method.steps.10.title',
-        helper: {
-          title: 'calculator.recipe.poolishDough.method.steps.10.helper.title',
-          descriptions: [
-            'calculator.recipe.poolishDough.method.steps.10.helper.descriptions.0',
-            'calculator.recipe.poolishDough.method.steps.10.helper.descriptions.1',
-          ],
-        },
+        helperDescriptions: 2,
       },
     ],
   };
