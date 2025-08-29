@@ -330,6 +330,7 @@
       "saltRatio": "Ratio de sal",
       "honeyRatio": "Ratio de miel",
       "flourStrength": "Fuerza de la harina",
+      "hydrationRatio": "Ratio de hidratación",
       "all": "Activar todo"
     }
   }

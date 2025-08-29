@@ -323,14 +323,15 @@
     "poolish": "Poolish",
     "direct": "Direct"
   },
-  "settings": {
-    "visibility": {
-      "title": "Additional fields",
-      "pizzaWeight": "Dough ball weight",
-      "saltRatio": "Salt ratio",
-      "honeyRatio": "Honey ratio",
-      "flourStrength": "Flour strength",
-      "all": "Enable all"
+      "settings": {
+      "visibility": {
+        "title": "Additional fields",
+        "pizzaWeight": "Dough ball weight",
+        "saltRatio": "Salt ratio",
+        "honeyRatio": "Honey ratio",
+        "flourStrength": "Flour strength",
+        "hydrationRatio": "Hydration ratio",
+        "all": "Enable all"
+      }
     }
-  }
 }

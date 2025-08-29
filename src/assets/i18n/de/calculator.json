@@ -330,6 +330,7 @@
       "saltRatio": "Salzverhältnis",
       "honeyRatio": "Honigverhältnis",
       "flourStrength": "Mehlstärke",
+      "hydrationRatio": "Hydratationsverhältnis",
       "all": "Alle aktivieren"
     }
   }

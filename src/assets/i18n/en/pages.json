@@ -7,6 +7,18 @@
     },
     "settings": {
       "title": "Calculator configuration"
+    },
+    "simple": {
+      "title": "Basic calculator",
+      "description": "Calculate ingredient quantities based on a minimum of parameters"
+    },
+    "complex": {
+      "title": "Advanced calculator",
+      "description": "Calculate ingredient quantities based on a multitude of parameters (Temperature, Flour, Hydration, Yeast, etc.)"
+    },
+    "planner": {
+      "title": "Planner",
+      "description": "Plan for dough ready at a given date and time"
     }
   },
   "guides": {

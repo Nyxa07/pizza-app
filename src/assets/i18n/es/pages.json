@@ -7,6 +7,18 @@
     },
     "settings": {
       "title": "Configuración de la calculadora"
+    },
+    "simple": {
+      "title": "Calculadora básica",
+      "description": "Calcular las cantidades de ingredientes basándose en un mínimo de parámetros"
+    },
+    "complex": {
+      "title": "Calculadora avanzada",
+      "description": "Calcular las cantidades de ingredientes basándose en una multitud de parámetros (Temperatura, Harina, Hidratación, Levadura, etc.)"
+    },
+    "planner": {
+      "title": "Planificador",
+      "description": "Planificar para una masa lista en una fecha y hora determinadas"
     }
   },
   "guides": {

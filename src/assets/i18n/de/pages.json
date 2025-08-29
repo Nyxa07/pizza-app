@@ -7,6 +7,18 @@
     },
     "settings": {
       "title": "Rechnerkonfiguration"
+    },
+    "simple": {
+      "title": "Einfacher Rechner",
+      "description": "Berechnen Sie die Zutatenmengen basierend auf minimalen Parametern"
+    },
+    "complex": {
+      "title": "Erweiterter Rechner",
+      "description": "Berechnen Sie die Zutatenmengen basierend auf einer Vielzahl von Parametern (Temperatur, Mehl, Hydratation, Hefe, usw.)"
+    },
+    "planner": {
+      "title": "Planer",
+      "description": "Planen Sie für einen Teig, der zu einem bestimmten Datum und einer bestimmten Uhrzeit fertig ist"
     }
   },
   "guides": {

@@ -7,6 +7,18 @@
     },
     "settings": {
       "title": "Configurazione della calcolatrice"
+    },
+    "simple": {
+      "title": "Calcolatrice di base",
+      "description": "Calcolare le quantità degli ingredienti basandosi su un minimo di parametri"
+    },
+    "complex": {
+      "title": "Calcolatrice avanzata",
+      "description": "Calcolare le quantità degli ingredienti basandosi su una moltitudine di parametri (Temperatura, Farina, Idratazione, Lievito, ecc.)"
+    },
+    "planner": {
+      "title": "Pianificatore",
+      "description": "Pianificare per un impasto pronto in una data e ora specifiche"
     }
   },
   "guides": {
