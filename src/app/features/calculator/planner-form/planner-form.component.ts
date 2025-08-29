@@ -121,7 +121,7 @@ export class PlannerFormComponent implements OnInit {
             preparationDate: value.preparationDate,
             cookingDate: value.cookingDate,
           },
-          3600 * 1000, // 1 hour
+          24 * 3600 * 1000, // 24 hours
         );
 
         this.state.update({
