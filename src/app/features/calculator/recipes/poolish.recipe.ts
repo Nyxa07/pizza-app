@@ -57,12 +57,6 @@ export class PoolishRecipe implements IRecipe {
         label: 'common.ingredients.honey',
         unit: 'g',
       },
-      {
-        icon: SpotlightIcon,
-        value: this.quantity.salt,
-        label: 'common.ingredients.salt',
-        unit: 'g',
-      },
     ],
   };
 

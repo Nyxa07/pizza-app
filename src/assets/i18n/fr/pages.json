@@ -7,6 +7,18 @@
     },
     "settings": {
       "title": "Configuration calculateur"
+    },
+    "simple": {
+      "title": "Calculateur basique",
+      "description": "Calculer les quantités des ingrédients en fonction d'un minimum de paramètres"
+    },
+    "complex": {
+      "title": "Calculateur avancé",
+      "description": "Calculer les quantités des ingrédients en fonction d'une multitudes de paramètres (Témperature, Farine, Hydratation, Levure, etc.)"
+    },
+    "planner": {
+      "title": "Planificateur",
+      "description": "Planifier pour une pâte prête à une date et heure donnée"
     }
   },
   "guides": {

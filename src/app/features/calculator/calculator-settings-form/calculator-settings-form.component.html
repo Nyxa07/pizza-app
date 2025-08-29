@@ -47,4 +47,15 @@
       }}</ion-toggle
     >
   </ion-item>
+
+  <ion-item>
+    <i-lucide slot="start" [img]="BubblesIcon"></i-lucide>
+    <ion-toggle
+      formControlName="hydrationRatioVisibility"
+      justify="space-between"
+      >{{
+        "calculator.settings.visibility.hydrationRatio" | translate
+      }}</ion-toggle
+    >
+  </ion-item>
 </ion-list>

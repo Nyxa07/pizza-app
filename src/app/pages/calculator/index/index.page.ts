@@ -1,18 +1,20 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
   IonButtons,
   IonTitle,
   IonContent,
-  IonButton,
   IonBackButton,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
-import { CalculatorFormComponent } from 'src/app/features/calculator/calculator-form/calculator-form.component';
-import { RouterLink } from '@angular/router';
-import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
-import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
+import { Router, RouterLink } from '@angular/router';
+import { LucideAngularModule } from 'lucide-angular';
+import { CalculatorStateService } from 'src/app/features/calculator/services/calculator-state.service';
 
 @Component({
   selector: 'calculator-index-page',
@@ -24,15 +26,43 @@ import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
     IonButtons,
     IonTitle,
     TranslatePipe,
-    CalculatorFormComponent,
     IonContent,
-    IonButton,
     IonBackButton,
-    CalculatorRefreshButtonComponent,
-    RouterLink,
     LucideAngularModule,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
   ],
 })
 export class CalculatorIndexPage {
-  readonly SettingsIcon = SettingsIcon;
+  constructor(
+    private router: Router,
+    private calculatorState: CalculatorStateService,
+  ) {}
+  protected readonly items = [
+    {
+      title: 'pages.calculator.simple.title',
+      description: 'pages.calculator.simple.description',
+      action: () => {
+        this.calculatorState.setSimpleMode();
+        this.router.navigate(['/tabs/calculator/simple']);
+      },
+    },
+    {
+      title: 'pages.calculator.complex.title',
+      description: 'pages.calculator.complex.description',
+      action: () => {
+        this.calculatorState.setComplexMode();
+        this.router.navigate(['/tabs/calculator/complex']);
+      },
+    },
+    {
+      title: 'pages.calculator.planner.title',
+      description: 'pages.calculator.planner.description',
+      action: () => {
+        this.router.navigate(['/tabs/calculator/planner']);
+      },
+    },
+  ];
 }

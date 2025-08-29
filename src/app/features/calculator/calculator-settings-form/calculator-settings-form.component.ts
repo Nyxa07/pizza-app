@@ -16,6 +16,7 @@ import {
   HandFistIcon,
   LucideAngularModule,
   SpotlightIcon,
+  BubblesIcon,
 } from 'lucide-angular';
 
 @Component({
@@ -40,12 +41,18 @@ export class CalculatorSettingsFormComponent implements OnInit {
   readonly CandyCaneIcon = CandyCaneIcon;
   readonly HandFistIcon = HandFistIcon;
   readonly CheckCheckIcon = CheckCheckIcon;
+  readonly BubblesIcon = BubblesIcon;
   form = this.fb.group({
-    pizzaWeightVisibility: [this.calculatorState.getVisibility('pizzaWeight')],
-    saltRatioVisibility: [this.calculatorState.getVisibility('saltRatio')],
-    honeyRatioVisibility: [this.calculatorState.getVisibility('honeyRatio')],
+    pizzaWeightVisibility: [
+      !this.calculatorState.getAutoCompute('pizzaWeight'),
+    ],
+    saltRatioVisibility: [!this.calculatorState.getAutoCompute('saltRatio')],
+    honeyRatioVisibility: [!this.calculatorState.getAutoCompute('honeyRatio')],
     flourStrengthVisibility: [
-      this.calculatorState.getVisibility('flourStrength'),
+      !this.calculatorState.getAutoCompute('flourStrength'),
+    ],
+    hydrationRatioVisibility: [
+      !this.calculatorState.getAutoCompute('hydrationRatio'),
     ],
   });
 
@@ -67,11 +74,12 @@ export class CalculatorSettingsFormComponent implements OnInit {
     this.form.valueChanges
       .pipe(takeUntilDestroyed())
       .subscribe((value: any) => {
-        this.calculatorState.updateVisibility({
-          pizzaWeight: value.pizzaWeightVisibility ?? false,
-          saltRatio: value.saltRatioVisibility ?? false,
-          honeyRatio: value.honeyRatioVisibility ?? false,
-          flourStrength: value.flourStrengthVisibility ?? false,
+        this.calculatorState.updateAutoCompute({
+          pizzaWeight: !value.pizzaWeightVisibility,
+          saltRatio: !value.saltRatioVisibility,
+          honeyRatio: !value.honeyRatioVisibility,
+          flourStrength: !value.flourStrengthVisibility,
+          hydrationRatio: !value.hydrationRatioVisibility,
         });
       });
   }
@@ -82,6 +90,7 @@ export class CalculatorSettingsFormComponent implements OnInit {
       saltRatioVisibility: event.detail.checked,
       honeyRatioVisibility: event.detail.checked,
       flourStrengthVisibility: event.detail.checked,
+      hydrationRatioVisibility: event.detail.checked,
     });
   }
 

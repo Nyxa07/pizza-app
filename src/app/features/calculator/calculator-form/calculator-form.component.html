@@ -152,16 +152,6 @@
           formControlName="hydrationRatio"
           [cancelText]="'common.actions.cancel' | translate"
           [okText]="'common.actions.ok' | translate"
-          [helperText]="
-            'calculator.form.hydrationHelperText'
-              | translate
-                : {
-                    minHydration:
-                      recommendedHydration().minHydration | number: '1.0-0',
-                    maxHydration:
-                      recommendedHydration().maxHydration | number: '1.0-0',
-                  }
-          "
         >
           @for (
             hydrationRatio of range(0.55, 0.8, 0.01, 2);

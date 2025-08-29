@@ -1,0 +1,30 @@
+<ion-header [translucent]="false">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ "pages.calculator.simple.title" | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <app-calculator-refresh-button></app-calculator-refresh-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large"
+        >{{ "pages.calculator.simple.title" | translate }}</ion-title
+      >
+    </ion-toolbar>
+  </ion-header>
+  <app-calculator-form></app-calculator-form>
+  <ion-button
+    class="ion-margin-top"
+    expand="block"
+    color="primary"
+    [routerLink]="['/tabs/calculator/results']"
+  >
+    {{ "pages.calculator.compute" | translate }}
+  </ion-button>
+</ion-content>

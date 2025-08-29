@@ -7,6 +7,21 @@ export const CALCULATOR_ROUTES: Route[] = [
       import('./index/index.page').then((m) => m.CalculatorIndexPage),
   },
   {
+    path: 'simple',
+    loadComponent: () =>
+      import('./simple/simple.page').then((m) => m.CalculatorSimplePage),
+  },
+  {
+    path: 'complex',
+    loadComponent: () =>
+      import('./complex/complex.page').then((m) => m.CalculatorComplexPage),
+  },
+  {
+    path: 'planner',
+    loadComponent: () =>
+      import('./planner/planner.page').then((m) => m.CalculatorPlannerPage),
+  },
+  {
     path: 'results',
     loadComponent: () =>
       import('./results/results.page').then((m) => m.CalculatorResultsPage),

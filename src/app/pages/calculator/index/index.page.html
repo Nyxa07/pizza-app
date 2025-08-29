@@ -4,12 +4,6 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>{{ "pages.calculator.title" | translate }}</ion-title>
-    <ion-buttons slot="end">
-      <app-calculator-refresh-button></app-calculator-refresh-button>
-      <ion-button [routerLink]="['/tabs/calculator/settings']">
-        <i-lucide slot="icon-only" [img]="SettingsIcon"></i-lucide>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -21,13 +15,12 @@
       >
     </ion-toolbar>
   </ion-header>
-  <app-calculator-form></app-calculator-form>
-  <ion-button
-    class="ion-margin-top"
-    expand="block"
-    color="primary"
-    [routerLink]="['/tabs/calculator/results']"
-  >
-    {{ "pages.calculator.compute" | translate }}
-  </ion-button>
+  @for (item of items; track item.title) {
+  <ion-card (click)="item.action()">
+    <ion-card-header>
+      <ion-card-title>{{ item.title | translate }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content> {{ item.description | translate }} </ion-card-content>
+  </ion-card>
+  }
 </ion-content>

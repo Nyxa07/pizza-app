@@ -58,19 +58,6 @@ export class PoolishDoughRecipe implements IRecipe {
         unit: 'g',
       },
       {
-        icon: BeerIcon,
-        value: this.quantity.yeast,
-        label: 'common.ingredients.yeast',
-        unit: 'g',
-        numberFormat: '1.0-2',
-      },
-      {
-        icon: CandyCaneIcon,
-        value: this.quantity.honey,
-        label: 'common.ingredients.honey',
-        unit: 'g',
-      },
-      {
         icon: SpotlightIcon,
         value: this.quantity.salt,
         label: 'common.ingredients.salt',

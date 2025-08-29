@@ -5,6 +5,7 @@ import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { CalculatorService } from './calculator.service';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
+import { HydrationService } from './hydration.service';
 
 export interface CalculatorInput {
   nbPizzas: number;
@@ -21,7 +22,7 @@ export interface CalculatorInput {
   pizzaWeight: number;
 }
 
-export interface InputsVisibility {
+export interface InputsAutoCompute {
   nbPizzas: boolean;
   doughType: boolean;
   yeastType: boolean;
@@ -51,37 +52,45 @@ export const DEFAULT_INPUT: CalculatorInput = {
   pizzaWeight: 250,
 };
 
-export const DEFAULT_POOLISH_INPUT: CalculatorInput = {
-  ...DEFAULT_INPUT,
-  doughType: DoughType.POOLISH,
-  coldRestTime: 24,
-  rtRestTime: 1,
+export const AUTO_COMPUTE_COMPLEX_INPUTS: InputsAutoCompute = {
+  nbPizzas: false,
+  doughType: false,
+  yeastType: false,
+  hydrationRatio: false,
+  temperature: false,
+  rtRestTime: false,
+  coldRestTime: false,
+  poolishRatio: true,
+  flourStrength: true,
+  saltRatio: true,
+  honeyRatio: true,
+  pizzaWeight: false,
 };
 
-export const DEFAULT_VISIBILITY: InputsVisibility = {
-  nbPizzas: true,
+export const AUTO_COMPUTE_SIMPLE_INPUTS: InputsAutoCompute = {
+  nbPizzas: false,
+  rtRestTime: false,
+  saltRatio: true,
+  honeyRatio: true,
+  poolishRatio: true,
   doughType: true,
-  yeastType: true,
+  yeastType: false,
   hydrationRatio: true,
-  temperature: true,
-  rtRestTime: true,
+  temperature: false,
   coldRestTime: true,
-  poolishRatio: false,
-  flourStrength: false,
-  saltRatio: false,
-  honeyRatio: false,
+  flourStrength: true,
   pizzaWeight: true,
 };
 
 @Injectable({ providedIn: 'root' })
 export class CalculatorStateService {
   private readonly STORAGE_KEY = 'calculator';
-  private readonly STORAGE_KEY_VISIBILITY = this.STORAGE_KEY + ':visibility';
+  private readonly STORAGE_KEY_AUTO_COMPUTE = this.STORAGE_KEY + ':autoCompute';
   private readonly _input = new BehaviorSubject<CalculatorInput>(
     this.loadFromStorage() ?? DEFAULT_INPUT,
   );
-  private readonly _visibility = new BehaviorSubject<InputsVisibility>(
-    this.loadVisibilityFromStorage() ?? DEFAULT_VISIBILITY,
+  private readonly _autoCompute = new BehaviorSubject<InputsAutoCompute>(
+    this.loadAutoComputeFromStorage() ?? AUTO_COMPUTE_COMPLEX_INPUTS,
   );
 
   readonly input$ = this._input.asObservable();
@@ -89,21 +98,29 @@ export class CalculatorStateService {
     map((i) => this.calculator.compute(i)),
     shareReplay({ refCount: true, bufferSize: 1 }),
   );
-  readonly visibility$ = this._visibility.asObservable();
+  readonly autoCompute$ = this._autoCompute.asObservable();
 
   constructor(
     private calculator: CalculatorService,
     private prefs: PrefsStorage,
+    private hydrationService: HydrationService,
   ) {}
 
-  getVisibility(key: keyof InputsVisibility): boolean {
-    return this._visibility.value[key] ?? false;
+  setSimpleMode(): void {
+    this.updateAutoCompute(AUTO_COMPUTE_SIMPLE_INPUTS);
+    this.reset();
+  }
+
+  setComplexMode(): void {
+    this.updateAutoCompute(AUTO_COMPUTE_COMPLEX_INPUTS);
+    this.reset();
+  }
+
+  getAutoCompute(key: keyof InputsAutoCompute): boolean {
+    return this._autoCompute.value[key] ?? false;
   }
 
   update(input: CalculatorInput): void {
-    // Before changine _input
-    input = this.beforeUpdateInput(input);
-
     this._input.next(input);
     this.prefs.set(this.STORAGE_KEY, input);
 
@@ -111,63 +128,55 @@ export class CalculatorStateService {
     this.afterUpdateInput(input);
   }
 
-  private beforeUpdateInput(input: CalculatorInput): CalculatorInput {
-    const doughTypeChanged = input.doughType !== this._input.value.doughType;
-    if (doughTypeChanged && input.doughType === DoughType.POOLISH) {
-      input = {
-        ...input,
-        coldRestTime: DEFAULT_POOLISH_INPUT.coldRestTime,
-        rtRestTime: DEFAULT_POOLISH_INPUT.rtRestTime,
-      };
-    }
-    if (doughTypeChanged && input.doughType === DoughType.DIRECT) {
-      input = {
-        ...input,
-        coldRestTime: DEFAULT_INPUT.coldRestTime,
-        rtRestTime: DEFAULT_INPUT.rtRestTime,
-      };
-    }
-    return input;
-  }
-
   private afterUpdateInput(input: CalculatorInput): void {
     if (input.doughType === DoughType.DIRECT) {
-      this.updateVisibility({ poolishRatio: false });
+      this.updateAutoCompute({ poolishRatio: true });
     } else {
-      this.updateVisibility({ poolishRatio: true });
+      this.updateAutoCompute({ poolishRatio: false });
     }
   }
 
-  updateVisibility(visibility: Partial<InputsVisibility>): void {
-    const currentVisibility = this._visibility.value;
-    const newVisibility: InputsVisibility = {
-      ...currentVisibility,
-      ...visibility,
+  updateAutoCompute(autoCompute: Partial<InputsAutoCompute>): void {
+    const currentAutoCompute = this._autoCompute.value;
+    const newAutoCompute: InputsAutoCompute = {
+      ...currentAutoCompute,
+      ...autoCompute,
     };
 
-    // When the visibility of a field changes, ensure its value is reset to the default
-    const currentInput = this._input.value;
-    let patchedInput: CalculatorInput = { ...currentInput };
+    this._autoCompute.next(newAutoCompute);
+    this.prefs.set(this.STORAGE_KEY_AUTO_COMPUTE, newAutoCompute);
+    this.computeAutoComputedInputs();
+  }
 
-    (Object.keys(visibility) as (keyof InputsVisibility)[])
-      .filter((key) => !visibility[key]) // Only reset fields that are made hidden
-      .forEach((key) => {
-        // Keys of InputsVisibility and DoughInput are aligned by design
-        const inputKey = key as keyof CalculatorInput;
-        if (inputKey in DEFAULT_INPUT) {
-          patchedInput = {
-            ...patchedInput,
-            [inputKey]: DEFAULT_INPUT[inputKey],
-          } as CalculatorInput;
-        }
-      });
+  private computeAutoComputedInputs(): void {
+    const input = this._input.value;
+    const autoCompute = this._autoCompute.value;
 
-    // Persist updated input and visibility states
-    this._input.next(patchedInput);
-    this.prefs.set(this.STORAGE_KEY, patchedInput);
+    if (autoCompute.flourStrength) {
+      input.flourStrength = DEFAULT_INPUT.flourStrength;
+    }
 
-    this._visibility.next(newVisibility);
-    this.prefs.set(this.STORAGE_KEY_VISIBILITY, newVisibility);
+    if (autoCompute.honeyRatio) {
+      input.honeyRatio = DEFAULT_INPUT.honeyRatio;
+    }
+
+    if (autoCompute.saltRatio) {
+      input.saltRatio = DEFAULT_INPUT.saltRatio;
+    }
+
+    if (autoCompute.pizzaWeight) {
+      input.pizzaWeight = DEFAULT_INPUT.pizzaWeight;
+    }
+
+    if (autoCompute.hydrationRatio) {
+      input.hydrationRatio =
+        Math.round(
+          this.hydrationService.compute(input.flourStrength).minHydration * 100,
+        ) / 100;
+    }
+
+    this._input.next(input);
+    this.prefs.set(this.STORAGE_KEY, input);
   }
 
   reset(): void {
@@ -178,7 +187,7 @@ export class CalculatorStateService {
     return this.prefs.get<CalculatorInput>(this.STORAGE_KEY);
   }
 
-  private loadVisibilityFromStorage(): InputsVisibility | null {
-    return this.prefs.get<InputsVisibility>(this.STORAGE_KEY_VISIBILITY);
+  private loadAutoComputeFromStorage(): InputsAutoCompute | null {
+    return this.prefs.get<InputsAutoCompute>(this.STORAGE_KEY_AUTO_COMPUTE);
   }
 }
