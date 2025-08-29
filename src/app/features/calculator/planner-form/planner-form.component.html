@@ -1,0 +1,37 @@
+<form [formGroup]="form">
+  <ion-list-header>
+    {{ "planner.form.titles.preparationDate" | translate }}
+  </ion-list-header>
+  <ion-list lines="none">
+    <ion-item>
+      <ion-datetime-button datetime="preparationDate"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime
+            formControlName="preparationDate"
+            id="preparationDate"
+          ></ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
+  </ion-list>
+
+  <ion-list-header>
+    {{ "planner.form.titles.cookingDate" | translate }}
+  </ion-list-header>
+  <ion-list lines="none">
+    <ion-item>
+      <ion-datetime-button datetime="cookingDate"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime
+            formControlName="cookingDate"
+            id="cookingDate"
+          ></ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
+  </ion-list>
+
+  <!-- <app-calculator-form></app-calculator-form> -->
+</form>

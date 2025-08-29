@@ -74,6 +74,14 @@ export interface DoughConstants {
     /** Hard upper bound */
     maxHydration: number;
   };
+
+  /** Parameters for pizza balls rest time */
+  pizzaBallsRestTime: {
+    minTemperature: number;
+    maxTemperature: number;
+    minRestTime: number;
+    maxRestTime: number;
+  };
 }
 
 export const DEFAULT_DOUGH_CONSTANTS: DoughConstants = {
@@ -118,6 +126,13 @@ export const DEFAULT_DOUGH_CONSTANTS: DoughConstants = {
     slope: 0.0007,
     minHydration: 0.55,
     maxHydration: 0.8,
+  },
+
+  pizzaBallsRestTime: {
+    minTemperature: 19,
+    maxTemperature: 25,
+    minRestTime: 1,
+    maxRestTime: 3,
   },
 } as const;
 

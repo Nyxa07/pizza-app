@@ -3,6 +3,7 @@ import { YeastService } from 'src/app/features/calculator/services/yeast.service
 import { DoughType } from '../enums/dough-type.enum';
 import { CalculatorInput } from './calculator-state.service';
 import { CalculatorConfigService } from './calculator-config.service';
+import { DEFAULT_DOUGH_CONSTANTS } from '../dough.constants';
 
 export interface Quantity {
   yeast: number;
@@ -18,6 +19,7 @@ export interface DoughResult {
   total: Quantity;
   poolish: Quantity | null;
   dough: Quantity;
+  pizzaBalls: { rtRestTime: number };
   pizzaWeight: number;
 }
 
@@ -35,6 +37,23 @@ export class CalculatorService {
   // Water in the poolish equals that flour weight (100 % hydration).
   private computePoolishQuantity(ratio: number, totalFlourAndWater: number) {
     return ratio * totalFlourAndWater; // no rounding here
+  }
+
+  private computePizzaBallsRestTime(data: CalculatorInput): number {
+    // Linear interpolation between 1 hour at 19°C and 3 hours at 25°C
+    const minTemp = DEFAULT_DOUGH_CONSTANTS.pizzaBallsRestTime.minTemperature;
+    const maxTemp = DEFAULT_DOUGH_CONSTANTS.pizzaBallsRestTime.maxTemperature;
+    const minHours = DEFAULT_DOUGH_CONSTANTS.pizzaBallsRestTime.minRestTime;
+    const maxHours = DEFAULT_DOUGH_CONSTANTS.pizzaBallsRestTime.maxRestTime;
+
+    // Clamp temperature to the range [19, 25]
+    const temperature = Math.max(minTemp, Math.min(data.temperature, maxTemp));
+
+    // Linear interpolation: y = mx + b
+    const slope = (maxHours - minHours) / (maxTemp - minTemp);
+    const restTime = minHours + slope * (temperature - minTemp);
+
+    return restTime;
   }
 
   compute(data: CalculatorInput): DoughResult {
@@ -118,6 +137,9 @@ export class CalculatorService {
         coldRestTime: data.coldRestTime,
         rtRestTime: data.rtRestTime,
         honey: honey,
+      },
+      pizzaBalls: {
+        rtRestTime: this.computePizzaBallsRestTime(data),
       },
       pizzaWeight: data.pizzaWeight,
     };

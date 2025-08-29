@@ -8,6 +8,7 @@ import {
   IonBackButton,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
+import { PlannerFormComponent } from 'src/app/features/calculator/planner-form/planner-form.component';
 
 @Component({
   selector: 'calculator-planner-page',
@@ -22,6 +23,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     TranslatePipe,
     IonButtons,
     IonBackButton,
+    PlannerFormComponent,
   ],
 })
 export class CalculatorPlannerPage implements OnInit {
