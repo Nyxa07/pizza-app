@@ -49,6 +49,7 @@ export class CalculatorSimplePage {
         hydrationRatio: true,
         pizzaWeight: true,
         doughType: true,
+        coldRestTime: true,
       },
     );
   }
