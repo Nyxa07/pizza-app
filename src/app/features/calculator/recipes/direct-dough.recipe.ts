@@ -91,7 +91,7 @@ export class DirectDoughRecipe implements IRecipeDef {
       },
       {
         icon: this.HandIcon,
-        helperDescriptions: 2,
+        helperDescriptions: 4,
       },
       {
         icon: this.CircleIcon,
@@ -99,7 +99,7 @@ export class DirectDoughRecipe implements IRecipeDef {
       },
       {
         icon: this.ThermometerSunIcon,
-        helperDescriptions: 1,
+        helperDescriptions: 2,
       },
       {
         icon: this.UndoDotIcon,
@@ -107,11 +107,11 @@ export class DirectDoughRecipe implements IRecipeDef {
       },
       {
         icon: this.ThermometerSunIcon,
-        helperDescriptions: 1,
+        helperDescriptions: 2,
       },
       {
         icon: this.ThermometerSnowflakeIcon,
-        helperDescriptions: 1,
+        helperDescriptions: 2,
       },
       {
         icon: this.EclipseIcon,

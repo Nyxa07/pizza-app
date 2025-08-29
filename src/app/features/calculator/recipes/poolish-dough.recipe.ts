@@ -87,11 +87,11 @@ export class PoolishDoughRecipe implements IRecipeDef {
       },
       {
         icon: this.ArrowDownUpIcon,
-        helperDescriptions: 1,
+        helperDescriptions: 2,
       },
       {
         icon: this.HandIcon,
-        helperDescriptions: 1,
+        helperDescriptions: 2,
       },
       {
         icon: this.UndoDotIcon,
@@ -99,7 +99,7 @@ export class PoolishDoughRecipe implements IRecipeDef {
       },
       {
         icon: this.ThermometerSunIcon,
-        helperDescriptions: 0,
+        helperDescriptions: 2,
       },
       {
         icon: this.CircleIcon,
