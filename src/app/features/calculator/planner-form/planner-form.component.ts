@@ -3,17 +3,16 @@ import {
   IonItem,
   IonList,
   IonListHeader,
-  IonRange,
   IonDatetime,
   IonDatetimeButton,
   IonModal,
-  IonLabel,
-  IonInput,
 } from '@ionic/angular/standalone';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
-import { CalculatorInput } from '../services/calculator-state.service';
+import { CalculatorStateService } from '../services/calculator-state.service';
 import { CalculatorFormComponent } from '../calculator-form/calculator-form.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RestTimeService } from '../services/rest-time.service';
 
 @Component({
   selector: 'app-planner-form',
@@ -29,8 +28,6 @@ import { CalculatorFormComponent } from '../calculator-form/calculator-form.comp
     IonDatetimeButton,
     IonModal,
     IonDatetime,
-    IonLabel,
-    IonInput,
     CalculatorFormComponent,
   ],
 })
@@ -61,20 +58,55 @@ export class PlannerFormComponent implements OnInit {
     return `${sign}${hours}:${minutes}`;
   }
 
-  constructor(private formBuilder: FormBuilder) {
-    this.form
-      .get('preparationDate')
-      ?.valueChanges.subscribe((value: string | null) => {
-        if (value) {
-          this.form
-            .get('cookingDate')
-            ?.setValue(
-              this.toLocalISOString(
-                new Date(new Date(value).getTime() + 4 * 60 * 60 * 1000),
-              ),
-            );
-        }
-      });
+  constructor(
+    private formBuilder: FormBuilder,
+    private state: CalculatorStateService,
+    private restTimeService: RestTimeService,
+  ) {
+    // this.form.get('preparationDate')?.valueChanges.subscribe((value) => {
+    //   this.form
+    //     .get('cookingDate')
+    //     ?.setValue(
+    //       this.toLocalISOString(
+    //         new Date(new Date(value ?? '').getTime() + 6 * 60 * 60 * 1000),
+    //       ),
+    //       { emitEvent: false },
+    //     );
+    // });
+
+    this.form.valueChanges.pipe(takeUntilDestroyed()).subscribe((value) => {
+      if (
+        new Date(value.preparationDate ?? '').getTime() >
+        new Date(value.cookingDate ?? '').getTime()
+      ) {
+        this.form.get('cookingDate')?.setErrors({
+          invalid: true,
+        });
+      } else {
+        this.form.get('cookingDate')?.setErrors(null);
+      }
+
+      if (
+        new Date(value.cookingDate ?? '').getTime() -
+          new Date(value.preparationDate ?? '').getTime() >
+        48 * 3600 * 1000
+      ) {
+        this.form.get('cookingDate')?.setErrors({
+          invalid: true,
+        });
+      } else {
+        this.form.get('cookingDate')?.setErrors(null);
+      }
+
+      if (this.form.valid) {
+        this.state.update({
+          preparationDate: new Date(value.preparationDate ?? '').getTime(),
+          cookingDate: new Date(value.cookingDate ?? '').getTime(),
+        });
+      }
+    });
+
+    this.form.updateValueAndValidity();
   }
 
   ngOnInit() {}

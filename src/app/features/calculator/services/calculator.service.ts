@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { YeastService } from 'src/app/features/calculator/services/yeast.service';
 import { DoughType } from '../enums/dough-type.enum';
 import { CalculatorInput } from './calculator-state.service';
-import { CalculatorConfigService } from './calculator-config.service';
-import { DEFAULT_DOUGH_CONSTANTS } from '../dough.constants';
 
 export interface Quantity {
   yeast: number;
@@ -27,33 +25,13 @@ export interface DoughResult {
   providedIn: 'root',
 })
 export class CalculatorService {
-  constructor(
-    private calculatorConfigService: CalculatorConfigService,
-    private yeastService: YeastService,
-  ) {}
+  constructor(private yeastService: YeastService) {}
 
   // Compute the flour (and water) weight used in the poolish.
   // Definition: `ratio` is the fraction of TOTAL FLOUR that will go into the poolish.
   // Water in the poolish equals that flour weight (100 % hydration).
   private computePoolishQuantity(ratio: number, totalFlourAndWater: number) {
     return ratio * totalFlourAndWater; // no rounding here
-  }
-
-  private computePizzaBallsRestTime(data: CalculatorInput): number {
-    // Linear interpolation between 1 hour at 19°C and 3 hours at 25°C
-    const minTemp = DEFAULT_DOUGH_CONSTANTS.pizzaBallsRestTime.minTemperature;
-    const maxTemp = DEFAULT_DOUGH_CONSTANTS.pizzaBallsRestTime.maxTemperature;
-    const minHours = DEFAULT_DOUGH_CONSTANTS.pizzaBallsRestTime.minRestTime;
-    const maxHours = DEFAULT_DOUGH_CONSTANTS.pizzaBallsRestTime.maxRestTime;
-
-    // Clamp temperature to the range [19, 25]
-    const temperature = Math.max(minTemp, Math.min(data.temperature, maxTemp));
-
-    // Linear interpolation: y = mx + b
-    const slope = (maxHours - minHours) / (maxTemp - minTemp);
-    const restTime = minHours + slope * (temperature - minTemp);
-
-    return restTime;
   }
 
   compute(data: CalculatorInput): DoughResult {
@@ -81,14 +59,16 @@ export class CalculatorService {
     const waterPerDough = totalWater - poolishQuantity;
     const honey = data.honeyRatio * totalFlour;
 
+    const pizzaBallsRestTime = data.pizzaBallsRestTime ?? 0;
+
     const yeast =
       data.doughType === DoughType.POOLISH
         ? this.yeastService.yeastForPoolish(
             data.temperature,
             data.yeastType,
             poolishQuantity,
-            data.rtRestTime,
-            data.coldRestTime,
+            data.rtRestTime ?? 0,
+            data.coldRestTime ?? 0,
             honey,
             data.flourStrength,
           )
@@ -99,8 +79,8 @@ export class CalculatorService {
             hydration,
             honey,
             salt,
-            data.rtRestTime,
-            data.coldRestTime,
+            data.rtRestTime ?? 0,
+            data.coldRestTime ?? 0,
             data.flourStrength,
           );
 
@@ -112,8 +92,8 @@ export class CalculatorService {
         water: totalWater,
         yeast: yeastValue,
         salt: salt,
-        coldRestTime: data.coldRestTime,
-        rtRestTime: data.rtRestTime,
+        coldRestTime: data.coldRestTime ?? 0,
+        rtRestTime: data.rtRestTime ?? 0,
         honey: honey,
       },
 
@@ -123,8 +103,8 @@ export class CalculatorService {
             water: poolishQuantity,
             yeast: yeastValue,
             salt: 0,
-            coldRestTime: data.coldRestTime,
-            rtRestTime: data.rtRestTime,
+            coldRestTime: data.coldRestTime ?? 0,
+            rtRestTime: data.rtRestTime ?? 0,
             honey: honey,
           }
         : null,
@@ -134,12 +114,12 @@ export class CalculatorService {
         flour: flourPerDough,
         water: waterPerDough,
         salt: salt,
-        coldRestTime: data.coldRestTime,
-        rtRestTime: data.rtRestTime,
+        coldRestTime: data.coldRestTime ?? 0,
+        rtRestTime: data.rtRestTime ?? 0,
         honey: honey,
       },
       pizzaBalls: {
-        rtRestTime: this.computePizzaBallsRestTime(data),
+        rtRestTime: pizzaBallsRestTime,
       },
       pizzaWeight: data.pizzaWeight,
     };

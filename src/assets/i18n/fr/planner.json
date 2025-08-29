@@ -1,7 +1,9 @@
 {
   "form": {
     "titles": {
-      "date": "Date à laquelle vous souhaitez commencer la cuisson"
+      "date": "Date à laquelle vous souhaitez commencer la cuisson",
+      "preparationDate": "Date de préparation",
+      "cookingDate": "Date de cuisson"
     }
   }
 }

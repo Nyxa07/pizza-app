@@ -76,8 +76,8 @@ export class DirectDoughRecipe implements IRecipeDef {
 
   method = {
     variables: {
-      rtRestTime: this.result.dough?.rtRestTime,
-      coldRestTime: this.result.dough?.coldRestTime,
+      rtRestTime: Math.round(this.result.dough?.rtRestTime ?? 0),
+      coldRestTime: Math.round(this.result.dough?.coldRestTime ?? 0),
       pizzaWeight: this.result.pizzaWeight,
     },
     items: [
@@ -120,6 +120,9 @@ export class DirectDoughRecipe implements IRecipeDef {
       {
         icon: this.ThermometerSunIcon,
         helperDescriptions: 2,
+        variables: {
+          rtRestTime: Math.round(this.result.pizzaBalls.rtRestTime),
+        },
       },
     ],
   };
