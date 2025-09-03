@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.pizzamaker.app;
 
 import com.getcapacitor.BridgeActivity;
 
