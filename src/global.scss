@@ -50,3 +50,17 @@
     border-radius: 0.6rem !important;
   }
 }
+
+.loading-skeleton {
+  ion-item {
+    --background: transparent;
+    --border-style: none;
+    --padding-start: 0;
+    margin-bottom: 1rem;
+  }
+
+  ion-skeleton-text {
+    height: 1.6rem;
+    border-radius: 0.25rem;
+  }
+}

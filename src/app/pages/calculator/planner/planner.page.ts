@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import {
   IonContent,
   IonHeader,
@@ -7,6 +7,8 @@ import {
   IonToolbar,
   IonBackButton,
   IonButton,
+  IonItem,
+  IonSkeletonText,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PlannerFormComponent } from 'src/app/features/calculator/planner-form/planner-form.component';
@@ -14,6 +16,7 @@ import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/ca
 import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
 import { CalculatorStateService } from 'src/app/features/calculator/services/calculator-state.service';
+import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 
 @Component({
   selector: 'calculator-planner-page',
@@ -33,20 +36,30 @@ import { CalculatorStateService } from 'src/app/features/calculator/services/cal
     IonButton,
     LucideAngularModule,
     RouterLink,
+    IonItem,
+    IonSkeletonText,
   ],
 })
-export class CalculatorPlannerPage {
+export class CalculatorPlannerPage implements OnInit {
   readonly SettingsIcon = SettingsIcon;
-  constructor(calculatorState: CalculatorStateService) {
-    calculatorState.init(
-      'planner',
-      {},
-      {
-        rtRestTime: true,
-        coldRestTime: true,
-        preparationDate: false,
-        cookingDate: false,
-      },
-    );
+  protected isInitialized = signal(false);
+
+  constructor(private calculatorState: CalculatorStateService) {}
+
+  ngOnInit() {
+    // Defer initialization to avoid blocking constructor
+    idleCallback(() => {
+      this.calculatorState.init(
+        'planner',
+        {},
+        {
+          rtRestTime: true,
+          coldRestTime: true,
+          preparationDate: false,
+          cookingDate: false,
+        },
+      );
+      this.isInitialized.set(true);
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -7,6 +7,8 @@ import {
   IonContent,
   IonButton,
   IonBackButton,
+  IonItem,
+  IonSkeletonText,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CalculatorFormComponent } from 'src/app/features/calculator/calculator-form/calculator-form.component';
@@ -14,7 +16,7 @@ import { RouterLink } from '@angular/router';
 import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
 import { LucideAngularModule } from 'lucide-angular';
 import { CalculatorStateService } from 'src/app/features/calculator/services/calculator-state.service';
-import { DoughType } from 'src/app/features/calculator/enums/dough-type.enum';
+import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 
 @Component({
   selector: 'calculator-simple-page',
@@ -34,23 +36,23 @@ import { DoughType } from 'src/app/features/calculator/enums/dough-type.enum';
     CalculatorRefreshButtonComponent,
     RouterLink,
     LucideAngularModule,
+    IonItem,
+    IonSkeletonText,
+    IonButton,
+    RouterLink,
+    CalculatorFormComponent,
+    CalculatorRefreshButtonComponent,
   ],
 })
-export class CalculatorSimplePage {
-  constructor(private calculatorState: CalculatorStateService) {
-    this.calculatorState.init(
-      'simple',
-      {
-        doughType: DoughType.DIRECT,
-        rtRestTime: 4,
-        coldRestTime: 0,
-      },
-      {
-        hydrationRatio: true,
-        pizzaWeight: true,
-        doughType: true,
-        coldRestTime: true,
-      },
-    );
+export class CalculatorSimplePage implements OnInit {
+  protected isInitialized = signal(false);
+
+  constructor(private calculatorState: CalculatorStateService) {}
+
+  ngOnInit() {
+    idleCallback(() => {
+      this.calculatorState.init('simple', {});
+      this.isInitialized.set(true);
+    });
   }
 }

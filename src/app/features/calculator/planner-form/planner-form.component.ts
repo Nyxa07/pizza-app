@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
   IonItem,
   IonList,
@@ -18,12 +18,14 @@ import { CalculatorStateService } from '../services/calculator-state.service';
 import { CalculatorFormComponent } from '../calculator-form/calculator-form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-planner-form',
   templateUrl: './planner-form.component.html',
   styleUrls: ['./planner-form.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     IonListHeader,
     IonList,
@@ -90,46 +92,50 @@ export class PlannerFormComponent implements OnInit {
       this.form.patchValue(values);
     }
 
-    this.form.valueChanges.pipe(takeUntilDestroyed()).subscribe((value) => {
-      if (
-        new Date(value.preparationDate ?? '').getTime() >
-        new Date(value.cookingDate ?? '').getTime()
-      ) {
-        this.form.get('cookingDate')?.setErrors({
-          invalid: true,
-        });
-      } else {
+    this.form.valueChanges
+      .pipe(
+        debounceTime(300), // Debounce to avoid excessive calculations
+        takeUntilDestroyed(),
+      )
+      .subscribe((value) => {
+        // Cache date objects to avoid repeated parsing
+        const prepDate = new Date(value.preparationDate ?? '');
+        const cookDate = new Date(value.cookingDate ?? '');
+        const prepTime = prepDate.getTime();
+        const cookTime = cookDate.getTime();
+
+        // Validate preparation date is before cooking date
+        if (prepTime > cookTime) {
+          this.form.get('cookingDate')?.setErrors({ invalid: true });
+          return; // Early return to avoid further processing
+        }
+
+        // Validate cooking date is within 48 hours of preparation
+        if (cookTime - prepTime > 48 * 3600 * 1000) {
+          this.form.get('cookingDate')?.setErrors({ invalid: true });
+          return; // Early return to avoid further processing
+        }
+
+        // Clear errors if validation passes
         this.form.get('cookingDate')?.setErrors(null);
-      }
 
-      if (
-        new Date(value.cookingDate ?? '').getTime() -
-          new Date(value.preparationDate ?? '').getTime() >
-        48 * 3600 * 1000
-      ) {
-        this.form.get('cookingDate')?.setErrors({
-          invalid: true,
-        });
-      } else {
-        this.form.get('cookingDate')?.setErrors(null);
-      }
+        if (this.form.valid) {
+          // Use cached values instead of re-parsing
+          this.prefStorage.set(
+            'planner:form',
+            {
+              preparationDate: value.preparationDate,
+              cookingDate: value.cookingDate,
+            },
+            24 * 3600 * 1000, // 24 hours
+          );
 
-      if (this.form.valid) {
-        this.prefStorage.set(
-          'planner:form',
-          {
-            preparationDate: value.preparationDate,
-            cookingDate: value.cookingDate,
-          },
-          24 * 3600 * 1000, // 24 hours
-        );
-
-        this.state.update({
-          preparationDate: new Date(value.preparationDate ?? '').getTime(),
-          cookingDate: new Date(value.cookingDate ?? '').getTime(),
-        });
-      }
-    });
+          this.state.update({
+            preparationDate: prepTime,
+            cookingDate: cookTime,
+          });
+        }
+      });
 
     this.form.updateValueAndValidity();
   }

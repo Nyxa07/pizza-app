@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -7,6 +7,8 @@ import {
   IonContent,
   IonButton,
   IonBackButton,
+  IonItem,
+  IonSkeletonText,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CalculatorFormComponent } from 'src/app/features/calculator/calculator-form/calculator-form.component';
@@ -14,6 +16,7 @@ import { RouterLink } from '@angular/router';
 import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
 import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
 import { CalculatorStateService } from 'src/app/features/calculator/services/calculator-state.service';
+import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 
 @Component({
   selector: 'calculator-complex-page',
@@ -33,11 +36,24 @@ import { CalculatorStateService } from 'src/app/features/calculator/services/cal
     CalculatorRefreshButtonComponent,
     RouterLink,
     LucideAngularModule,
+    IonItem,
+    IonSkeletonText,
+    IonButton,
+    RouterLink,
+    CalculatorFormComponent,
+    CalculatorRefreshButtonComponent,
   ],
 })
-export class CalculatorComplexPage {
+export class CalculatorComplexPage implements OnInit {
   readonly SettingsIcon = SettingsIcon;
-  constructor(calculatorState: CalculatorStateService) {
-    calculatorState.init('complex', { rtRestTime: 16 });
+  protected isInitialized = signal(false);
+
+  constructor(private calculatorState: CalculatorStateService) {}
+
+  ngOnInit() {
+    idleCallback(() => {
+      this.calculatorState.init('complex', { rtRestTime: 16 });
+      this.isInitialized.set(true);
+    });
   }
 }

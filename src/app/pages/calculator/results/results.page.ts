@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import {
   IonContent,
@@ -7,6 +7,8 @@ import {
   IonToolbar,
   IonButtons,
   IonBackButton,
+  IonItem,
+  IonSkeletonText,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RecipeComponent } from 'src/app/features/recipe/recipe.component';
@@ -16,10 +18,12 @@ import { filter, map } from 'rxjs/operators';
 import { DirectDoughRecipe } from 'src/app/features/calculator/recipes/direct-dough.recipe';
 import { PoolishRecipe } from 'src/app/features/calculator/recipes/poolish.recipe';
 import { RecipeDefConverterService } from 'src/app/features/recipe/services/recipe-def-converter.service';
+import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 
 @Component({
   selector: 'calculator-results-page',
   templateUrl: './results.page.html',
+  styleUrls: ['./results.page.scss'],
   standalone: true,
   imports: [
     IonContent,
@@ -32,17 +36,24 @@ import { RecipeDefConverterService } from 'src/app/features/recipe/services/reci
     IonBackButton,
     AsyncPipe,
     RecipeComponent,
+    IonItem,
+    IonSkeletonText,
   ],
 })
 export class CalculatorResultsPage implements OnInit {
+  protected isInitialized = signal(false);
   protected poolishDoughRecipe$ = this.calculatorState.result$.pipe(
     filter((result) => !!result?.poolish),
-    map((result) => this.recipeDefConverter.convert(new PoolishDoughRecipe(result))),
+    map((result) =>
+      this.recipeDefConverter.convert(new PoolishDoughRecipe(result)),
+    ),
   );
 
   protected directDoughRecipe$ = this.calculatorState.result$.pipe(
     filter((result) => !!result?.dough),
-    map((result) => this.recipeDefConverter.convert(new DirectDoughRecipe(result))),
+    map((result) =>
+      this.recipeDefConverter.convert(new DirectDoughRecipe(result)),
+    ),
   );
 
   protected poolishRecipe$ = this.calculatorState.result$.pipe(
@@ -50,7 +61,14 @@ export class CalculatorResultsPage implements OnInit {
     map((result) => this.recipeDefConverter.convert(new PoolishRecipe(result))),
   );
 
-  constructor(private calculatorState: CalculatorStateService, private recipeDefConverter: RecipeDefConverterService) {}
+  constructor(
+    private calculatorState: CalculatorStateService,
+    private recipeDefConverter: RecipeDefConverterService,
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    idleCallback(() => {
+      this.isInitialized.set(true);
+    });
+  }
 }
