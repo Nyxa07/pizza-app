@@ -12,7 +12,7 @@ import {
 } from '@ionic/angular/standalone';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
-import { AsyncPipe, LowerCasePipe } from '@angular/common';
+import { AsyncPipe, JsonPipe, LowerCasePipe } from '@angular/common';
 import { debounceTime, map, tap } from 'rxjs';
 import {
   CalculatorStateService,

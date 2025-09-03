@@ -1,7 +1,3 @@
-@let poolishRecipe = poolishRecipe$ | async;
-@let poolishDoughRecipe = poolishDoughRecipe$ | async;
-@let directDoughRecipe = directDoughRecipe$ | async;
-
 <ion-header [translucent]="false">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
@@ -21,6 +17,9 @@
   </ion-header>
 
   @if (isInitialized()) {
+    @let poolishRecipe = poolishRecipe$ | async;
+    @let poolishDoughRecipe = poolishDoughRecipe$ | async;
+    @let directDoughRecipe = directDoughRecipe$ | async;
     @if (poolishRecipe && poolishDoughRecipe) {
       <app-recipe [recipe]="poolishRecipe"></app-recipe>
       <app-recipe [recipe]="poolishDoughRecipe"></app-recipe>
