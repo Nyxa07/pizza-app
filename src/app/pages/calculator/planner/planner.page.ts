@@ -51,7 +51,12 @@ export class CalculatorPlannerPage implements OnInit {
     idleCallback(() => {
       this.calculatorState.init(
         'planner',
-        {},
+        {
+          preparationDate: new Date().getTime(),
+          cookingDate: new Date(
+            new Date().getTime() + 4 * 60 * 60 * 1000,
+          ).getTime(),
+        },
         {
           rtRestTime: true,
           coldRestTime: true,
