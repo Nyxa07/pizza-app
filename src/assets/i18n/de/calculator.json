@@ -18,7 +18,15 @@
     "saltRatio": "Salzverhältnis",
     "honeyRatio": "Honigverhältnis",
     "pizzaWeight": "Teiglingsgewicht",
-    "hydrationHelperText": "Empfohlen für Mehlstärke (W): {minHydration}% - {maxHydration}%"
+    "hydrationHelperText": "Empfohlen für Mehlstärke (W): {minHydration}% - {maxHydration}%",
+    "infos": {
+      "title": "Zusätzliche Informationen",
+      "restTime": "Ruhezeit",
+      "ballsRestTime": "Ruhezeit der Teiglinge",
+      "totalPrepTime": "Gesamte Zubereitungszeit",
+      "totalPrepTimeDescription": "Dies berücksichtigt das Rezept",
+      "hoursUnit": "Stunden"
+    }
   },
   "recipe": {
     "poolish": {

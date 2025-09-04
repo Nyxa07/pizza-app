@@ -18,7 +18,15 @@
     "saltRatio": "Salt ratio",
     "honeyRatio": "Honey ratio",
     "pizzaWeight": "Dough ball weight",
-    "hydrationHelperText": "Recommended for flour strength (W): {minHydration}% - {maxHydration}%"
+    "hydrationHelperText": "Recommended for flour strength (W): {minHydration}% - {maxHydration}%",
+    "infos": {
+      "title": "Additional information",
+      "restTime": "Rest time",
+      "ballsRestTime": "Dough balls rest time",
+      "totalPrepTime": "Total preparation time",
+      "totalPrepTimeDescription": "This takes the recipe into account",
+      "hoursUnit": "hours"
+    }
   },
   "recipe": {
     "poolish": {

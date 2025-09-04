@@ -228,4 +228,40 @@
       </ion-item>
     }
   </ion-list>
+
+  <ion-list-header>{{
+    "calculator.form.infos.title" | translate
+  }}</ion-list-header>
+  <ion-list lines="none">
+    <ion-item>
+      <ion-label>{{ "calculator.form.infos.restTime" | translate }}</ion-label>
+      <ion-label slot="end"
+        >~{{ (doughAndPoolishRestTime$ | async) ?? 0 | number: "1.0-0" }}
+        {{ "calculator.form.infos.hoursUnit" | translate }}</ion-label
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>{{
+        "calculator.form.infos.ballsRestTime" | translate
+      }}</ion-label>
+      <ion-label slot="end"
+        >~{{ pizzaBallsRestTime$ | async | number: "1.0-0" }}
+        {{ "calculator.form.infos.hoursUnit" | translate }}</ion-label
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        {{ "calculator.form.infos.totalPrepTime" | translate }}
+        <p>
+          {{ "calculator.form.infos.totalPrepTimeDescription" | translate }}
+        </p>
+      </ion-label>
+      <ion-label slot="end"
+        >~{{ totalPrepTime$ | async | number: "1.0-0" }}
+        {{ "calculator.form.infos.hoursUnit" | translate }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </form>

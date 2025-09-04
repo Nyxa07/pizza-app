@@ -11,11 +11,13 @@ import {
   ThermometerSnowflakeIcon,
   CircleIcon,
   EclipseIcon,
+  CookingPotIcon,
 } from 'lucide-angular';
 import { DoughResult } from '../services/calculator.service';
 import { IRecipeDef } from '../../recipe/interfaces/recipe-def.interface';
 
 export class DirectDoughRecipe implements IRecipeDef {
+  readonly CookingPotIcon = CookingPotIcon;
   readonly WheatIcon = WheatIcon;
   readonly DropletsIcon = DropletsIcon;
   readonly BeerIcon = BeerIcon;
@@ -112,7 +114,12 @@ export class DirectDoughRecipe implements IRecipeDef {
       {
         icon: this.ThermometerSnowflakeIcon,
         helperDescriptions: 2,
-        hide: Math.round(this.result.dough?.coldRestTime ?? 0) === 0,
+        hide: !this.result.dough?.coldRestTime,
+      },
+      {
+        icon: this.CookingPotIcon,
+        helperDescriptions: 1,
+        hide: !this.result.dough?.coldRestTime,
       },
       {
         icon: this.EclipseIcon,

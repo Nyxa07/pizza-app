@@ -106,7 +106,7 @@ export class CalculatorService {
         yeast,
         salt: salt,
         coldRestTime: data.coldRestTime ?? 0,
-        rtRestTime: data.rtRestTime ?? 0,
+        rtRestTime: data.rtRestTime + pizzaBallsRestTime,
         honey: honey,
       },
 

@@ -18,7 +18,15 @@
     "saltRatio": "Ratio de sel",
     "honeyRatio": "Ratio de miel",
     "pizzaWeight": "Poids du pâton",
-    "hydrationHelperText": "Recommandée pour la force de la farine (W) : {minHydration}% - {maxHydration}%"
+    "hydrationHelperText": "Recommandée pour la force de la farine (W) : {minHydration}% - {maxHydration}%",
+    "infos": {
+      "title": "Informations complémentaires",
+      "restTime": "Temps repos",
+      "ballsRestTime": "Temps repos des pâtons",
+      "totalPrepTime": "Temps préparation total",
+      "totalPrepTimeDescription": "Cela tiens compte de la recette",
+      "hoursUnit": "heures"
+    }
   },
   "recipe": {
     "poolish": {
@@ -297,6 +305,16 @@
               "descriptions": [
                 "Le repos va permettre à la levure de s'activer, de créer un beau réseau de gluten et ainsi donner toute sa texture à la pâte",
                 "La pâte va se tendre et devenir plus lisse"
+              ]
+            }
+          },
+          {
+            "title": "Sortir la pâte 1 heure avant utilisation",
+            "description": "",
+            "helper": {
+              "title": "Sortir la pâte",
+              "descriptions": [
+                "Sortir la pâte 1 heure avant utilisation, pour qu'elle est le temps de revenir à température ambiante"
               ]
             }
           },

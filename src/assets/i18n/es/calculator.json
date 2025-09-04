@@ -18,7 +18,15 @@
     "saltRatio": "Ratio de sal",
     "honeyRatio": "Ratio de miel",
     "pizzaWeight": "Peso del bollo",
-    "hydrationHelperText": "Recomendado para la fuerza de la harina (W): {minHydration}% - {maxHydration}%"
+    "hydrationHelperText": "Recomendado para la fuerza de la harina (W): {minHydration}% - {maxHydration}%",
+    "infos": {
+      "title": "Información adicional",
+      "restTime": "Tiempo de reposo",
+      "ballsRestTime": "Tiempo de reposo de los bollos",
+      "totalPrepTime": "Tiempo total de preparación",
+      "totalPrepTimeDescription": "Esto tiene en cuenta la receta",
+      "hoursUnit": "horas"
+    }
   },
   "recipe": {
     "poolish": {

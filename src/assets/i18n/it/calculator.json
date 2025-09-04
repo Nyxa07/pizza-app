@@ -18,7 +18,15 @@
     "saltRatio": "Rapporto di sale",
     "honeyRatio": "Rapporto di miele",
     "pizzaWeight": "Peso del panetto",
-    "hydrationHelperText": "Consigliato per la forza della farina (W): {minHydration}% - {maxHydration}%"
+    "hydrationHelperText": "Consigliato per la forza della farina (W): {minHydration}% - {maxHydration}%",
+    "infos": {
+      "title": "Informazioni aggiuntive",
+      "restTime": "Tempo di riposo",
+      "ballsRestTime": "Tempo di riposo dei panetti",
+      "totalPrepTime": "Tempo totale di preparazione",
+      "totalPrepTimeDescription": "Questo tiene conto della ricetta",
+      "hoursUnit": "ore"
+    }
   },
   "recipe": {
     "poolish": {

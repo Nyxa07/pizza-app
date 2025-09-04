@@ -8,29 +8,18 @@ import {
   IonRange,
   IonListHeader,
   IonLabel,
-  IonButton,
 } from '@ionic/angular/standalone';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
 import { AsyncPipe, JsonPipe, LowerCasePipe } from '@angular/common';
-import {
-  combineLatest,
-  debounceTime,
-  map,
-  Observable,
-  startWith,
-  tap,
-} from 'rxjs';
+import { combineLatest, debounceTime, map, startWith } from 'rxjs';
 import {
   CalculatorStateService,
   CalculatorInput,
 } from '../services/calculator-state.service';
 import { DEFAULT_INPUT } from '../services/calculator-state.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
-import {
-  CalculatorSettingsService,
-  ICalculatorSettings,
-} from '../services/calculator-settings.service';
+import { CalculatorSettingsService } from '../services/calculator-settings.service';
 import { DoughType } from '../enums/dough-type.enum';
 
 @Component({
@@ -74,6 +63,30 @@ export class CalculatorFormComponent implements OnInit {
     map(
       ([doughType, settings]) =>
         doughType === DoughType.POOLISH && settings.poolishRatio.visible,
+    ),
+  );
+
+  protected pizzaBallsRestTime$ = this.state.result$.pipe(
+    map((result) => result.pizzaBalls.rtRestTime),
+  );
+
+  protected doughAndPoolishRestTime$ = this.state.result$.pipe(
+    map(
+      (result) =>
+        (result.poolish
+          ? result.poolish.rtRestTime + result.poolish.coldRestTime
+          : result.dough.rtRestTime + result.dough.coldRestTime) +
+        (result.total.coldRestTime > 0 ? 1 : 0),
+    ),
+  );
+
+  protected totalPrepTime$ = this.state.result$.pipe(
+    map(
+      (result) =>
+        result.total.rtRestTime +
+        result.total.coldRestTime +
+        1 +
+        (result.total.coldRestTime > 0 ? 1 : 0),
     ),
   );
 

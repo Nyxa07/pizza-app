@@ -76,6 +76,7 @@ export class PoolishDoughRecipe implements IRecipeDef {
       {
         icon: this.CookingPotIcon,
         helperDescriptions: 1,
+        hide: !this.result.poolish?.coldRestTime,
       },
       {
         icon: this.BubblesIcon,
