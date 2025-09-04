@@ -104,6 +104,7 @@ export class CalculatorSettingsFormComponent implements OnInit {
       honeyRatio: event.detail.checked,
       flourStrength: event.detail.checked,
       hydrationRatio: event.detail.checked,
+      poolishRatio: event.detail.checked,
     });
   }
 
