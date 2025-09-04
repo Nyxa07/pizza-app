@@ -59,6 +59,7 @@ export class CalculatorStateSaveManagerService {
     if (stateIndex !== -1) {
       savedStates.splice(stateIndex, 1);
     }
+    this.prefs.set(this.STORAGE_KEY + ':' + this.mode + ':states', savedStates);
   }
 
   listSavedStates(): { name: string; input: CalculatorInput }[] {
