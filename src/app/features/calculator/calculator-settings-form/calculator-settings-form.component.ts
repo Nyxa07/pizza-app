@@ -4,7 +4,6 @@ import { IonList } from '@ionic/angular/standalone';
 import { IonItem } from '@ionic/angular/standalone';
 import { IonToggle } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
-import { CalculatorStateService } from '../services/calculator-state.service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { map, startWith, tap } from 'rxjs';
@@ -17,7 +16,12 @@ import {
   LucideAngularModule,
   SpotlightIcon,
   BubblesIcon,
+  WavesIcon,
 } from 'lucide-angular';
+import {
+  CalculatorSettingsService,
+  ICalculatorSettings,
+} from '../services/calculator-settings.service';
 
 @Component({
   selector: 'app-calculator-settings-form',
@@ -42,55 +46,64 @@ export class CalculatorSettingsFormComponent implements OnInit {
   readonly HandFistIcon = HandFistIcon;
   readonly CheckCheckIcon = CheckCheckIcon;
   readonly BubblesIcon = BubblesIcon;
+  readonly WavesIcon = WavesIcon;
+
   form = this.fb.group({
-    pizzaWeightVisibility: [
-      !this.calculatorState.getAutoCompute('pizzaWeight'),
+    pizzaWeight: [this.settings.getSettings('complex').pizzaWeight.visible],
+    saltRatio: [this.settings.getSettings('complex').saltRatio.visible],
+    honeyRatio: [this.settings.getSettings('complex').honeyRatio.visible],
+    flourStrength: [this.settings.getSettings('complex').flourStrength.visible],
+    hydrationRatio: [
+      this.settings.getSettings('complex').hydrationRatio.visible,
     ],
-    saltRatioVisibility: [!this.calculatorState.getAutoCompute('saltRatio')],
-    honeyRatioVisibility: [!this.calculatorState.getAutoCompute('honeyRatio')],
-    flourStrengthVisibility: [
-      !this.calculatorState.getAutoCompute('flourStrength'),
-    ],
-    hydrationRatioVisibility: [
-      !this.calculatorState.getAutoCompute('hydrationRatio'),
-    ],
+    poolishRatio: [this.settings.getSettings('complex').poolishRatio.visible],
   });
 
   allVisibility$ = this.form.valueChanges.pipe(
     startWith(this.form.value),
     map(
       (value) =>
-        value.pizzaWeightVisibility &&
-        value.saltRatioVisibility &&
-        value.honeyRatioVisibility &&
-        value.flourStrengthVisibility,
+        value.pizzaWeight &&
+        value.saltRatio &&
+        value.honeyRatio &&
+        value.flourStrength &&
+        value.hydrationRatio &&
+        value.poolishRatio,
     ),
   );
 
   constructor(
-    private calculatorState: CalculatorStateService,
+    private settings: CalculatorSettingsService,
     private fb: FormBuilder,
   ) {
-    this.form.valueChanges
-      .pipe(takeUntilDestroyed())
-      .subscribe((value: any) => {
-        this.calculatorState.updateAutoCompute({
-          pizzaWeight: !value.pizzaWeightVisibility,
-          saltRatio: !value.saltRatioVisibility,
-          honeyRatio: !value.honeyRatioVisibility,
-          flourStrength: !value.flourStrengthVisibility,
-          hydrationRatio: !value.hydrationRatioVisibility,
-        });
+    this.form.valueChanges.pipe(takeUntilDestroyed()).subscribe((value) => {
+      this.settings.update('complex', {
+        pizzaWeight: { visible: !!value.pizzaWeight, auto: !value.pizzaWeight },
+        saltRatio: { visible: !!value.saltRatio, auto: !value.saltRatio },
+        honeyRatio: { visible: !!value.honeyRatio, auto: !value.honeyRatio },
+        flourStrength: {
+          visible: !!value.flourStrength,
+          auto: !value.flourStrength,
+        },
+        hydrationRatio: {
+          visible: !!value.hydrationRatio,
+          auto: !value.hydrationRatio,
+        },
+        poolishRatio: {
+          visible: !!value.poolishRatio,
+          auto: !value.poolishRatio,
+        },
       });
+    });
   }
 
   onAllVisibilityChange(event: any) {
     this.form.patchValue({
-      pizzaWeightVisibility: event.detail.checked,
-      saltRatioVisibility: event.detail.checked,
-      honeyRatioVisibility: event.detail.checked,
-      flourStrengthVisibility: event.detail.checked,
-      hydrationRatioVisibility: event.detail.checked,
+      pizzaWeight: event.detail.checked,
+      saltRatio: event.detail.checked,
+      honeyRatio: event.detail.checked,
+      flourStrength: event.detail.checked,
+      hydrationRatio: event.detail.checked,
     });
   }
 

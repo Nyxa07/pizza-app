@@ -15,10 +15,6 @@
     "complex": {
       "title": "Calculadora avanzada",
       "description": "Calcular las cantidades de ingredientes basándose en una multitud de parámetros (Temperatura, Harina, Hidratación, Levadura, etc.)"
-    },
-    "planner": {
-      "title": "Planificador",
-      "description": "Planificar para una masa lista en una fecha y hora determinadas"
     }
   },
   "guides": {
@@ -36,12 +32,12 @@
     "calculator": {
       "title": "Calculadora",
       "subtitle": "Calculadora de masa de pizza",
-      "content": "Calcule las cantidades de los ingredientes en función de una multitud de parámetros (Temperatura, Harina, Hidratación, Levadura, etc.)."
+      "content": "Calcular las cantidades de ingredientes basándose en una multitud de parámetros (Temperatura, Harina, Hidratación, Levadura, etc.)"
     },
     "faq": {
       "title": "FAQ",
       "subtitle": "Preguntas frecuentes",
-      "content": "Preguntas frecuentes"
+      "content": "Encuentre aquí las preguntas frecuentes sobre masa de pizza y cálculos."
     }
   }
 }

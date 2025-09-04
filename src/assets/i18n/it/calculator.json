@@ -45,27 +45,27 @@
             "helper": {
               "title": "Aggiungere la farina",
               "descriptions": [
-                "Aggiungere la farina e mescolare con un cucchiaio di legno fino ad ottenere un composto omogeneo."
+                "Aggiungere la farina poco a poco, mescolando con un cucchiaio di legno fino ad ottenere un composto omogeneo"
               ]
             }
           },
           {
-            "title": "Riposo di <strong>{ rtRestTime } ora/e</strong> a temperatura ambiente",
+            "title": "Riposo <strong>{ rtRestTime } ora/e</strong> a temperatura ambiente",
             "description": "",
             "helper": {
               "title": "Riposo a temperatura ambiente",
               "descriptions": [
-                "Lasciare riposare per <strong>{ rtRestTime } ora/e</strong> a temperatura ambiente coperto con pellicola trasparente."
+                "Lasciare riposare <strong>{ rtRestTime } ora/e</strong> a temperatura ambiente in un contenitore ermetico o coperto con pellicola trasparente"
               ]
             }
           },
           {
-            "title": "Riposo di <strong>{ coldRestTime } ora/e</strong> in frigorifero",
+            "title": "Riposo <strong>{ coldRestTime } ora/e</strong> in frigorifero",
             "description": "",
             "helper": {
               "title": "Riposo in frigorifero",
               "descriptions": [
-                "Lasciare riposare per <strong>{ coldRestTime } ora/e</strong> in frigorifero coperto con pellicola trasparente."
+                "Lasciare riposare <strong>{ coldRestTime } ora/e</strong> in frigorifero in un contenitore ermetico o coperto con pellicola trasparente"
               ]
             }
           }
@@ -80,12 +80,12 @@
         "title": "Preparazione dell'impasto",
         "steps": [
           {
-            "title": "Togliere il poolish 1 ora prima dell'uso",
+            "title": "Togliere il poolish 1H prima dell'uso",
             "description": "",
             "helper": {
               "title": "Come usare il poolish",
               "descriptions": [
-                "Togliere il poolish 1 ora prima dell'uso, in modo che abbia il tempo di tornare a temperatura ambiente."
+                "Togliere il poolish 1 ora prima dell'uso, in modo che abbia il tempo di tornare a temperatura ambiente"
               ]
             }
           },
@@ -95,8 +95,8 @@
             "helper": {
               "title": "Preparazione dell'impasto",
               "descriptions": [
-                "Pesare le quantità da aggiungere nel poolish.",
-                "Nella ciotola del poolish, aggiungere l'acqua e il sale. Mescolare con un cucchiaio di legno fino a quando l'acqua non sarà assorbita."
+                "Pesare le quantità da aggiungere nel poolish",
+                "Nella ciotola del poolish, aggiungere l'acqua e il sale. Mescolare con un cucchiaio di legno fino a quando l'acqua non sarà assorbita"
               ]
             }
           },
@@ -106,7 +106,7 @@
             "helper": {
               "title": "Come aggiungere la farina",
               "descriptions": [
-                "Aggiungere la farina poco a poco e mescolare con un cucchiaio di legno."
+                "Aggiungere la farina poco a poco e mescolare con un cucchiaio di legno"
               ]
             }
           },
@@ -116,7 +116,8 @@
             "helper": {
               "title": "Trasferimento dell'impasto",
               "descriptions": [
-                "Con l'aiuto di un tarocco, trasferire l'impasto sul piano di lavoro."
+                "Quando non è più possibile mescolare con il cucchiaio, si inizia ad avere un aspetto di impasto e si può trasferire sul piano di lavoro",
+                "Utilizzare un tarocco per aiutare con il trasferimento"
               ]
             }
           },
@@ -126,7 +127,8 @@
             "helper": {
               "title": "Impasto",
               "descriptions": [
-                "Lavorare l'impasto impastandolo, la farina deve essere completamente integrata."
+                "Lavorare l'impasto impastandolo, la farina deve essere completamente integrata",
+                "Utilizzare il palmo delle mani per impastare"
               ]
             }
           },
@@ -136,19 +138,22 @@
             "helper": {
               "title": "Pieghe",
               "descriptions": [
-                "Per fare una piega, prendiamo l'impasto e lo pieghiamo su se stesso.",
-                "Possiamo fare quante pieghe vogliamo, ma l'impasto deve essere morbido ed elastico.",
-                "La piega permette di introdurre aria nell'impasto.",
-                "Una volta finito, possiamo formare una bella palla."
+                "Per fare una piega, prendiamo l'impasto e lo pieghiamo su se stesso",
+                "Possiamo fare quante pieghe vogliamo, ma l'impasto deve rimanere morbido ed elastico",
+                "La piega permette di introdurre aria nell'impasto e permetterà di ottenere un impasto alveolato durante la cottura",
+                "Una volta finito, possiamo formare una bella palla"
               ]
             }
           },
           {
-            "title": "Riposo 10 - 15 min sotto una ciotola",
+            "title": "Riposo 10 – 15 min sotto una ciotola",
             "description": "",
             "helper": {
               "title": "Riposo",
-              "descriptions": []
+              "descriptions": [
+                "Semplicemente capovolgere la ciotola utilizzata per la preparazione sull'impasto",
+                "L'impasto si tenderà e diventerà più liscio"
+              ]
             }
           },
           {
@@ -157,8 +162,8 @@
             "helper": {
               "title": "Riformare una palla",
               "descriptions": [
-                "Non lavorare troppo l'impasto.",
-                "Stendere l'impasto e facendogli fare qualche giro tra le mani riformare una palla."
+                "Non lavorare troppo l'impasto",
+                "Stendere l'impasto e facendogli fare qualche giro tra le mani, riformare una palla"
               ]
             }
           },
@@ -174,13 +179,13 @@
             "title": "Formare i panetti",
             "description": "",
             "helper": {
-              "title": "Formare i panetti",
+              "title": "Formazione dei panetti",
               "descriptions": [
-                "Recuperare l'impasto e con un tagliapasta o una spatola",
-                "Formare dei panetti (ben tesi) di circa <strong>{ pizzaWeight } g</strong>.",
-                "Mettere un sottile strato di semola fine in un piatto.",
-                "Disporre i panetti in un piatto lasciando spazio tra di loro (cresceranno ancora).",
-                "Chiudere il piatto o mettere una pellicola trasparente."
+                "Recuperare l'impasto e con l'aiuto di un tagliapasta o una spatola",
+                "Formare dei panetti (ben tesi) di circa <strong>{ pizzaWeight } g</strong>",
+                "Mettere un sottile strato di semola fine in un piatto (questo eviterà che si attacchino al piatto)",
+                "Disporre i panetti in un piatto lasciando spazio tra di loro (cresceranno ancora)",
+                "Chiudere il piatto o mettere pellicola trasparente"
               ]
             }
           },
@@ -190,8 +195,8 @@
             "helper": {
               "title": "Riposo del panetto",
               "descriptions": [
-                "Il tempo di riposo del panetto varia a seconda della temperatura.",
-                "Può richiedere tra 1 e 3 ore, quindi bisogna tenerne conto 😉."
+                "Il tempo di riposo del panetto varia a seconda della temperatura",
+                "Ci vogliono circa <strong>{ rtRestTime } ora/e</strong>, quindi bisogna tenerne conto 😉"
               ]
             }
           }
@@ -202,7 +207,7 @@
       "ingredients": {
         "title": "Ingredienti dell'impasto"
       },
-      "method": {
+      "method": { 
         "title": "Preparazione dell'impasto",
         "steps": [
           {
@@ -211,8 +216,8 @@
             "helper": {
               "title": "Preparazione dell'impasto",
               "descriptions": [
-                "Pesare tutti gli ingredienti.",
-                "Mescolare il lievito e il miele con l'acqua."
+                "Pesare tutti gli ingredienti",
+                "Mescolare il lievito e il miele con l'acqua"
               ]
             }
           },
@@ -222,7 +227,7 @@
             "helper": {
               "title": "Introduzione della farina",
               "descriptions": [
-                "Aggiungere la farina e il sale e mescolare con un cucchiaio di legno fino ad ottenere un composto omogeneo."
+                "Aggiungere il sale e la farina poco a poco e mescolare con un cucchiaio di legno fino ad ottenere un composto omogeneo"
               ]
             }
           },
@@ -232,8 +237,10 @@
             "helper": {
               "title": "Impasto",
               "descriptions": [
-                "Una volta che tutti gli ingredienti sono ben amalgamati e si inizia ad avere una palla, si può trasferire sul piano di lavoro.",
-                "Terminare di impastare a mano per circa 10 minuti (è possibile utilizzare un'impastatrice con il gancio per impastare). Impastare bene per idratare correttamente la farina."
+                "Una volta che tutti gli ingredienti sono ben amalgamati e si inizia ad avere un impasto, si può trasferire sul piano di lavoro",
+                "Si può utilizzare un tarocco per recuperare bene tutto l'impasto",
+                "Terminare l'impasto a mano per circa 10 min. Impastare bene con il palmo delle mani per idratare correttamente la farina",
+                "Si può anche utilizzare un'impastatrice con il gancio per impastare, ma è meno divertente 😉"
               ]
             }
           },
@@ -243,7 +250,7 @@
             "helper": {
               "title": "Palla di impasto",
               "descriptions": [
-                "Una volta che l'impasto ha una bella struttura, formare una palla."
+                "Una volta che l'impasto ha una bella struttura, stendere l'impasto e facendogli fare qualche giro tra le mani, formare una palla"
               ]
             }
           },
@@ -253,7 +260,8 @@
             "helper": {
               "title": "Riposo",
               "descriptions": [
-                "L'impasto si tenderà e diventerà più liscio."
+                "Semplicemente capovolgere la ciotola utilizzata per la preparazione sull'impasto",
+                "L'impasto si tenderà e diventerà più liscio"
               ]
             }
           },
@@ -263,30 +271,32 @@
             "helper": {
               "title": "Pieghe",
               "descriptions": [
-                "Per fare una piega, prendiamo l'impasto e lo pieghiamo su se stesso.",
-                "Possiamo fare quante pieghe vogliamo, ma l'impasto deve essere morbido ed elastico.",
-                "La piega permette di introdurre aria nell'impasto.",
-                "Una volta finito, possiamo formare una bella palla."
+                "Per fare una piega, prendiamo l'impasto e lo pieghiamo su se stesso",
+                "Possiamo fare quante pieghe vogliamo, ma l'impasto deve rimanere morbido ed elastico",
+                "La piega permette di introdurre aria nell'impasto e permetterà di ottenere un impasto alveolato durante la cottura",
+                "Una volta finito, possiamo formare una bella palla"
               ]
             }
           },
           {
-            "title": "Riposo a temperatura ambiente per <strong>{ rtRestTime } ora/e</strong> in un contenitore ermetico",
+            "title": "Riposo a temperatura ambiente <strong>{ rtRestTime } ora/e</strong> in un contenitore ermetico",
             "description": "",
             "helper": {
               "title": "Riposo",
               "descriptions": [
-                "L'impasto si tenderà e diventerà più liscio."
+                "Il riposo permetterà al lievito di attivarsi, creare una bella rete di glutine e così dare tutta la sua consistenza all'impasto",
+                "L'impasto si tenderà e diventerà più liscio"
               ]
             }
           },
           {
-            "title": "Riposo a freddo per <strong>{ coldRestTime } ora/e</strong> in un contenitore ermetico",
+            "title": "Riposo a freddo <strong>{ coldRestTime } ora/e</strong> in un contenitore ermetico",
             "description": "",
             "helper": {
               "title": "Riposo",
               "descriptions": [
-                "L'impasto si tenderà e diventerà più liscio."
+                "Il riposo permetterà al lievito di attivarsi, creare una bella rete di glutine e così dare tutta la sua consistenza all'impasto",
+                "L'impasto si tenderà e diventerà più liscio"
               ]
             }
           },
@@ -297,12 +307,12 @@
               "title": "Formare i panetti",
               "descriptions": [
                 "Recuperare l'impasto e con un tagliapasta o una spatola",
-                "Formare dei panetti (ben tesi) di circa <strong>{ pizzaWeight } g</strong>.",
-                "Mettere un sottile strato di semola fine in un piatto.",
-                "Disporre i panetti in un piatto lasciando spazio tra di loro (cresceranno ancora).",
-                "Chiudere il piatto o mettere una pellicola trasparente."
+                "Formare dei panetti (ben tesi) di circa <strong>{ pizzaWeight } g</strong>",
+                "Mettere un sottile strato di semola fine in un piatto (questo eviterà che si attacchino al piatto)",
+                "Disporre i panetti in un piatto lasciando spazio tra di loro (cresceranno ancora)",
+                "Chiudere il piatto o mettere pellicola trasparente"
               ]
-            }
+            }     
           },
           {
             "title": "Riposo per raddoppiare di volume",
@@ -310,8 +320,8 @@
             "helper": {
               "title": "Riposo del panetto",
               "descriptions": [
-                "Il tempo di riposo del panetto varia a seconda della temperatura.",
-                "Può richiedere tra 1 e 3 ore, quindi bisogna tenerne conto 😉."
+                "Il tempo di riposo del panetto varia a seconda della temperatura",
+                "Ci vogliono circa <strong>{ rtRestTime } ora/e</strong>, quindi bisogna tenerne conto 😉"
               ]
             }
           }
@@ -331,6 +341,7 @@
       "honeyRatio": "Rapporto di miele",
       "flourStrength": "Forza della farina",
       "hydrationRatio": "Rapporto di idratazione",
+      "poolishRatio": "Rapporto poolish",
       "all": "Abilita tutto"
     }
   }

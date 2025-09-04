@@ -15,10 +15,6 @@
     "complex": {
       "title": "Advanced calculator",
       "description": "Calculate ingredient quantities based on a multitude of parameters (Temperature, Flour, Hydration, Yeast, etc.)"
-    },
-    "planner": {
-      "title": "Planner",
-      "description": "Plan for dough ready at a given date and time"
     }
   },
   "guides": {
@@ -36,12 +32,12 @@
     "calculator": {
       "title": "Calculator",
       "subtitle": "Pizza dough calculator",
-      "content": "Calculate the quantities of ingredients based on a multitude of parameters (Temperature, Flour, Hydration, Yeast, etc.)."
+      "content": "Calculate ingredient quantities based on a multitude of parameters (Temperature, Flour, Hydration, Yeast, etc.)"
     },
     "faq": {
       "title": "FAQ",
       "subtitle": "Frequently Asked Questions",
-      "content": "Frequently Asked Questions"
+      "content": "Find here frequently asked questions about pizza dough and calculations."
     }
   }
 }

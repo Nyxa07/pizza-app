@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, computed, Input, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
   IonItem,
@@ -10,16 +10,28 @@ import {
   IonLabel,
   IonButton,
 } from '@ionic/angular/standalone';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
 import { AsyncPipe, JsonPipe, LowerCasePipe } from '@angular/common';
-import { debounceTime, map, tap } from 'rxjs';
+import {
+  combineLatest,
+  debounceTime,
+  map,
+  Observable,
+  startWith,
+  tap,
+} from 'rxjs';
 import {
   CalculatorStateService,
   CalculatorInput,
 } from '../services/calculator-state.service';
 import { DEFAULT_INPUT } from '../services/calculator-state.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
+import {
+  CalculatorSettingsService,
+  ICalculatorSettings,
+} from '../services/calculator-settings.service';
+import { DoughType } from '../enums/dough-type.enum';
 
 @Component({
   selector: 'app-calculator-form',
@@ -42,36 +54,62 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
   standalone: true,
 })
 export class CalculatorFormComponent implements OnInit {
-  protected form = this.formBuilder.group<CalculatorInput>(DEFAULT_INPUT);
-  protected visibility$ = this.state.autoCompute$.pipe(
+  @Input() mode: 'complex' | 'simple' = 'complex';
+  protected form = this.formBuilder.group<CalculatorInput>(
+    this.state.getInput(),
+  );
+  protected doughType$ = this.form
+    .get('doughType')!
+    .valueChanges.pipe(startWith(this.form.get('doughType')!.value));
+
+  protected settings$ = this.settings
+    .getSettings$(this.mode)
+    .pipe(startWith(this.settings.getSettings(this.mode)));
+
+  protected showPoolishRatio$ = combineLatest([
+    this.doughType$,
+    this.settings$,
+  ]).pipe(
     takeUntilDestroyed(),
-    map((v) => {
-      return Object.keys(v).reduce(
-        (acc, k) => {
-          acc[k as keyof typeof v] = !v[k as keyof typeof v];
-          return acc;
-        },
-        {} as Record<keyof typeof v, boolean>,
-      );
-    }),
+    map(
+      ([doughType, settings]) =>
+        doughType === DoughType.POOLISH && settings.poolishRatio.visible,
+    ),
   );
 
   constructor(
     private formBuilder: FormBuilder,
+    private settings: CalculatorSettingsService,
     private state: CalculatorStateService,
   ) {
-    this.state.input$.pipe(takeUntilDestroyed()).subscribe((v) => {
-      this.form.patchValue(v, { emitEvent: false });
+    this.state.input$.pipe(takeUntilDestroyed()).subscribe((input) => {
+      this.form.patchValue(input, { emitEvent: false });
     });
-
     this.form.valueChanges
       .pipe(debounceTime(250), takeUntilDestroyed())
       .subscribe((v) => {
         this.state.update(v as CalculatorInput);
       });
+
+    // Set recommanded values for rtRestTime and coldRestTime based on doughType
+    // Even if not auto computed
+    this.form
+      .get('doughType')!
+      .valueChanges.pipe(takeUntilDestroyed())
+      .subscribe((v) => {
+        if (v === DoughType.POOLISH) {
+          this.form.get('rtRestTime')!.setValue(1);
+          this.form.get('coldRestTime')!.setValue(24);
+        } else {
+          this.form.get('rtRestTime')!.setValue(DEFAULT_INPUT.rtRestTime);
+          this.form.get('coldRestTime')!.setValue(DEFAULT_INPUT.coldRestTime);
+        }
+      });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.settings$ = this.settings.getSettings$(this.mode);
+  }
 
   protected pinFormatter(value: number) {
     return `${value}`;

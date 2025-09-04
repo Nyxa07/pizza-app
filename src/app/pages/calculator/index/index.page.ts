@@ -48,10 +48,5 @@ export class CalculatorIndexPage {
       description: 'pages.calculator.complex.description',
       link: '/tabs/calculator/complex',
     },
-    {
-      title: 'pages.calculator.planner.title',
-      description: 'pages.calculator.planner.description',
-      link: '/tabs/calculator/planner',
-    },
   ];
 }

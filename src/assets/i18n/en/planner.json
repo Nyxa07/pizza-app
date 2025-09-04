@@ -1,9 +1,0 @@
-{
-  "form": {
-    "titles": {
-      "date": "Date when you want to start cooking",
-      "preparationDate": "Preparation date",
-      "cookingDate": "Cooking date"
-    }
-  }
-}

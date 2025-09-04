@@ -15,10 +15,6 @@
     "complex": {
       "title": "Calculateur avancé",
       "description": "Calculer les quantités des ingrédients en fonction d'une multitudes de paramètres (Témperature, Farine, Hydratation, Levure, etc.)"
-    },
-    "planner": {
-      "title": "Planificateur",
-      "description": "Planifier pour une pâte prête à une date et heure donnée"
     }
   },
   "guides": {
@@ -41,7 +37,7 @@
     "faq": {
       "title": "FAQ",
       "subtitle": "Foire aux questions",
-      "content": "Foire aux questions"
+      "content": "Retrouvez ici les questions fréquentes sur la pâte à pizza et les calculs."
     }
   }
 }

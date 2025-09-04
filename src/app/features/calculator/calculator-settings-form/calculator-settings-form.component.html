@@ -15,47 +15,40 @@
 <ion-list lines="none" [formGroup]="form">
   <ion-item>
     <i-lucide slot="start" [img]="AnvilIcon"></i-lucide>
-    <ion-toggle
-      formControlName="pizzaWeightVisibility"
-      justify="space-between"
-      >{{
-        "calculator.settings.visibility.pizzaWeight" | translate
-      }}</ion-toggle
-    >
+    <ion-toggle formControlName="pizzaWeight" justify="space-between">{{
+      "calculator.settings.visibility.pizzaWeight" | translate
+    }}</ion-toggle>
   </ion-item>
   <ion-item>
     <i-lucide slot="start" [img]="SpotlightIcon"></i-lucide>
-    <ion-toggle formControlName="saltRatioVisibility" justify="space-between">{{
+    <ion-toggle formControlName="saltRatio" justify="space-between">{{
       "calculator.settings.visibility.saltRatio" | translate
     }}</ion-toggle>
   </ion-item>
   <ion-item>
     <i-lucide slot="start" [img]="CandyCaneIcon"></i-lucide>
-    <ion-toggle
-      formControlName="honeyRatioVisibility"
-      justify="space-between"
-      >{{ "calculator.settings.visibility.honeyRatio" | translate }}</ion-toggle
-    >
+    <ion-toggle formControlName="honeyRatio" justify="space-between">{{
+      "calculator.settings.visibility.honeyRatio" | translate
+    }}</ion-toggle>
   </ion-item>
   <ion-item>
     <i-lucide slot="start" [img]="HandFistIcon"></i-lucide>
-    <ion-toggle
-      formControlName="flourStrengthVisibility"
-      justify="space-between"
-      >{{
-        "calculator.settings.visibility.flourStrength" | translate
-      }}</ion-toggle
-    >
+    <ion-toggle formControlName="flourStrength" justify="space-between">{{
+      "calculator.settings.visibility.flourStrength" | translate
+    }}</ion-toggle>
   </ion-item>
 
   <ion-item>
     <i-lucide slot="start" [img]="BubblesIcon"></i-lucide>
-    <ion-toggle
-      formControlName="hydrationRatioVisibility"
-      justify="space-between"
-      >{{
-        "calculator.settings.visibility.hydrationRatio" | translate
-      }}</ion-toggle
-    >
+    <ion-toggle formControlName="hydrationRatio" justify="space-between">{{
+      "calculator.settings.visibility.hydrationRatio" | translate
+    }}</ion-toggle>
+  </ion-item>
+
+  <ion-item>
+    <i-lucide slot="start" [img]="WavesIcon"></i-lucide>
+    <ion-toggle formControlName="poolishRatio" justify="space-between">{{
+      "calculator.settings.visibility.poolishRatio" | translate
+    }}</ion-toggle>
   </ion-item>
 </ion-list>

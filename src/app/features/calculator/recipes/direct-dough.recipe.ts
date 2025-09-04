@@ -112,6 +112,7 @@ export class DirectDoughRecipe implements IRecipeDef {
       {
         icon: this.ThermometerSnowflakeIcon,
         helperDescriptions: 2,
+        hide: Math.round(this.result.dough?.coldRestTime ?? 0) === 0,
       },
       {
         icon: this.EclipseIcon,

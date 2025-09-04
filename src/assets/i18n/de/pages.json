@@ -3,7 +3,7 @@
     "title": "Rechner",
     "compute": "Berechnen",
     "results": {
-      "title": "Ergebnisse der Berechnung"
+      "title": "Berechnungsergebnisse"
     },
     "settings": {
       "title": "Rechnerkonfiguration"
@@ -15,10 +15,6 @@
     "complex": {
       "title": "Erweiterter Rechner",
       "description": "Berechnen Sie die Zutatenmengen basierend auf einer Vielzahl von Parametern (Temperatur, Mehl, Hydratation, Hefe, usw.)"
-    },
-    "planner": {
-      "title": "Planer",
-      "description": "Planen Sie für einen Teig, der zu einem bestimmten Datum und einer bestimmten Uhrzeit fertig ist"
     }
   },
   "guides": {
@@ -36,12 +32,12 @@
     "calculator": {
       "title": "Rechner",
       "subtitle": "Pizzateig-Rechner",
-      "content": "Berechnen Sie die Zutatenmengen basierend auf einer Vielzahl von Parametern (Temperatur, Mehl, Hydratation, Hefe usw.)."
+      "content": "Berechnen Sie die Zutatenmengen basierend auf einer Vielzahl von Parametern (Temperatur, Mehl, Hydratation, Hefe, usw.)"
     },
     "faq": {
       "title": "FAQ",
       "subtitle": "Häufig gestellte Fragen",
-      "content": "Häufig gestellte Fragen"
+      "content": "Hier finden Sie häufig gestellte Fragen zu Pizzateig und Berechnungen."
     }
   }
 }
