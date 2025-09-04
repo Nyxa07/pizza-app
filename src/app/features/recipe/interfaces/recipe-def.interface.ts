@@ -14,6 +14,7 @@ export interface IRecipeDef {
       icon: any;
       helperDescriptions: number;
       variables?: Record<string, any>;
+      hide?: boolean;
     }[];
   };
 }

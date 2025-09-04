@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { YeastService } from 'src/app/features/calculator/services/yeast.service';
 import { DoughType } from '../enums/dough-type.enum';
 import { CalculatorInput } from './calculator-state.service';
+import { RestTimeService } from './rest-time.service';
+import { HydrationService } from './hydration.service';
 
 export interface Quantity {
   yeast: number;
@@ -25,7 +27,11 @@ export interface DoughResult {
   providedIn: 'root',
 })
 export class CalculatorService {
-  constructor(private yeastService: YeastService) {}
+  constructor(
+    private yeastService: YeastService,
+    private restTimeService: RestTimeService,
+    private hydrationService: HydrationService,
+  ) {}
 
   // Compute the flour (and water) weight used in the poolish.
   // Definition: `ratio` is the fraction of TOTAL FLOUR that will go into the poolish.
@@ -36,7 +42,14 @@ export class CalculatorService {
 
   compute(data: CalculatorInput): DoughResult {
     // Clamp user inputs to safe range
-    const hydration = Math.max(0, Math.min(data.hydrationRatio, 1));
+    const hydration = Math.max(
+      0,
+      Math.min(
+        data.hydrationRatio ??
+          this.hydrationService.compute(data.flourStrength).minHydration,
+        1,
+      ),
+    );
     const hasPoolish = data.doughType === DoughType.POOLISH;
     const poolishRatio = hasPoolish
       ? Math.max(0, Math.min(data.poolishRatio ?? 0, 0.6))
@@ -59,7 +72,9 @@ export class CalculatorService {
     const waterPerDough = totalWater - poolishQuantity;
     const honey = data.honeyRatio * totalFlour;
 
-    const pizzaBallsRestTime = data.pizzaBallsRestTime ?? 0;
+    const pizzaBallsRestTime = this.restTimeService.computePizzaBallsRestTime(
+      data.temperature,
+    );
 
     const yeast =
       data.doughType === DoughType.POOLISH
@@ -84,13 +99,11 @@ export class CalculatorService {
             data.flourStrength,
           );
 
-    const yeastValue = yeast;
-
     const result: DoughResult = {
       total: {
         flour: totalFlour,
         water: totalWater,
-        yeast: yeastValue,
+        yeast,
         salt: salt,
         coldRestTime: data.coldRestTime ?? 0,
         rtRestTime: data.rtRestTime ?? 0,
@@ -101,7 +114,7 @@ export class CalculatorService {
         ? {
             flour: poolishQuantity,
             water: poolishQuantity,
-            yeast: yeastValue,
+            yeast,
             salt: 0,
             coldRestTime: data.coldRestTime ?? 0,
             rtRestTime: data.rtRestTime ?? 0,
@@ -110,7 +123,7 @@ export class CalculatorService {
         : null,
 
       dough: {
-        yeast: hasPoolish ? 0 : yeastValue,
+        yeast: hasPoolish ? 0 : yeast,
         flour: flourPerDough,
         water: waterPerDough,
         salt: salt,

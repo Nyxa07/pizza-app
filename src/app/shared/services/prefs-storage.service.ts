@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
  */
 @Injectable({ providedIn: 'root' })
 export class PrefsStorage {
-  private readonly cacheVersion = 2;
+  private readonly cacheVersion = 3;
   private storage: Storage = localStorage;
 
   constructor() {}

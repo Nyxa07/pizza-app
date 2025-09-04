@@ -12,7 +12,6 @@ const domains = [
   'language',
   'faq',
   'settings',
-  'planner',
 ];
 /**
  * Custom loader able to merge several domain-specific JSON files per language

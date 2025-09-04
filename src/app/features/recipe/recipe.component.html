@@ -3,22 +3,25 @@
 </ion-list-header>
 <ion-list lines="none">
   @for (item of recipe.ingredients.items; track item) {
-    <ion-item>
-      <i-lucide slot="start" [img]="item.icon"></i-lucide>
-      <ion-label>
-        {{ item.label | translate }}
-      </ion-label>
-      <ion-note slot="end">
-        {{ item.value | number: item.numberFormat ?? "1.0-0" }}
-        {{ item.unit }}
-      </ion-note>
-    </ion-item>
+    @if (item.value > 0) {
+      <ion-item>
+        <i-lucide slot="start" [img]="item.icon"></i-lucide>
+        <ion-label>
+          {{ item.label | translate }}
+        </ion-label>
+        <ion-note slot="end">
+          {{ item.value | number: item.numberFormat ?? "1.0-0" }}
+          {{ item.unit }}
+        </ion-note>
+      </ion-item>
+    }
   }
 </ion-list>
 
 <ion-list-header>
   {{ recipe.method.title | translate }}
 </ion-list-header>
+
 <ion-list lines="none">
   @for (item of recipe.method.items; track item) {
     <ion-item (click)="openHelperModal(item)" button>
@@ -35,6 +38,7 @@
   [initialBreakpoint]="0.5"
   [breakpoints]="[0, 0.25, 0.5, 0.75]"
   handleBehavior="cycle"
+  (ionModalDidDismiss)="currentMethodItem = null"
 >
   <ng-template>
     <div class="ion-padding">
