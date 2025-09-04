@@ -69,7 +69,11 @@ export class PoolishRecipe implements IRecipeDef {
       { icon: this.WandIcon, helperDescriptions: 2 },
       { icon: this.WheatIcon, helperDescriptions: 1 },
       { icon: this.ThermometerSunIcon, helperDescriptions: 1 },
-      { icon: this.ThermometerSnowflakeIcon, helperDescriptions: 1 },
+      {
+        icon: this.ThermometerSnowflakeIcon,
+        helperDescriptions: 1,
+        hide: !this.result.poolish?.coldRestTime,
+      },
     ],
   };
 }
