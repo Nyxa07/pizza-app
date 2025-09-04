@@ -6,6 +6,9 @@
     <ion-title>{{ "pages.calculator.complex.title" | translate }}</ion-title>
     <ion-buttons slot="end">
       <app-calculator-refresh-button></app-calculator-refresh-button>
+      @if (isInitialized()) {
+        <app-calculator-state-saver></app-calculator-state-saver>
+      }
       <ion-button [routerLink]="['/tabs/calculator/settings']">
         <i-lucide slot="icon-only" [img]="SettingsIcon"></i-lucide>
       </ion-button>

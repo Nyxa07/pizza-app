@@ -6,7 +6,10 @@
     "edit": "Modifier",
     "add": "Ajouter",
     "ok": "OK",
-    "reset": "Réinitialiser"
+    "reset": "Réinitialiser",
+    "override": "Écraser",
+    "close": "Fermer",
+    "load": "Charger"
   },
   "status": {
     "loading": "Chargement...",

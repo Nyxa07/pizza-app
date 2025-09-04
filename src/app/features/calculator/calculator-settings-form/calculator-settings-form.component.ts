@@ -49,14 +49,12 @@ export class CalculatorSettingsFormComponent implements OnInit {
   readonly WavesIcon = WavesIcon;
 
   form = this.fb.group({
-    pizzaWeight: [this.settings.getSettings('complex').pizzaWeight.visible],
-    saltRatio: [this.settings.getSettings('complex').saltRatio.visible],
-    honeyRatio: [this.settings.getSettings('complex').honeyRatio.visible],
-    flourStrength: [this.settings.getSettings('complex').flourStrength.visible],
-    hydrationRatio: [
-      this.settings.getSettings('complex').hydrationRatio.visible,
-    ],
-    poolishRatio: [this.settings.getSettings('complex').poolishRatio.visible],
+    pizzaWeight: [this.settings.getSettings().pizzaWeight.visible],
+    saltRatio: [this.settings.getSettings().saltRatio.visible],
+    honeyRatio: [this.settings.getSettings().honeyRatio.visible],
+    flourStrength: [this.settings.getSettings().flourStrength.visible],
+    hydrationRatio: [this.settings.getSettings().hydrationRatio.visible],
+    poolishRatio: [this.settings.getSettings().poolishRatio.visible],
   });
 
   allVisibility$ = this.form.valueChanges.pipe(
@@ -77,7 +75,7 @@ export class CalculatorSettingsFormComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.form.valueChanges.pipe(takeUntilDestroyed()).subscribe((value) => {
-      this.settings.update('complex', {
+      this.settings.update({
         pizzaWeight: { visible: !!value.pizzaWeight, auto: !value.pizzaWeight },
         saltRatio: { visible: !!value.saltRatio, auto: !value.saltRatio },
         honeyRatio: { visible: !!value.honeyRatio, auto: !value.honeyRatio },

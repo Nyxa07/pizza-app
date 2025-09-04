@@ -32,49 +32,49 @@ const DEFAULT_SETTINGS: ICalculatorSettings = {
   coldRestTime: { auto: false, visible: true },
 };
 
+export enum CALCULATOR_MODE {
+  SIMPLE = 'simple',
+  COMPLEX = 'complex',
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class CalculatorSettingsService {
+  private mode: CALCULATOR_MODE = CALCULATOR_MODE.SIMPLE;
   private readonly STORAGE_KEY = 'calculator:settings';
-
-  private readonly _state: {
-    [key: string]: BehaviorSubject<ICalculatorSettings>;
-  } = {};
+  private readonly _state = new BehaviorSubject<ICalculatorSettings>(
+    DEFAULT_SETTINGS,
+  );
 
   constructor(
     private prefs: PrefsStorage,
     private injector: Injector,
   ) {}
 
-  init(key: string, defaultSettings?: Partial<ICalculatorSettings>): void {
-    if (this._state[key]) {
-      return;
-    }
-    this._state[key] = new BehaviorSubject<ICalculatorSettings>(
-      this.prefs.get<ICalculatorSettings>(this.STORAGE_KEY + ':' + key) ?? {
-        ...DEFAULT_SETTINGS,
-        ...defaultSettings,
-      },
-    );
-    this.prefs.set(this.STORAGE_KEY + ':' + key, this._state[key].value);
+  init(
+    mode: CALCULATOR_MODE,
+    defaultSettings?: Partial<ICalculatorSettings>,
+  ): void {
+    this.mode = mode;
+    this._state.next({
+      ...DEFAULT_SETTINGS,
+      ...defaultSettings,
+    });
   }
 
-  getSettings(key: string): ICalculatorSettings {
-    this.init(key);
-    return this._state[key].value;
+  getSettings(): ICalculatorSettings {
+    return this._state.value;
   }
 
-  getSettings$(key: string): Observable<ICalculatorSettings> {
-    this.init(key);
-    return this._state[key].asObservable();
+  getSettings$(): Observable<ICalculatorSettings> {
+    return this._state.asObservable();
   }
 
-  update(key: string, partial: Partial<ICalculatorSettings>): void {
-    this.init(key);
-    this._state[key].next({ ...this._state[key].value, ...partial });
-    this.prefs.set(this.STORAGE_KEY + ':' + key, {
-      ...this._state[key].value,
+  update(partial: Partial<ICalculatorSettings>): void {
+    this._state.next({ ...this._state.value, ...partial });
+    this.prefs.set(this.STORAGE_KEY + ':' + this.mode, {
+      ...this._state.value,
       ...partial,
     });
 

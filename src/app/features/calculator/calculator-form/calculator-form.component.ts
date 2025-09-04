@@ -43,7 +43,6 @@ import { DoughType } from '../enums/dough-type.enum';
   standalone: true,
 })
 export class CalculatorFormComponent implements OnInit {
-  @Input() mode: 'complex' | 'simple' = 'complex';
   protected form = this.formBuilder.group<CalculatorInput>(
     this.state.getInput(),
   );
@@ -52,8 +51,8 @@ export class CalculatorFormComponent implements OnInit {
     .valueChanges.pipe(startWith(this.form.get('doughType')!.value));
 
   protected settings$ = this.settings
-    .getSettings$(this.mode)
-    .pipe(startWith(this.settings.getSettings(this.mode)));
+    .getSettings$()
+    .pipe(startWith(this.settings.getSettings()));
 
   protected showPoolishRatio$ = combineLatest([
     this.doughType$,
@@ -121,7 +120,7 @@ export class CalculatorFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.settings$ = this.settings.getSettings$(this.mode);
+    this.settings$ = this.settings.getSettings$();
   }
 
   protected pinFormatter(value: number) {

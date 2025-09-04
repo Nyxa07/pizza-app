@@ -5,9 +5,10 @@ import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { CalculatorService } from './calculator.service';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
-import { CalculatorSettingsService } from './calculator-settings.service';
-// import { HydrationService } from './hydration.service';
-// import { RestTimeService } from './rest-time.service';
+import {
+  CALCULATOR_MODE,
+  CalculatorSettingsService,
+} from './calculator-settings.service';
 
 export interface CalculatorInput {
   nbPizzas: number;
@@ -41,7 +42,7 @@ export const DEFAULT_INPUT: CalculatorInput = {
 
 @Injectable({ providedIn: 'root' })
 export class CalculatorStateService {
-  private INIT_KEY: string = 'default';
+  private mode: CALCULATOR_MODE = CALCULATOR_MODE.SIMPLE;
   private readonly STORAGE_KEY = 'calculator';
   private readonly _input = new BehaviorSubject<CalculatorInput>(DEFAULT_INPUT);
 
@@ -66,11 +67,11 @@ export class CalculatorStateService {
 
   update(input: Partial<CalculatorInput>): void {
     this._input.next({ ...this._input.value, ...input } as CalculatorInput);
-    this.prefs.set(this.STORAGE_KEY + ':' + this.INIT_KEY, this._input.value);
+    this.prefs.set(this.STORAGE_KEY + ':' + this.mode, this._input.value);
   }
 
   computeInput(i: CalculatorInput): CalculatorInput {
-    const settings = this.settings.getSettings(this.INIT_KEY);
+    const settings = this.settings.getSettings();
 
     return {
       nbPizzas: i.nbPizzas,
@@ -102,9 +103,8 @@ export class CalculatorStateService {
     };
   }
 
-  init(key: string, input?: Partial<CalculatorInput>): void {
-    this.INIT_KEY = key;
-
+  init(mode: CALCULATOR_MODE, input?: Partial<CalculatorInput>): void {
+    this.mode = mode;
     // To be able to reset to default
     this._initInput = {
       ...DEFAULT_INPUT,
@@ -129,8 +129,6 @@ export class CalculatorStateService {
   }
 
   private loadFromStorage(): CalculatorInput | null {
-    return this.prefs.get<CalculatorInput>(
-      this.STORAGE_KEY + ':' + this.INIT_KEY,
-    );
+    return this.prefs.get<CalculatorInput>(this.STORAGE_KEY + ':' + this.mode);
   }
 }

@@ -362,6 +362,18 @@
       "poolishRatio": "Ratio poolish",
       "all": "Tout activer"
     }
+  },
+  "stateSaver": {
+    "form": {
+      "title": "Sauvegarde",
+      "newSave": "Nouvelle sauvegarde",
+      "previousSaves": "Sauvegardes précédentes",
+      "saveStateName": "Nom de la sauvegarde",
+      "stateSaved": "Sauvegarde effectuée",
+      "stateOverridden": "Sauvegarde remplacée",
+      "stateLoaded": "Sauvegarde chargée",
+      "stateDeleted": "Sauvegarde supprimée"
+    }
   }
 }
 

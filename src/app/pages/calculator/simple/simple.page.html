@@ -6,6 +6,9 @@
     <ion-title>{{ "pages.calculator.simple.title" | translate }}</ion-title>
     <ion-buttons slot="end">
       <app-calculator-refresh-button></app-calculator-refresh-button>
+      @if (isInitialized()) {
+        <app-calculator-state-saver></app-calculator-state-saver>
+      }
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -20,7 +23,7 @@
   </ion-header>
 
   @if (isInitialized()) {
-    <app-calculator-form [mode]="'simple'"></app-calculator-form>
+    <app-calculator-form></app-calculator-form>
     <ion-button
       class="ion-margin-top"
       expand="block"
