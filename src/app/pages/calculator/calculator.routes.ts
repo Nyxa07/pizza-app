@@ -17,11 +17,6 @@ export const CALCULATOR_ROUTES: Route[] = [
       import('./complex/complex.page').then((m) => m.CalculatorComplexPage),
   },
   {
-    path: 'planner',
-    loadComponent: () =>
-      import('./planner/planner.page').then((m) => m.CalculatorPlannerPage),
-  },
-  {
     path: 'results',
     loadComponent: () =>
       import('./results/results.page').then((m) => m.CalculatorResultsPage),
