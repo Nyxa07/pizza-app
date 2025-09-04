@@ -6,13 +6,16 @@
     "edit": "Modifica",
     "add": "Aggiungi",
     "ok": "OK",
-    "reset": "Ripristina"
+    "reset": "Ripristina",
+    "override": "Sovrascrivi",
+    "close": "Chiudi",
+    "load": "Carica"
   },
   "status": {
-    "loading": "Caricamento in corso...",
+    "loading": "Caricamento...",
     "error": "Errore",
     "success": "Successo",
-    "warning": "Attenzione"
+    "warning": "Avviso"
   },
   "navigation": {
     "back": "Indietro",

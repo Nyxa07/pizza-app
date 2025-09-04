@@ -6,7 +6,10 @@
     "edit": "Editar",
     "add": "Añadir",
     "ok": "OK",
-    "reset": "Reiniciar"
+    "reset": "Restablecer",
+    "override": "Sobrescribir",
+    "close": "Cerrar",
+    "load": "Cargar"
   },
   "status": {
     "loading": "Cargando...",
@@ -32,6 +35,6 @@
   "yeastTypes": {
     "dryActive": "Seca activa",
     "dryInstant": "Instantánea",
-    "fresh": "Fresco"
+    "fresh": "Fresca"
   }
 }

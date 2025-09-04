@@ -14,7 +14,7 @@
     },
     "complex": {
       "title": "Erweiterter Rechner",
-      "description": "Berechnen Sie die Zutatenmengen basierend auf einer Vielzahl von Parametern (Temperatur, Mehl, Hydratation, Hefe, usw.)"
+      "description": "Berechnen Sie die Zutatenmengen in Abhängigkeit von einer Vielzahl von Parametern (Temperatur, Mehl, Hydratation, Hefe, usw.)"
     }
   },
   "guides": {
@@ -32,7 +32,7 @@
     "calculator": {
       "title": "Rechner",
       "subtitle": "Pizzateig-Rechner",
-      "content": "Berechnen Sie die Zutatenmengen basierend auf einer Vielzahl von Parametern (Temperatur, Mehl, Hydratation, Hefe, usw.)"
+      "content": "Berechnen Sie die Zutatenmengen in Abhängigkeit von einer Vielzahl von Parametern (Temperatur, Mehl, Hydratation, Hefe, usw.)"
     },
     "faq": {
       "title": "FAQ",

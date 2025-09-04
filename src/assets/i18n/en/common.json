@@ -6,7 +6,10 @@
     "edit": "Edit",
     "add": "Add",
     "ok": "OK",
-    "reset": "Reset"
+    "reset": "Reset",
+    "override": "Override",
+    "close": "Close",
+    "load": "Load"
   },
   "status": {
     "loading": "Loading...",

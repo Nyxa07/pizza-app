@@ -14,7 +14,7 @@
     },
     "complex": {
       "title": "Calcolatrice avanzata",
-      "description": "Calcolare le quantità degli ingredienti basandosi su una moltitudine di parametri (Temperatura, Farina, Idratazione, Lievito, ecc.)"
+      "description": "Calcolare le quantità degli ingredienti in funzione di una moltitudine di parametri (Temperatura, Farina, Idratazione, Lievito, ecc.)"
     }
   },
   "guides": {
@@ -32,7 +32,7 @@
     "calculator": {
       "title": "Calcolatrice",
       "subtitle": "Calcolatrice per impasto per pizza",
-      "content": "Calcolare le quantità degli ingredienti basandosi su una moltitudine di parametri (Temperatura, Farina, Idratazione, Lievito, ecc.)"
+      "content": "Calcolare le quantità degli ingredienti in funzione di una moltitudine di parametri (Temperatura, Farina, Idratazione, Lievito, ecc.)"
     },
     "faq": {
       "title": "FAQ",

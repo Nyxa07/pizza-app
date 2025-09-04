@@ -4,17 +4,17 @@
       "title": "El método directo",
       "subtitle": "Preparación directa de la masa",
       "answers": [
-        "Es un método de preparación más sencillo que los métodos indirectos.",
-        "Se incorporan directamente todos los ingredientes y, tras un reposo más o menos largo, se puede utilizar."
+        "Es un método de preparación más simple que los métodos indirectos.",
+        "Se incorporan directamente todos los ingredientes y después de un reposo más o menos largo se puede utilizar."
       ]
     },
     {
-      "title": "El Poolish",
-      "subtitle": "El poolish es una masa líquida a base de harina, agua y levadura",
+      "title": "La Poolish",
+      "subtitle": "La poolish es una masa líquida a base de harina, agua y levadura",
       "answers": [
-        "El poolish es una pre-fermentación de la masa que reposa durante varias horas antes de ser utilizada para la masa de pizza.",
-        "Se prepara mezclando 1 parte de harina y 1 parte de agua, así como una pequeña cantidad de levadura.",
-        "Es un método indirecto de preparación de la masa de pizza."
+        "La poolish es una pre-fermentación de la masa que reposa durante varias horas antes de ser utilizada para la masa de pizza.",
+        "Se prepara mezclando 1 parte de harina y 1 parte de agua así como una pequeña cantidad de levadura.",
+        "Es un método indirecto de preparación de masa de pizza."
       ]
     },
     {
@@ -22,72 +22,72 @@
       "subtitle": "La Biga es una preparación llamada seca a base de harina, agua y levadura",
       "answers": [
         "La Biga es una pre-fermentación de la masa que reposa durante varias horas antes de ser utilizada para la masa de pizza.",
-        "BlaBlaBla, nunca lo he hecho, así que no voy a escribir ninguna tontería 😉"
+        "BlaBlaBla, nunca lo he hecho así que no voy a poner cualquier cosa 😉"
       ]
     },
     {
       "title": "Las levaduras",
-      "subtitle": "Aquí utilizamos 3 tipos de levadura",
+      "subtitle": "Aquí utilizamos 3 tipos de levaduras",
       "answers": [
-        "La levadura seca activa es la que se encuentra en el comercio como levadura de panadería clásica y no rápida.",
-        "La levadura seca instantánea es la levadura liofilizada en forma de finos copos. No necesita ser hidratada antes de su uso y permite una fermentación rápida.",
-        "La levadura fresca es la que se encuentra en el comercio como levadura de panadería fresca en forma de pasta en cubos."
+        "La levadura seca activa es la levadura que se encuentra en el comercio en forma de levadura de panadero \"clásica\" y no rápida. Se vende generalmente en sobres de pequeñas bolitas.",
+        "La levadura seca instantánea es la levadura liofilizada en forma de finas escamas. No necesita ser hidratada antes de ser utilizada y permite hacer fermentaciones rápidas.",
+        "La levadura fresca es la levadura que se encuentra en el comercio en forma de levadura de panadero \"fresca\" en forma de pasta en cubo."
       ],
       "tips": [
         {
           "title": "💡 Consejo:",
-          "description": "La calculadora permite cambiar fácilmente de una levadura a otra."
+          "description": "La calculadora permite fácilmente pasar a una u otra de las levaduras"
         }
       ]
     },
     {
-      "title": "💦 Hidratación",
-      "subtitle": "Relación entre la cantidad total de agua y la cantidad total de harina",
+      "title": " 💦 Hidratación",
+      "subtitle": "Ratio entre la cantidad de agua total sobre la cantidad de harina total",
       "answers": [
-        "Ej 1: Para un total de 100 g de agua, tendré un total de 151,5 g de harina, lo que da una hidratación de la masa del 66%. Cálculo: 100 ÷ 151,5 = 0,66 o 66%.",
-        "Ej 2: Si quiero saber la cantidad de agua que hay que añadir cuando tengo 151,5 g de harina y quiero una hidratación del 66%, el cálculo será: 0,66 x 151,5 = 100 g de agua en total."
+        "Ej 1: Para 100 g de agua total voy a tener 151,5 g de harina total lo que da una hidratación de la masa del 66%. Cálculo: 100 ÷ 151,5 = 0,66 o sea 66%.",
+        "Ej 2: Si quiero conocer la cantidad de agua a añadir cuando tengo 151,5 g de harina y quiero una hidratación del 66% el cálculo será: 0,66 x 151,5 = 100 g de agua total a añadir."
       ],
       "tips": [
         {
           "title": "💡 Consejo:",
-          "description": "Cuanto más hidratada esté la masa, más difícil será de manejar, será más líquida y, por lo tanto, más pegajosa. Hidratación recomendada: Entre 62 y 75%"
+          "description": "Cuanto más hidratada esté la masa más difícil será de manipular, será más líquida y por tanto más pegajosa. Hidratación recomendada: Entre 62 y 75%"
         }
       ]
     },
     {
-      "title": "🍚 Relación de Poolish",
-      "subtitle": "Relación entre la cantidad de poolish y la cantidad total de masa",
+      "title": " 🍚 Ratio Poolish",
+      "subtitle": "Ratio entre la cantidad de poolish y la cantidad total de masa",
       "answers": [
-        "Se suele utilizar entre un 30 y un 60% de poolish en la cantidad final de masa.",
-        "Ej: Si quiero un 30% de poolish en mi masa y 1 kg de masa final, el cálculo será: 1000 x 0,3 = 300 g. Por lo tanto, el poolish será de 300 g y estará compuesto por 150 g de harina y 150 g de agua."
+        "Se utiliza comúnmente entre 30 y 60% de poolish en la cantidad de masa final.",
+        "Ej: Si quiero 30% de poolish en mi masa y 1 kg de masa final, el cálculo será: 1000 x 0,3 = 300 g. La poolish pesará por tanto 300 g y estará compuesta de 150 g de harina y 150 g de agua."
       ],
       "tips": [
         {
           "title": "💡 Consejo:",
-          "description": "En general, se utiliza una mayor proporción de poolish en invierno que en verano porque la fermentación está influenciada en parte por la temperatura. Por lo tanto, poner más poolish en invierno que en verano puede ayudar al desarrollo final de la masa."
+          "description": "En general se pone un ratio más elevado de poolish en invierno que en verano porque la fermentación está en parte influenciada por la temperatura. Así que poner más poolish en invierno que en verano puede ayudar al desarrollo final de la masa."
         }
       ]
     },
     {
-      "title": "🌡️ La temperatura",
+      "title": " 🌡️ La temperatura",
       "subtitle": "Es la temperatura ambiente de la habitación, la que está fuera de la nevera",
       "answers": [
-        "Temperatura de la habitación donde se dejará reposar el poolish / la masa / la biga / los bollos.",
-        "Se utiliza en el cálculo del reposo en caliente."
+        "Temperatura de la habitación donde vamos a hacer reposar la poolish / la masa / la biga / los bollos.",
+        "Sirve en el cálculo de reposo en caliente."
       ]
     },
     {
-      "title": "🔥 Reposo en caliente",
+      "title": " 🔥 Reposo en caliente",
       "subtitle": "",
       "answers": [
-        "Tiempo de reposo de las distintas preparaciones a la temperatura seleccionada."
+        "Tiempo de reposo de las diversas preparaciones a la temperatura seleccionada."
       ]
     },
     {
-      "title": "❄️ Reposo en frío",
+      "title": " ❄️ Reposo en frío",
       "subtitle": "",
       "answers": [
-        "Tiempo de reposo de las distintas preparaciones en la nevera."
+        "Tiempo de reposo de las diversas preparaciones en la nevera."
       ]
     }
   ]
