@@ -104,7 +104,7 @@ export class CalculatorStateSaverComponent implements OnInit {
   }
 
   overrideState(state: { name: string; input: CalculatorInput }) {
-    this.stateSaveManagerService.saveState(this.form.controls.stateName.value!);
+    this.stateSaveManagerService.saveState(state.name);
     this.savedStates.set(this.stateSaveManagerService.listSavedStates());
     this.toastMessage.set('calculator.stateSaver.stateOverridden');
     this.toast.present();
