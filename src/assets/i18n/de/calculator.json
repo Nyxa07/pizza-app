@@ -309,6 +309,16 @@
             }
           },
           {
+            "title": "Den Teig 1 Stunde vor der Verwendung herausnehmen",
+            "description": "",
+            "helper": {
+              "title": "Teig herausnehmen",
+              "descriptions": [
+                "Den Teig 1 Stunde vor der Verwendung herausnehmen, damit er Zeit hat, auf Raumtemperatur zu kommen"
+              ]
+            }
+          },
+          {
             "title": "Die Teiglinge formen",
             "description": "",
             "helper": {
@@ -351,6 +361,18 @@
       "hydrationRatio": "Hydratationsverhältnis",
       "poolishRatio": "Poolish-Verhältnis",
       "all": "Alle aktivieren"
+    }
+  },
+  "stateSaver": {
+    "form": {
+      "title": "Speicherstände",
+      "newSave": "Neue Speicherung",
+      "previousSaves": "Frühere Speicherstände",
+      "saveStateName": "Name der Speicherung",
+      "stateSaved": "Speicherung durchgeführt",
+      "stateOverridden": "Speicherung überschrieben",
+      "stateLoaded": "Speicherung geladen",
+      "stateDeleted": "Speicherung gelöscht"
     }
   }
 }

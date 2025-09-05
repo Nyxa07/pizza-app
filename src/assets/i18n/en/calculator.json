@@ -309,6 +309,16 @@
             }
           },
           {
+            "title": "Take the dough out 1 hour before use",
+            "description": "",
+            "helper": {
+              "title": "Take the dough out",
+              "descriptions": [
+                "Take the dough out 1 hour before use so that it has time to return to room temperature"
+              ]
+            }
+          },
+          {
             "title": "Form the dough balls",
             "description": "",
             "helper": {
@@ -351,6 +361,18 @@
       "hydrationRatio": "Hydration ratio",
       "poolishRatio": "Poolish ratio",
       "all": "Enable all"
+    }
+  },
+  "stateSaver": {
+    "form": {
+      "title": "Saves",
+      "newSave": "New save",
+      "previousSaves": "Previous saves",
+      "saveStateName": "Save name",
+      "stateSaved": "Save completed",
+      "stateOverridden": "Save overridden",
+      "stateLoaded": "Save loaded",
+      "stateDeleted": "Save deleted"
     }
   }
 }

@@ -309,6 +309,16 @@
             }
           },
           {
+            "title": "Togliere l'impasto 1 ora prima dell'uso",
+            "description": "",
+            "helper": {
+              "title": "Togliere l'impasto",
+              "descriptions": [
+                "Togliere l'impasto 1 ora prima dell'uso, in modo che abbia il tempo di tornare a temperatura ambiente"
+              ]
+            }
+          },
+          {
             "title": "Formare i panetti",
             "description": "",
             "helper": {
@@ -351,6 +361,18 @@
       "hydrationRatio": "Rapporto di idratazione",
       "poolishRatio": "Rapporto poolish",
       "all": "Abilita tutto"
+    }
+  },
+  "stateSaver": {
+    "form": {
+      "title": "Salvataggi",
+      "newSave": "Nuovo salvataggio",
+      "previousSaves": "Salvataggi precedenti",
+      "saveStateName": "Nome del salvataggio",
+      "stateSaved": "Salvataggio effettuato",
+      "stateOverridden": "Salvataggio sovrascritto",
+      "stateLoaded": "Salvataggio caricato",
+      "stateDeleted": "Salvataggio eliminato"
     }
   }
 }

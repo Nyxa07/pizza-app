@@ -309,6 +309,16 @@
             }
           },
           {
+            "title": "Sacar la masa 1 hora antes de usar",
+            "description": "",
+            "helper": {
+              "title": "Sacar la masa",
+              "descriptions": [
+                "Sacar la masa 1 hora antes de usarla, para que tenga tiempo de volver a temperatura ambiente"
+              ]
+            }
+          },
+          {
             "title": "Formar los bollos",
             "description": "",
             "helper": {
@@ -351,6 +361,18 @@
       "hydrationRatio": "Ratio de hidratación",
       "poolishRatio": "Ratio de poolish",
       "all": "Activar todo"
+    }
+  },
+  "stateSaver": {
+    "form": {
+      "title": "Guardados",
+      "newSave": "Nuevo guardado",
+      "previousSaves": "Guardados anteriores",
+      "saveStateName": "Nombre del guardado",
+      "stateSaved": "Guardado realizado",
+      "stateOverridden": "Guardado sobrescrito",
+      "stateLoaded": "Guardado cargado",
+      "stateDeleted": "Guardado eliminado"
     }
   }
 }
