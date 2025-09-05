@@ -372,7 +372,9 @@
       "stateSaved": "Sauvegarde effectuée",
       "stateOverridden": "Sauvegarde remplacée",
       "stateLoaded": "Sauvegarde chargée",
-      "stateDeleted": "Sauvegarde supprimée"
+      "stateDeleted": "Sauvegarde supprimée",
+      "nameRequired": "Le nom est requis",
+      "nameAlreadyExists": "Le nom existe déjà"
     }
   }
 }

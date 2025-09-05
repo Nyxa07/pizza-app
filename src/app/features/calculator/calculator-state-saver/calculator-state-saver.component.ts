@@ -1,5 +1,18 @@
-import { Component, Input, OnInit, signal, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  Component,
+  computed,
+  Input,
+  OnInit,
+  signal,
+  ViewChild,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+  ValidatorFn,
+} from '@angular/forms';
 import {
   IonButton,
   IonModal,
@@ -21,6 +34,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule, SaveIcon } from 'lucide-angular';
 import { CalculatorInput } from '../services/calculator-state.service';
 import { CalculatorStateSaveManagerService } from '../services/calculator-state-save-manager.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-calculator-state-saver',
@@ -48,6 +62,7 @@ import { CalculatorStateSaveManagerService } from '../services/calculator-state-
     IonItemSliding,
     IonItemOption,
     IonItemOptions,
+    ReactiveFormsModule,
   ],
 })
 export class CalculatorStateSaverComponent implements OnInit {
@@ -56,12 +71,31 @@ export class CalculatorStateSaverComponent implements OnInit {
   toastMessage = signal('');
 
   readonly SaveIcon = SaveIcon;
-  protected stateName = signal('');
   protected savedStates = signal<{ name: string; input: CalculatorInput }[]>(
     [],
   );
+
+  protected validation: ValidatorFn = (control) => {
+    if (!control.value) {
+      return { required: true };
+    }
+    if (this.savedStates().some((state) => state.name === control.value)) {
+      return { stateNameExists: true };
+    }
+    return null;
+  };
+
+  protected form = this.fb.group({
+    stateName: ['', [this.validation]],
+  });
+
+  protected stateName = computed<string>(
+    () => this.form.controls.stateName.value ?? '',
+  );
+
   constructor(
     private stateSaveManagerService: CalculatorStateSaveManagerService,
+    private fb: FormBuilder,
   ) {}
 
   ngOnInit() {
@@ -80,7 +114,7 @@ export class CalculatorStateSaverComponent implements OnInit {
     this.savedStates.set(this.stateSaveManagerService.listSavedStates());
     this.toastMessage.set('calculator.stateSaver.form.stateSaved');
     this.toast.present();
-    this.stateName.set('');
+    this.form.reset();
   }
 
   overrideState(state: { name: string; input: CalculatorInput }) {
@@ -101,5 +135,6 @@ export class CalculatorStateSaverComponent implements OnInit {
     this.savedStates.set(this.stateSaveManagerService.listSavedStates());
     this.toastMessage.set('calculator.stateSaver.form.stateDeleted');
     this.toast.present();
+    this.form.patchValue({ stateName: this.stateName() });
   }
 }

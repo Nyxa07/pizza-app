@@ -27,6 +27,7 @@
     "@capacitor/device": "^7.0.2",
     "@capacitor/haptics": "7.0.2",
     "@capacitor/keyboard": "7.0.2",
+    "@capacitor/status-bar": "^7.0.2",
     "@ionic/angular": "^8.0.0",
     "@messageformat/core": "^3.4.0",
     "@ngx-translate/core": "^17.0.0",
