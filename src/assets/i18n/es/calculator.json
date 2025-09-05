@@ -364,15 +364,17 @@
     }
   },
   "stateSaver": {
-    "form": {
-      "title": "Guardados",
-      "newSave": "Nuevo guardado",
-      "previousSaves": "Guardados anteriores",
-      "saveStateName": "Nombre del guardado",
-      "stateSaved": "Guardado realizado",
-      "stateOverridden": "Guardado sobrescrito",
-      "stateLoaded": "Guardado cargado",
-      "stateDeleted": "Guardado eliminado"
-    }
+    "title": "Guardados",
+    "newSave": "Nuevo guardado",
+    "previousSaves": "Guardados anteriores",
+    "saveStateName": "Nombre del guardado",
+    "stateSaved": "Guardado realizado",
+    "stateOverridden": "Guardado sobrescrito",
+    "stateLoaded": "Guardado cargado",
+    "stateDeleted": "Guardado eliminado",
+    "nameRequired": "El nombre es obligatorio",
+    "nameAlreadyExists": "El nombre ya existe",
+    "confirmDeletion": "¿Seguro que quieres eliminar este guardado?",
+    "confirmOverride": "¿Seguro que quieres sobrescribir este guardado?"
   }
 }

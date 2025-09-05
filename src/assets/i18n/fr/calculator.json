@@ -364,16 +364,18 @@
     }
   },
   "stateSaver": {
-    "form": {
-      "title": "Sauvegarde",
-      "newSave": "Nouvelle sauvegarde",
-      "previousSaves": "Sauvegardes précédentes",
-      "saveStateName": "Nom de la sauvegarde",
-      "stateSaved": "Sauvegarde effectuée",
-      "stateOverridden": "Sauvegarde remplacée",
-      "stateLoaded": "Sauvegarde chargée",
-      "stateDeleted": "Sauvegarde supprimée"
-    }
+    "title": "Sauvegarde",
+    "newSave": "Nouvelle sauvegarde",
+    "previousSaves": "Sauvegardes précédentes",
+    "saveStateName": "Nom de la sauvegarde",
+    "stateSaved": "Sauvegarde effectuée",
+    "stateOverridden": "Sauvegarde remplacée",
+    "stateLoaded": "Sauvegarde chargée",
+    "stateDeleted": "Sauvegarde supprimée",
+    "nameRequired": "Le nom est requis",
+    "nameAlreadyExists": "Le nom existe déjà",
+    "confirmDeletion": "Êtes-vous sûr de vouloir supprimer cette sauvegarde ?",
+    "confirmOverride": "Êtes-vous sûr de vouloir remplacer cette sauvegarde ?"
   }
 }
 

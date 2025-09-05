@@ -364,15 +364,17 @@
     }
   },
   "stateSaver": {
-    "form": {
-      "title": "Salvataggi",
-      "newSave": "Nuovo salvataggio",
-      "previousSaves": "Salvataggi precedenti",
-      "saveStateName": "Nome del salvataggio",
-      "stateSaved": "Salvataggio effettuato",
-      "stateOverridden": "Salvataggio sovrascritto",
-      "stateLoaded": "Salvataggio caricato",
-      "stateDeleted": "Salvataggio eliminato"
-    }
+    "title": "Salvataggi",
+    "newSave": "Nuovo salvataggio",
+    "previousSaves": "Salvataggi precedenti",
+    "saveStateName": "Nome del salvataggio",
+    "stateSaved": "Salvataggio effettuato",
+    "stateOverridden": "Salvataggio sovrascritto",
+    "stateLoaded": "Salvataggio caricato",
+    "stateDeleted": "Salvataggio eliminato",
+    "nameRequired": "Il nome è obbligatorio",
+    "nameAlreadyExists": "Il nome esiste già",
+    "confirmDeletion": "Sei sicuro di voler eliminare questo salvataggio?",
+    "confirmOverride": "Sei sicuro di voler sovrascrivere questo salvataggio?"
   }
 }
