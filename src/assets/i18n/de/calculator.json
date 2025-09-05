@@ -364,15 +364,17 @@
     }
   },
   "stateSaver": {
-    "form": {
-      "title": "Speicherstände",
-      "newSave": "Neue Speicherung",
-      "previousSaves": "Frühere Speicherstände",
-      "saveStateName": "Name der Speicherung",
-      "stateSaved": "Speicherung durchgeführt",
-      "stateOverridden": "Speicherung überschrieben",
-      "stateLoaded": "Speicherung geladen",
-      "stateDeleted": "Speicherung gelöscht"
-    }
+    "title": "Speicherstände",
+    "newSave": "Neue Speicherung",
+    "previousSaves": "Frühere Speicherstände",
+    "saveStateName": "Name der Speicherung",
+    "stateSaved": "Speicherung durchgeführt",
+    "stateOverridden": "Speicherung überschrieben",
+    "stateLoaded": "Speicherung geladen",
+    "stateDeleted": "Speicherung gelöscht",
+    "nameRequired": "Name ist erforderlich",
+    "nameAlreadyExists": "Name existiert bereits",
+    "confirmDeletion": "Sind Sie sicher, dass Sie diesen Speicherstand löschen möchten?",
+    "confirmOverride": "Sind Sie sicher, dass Sie diesen Speicherstand überschreiben möchten?"
   }
 }

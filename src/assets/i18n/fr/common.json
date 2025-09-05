@@ -1,5 +1,6 @@
 {
   "actions": {
+    "title": "Actions",
     "save": "Sauvegarder",
     "cancel": "Annuler",
     "delete": "Supprimer",

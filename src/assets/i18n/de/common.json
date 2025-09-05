@@ -1,5 +1,6 @@
 {
   "actions": {
+    "title": "Aktionen",
     "save": "Speichern",
     "cancel": "Abbrechen",
     "delete": "Löschen",

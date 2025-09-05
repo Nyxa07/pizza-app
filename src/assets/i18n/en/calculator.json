@@ -364,15 +364,17 @@
     }
   },
   "stateSaver": {
-    "form": {
-      "title": "Saves",
-      "newSave": "New save",
-      "previousSaves": "Previous saves",
-      "saveStateName": "Save name",
-      "stateSaved": "Save completed",
-      "stateOverridden": "Save overridden",
-      "stateLoaded": "Save loaded",
-      "stateDeleted": "Save deleted"
-    }
+    "title": "Saves",
+    "newSave": "New save",
+    "previousSaves": "Previous saves",
+    "saveStateName": "Save name",
+    "stateSaved": "Save completed",
+    "stateOverridden": "Save overridden",
+    "stateLoaded": "Save loaded",
+    "stateDeleted": "Save deleted",
+    "nameRequired": "Name is required",
+    "nameAlreadyExists": "Name already exists",
+    "confirmDeletion": "Are you sure you want to delete this save?",
+    "confirmOverride": "Are you sure you want to overwrite this save?"
   }
 }
