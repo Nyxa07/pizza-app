@@ -12,7 +12,7 @@ import {
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
 import { AsyncPipe, JsonPipe, LowerCasePipe } from '@angular/common';
-import { combineLatest, debounceTime, map, startWith } from 'rxjs';
+import { combineLatest, debounceTime, filter, map, startWith } from 'rxjs';
 import {
   CalculatorStateService,
   CalculatorInput,
@@ -43,6 +43,7 @@ import { DoughType } from '../enums/dough-type.enum';
   standalone: true,
 })
 export class CalculatorFormComponent implements OnInit {
+  private blockStatsUpdates = false;
   protected form = this.formBuilder.group<CalculatorInput>(
     this.state.getInput(),
   );
@@ -95,10 +96,19 @@ export class CalculatorFormComponent implements OnInit {
     private state: CalculatorStateService,
   ) {
     this.state.input$.pipe(takeUntilDestroyed()).subscribe((input) => {
-      this.form.patchValue(input, { emitEvent: false });
+      this.blockStatsUpdates = true;
+      this.form.patchValue(input);
+      setTimeout(() => {
+        this.blockStatsUpdates = false;
+      }, 100);
     });
+
     this.form.valueChanges
-      .pipe(debounceTime(250), takeUntilDestroyed())
+      .pipe(
+        filter(() => !this.blockStatsUpdates),
+        debounceTime(250),
+        takeUntilDestroyed(),
+      )
       .subscribe((v) => {
         this.state.update(v as CalculatorInput);
       });
