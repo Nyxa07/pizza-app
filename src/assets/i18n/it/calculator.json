@@ -376,5 +376,17 @@
     "nameAlreadyExists": "Il nome esiste già",
     "confirmDeletion": "Sei sicuro di voler eliminare questo salvataggio?",
     "confirmOverride": "Sei sicuro di voler sovrascrivere questo salvataggio?"
+  },
+  "share": {
+    "title": "La mia ricetta della pizza",
+    "dialogTitle": "Condividi la ricetta con i tuoi amici",
+    "form": {
+      "titles": {
+        "configuration": "Configurazione della condivisione"
+      },
+      "onlyIngredients": "Solo ingredienti",
+      "withHelperDescriptions": "Includi descrizioni dei passaggi",
+      "withHelperDescriptionsMessage": "Vuoi davvero condividere la ricetta con le descrizioni dei passaggi (il testo sarà più lungo)?"
+    }
   }
 }

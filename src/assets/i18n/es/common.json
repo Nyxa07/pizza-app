@@ -10,7 +10,9 @@
     "reset": "Restablecer",
     "override": "Sobrescribir",
     "close": "Cerrar",
-    "load": "Cargar"
+    "load": "Cargar",
+    "share": "Compartir",
+    "validate": "Validar"
   },
   "status": {
     "loading": "Cargando...",

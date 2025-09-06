@@ -10,7 +10,9 @@
     "reset": "Zurücksetzen",
     "override": "Überschreiben",
     "close": "Schließen",
-    "load": "Laden"
+    "load": "Laden",
+    "share": "Teilen",
+    "validate": "Bestätigen"
   },
   "status": {
     "loading": "Laden...",

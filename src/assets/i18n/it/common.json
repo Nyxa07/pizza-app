@@ -10,7 +10,9 @@
     "reset": "Ripristina",
     "override": "Sovrascrivi",
     "close": "Chiudi",
-    "load": "Carica"
+    "load": "Carica",
+    "share": "Condividi",
+    "validate": "Conferma"
   },
   "status": {
     "loading": "Caricamento...",

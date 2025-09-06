@@ -376,5 +376,17 @@
     "nameAlreadyExists": "Name already exists",
     "confirmDeletion": "Are you sure you want to delete this save?",
     "confirmOverride": "Are you sure you want to overwrite this save?"
+  },
+  "share": {
+    "title": "My pizza recipe",
+    "dialogTitle": "Share the recipe with your friends",
+    "form": {
+      "titles": {
+        "configuration": "Share configuration"
+      },
+      "onlyIngredients": "Ingredients only",
+      "withHelperDescriptions": "Include step descriptions",
+      "withHelperDescriptionsMessage": "Are you sure you want to share the recipe with the step descriptions (the text will be longer)?"
+    }
   }
 }

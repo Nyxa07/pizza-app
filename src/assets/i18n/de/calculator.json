@@ -376,5 +376,17 @@
     "nameAlreadyExists": "Name existiert bereits",
     "confirmDeletion": "Sind Sie sicher, dass Sie diesen Speicherstand löschen möchten?",
     "confirmOverride": "Sind Sie sicher, dass Sie diesen Speicherstand überschreiben möchten?"
+  },
+  "share": {
+    "title": "Mein Pizzarezept",
+    "dialogTitle": "Rezept mit Freunden teilen",
+    "form": {
+      "titles": {
+        "configuration": "Teilen-Konfiguration"
+      },
+      "onlyIngredients": "Nur Zutaten",
+      "withHelperDescriptions": "Schrittbeschreibungen einbeziehen",
+      "withHelperDescriptionsMessage": "Möchten Sie die Rezeptbeschreibung mit den Schrittbeschreibungen teilen (der Text wird länger)?"
+    }
   }
 }
