@@ -1,3 +1,43 @@
-<ion-button id="open-save-state" (click)="onShare()">
+<ion-button id="open-share-modal">
   <i-lucide slot="icon-only" [img]="ShareIcon"></i-lucide>
 </ion-button>
+
+<ion-modal trigger="open-share-modal">
+  <ng-template>
+    <ion-header [translucent]="false">
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">{{
+            "common.actions.cancel" | translate
+          }}</ion-button>
+        </ion-buttons>
+        <ion-title>{{ "common.actions.share" | translate }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="confirm()" [strong]="true">{{
+            "common.actions.validate" | translate
+          }}</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <form [formGroup]="form">
+        <ion-list-header>{{
+          "calculator.share.form.titles.configuration" | translate
+        }}</ion-list-header>
+        <ion-list [lines]="'none'">
+          <ion-item>
+            <ion-toggle formControlName="withHelperDescriptions">
+              {{ "calculator.share.form.withHelperDescriptions" | translate }}
+            </ion-toggle>
+          </ion-item>
+
+          <ion-item>
+            <ion-toggle formControlName="onlyIngredients">
+              {{ "calculator.share.form.onlyIngredients" | translate }}
+            </ion-toggle>
+          </ion-item>
+        </ion-list>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

@@ -10,7 +10,9 @@
     "reset": "Réinitialiser",
     "override": "Écraser",
     "close": "Fermer",
-    "load": "Charger"
+    "load": "Charger",
+    "share": "Partager",
+    "validate": "Valider"
   },
   "status": {
     "loading": "Chargement...",
