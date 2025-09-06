@@ -10,7 +10,9 @@
     "reset": "Reset",
     "override": "Override",
     "close": "Close",
-    "load": "Load"
+    "load": "Load",
+    "share": "Share",
+    "validate": "Validate"
   },
   "status": {
     "loading": "Loading...",
