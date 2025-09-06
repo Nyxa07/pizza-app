@@ -1,4 +1,10 @@
-import { Component, OnInit, signal, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  signal,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -51,6 +57,7 @@ import { Dialog } from '@capacitor/dialog';
     IonToast,
     ReactiveFormsModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalculatorStateSaverComponent implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;

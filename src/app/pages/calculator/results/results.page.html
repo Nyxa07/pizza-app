@@ -4,6 +4,9 @@
       <ion-back-button defaultHref="/tabs/calculator"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ "pages.calculator.results.title" | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <app-calculator-state-share></app-calculator-state-share>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -12,8 +15,8 @@
     <ion-toolbar>
       <ion-title size="large">{{
         "pages.calculator.results.title" | translate
-      }}</ion-title>
-    </ion-toolbar>
+      }}</ion-title> </ion-toolbar
+    >.
   </ion-header>
 
   @if (isInitialized()) {

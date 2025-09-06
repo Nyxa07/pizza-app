@@ -19,6 +19,7 @@ import { DirectDoughRecipe } from 'src/app/features/calculator/recipes/direct-do
 import { PoolishRecipe } from 'src/app/features/calculator/recipes/poolish.recipe';
 import { RecipeDefConverterService } from 'src/app/features/recipe/services/recipe-def-converter.service';
 import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
+import { CalculatorStateShareComponent } from 'src/app/features/calculator/calculator-state-share/calculator-state-share.component';
 
 @Component({
   selector: 'calculator-results-page',
@@ -38,6 +39,7 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
     RecipeComponent,
     IonItem,
     IonSkeletonText,
+    CalculatorStateShareComponent,
   ],
 })
 export class CalculatorResultsPage implements OnInit {

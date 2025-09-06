@@ -41,10 +41,6 @@ import { CalculatorInitializerService } from 'src/app/features/calculator/servic
     LucideAngularModule,
     IonItem,
     IonSkeletonText,
-    IonButton,
-    RouterLink,
-    CalculatorFormComponent,
-    CalculatorRefreshButtonComponent,
     CalculatorStateSaverComponent,
   ],
 })
