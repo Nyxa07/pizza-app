@@ -1,6 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
-import { LocaleManagerService } from 'src/app/features/locales/services/locale-manager.service';
+import { LocaleManagerService } from 'src/app/features/settings/services/locale-manager.service';
 
 @Pipe({
   name: 'number',

@@ -9,11 +9,12 @@ import {
   IonToggle,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
-import { LocaleManagerService } from '../../locales/services/locale-manager.service';
-import { Locales } from '../../locales/enums/locales.enum';
-import { ThemeService } from '../../theme/services/theme.service';
+import { Locales } from '../enums/locales.enum';
+import { ThemeService } from '../services/theme.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
+import { KeepAwakeService } from 'src/app/features/settings/services/keep-awake.service';
+import { LocaleManagerService } from '../services/locale-manager.service';
 
 @Component({
   selector: 'app-settings-form',
@@ -40,12 +41,14 @@ export class SettingsFormComponent implements OnInit {
   form = this.fb.group({
     locale: [this.localeManager.getLocale(), Validators.required],
     paletteToggle: [this.themeService.isDarkMode()],
+    keepAwake: [this.keepAwakeService.isKeptAwake()],
   });
 
   constructor(
     private localeManager: LocaleManagerService,
     private themeService: ThemeService,
     private fb: FormBuilder,
+    private keepAwakeService: KeepAwakeService,
   ) {
     this.form.valueChanges
       .pipe(takeUntilDestroyed(), debounceTime(250))
@@ -55,7 +58,9 @@ export class SettingsFormComponent implements OnInit {
         }
         this.localeManager.switchLocale(value.locale ?? '');
         this.themeService.setDarkMode(value.paletteToggle ?? false);
+        this.keepAwakeService.setKeepAwake(value.keepAwake ?? false);
       });
+
   }
 
   ngOnInit() {}

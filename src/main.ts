@@ -18,10 +18,11 @@ import {
 } from '@ngx-translate/core';
 import { provideHttpClient } from '@angular/common/http';
 import { inject, provideAppInitializer } from '@angular/core';
-import { LocaleManagerService } from './app/features/locales/services/locale-manager.service';
-import { provideMultiTranslateLoader } from './app/features/locales/services/translation.loader';
 import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
-import { ThemeService } from './app/features/theme/services/theme.service';
+import { ThemeService } from './app/features/settings/services/theme.service';
+import { LocaleManagerService } from './app/features/settings/services/locale-manager.service';
+import { provideMultiTranslateLoader } from './app/features/settings/services/translation.loader';
+import { KeepAwakeService } from './app/features/settings/services/keep-awake.service';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -40,6 +41,9 @@ bootstrapApplication(AppComponent, {
     provideAppInitializer(() => {
       const themeService = inject(ThemeService);
       themeService.init();
+
+      const keepAwakeService = inject(KeepAwakeService);
+      keepAwakeService.init();
 
       const localeInitService = inject(LocaleManagerService);
       return localeInitService.init();
