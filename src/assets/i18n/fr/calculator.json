@@ -24,7 +24,7 @@
       "restTime": "Temps repos",
       "ballsRestTime": "Temps repos des pâtons",
       "totalPrepTime": "Temps préparation total",
-      "totalPrepTimeDescription": "Cela tiens compte de la recette",
+      "totalPrepTimeDescription": "Cela tient compte de la recette",
       "hoursUnit": "heures"
     }
   },
@@ -147,7 +147,7 @@
               "title": "Rabats",
               "descriptions": [
                 "Pour faire un rabat, on prend la pâte et on la plie sur elle-même",
-                "On peut faire autant de rabats que l'on veut, mais il faut que la pâte reste soit douce et souple",
+                "On peut faire autant de rabats que l'on veut, mais il faut que la pâte reste douce et souple",
                 "Le rabat permet d'introduire de l'air dans la pâte et permettra lors de la cuisson d'obtenir une pâte alvéolée",
                 "Une fois que l'on a fini, on peut former une belle boule"
               ]
@@ -280,7 +280,7 @@
               "title": "Rabats",
               "descriptions": [
                 "Pour faire un rabat, on prend la pâte et on la plie sur elle-même",
-                "On peut faire autant de rabats que l'on veut, mais il faut que la pâte reste soit douce et souple",
+                "On peut faire autant de rabats que l'on veut, mais il faut que la pâte reste douce et souple",
                 "Le rabat permet d'introduire de l'air dans la pâte et permettra lors de la cuisson d'obtenir une pâte alvéolée",
                 "Une fois que l'on a fini, on peut former une belle boule"
               ]

@@ -41,7 +41,7 @@
       ]
     },
     {
-      "title": " 💦 Hydratation",
+      "title": "Hydratation",
       "subtitle": "Ratio entre la quantité d’eau totale sur la quantité de farine totale",
       "answers": [
         "Ex 1 : Pour 100 g d’eau au total je vais avoir 151,5 g de farine totale ce qui donne une hydratation de la pâte à 66 %. Calcul : 100 ÷ 151,5 = 0,66 soit 66 %.",
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "title": " 🍚 Ratio Poolish",
+      "title": "Ratio Poolish",
       "subtitle": "Ratio entre la quantité de poolish et la quantité totale de pâte",
       "answers": [
         "On utilise couramment entre 30 et 60 % de poolish dans la quantité de pâte finale.",
@@ -64,30 +64,30 @@
       "tips": [
         {
           "title": "💡 Astuce :",
-          "description": "En général on met un ratio plus élevé de poolish l’hiver que l’été car la fermentation est en partie influencée par la température. Donc mettre plus de poolish en hiver que l’été peut aider au développement finale de la pâte."
+          "description": "En général on met un ratio plus élevé de poolish l’hiver que l’été car la fermentation est en partie influencée par la température. Donc mettre plus de poolish en hiver que l’été peut aider au développement final de la pâte."
         }
       ]
     },
     {
-      "title": " 🌡️ La Température",
+      "title": "La Température",
       "subtitle": "C'est la température ambiante de la pièce, celle en dehors du frigo",
       "answers": [
         "Température de la pièce où l'on va faire reposer la poolish / la pâte / la biga / les pâtons.",
-        "Sers dans le calcul de repos à chaud."
+        "Sert dans le calcul de repos à chaud."
       ]
     },
     {
-      "title": " 🔥 Repos à Chaud",
+      "title": "Repos à Chaud",
       "subtitle": "",
       "answers": [
-        "Temps de repos des diverses préparation à la température sélectionnée."
+        "Temps de repos des diverses préparations à la température sélectionnée."
       ]
     },
     {
-      "title": " ❄️ Repos à Froid",
+      "title": "Repos à Froid",
       "subtitle": "",
       "answers": [
-        "Temps de repos des diverses préparation au frigo."
+        "Temps de repos des diverses préparations au frigo."
       ]
     }
   ]
