@@ -14,7 +14,7 @@
     },
     "complex": {
       "title": "Calculateur avancé",
-      "description": "Calculer les quantités des ingrédients en fonction d'une multitudes de paramètres (Témperature, Farine, Hydratation, Levure, etc.)"
+      "description": "Calculer les quantités des ingrédients en fonction d'une multitude de paramètres (Témperature, Farine, Hydratation, Levure, etc.)"
     }
   },
   "guides": {
@@ -32,7 +32,7 @@
     "calculator": {
       "title": "Calculateur",
       "subtitle": "Calculateur de pâte à pizza",
-      "content": "Calculer les quantités des ingrédients en fonction d'une multitudes de paramètres (Témperature, Farine, Hydratation, Levure, etc.)"
+      "content": "Calculer les quantités des ingrédients en fonction d'une multitude de paramètres (Témperature, Farine, Hydratation, Levure, etc.)"
     },
     "faq": {
       "title": "FAQ",
