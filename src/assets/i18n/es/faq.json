@@ -41,7 +41,7 @@
       ]
     },
     {
-      "title": " 💦 Hidratación",
+      "title": " Hidratación",
       "subtitle": "Ratio entre la cantidad de agua total sobre la cantidad de harina total",
       "answers": [
         "Ej 1: Para 100 g de agua total voy a tener 151,5 g de harina total lo que da una hidratación de la masa del 66%. Cálculo: 100 ÷ 151,5 = 0,66 o sea 66%.",
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "title": " 🍚 Ratio Poolish",
+      "title": " Ratio Poolish",
       "subtitle": "Ratio entre la cantidad de poolish y la cantidad total de masa",
       "answers": [
         "Se utiliza comúnmente entre 30 y 60% de poolish en la cantidad de masa final.",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "title": " 🌡️ La temperatura",
+      "title": " La temperatura",
       "subtitle": "Es la temperatura ambiente de la habitación, la que está fuera de la nevera",
       "answers": [
         "Temperatura de la habitación donde vamos a hacer reposar la poolish / la masa / la biga / los bollos.",
@@ -77,14 +77,14 @@
       ]
     },
     {
-      "title": " 🔥 Reposo en caliente",
+      "title": "Reposo en caliente",
       "subtitle": "",
       "answers": [
         "Tiempo de reposo de las diversas preparaciones a la temperatura seleccionada."
       ]
     },
     {
-      "title": " ❄️ Reposo en frío",
+      "title": "Reposo en frío",
       "subtitle": "",
       "answers": [
         "Tiempo de reposo de las diversas preparaciones en la nevera."

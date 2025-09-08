@@ -41,7 +41,7 @@
       ]
     },
     {
-      "title": " 💦 Hydration",
+      "title": " Hydration",
       "subtitle": "Ratio between the total amount of water over the total amount of flour",
       "answers": [
         "Ex 1: For 100 g of total water I will have 151.5 g of total flour which gives a dough hydration of 66%. Calculation: 100 ÷ 151.5 = 0.66 or 66%.",
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "title": " 🍚 Poolish Ratio",
+      "title": " Poolish Ratio",
       "subtitle": "Ratio between the amount of poolish and the total amount of dough",
       "answers": [
         "We commonly use between 30 and 60% poolish in the final dough quantity.",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "title": " 🌡️ Temperature",
+      "title": "Temperature",
       "subtitle": "It's the ambient temperature of the room, the one outside the fridge",
       "answers": [
         "Temperature of the room where we will let the poolish / dough / biga / dough balls rest.",
@@ -77,14 +77,14 @@
       ]
     },
     {
-      "title": " 🔥 Warm Rest",
+      "title": "Warm Rest",
       "subtitle": "",
       "answers": [
         "Rest time of various preparations at the selected temperature."
       ]
     },
     {
-      "title": " ❄️ Cold Rest",
+      "title": "Cold Rest",
       "subtitle": "",
       "answers": [
         "Rest time of various preparations in the fridge."
