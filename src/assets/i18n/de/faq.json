@@ -41,7 +41,7 @@
       ]
     },
     {
-      "title": " 💦 Hydratation",
+      "title": "Hydratation",
       "subtitle": "Verhältnis zwischen der gesamten Wassermenge zur gesamten Mehlmenge",
       "answers": [
         "Beispiel 1: Für 100 g Gesamtwasser habe ich 151,5 g Gesamtmehl, was eine Teighydratation von 66% ergibt. Berechnung: 100 ÷ 151,5 = 0,66 oder 66%.",
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "title": " 🍚 Poolish-Verhältnis",
+      "title": "Poolish-Verhältnis",
       "subtitle": "Verhältnis zwischen der Poolish-Menge und der Gesamtteigmenge",
       "answers": [
         "Wir verwenden üblicherweise zwischen 30 und 60% Poolish in der finalen Teigmenge.",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "title": " 🌡️ Die Temperatur",
+      "title": "Die Temperatur",
       "subtitle": "Es ist die Umgebungstemperatur des Raumes, die außerhalb des Kühlschranks",
       "answers": [
         "Temperatur des Raumes, wo wir den Poolish / Teig / Biga / Teiglinge ruhen lassen werden.",
@@ -77,14 +77,14 @@
       ]
     },
     {
-      "title": " 🔥 Warme Ruhezeit",
+      "title": "Warme Ruhezeit",
       "subtitle": "",
       "answers": [
         "Ruhezeit der verschiedenen Zubereitungen bei der ausgewählten Temperatur."
       ]
     },
     {
-      "title": " ❄️ Kalte Ruhezeit",
+      "title": "Kalte Ruhezeit",
       "subtitle": "",
       "answers": [
         "Ruhezeit der verschiedenen Zubereitungen im Kühlschrank."

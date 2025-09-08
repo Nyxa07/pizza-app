@@ -7,7 +7,7 @@ import {
   IonCardSubtitle,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
-import { LocaleManagerService } from '../locales/services/locale-manager.service';
+import { LocaleManagerService } from '../settings/services/locale-manager.service';
 
 @Component({
   selector: 'app-faq',

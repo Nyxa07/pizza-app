@@ -9,6 +9,9 @@ const config: CapacitorConfig = {
       overlaysWebView: false,
       backgroundColor: '#ff9860',
     },
+    EdgeToEdge: {
+      backgroundColor: '#ff9860',
+    },
   },
 };
 

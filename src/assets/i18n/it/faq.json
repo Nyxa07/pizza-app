@@ -41,7 +41,7 @@
       ]
     },
     {
-      "title": " 💦 Idratazione",
+      "title": " Idratazione",
       "subtitle": "Rapporto tra la quantità di acqua totale sulla quantità di farina totale",
       "answers": [
         "Es 1: Per 100 g di acqua totale avrò 151,5 g di farina totale che dà un'idratazione dell'impasto del 66%. Calcolo: 100 ÷ 151,5 = 0,66 ossia 66%.",
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "title": " 🍚 Rapporto Poolish",
+      "title": " Rapporto Poolish",
       "subtitle": "Rapporto tra la quantità di poolish e la quantità totale di impasto",
       "answers": [
         "Si utilizza comunemente tra il 30 e il 60% di poolish nella quantità di impasto finale.",
@@ -63,13 +63,13 @@
       ],
       "tips": [
         {
-          "title": "💡 Suggerimento:",
+          "title": "Suggerimento:",
           "description": "In generale si mette un rapporto più elevato di poolish d'inverno che d'estate perché la fermentazione è in parte influenzata dalla temperatura. Quindi mettere più poolish d'inverno che d'estate può aiutare lo sviluppo finale dell'impasto."
         }
       ]
     },
     {
-      "title": " 🌡️ La temperatura",
+      "title": "La temperatura",
       "subtitle": "È la temperatura ambiente della stanza, quella fuori dal frigo",
       "answers": [
         "Temperatura della stanza dove faremo riposare la poolish / l'impasto / la biga / i panetti.",
@@ -77,14 +77,14 @@
       ]
     },
     {
-      "title": " 🔥 Riposo al caldo",
+      "title": " Riposo al caldo",
       "subtitle": "",
       "answers": [
         "Tempo di riposo delle diverse preparazioni alla temperatura selezionata."
       ]
     },
     {
-      "title": " ❄️ Riposo al freddo",
+      "title": " Riposo al freddo",
       "subtitle": "",
       "answers": [
         "Tempo di riposo delle diverse preparazioni in frigo."

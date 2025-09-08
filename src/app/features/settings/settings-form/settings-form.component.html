@@ -30,4 +30,15 @@
       }}</ion-toggle>
     </ion-item>
   </ion-list>
+
+  <ion-list-header>{{
+    "settings.form.system.title" | translate
+  }}</ion-list-header>
+  <ion-list lines="none">
+    <ion-item>
+      <ion-toggle formControlName="keepAwake" justify="space-between">{{
+        "settings.form.system.keepAwake.title" | translate
+      }}</ion-toggle>
+    </ion-item>
+  </ion-list>
 </form>

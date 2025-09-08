@@ -11,6 +11,12 @@
       "paletteToggle": {
         "title": "Mode sombre"
       }
+    },
+    "system": {
+      "title": "Système",
+      "keepAwake": {
+        "title": "Garder l'écran allumé"
+      }
     }
   }
 }

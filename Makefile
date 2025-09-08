@@ -12,3 +12,6 @@ web-build:
 serve:
 	npm i
 	ionic serve
+
+assets-generation:
+	npx @capacitor/assets generate --android --iconBackgroundColor '#eeeeee' --iconBackgroundColorDark '#222222' --splashBackgroundColor '#eeeeee' --splashBackgroundColorDark '#111111'
