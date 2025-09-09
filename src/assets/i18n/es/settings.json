@@ -11,6 +11,12 @@
       "paletteToggle": {
         "title": "Modo oscuro"
       }
+    },
+    "system": {
+      "title": "Sistema",
+      "keepAwake": {
+        "title": "Mantener pantalla encendida"
+      }
     }
   }
 }

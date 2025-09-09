@@ -11,6 +11,12 @@
       "paletteToggle": {
         "title": "Modalità scura"
       }
+    },
+    "system": {
+      "title": "Sistema",
+      "keepAwake": {
+        "title": "Mantieni schermo acceso"
+      }
     }
   }
 }

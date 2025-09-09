@@ -11,6 +11,12 @@
       "paletteToggle": {
         "title": "Dark mode"
       }
+    },
+    "system": {
+      "title": "System",
+      "keepAwake": {
+        "title": "Keep screen on"
+      }
     }
   }
 }
