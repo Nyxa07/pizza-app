@@ -34,7 +34,7 @@ import { LocaleManagerService } from '../services/locale-manager.service';
 })
 export class SettingsFormComponent implements OnInit {
   availableLocales = Object.entries(Locales).map(([_, value]) => ({
-    translateKey: `language.selector.${value}`,
+    translateKey: `settings.form.system.language.${value}`,
     value,
   }));
 
@@ -60,7 +60,6 @@ export class SettingsFormComponent implements OnInit {
         this.themeService.setDarkMode(value.paletteToggle ?? false);
         this.keepAwakeService.setKeepAwake(value.keepAwake ?? false);
       });
-
   }
 
   ngOnInit() {}

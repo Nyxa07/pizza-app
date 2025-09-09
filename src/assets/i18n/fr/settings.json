@@ -16,6 +16,14 @@
       "title": "Système",
       "keepAwake": {
         "title": "Garder l'écran allumé"
+      },
+      "language": {
+        "title": "Langue",
+        "en": "Anglais",
+        "fr": "Français",
+        "it": "Italien",
+        "es": "Espagnol",
+        "de": "Allemand"
       }
     }
   }

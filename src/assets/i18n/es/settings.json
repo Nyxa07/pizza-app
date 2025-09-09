@@ -11,6 +11,20 @@
       "paletteToggle": {
         "title": "Modo oscuro"
       }
+    },
+    "system": {
+      "title": "Sistema",
+      "keepAwake": {
+        "title": "Mantener pantalla encendida"
+      },
+      "language": {
+        "title": "Idioma",
+        "en": "Inglés",
+        "fr": "Francés",
+        "it": "Italiano",
+        "es": "Español",
+        "de": "Alemán"
+      }
     }
   }
 }

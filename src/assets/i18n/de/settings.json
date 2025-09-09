@@ -11,6 +11,20 @@
       "paletteToggle": {
         "title": "Dunkler Modus"
       }
+    },
+    "system": {
+      "title": "System",
+      "keepAwake": {
+        "title": "Bildschirm eingeschaltet lassen"
+      },
+      "language": {
+        "title": "Sprache",
+        "en": "Englisch",
+        "fr": "Französisch",
+        "it": "Italienisch",
+        "es": "Spanisch",
+        "de": "Deutsch"
+      }
     }
   }
 }
