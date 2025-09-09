@@ -16,6 +16,14 @@
       "title": "System",
       "keepAwake": {
         "title": "Keep screen on"
+      },
+      "language": {
+        "title": "Language",
+        "en": "English",
+        "fr": "French",
+        "it": "Italian",
+        "es": "Spanish",
+        "de": "German"
       }
     }
   }
