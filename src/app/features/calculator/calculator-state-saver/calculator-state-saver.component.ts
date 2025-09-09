@@ -156,6 +156,10 @@ export class CalculatorStateSaverComponent implements OnInit {
               message: this.translate.instant(
                 'calculator.stateSaver.confirmOverride',
               ),
+              okButtonTitle: this.translate.instant('common.actions.override'),
+              cancelButtonTitle: this.translate.instant(
+                'common.actions.cancel',
+              ),
             });
             if (value) {
               this.overrideState(state);
@@ -174,6 +178,10 @@ export class CalculatorStateSaverComponent implements OnInit {
               title: 'Confirm',
               message: this.translate.instant(
                 'calculator.stateSaver.confirmDeletion',
+              ),
+              okButtonTitle: this.translate.instant('common.actions.delete'),
+              cancelButtonTitle: this.translate.instant(
+                'common.actions.cancel',
               ),
             });
             if (value) {
