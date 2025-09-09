@@ -28,7 +28,7 @@
           [cancelText]="'common.actions.cancel' | translate"
           [okText]="'common.actions.ok' | translate"
         >
-          @for (pizzaWeight of range(200, 400, 10); track pizzaWeight) {
+          @for (pizzaWeight of range(150, 400, 10); track pizzaWeight) {
             <ion-select-option [value]="pizzaWeight">
               {{ pizzaWeight | number: "1.0-0" }} g
             </ion-select-option>
