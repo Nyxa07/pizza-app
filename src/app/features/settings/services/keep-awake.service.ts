@@ -15,17 +15,18 @@ export class KeepAwakeService {
   async init() {
     const isSupported = await this.isSupported();
     if (isSupported) {
-      const isKeptAwake = this.prefs.get(this.STORAGE_KEY ?? false);
+      const isKeptAwake = !!this.prefs.get(this.STORAGE_KEY ?? false);
       if (isKeptAwake) {
         await KeepAwake.keepAwake();
       } else {
         await KeepAwake.allowSleep();
       }
+      this._isKeptAwake.next(isKeptAwake);
     }
   }
 
   isKeptAwake() {
-    return this._isKeptAwake.value
+    return this._isKeptAwake.value;
   }
 
   async setKeepAwake(isKeptAwake: boolean) {
