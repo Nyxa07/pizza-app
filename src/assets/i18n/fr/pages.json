@@ -15,6 +15,10 @@
     "complex": {
       "title": "Calculateur avancé",
       "description": "Calculer les quantités des ingrédients en fonction d'une multitude de paramètres (Témperature, Farine, Hydratation, Levure, etc.)"
+    },
+    "assistant": {
+      "title": "Assistant de configuration",
+      "description": "Un assistant pas à pas pour vous aider à configurer votre recette de pâte à pizza"
     }
   },
   "guides": {

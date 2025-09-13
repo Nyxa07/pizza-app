@@ -35,6 +35,7 @@ const DEFAULT_SETTINGS: ICalculatorSettings = {
 export enum CALCULATOR_MODE {
   SIMPLE = 'simple',
   COMPLEX = 'complex',
+  ASSIST = 'assist',
 }
 
 @Injectable({

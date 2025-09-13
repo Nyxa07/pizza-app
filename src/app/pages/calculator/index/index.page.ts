@@ -39,6 +39,11 @@ export class CalculatorIndexPage {
   constructor(private router: Router) {}
   protected readonly items = [
     {
+      title: 'pages.calculator.assistant.title',
+      description: 'pages.calculator.assistant.description',
+      link: '/tabs/calculator/assistant',
+    },
+    {
       title: 'pages.calculator.simple.title',
       description: 'pages.calculator.simple.description',
       link: '/tabs/calculator/simple',
