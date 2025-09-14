@@ -1,11 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  effect,
   Input,
-  OnDestroy,
   OnInit,
-  signal,
 } from '@angular/core';
 import {
   IonList,
@@ -20,14 +17,7 @@ import {
   IonRange,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subject, takeUntil } from 'rxjs';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dough-type-step',

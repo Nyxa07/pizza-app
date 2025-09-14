@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  Input,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
   IonList,
   IonItem,
@@ -20,8 +13,6 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PizzaType } from '../../../settings/enums/pizza-type.enum';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-pizza-type-step',

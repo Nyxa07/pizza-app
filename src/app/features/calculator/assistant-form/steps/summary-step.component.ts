@@ -25,7 +25,6 @@ import {
 } from 'lucide-angular';
 import { FormGroup } from '@angular/forms';
 import { YeastType } from '../../enums/yeast-type.enum';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-summary-step',
