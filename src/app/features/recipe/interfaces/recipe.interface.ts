@@ -25,6 +25,7 @@ export interface IRecipeMethodItem {
 
 export interface IRecipe {
   title: string;
+  description?: string;
   ingredients: {
     items: IRecipeIngredientItem[];
   };

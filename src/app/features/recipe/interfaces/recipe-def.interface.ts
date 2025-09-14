@@ -1,5 +1,6 @@
 export interface IRecipeDef {
   title: string;
+  description?: string;
   ingredients: {
     items: {
       icon: any;
