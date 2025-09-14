@@ -34,6 +34,9 @@ export class PoolishDoughRecipe implements IRecipeDef {
   readonly CircleIcon = CircleIcon;
   readonly ArrowDownUpIcon = ArrowDownUpIcon;
   readonly EclipseIcon = EclipseIcon;
+
+  readonly baseStepsKey = 'calculator.recipe.steps.';
+
   constructor(private result: DoughResult) {}
 
   private get quantity() {
@@ -41,26 +44,31 @@ export class PoolishDoughRecipe implements IRecipeDef {
       this.result.dough ?? { flour: 0, water: 0, yeast: 0, honey: 0, salt: 0 }
     );
   }
-  baseTranslationKey = 'calculator.recipe.poolishDough';
+
+  private getStepsKey(step: string) {
+    return this.baseStepsKey + step;
+  }
+
+  title = 'calculator.recipe.titles.poolishDough';
 
   ingredients = {
     items: [
       {
         icon: this.WheatIcon,
         value: this.quantity.flour,
-        label: 'common.ingredients.flour',
+        title: 'common.ingredients.flour',
         unit: 'g',
       },
       {
         icon: DropletsIcon,
         value: this.quantity.water,
-        label: 'common.ingredients.water',
+        title: 'common.ingredients.water',
         unit: 'g',
       },
       {
         icon: SpotlightIcon,
         value: this.quantity.salt,
-        label: 'common.ingredients.salt',
+        title: 'common.ingredients.salt',
         unit: 'g',
       },
     ],
@@ -77,52 +85,52 @@ export class PoolishDoughRecipe implements IRecipeDef {
         icon: this.CookingPotIcon,
         helperDescriptions: 1,
         hide: !this.result.poolish?.coldRestTime,
-        translationKey: 'takeOutPoolish',
+        baseTranslationKey: this.getStepsKey('takeOutPoolish'),
       },
       {
         icon: this.BubblesIcon,
         helperDescriptions: 2,
-        translationKey: 'addWaterSalt',
+        baseTranslationKey: this.getStepsKey('addWaterSalt'),
       },
       {
         icon: this.WheatIcon,
         helperDescriptions: 1,
-        translationKey: 'addFlour',
+        baseTranslationKey: this.getStepsKey('addFlourPoolishDough'),
       },
       {
         icon: this.ArrowDownUpIcon,
         helperDescriptions: 2,
-        translationKey: 'transferDough',
+        baseTranslationKey: this.getStepsKey('transferDough'),
       },
       {
         icon: this.HandIcon,
-        helperDescriptions: 2,
-        translationKey: 'knead',
+        helperDescriptions: 3,
+        baseTranslationKey: this.getStepsKey('knead'),
       },
       {
         icon: this.UndoDotIcon,
         helperDescriptions: 4,
-        translationKey: 'foldAndShape',
+        baseTranslationKey: this.getStepsKey('foldAndShape'),
       },
       {
         icon: this.ThermometerSunIcon,
         helperDescriptions: 2,
-        translationKey: 'shortRest',
+        baseTranslationKey: this.getStepsKey('shortRestPoolishDough'),
       },
       {
         icon: this.CircleIcon,
         helperDescriptions: 2,
-        translationKey: 'reshapeBall',
+        baseTranslationKey: this.getStepsKey('shapeAsBall'),
       },
       {
         icon: this.ThermometerSunIcon,
         helperDescriptions: 0,
-        translationKey: 'restOneHour',
+        baseTranslationKey: this.getStepsKey('restOneHour'),
       },
       {
         icon: this.EclipseIcon,
         helperDescriptions: 5,
-        translationKey: 'formBalls',
+        baseTranslationKey: this.getStepsKey('formBalls'),
       },
       {
         icon: this.ThermometerSunIcon,
@@ -130,7 +138,7 @@ export class PoolishDoughRecipe implements IRecipeDef {
         variables: {
           rtRestTime: Math.round(this.result.pizzaBalls.rtRestTime),
         },
-        translationKey: 'finalRest',
+        baseTranslationKey: this.getStepsKey('finalRest'),
         hide: !Math.round(this.result.pizzaBalls.rtRestTime),
       },
     ],

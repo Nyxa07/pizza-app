@@ -12,6 +12,7 @@ import {
   CircleIcon,
   EclipseIcon,
   CookingPotIcon,
+  ArrowDownUpIcon,
 } from 'lucide-angular';
 import { DoughResult } from '../services/calculator.service';
 import { IRecipeDef } from '../../recipe/interfaces/recipe-def.interface';
@@ -30,6 +31,7 @@ export class DirectDoughRecipe implements IRecipeDef {
   readonly HandIcon = HandIcon;
   readonly CircleIcon = CircleIcon;
   readonly EclipseIcon = EclipseIcon;
+  readonly ArrowDownUpIcon = ArrowDownUpIcon;
   constructor(private result: DoughResult) {}
 
   private get quantity() {
@@ -38,39 +40,45 @@ export class DirectDoughRecipe implements IRecipeDef {
     );
   }
 
-  baseTranslationKey = 'calculator.recipe.directDough';
+  readonly baseStepsKey = 'calculator.recipe.steps.';
+
+  private getStepsKey(step: string) {
+    return this.baseStepsKey + step;
+  }
+
+  title = 'calculator.recipe.titles.directDough';
 
   ingredients = {
     items: [
       {
         icon: this.WheatIcon,
         value: this.quantity.flour,
-        label: 'common.ingredients.flour',
+        title: 'common.ingredients.flour',
         unit: 'g',
       },
       {
         icon: DropletsIcon,
         value: this.quantity.water,
-        label: 'common.ingredients.water',
+        title: 'common.ingredients.water',
         unit: 'g',
       },
       {
         icon: BeerIcon,
         value: this.quantity.yeast,
-        label: 'common.ingredients.yeast',
+        title: 'common.ingredients.yeast',
         unit: 'g',
         numberFormat: '1.0-2',
       },
       {
         icon: CandyCaneIcon,
         value: this.quantity.honey,
-        label: 'common.ingredients.honey',
+        title: 'common.ingredients.honey',
         unit: 'g',
       },
       {
         icon: SpotlightIcon,
         value: this.quantity.salt,
-        label: 'common.ingredients.salt',
+        title: 'common.ingredients.salt',
         unit: 'g',
       },
     ],
@@ -86,54 +94,59 @@ export class DirectDoughRecipe implements IRecipeDef {
       {
         icon: this.WandIcon,
         helperDescriptions: 2,
-        translationKey: 'mixIngredients',
+        baseTranslationKey: this.getStepsKey('mixIngredients'),
       },
       {
         icon: this.WheatIcon,
         helperDescriptions: 1,
-        translationKey: 'addFlourSalt',
+        baseTranslationKey: this.getStepsKey('addFlourSalt'),
+      },
+      {
+        icon: this.ArrowDownUpIcon,
+        helperDescriptions: 2,
+        baseTranslationKey: this.getStepsKey('transferDough'),
       },
       {
         icon: this.HandIcon,
-        helperDescriptions: 4,
-        translationKey: 'knead',
+        helperDescriptions: 3,
+        baseTranslationKey: this.getStepsKey('knead'),
       },
       {
         icon: this.CircleIcon,
-        helperDescriptions: 1,
-        translationKey: 'formBall',
+        helperDescriptions: 2,
+        baseTranslationKey: this.getStepsKey('shapeAsBall'),
       },
       {
         icon: this.ThermometerSunIcon,
         helperDescriptions: 2,
-        translationKey: 'shortRest',
+        baseTranslationKey: this.getStepsKey('shortRestDirectDough'),
       },
       {
         icon: this.UndoDotIcon,
         helperDescriptions: 4,
-        translationKey: 'foldAndShape',
+        baseTranslationKey: this.getStepsKey('foldAndShape'),
       },
       {
         icon: this.ThermometerSunIcon,
         helperDescriptions: 2,
-        translationKey: 'restRT',
+        baseTranslationKey: this.getStepsKey('restRT'),
       },
       {
         icon: this.ThermometerSnowflakeIcon,
-        helperDescriptions: 2,
+        helperDescriptions: 3,
         hide: !this.result.dough?.coldRestTime,
-        translationKey: 'restCold',
+        baseTranslationKey: this.getStepsKey('restCold'),
       },
       {
         icon: this.CookingPotIcon,
         helperDescriptions: 1,
         hide: !this.result.dough?.coldRestTime,
-        translationKey: 'takeOutDough',
+        baseTranslationKey: this.getStepsKey('takeOutDough'),
       },
       {
         icon: this.EclipseIcon,
         helperDescriptions: 5,
-        translationKey: 'formBalls',
+        baseTranslationKey: this.getStepsKey('formBalls'),
       },
       {
         icon: this.ThermometerSunIcon,
@@ -141,7 +154,7 @@ export class DirectDoughRecipe implements IRecipeDef {
         variables: {
           rtRestTime: Math.round(this.result.pizzaBalls.rtRestTime),
         },
-        translationKey: 'finalRest',
+        baseTranslationKey: this.getStepsKey('finalRest'),
         hide: !Math.round(this.result.pizzaBalls.rtRestTime),
       },
     ],

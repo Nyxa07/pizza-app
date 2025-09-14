@@ -8,7 +8,7 @@ export interface IRecipeHelper {
 export interface IRecipeIngredientItem {
   icon: LucideIconData;
   value: number;
-  label: string;
+  title: string;
   unit: string;
   numberFormat?: string;
   description?: string;
@@ -16,7 +16,7 @@ export interface IRecipeIngredientItem {
 
 export interface IRecipeMethodItem {
   icon: LucideIconData;
-  label: string;
+  title: string;
   helper?: IRecipeHelper;
   variables?: {
     [key: string]: number | string | undefined;
@@ -24,12 +24,11 @@ export interface IRecipeMethodItem {
 }
 
 export interface IRecipe {
+  title: string;
   ingredients: {
-    title: string;
     items: IRecipeIngredientItem[];
   };
   method: {
-    title: string;
     items: IRecipeMethodItem[];
   };
 }

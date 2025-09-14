@@ -24,7 +24,7 @@ export class RecipeService {
 
     // 1. Ingredients list --------------------------------------------------
     const ingredientsTitle = this.stripHtml(
-      this.translateService.instant(recipe.ingredients.title),
+      this.translateService.instant('common.recipe.ingredients'),
     );
     const ingredientsLines: string[] = [ingredientsTitle + ':'];
 
@@ -34,7 +34,7 @@ export class RecipeService {
         minimumFractionDigits: 0,
       });
       const unit = item.unit ?? '';
-      const label = this.stripHtml(this.translateService.instant(item.label));
+      const label = this.stripHtml(this.translateService.instant(item.title));
       const description = item.description
         ? ` – ${this.stripHtml(this.translateService.instant(item.description))}`
         : '';
@@ -43,13 +43,13 @@ export class RecipeService {
 
     // 2. Method steps ------------------------------------------------------
     const methodTitle = this.stripHtml(
-      this.translateService.instant(recipe.method.title),
+      this.translateService.instant('common.recipe.method'),
     );
     const methodLines: string[] = ['\n' + methodTitle + ':'];
 
     recipe.method.items.forEach((step, idx) => {
       const stepLabel = this.stripHtml(
-        this.translateService.instant(step.label, step.variables),
+        this.translateService.instant(step.title, step.variables),
       );
 
       // Main step line

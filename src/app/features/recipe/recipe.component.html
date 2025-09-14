@@ -1,5 +1,5 @@
 <ion-list-header>
-  {{ recipe.ingredients.title | translate }}
+  {{ "common.recipe.ingredients" | translate }}
 </ion-list-header>
 <ion-list lines="none">
   @for (item of recipe.ingredients.items; track item) {
@@ -7,7 +7,7 @@
       <ion-item>
         <i-lucide slot="start" [img]="item.icon"></i-lucide>
         <ion-label>
-          {{ item.label | translate }}
+          {{ item.title | translate }}
         </ion-label>
         <ion-note slot="end">
           {{ item.value | number: item.numberFormat ?? "1.0-0" }}
@@ -19,7 +19,7 @@
 </ion-list>
 
 <ion-list-header>
-  {{ recipe.method.title | translate }}
+  {{ "common.recipe.method" | translate }}
 </ion-list-header>
 
 <ion-list lines="none">
@@ -27,7 +27,7 @@
     <ion-item (click)="openHelperModal(item)" button>
       <i-lucide slot="start" [img]="item.icon"></i-lucide>
       <ion-label
-        [innerHTML]="item.label | translate: item.variables ?? {}"
+        [innerHTML]="item.title | translate: item.variables ?? {}"
       ></ion-label>
     </ion-item>
   }

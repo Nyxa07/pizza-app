@@ -10,23 +10,26 @@ export class RecipeDefConverterService {
 
   convert(recipeDef: IRecipeDef): IRecipe {
     return {
+      title: `${recipeDef.title}`,
       ingredients: {
-        ...recipeDef.ingredients,
-        title: `${recipeDef.baseTranslationKey}.ingredients.title`,
+        items: recipeDef.ingredients.items.map((item) => ({
+          icon: item.icon,
+          title: `${item.title}`,
+          value: item.value,
+          unit: item.unit,
+        })),
       },
       method: {
-        title: `${recipeDef.baseTranslationKey}.method.title`,
         items: recipeDef.method.items
           .filter((item) => !item.hide)
           .map((item) => ({
             icon: item.icon,
-            label: `${recipeDef.baseTranslationKey}.method.steps.${item.translationKey}.title`,
+            title: `${item.baseTranslationKey}.title`,
             helper: {
-              title: `${recipeDef.baseTranslationKey}.method.steps.${item.translationKey}.helper.title`,
+              title: `${item.baseTranslationKey}.helper.title`,
               descriptions: Array.from(
                 { length: item.helperDescriptions },
-                (_, i) =>
-                  `${recipeDef.baseTranslationKey}.method.steps.${item.translationKey}.helper.descriptions.${i}`,
+                (_, i) => `${item.baseTranslationKey}.helper.descriptions.${i}`,
               ),
             },
             variables: {
