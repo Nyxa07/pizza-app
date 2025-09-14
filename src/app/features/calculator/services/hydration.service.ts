@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CalculatorConfigService } from './calculator-config.service';
+import { PizzaType } from '../../settings/enums/pizza-type.enum';
 
 export interface HydrationRange {
   /** Lower bound of recommended hydration (decimal, e.g. 0.60 for 60 %) */
@@ -18,15 +19,15 @@ export class HydrationService {
    * of ±tolerance around that value is applied. Finally, the range is clamped by the hard
    * limits defined in the configuration.
    */
-  compute(flourStrength: number): HydrationRange {
-    const mid = this.recommendedHydration(flourStrength);
+  compute(flourStrength: number, pizzaType: PizzaType): HydrationRange {
+    const mid = this.recommendedHydration(flourStrength, pizzaType);
     const cfg = this.calculatorConfigService.constants.hydrationRecommendation;
 
     // 2 % absolute tolerance yields a sensible ± window (can be adjusted later via cfg)
     const tolerance = 0.02;
 
-    const minHydration = Math.max(cfg.minHydration, mid - tolerance);
-    const maxHydration = Math.min(cfg.maxHydration, mid + tolerance);
+    const minHydration = Math.max(cfg[pizzaType].minHydration, mid - tolerance);
+    const maxHydration = Math.min(cfg[pizzaType].maxHydration, mid + tolerance);
 
     return { minHydration, maxHydration };
   }
@@ -35,9 +36,14 @@ export class HydrationService {
    * Central recommended hydration ratio (water / flour) for a given flour strength (W).
    * Uses a linear model: h = base + slope * (W - reference), then clamps to config bounds.
    */
-  private recommendedHydration(W: number): number {
+  private recommendedHydration(W: number, pizzaType: PizzaType): number {
     const cfg = this.calculatorConfigService.constants.hydrationRecommendation;
-    const raw = cfg.baseHydration + cfg.slope * (W - cfg.referenceW);
-    return Math.max(cfg.minHydration, Math.min(cfg.maxHydration, raw));
+    const raw =
+      cfg[pizzaType].baseHydration +
+      cfg[pizzaType].slope * (W - cfg[pizzaType].referenceW);
+    return Math.max(
+      cfg[pizzaType].minHydration,
+      Math.min(cfg[pizzaType].maxHydration, raw),
+    );
   }
 }

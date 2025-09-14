@@ -1,17 +1,14 @@
-// --------------------------------------------------------------------------------
-// DO NOT import this file outside of the dough feature unless the value really is
-// dough-specific business logic. For application-wide configuration use a shared
-// settings service instead.
-// --------------------------------------------------------------------------------
+import { PizzaType } from '../settings/enums/pizza-type.enum';
 
-// A strongly-typed, namespaced representation of every constant that influences
-// the dough calculations.  Having everything in one immutable object makes it
-// trivial to:
-//   • expose the structure through a configuration service;
-//   • persist selective overrides (only the delta needs storing);
-//   • reset to factory defaults (just spread the object again).
+type HydrationCfg = {
+  referenceW: number;
+  baseHydration: number;
+  slope: number;
+  minHydration: number;
+  maxHydration: number;
+};
 
-export interface KFactorConstants {
+export type KFactorConstants = {
   /** Minimum yeast coefficient for very long fermentation (>24 h) */
   kMin: number;
   /** Maximum yeast coefficient for ultra-fast fermentation (<4 h) */
@@ -20,9 +17,9 @@ export interface KFactorConstants {
   refFermTime: number;
   /** Exponent controlling the steepness of the logistic curve */
   kExponent: number;
-}
+};
 
-export interface DoughConstants {
+export type DoughConstants = {
   /** All yeast and fermentation related tweaking coefficients. */
   yeast: {
     /** Base loss of activity when the dough is retarded in the fridge (dimensionless). */
@@ -63,26 +60,21 @@ export interface DoughConstants {
 
   /** Parameters for recommended hydration based on flour strength */
   hydrationRecommendation: {
-    /** Reference W at which base hydration applies */
-    referenceW: number;
-    /** Base hydration (decimal, e.g. 0.55 for 55 %) when W = referenceW */
-    baseHydration: number;
-    /** Linear slope applied per W point above/below reference (decimal per W) */
-    slope: number;
-    /** Hard lower bound */
-    minHydration: number;
-    /** Hard upper bound */
-    maxHydration: number;
+    [key in PizzaType]: HydrationCfg;
   };
 
-  /** Parameters for pizza balls rest time */
+  /** Parameters for pizza-balls rest time */
   pizzaBallsRestTime: {
+    // Temperature boundaries for the interpolation (°C)
     minTemperature: number;
     maxTemperature: number;
-    minRestTime: number;
-    maxRestTime: number;
+
+    // Default min/max rest times coef to apply to total rest time to get min/max pizza balls rest time (h)
+    minRestTimeCoef: number;
+    maxRestTimeCoef: number;
+    maxTotalRestTime: number;
   };
-}
+};
 
 export const DEFAULT_DOUGH_CONSTANTS: DoughConstants = {
   yeast: {
@@ -121,18 +113,30 @@ export const DEFAULT_DOUGH_CONSTANTS: DoughConstants = {
   // honeyRatio: 0.004,
 
   hydrationRecommendation: {
-    referenceW: 160,
-    baseHydration: 0.55,
-    slope: 0.0007,
-    minHydration: 0.55,
-    maxHydration: 0.8,
+    [PizzaType.NEAPOLITAN]: {
+      referenceW: 160,
+      baseHydration: 0.55,
+      slope: 0.0007,
+      minHydration: 0.55,
+      maxHydration: 0.8,
+    },
+    [PizzaType.ROMAN]: {
+      referenceW: 160,
+      baseHydration: 0.55,
+      slope: 0.0007,
+      minHydration: 0.55,
+      maxHydration: 0.6,
+    },
   },
 
   pizzaBallsRestTime: {
     minTemperature: 19,
     maxTemperature: 25,
-    minRestTime: 1,
-    maxRestTime: 3,
+
+    // These two were historically used by the UI; keep them for reference.
+    minRestTimeCoef: 0.05,
+    maxRestTimeCoef: 0.15,
+    maxTotalRestTime: 24,
   },
 } as const;
 

@@ -7,6 +7,13 @@ export const CALCULATOR_ROUTES: Route[] = [
       import('./index/index.page').then((m) => m.CalculatorIndexPage),
   },
   {
+    path: 'assistant',
+    loadComponent: () =>
+      import('./assistant/assistant.page').then(
+        (m) => m.CalculatorAssistantPage,
+      ),
+  },
+  {
     path: 'simple',
     loadComponent: () =>
       import('./simple/simple.page').then((m) => m.CalculatorSimplePage),

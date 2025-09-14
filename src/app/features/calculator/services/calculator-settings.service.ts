@@ -16,6 +16,7 @@ export interface ICalculatorSettings {
   temperature: { auto: boolean; visible: boolean };
   rtRestTime: { auto: boolean; visible: boolean };
   coldRestTime: { auto: boolean; visible: boolean };
+  oliveOilRatio: { auto: boolean; visible: boolean };
 }
 
 const DEFAULT_SETTINGS: ICalculatorSettings = {
@@ -30,11 +31,13 @@ const DEFAULT_SETTINGS: ICalculatorSettings = {
   temperature: { auto: false, visible: true },
   rtRestTime: { auto: false, visible: true },
   coldRestTime: { auto: false, visible: true },
+  oliveOilRatio: { auto: false, visible: true },
 };
 
 export enum CALCULATOR_MODE {
   SIMPLE = 'simple',
   COMPLEX = 'complex',
+  ASSIST = 'assist',
 }
 
 @Injectable({

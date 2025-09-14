@@ -10,32 +10,33 @@ export class RecipeDefConverterService {
 
   convert(recipeDef: IRecipeDef): IRecipe {
     return {
+      title: `${recipeDef.title}`,
       ingredients: {
-        ...recipeDef.ingredients,
-        title: `${recipeDef.baseTranslationKey}.ingredients.title`,
+        items: recipeDef.ingredients.items.map((item) => ({
+          icon: item.icon,
+          title: `${item.title}`,
+          value: item.value,
+          unit: item.unit,
+        })),
       },
       method: {
-        title: `${recipeDef.baseTranslationKey}.method.title`,
         items: recipeDef.method.items
-          .map((item, index) => ({
+          .filter((item) => !item.hide)
+          .map((item) => ({
             icon: item.icon,
-            label: `${recipeDef.baseTranslationKey}.method.steps.${index}.title`,
+            title: `${item.baseTranslationKey}.title`,
             helper: {
-              title: `${recipeDef.baseTranslationKey}.method.steps.${index}.helper.title`,
+              title: `${item.baseTranslationKey}.helper.title`,
               descriptions: Array.from(
                 { length: item.helperDescriptions },
-                (_, i) =>
-                  `${recipeDef.baseTranslationKey}.method.steps.${index}.helper.descriptions.${i}`,
+                (_, i) => `${item.baseTranslationKey}.helper.descriptions.${i}`,
               ),
             },
             variables: {
               ...recipeDef.method.variables,
               ...(item.variables ?? {}),
             },
-          }))
-          // Filter out items that are marked as hidden after mapping because index is used
-          // to access translation keys and can not change before mapping
-          .filter((_, index) => !recipeDef.method.items[index].hide),
+          })),
       },
     };
   }

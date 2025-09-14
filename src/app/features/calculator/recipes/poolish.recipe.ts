@@ -28,33 +28,39 @@ export class PoolishRecipe implements IRecipeDef {
       this.result.poolish ?? { flour: 0, water: 0, yeast: 0, honey: 0, salt: 0 }
     );
   }
-  baseTranslationKey = 'calculator.recipe.poolish';
+  readonly baseStepsKey = 'calculator.recipe.steps.';
+
+  private getStepsKey(step: string) {
+    return this.baseStepsKey + step;
+  }
+
+  title = 'calculator.recipe.titles.poolish';
 
   ingredients = {
     items: [
       {
         icon: this.WheatIcon,
         value: this.quantity.flour,
-        label: 'common.ingredients.flour',
+        title: 'common.ingredients.flour',
         unit: 'g',
       },
       {
         icon: DropletsIcon,
         value: this.quantity.water,
-        label: 'common.ingredients.water',
+        title: 'common.ingredients.water',
         unit: 'g',
       },
       {
         icon: BeerIcon,
         value: this.quantity.yeast,
-        label: 'common.ingredients.yeast',
+        title: 'common.ingredients.yeast',
         unit: 'g',
         numberFormat: '1.0-2',
       },
       {
         icon: CandyCaneIcon,
         value: this.quantity.honey,
-        label: 'common.ingredients.honey',
+        title: 'common.ingredients.honey',
         unit: 'g',
       },
     ],
@@ -66,13 +72,26 @@ export class PoolishRecipe implements IRecipeDef {
       coldRestTime: Math.round(this.result.poolish?.coldRestTime ?? 0),
     },
     items: [
-      { icon: this.WandIcon, helperDescriptions: 2 },
-      { icon: this.WheatIcon, helperDescriptions: 1 },
-      { icon: this.ThermometerSunIcon, helperDescriptions: 1 },
+      {
+        icon: this.WandIcon,
+        helperDescriptions: 2,
+        baseTranslationKey: this.getStepsKey('mixIngredients'),
+      },
+      {
+        icon: this.WheatIcon,
+        helperDescriptions: 1,
+        baseTranslationKey: this.getStepsKey('addFlourPoolish'),
+      },
+      {
+        icon: this.ThermometerSunIcon,
+        helperDescriptions: 1,
+        baseTranslationKey: this.getStepsKey('restRT'),
+      },
       {
         icon: this.ThermometerSnowflakeIcon,
         helperDescriptions: 1,
         hide: !this.result.poolish?.coldRestTime,
+        baseTranslationKey: this.getStepsKey('restCold'),
       },
     ],
   };

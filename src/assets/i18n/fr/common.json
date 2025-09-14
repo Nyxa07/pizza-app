@@ -23,7 +23,8 @@
   "navigation": {
     "back": "Retour",
     "next": "Suivant",
-    "previous": "Précédent"
+    "previous": "Précédent",
+    "finish": "Terminer"
   },
   "ingredients": {
     "flour": "Farine",
@@ -35,9 +36,13 @@
     "dryInstantYeast": "Levure sèche instantanée",
     "freshYeast": "Levure fraîche"
   },
-  "yeastTypes": {
-    "dryActive": "Sèche active",
-    "dryInstant": "Instantanée",
-    "fresh": "Fraîche"
+  "time": {
+    "hours": "{count, plural, one {heure} other {heures}}",
+    "minutes": "{count, plural, one {minute} other {minutes}}",
+    "seconds": "{count, plural, one {seconde} other {secondes}}"
+  },
+  "recipe": {
+    "ingredients": "Ingrédients",
+    "method": "Méthode"
   }
 }

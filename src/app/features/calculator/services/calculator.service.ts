@@ -2,25 +2,25 @@ import { Injectable } from '@angular/core';
 import { YeastService } from 'src/app/features/calculator/services/yeast.service';
 import { DoughType } from '../enums/dough-type.enum';
 import { CalculatorInput } from './calculator-state.service';
-import { RestTimeService } from './rest-time.service';
 import { HydrationService } from './hydration.service';
+import { PlannerService, TimingPart, Timings } from './planner.service';
+import { PizzaType } from '../../settings/enums/pizza-type.enum';
 
-export interface Quantity {
+export interface Quantity extends TimingPart {
   yeast: number;
   flour: number;
   water: number;
   salt: number;
-  coldRestTime: number;
-  rtRestTime: number;
   honey: number;
+  oliveOil: number;
 }
 
 export interface DoughResult {
   total: Quantity;
   poolish: Quantity | null;
   dough: Quantity;
-  pizzaBalls: { rtRestTime: number };
   pizzaWeight: number;
+  pizzaBalls: TimingPart;
 }
 
 @Injectable({
@@ -29,52 +29,79 @@ export interface DoughResult {
 export class CalculatorService {
   constructor(
     private yeastService: YeastService,
-    private restTimeService: RestTimeService,
     private hydrationService: HydrationService,
+    private plannerService: PlannerService,
   ) {}
 
   // Compute the flour (and water) weight used in the poolish.
   // Definition: `ratio` is the fraction of TOTAL FLOUR that will go into the poolish.
   // Water in the poolish equals that flour weight (100 % hydration).
-  private computePoolishQuantity(ratio: number, totalFlourAndWater: number) {
+  private computePoolishQuantity(
+    doughType: DoughType,
+    poolishRatio: number,
+    nbPizzas: number,
+    pizzaWeight: number,
+  ) {
+    const hasPoolish = doughType === DoughType.POOLISH;
+    const ratio = hasPoolish ? (poolishRatio ?? 0.3) : 0;
+    const totalFlourAndWater = nbPizzas * pizzaWeight;
     return ratio * totalFlourAndWater; // no rounding here
   }
 
-  compute(data: CalculatorInput): DoughResult {
-    // Clamp user inputs to safe range
-    const hydration = Math.max(
-      0,
-      Math.min(
-        data.hydrationRatio ??
-          this.hydrationService.compute(data.flourStrength).minHydration,
-        1,
-      ),
-    );
-    const hasPoolish = data.doughType === DoughType.POOLISH;
-    const poolishRatio = hasPoolish
-      ? Math.max(0, Math.min(data.poolishRatio ?? 0, 0.6))
-      : 0;
+  private computeTimings(data: CalculatorInput): Timings {
+    return this.plannerService.computeTimingsFromRestTimes({
+      rtRestTime: data.rtRestTime,
+      coldRestTime: data.coldRestTime,
+      method: data.doughType,
+      temperature: data.temperature,
+    });
+  }
 
-    // Ingredients
+  private computeHydration(data: CalculatorInput): number {
+    return (
+      data.hydrationRatio ??
+      this.hydrationService.compute(data.flourStrength, data.pizzaType)
+        .minHydration
+    );
+  }
+
+  private computeOliveOil(
+    totalFlour: number,
+    oliveOilRatio: number,
+    pizzaType: PizzaType,
+  ): number {
+    return pizzaType === PizzaType.NEAPOLITAN ? 0 : oliveOilRatio * totalFlour;
+  }
+
+  compute(data: CalculatorInput): DoughResult {
+    const hydration = this.computeHydration(data);
+    const hasPoolish = data.doughType === DoughType.POOLISH;
+
+    // Flour and water
     const flourPerPizza = data.pizzaWeight / (1 + hydration);
     const waterPerPizza = data.pizzaWeight - flourPerPizza;
     const totalFlour = data.nbPizzas * flourPerPizza;
     const totalWater = data.nbPizzas * waterPerPizza;
     const poolishTotal = this.computePoolishQuantity(
-      poolishRatio,
-      totalFlour + totalWater,
+      data.doughType,
+      data.poolishRatio ?? 0.3,
+      data.nbPizzas,
+      data.pizzaWeight,
     );
     const poolishQuantity = poolishTotal / 2;
 
-    // Salt: baker's percentage
+    // Ingredients ratios
     const salt = data.saltRatio * totalFlour;
     const flourPerDough = totalFlour - poolishQuantity;
     const waterPerDough = totalWater - poolishQuantity;
     const honey = data.honeyRatio * totalFlour;
-
-    const pizzaBallsRestTime = this.restTimeService.computePizzaBallsRestTime(
-      data.temperature,
+    const oliveOil = this.computeOliveOil(
+      totalFlour,
+      data.oliveOilRatio,
+      data.pizzaType,
     );
+
+    const timings = this.computeTimings(data);
 
     const yeast =
       data.doughType === DoughType.POOLISH
@@ -82,8 +109,8 @@ export class CalculatorService {
             data.temperature,
             data.yeastType,
             poolishQuantity,
-            data.rtRestTime ?? 0,
-            data.coldRestTime ?? 0,
+            timings.poolish.rtRestTime,
+            timings.poolish.coldRestTime,
             honey,
             data.flourStrength,
           )
@@ -94,8 +121,8 @@ export class CalculatorService {
             hydration,
             honey,
             salt,
-            data.rtRestTime ?? 0,
-            data.coldRestTime ?? 0,
+            timings.dough.rtRestTime,
+            timings.dough.coldRestTime,
             data.flourStrength,
           );
 
@@ -105,9 +132,11 @@ export class CalculatorService {
         water: totalWater,
         yeast,
         salt: salt,
-        coldRestTime: data.coldRestTime ?? 0,
-        rtRestTime: data.rtRestTime + pizzaBallsRestTime,
+        coldRestTime: timings.total.coldRestTime,
+        rtRestTime: timings.total.rtRestTime,
         honey: honey,
+        oliveOil: oliveOil,
+        prepTime: timings.total.prepTime,
       },
 
       poolish: hasPoolish
@@ -116,9 +145,11 @@ export class CalculatorService {
             water: poolishQuantity,
             yeast,
             salt: 0,
-            coldRestTime: data.coldRestTime ?? 0,
-            rtRestTime: data.rtRestTime ?? 0,
+            coldRestTime: timings.poolish.coldRestTime,
+            rtRestTime: timings.poolish.rtRestTime,
             honey: honey,
+            oliveOil: 0,
+            prepTime: timings.poolish.prepTime,
           }
         : null,
 
@@ -127,12 +158,16 @@ export class CalculatorService {
         flour: flourPerDough,
         water: waterPerDough,
         salt: salt,
-        coldRestTime: data.coldRestTime ?? 0,
-        rtRestTime: data.rtRestTime ?? 0,
+        coldRestTime: timings.dough.coldRestTime,
+        rtRestTime: timings.dough.rtRestTime,
         honey: honey,
+        oliveOil: oliveOil,
+        prepTime: timings.dough.prepTime,
       },
       pizzaBalls: {
-        rtRestTime: pizzaBallsRestTime,
+        rtRestTime: timings.pizzaBalls.rtRestTime,
+        prepTime: timings.pizzaBalls.prepTime,
+        coldRestTime: timings.pizzaBalls.coldRestTime,
       },
       pizzaWeight: data.pizzaWeight,
     };

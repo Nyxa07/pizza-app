@@ -17,6 +17,7 @@ import {
   SpotlightIcon,
   BubblesIcon,
   WavesIcon,
+  FlaskRoundIcon,
 } from 'lucide-angular';
 import {
   CalculatorSettingsService,
@@ -47,6 +48,7 @@ export class CalculatorSettingsFormComponent implements OnInit {
   readonly CheckCheckIcon = CheckCheckIcon;
   readonly BubblesIcon = BubblesIcon;
   readonly WavesIcon = WavesIcon;
+  readonly FlaskRoundIcon = FlaskRoundIcon;
 
   form = this.fb.group({
     pizzaWeight: [this.settings.getSettings().pizzaWeight.visible],
@@ -55,6 +57,7 @@ export class CalculatorSettingsFormComponent implements OnInit {
     flourStrength: [this.settings.getSettings().flourStrength.visible],
     hydrationRatio: [this.settings.getSettings().hydrationRatio.visible],
     poolishRatio: [this.settings.getSettings().poolishRatio.visible],
+    oliveOilRatio: [this.settings.getSettings().oliveOilRatio.visible],
   });
 
   allVisibility$ = this.form.valueChanges.pipe(
@@ -66,7 +69,8 @@ export class CalculatorSettingsFormComponent implements OnInit {
         value.honeyRatio &&
         value.flourStrength &&
         value.hydrationRatio &&
-        value.poolishRatio,
+        value.poolishRatio &&
+        value.oliveOilRatio,
     ),
   );
 
@@ -91,6 +95,10 @@ export class CalculatorSettingsFormComponent implements OnInit {
           visible: !!value.poolishRatio,
           auto: !value.poolishRatio,
         },
+        oliveOilRatio: {
+          visible: !!value.oliveOilRatio,
+          auto: !value.oliveOilRatio,
+        },
       });
     });
   }
@@ -103,6 +111,7 @@ export class CalculatorSettingsFormComponent implements OnInit {
       flourStrength: event.detail.checked,
       hydrationRatio: event.detail.checked,
       poolishRatio: event.detail.checked,
+      oliveOilRatio: event.detail.checked,
     });
   }
 

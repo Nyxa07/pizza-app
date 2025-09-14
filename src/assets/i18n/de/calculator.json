@@ -3,7 +3,8 @@
     "titles": {
       "quantity": "Teigmenge",
       "doughType": "Teigart",
-      "rest": "Ruhezeit"
+      "rest": "Ruhezeit",
+      "ingredients": "Zutaten"
     },
     "pizzasNumber": "Anzahl der Pizzen",
     "doughType": "Methode",
@@ -19,337 +20,314 @@
     "honeyRatio": "Honigverhältnis",
     "pizzaWeight": "Teiglingsgewicht",
     "hydrationHelperText": "Empfohlen für Mehlstärke (W): {minHydration}% - {maxHydration}%",
+    "oliveOilRatio": "Olivenöl-Verhältnis",
+    "pizzaType": "Pizzatyp",
     "infos": {
       "title": "Zusätzliche Informationen",
-      "restTime": "Ruhezeit",
-      "ballsRestTime": "Ruhezeit der Teiglinge",
       "totalPrepTime": "Gesamte Zubereitungszeit",
       "totalPrepTimeDescription": "Dies berücksichtigt das Rezept",
       "hoursUnit": "Stunden"
     }
   },
+   "assistant": {
+     "title": "Pizza-Assistent",
+     "subtitle": "Erstellen wir Ihr perfektes Rezept",
+     "description": "Lassen Sie sich Schritt für Schritt führen, um das ideale Pizzarezept nach Ihren Vorlieben zu erstellen.",
+     "startButton": "Assistent starten",
+     "continueButton": "Assistent fortsetzen",
+     "form": {
+       "titles": {
+         "pizzaType": "Pizzatyp",
+         "doughType": "Teigart",
+         "quantity": "Menge",
+         "rest": "Ruhezeit",
+         "ingredients": "Zutaten",
+         "summary": "Zusammenfassung",
+         "yeastType": "Hefeart",
+         "temperature": "Raumtemperatur",
+         "planner": "Planer",
+         "rtRestTime": "Ruhezeit bei Raumtemperatur",
+         "coldRestTime": "Kalte Ruhezeit",
+         "flourType": "Mehltyp"
+       },
+       "pizzaType": {
+         "subtitle": "Wählen Sie Ihren Stil",
+         "description": "Wählen Sie den Pizzatyp, den Sie zubereiten möchten.",
+         "helpers": {
+           "neapolitan": "Traditionelle Pizza mit dünnem und weichem Teig",
+           "roman": "Pizza mit dünnem und knusprigem Teig"
+         }
+       },
+       "doughType": {
+         "subtitle": "Zubereitungsmethode",
+         "description": "Wählen Sie die Fermentationstechnik für Ihren Teig.",
+         "helpers": {
+           "direct": "Schnelle Methode, kurze Fermentation",
+           "poolish": "Lange Methode, entwickelter Geschmack"
+         }
+       },
+       "quantity": {
+         "subtitle": "Wie viele Pizzen?",
+         "description": "Geben Sie die Anzahl der Pizzen an, die Sie zubereiten möchten.",
+         "pizzas": "Pizza(s)"
+       },
+       "temperature": {
+         "subtitle": "Raumtemperatur",
+         "description": "Geben Sie die Temperatur bei Ihnen zu Hause an.",
+         "temperature": "°C",
+         "helpers": {
+           "temperature": "Raumtemperatur"
+         }
+       },
+       "planner": {
+         "subtitle": "Ruhezeit",
+         "description": "Geben Sie die gewünschte Ruhezeit aus den vorgeschlagenen Optionen an. Einige Optionen erscheinen nur mit speziellem Pizzamehl (stark).",
+         "withLongRestTime": "Lange Ruhezeit",
+         "withLongRestTimeDescription": "Die lange Ruhezeit ermöglicht es, den Geschmack des Teigs zu entwickeln.",
+         "withoutLongRestTime": "Kurze Ruhezeit",
+         "withoutLongRestTimeDescription": "Die kurze Ruhezeit ermöglicht es... schneller zu essen 🤣",
+         "totalPrepTime": "Gesamte Zubereitungszeit",
+         "totalPrepTimeDescription": "Das gibt Ihnen eine Vorstellung von der gesamten Zubereitungszeit Ihres Rezepts, wodurch Sie zum richtigen Zeitpunkt beginnen können 😊"
+       },
+       "yeastType": {
+         "subtitle": "Hefeart",
+         "description": "Wählen Sie die Art der Hefe, die Sie verwenden möchten.",
+         "helpers": {
+           "dryActive": "Aktive Trockenhefe",
+           "dryInstant": "Instant-Trockenhefe",
+           "fresh": "Frische Hefe"
+         }
+       },
+       "flourType": {
+         "subtitle": "Mehltyp",
+         "description": "Die Mehlstärke misst ihre Fähigkeit, einer längeren Fermentation standzuhalten.",
+         "helpers": {
+           "yes": "Ich kenne die Stärke meines Mehls",
+           "no": "Ich kenne die Stärke meines Mehls nicht",
+           "standard": "Standardmehl",
+           "specialPizza": "Spezielles Pizzamehl",
+           "strength": "Mehlstärke (W)"
+         }
+       },
+       "summary": {
+         "subtitle": "Ihre Konfiguration",
+         "description": "Überprüfen Sie Ihre Auswahl, bevor Sie das Rezept generieren.",
+         "ready": "Alles ist bereit!",
+         "readyDescription": "Ihr Rezept wird nach Ihren Vorlieben generiert.",
+         "helpers": {
+           "summary": "Zusammenfassung"
+         }
+       }
+     },
+     "results": {
+       "title": "Ihre Konfiguration",
+       "apply": "Diese Konfiguration anwenden",
+       "restart": "Assistent neu starten"
+     }
+   },
   "recipe": {
-    "poolish": {
-      "ingredients": {
-        "title": "Zutaten für den Poolish"
-      },
-      "method": {
-        "title": "Zubereitung des Poolish",
-        "steps": [
-          {
-            "title": "Wasser, Hefe und Honig mischen",
-            "description": "",
-            "helper": {
-              "title": "Wasser, Hefe und Honig mischen",
-              "descriptions": [
-                "Alle Zutaten abwiegen.",
-                "In einer großen Schüssel die Hefe im Wasser auflösen und den Honig hinzufügen."
-              ]
-            }
-          },
-          {
-            "title": "Mehl hinzufügen",
-            "description": "",
-            "helper": {
-              "title": "Mehl hinzufügen",
-              "descriptions": [
-                "Das Mehl nach und nach hinzufügen und mit einem Holzlöffel mischen, bis eine homogene Mischung entsteht"
-              ]
-            }
-          },
-          {
-            "title": "Ruhezeit <strong>{ rtRestTime } Stunde(n)</strong> bei Raumtemperatur",
-            "description": "",
-            "helper": {
-              "title": "Ruhezeit bei Raumtemperatur",
-              "descriptions": [
-                "<strong>{ rtRestTime } Stunde(n)</strong> bei Raumtemperatur in einem luftdichten Behälter oder mit Frischhaltefolie abgedeckt ruhen lassen"
-              ]
-            }
-          },
-          {
-            "title": "Ruhezeit <strong>{ coldRestTime } Stunde(n)</strong> im Kühlschrank",
-            "description": "",
-            "helper": {
-              "title": "Ruhezeit im Kühlschrank",
-              "descriptions": [
-                "<strong>{ coldRestTime } Stunde(n)</strong> im Kühlschrank in einem luftdichten Behälter oder mit Frischhaltefolie abgedeckt ruhen lassen"
-              ]
-            }
-          }
-        ]
-      }
+    "titles": {
+      "poolish": "Poolish",
+      "directDough": "Teig nach direkter Methode",
+      "poolishDough": "Teig mit Poolish"
     },
-    "poolishDough": {
-      "ingredients": {
-        "title": "Zutaten für den Teig"
+    "steps": {
+      "mixIngredients": {
+        "title": "Wasser, Hefe und Honig mischen",
+        "helper": {
+          "title": "Wasser, Hefe und Honig mischen",
+          "descriptions": [
+            "Alle Zutaten abwiegen.",
+            "In einer großen Schüssel die Hefe im Wasser auflösen und den Honig hinzufügen."
+          ]
+        }
       },
-      "method": {
-        "title": "Zubereitung des Teigs",
-        "steps": [
-          {
-            "title": "Den Poolish 1H vor Gebrauch herausnehmen",
-            "description": "",
-            "helper": {
-              "title": "Wie man den Poolish verwendet",
-              "descriptions": [
-                "Den Poolish 1 Stunde vor Gebrauch herausnehmen, damit er Zeit hat, auf Raumtemperatur zu kommen"
-              ]
-            }
-          },
-          {
-            "title": "Wasser und Salz zum Poolish hinzufügen",
-            "description": "",
-            "helper": {
-              "title": "Zubereitung des Teigs",
-              "descriptions": [
-                "Die zum Poolish hinzuzufügenden Mengen abwiegen",
-                "In die Schüssel mit dem Poolish Wasser und Salz geben. Mit einem Holzlöffel verrühren, bis das Wasser aufgenommen ist"
-              ]
-            }
-          },
-          {
-            "title": "Nach und nach das Mehl hinzufügen",
-            "description": "",
-            "helper": {
-              "title": "Wie man das Mehl hinzufügt",
-              "descriptions": [
-                "Nach und nach das Mehl hinzufügen und mit einem Holzlöffel verrühren"
-              ]
-            }
-          },
-          {
-            "title": "Den Teig auf die Arbeitsfläche geben",
-            "description": "",
-            "helper": {
-              "title": "Übertragen des Teigs",
-              "descriptions": [
-                "Wenn es nicht mehr möglich ist, mit dem Löffel zu rühren, beginnt man eine Teigkonsistenz zu bekommen und kann ihn auf die Arbeitsfläche übertragen",
-                "Verwenden Sie einen Teigschaber, um beim Übertragen zu helfen"
-              ]
-            }
-          },
-          {
-            "title": "Den Teig kneten",
-            "description": "",
-            "helper": {
-              "title": "Kneten",
-              "descriptions": [
-                "Den Teig durchkneten, das Mehl muss vollständig eingearbeitet sein",
-                "Verwenden Sie die Handflächen zum Kneten"
-              ]
-            }
-          },
-          {
-            "title": "Einige Faltungen machen und eine Kugel formen",
-            "description": "",
-            "helper": {
-              "title": "Faltungen",
-              "descriptions": [
-                "Um eine Faltung zu machen, nimmt man den Teig und faltet ihn über sich selbst",
-                "Man kann so viele Faltungen machen, wie man möchte, aber der Teig muss weich und geschmeidig bleiben",
-                "Die Faltung ermöglicht es, Luft in den Teig einzuführen und wird beim Backen eine luftige Textur ermöglichen",
-                "Wenn man fertig ist, kann man eine schöne Kugel formen"
-              ]
-            }
-          },
-          {
-            "title": "10 – 15 Min. unter einer Schüssel ruhen lassen",
-            "description": "",
-            "helper": {
-              "title": "Ruhezeit",
-              "descriptions": [
-                "Einfach die für die Zubereitung verwendete Schüssel über den Teig stülpen",
-                "Der Teig wird sich straffen und glatter werden"
-              ]
-            }
-          },
-          {
-            "title": "Erneut eine Kugel formen",
-            "description": "",
-            "helper": {
-              "title": "Erneut eine Kugel formen",
-              "descriptions": [
-                "Den Teig nicht zu sehr bearbeiten",
-                "Den Teig dehnen und durch einige Drehungen zwischen den Händen erneut zu einer Kugel formen"
-              ]
-            }
-          },
-          {
-            "title": "1 Stunde in einem luftdichten Behälter ruhen lassen",
-            "description": "",
-            "helper": {
-              "title": "Ruhezeit",
-              "descriptions": []
-            }
-          },
-          {
-            "title": "Die Teiglinge formen",
-            "description": "",
-            "helper": {
-              "title": "Formen der Teiglinge",
-              "descriptions": [
-                "Den Teig nehmen und mit Hilfe eines Teigschneiders oder einer Spachtel",
-                "Teiglinge (gut gespannt) von etwa <strong>{ pizzaWeight } g</strong> formen",
-                "Eine dünne Schicht feinen Grieß in eine Schale geben (dies verhindert, dass sie an der Schale kleben)",
-                "Die Teiglinge mit Abstand in eine Schale legen (sie werden noch aufgehen)",
-                "Die Schale verschließen oder mit Frischhaltefolie abdecken"
-              ]
-            }
-          },
-          {
-            "title": "Ruhen lassen, bis sich das Volumen verdoppelt hat",
-            "description": "",
-            "helper": {
-              "title": "Ruhezeit des Teiglings",
-              "descriptions": [
-                "Die Ruhezeit des Teiglings variiert je nach Temperatur",
-                "Es dauert etwa <strong>{ rtRestTime } Stunde(n)</strong>, also daran denken 😉"
-              ]
-            }
-          }
-        ]
-      }
-    },
-    "directDough": {
-      "ingredients": {
-        "title": "Zutaten für den Teig"
+      "addFlourPoolish": {
+        "title": "Mehl hinzufügen",
+        "helper": {
+          "title": "Mehl hinzufügen",
+          "descriptions": [
+            "Das Mehl nach und nach hinzufügen und mit einem Holzlöffel mischen, bis eine homogene Mischung entsteht"
+          ]
+        }
       },
-      "method": { 
-        "title": "Zubereitung des Teigs",
-        "steps": [
-          {
-            "title": "Wasser, Hefe und Honig mischen",
-            "description": "",
-            "helper": {
-              "title": "Zubereitung des Teigs",
-              "descriptions": [
-                "Alle Zutaten abwiegen",
-                "Hefe und Honig mit dem Wasser vermischen"
-              ]
-            }
-          },
-          {
-            "title": "Mehl und Salz hinzufügen",
-            "description": "",
-            "helper": {
-              "title": "Einführung des Mehls",
-              "descriptions": [
-                "Salz und Mehl nach und nach hinzufügen und mit einem Holzlöffel mischen, bis eine homogene Mischung entsteht"
-              ]
-            }
-          },
-          {
-            "title": "10 Min. kneten",
-            "description": "",
-            "helper": {
-              "title": "Kneten",
-              "descriptions": [
-                "Sobald alle Zutaten gut vermischt sind und man anfängt, einen Teig zu bekommen, kann man ihn auf die Arbeitsfläche legen",
-                "Sie können einen Teigschaber verwenden, um den ganzen Teig gut zu bekommen",
-                "Das Kneten von Hand etwa 10 Min. beenden. Gut mit den Handflächen kneten, um das Mehl richtig zu hydrieren",
-                "Sie können auch eine Küchenmaschine mit Knethaken verwenden, aber das ist weniger lustig 😉"
-              ]
-            }
-          },
-          {
-            "title": "Eine Kugel formen",
-            "description": "",
-            "helper": {
-              "title": "Teigkugel",
-              "descriptions": [
-                "Sobald der Teig eine schöne Struktur hat, den Teig dehnen und durch einige Drehungen zwischen den Händen eine Kugel formen"
-              ]
-            }
-          },
-          {
-            "title": "25 Min. unter einer Schüssel ruhen lassen",
-            "description": "",
-            "helper": {
-              "title": "Ruhezeit",
-              "descriptions": [
-                "Einfach die für die Zubereitung verwendete Schüssel über den Teig stülpen",
-                "Der Teig wird sich straffen und glatter werden"
-              ]
-            }
-          },
-          {
-            "title": "Einige Faltungen machen und eine Kugel formen",
-            "description": "",
-            "helper": {
-              "title": "Faltungen",
-              "descriptions": [
-                "Um eine Faltung zu machen, nimmt man den Teig und faltet ihn über sich selbst",
-                "Man kann so viele Faltungen machen, wie man möchte, aber der Teig muss weich und geschmeidig bleiben",
-                "Die Faltung ermöglicht es, Luft in den Teig einzuführen und wird beim Backen eine luftige Textur ermöglichen",
-                "Wenn man fertig ist, kann man eine schöne Kugel formen"
-              ]
-            }
-          },
-          {
-            "title": "Bei Raumtemperatur <strong>{ rtRestTime } Stunde(n)</strong> in einem luftdichten Behälter ruhen lassen",
-            "description": "",
-            "helper": {
-              "title": "Ruhezeit",
-              "descriptions": [
-                "Die Ruhezeit ermöglicht es der Hefe, sich zu aktivieren, ein schönes Glutennetzwerk zu schaffen und dem Teig seine ganze Textur zu geben",
-                "Der Teig wird sich straffen und glatter werden"
-              ]
-            }
-          },
-          {
-            "title": "Kalt <strong>{ coldRestTime } Stunde(n)</strong> in einem luftdichten Behälter ruhen lassen",
-            "description": "",
-            "helper": {
-              "title": "Ruhezeit",
-              "descriptions": [
-                "Die Ruhezeit ermöglicht es der Hefe, sich zu aktivieren, ein schönes Glutennetzwerk zu schaffen und dem Teig seine ganze Textur zu geben",
-                "Der Teig wird sich straffen und glatter werden"
-              ]
-            }
-          },
-          {
-            "title": "Den Teig 1 Stunde vor der Verwendung herausnehmen",
-            "description": "",
-            "helper": {
-              "title": "Teig herausnehmen",
-              "descriptions": [
-                "Den Teig 1 Stunde vor der Verwendung herausnehmen, damit er Zeit hat, auf Raumtemperatur zu kommen"
-              ]
-            }
-          },
-          {
-            "title": "Die Teiglinge formen",
-            "description": "",
-            "helper": {
-              "title": "Die Teiglinge formen",
-              "descriptions": [
-                "Den Teig nehmen und mit einem Teigschneider oder einer Spachtel",
-                "Teiglinge (gut gespannt) von etwa <strong>{ pizzaWeight } g</strong> formen",
-                "Eine dünne Schicht feinen Grieß in eine Schale geben (dies verhindert, dass sie an der Schale kleben)",
-                "Die Teiglinge mit Abstand in eine Schale legen (sie werden noch aufgehen)",
-                "Die Schale verschließen oder mit Frischhaltefolie abdecken"
-              ]
-            }     
-          },
-          {
-            "title": "Ruhen lassen, bis sich das Volumen verdoppelt hat",
-            "description": "",
-            "helper": {
-              "title": "Ruhezeit des Teiglings",
-              "descriptions": [
-                "Die Ruhezeit des Teiglings variiert je nach Temperatur",
-                "Es dauert etwa <strong>{ rtRestTime } Stunde(n)</strong>, also daran denken 😉"
-              ]
-            }
-          }
-        ]
+      "restRT": {
+        "title": "Ruhezeit <strong>{ rtRestTime } Stunde(n)</strong> bei Raumtemperatur",
+        "helper": {
+          "title": "Ruhezeit bei Raumtemperatur",
+          "descriptions": [
+            "<strong>{ rtRestTime } Stunde(n)</strong> bei Raumtemperatur in einem luftdichten Behälter oder mit Frischhaltefolie abgedeckt ruhen lassen",
+            "Die Ruhezeit ermöglicht es der Hefe, sich zu aktivieren, ein schönes Glutennetzwerk zu schaffen und dem Teig seine ganze Textur zu geben",
+            "Der Teig wird sich straffen und glatter werden"
+          ]
+        }
+      },
+      "restCold": {
+        "title": "Ruhezeit <strong>{ coldRestTime } Stunde(n)</strong> im Kühlschrank",
+        "helper": {
+          "title": "Ruhezeit im Kühlschrank",
+          "descriptions": [
+            "<strong>{ coldRestTime } Stunde(n)</strong> im Kühlschrank in einem luftdichten Behälter oder mit Frischhaltefolie abgedeckt ruhen lassen",
+            "Die Ruhezeit ermöglicht es der Hefe, sich zu aktivieren, ein schönes Glutennetzwerk zu schaffen und dem Teig seine ganze Textur zu geben",
+            "Der Teig wird sich straffen und glatter werden"
+          ]
+        }
+      },
+      "takeOutPoolish": {
+        "title": "Poolish 1H vor Gebrauch herausnehmen",
+        "helper": {
+          "title": "Wie man Poolish verwendet",
+          "descriptions": [
+            "Poolish 1 Stunde vor Gebrauch herausnehmen, damit er Zeit hat, auf Raumtemperatur zu kommen"
+          ]
+        }
+      },
+      "addWaterSalt": {
+        "title": "Zum Poolish Wasser und Salz hinzufügen",
+        "helper": {
+          "title": "Teigzubereitung",
+          "descriptions": [
+            "Die zum Poolish hinzuzufügenden Mengen abwiegen",
+            "In die Schüssel mit dem Poolish Wasser und Salz geben. Mit einem Holzlöffel verrühren, bis das Wasser aufgenommen ist"
+          ]
+        }
+      },
+      "addFlourPoolishDough": {
+        "title": "Nach und nach Mehl hinzufügen",
+        "helper": {
+          "title": "Wie man Mehl hinzufügt",
+          "descriptions": [
+            "Nach und nach Mehl hinzufügen und mit einem Holzlöffel verrühren"
+          ]
+        }
+      },
+      "transferDough": {
+        "title": "Teig auf die Arbeitsfläche übertragen",
+        "helper": {
+          "title": "Teigübertragung",
+          "descriptions": [
+            "Wenn es nicht mehr möglich ist, mit dem Löffel zu rühren, beginnt man eine Teigkonsistenz zu bekommen und kann ihn auf die Arbeitsfläche übertragen",
+            "Verwenden Sie einen Teigschaber, um beim Übertragen zu helfen"
+          ]
+        }
+      },
+      "knead": {
+        "title": "Den Teig kneten",
+        "helper": {
+          "title": "Kneten",
+          "descriptions": [
+            "Den Teig etwa 10 Min. durchkneten, das Mehl muss vollständig eingearbeitet sein",
+            "Verwenden Sie die Handflächen zum Kneten",
+            "Sie können auch eine Küchenmaschine mit Knethaken verwenden, aber das ist weniger lustig 😉"
+          ]
+        }
+      },
+      "foldAndShape": {
+        "title": "Einige Faltungen machen und eine Kugel formen",
+        "helper": {
+          "title": "Faltungen",
+          "descriptions": [
+            "Um eine Faltung zu machen, nimmt man den Teig und faltet ihn über sich selbst",
+            "Man kann so viele Faltungen machen, wie man möchte, aber der Teig muss weich und geschmeidig bleiben",
+            "Die Faltung ermöglicht es, Luft in den Teig einzuführen und wird beim Backen eine luftige Textur ermöglichen",
+            "Wenn man fertig ist, kann man eine schöne Kugel formen"
+          ]
+        }
+      },
+      "shortRestPoolishDough": {
+        "title": "10 – 15 Min. unter einer Schüssel ruhen lassen",
+        "helper": {
+          "title": "Ruhezeit",
+          "descriptions": [
+            "Einfach die für die Zubereitung verwendete Schüssel über den Teig stülpen",
+            "Der Teig wird sich straffen und glatter werden"
+          ]
+        }
+      },
+      "shapeAsBall": {
+        "title": "Eine Kugel formen",
+        "helper": {
+          "title": "Eine Kugel formen",
+          "descriptions": [
+            "Den Teig nicht zu sehr bearbeiten",
+            "Den Teig dehnen und durch einige Drehungen zwischen den Händen erneut zu einer Kugel formen"
+          ]
+        }
+      },
+      "restOneHour": {
+        "title": "1H in einem luftdichten Behälter ruhen lassen",
+        "helper": {
+          "title": "Ruhezeit",
+          "descriptions": []
+        }
+      },
+      "formBalls": {
+        "title": "Teiglinge formen",
+        "helper": {
+          "title": "Formen der Teiglinge",
+          "descriptions": [
+            "Den Teig nehmen und mit Hilfe eines Teigschneiders oder einer Spachtel",
+            "Teiglinge (gut gespannt) von etwa <strong>{ pizzaWeight } g</strong> formen",
+            "Eine dünne Schicht feinen Grieß in eine Schale geben (dies verhindert, dass sie an der Schale kleben)",
+            "Die Teiglinge mit Abstand in eine Schale legen (sie werden noch aufgehen)",
+            "Die Schale verschließen oder mit Frischhaltefolie abdecken"
+          ]
+        }
+      },
+      "finalRest": {
+        "title": "Ruhen lassen, bis sich das Volumen verdoppelt hat",
+        "helper": {
+          "title": "Ruhezeit des Teiglings",
+          "descriptions": [
+            "Die Ruhezeit des Teiglings variiert je nach Temperatur",
+            "Es dauert etwa <strong>{ rtRestTime } Stunde(n)</strong>, also daran denken 😉"
+          ]
+        }
+      },
+      "addFlourSalt": {
+        "title": "Mehl und Salz hinzufügen",
+        "helper": {
+          "title": "Einführung des Mehls",
+          "descriptions": [
+            "Salz und Mehl nach und nach hinzufügen und mit einem Holzlöffel mischen, bis eine homogene Mischung entsteht"
+          ]
+        }
+      },
+      "shortRestDirectDough": {
+        "title": "25 Min. unter einer Schüssel ruhen lassen",
+        "helper": {
+          "title": "Ruhezeit",
+          "descriptions": [
+            "Einfach die für die Zubereitung verwendete Schüssel über den Teig stülpen",
+            "Der Teig wird sich straffen und glatter werden"
+          ]
+        }
+      },
+      "takeOutDough": {
+        "title": "Teig 1 Stunde vor der Verwendung herausnehmen",
+        "helper": {
+          "title": "Teig herausnehmen",
+          "descriptions": [
+            "Den Teig 1 Stunde vor der Verwendung herausnehmen, damit er Zeit hat, auf Raumtemperatur zu kommen"
+          ]
+        }
       }
     }
   },
-  "doughTypes": {
+  "enums": {
+    "doughTypes": {
     "poolish": "Poolish",
     "direct": "Direkt"
+    },
+    "pizzaTypes": {
+      "neapolitan": "Neapolitanisch",
+      "roman": "Römisch"
+    },
+    "yeastTypes": {
+      "dryActive": "Aktive Trockenhefe",
+      "dryInstant": "Instantan",
+      "fresh": "Frisch"
+    }
   },
   "settings": {
     "visibility": {
@@ -360,6 +338,7 @@
       "flourStrength": "Mehlstärke",
       "hydrationRatio": "Hydratationsverhältnis",
       "poolishRatio": "Poolish-Verhältnis",
+      "oliveOilRatio": "Olivenöl-Verhältnis",
       "all": "Alle aktivieren"
     }
   },
@@ -385,8 +364,8 @@
         "configuration": "Teilen-Konfiguration"
       },
       "onlyIngredients": "Nur Zutaten",
-      "withHelperDescriptions": "Schrittbeschreibungen einbeziehen",
-      "withHelperDescriptionsMessage": "Möchten Sie die Rezeptbeschreibung mit den Schrittbeschreibungen teilen (der Text wird länger)?"
+      "withHelperDescriptions": "Mit Schrittbeschreibungen",
+      "withHelperDescriptionsMessage": "Sind Sie sicher, dass Sie das Rezept mit den Schrittbeschreibungen teilen möchten (der Text wird länger)?"
     }
   }
 }

@@ -23,7 +23,8 @@
   "navigation": {
     "back": "Atrás",
     "next": "Siguiente",
-    "previous": "Anterior"
+    "previous": "Anterior",
+    "finish": "Finalizar"
   },
   "ingredients": {
     "flour": "Harina",
@@ -35,9 +36,13 @@
     "dryInstantYeast": "Levadura seca instantánea",
     "freshYeast": "Levadura fresca"
   },
-  "yeastTypes": {
-    "dryActive": "Seca activa",
-    "dryInstant": "Instantánea",
-    "fresh": "Fresca"
+  "time": {
+    "hours": "{count, plural, one {hora} other {horas}}",
+    "minutes": "{count, plural, one {minuto} other {minutos}}",
+    "seconds": "{count, plural, one {segundo} other {segundos}}"
+  },
+  "recipe": {
+    "ingredients": "Ingredientes",
+    "method": "Método"
   }
 }

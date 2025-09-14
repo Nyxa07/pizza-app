@@ -1,10 +1,11 @@
 export interface IRecipeDef {
-  baseTranslationKey: string;
+  title: string;
+  description?: string;
   ingredients: {
     items: {
       icon: any;
       value: number;
-      label: string;
+      title: string;
       unit: string;
     }[];
   };
@@ -15,6 +16,7 @@ export interface IRecipeDef {
       helperDescriptions: number;
       variables?: Record<string, any>;
       hide?: boolean;
+      baseTranslationKey: string;
     }[];
   };
 }
