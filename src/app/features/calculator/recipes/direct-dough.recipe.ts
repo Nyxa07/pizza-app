@@ -86,44 +86,54 @@ export class DirectDoughRecipe implements IRecipeDef {
       {
         icon: this.WandIcon,
         helperDescriptions: 2,
+        translationKey: 'mixIngredients',
       },
       {
         icon: this.WheatIcon,
         helperDescriptions: 1,
+        translationKey: 'addFlourSalt',
       },
       {
         icon: this.HandIcon,
         helperDescriptions: 4,
+        translationKey: 'knead',
       },
       {
         icon: this.CircleIcon,
         helperDescriptions: 1,
+        translationKey: 'formBall',
       },
       {
         icon: this.ThermometerSunIcon,
         helperDescriptions: 2,
+        translationKey: 'shortRest',
       },
       {
         icon: this.UndoDotIcon,
         helperDescriptions: 4,
+        translationKey: 'foldAndShape',
       },
       {
         icon: this.ThermometerSunIcon,
         helperDescriptions: 2,
+        translationKey: 'restRT',
       },
       {
         icon: this.ThermometerSnowflakeIcon,
         helperDescriptions: 2,
         hide: !this.result.dough?.coldRestTime,
+        translationKey: 'restCold',
       },
       {
         icon: this.CookingPotIcon,
         helperDescriptions: 1,
         hide: !this.result.dough?.coldRestTime,
+        translationKey: 'takeOutDough',
       },
       {
         icon: this.EclipseIcon,
         helperDescriptions: 5,
+        translationKey: 'formBalls',
       },
       {
         icon: this.ThermometerSunIcon,
@@ -131,6 +141,8 @@ export class DirectDoughRecipe implements IRecipeDef {
         variables: {
           rtRestTime: Math.round(this.result.pizzaBalls.rtRestTime),
         },
+        translationKey: 'finalRest',
+        hide: !Math.round(this.result.pizzaBalls.rtRestTime),
       },
     ],
   };

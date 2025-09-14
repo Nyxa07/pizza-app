@@ -7,16 +7,23 @@ import { CalculatorConfigService } from './calculator-config.service';
 export class RestTimeService {
   constructor(private calculatorConfigService: CalculatorConfigService) {}
 
-  computePizzaBallsRestTime(temperature: number): number {
+  computePizzaBallsRestTime(
+    temperature: number,
+    rtRestTime: number,
+    coldRestTime: number,
+  ): number {
+    const constants = this.calculatorConfigService.constants.pizzaBallsRestTime;
+    const coefMinTime = constants.minRestTimeCoef;
+    const coefMaxTime = constants.maxRestTimeCoef;
+    const maxTotalRestTime = constants.maxTotalRestTime;
+
     // Inverse relationship: 3 hours at 19°C, 1 hour at 25°C
-    const minTemp =
-      this.calculatorConfigService.constants.pizzaBallsRestTime.minTemperature;
-    const maxTemp =
-      this.calculatorConfigService.constants.pizzaBallsRestTime.maxTemperature;
-    const minHours =
-      this.calculatorConfigService.constants.pizzaBallsRestTime.minRestTime;
-    const maxHours =
-      this.calculatorConfigService.constants.pizzaBallsRestTime.maxRestTime;
+    const minTemp = constants.minTemperature;
+    const maxTemp = constants.maxTemperature;
+
+    const totalRestTime = Math.min(rtRestTime + coldRestTime, maxTotalRestTime);
+    const minRestTime = totalRestTime * coefMinTime;
+    const maxRestTime = totalRestTime * coefMaxTime;
 
     // Clamp temperature to the range [19, 25]
     const clampedTemperature = Math.max(
@@ -26,8 +33,8 @@ export class RestTimeService {
 
     // Inverse linear interpolation: higher temp = lower rest time
     // At minTemp (19°C) we want maxHours (3h), at maxTemp (25°C) we want minHours (1h)
-    const slope = (minHours - maxHours) / (maxTemp - minTemp);
-    const restTime = maxHours + slope * (clampedTemperature - minTemp);
+    const slope = (minRestTime - maxRestTime) / (maxTemp - minTemp);
+    const restTime = maxRestTime + slope * (clampedTemperature - minTemp);
 
     return restTime;
   }

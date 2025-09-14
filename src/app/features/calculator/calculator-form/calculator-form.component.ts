@@ -1,4 +1,4 @@
-import { Component, computed, Input, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import {
   IonItem,
@@ -8,19 +8,22 @@ import {
   IonRange,
   IonListHeader,
   IonLabel,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
 } from '@ionic/angular/standalone';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
-import { AsyncPipe, JsonPipe, LowerCasePipe } from '@angular/common';
+import { AsyncPipe, LowerCasePipe } from '@angular/common';
 import { combineLatest, debounceTime, filter, map, startWith } from 'rxjs';
 import {
   CalculatorStateService,
   CalculatorInput,
 } from '../services/calculator-state.service';
-import { DEFAULT_INPUT } from '../services/calculator-state.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 import { CalculatorSettingsService } from '../services/calculator-settings.service';
 import { DoughType } from '../enums/dough-type.enum';
+import { PizzaType } from '../../settings/enums/pizza-type.enum';
 
 @Component({
   selector: 'app-calculator-form',
@@ -39,6 +42,9 @@ import { DoughType } from '../enums/dough-type.enum';
     NumberPipe,
     IonListHeader,
     IonLabel,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
   ],
   standalone: true,
 })
@@ -67,28 +73,26 @@ export class CalculatorFormComponent implements OnInit {
   );
 
   protected pizzaBallsRestTime$ = this.state.result$.pipe(
-    map((result) => result.pizzaBalls.rtRestTime),
+    map((result) => result.pizzaBalls.prepTime),
   );
 
-  protected doughAndPoolishRestTime$ = this.state.result$.pipe(
-    map(
-      (result) =>
-        (result.poolish
-          ? result.poolish.rtRestTime + result.poolish.coldRestTime
-          : result.dough.rtRestTime + result.dough.coldRestTime) +
-        (result.total.coldRestTime > 0 ? 1 : 0),
-    ),
+  protected totalRestTime$ = this.state.result$.pipe(
+    map((result) => result.total.rtRestTime + result.total.coldRestTime),
   );
 
   protected totalPrepTime$ = this.state.result$.pipe(
-    map(
-      (result) =>
-        result.total.rtRestTime +
-        result.total.coldRestTime +
-        1 +
-        (result.total.coldRestTime > 0 ? 1 : 0),
-    ),
+    map((result) => result.total.prepTime),
   );
+
+  protected pizzaTypes = Object.values(PizzaType).map((type) => ({
+    value: type,
+    label: `calculator.enums.pizzaTypes.${type}`,
+  }));
+
+  protected doughTypes = Object.values(DoughType).map((type) => ({
+    value: type,
+    label: `calculator.enums.doughTypes.${type}`,
+  }));
 
   constructor(
     private formBuilder: FormBuilder,
@@ -113,20 +117,35 @@ export class CalculatorFormComponent implements OnInit {
         this.state.update(v as CalculatorInput);
       });
 
-    // Set recommanded values for rtRestTime and coldRestTime based on doughType
-    // Even if not auto computed
-    this.form
-      .get('doughType')!
-      .valueChanges.pipe(takeUntilDestroyed())
-      .subscribe((v) => {
-        if (v === DoughType.POOLISH) {
-          this.form.get('rtRestTime')!.setValue(1);
-          this.form.get('coldRestTime')!.setValue(24);
-        } else {
-          this.form.get('rtRestTime')!.setValue(DEFAULT_INPUT.rtRestTime);
-          this.form.get('coldRestTime')!.setValue(DEFAULT_INPUT.coldRestTime);
-        }
-      });
+    // // Set recommanded values for rtRestTime and coldRestTime based on doughType
+    // // Even if not auto computed
+    // this.form
+    //   .get('doughType')!
+    //   .valueChanges.pipe(takeUntilDestroyed())
+    //   .subscribe((v) => {
+    //     if (v === DoughType.POOLISH) {
+    //       this.form.get('rtRestTime')!.setValue(1);
+    //       this.form.get('coldRestTime')!.setValue(24);
+    //     } else {
+    //       this.form.get('rtRestTime')!.setValue(DEFAULT_INPUT.rtRestTime);
+    //       this.form.get('coldRestTime')!.setValue(DEFAULT_INPUT.coldRestTime);
+    //     }
+    //   });
+
+    // // Set recommanded value for oliveOilRatio based on pizzaType
+    // this.form
+    //   .get('pizzaType')!
+    //   .valueChanges.pipe(takeUntilDestroyed(), distinctUntilChanged())
+    //   .subscribe((v) => {
+    //     if (v) {
+    //       this.form
+    //         .get('oliveOilRatio')!
+    //         .setValue(DEFAULT_INPUTS[v].oliveOilRatio);
+    //       this.form
+    //         .get('hydrationRatio')!
+    //         .setValue(DEFAULT_INPUTS[v].hydrationRatio);
+    //     }
+    //   });
   }
 
   ngOnInit() {

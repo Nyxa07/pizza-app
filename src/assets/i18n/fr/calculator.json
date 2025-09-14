@@ -3,7 +3,8 @@
     "titles": {
       "quantity": "Quantité de pâte",
       "doughType": "Type de pâte",
-      "rest": "Repos"
+      "rest": "Repos",
+      "ingredients": "Ingrédients"
     },
     "pizzasNumber": "Nombre de pizzas",
     "doughType": "Méthode",
@@ -19,15 +20,110 @@
     "honeyRatio": "Ratio de miel",
     "pizzaWeight": "Poids du pâton",
     "hydrationHelperText": "Recommandée pour la force de la farine (W) : {minHydration}% - {maxHydration}%",
+    "oliveOilRatio": "Ratio d'huile d'olive",
+    "pizzaType": "Type de pizza",
     "infos": {
       "title": "Informations complémentaires",
-      "restTime": "Temps repos",
-      "ballsRestTime": "Temps repos des pâtons",
       "totalPrepTime": "Temps préparation total",
       "totalPrepTimeDescription": "Cela tient compte de la recette",
       "hoursUnit": "heures"
     }
   },
+   "assistant": {
+     "title": "Assistant Pizza",
+     "subtitle": "Créons votre recette parfaite",
+     "description": "Laissez-vous guider étape par étape pour créer la recette de pizza idéale selon vos préférences.",
+     "startButton": "Commencer l'assistant",
+     "form": {
+       "titles": {
+         "pizzaType": "Type de pizza",
+         "doughType": "Type de pâte",
+         "quantity": "Quantité",
+         "rest": "Repos",
+         "ingredients": "Ingrédients",
+         "summary": "Récapitulatif",
+         "yeastType": "Type de levure",
+         "temperature": "Température ambiante",
+         "planner": "Planificateur",
+         "rtRestTime": "Repos à température ambiante",
+         "coldRestTime": "Repos à froid",
+         "flourType": "Type de farine"
+       },
+       "pizzaType": {
+         "subtitle": "Choisissez votre style",
+         "description": "Sélectionnez le type de pizza que vous souhaitez préparer.",
+         "helpers": {
+           "neapolitan": "Pizza traditionnelle avec pâte fine et moelleuse",
+           "roman": "Pizza à pâte fine et croustillante"
+         }
+       },
+       "doughType": {
+         "subtitle": "Méthode de préparation",
+         "description": "Choisissez la technique de fermentation pour votre pâte.",
+         "helpers": {
+           "direct": "Méthode rapide, fermentation courte",
+           "poolish": "Méthode longue, saveur développée"
+         }
+       },
+       "quantity": {
+         "subtitle": "Combien de pizzas ?",
+         "description": "Indiquez le nombre de pizzas que vous souhaitez préparer.",
+         "pizzas": "pizza(s)"
+       },
+       "temperature": {
+         "subtitle": "Température ambiante",
+         "description": "Indiquez la température qu'il fait chez vous.",
+         "temperature": "°C",
+         "helpers": {
+           "temperature": "Température ambiante"
+         }
+       },
+       "planner": {
+         "subtitle": "Temps de repos",
+         "description": "Indiquez le temps de repos désiré parmis les choix proposés. Certains choix n'apparaissent qu'avec une faire spéciale pizza (forte).",
+         "withLongRestTime": "Repos long",
+         "withLongRestTimeDescription": "Le repos long permet de développer la saveur de la pâte.",
+         "withoutLongRestTime": "Repos court",
+         "withoutLongRestTimeDescription": "Le repos court permet de... manger plus vite 🤣",
+         "totalPrepTime": "Temps préparation total",
+         "totalPrepTimeDescription": "Cela vous donne une idée du temps total de préparation de votre recette, ce qui permet de commencer au bon moment 😊"
+       },
+       "yeastType": {
+         "subtitle": "Type de levure",
+         "description": "Choisissez le type de levure que vous souhaitez utiliser.",
+         "helpers": {
+           "dryActive": "Levure sèche active",
+           "dryInstant": "Levure sèche instantanée",
+           "fresh": "Levure fraîche"
+         }
+       },
+       "flourType": {
+         "subtitle": "Type de farine",
+         "description": "La force de la farine mesure sa capacité à supporter une fermentation prolongée.",
+         "helpers": {
+           "yes": "Je connais la force de ma farine",
+           "no": "Je ne connais pas la force de ma farine",
+           "standard": "Farine standard",
+           "specialPizza": "Farine spéciale pizza",
+           "strength": "Force de la farine (W)"
+         }
+       },
+       "summary": {
+         "subtitle": "Votre configuration",
+         "description": "Vérifiez vos choix avant de générer la recette.",
+         "ready": "Tout est prêt !",
+         "readyDescription": "Votre recette va être générée selon vos préférences.",
+         "helpers": {
+           "summary": "Récapitulatif"
+         }
+       }
+     },
+     "results": {
+       "title": "Votre Configuration",
+       "apply": "Appliquer cette configuration",
+       "restart": "Recommencer l'assistant"
+     }
+   },
   "recipe": {
     "poolish": {
       "ingredients": {
@@ -35,8 +131,8 @@
       },
       "method": {
         "title": "Préparation de la poolish",
-        "steps": [
-          {
+        "steps": {
+          "mixIngredients": {
             "title": "Mélanger l’eau, la levure et le miel",
             "description": "",
             "helper": {
@@ -47,7 +143,7 @@
               ]
             }
           },
-          {
+          "addFlour": {
             "title": "Ajouter la farine",
             "description": "",
             "helper": {
@@ -57,7 +153,7 @@
               ]
             }
           },
-          {
+          "restRT": {
             "title": "Repos <strong>{ rtRestTime } heure(s)</strong> à température ambiante",
             "description": "",
             "helper": {
@@ -67,7 +163,7 @@
               ]
             }
           },
-          {
+          "restCold": {
             "title": "Repos <strong>{ coldRestTime } heure(s)</strong> au réfrigérateur",
             "description": "",
             "helper": {
@@ -77,7 +173,7 @@
               ]
             }
           }
-        ]
+        }
       }
     },
     "poolishDough": {
@@ -86,8 +182,8 @@
       },
       "method": {
         "title": "Préparation de la pâte",
-        "steps": [
-          {
+        "steps": {
+          "takeOutPoolish": {
             "title": "Sortir la poolish 1H avant utilisation",
             "description": "",
             "helper": {
@@ -97,8 +193,8 @@
               ]
             }
           },
-          {
-            "title": "Dans la poolish, ajouter l’eau et le sel",
+          "addWaterSalt": {
+            "title": "Dans la poolish, ajouter l'eau et le sel",
             "description": "",
             "helper": {
               "title": "Préparation de la pâte",
@@ -108,7 +204,7 @@
               ]
             }
           },
-          {
+          "addFlour": {
             "title": "Ajouter la farine petit à petit",
             "description": "",
             "helper": {
@@ -118,7 +214,7 @@
               ]
             }
           },
-          {
+          "transferDough": {
             "title": "Transférer la pâte sur le plan de travail",
             "description": "",
             "helper": {
@@ -129,7 +225,7 @@
               ]
             }
           },
-          {
+          "knead": {
             "title": "Pétrir la pâte",
             "description": "",
             "helper": {
@@ -140,7 +236,7 @@
               ]
             }
           },
-          {
+          "foldAndShape": {
             "title": "Faire quelques rabats et former une boule",
             "description": "",
             "helper": {
@@ -153,7 +249,7 @@
               ]
             }
           },
-          {
+          "shortRest": {
             "title": "Repos 10 – 15 min sous un saladier",
             "description": "",
             "helper": {
@@ -164,7 +260,7 @@
               ]
             }
           },
-          {
+          "reshapeBall": {
             "title": "Reformer une boule",
             "description": "",
             "helper": {
@@ -175,7 +271,7 @@
               ]
             }
           },
-          {
+          "restOneHour": {
             "title": "Repos 1H dans un récipient hermétique",
             "description": "",
             "helper": {
@@ -183,7 +279,7 @@
               "descriptions": []
             }
           },
-          {
+          "formBalls": {
             "title": "Former les pâtons",
             "description": "",
             "helper": {
@@ -192,12 +288,12 @@
                 "Récupérer la pâte et avec l'aide d'un coupe pâte ou d'une spatule",
                 "Former des pâtons (bien tendu) d'environ <strong>{ pizzaWeight } g</strong>",
                 "Mettre une fine couche de semoule fine dans un plat (cela évitera qu'ils collent au plat)",
-                "Déposer les pâtons dans un plat en laissant de l’espace entre eux (ils vont encore grossir)",
+                "Déposer les pâtons dans un plat en laissant de l'espace entre eux (ils vont encore grossir)",
                 "Fermer le plat ou mettre un film plastique"
               ]
             }
           },
-          {
+          "finalRest": {
             "title": "Repos pour faire doubler de volume",
             "description": "",
             "helper": {
@@ -208,7 +304,7 @@
               ]
             }
           }
-        ]
+        }
       }
     },
     "directDough": {
@@ -217,19 +313,19 @@
       },
       "method": { 
         "title": "Préparation de la pâte",
-        "steps": [
-          {
-            "title": "Mélanger l’eau, la levure et le miel",
+        "steps": {
+          "mixIngredients": {
+            "title": "Mélanger l'eau, la levure et le miel",
             "description": "",
             "helper": {
               "title": "Préparation de la pâte",
               "descriptions": [
                 "Peser tous les ingrédients",
-                "Mélanger la levure et le miel à l’eau"
+                "Mélanger la levure et le miel à l'eau"
               ]
             }
           },
-          {
+          "addFlourSalt": {
             "title": "Ajouter la farine et le sel",
             "description": "",
             "helper": {
@@ -239,20 +335,20 @@
               ]
             }
           },
-          {
+          "knead": {
             "title": "Pétrir 10 min",
             "description": "",
             "helper": {
               "title": "Pétrissage",
               "descriptions": [
-                "Une fois que tous les ingrédients sont bien mélangés et que l’on commence à avoir une pâte, on peut la déposer sur le plan de travail",
+                "Une fois que tous les ingrédients sont bien mélangés et que l'on commence à avoir une pâte, on peut la déposer sur le plan de travail",
                 "Vous pouvez vous aider d'une corne à pâtisserie pour bien récupérer toute la pâte",
                 "Terminer le pétrissage à la main environ 10 min. Bien pétrir avec la paume des mains pour hydrater correctement la farine",
                 "Vous pouvez aussi utiliser un robot pâtissier avec son crochet pétrisseur, mais c'est quand même moins drôle 😉"
               ]
             }
           },
-          {
+          "formBall": {
             "title": "Former une boule",
             "description": "",
             "helper": {
@@ -262,7 +358,7 @@
               ]
             }
           },
-          {
+          "shortRest": {
             "title": "Repos 25 min sous un saladier",
             "description": "",
             "helper": {
@@ -273,7 +369,7 @@
               ]
             }
           },
-          {
+          "foldAndShape": {
             "title": "Faire quelques rabats et former une boule",
             "description": "",
             "helper": {
@@ -286,7 +382,7 @@
               ]
             }
           },
-          {
+          "restRT": {
             "title": "Repos à température ambiante <strong>{ rtRestTime } heure(s)</strong> dans un récipient hermétique",
             "description": "",
             "helper": {
@@ -297,7 +393,7 @@
               ]
             }
           },
-          {
+          "restCold": {
             "title": "Repos à froid <strong>{ coldRestTime } heure(s)</strong> dans un récipient hermétique",
             "description": "",
             "helper": {
@@ -308,7 +404,7 @@
               ]
             }
           },
-          {
+          "takeOutDough": {
             "title": "Sortir la pâte 1 heure avant utilisation",
             "description": "",
             "helper": {
@@ -318,7 +414,7 @@
               ]
             }
           },
-          {
+          "formBalls": {
             "title": "Former les pâtons",
             "description": "",
             "helper": {
@@ -327,12 +423,12 @@
                 "Récupérer la pâte et avec un coupe pâte ou une spatule",
                 "Former des pâtons (bien tendu) d'environ <strong>{ pizzaWeight } g</strong>",
                 "Mettre une fine couche de semoule fine dans un plat (cela évitera qu'ils collent au plat)",
-                "Déposer les pâtons dans un plat en laissant de l’espace entre eux (ils vont encore grossir)",
+                "Déposer les pâtons dans un plat en laissant de l'espace entre eux (ils vont encore grossir)",
                 "Fermer le plat ou mettre un film plastique"
               ]
             }     
           },
-          {
+          "finalRest": {
             "title": "Repos pour faire doubler de volume",
             "description": "",
             "helper": {
@@ -343,13 +439,24 @@
               ]
             }
           }
-        ]
+        }
       }
     }
   },
-  "doughTypes": {
+  "enums": {
+    "doughTypes": {
     "poolish": "Poolish",
     "direct": "Directe"
+    },
+    "pizzaTypes": {
+      "neapolitan": "Napolitaine",
+      "roman": "Romaine"
+    },
+    "yeastTypes": {
+      "dryActive": "Sèche active",
+      "dryInstant": "Instantanée",
+      "fresh": "Fraîche"
+    }
   },
   "settings": {
     "visibility": {
@@ -360,6 +467,7 @@
       "flourStrength": "Force de la farine",
       "hydrationRatio": "Ratio d'hydratation",
       "poolishRatio": "Ratio poolish",
+      "oliveOilRatio": "Ratio d'huile d'olive",
       "all": "Tout activer"
     }
   },

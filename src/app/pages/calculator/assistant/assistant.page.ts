@@ -51,16 +51,14 @@ export class CalculatorAssistantPage implements OnInit {
         settings: {
           saltRatio: { auto: true, visible: false },
           honeyRatio: { auto: true, visible: false },
-          flourStrength: { auto: true, visible: false },
+          flourStrength: { auto: false, visible: true },
           hydrationRatio: { auto: true, visible: false },
-          doughType: { auto: true, visible: false },
+          doughType: { auto: false, visible: true },
           poolishRatio: { auto: true, visible: false },
           yeastType: { auto: false, visible: true },
-          coldRestTime: { auto: true, visible: false },
+          coldRestTime: { auto: false, visible: false },
           pizzaWeight: { auto: true, visible: false },
-        },
-        input: {
-          doughType: DoughType.DIRECT,
+          oliveOilRatio: { auto: true, visible: false },
         },
       });
       this.isInitialized.set(true);

@@ -66,13 +66,26 @@ export class PoolishRecipe implements IRecipeDef {
       coldRestTime: Math.round(this.result.poolish?.coldRestTime ?? 0),
     },
     items: [
-      { icon: this.WandIcon, helperDescriptions: 2 },
-      { icon: this.WheatIcon, helperDescriptions: 1 },
-      { icon: this.ThermometerSunIcon, helperDescriptions: 1 },
+      {
+        icon: this.WandIcon,
+        helperDescriptions: 2,
+        translationKey: 'mixIngredients',
+      },
+      {
+        icon: this.WheatIcon,
+        helperDescriptions: 1,
+        translationKey: 'addFlour',
+      },
+      {
+        icon: this.ThermometerSunIcon,
+        helperDescriptions: 1,
+        translationKey: 'restRT',
+      },
       {
         icon: this.ThermometerSnowflakeIcon,
         helperDescriptions: 1,
         hide: !this.result.poolish?.coldRestTime,
+        translationKey: 'restCold',
       },
     ],
   };

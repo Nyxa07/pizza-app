@@ -36,6 +36,20 @@
         </ion-select>
       </ion-item>
     }
+    <ion-item>
+      <ion-select
+        [label]="'calculator.form.pizzaType' | translate"
+        formControlName="pizzaType"
+        [cancelText]="'common.actions.cancel' | translate"
+        [okText]="'common.actions.ok' | translate"
+      >
+        @for (pizzaType of pizzaTypes; track pizzaType) {
+          <ion-select-option [value]="pizzaType.value">{{
+            pizzaType.label | translate
+          }}</ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
   </ion-list>
 
   <ion-list-header>
@@ -50,12 +64,11 @@
           [cancelText]="'common.actions.cancel' | translate"
           [okText]="'common.actions.ok' | translate"
         >
-          <ion-select-option value="direct">{{
-            "calculator.doughTypes.direct" | translate
-          }}</ion-select-option>
-          <ion-select-option value="poolish">{{
-            "calculator.doughTypes.poolish" | translate
-          }}</ion-select-option>
+          @for (doughType of doughTypes; track doughType) {
+            <ion-select-option [value]="doughType.value">{{
+              doughType.label | translate
+            }}</ion-select-option>
+          }
         </ion-select>
       </ion-item>
     }
@@ -84,46 +97,14 @@
           [okText]="'common.actions.ok' | translate"
         >
           <ion-select-option value="dry_active">
-            {{ "common.yeastTypes.dryActive" | translate }}
+            {{ "calculator.enums.yeastTypes.dryActive" | translate }}
           </ion-select-option>
           <ion-select-option value="dry_instant">
-            {{ "common.yeastTypes.dryInstant" | translate }}
+            {{ "calculator.enums.yeastTypes.dryInstant" | translate }}
           </ion-select-option>
           <ion-select-option value="fresh">{{
-            "common.yeastTypes.fresh" | translate
+            "calculator.enums.yeastTypes.fresh" | translate
           }}</ion-select-option>
-        </ion-select>
-      </ion-item>
-    }
-    @if (settings?.saltRatio?.visible) {
-      <ion-item>
-        <ion-select
-          [label]="'calculator.form.saltRatio' | translate"
-          formControlName="saltRatio"
-          [cancelText]="'common.actions.cancel' | translate"
-          [okText]="'common.actions.ok' | translate"
-        >
-          @for (saltRatio of range(0.02, 0.04, 0.001, 3); track saltRatio) {
-            <ion-select-option [value]="saltRatio">
-              {{ saltRatio * 100 | number: "1.1-1" }}%
-            </ion-select-option>
-          }
-        </ion-select>
-      </ion-item>
-    }
-    @if (settings?.honeyRatio?.visible) {
-      <ion-item>
-        <ion-select
-          [label]="'calculator.form.honeyRatio' | translate"
-          formControlName="honeyRatio"
-          [cancelText]="'common.actions.cancel' | translate"
-          [okText]="'common.actions.ok' | translate"
-        >
-          @for (honeyRatio of range(0, 0.005, 0.001, 3); track honeyRatio) {
-            <ion-select-option [value]="honeyRatio">
-              {{ honeyRatio * 100 | number: "1.1-1" }}%
-            </ion-select-option>
-          }
         </ion-select>
       </ion-item>
     }
@@ -163,6 +144,71 @@
       </ion-item>
     }
   </ion-list>
+
+  @if (
+    settings?.saltRatio?.visible ||
+    settings?.honeyRatio?.visible ||
+    settings?.oliveOilRatio?.visible
+  ) {
+    <ion-list-header>
+      {{ "calculator.form.titles.ingredients" | translate }}
+    </ion-list-header>
+    <ion-list lines="none">
+      @if (settings?.saltRatio?.visible) {
+        <ion-item>
+          <ion-select
+            [label]="'calculator.form.saltRatio' | translate"
+            formControlName="saltRatio"
+            [cancelText]="'common.actions.cancel' | translate"
+            [okText]="'common.actions.ok' | translate"
+          >
+            @for (saltRatio of range(0.02, 0.04, 0.001, 3); track saltRatio) {
+              <ion-select-option [value]="saltRatio">
+                {{ saltRatio * 100 | number: "1.1-1" }}%
+              </ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+      }
+      @if (settings?.honeyRatio?.visible) {
+        <ion-item>
+          <ion-select
+            [label]="'calculator.form.honeyRatio' | translate"
+            formControlName="honeyRatio"
+            [cancelText]="'common.actions.cancel' | translate"
+            [okText]="'common.actions.ok' | translate"
+          >
+            @for (honeyRatio of range(0, 0.005, 0.001, 3); track honeyRatio) {
+              <ion-select-option [value]="honeyRatio">
+                {{ honeyRatio * 100 | number: "1.1-1" }}%
+              </ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+      }
+
+      @if (settings?.oliveOilRatio?.visible) {
+        <ion-item>
+          <ion-select
+            [label]="'calculator.form.oliveOilRatio' | translate"
+            formControlName="oliveOilRatio"
+            [cancelText]="'common.actions.cancel' | translate"
+            [okText]="'common.actions.ok' | translate"
+          >
+            @for (
+              oliveOilRatio of range(0, 0.03, 0.001, 3);
+              track oliveOilRatio
+            ) {
+              <ion-select-option [value]="oliveOilRatio">
+                {{ oliveOilRatio * 100 | number: "1.1-1" }}%
+              </ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+      }
+    </ion-list>
+  }
+
   <ion-list-header>{{
     "calculator.form.titles.rest" | translate
   }}</ion-list-header>
@@ -214,7 +260,7 @@
           [cancelText]="'common.actions.cancel' | translate"
           [okText]="'common.actions.ok' | translate"
         >
-          @for (i of range(0, 24); track i) {
+          @for (i of range(0, 48); track i) {
             <ion-select-option [value]="i"
               >{{ i }}
               {{
@@ -233,24 +279,6 @@
     "calculator.form.infos.title" | translate
   }}</ion-list-header>
   <ion-list lines="none" class="muted">
-    <ion-item>
-      <ion-label>{{ "calculator.form.infos.restTime" | translate }}</ion-label>
-      <ion-label slot="end"
-        >~{{ (doughAndPoolishRestTime$ | async) ?? 0 | number: "1.0-0" }}
-        {{ "calculator.form.infos.hoursUnit" | translate }}</ion-label
-      >
-    </ion-item>
-
-    <ion-item>
-      <ion-label>{{
-        "calculator.form.infos.ballsRestTime" | translate
-      }}</ion-label>
-      <ion-label slot="end"
-        >~{{ pizzaBallsRestTime$ | async | number: "1.0-0" }}
-        {{ "calculator.form.infos.hoursUnit" | translate }}</ion-label
-      >
-    </ion-item>
-
     <ion-item>
       <ion-label>
         {{ "calculator.form.infos.totalPrepTime" | translate }}

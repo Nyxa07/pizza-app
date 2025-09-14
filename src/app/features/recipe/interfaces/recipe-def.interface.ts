@@ -15,6 +15,7 @@ export interface IRecipeDef {
       helperDescriptions: number;
       variables?: Record<string, any>;
       hide?: boolean;
+      translationKey: string;
     }[];
   };
 }

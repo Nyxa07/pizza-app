@@ -9,8 +9,8 @@ describe('AssistantFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AssistantFormComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [AssistantFormComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AssistantFormComponent);

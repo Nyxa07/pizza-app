@@ -77,42 +77,52 @@ export class PoolishDoughRecipe implements IRecipeDef {
         icon: this.CookingPotIcon,
         helperDescriptions: 1,
         hide: !this.result.poolish?.coldRestTime,
+        translationKey: 'takeOutPoolish',
       },
       {
         icon: this.BubblesIcon,
         helperDescriptions: 2,
+        translationKey: 'addWaterSalt',
       },
       {
         icon: this.WheatIcon,
         helperDescriptions: 1,
+        translationKey: 'addFlour',
       },
       {
         icon: this.ArrowDownUpIcon,
         helperDescriptions: 2,
+        translationKey: 'transferDough',
       },
       {
         icon: this.HandIcon,
         helperDescriptions: 2,
+        translationKey: 'knead',
       },
       {
         icon: this.UndoDotIcon,
         helperDescriptions: 4,
+        translationKey: 'foldAndShape',
       },
       {
         icon: this.ThermometerSunIcon,
         helperDescriptions: 2,
+        translationKey: 'shortRest',
       },
       {
         icon: this.CircleIcon,
         helperDescriptions: 2,
+        translationKey: 'reshapeBall',
       },
       {
         icon: this.ThermometerSunIcon,
         helperDescriptions: 0,
+        translationKey: 'restOneHour',
       },
       {
         icon: this.EclipseIcon,
         helperDescriptions: 5,
+        translationKey: 'formBalls',
       },
       {
         icon: this.ThermometerSunIcon,
@@ -120,6 +130,8 @@ export class PoolishDoughRecipe implements IRecipeDef {
         variables: {
           rtRestTime: Math.round(this.result.pizzaBalls.rtRestTime),
         },
+        translationKey: 'finalRest',
+        hide: !Math.round(this.result.pizzaBalls.rtRestTime),
       },
     ],
   };
