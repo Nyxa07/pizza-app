@@ -8,6 +8,9 @@ import {
   IonRange,
   IonListHeader,
   IonLabel,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
 } from '@ionic/angular/standalone';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
@@ -39,6 +42,9 @@ import { PizzaType } from '../../settings/enums/pizza-type.enum';
     NumberPipe,
     IonListHeader,
     IonLabel,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
   ],
   standalone: true,
 })
