@@ -23,7 +23,8 @@
   "navigation": {
     "back": "Back",
     "next": "Next",
-    "previous": "Previous"
+    "previous": "Previous",
+    "finish": "Finish"
   },
   "ingredients": {
     "flour": "Flour",
@@ -31,18 +32,17 @@
     "yeast": "Yeast",
     "honey": "Honey",
     "salt": "Salt",
-    "dryActiveYeast": "Dry active yeast",
-    "dryInstantYeast": "Dry instant yeast",
+    "dryActiveYeast": "Active dry yeast",
+    "dryInstantYeast": "Instant dry yeast",
     "freshYeast": "Fresh yeast"
   },
-  "yeastTypes": {
-    "dryActive": "Dry active",
-    "dryInstant": "Instant",
-    "fresh": "Fresh"
-  },
   "time": {
-    "hours": "{count, plural, one {Hour} other {Hours}}",
-    "minutes": "{count, plural, one {Minute} other {Minutes}}",
-    "seconds": "{count, plural, one {Second} other {Seconds}}"
+    "hours": "{count, plural, one {hour} other {hours}}",
+    "minutes": "{count, plural, one {minute} other {minutes}}",
+    "seconds": "{count, plural, one {second} other {seconds}}"
+  },
+  "recipe": {
+    "ingredients": "Ingredients",
+    "method": "Method"
   }
 }

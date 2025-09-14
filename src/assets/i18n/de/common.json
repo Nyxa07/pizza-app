@@ -23,7 +23,8 @@
   "navigation": {
     "back": "Zurück",
     "next": "Weiter",
-    "previous": "Vorherige"
+    "previous": "Vorherige",
+    "finish": "Beenden"
   },
   "ingredients": {
     "flour": "Mehl",
@@ -31,13 +32,17 @@
     "yeast": "Hefe",
     "honey": "Honig",
     "salt": "Salz",
-    "dryActiveYeast": "Trockene aktive Hefe",
-    "dryInstantYeast": "Trockene Instanthefe",
+    "dryActiveYeast": "Aktive Trockenhefe",
+    "dryInstantYeast": "Instant-Trockenhefe",
     "freshYeast": "Frische Hefe"
   },
-  "yeastTypes": {
-    "dryActive": "Trocken aktiv",
-    "dryInstant": "Instant",
-    "fresh": "Frisch"
+  "time": {
+    "hours": "{count, plural, one {Stunde} other {Stunden}}",
+    "minutes": "{count, plural, one {Minute} other {Minuten}}",
+    "seconds": "{count, plural, one {Sekunde} other {Sekunden}}"
+  },
+  "recipe": {
+    "ingredients": "Zutaten",
+    "method": "Methode"
   }
 }

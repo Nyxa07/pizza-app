@@ -3,7 +3,8 @@
     "titles": {
       "quantity": "Quantità di impasto",
       "doughType": "Tipo di impasto",
-      "rest": "Riposo"
+      "rest": "Riposo",
+      "ingredients": "Ingredienti"
     },
     "pizzasNumber": "Numero di pizze",
     "doughType": "Metodo",
@@ -19,337 +20,314 @@
     "honeyRatio": "Rapporto di miele",
     "pizzaWeight": "Peso del panetto",
     "hydrationHelperText": "Consigliato per la forza della farina (W): {minHydration}% - {maxHydration}%",
+    "oliveOilRatio": "Rapporto di olio d'oliva",
+    "pizzaType": "Tipo di pizza",
     "infos": {
       "title": "Informazioni aggiuntive",
-      "restTime": "Tempo di riposo",
-      "ballsRestTime": "Tempo di riposo dei panetti",
       "totalPrepTime": "Tempo totale di preparazione",
       "totalPrepTimeDescription": "Questo tiene conto della ricetta",
       "hoursUnit": "ore"
     }
   },
+   "assistant": {
+     "title": "Assistente Pizza",
+     "subtitle": "Creiamo la tua ricetta perfetta",
+     "description": "Lasciati guidare passo dopo passo per creare la ricetta di pizza ideale secondo le tue preferenze.",
+     "startButton": "Avvia assistente",
+     "continueButton": "Riprendi assistente",
+     "form": {
+       "titles": {
+         "pizzaType": "Tipo di pizza",
+         "doughType": "Tipo di impasto",
+         "quantity": "Quantità",
+         "rest": "Riposo",
+         "ingredients": "Ingredienti",
+         "summary": "Riepilogo",
+         "yeastType": "Tipo di lievito",
+         "temperature": "Temperatura ambiente",
+         "planner": "Pianificatore",
+         "rtRestTime": "Riposo a temperatura ambiente",
+         "coldRestTime": "Riposo a freddo",
+         "flourType": "Tipo di farina"
+       },
+       "pizzaType": {
+         "subtitle": "Scegli il tuo stile",
+         "description": "Seleziona il tipo di pizza che vuoi preparare.",
+         "helpers": {
+           "neapolitan": "Pizza tradizionale con impasto sottile e soffice",
+           "roman": "Pizza con impasto sottile e croccante"
+         }
+       },
+       "doughType": {
+         "subtitle": "Metodo di preparazione",
+         "description": "Scegli la tecnica di fermentazione per il tuo impasto.",
+         "helpers": {
+           "direct": "Metodo veloce, fermentazione breve",
+           "poolish": "Metodo lungo, sapore sviluppato"
+         }
+       },
+       "quantity": {
+         "subtitle": "Quante pizze?",
+         "description": "Indica il numero di pizze che vuoi preparare.",
+         "pizzas": "pizza/e"
+       },
+       "temperature": {
+         "subtitle": "Temperatura ambiente",
+         "description": "Indica la temperatura che c'è a casa tua.",
+         "temperature": "°C",
+         "helpers": {
+           "temperature": "Temperatura ambiente"
+         }
+       },
+       "planner": {
+         "subtitle": "Tempo di riposo",
+         "description": "Indica il tempo di riposo desiderato tra le scelte proposte. Alcune scelte appaiono solo con farina speciale pizza (forte).",
+         "withLongRestTime": "Riposo lungo",
+         "withLongRestTimeDescription": "Il riposo lungo permette di sviluppare il sapore dell'impasto.",
+         "withoutLongRestTime": "Riposo breve",
+         "withoutLongRestTimeDescription": "Il riposo breve permette di... mangiare più velocemente 🤣",
+         "totalPrepTime": "Tempo totale di preparazione",
+         "totalPrepTimeDescription": "Questo ti dà un'idea del tempo totale di preparazione della tua ricetta, che permette di iniziare al momento giusto 😊"
+       },
+       "yeastType": {
+         "subtitle": "Tipo di lievito",
+         "description": "Scegli il tipo di lievito che vuoi usare.",
+         "helpers": {
+           "dryActive": "Lievito secco attivo",
+           "dryInstant": "Lievito secco istantaneo",
+           "fresh": "Lievito fresco"
+         }
+       },
+       "flourType": {
+         "subtitle": "Tipo di farina",
+         "description": "La forza della farina misura la sua capacità di sopportare una fermentazione prolungata.",
+         "helpers": {
+           "yes": "Conosco la forza della mia farina",
+           "no": "Non conosco la forza della mia farina",
+           "standard": "Farina standard",
+           "specialPizza": "Farina speciale pizza",
+           "strength": "Forza della farina (W)"
+         }
+       },
+       "summary": {
+         "subtitle": "La tua configurazione",
+         "description": "Verifica le tue scelte prima di generare la ricetta.",
+         "ready": "Tutto è pronto!",
+         "readyDescription": "La tua ricetta sarà generata secondo le tue preferenze.",
+         "helpers": {
+           "summary": "Riepilogo"
+         }
+       }
+     },
+     "results": {
+       "title": "La Tua Configurazione",
+       "apply": "Applica questa configurazione",
+       "restart": "Riavvia assistente"
+     }
+   },
   "recipe": {
-    "poolish": {
-      "ingredients": {
-        "title": "Ingredienti del poolish"
-      },
-      "method": {
-        "title": "Preparazione del poolish",
-        "steps": [
-          {
-            "title": "Mescolare acqua, lievito e miele",
-            "description": "",
-            "helper": {
-              "title": "Mescolare acqua, lievito e miele",
-              "descriptions": [
-                "Pesare tutti gli ingredienti.",
-                "In una ciotola grande, sciogliere il lievito nell'acqua e aggiungere il miele."
-              ]
-            }
-          },
-          {
-            "title": "Aggiungere la farina",
-            "description": "",
-            "helper": {
-              "title": "Aggiungere la farina",
-              "descriptions": [
-                "Aggiungere la farina poco a poco, mescolando con un cucchiaio di legno fino ad ottenere un composto omogeneo"
-              ]
-            }
-          },
-          {
-            "title": "Riposo <strong>{ rtRestTime } ora/e</strong> a temperatura ambiente",
-            "description": "",
-            "helper": {
-              "title": "Riposo a temperatura ambiente",
-              "descriptions": [
-                "Lasciare riposare <strong>{ rtRestTime } ora/e</strong> a temperatura ambiente in un contenitore ermetico o coperto con pellicola trasparente"
-              ]
-            }
-          },
-          {
-            "title": "Riposo <strong>{ coldRestTime } ora/e</strong> in frigorifero",
-            "description": "",
-            "helper": {
-              "title": "Riposo in frigorifero",
-              "descriptions": [
-                "Lasciare riposare <strong>{ coldRestTime } ora/e</strong> in frigorifero in un contenitore ermetico o coperto con pellicola trasparente"
-              ]
-            }
-          }
-        ]
-      }
+    "titles": {
+      "poolish": "Poolish",
+      "directDough": "Impasto metodo diretto",
+      "poolishDough": "Impasto con poolish"
     },
-    "poolishDough": {
-      "ingredients": {
-        "title": "Ingredienti dell'impasto"
+    "steps": {
+      "mixIngredients": {
+        "title": "Mescolare acqua, lievito e miele",
+        "helper": {
+          "title": "Mescolare acqua, lievito e miele",
+          "descriptions": [
+            "Pesare tutti gli ingredienti.",
+            "In una ciotola grande, sciogliere il lievito nell'acqua e aggiungere il miele."
+          ]
+        }
       },
-      "method": {
-        "title": "Preparazione dell'impasto",
-        "steps": [
-          {
-            "title": "Togliere il poolish 1H prima dell'uso",
-            "description": "",
-            "helper": {
-              "title": "Come usare il poolish",
-              "descriptions": [
-                "Togliere il poolish 1 ora prima dell'uso, in modo che abbia il tempo di tornare a temperatura ambiente"
-              ]
-            }
-          },
-          {
-            "title": "Nel poolish, aggiungere l'acqua e il sale",
-            "description": "",
-            "helper": {
-              "title": "Preparazione dell'impasto",
-              "descriptions": [
-                "Pesare le quantità da aggiungere nel poolish",
-                "Nella ciotola del poolish, aggiungere l'acqua e il sale. Mescolare con un cucchiaio di legno fino a quando l'acqua non sarà assorbita"
-              ]
-            }
-          },
-          {
-            "title": "Aggiungere la farina poco a poco",
-            "description": "",
-            "helper": {
-              "title": "Come aggiungere la farina",
-              "descriptions": [
-                "Aggiungere la farina poco a poco e mescolare con un cucchiaio di legno"
-              ]
-            }
-          },
-          {
-            "title": "Trasferire l'impasto sul piano di lavoro",
-            "description": "",
-            "helper": {
-              "title": "Trasferimento dell'impasto",
-              "descriptions": [
-                "Quando non è più possibile mescolare con il cucchiaio, si inizia ad avere un aspetto di impasto e si può trasferire sul piano di lavoro",
-                "Utilizzare un tarocco per aiutare con il trasferimento"
-              ]
-            }
-          },
-          {
-            "title": "Impastare l'impasto",
-            "description": "",
-            "helper": {
-              "title": "Impasto",
-              "descriptions": [
-                "Lavorare l'impasto impastandolo, la farina deve essere completamente integrata",
-                "Utilizzare il palmo delle mani per impastare"
-              ]
-            }
-          },
-          {
-            "title": "Fare qualche piega e formare una palla",
-            "description": "",
-            "helper": {
-              "title": "Pieghe",
-              "descriptions": [
-                "Per fare una piega, prendiamo l'impasto e lo pieghiamo su se stesso",
-                "Possiamo fare quante pieghe vogliamo, ma l'impasto deve rimanere morbido ed elastico",
-                "La piega permette di introdurre aria nell'impasto e permetterà di ottenere un impasto alveolato durante la cottura",
-                "Una volta finito, possiamo formare una bella palla"
-              ]
-            }
-          },
-          {
-            "title": "Riposo 10 – 15 min sotto una ciotola",
-            "description": "",
-            "helper": {
-              "title": "Riposo",
-              "descriptions": [
-                "Semplicemente capovolgere la ciotola utilizzata per la preparazione sull'impasto",
-                "L'impasto si tenderà e diventerà più liscio"
-              ]
-            }
-          },
-          {
-            "title": "Riformare una palla",
-            "description": "",
-            "helper": {
-              "title": "Riformare una palla",
-              "descriptions": [
-                "Non lavorare troppo l'impasto",
-                "Stendere l'impasto e facendogli fare qualche giro tra le mani, riformare una palla"
-              ]
-            }
-          },
-          {
-            "title": "Riposo 1H in un contenitore ermetico",
-            "description": "",
-            "helper": {
-              "title": "Riposo",
-              "descriptions": []
-            }
-          },
-          {
-            "title": "Formare i panetti",
-            "description": "",
-            "helper": {
-              "title": "Formazione dei panetti",
-              "descriptions": [
-                "Recuperare l'impasto e con l'aiuto di un tagliapasta o una spatola",
-                "Formare dei panetti (ben tesi) di circa <strong>{ pizzaWeight } g</strong>",
-                "Mettere un sottile strato di semola fine in un piatto (questo eviterà che si attacchino al piatto)",
-                "Disporre i panetti in un piatto lasciando spazio tra di loro (cresceranno ancora)",
-                "Chiudere il piatto o mettere pellicola trasparente"
-              ]
-            }
-          },
-          {
-            "title": "Riposo per raddoppiare di volume",
-            "description": "",
-            "helper": {
-              "title": "Riposo del panetto",
-              "descriptions": [
-                "Il tempo di riposo del panetto varia a seconda della temperatura",
-                "Ci vogliono circa <strong>{ rtRestTime } ora/e</strong>, quindi bisogna tenerne conto 😉"
-              ]
-            }
-          }
-        ]
-      }
-    },
-    "directDough": {
-      "ingredients": {
-        "title": "Ingredienti dell'impasto"
+      "addFlourPoolish": {
+        "title": "Aggiungere la farina",
+        "helper": {
+          "title": "Aggiungere la farina",
+          "descriptions": [
+            "Aggiungere la farina poco a poco, mescolando con un cucchiaio di legno fino ad ottenere un composto omogeneo"
+          ]
+        }
       },
-      "method": { 
-        "title": "Preparazione dell'impasto",
-        "steps": [
-          {
-            "title": "Mescolare acqua, lievito e miele",
-            "description": "",
-            "helper": {
-              "title": "Preparazione dell'impasto",
-              "descriptions": [
-                "Pesare tutti gli ingredienti",
-                "Mescolare il lievito e il miele con l'acqua"
-              ]
-            }
-          },
-          {
-            "title": "Aggiungere la farina e il sale",
-            "description": "",
-            "helper": {
-              "title": "Introduzione della farina",
-              "descriptions": [
-                "Aggiungere il sale e la farina poco a poco e mescolare con un cucchiaio di legno fino ad ottenere un composto omogeneo"
-              ]
-            }
-          },
-          {
-            "title": "Impastare per 10 min",
-            "description": "",
-            "helper": {
-              "title": "Impasto",
-              "descriptions": [
-                "Una volta che tutti gli ingredienti sono ben amalgamati e si inizia ad avere un impasto, si può trasferire sul piano di lavoro",
-                "Si può utilizzare un tarocco per recuperare bene tutto l'impasto",
-                "Terminare l'impasto a mano per circa 10 min. Impastare bene con il palmo delle mani per idratare correttamente la farina",
-                "Si può anche utilizzare un'impastatrice con il gancio per impastare, ma è meno divertente 😉"
-              ]
-            }
-          },
-          {
-            "title": "Formare una palla",
-            "description": "",
-            "helper": {
-              "title": "Palla di impasto",
-              "descriptions": [
-                "Una volta che l'impasto ha una bella struttura, stendere l'impasto e facendogli fare qualche giro tra le mani, formare una palla"
-              ]
-            }
-          },
-          {
-            "title": "Riposo per 25 min sotto una ciotola",
-            "description": "",
-            "helper": {
-              "title": "Riposo",
-              "descriptions": [
-                "Semplicemente capovolgere la ciotola utilizzata per la preparazione sull'impasto",
-                "L'impasto si tenderà e diventerà più liscio"
-              ]
-            }
-          },
-          {
-            "title": "Fare qualche piega e formare una palla",
-            "description": "",
-            "helper": {
-              "title": "Pieghe",
-              "descriptions": [
-                "Per fare una piega, prendiamo l'impasto e lo pieghiamo su se stesso",
-                "Possiamo fare quante pieghe vogliamo, ma l'impasto deve rimanere morbido ed elastico",
-                "La piega permette di introdurre aria nell'impasto e permetterà di ottenere un impasto alveolato durante la cottura",
-                "Una volta finito, possiamo formare una bella palla"
-              ]
-            }
-          },
-          {
-            "title": "Riposo a temperatura ambiente <strong>{ rtRestTime } ora/e</strong> in un contenitore ermetico",
-            "description": "",
-            "helper": {
-              "title": "Riposo",
-              "descriptions": [
-                "Il riposo permetterà al lievito di attivarsi, creare una bella rete di glutine e così dare tutta la sua consistenza all'impasto",
-                "L'impasto si tenderà e diventerà più liscio"
-              ]
-            }
-          },
-          {
-            "title": "Riposo a freddo <strong>{ coldRestTime } ora/e</strong> in un contenitore ermetico",
-            "description": "",
-            "helper": {
-              "title": "Riposo",
-              "descriptions": [
-                "Il riposo permetterà al lievito di attivarsi, creare una bella rete di glutine e così dare tutta la sua consistenza all'impasto",
-                "L'impasto si tenderà e diventerà più liscio"
-              ]
-            }
-          },
-          {
-            "title": "Togliere l'impasto 1 ora prima dell'uso",
-            "description": "",
-            "helper": {
-              "title": "Togliere l'impasto",
-              "descriptions": [
-                "Togliere l'impasto 1 ora prima dell'uso, in modo che abbia il tempo di tornare a temperatura ambiente"
-              ]
-            }
-          },
-          {
-            "title": "Formare i panetti",
-            "description": "",
-            "helper": {
-              "title": "Formare i panetti",
-              "descriptions": [
-                "Recuperare l'impasto e con un tagliapasta o una spatola",
-                "Formare dei panetti (ben tesi) di circa <strong>{ pizzaWeight } g</strong>",
-                "Mettere un sottile strato di semola fine in un piatto (questo eviterà che si attacchino al piatto)",
-                "Disporre i panetti in un piatto lasciando spazio tra di loro (cresceranno ancora)",
-                "Chiudere il piatto o mettere pellicola trasparente"
-              ]
-            }     
-          },
-          {
-            "title": "Riposo per raddoppiare di volume",
-            "description": "",
-            "helper": {
-              "title": "Riposo del panetto",
-              "descriptions": [
-                "Il tempo di riposo del panetto varia a seconda della temperatura",
-                "Ci vogliono circa <strong>{ rtRestTime } ora/e</strong>, quindi bisogna tenerne conto 😉"
-              ]
-            }
-          }
-        ]
+      "restRT": {
+        "title": "Riposo <strong>{ rtRestTime } ora/e</strong> a temperatura ambiente",
+        "helper": {
+          "title": "Riposo a temperatura ambiente",
+          "descriptions": [
+            "Lasciare riposare <strong>{ rtRestTime } ora/e</strong> a temperatura ambiente in un contenitore ermetico o coperto con pellicola trasparente",
+            "Il riposo permetterà al lievito di attivarsi, creare una bella rete di glutine e così dare tutta la sua consistenza all'impasto",
+            "L'impasto si tenderà e diventerà più liscio"
+          ]
+        }
+      },
+      "restCold": {
+        "title": "Riposo <strong>{ coldRestTime } ora/e</strong> in frigorifero",
+        "helper": {
+          "title": "Riposo in frigorifero",
+          "descriptions": [
+            "Lasciare riposare <strong>{ coldRestTime } ora/e</strong> in frigorifero in un contenitore ermetico o coperto con pellicola trasparente",
+            "Il riposo permetterà al lievito di attivarsi, creare una bella rete di glutine e così dare tutta la sua consistenza all'impasto",
+            "L'impasto si tenderà e diventerà più liscio"
+          ]
+        }
+      },
+      "takeOutPoolish": {
+        "title": "Togliere il poolish 1H prima dell'uso",
+        "helper": {
+          "title": "Come usare il poolish",
+          "descriptions": [
+            "Togliere il poolish 1 ora prima dell'uso, in modo che abbia il tempo di tornare a temperatura ambiente"
+          ]
+        }
+      },
+      "addWaterSalt": {
+        "title": "Nel poolish, aggiungere l'acqua e il sale",
+        "helper": {
+          "title": "Preparazione dell'impasto",
+          "descriptions": [
+            "Pesare le quantità da aggiungere nel poolish",
+            "Nella ciotola del poolish, aggiungere l'acqua e il sale. Mescolare con un cucchiaio di legno fino a quando l'acqua non sarà assorbita"
+          ]
+        }
+      },
+      "addFlourPoolishDough": {
+        "title": "Aggiungere la farina poco a poco",
+        "helper": {
+          "title": "Come aggiungere la farina",
+          "descriptions": [
+            "Aggiungere la farina poco a poco e mescolare con un cucchiaio di legno"
+          ]
+        }
+      },
+      "transferDough": {
+        "title": "Trasferire l'impasto sul piano di lavoro",
+        "helper": {
+          "title": "Trasferimento dell'impasto",
+          "descriptions": [
+            "Quando non è più possibile mescolare con il cucchiaio, si inizia ad avere un aspetto di impasto e si può trasferire sul piano di lavoro",
+            "Utilizzare un tarocco per aiutare con il trasferimento"
+          ]
+        }
+      },
+      "knead": {
+        "title": "Impastare l'impasto",
+        "helper": {
+          "title": "Impasto",
+          "descriptions": [
+            "Lavorare l'impasto impastandolo per circa 10 min, la farina deve essere completamente integrata",
+            "Utilizzare il palmo delle mani per impastare",
+            "Si può anche utilizzare un'impastatrice con il gancio per impastare, ma è meno divertente 😉"
+          ]
+        }
+      },
+      "foldAndShape": {
+        "title": "Fare qualche piega e formare una palla",
+        "helper": {
+          "title": "Pieghe",
+          "descriptions": [
+            "Per fare una piega, prendiamo l'impasto e lo pieghiamo su se stesso",
+            "Possiamo fare quante pieghe vogliamo, ma l'impasto deve rimanere morbido ed elastico",
+            "La piega permette di introdurre aria nell'impasto e permetterà di ottenere un impasto alveolato durante la cottura",
+            "Una volta finito, possiamo formare una bella palla"
+          ]
+        }
+      },
+      "shortRestPoolishDough": {
+        "title": "Riposo 10 – 15 min sotto una ciotola",
+        "helper": {
+          "title": "Riposo",
+          "descriptions": [
+            "Semplicemente capovolgere la ciotola utilizzata per la preparazione sull'impasto",
+            "L'impasto si tenderà e diventerà più liscio"
+          ]
+        }
+      },
+      "shapeAsBall": {
+        "title": "Formare una palla",
+        "helper": {
+          "title": "Formare una palla",
+          "descriptions": [
+            "Non lavorare troppo l'impasto",
+            "Stendere l'impasto e facendogli fare qualche giro tra le mani, riformare una palla"
+          ]
+        }
+      },
+      "restOneHour": {
+        "title": "Riposo 1H in un contenitore ermetico",
+        "helper": {
+          "title": "Riposo",
+          "descriptions": []
+        }
+      },
+      "formBalls": {
+        "title": "Formare i panetti",
+        "helper": {
+          "title": "Formazione dei panetti",
+          "descriptions": [
+            "Recuperare l'impasto e con l'aiuto di un tagliapasta o una spatola",
+            "Formare dei panetti (ben tesi) di circa <strong>{ pizzaWeight } g</strong>",
+            "Mettere un sottile strato di semola fine in un piatto (questo eviterà che si attacchino al piatto)",
+            "Disporre i panetti in un piatto lasciando spazio tra di loro (cresceranno ancora)",
+            "Chiudere il piatto o mettere pellicola trasparente"
+          ]
+        }
+      },
+      "finalRest": {
+        "title": "Riposo per raddoppiare di volume",
+        "helper": {
+          "title": "Riposo del panetto",
+          "descriptions": [
+            "Il tempo di riposo del panetto varia a seconda della temperatura",
+            "Ci vogliono circa <strong>{ rtRestTime } ora/e</strong>, quindi bisogna tenerne conto 😉"
+          ]
+        }
+      },
+      "addFlourSalt": {
+        "title": "Aggiungere la farina e il sale",
+        "helper": {
+          "title": "Introduzione della farina",
+          "descriptions": [
+            "Aggiungere il sale e la farina poco a poco e mescolare con un cucchiaio di legno fino ad ottenere un composto omogeneo"
+          ]
+        }
+      },
+      "shortRestDirectDough": {
+        "title": "Riposo 25 min sotto una ciotola",
+        "helper": {
+          "title": "Riposo",
+          "descriptions": [
+            "Semplicemente capovolgere la ciotola utilizzata per la preparazione sull'impasto",
+            "L'impasto si tenderà e diventerà più liscio"
+          ]
+        }
+      },
+      "takeOutDough": {
+        "title": "Togliere l'impasto 1 ora prima dell'uso",
+        "helper": {
+          "title": "Togliere l'impasto",
+          "descriptions": [
+            "Togliere l'impasto 1 ora prima dell'uso, in modo che abbia il tempo di tornare a temperatura ambiente"
+          ]
+        }
       }
     }
   },
-  "doughTypes": {
+  "enums": {
+    "doughTypes": {
     "poolish": "Poolish",
     "direct": "Diretto"
+    },
+    "pizzaTypes": {
+      "neapolitan": "Napoletana",
+      "roman": "Romana"
+    },
+    "yeastTypes": {
+      "dryActive": "Secco attivo",
+      "dryInstant": "Istantaneo",
+      "fresh": "Fresco"
+    }
   },
   "settings": {
     "visibility": {
@@ -360,6 +338,7 @@
       "flourStrength": "Forza della farina",
       "hydrationRatio": "Rapporto di idratazione",
       "poolishRatio": "Rapporto poolish",
+      "oliveOilRatio": "Rapporto di olio d'oliva",
       "all": "Abilita tutto"
     }
   },
@@ -385,7 +364,7 @@
         "configuration": "Configurazione della condivisione"
       },
       "onlyIngredients": "Solo ingredienti",
-      "withHelperDescriptions": "Includi descrizioni dei passaggi",
+      "withHelperDescriptions": "Con descrizioni dei passaggi",
       "withHelperDescriptionsMessage": "Vuoi davvero condividere la ricetta con le descrizioni dei passaggi (il testo sarà più lungo)?"
     }
   }

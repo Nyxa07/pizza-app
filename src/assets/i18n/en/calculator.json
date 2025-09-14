@@ -3,7 +3,8 @@
     "titles": {
       "quantity": "Dough quantity",
       "doughType": "Dough type",
-      "rest": "Rest"
+      "rest": "Rest",
+      "ingredients": "Ingredients"
     },
     "pizzasNumber": "Number of pizzas",
     "doughType": "Method",
@@ -19,337 +20,314 @@
     "honeyRatio": "Honey ratio",
     "pizzaWeight": "Dough ball weight",
     "hydrationHelperText": "Recommended for flour strength (W): {minHydration}% - {maxHydration}%",
+    "oliveOilRatio": "Olive oil ratio",
+    "pizzaType": "Pizza type",
     "infos": {
       "title": "Additional information",
-      "restTime": "Rest time",
-      "ballsRestTime": "Dough balls rest time",
       "totalPrepTime": "Total preparation time",
       "totalPrepTimeDescription": "This takes the recipe into account",
       "hoursUnit": "hours"
     }
   },
+   "assistant": {
+     "title": "Pizza Assistant",
+     "subtitle": "Let's create your perfect recipe",
+     "description": "Let yourself be guided step by step to create the ideal pizza recipe according to your preferences.",
+     "startButton": "Start assistant",
+     "continueButton": "Resume assistant",
+     "form": {
+       "titles": {
+         "pizzaType": "Pizza type",
+         "doughType": "Dough type",
+         "quantity": "Quantity",
+         "rest": "Rest",
+         "ingredients": "Ingredients",
+         "summary": "Summary",
+         "yeastType": "Yeast type",
+         "temperature": "Room temperature",
+         "planner": "Planner",
+         "rtRestTime": "Rest at room temperature",
+         "coldRestTime": "Cold rest",
+         "flourType": "Flour type"
+       },
+       "pizzaType": {
+         "subtitle": "Choose your style",
+         "description": "Select the type of pizza you want to prepare.",
+         "helpers": {
+           "neapolitan": "Traditional pizza with thin and soft dough",
+           "roman": "Pizza with thin and crispy dough"
+         }
+       },
+       "doughType": {
+         "subtitle": "Preparation method",
+         "description": "Choose the fermentation technique for your dough.",
+         "helpers": {
+           "direct": "Quick method, short fermentation",
+           "poolish": "Long method, developed flavor"
+         }
+       },
+       "quantity": {
+         "subtitle": "How many pizzas?",
+         "description": "Indicate the number of pizzas you want to prepare.",
+         "pizzas": "pizza(s)"
+       },
+       "temperature": {
+         "subtitle": "Room temperature",
+         "description": "Indicate the temperature at your place.",
+         "temperature": "°C",
+         "helpers": {
+           "temperature": "Room temperature"
+         }
+       },
+       "planner": {
+         "subtitle": "Rest time",
+         "description": "Indicate the desired rest time among the proposed choices. Some choices only appear with special pizza flour (strong).",
+         "withLongRestTime": "Long rest",
+         "withLongRestTimeDescription": "Long rest allows developing the flavor of the dough.",
+         "withoutLongRestTime": "Short rest",
+         "withoutLongRestTimeDescription": "Short rest allows... eating faster 🤣",
+         "totalPrepTime": "Total preparation time",
+         "totalPrepTimeDescription": "This gives you an idea of the total preparation time for your recipe, which allows you to start at the right time 😊"
+       },
+       "yeastType": {
+         "subtitle": "Yeast type",
+         "description": "Choose the type of yeast you want to use.",
+         "helpers": {
+           "dryActive": "Active dry yeast",
+           "dryInstant": "Instant dry yeast",
+           "fresh": "Fresh yeast"
+         }
+       },
+       "flourType": {
+         "subtitle": "Flour type",
+         "description": "Flour strength measures its ability to withstand prolonged fermentation.",
+         "helpers": {
+           "yes": "I know my flour strength",
+           "no": "I don't know my flour strength",
+           "standard": "Standard flour",
+           "specialPizza": "Special pizza flour",
+           "strength": "Flour strength (W)"
+         }
+       },
+       "summary": {
+         "subtitle": "Your configuration",
+         "description": "Check your choices before generating the recipe.",
+         "ready": "Everything is ready!",
+         "readyDescription": "Your recipe will be generated according to your preferences.",
+         "helpers": {
+           "summary": "Summary"
+         }
+       }
+     },
+     "results": {
+       "title": "Your Configuration",
+       "apply": "Apply this configuration",
+       "restart": "Restart assistant"
+     }
+   },
   "recipe": {
-    "poolish": {
-      "ingredients": {
-        "title": "Poolish ingredients"
-      },
-      "method": {
-        "title": "Poolish preparation",
-        "steps": [
-          {
-            "title": "Mix water, yeast and honey",
-            "description": "",
-            "helper": {
-              "title": "Mix water, yeast and honey",
-              "descriptions": [
-                "Weigh all the ingredients.",
-                "In a large bowl, dissolve the yeast in the water and add the honey."
-              ]
-            }
-          },
-          {
-            "title": "Add the flour",
-            "description": "",
-            "helper": {
-              "title": "Add the flour",
-              "descriptions": [
-                "Add the flour gradually, mixing with a wooden spoon until you get a homogeneous mixture"
-              ]
-            }
-          },
-          {
-            "title": "Rest <strong>{ rtRestTime } hour(s)</strong> at room temperature",
-            "description": "",
-            "helper": {
-              "title": "Rest at room temperature",
-              "descriptions": [
-                "Let rest <strong>{ rtRestTime } hour(s)</strong> at room temperature in an airtight container or covered with plastic wrap"
-              ]
-            }
-          },
-          {
-            "title": "Rest <strong>{ coldRestTime } hour(s)</strong> in the refrigerator",
-            "description": "",
-            "helper": {
-              "title": "Rest in the refrigerator",
-              "descriptions": [
-                "Let rest <strong>{ coldRestTime } hour(s)</strong> in the refrigerator in an airtight container or covered with plastic wrap"
-              ]
-            }
-          }
-        ]
-      }
+    "titles": {
+      "poolish": "Poolish",
+      "directDough": "Direct method dough",
+      "poolishDough": "Poolish dough"
     },
-    "poolishDough": {
-      "ingredients": {
-        "title": "Dough ingredients"
+    "steps": {
+      "mixIngredients": {
+        "title": "Mix water, yeast and honey",
+        "helper": {
+          "title": "Mix water, yeast and honey",
+          "descriptions": [
+            "Weigh all ingredients.",
+            "In a large bowl, dissolve the yeast in water and add honey."
+          ]
+        }
       },
-      "method": {
-        "title": "Dough preparation",
-        "steps": [
-          {
-            "title": "Take out the poolish 1H before use",
-            "description": "",
-            "helper": {
-              "title": "How to use the poolish",
-              "descriptions": [
-                "Take out the poolish 1 hour before use, so that it has time to return to room temperature"
-              ]
-            }
-          },
-          {
-            "title": "In the poolish, add the water and salt",
-            "description": "",
-            "helper": {
-              "title": "Dough preparation",
-              "descriptions": [
-                "Weigh the quantities to be added to the poolish",
-                "In the poolish bowl, add the water and salt. Mix with a wooden spoon until the water is absorbed"
-              ]
-            }
-          },
-          {
-            "title": "Add the flour little by little",
-            "description": "",
-            "helper": {
-              "title": "How to add the flour",
-              "descriptions": [
-                "Add the flour little by little and mix with a wooden spoon"
-              ]
-            }
-          },
-          {
-            "title": "Transfer the dough to the work surface",
-            "description": "",
-            "helper": {
-              "title": "Dough transfer",
-              "descriptions": [
-                "When it's no longer possible to mix with the spoon, you start to have a dough appearance and you can transfer it to the work surface",
-                "Use a pastry scraper to help with the transfer"
-              ]
-            }
-          },
-          {
-            "title": "Knead the dough",
-            "description": "",
-            "helper": {
-              "title": "Kneading",
-              "descriptions": [
-                "Work the dough by kneading it, the flour must be completely integrated",
-                "Use the palm of your hands to knead"
-              ]
-            }
-          },
-          {
-            "title": "Make a few folds and form a ball",
-            "description": "",
-            "helper": {
-              "title": "Folds",
-              "descriptions": [
-                "To make a fold, take the dough and fold it on itself",
-                "You can make as many folds as you want, but the dough must remain soft and supple",
-                "The fold allows air to be introduced into the dough and will allow an airy texture when baking",
-                "Once finished, you can form a beautiful ball"
-              ]
-            }
-          },
-          {
-            "title": "Rest 10 – 15 min under a bowl",
-            "description": "",
-            "helper": {
-              "title": "Rest",
-              "descriptions": [
-                "Simply turn over the bowl used for preparation on the dough",
-                "The dough will tighten and become smoother"
-              ]
-            }
-          },
-          {
-            "title": "Reform a ball",
-            "description": "",
-            "helper": {
-              "title": "Reform a ball",
-              "descriptions": [
-                "Don't work the dough too much",
-                "Stretch the dough and by making it turn a few times between your hands, reform a ball"
-              ]
-            }
-          },
-          {
-            "title": "Rest 1H in an airtight container",
-            "description": "",
-            "helper": {
-              "title": "Rest",
-              "descriptions": []
-            }
-          },
-          {
-            "title": "Form the dough balls",
-            "description": "",
-            "helper": {
-              "title": "Forming the dough balls",
-              "descriptions": [
-                "Take the dough and with the help of a dough cutter or a spatula",
-                "Form dough balls (well stretched) of about <strong>{ pizzaWeight } g</strong>",
-                "Put a thin layer of fine semolina in a dish (this will prevent them from sticking to the dish)",
-                "Place the dough balls in a dish leaving space between them (they will still grow)",
-                "Close the dish or put plastic wrap"
-              ]
-            }
-          },
-          {
-            "title": "Rest to double in volume",
-            "description": "",
-            "helper": {
-              "title": "Dough ball rest",
-              "descriptions": [
-                "The resting time of the dough ball varies depending on the temperature",
-                "It takes about <strong>{ rtRestTime } hour(s)</strong>, so remember to take it into account 😉"
-              ]
-            }
-          }
-        ]
-      }
-    },
-    "directDough": {
-      "ingredients": {
-        "title": "Dough ingredients"
+      "addFlourPoolish": {
+        "title": "Add flour",
+        "helper": {
+          "title": "Add flour",
+          "descriptions": [
+            "Add flour gradually, mixing with a wooden spoon until you get a homogeneous mixture"
+          ]
+        }
       },
-      "method": { 
-        "title": "Dough preparation",
-        "steps": [
-          {
-            "title": "Mix water, yeast and honey",
-            "description": "",
-            "helper": {
-              "title": "Dough preparation",
-              "descriptions": [
-                "Weigh all the ingredients",
-                "Mix the yeast and honey with the water"
-              ]
-            }
-          },
-          {
-            "title": "Add the flour and salt",
-            "description": "",
-            "helper": {
-              "title": "Introduction of the flour",
-              "descriptions": [
-                "Add the salt and flour little by little and mix with a wooden spoon until you get a homogeneous mixture"
-              ]
-            }
-          },
-          {
-            "title": "Knead 10 min",
-            "description": "",
-            "helper": {
-              "title": "Kneading",
-              "descriptions": [
-                "Once all the ingredients are well mixed and you start to have a dough, you can place it on the work surface",
-                "You can use a pastry scraper to recover all the dough",
-                "Finish kneading by hand for about 10 min. Knead well with the palm of your hands to properly hydrate the flour",
-                "You can also use a stand mixer with its dough hook, but it's less fun 😉"
-              ]
-            }
-          },
-          {
-            "title": "Form a ball",
-            "description": "",
-            "helper": {
-              "title": "Dough ball",
-              "descriptions": [
-                "Once the dough has a beautiful structure, stretch the dough and by making it turn a few times between your hands, form a ball"
-              ]
-            }
-          },
-          {
-            "title": "Rest 25 min under a bowl",
-            "description": "",
-            "helper": {
-              "title": "Rest",
-              "descriptions": [
-                "Simply turn over the bowl used for preparation on the dough",
-                "The dough will tighten and become smoother"
-              ]
-            }
-          },
-          {
-            "title": "Make a few folds and form a ball",
-            "description": "",
-            "helper": {
-              "title": "Folds",
-              "descriptions": [
-                "To make a fold, take the dough and fold it on itself",
-                "You can make as many folds as you want, but the dough must remain soft and supple",
-                "The fold allows air to be introduced into the dough and will allow an airy texture when baking",
-                "Once finished, you can form a beautiful ball"
-              ]
-            }
-          },
-          {
-            "title": "Rest at room temperature <strong>{ rtRestTime } hour(s)</strong> in an airtight container",
-            "description": "",
-            "helper": {
-              "title": "Rest",
-              "descriptions": [
-                "The rest will allow the yeast to activate, create a beautiful gluten network and thus give all its texture to the dough",
-                "The dough will tighten and become smoother"
-              ]
-            }
-          },
-          {
-            "title": "Rest cold <strong>{ coldRestTime } hour(s)</strong> in an airtight container",
-            "description": "",
-            "helper": {
-              "title": "Rest",
-              "descriptions": [
-                "The rest will allow the yeast to activate, create a beautiful gluten network and thus give all its texture to the dough",
-                "The dough will tighten and become smoother"
-              ]
-            }
-          },
-          {
-            "title": "Take the dough out 1 hour before use",
-            "description": "",
-            "helper": {
-              "title": "Take the dough out",
-              "descriptions": [
-                "Take the dough out 1 hour before use so that it has time to return to room temperature"
-              ]
-            }
-          },
-          {
-            "title": "Form the dough balls",
-            "description": "",
-            "helper": {
-              "title": "Form the dough balls",
-              "descriptions": [
-                "Take the dough and with a dough cutter or a spatula",
-                "Form dough balls (well stretched) of about <strong>{ pizzaWeight } g</strong>",
-                "Put a thin layer of fine semolina in a dish (this will prevent them from sticking to the dish)",
-                "Place the dough balls in a dish leaving space between them (they will still grow)",
-                "Close the dish or put plastic wrap"
-              ]
-            }     
-          },
-          {
-            "title": "Rest to double in volume",
-            "description": "",
-            "helper": {
-              "title": "Dough ball rest",
-              "descriptions": [
-                "The resting time of the dough ball varies depending on the temperature",
-                "It takes about <strong>{ rtRestTime } hour(s)</strong>, so remember to take it into account 😉"
-              ]
-            }
-          }
-        ]
+      "restRT": {
+        "title": "Rest <strong>{ rtRestTime } hour(s)</strong> at room temperature",
+        "helper": {
+          "title": "Rest at room temperature",
+          "descriptions": [
+            "Let rest <strong>{ rtRestTime } hour(s)</strong> at room temperature in an airtight container or covered with plastic wrap",
+            "The rest will allow the yeast to activate, create a beautiful gluten network and thus give all its texture to the dough",
+            "The dough will tighten and become smoother"
+          ]
+        }
+      },
+      "restCold": {
+        "title": "Rest <strong>{ coldRestTime } hour(s)</strong> in refrigerator",
+        "helper": {
+          "title": "Rest in refrigerator",
+          "descriptions": [
+            "Let rest <strong>{ coldRestTime } hour(s)</strong> in refrigerator in an airtight container or covered with plastic wrap",
+            "The rest will allow the yeast to activate, create a beautiful gluten network and thus give all its texture to the dough",
+            "The dough will tighten and become smoother"
+          ]
+        }
+      },
+      "takeOutPoolish": {
+        "title": "Take out poolish 1H before use",
+        "helper": {
+          "title": "How to use poolish",
+          "descriptions": [
+            "Take out poolish 1 hour before use, so it has time to return to room temperature"
+          ]
+        }
+      },
+      "addWaterSalt": {
+        "title": "In poolish, add water and salt",
+        "helper": {
+          "title": "Dough preparation",
+          "descriptions": [
+            "Weigh the quantities to add to poolish",
+            "In the poolish bowl, add water and salt. Mix with wooden spoon until water is absorbed"
+          ]
+        }
+      },
+      "addFlourPoolishDough": {
+        "title": "Add flour little by little",
+        "helper": {
+          "title": "How to add flour",
+          "descriptions": [
+            "Add flour little by little and mix with wooden spoon"
+          ]
+        }
+      },
+      "transferDough": {
+        "title": "Transfer dough to work surface",
+        "helper": {
+          "title": "Dough transfer",
+          "descriptions": [
+            "When it's no longer possible to mix with the spoon, we start to have a dough appearance and can transfer it to the work surface",
+            "Use a pastry scraper to help with the transfer"
+          ]
+        }
+      },
+      "knead": {
+        "title": "Knead the dough",
+        "helper": {
+          "title": "Kneading",
+          "descriptions": [
+            "Work the dough by kneading it for about 10 min, flour must be completely integrated",
+            "Use the palm of your hands to knead",
+            "You can also use a stand mixer with its dough hook, but it's less fun 😉"
+          ]
+        }
+      },
+      "foldAndShape": {
+        "title": "Make a few folds and form a ball",
+        "helper": {
+          "title": "Folds",
+          "descriptions": [
+            "To make a fold, take the dough and fold it on itself",
+            "You can make as many folds as you want, but the dough must remain soft and supple",
+            "The fold allows air to be introduced into the dough and will allow an airy texture when baking",
+            "Once finished, you can form a beautiful ball"
+          ]
+        }
+      },
+      "shortRestPoolishDough": {
+        "title": "Rest 10 – 15 min under a bowl",
+        "helper": {
+          "title": "Rest",
+          "descriptions": [
+            "Simply turn over the bowl used for preparation on the dough",
+            "The dough will tighten and become smoother"
+          ]
+        }
+      },
+      "shapeAsBall": {
+        "title": "Form a ball",
+        "helper": {
+          "title": "Form a ball",
+          "descriptions": [
+            "Don't work the dough too much",
+            "Stretch the dough and by making it turn a few times between your hands, reform a ball"
+          ]
+        }
+      },
+      "restOneHour": {
+        "title": "Rest 1H in airtight container",
+        "helper": {
+          "title": "Rest",
+          "descriptions": []
+        }
+      },
+      "formBalls": {
+        "title": "Form dough balls",
+        "helper": {
+          "title": "Forming dough balls",
+          "descriptions": [
+            "Take the dough and with the help of a dough cutter or spatula",
+            "Form dough balls (well stretched) of about <strong>{ pizzaWeight } g</strong>",
+            "Put a thin layer of fine semolina in a dish (this will prevent them from sticking to the dish)",
+            "Place dough balls in a dish leaving space between them (they will still grow)",
+            "Close the dish or put plastic wrap"
+          ]
+        }
+      },
+      "finalRest": {
+        "title": "Rest to double in volume",
+        "helper": {
+          "title": "Dough ball rest",
+          "descriptions": [
+            "The resting time of dough ball varies depending on temperature",
+            "It takes about <strong>{ rtRestTime } hour(s)</strong>, so remember to take it into account 😉"
+          ]
+        }
+      },
+      "addFlourSalt": {
+        "title": "Add flour and salt",
+        "helper": {
+          "title": "Introduction of flour",
+          "descriptions": [
+            "Add salt and flour little by little and mix with wooden spoon until you get a homogeneous mixture"
+          ]
+        }
+      },
+      "shortRestDirectDough": {
+        "title": "Rest 25 min under a bowl",
+        "helper": {
+          "title": "Rest",
+          "descriptions": [
+            "Simply turn over the bowl used for preparation on the dough",
+            "The dough will tighten and become smoother"
+          ]
+        }
+      },
+      "takeOutDough": {
+        "title": "Take out dough 1 hour before use",
+        "helper": {
+          "title": "Take out dough",
+          "descriptions": [
+            "Take out dough 1 hour before use, so it has time to return to room temperature"
+          ]
+        }
       }
     }
   },
-  "doughTypes": {
+  "enums": {
+    "doughTypes": {
     "poolish": "Poolish",
     "direct": "Direct"
+    },
+    "pizzaTypes": {
+      "neapolitan": "Neapolitan",
+      "roman": "Roman"
+    },
+    "yeastTypes": {
+      "dryActive": "Active dry",
+      "dryInstant": "Instant",
+      "fresh": "Fresh"
+    }
   },
   "settings": {
     "visibility": {
@@ -360,6 +338,7 @@
       "flourStrength": "Flour strength",
       "hydrationRatio": "Hydration ratio",
       "poolishRatio": "Poolish ratio",
+      "oliveOilRatio": "Olive oil ratio",
       "all": "Enable all"
     }
   },
@@ -385,8 +364,8 @@
         "configuration": "Share configuration"
       },
       "onlyIngredients": "Ingredients only",
-      "withHelperDescriptions": "Include step descriptions",
-      "withHelperDescriptionsMessage": "Are you sure you want to share the recipe with the step descriptions (the text will be longer)?"
+      "withHelperDescriptions": "With step descriptions",
+      "withHelperDescriptionsMessage": "Are you sure you want to share the recipe with step descriptions (the text will be longer)?"
     }
   }
 }

@@ -23,7 +23,8 @@
   "navigation": {
     "back": "Indietro",
     "next": "Avanti",
-    "previous": "Precedente"
+    "previous": "Precedente",
+    "finish": "Termina"
   },
   "ingredients": {
     "flour": "Farina",
@@ -35,9 +36,13 @@
     "dryInstantYeast": "Lievito secco istantaneo",
     "freshYeast": "Lievito fresco"
   },
-  "yeastTypes": {
-    "dryActive": "Secco attivo",
-    "dryInstant": "Istantaneo",
-    "fresh": "Fresco"
+  "time": {
+    "hours": "{count, plural, one {ora} other {ore}}",
+    "minutes": "{count, plural, one {minuto} other {minuti}}",
+    "seconds": "{count, plural, one {secondo} other {secondi}}"
+  },
+  "recipe": {
+    "ingredients": "Ingredienti",
+    "method": "Metodo"
   }
 }
