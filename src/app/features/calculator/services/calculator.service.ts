@@ -50,8 +50,8 @@ export class CalculatorService {
 
   private computeTimings(data: CalculatorInput): Timings {
     return this.plannerService.computeTimingsFromRestTimes({
-      rtRestTime: data.rtRestTime ?? 0,
-      coldRestTime: data.coldRestTime ?? 0,
+      rtRestTime: data.rtRestTime,
+      coldRestTime: data.coldRestTime,
       method: data.doughType,
       temperature: data.temperature,
     });
