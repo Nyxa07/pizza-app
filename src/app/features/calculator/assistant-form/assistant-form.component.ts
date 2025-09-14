@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   OnInit,
   signal,
   ViewChild,
@@ -39,6 +40,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest } from 'rxjs';
+import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 
 export interface IAssistantData {
   pizzaType: PizzaType;
@@ -216,6 +218,7 @@ export class AssistantFormComponent implements OnInit {
     private state: CalculatorStateService,
     private router: Router,
     private fb: FormBuilder,
+    private prefStorage: PrefsStorage,
   ) {
     this.assistantForm.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
       const assistantData = this.assistantForm
@@ -231,6 +234,16 @@ export class AssistantFormComponent implements OnInit {
         flourStrength: assistantData.flourStrength,
         pizzaWeight: assistantData.pizzaWeight,
       });
+      // Store form data
+      this.prefStorage.set('assistant:data', this.assistantForm.value);
+    });
+
+    // Store step index
+    effect(() => {
+      this.prefStorage.set(
+        'assistant:currentStepIndex',
+        this.currentStepIndex(),
+      );
     });
 
     combineLatest([
@@ -296,7 +309,14 @@ export class AssistantFormComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // this.reset();
+    const assistantData = this.prefStorage.get('assistant:data');
+    const currentStepIndex =
+      this.prefStorage.get('assistant:currentStepIndex') ?? 0;
+
+    if (assistantData && currentStepIndex) {
+      this.assistantForm.patchValue(assistantData);
+      this.proceed(currentStepIndex as number);
+    }
   }
 
   canProceed() {
