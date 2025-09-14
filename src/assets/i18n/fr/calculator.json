@@ -34,6 +34,7 @@
      "subtitle": "Créons votre recette parfaite",
      "description": "Laissez-vous guider étape par étape pour créer la recette de pizza idéale selon vos préférences.",
      "startButton": "Commencer l'assistant",
+     "continueButton": "Reprendre l'assistant",
      "form": {
        "titles": {
          "pizzaType": "Type de pizza",

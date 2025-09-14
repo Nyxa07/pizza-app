@@ -21,6 +21,7 @@ import {
   LucideAngularModule,
   ThermometerSunIcon,
   ThermometerSnowflakeIcon,
+  LassoSelectIcon,
 } from 'lucide-angular';
 import { FormGroup } from '@angular/forms';
 import { YeastType } from '../../enums/yeast-type.enum';
@@ -40,7 +41,7 @@ import { DatePipe } from '@angular/common';
       </ion-card-content>
     </ion-card>
 
-    <ion-list>
+    <ion-list lines="none">
       <ion-item>
         <i-lucide [img]="PizzaIcon" slot="start"></i-lucide>
         <ion-label>
@@ -50,13 +51,26 @@ import { DatePipe } from '@angular/common';
       </ion-item>
 
       <ion-item>
-        <i-lucide [img]="WheatIcon" slot="start"></i-lucide>
+        <i-lucide [img]="LassoSelectIcon" slot="start"></i-lucide>
         <ion-label>
           {{ 'calculator.assistant.form.titles.doughType' | translate }}
           <p>{{ getDoughTypeLabel() | translate }}</p>
         </ion-label>
       </ion-item>
-
+      <ion-item>
+        <i-lucide [img]="ThermometerIcon" slot="start"></i-lucide>
+        <ion-label>
+          {{ 'calculator.assistant.form.titles.temperature' | translate }}
+          <p>{{ assistantData.temperature }}°C</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <i-lucide [img]="WheatIcon" slot="start"></i-lucide>
+        <ion-label>
+          {{ 'calculator.assistant.form.titles.flourType' | translate }}
+          <p>{{ assistantData.flourStrength }} W</p>
+        </ion-label>
+      </ion-item>
       <ion-item>
         <i-lucide [img]="ChartColumnBigIcon" slot="start"></i-lucide>
         <ion-label>
@@ -67,13 +81,7 @@ import { DatePipe } from '@angular/common';
           </p>
         </ion-label>
       </ion-item>
-      <ion-item>
-        <i-lucide [img]="ThermometerIcon" slot="start"></i-lucide>
-        <ion-label>
-          {{ 'calculator.assistant.form.titles.temperature' | translate }}
-          <p>{{ assistantData.temperature }}°C</p>
-        </ion-label>
-      </ion-item>
+
       <ion-item>
         <i-lucide [img]="TorusIcon" slot="start"></i-lucide>
         <ion-label>
@@ -94,19 +102,21 @@ import { DatePipe } from '@angular/common';
           </p>
         </ion-label>
       </ion-item>
-      <ion-item>
-        <i-lucide [img]="ThermometerSnowflakeIcon" slot="start"></i-lucide>
-        <ion-label>
-          {{ 'calculator.assistant.form.titles.coldRestTime' | translate }}
-          <p>
-            {{ assistantData.coldRestTime }}
-            {{
-              'common.time.hours'
-                | translate: { count: assistantData.coldRestTime }
-            }}
-          </p>
-        </ion-label>
-      </ion-item>
+      @if (assistantData.coldRestTime > 0) {
+        <ion-item>
+          <i-lucide [img]="ThermometerSnowflakeIcon" slot="start"></i-lucide>
+          <ion-label>
+            {{ 'calculator.assistant.form.titles.coldRestTime' | translate }}
+            <p>
+              {{ assistantData.coldRestTime }}
+              {{
+                'common.time.hours'
+                  | translate: { count: assistantData.coldRestTime }
+              }}
+            </p>
+          </ion-label>
+        </ion-item>
+      }
     </ion-list>
 
     <ion-card color="success">
@@ -142,6 +152,7 @@ export class SummaryStepComponent {
   TorusIcon = TorusIcon;
   ThermometerSunIcon = ThermometerSunIcon;
   ThermometerSnowflakeIcon = ThermometerSnowflakeIcon;
+  LassoSelectIcon = LassoSelectIcon;
   @Input() parentGroup!: FormGroup;
 
   get assistantData() {

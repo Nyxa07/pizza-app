@@ -152,29 +152,12 @@ import { Subject, takeUntil } from 'rxjs';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FlourTypeStepComponent implements OnInit, OnDestroy {
+export class FlourTypeStepComponent implements OnInit {
   @Input() parentGroup!: FormGroup;
-  destroy$ = new Subject<void>();
 
-  ngOnInit(): void {
-    this.parentGroup
-      .get('flourStrenghKnowledge')
-      ?.valueChanges.pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        if (value === true) {
-          this.parentGroup.get('flourStrength')?.setValue(270);
-        } else {
-          this.parentGroup.get('flourStrength')?.setValue(180);
-        }
-      });
-  }
+  ngOnInit(): void {}
 
   setKnowledge(value: boolean) {
     this.parentGroup.get('flourStrenghKnowledge')?.setValue(value);
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

@@ -160,19 +160,20 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlannerStepComponent implements OnInit, OnDestroy {
+export class PlannerStepComponent implements OnInit {
   state = inject(CalculatorStateService);
   result$ = this.state.result$;
   @Input() parentGroup!: FormGroup;
 
   showLongRestOption = signal(false);
-  destroy$ = new Subject<void>();
   shortRestTimes = [2, 4, 6, 8, 12];
   longRestTimes = [16, 24, 48];
 
   setHasLongRestTime(value: boolean | null) {
+    // if (value !== this.parentGroup.get('hasLongRestTime')?.value) {
+    //   this.parentGroup.get('restTime')?.setValue(null);
+    // }
     this.parentGroup.get('hasLongRestTime')?.setValue(value);
-    this.parentGroup.get('restTime')?.setValue(null);
   }
 
   ngOnInit(): void {
@@ -183,40 +184,5 @@ export class PlannerStepComponent implements OnInit, OnDestroy {
     if (!this.showLongRestOption()) {
       this.setHasLongRestTime(false);
     }
-
-    const doughType = this.parentGroup.get('doughType')?.value;
-    this.parentGroup
-      .get('restTime')
-      ?.valueChanges.pipe(takeUntil(this.destroy$))
-      .subscribe((restTime) => {
-        if (restTime === null) {
-          return;
-        }
-
-        let coldRestTime = 0;
-        let rtRestTime = 0;
-        let restTimeLeft = restTime;
-
-        if (doughType === DoughType.DIRECT) {
-          rtRestTime = Math.min(restTimeLeft, 24);
-          restTimeLeft -= rtRestTime;
-          coldRestTime = restTimeLeft;
-          restTimeLeft = 0;
-        }
-
-        if (doughType === DoughType.POOLISH) {
-          rtRestTime = 1;
-          coldRestTime = restTimeLeft;
-          restTimeLeft = 0;
-        }
-
-        this.parentGroup.get('rtRestTime')?.setValue(rtRestTime);
-        this.parentGroup.get('coldRestTime')?.setValue(coldRestTime);
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

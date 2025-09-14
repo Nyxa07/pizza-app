@@ -70,9 +70,8 @@ import { Subject, takeUntil } from 'rxjs';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PizzaTypeStepComponent implements OnInit, OnDestroy {
+export class PizzaTypeStepComponent {
   @Input() parentGroup!: FormGroup;
-  destroy$ = new Subject<void>();
   pizzaTypes = [
     {
       value: PizzaType.NEAPOLITAN,
@@ -85,22 +84,4 @@ export class PizzaTypeStepComponent implements OnInit, OnDestroy {
       description: 'calculator.assistant.form.pizzaType.helpers.roman',
     },
   ];
-
-  ngOnInit(): void {
-    this.parentGroup
-      .get('pizzaType')
-      ?.valueChanges.pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        if (value === PizzaType.NEAPOLITAN) {
-          this.parentGroup.get('pizzaWeight')?.setValue(250);
-        } else if (value === PizzaType.ROMAN) {
-          this.parentGroup.get('pizzaWeight')?.setValue(180);
-        }
-      });
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 }

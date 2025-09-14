@@ -29,7 +29,6 @@ import {
   LucideAngularModule,
   XIcon,
   ChevronLeft,
-  PlayIcon,
   CheckIcon,
   ChevronRight,
 } from 'lucide-angular';
@@ -39,6 +38,7 @@ import { DoughType } from '../enums/dough-type.enum';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { combineLatest } from 'rxjs';
 
 export interface IAssistantData {
   pizzaType: PizzaType;
@@ -118,7 +118,6 @@ export class AssistantFormComponent implements OnInit {
     pizzaWeight: this.fb.control<number | null>(null, Validators.required),
   });
 
-  PlayIcon = PlayIcon;
   XIcon = XIcon;
   ChevronLeft = ChevronLeft;
   CheckIcon = CheckIcon;
@@ -233,11 +232,71 @@ export class AssistantFormComponent implements OnInit {
         pizzaWeight: assistantData.pizzaWeight,
       });
     });
+
+    combineLatest([
+      this.assistantForm.controls.restTime.valueChanges,
+      this.assistantForm.controls.doughType.valueChanges,
+    ])
+      .pipe(takeUntilDestroyed())
+      .subscribe((value) => {
+        const [restTime, doughType] = value;
+        if (restTime === null) {
+          return;
+        }
+
+        let coldRestTime = 0;
+        let rtRestTime = 0;
+        let restTimeLeft = restTime;
+
+        if (doughType === DoughType.DIRECT) {
+          rtRestTime = Math.min(restTimeLeft, 24);
+          restTimeLeft -= rtRestTime;
+          coldRestTime = restTimeLeft;
+          restTimeLeft = 0;
+        }
+
+        if (doughType === DoughType.POOLISH) {
+          rtRestTime = 1;
+          coldRestTime = restTimeLeft;
+          restTimeLeft = 0;
+        }
+
+        this.assistantForm.get('rtRestTime')?.setValue(rtRestTime);
+        this.assistantForm.get('coldRestTime')?.setValue(coldRestTime);
+      });
+
+    this.assistantForm
+      .get('hasLongRestTime')
+      ?.valueChanges.pipe(takeUntilDestroyed())
+      .subscribe((hasLongRestTime) => {
+        this.assistantForm.get('restTime')?.setValue(null);
+      });
+
+    this.assistantForm
+      .get('pizzaType')
+      ?.valueChanges.pipe(takeUntilDestroyed())
+      .subscribe((value) => {
+        if (value === PizzaType.NEAPOLITAN) {
+          this.assistantForm.get('pizzaWeight')?.setValue(250);
+        } else if (value === PizzaType.ROMAN) {
+          this.assistantForm.get('pizzaWeight')?.setValue(180);
+        }
+      });
+
+    this.assistantForm
+      .get('flourStrenghKnowledge')
+      ?.valueChanges.pipe(takeUntilDestroyed())
+      .subscribe((value) => {
+        if (value === true) {
+          this.assistantForm.get('flourStrength')?.setValue(270);
+        } else {
+          this.assistantForm.get('flourStrength')?.setValue(180);
+        }
+      });
   }
 
   async ngOnInit() {
     this.reset();
-    this.proceed(0);
   }
 
   canProceed() {
@@ -245,11 +304,17 @@ export class AssistantFormComponent implements OnInit {
   }
 
   async runAssistantFlow() {
+    this.reset();
+    this.modal.present();
+  }
+
+  async continueAssistantFlow() {
     this.modal.present();
   }
 
   reset() {
     this.assistantForm.reset();
+    this.proceed(0);
   }
 
   applyConfiguration() {

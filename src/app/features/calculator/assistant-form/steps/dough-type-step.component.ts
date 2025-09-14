@@ -13,9 +13,17 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DoughType } from '../../enums/dough-type.enum';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-dough-type-step',
+  styles: [
+    `
+      .disabled {
+        opacity: 0.5;
+      }
+    `,
+  ],
   template: `
     <ion-card>
       <ion-card-header>
@@ -31,22 +39,23 @@ import { DoughType } from '../../enums/dough-type.enum';
     <ion-list [formGroup]="parentGroup" lines="none">
       <ion-radio-group formControlName="doughType">
         @for (type of doughTypes; track type) {
-          @if (!type.disabled()) {
-            <ion-item
-              button
-              (click)="parentGroup.get('doughType')?.setValue(type.value)"
-            >
-              <ion-radio
-                [value]="type.value"
-                slot="start"
-                [disabled]="type.disabled()"
-              ></ion-radio>
-              <ion-label>
-                <h3>{{ type.label | translate }}</h3>
-                <p>{{ type.description | translate }}</p>
-              </ion-label>
-            </ion-item>
-          }
+          <ion-item
+            button
+            (click)="setDoughType(type)"
+            [ngClass]="{
+              disabled: type.disabled(),
+            }"
+          >
+            <ion-radio
+              [value]="type.value"
+              slot="start"
+              [disabled]="type.disabled()"
+            ></ion-radio>
+            <ion-label>
+              <h3>{{ type.label | translate }}</h3>
+              <p>{{ type.description | translate }}</p>
+            </ion-label>
+          </ion-item>
         }
       </ion-radio-group>
     </ion-list>
@@ -64,11 +73,19 @@ import { DoughType } from '../../enums/dough-type.enum';
     IonCardContent,
     TranslatePipe,
     ReactiveFormsModule,
+    NgClass,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DoughTypeStepComponent {
   @Input() parentGroup!: FormGroup;
+
+  setDoughType(type: { value: DoughType; disabled: () => boolean }) {
+    if (type.disabled()) {
+      return;
+    }
+    this.parentGroup.get('doughType')?.setValue(type.value);
+  }
 
   doughTypes = [
     {

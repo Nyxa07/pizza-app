@@ -18,9 +18,19 @@
         class="ion-margin-top"
         (click)="runAssistantFlow()"
       >
-        <i-lucide [img]="PlayIcon" slot="start"></i-lucide>
         {{ "calculator.assistant.startButton" | translate }}
       </ion-button>
+      @if (progressValue() > 0) {
+        <ion-button
+          expand="block"
+          color="secondary"
+          id="open-modal"
+          class="ion-margin-top"
+          (click)="continueAssistantFlow()"
+        >
+          {{ "calculator.assistant.continueButton" | translate }}
+        </ion-button>
+      }
     </ion-card-content>
   </ion-card>
 
