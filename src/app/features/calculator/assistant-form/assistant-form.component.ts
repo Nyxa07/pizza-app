@@ -265,12 +265,12 @@ export class AssistantFormComponent implements OnInit {
         this.assistantForm.get('coldRestTime')?.setValue(coldRestTime);
       });
 
-    this.assistantForm
-      .get('hasLongRestTime')
-      ?.valueChanges.pipe(takeUntilDestroyed())
-      .subscribe((hasLongRestTime) => {
-        this.assistantForm.get('restTime')?.setValue(null);
-      });
+    // this.assistantForm
+    //   .get('hasLongRestTime')
+    //   ?.valueChanges.pipe(takeUntilDestroyed())
+    //   .subscribe((hasLongRestTime) => {
+    //     this.assistantForm.get('restTime')?.setValue(null);
+    //   });
 
     this.assistantForm
       .get('pizzaType')
@@ -296,7 +296,7 @@ export class AssistantFormComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.reset();
+    // this.reset();
   }
 
   canProceed() {

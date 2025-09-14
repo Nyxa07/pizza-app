@@ -20,8 +20,6 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe } from '@angular/common';
-import { Subject, takeUntil } from 'rxjs';
-import { DoughType } from '../../enums/dough-type.enum';
 import { CalculatorStateService } from '../../services/calculator-state.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
