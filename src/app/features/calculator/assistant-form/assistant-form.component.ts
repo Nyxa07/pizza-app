@@ -7,6 +7,15 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+  query,
+  group,
+} from '@angular/animations';
 import { CalculatorStateService } from '../services/calculator-state.service';
 import { YeastType } from '../enums/yeast-type.enum';
 import {
@@ -60,6 +69,22 @@ export interface IAssistantData {
   styleUrls: ['./assistant-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
+  animations: [
+    trigger('slideAnimation', [
+      transition('* => forward', [
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)', 
+          style({ transform: 'translateX(0)', opacity: 1 })
+        )
+      ]),
+      transition('* => backward', [
+        style({ transform: 'translateX(-100%)', opacity: 0 }),
+        animate('350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)', 
+          style({ transform: 'translateX(0)', opacity: 1 })
+        )
+      ])
+    ])
+  ],
   imports: [
     IonContent,
     IonCard,

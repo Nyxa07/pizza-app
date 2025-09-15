@@ -45,12 +45,12 @@ export class CalculatorService {
     );
 
     const output = runProcessors(processedInput, [
-      (i) => this.hydrationProcessor.process(i),
-      (i, acc) => this.flourWaterQuantityProcessor.process(i, acc as any),
-      (i, acc) => this.simpleIngredientsProcessor.process(i, acc as any),
-      (i, acc) => this.ballsRestTimeProcessor.process(i, acc as any),
-      (i, acc) => this.timingsProcessor.process(i, acc as any),
-      (i, acc) => this.yeastProcessor.process(i, acc as any),
+      this.hydrationProcessor,
+      this.flourWaterQuantityProcessor,
+      this.simpleIngredientsProcessor,
+      this.ballsRestTimeProcessor,
+      this.timingsProcessor,
+      this.yeastProcessor,
     ]);
 
     return output as ICalculatorOutput;
