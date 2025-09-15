@@ -73,17 +73,19 @@ export interface IAssistantData {
     trigger('slideAnimation', [
       transition('* => forward', [
         style({ transform: 'translateX(100%)', opacity: 0 }),
-        animate('350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)', 
-          style({ transform: 'translateX(0)', opacity: 1 })
-        )
+        animate(
+          '350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          style({ transform: 'translateX(0)', opacity: 1 }),
+        ),
       ]),
       transition('* => backward', [
         style({ transform: 'translateX(-100%)', opacity: 0 }),
-        animate('350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)', 
-          style({ transform: 'translateX(0)', opacity: 1 })
-        )
-      ])
-    ])
+        animate(
+          '350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          style({ transform: 'translateX(0)', opacity: 1 }),
+        ),
+      ]),
+    ]),
   ],
   imports: [
     IonContent,
@@ -220,6 +222,8 @@ export class AssistantFormComponent implements OnInit {
   protected currentStepComponent = signal<any | null>(null);
   protected currentStep = computed(() => this.steps[this.currentStepIndex()]);
   protected canGoBack = computed(() => this.currentStepIndex() > 0);
+  protected animationState = signal<'forward' | 'backward' | 'none'>('none');
+  protected isAnimating = signal(false);
   // protected canProceed = computed(
   //   () =>
   //     this.currentStepIndex() < this.steps.length - 1 &&
@@ -294,7 +298,12 @@ export class AssistantFormComponent implements OnInit {
 
     if (assistantData && currentStepIndex) {
       this.assistantForm.patchValue(assistantData);
-      this.proceed(currentStepIndex as number);
+      // Load without animation on init
+      this.currentStepIndex.set(currentStepIndex as number);
+      this.currentStepComponent.set(await this.currentStep().load());
+    } else {
+      // Load first step without animation
+      this.currentStepComponent.set(await this.currentStep().load());
     }
   }
 
@@ -311,9 +320,12 @@ export class AssistantFormComponent implements OnInit {
     this.modal.present();
   }
 
-  reset() {
+  async reset() {
     this.assistantForm.reset();
-    this.proceed(0);
+    this.currentStepIndex.set(0);
+    this.currentStepComponent.set(await this.currentStep().load());
+    this.animationState.set('none');
+    this.isAnimating.set(false);
   }
 
   applyConfiguration() {
@@ -326,6 +338,10 @@ export class AssistantFormComponent implements OnInit {
   }
 
   async goBack() {
+    if (this.isAnimating()) return;
+
+    this.isAnimating.set(true);
+    this.animationState.set('backward');
     this.currentStepIndex.update((prev) => prev - 1);
     this.currentStepComponent.set(await this.currentStep().load());
   }
@@ -334,8 +350,22 @@ export class AssistantFormComponent implements OnInit {
     if (stepIndex === undefined && this.isLastStep()) {
       return this.applyConfiguration();
     }
+
+    if (this.isAnimating()) return;
+
+    this.isAnimating.set(true);
+    const direction =
+      stepIndex !== undefined && stepIndex < this.currentStepIndex()
+        ? 'backward'
+        : 'forward';
+    this.animationState.set(direction);
     this.currentStepIndex.update((prev) => stepIndex ?? prev + 1);
     this.currentStepComponent.set(await this.currentStep().load());
+  }
+
+  onAnimationDone() {
+    this.isAnimating.set(false);
+    this.animationState.set('none');
   }
 
   get inputs() {

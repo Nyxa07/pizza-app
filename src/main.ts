@@ -1,4 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   RouteReuseStrategy,
   provideRouter,
@@ -30,6 +31,7 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(),
+    provideAnimations(),
     provideTranslateService({
       loader: provideMultiTranslateLoader(),
       fallbackLang: 'en',

@@ -3,6 +3,15 @@ import {
   PartialCalculatorOutput,
 } from '../../interfaces/processor.interface';
 
+/**
+ * Helper to run a list of processors sequentially.
+ * Each processor can read the immutable `input` object and the cumulative
+ * `acc` output built so far. It must return an *additional* partial output.
+ *
+ * The helper merges every partial output **deeply** to build the final result.
+ * Objects are merged recursively; primitive values and arrays are overwritten by the most
+ * recent processor's output.
+ */
 export function runProcessors<Input>(
   input: Input,
   processors: IProcessor[],
