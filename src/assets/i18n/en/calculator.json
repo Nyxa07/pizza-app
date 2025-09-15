@@ -46,8 +46,7 @@
          "yeastType": "Yeast type",
          "temperature": "Room temperature",
          "planner": "Planner",
-         "rtRestTime": "Rest at room temperature",
-         "coldRestTime": "Cold rest",
+         "globalRestTime": "Rest time",
          "flourType": "Flour type"
        },
        "pizzaType": {

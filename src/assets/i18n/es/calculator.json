@@ -46,8 +46,7 @@
          "yeastType": "Tipo de levadura",
          "temperature": "Temperatura ambiente",
          "planner": "Planificador",
-         "rtRestTime": "Reposo a temperatura ambiente",
-         "coldRestTime": "Reposo en frío",
+         "globalRestTime": "Tiempo de reposo",
          "flourType": "Tipo de harina"
        },
        "pizzaType": {

@@ -46,8 +46,7 @@
          "yeastType": "Tipo di lievito",
          "temperature": "Temperatura ambiente",
          "planner": "Pianificatore",
-         "rtRestTime": "Riposo a temperatura ambiente",
-         "coldRestTime": "Riposo a freddo",
+         "globalRestTime": "Tempo di riposo",
          "flourType": "Tipo di farina"
        },
        "pizzaType": {

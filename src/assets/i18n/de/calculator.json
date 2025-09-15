@@ -46,8 +46,7 @@
          "yeastType": "Hefeart",
          "temperature": "Raumtemperatur",
          "planner": "Planer",
-         "rtRestTime": "Ruhezeit bei Raumtemperatur",
-         "coldRestTime": "Kalte Ruhezeit",
+         "globalRestTime": "Ruhezeit",
          "flourType": "Mehltyp"
        },
        "pizzaType": {

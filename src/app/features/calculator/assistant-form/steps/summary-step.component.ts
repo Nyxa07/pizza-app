@@ -94,10 +94,10 @@ import { YeastType } from '../../enums/yeast-type.enum';
         <ion-label>
           {{ 'calculator.assistant.form.titles.globalRestTime' | translate }}
           <p>
-            {{ assistantData.rtRestTime }}
+            {{ assistantData.globalRestTime }}
             {{
               'common.time.hours'
-                | translate: { count: assistantData.rtRestTime }
+                | translate: { count: assistantData.globalRestTime }
             }}
           </p>
         </ion-label>
