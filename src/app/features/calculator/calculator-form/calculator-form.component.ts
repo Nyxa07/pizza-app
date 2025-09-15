@@ -13,14 +13,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
 import { AsyncPipe, LowerCasePipe } from '@angular/common';
 import { combineLatest, debounceTime, filter, map, startWith } from 'rxjs';
-import {
-  CalculatorStateService,
-  CalculatorInput,
-} from '../services/calculator-state.service';
+import { CalculatorStateService } from '../services/calculator-state.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 import { CalculatorSettingsService } from '../services/calculator-settings.service';
 import { DoughType } from '../enums/dough-type.enum';
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
+import { ICalculatorInput } from '../interfaces/calculator-input.interface';
+import { CalculatorService } from '../services/calculator.service';
 
 @Component({
   selector: 'app-calculator-form',
@@ -44,7 +43,7 @@ import { PizzaType } from '../../settings/enums/pizza-type.enum';
 })
 export class CalculatorFormComponent implements OnInit {
   private blockStatsUpdates = false;
-  protected form = this.formBuilder.group<CalculatorInput>(
+  protected form = this.formBuilder.group<ICalculatorInput>(
     this.state.getInput(),
   );
   protected doughType$ = this.form
@@ -66,15 +65,15 @@ export class CalculatorFormComponent implements OnInit {
     ),
   );
 
-  protected pizzaBallsRestTime$ = this.state.result$.pipe(
+  protected pizzaBallsRestTime$ = this.calculator.results$.pipe(
     map((result) => result.pizzaBalls.prepTime),
   );
 
-  protected totalRestTime$ = this.state.result$.pipe(
+  protected totalRestTime$ = this.calculator.results$.pipe(
     map((result) => result.total.rtRestTime + result.total.coldRestTime),
   );
 
-  protected totalPrepTime$ = this.state.result$.pipe(
+  protected totalPrepTime$ = this.calculator.results$.pipe(
     map((result) => result.total.prepTime),
   );
 
@@ -92,14 +91,18 @@ export class CalculatorFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private settings: CalculatorSettingsService,
     private state: CalculatorStateService,
+    private calculator: CalculatorService,
   ) {
-    this.state.input$.pipe(takeUntilDestroyed()).subscribe((input) => {
-      this.blockStatsUpdates = true;
-      this.form.patchValue(input);
-      setTimeout(() => {
-        this.blockStatsUpdates = false;
-      }, 100);
-    });
+    this.state
+      .getInput$()
+      .pipe(takeUntilDestroyed())
+      .subscribe((input) => {
+        this.blockStatsUpdates = true;
+        this.form.patchValue(input);
+        setTimeout(() => {
+          this.blockStatsUpdates = false;
+        }, 100);
+      });
 
     this.form.valueChanges
       .pipe(
@@ -108,38 +111,8 @@ export class CalculatorFormComponent implements OnInit {
         takeUntilDestroyed(),
       )
       .subscribe((v) => {
-        this.state.update(v as CalculatorInput);
+        this.state.update(v as ICalculatorInput);
       });
-
-    // // Set recommanded values for rtRestTime and coldRestTime based on doughType
-    // // Even if not auto computed
-    // this.form
-    //   .get('doughType')!
-    //   .valueChanges.pipe(takeUntilDestroyed())
-    //   .subscribe((v) => {
-    //     if (v === DoughType.POOLISH) {
-    //       this.form.get('rtRestTime')!.setValue(1);
-    //       this.form.get('coldRestTime')!.setValue(24);
-    //     } else {
-    //       this.form.get('rtRestTime')!.setValue(DEFAULT_INPUT.rtRestTime);
-    //       this.form.get('coldRestTime')!.setValue(DEFAULT_INPUT.coldRestTime);
-    //     }
-    //   });
-
-    // // Set recommanded value for oliveOilRatio based on pizzaType
-    // this.form
-    //   .get('pizzaType')!
-    //   .valueChanges.pipe(takeUntilDestroyed(), distinctUntilChanged())
-    //   .subscribe((v) => {
-    //     if (v) {
-    //       this.form
-    //         .get('oliveOilRatio')!
-    //         .setValue(DEFAULT_INPUTS[v].oliveOilRatio);
-    //       this.form
-    //         .get('hydrationRatio')!
-    //         .setValue(DEFAULT_INPUTS[v].hydrationRatio);
-    //     }
-    //   });
   }
 
   ngOnInit() {

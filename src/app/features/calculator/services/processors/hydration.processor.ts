@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CalculatorConfigService } from './calculator-config.service';
-import { PizzaType } from '../../settings/enums/pizza-type.enum';
+import { PizzaType } from '../../../settings/enums/pizza-type.enum';
+import { IProcessor } from '../../interfaces/processor.interface';
+import { CalculatorConfigService } from '../calculator-config.service';
+import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
 
 export interface HydrationRange {
   /** Lower bound of recommended hydration (decimal, e.g. 0.60 for 60 %) */
@@ -10,8 +12,16 @@ export interface HydrationRange {
 }
 
 @Injectable({ providedIn: 'root' })
-export class HydrationService {
+export class HydrationProcessor implements IProcessor {
   constructor(private calculatorConfigService: CalculatorConfigService) {}
+
+  process(input: ICalculatorInput) {
+    return {
+      hydrationRatio:
+        input.hydrationRatio ??
+        this.compute(input.flourStrength, input.pizzaType).minHydration,
+    };
+  }
 
   /**
    * Returns the recommended hydration range (min / max) for a given flour strength (W).
@@ -19,7 +29,7 @@ export class HydrationService {
    * of ±tolerance around that value is applied. Finally, the range is clamped by the hard
    * limits defined in the configuration.
    */
-  compute(flourStrength: number, pizzaType: PizzaType): HydrationRange {
+  private compute(flourStrength: number, pizzaType: PizzaType): HydrationRange {
     const mid = this.recommendedHydration(flourStrength, pizzaType);
     const cfg = this.calculatorConfigService.constants.hydrationRecommendation;
 

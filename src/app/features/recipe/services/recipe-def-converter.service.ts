@@ -17,6 +17,7 @@ export class RecipeDefConverterService {
           title: `${item.title}`,
           value: item.value,
           unit: item.unit,
+          numberFormat: item.numberFormat,
         })),
       },
       method: {

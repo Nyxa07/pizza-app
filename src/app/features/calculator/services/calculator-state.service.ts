@@ -1,41 +1,19 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
-
-import { CalculatorService } from './calculator.service';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
-import {
-  CALCULATOR_MODE,
-  CalculatorSettingsService,
-} from './calculator-settings.service';
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
+import { ICalculatorInput } from '../interfaces/calculator-input.interface';
+import { CALCULATOR_MODE } from '../enums/calculator-mode.enum';
 
-export interface CalculatorInput {
-  nbPizzas: number;
-  doughType: DoughType;
-  yeastType: YeastType;
-  hydrationRatio?: number;
-  temperature: number;
-  poolishRatio?: number;
-  globalRestTime?: number;
-  rtRestTime?: number;
-  coldRestTime?: number;
-  flourStrength: number;
-  saltRatio: number;
-  honeyRatio: number;
-  pizzaWeight: number;
-  pizzaType: PizzaType;
-  oliveOilRatio: number;
-}
-
-export const DEFAULT_INPUT: CalculatorInput = {
+export const DEFAULT_INPUT: ICalculatorInput = {
   nbPizzas: 5,
   doughType: DoughType.DIRECT,
   yeastType: YeastType.DRY_ACTIVE,
   hydrationRatio: 0.62,
   temperature: 20,
-  globalRestTime: undefined,
+  globalRestTime: 24,
   rtRestTime: 16,
   coldRestTime: 0,
   poolishRatio: 0.4,
@@ -47,7 +25,7 @@ export const DEFAULT_INPUT: CalculatorInput = {
   oliveOilRatio: 0,
 };
 
-export const DEFAULT_INPUTS: Record<PizzaType, CalculatorInput> = {
+export const DEFAULT_INPUTS: Record<PizzaType, ICalculatorInput> = {
   [PizzaType.NEAPOLITAN]: {
     ...DEFAULT_INPUT,
     pizzaType: PizzaType.NEAPOLITAN,
@@ -68,80 +46,37 @@ export const DEFAULT_INPUTS: Record<PizzaType, CalculatorInput> = {
 export class CalculatorStateService {
   private mode: CALCULATOR_MODE = CALCULATOR_MODE.SIMPLE;
   private readonly STORAGE_KEY = 'calculator';
-  private readonly _input = new BehaviorSubject<CalculatorInput>(DEFAULT_INPUT);
-
-  readonly input$ = this._input.asObservable();
-  readonly result$ = this.input$.pipe(
-    map((i) => this.computeInput(i)),
-    map((i) => this.calculator.compute(i)),
-    shareReplay({ refCount: true, bufferSize: 1 }),
+  private readonly _input = new BehaviorSubject<ICalculatorInput>(
+    DEFAULT_INPUT,
   );
 
-  private _initInput: CalculatorInput | null = null;
+  private _initInput: ICalculatorInput | null = null;
 
-  constructor(
-    private calculator: CalculatorService,
-    private prefs: PrefsStorage,
-    private settings: CalculatorSettingsService,
-  ) {}
+  constructor(private prefs: PrefsStorage) {}
 
-  getInput(): CalculatorInput {
+  getInput(): ICalculatorInput {
     return this._input.value;
   }
 
-  update(input: Partial<CalculatorInput>): void {
+  getInput$(): Observable<ICalculatorInput> {
+    return this._input.asObservable();
+  }
+
+  update(input: Partial<ICalculatorInput>): void {
     this._input.next({
       ...this._input.value,
       ...input,
-    } as CalculatorInput);
+    } as ICalculatorInput);
     this.prefs.set(this.STORAGE_KEY + ':' + this.mode, this._input.value);
   }
 
-  computeInput(i: CalculatorInput): CalculatorInput {
-    const settings = this.settings.getSettings();
-    const pizzaType = i.pizzaType;
-    const defaultInput = DEFAULT_INPUTS[pizzaType];
-    return {
-      nbPizzas: i.nbPizzas,
-      pizzaType: i.pizzaType,
-      temperature: i.temperature,
-      globalRestTime: settings.globalRestTime.auto
-        ? undefined
-        : i.globalRestTime,
-      rtRestTime: settings.rtRestTime.auto ? undefined : i.rtRestTime,
-      coldRestTime: settings.coldRestTime.auto ? undefined : i.coldRestTime,
-      doughType: settings.doughType.auto ? DoughType.DIRECT : i.doughType,
-      yeastType: settings.yeastType.auto ? YeastType.DRY_ACTIVE : i.yeastType,
-      hydrationRatio: settings.hydrationRatio.auto
-        ? undefined
-        : i.hydrationRatio,
-      poolishRatio: settings.poolishRatio.auto
-        ? defaultInput.poolishRatio
-        : i.poolishRatio,
-      flourStrength: settings.flourStrength.auto
-        ? defaultInput.flourStrength
-        : i.flourStrength,
-      saltRatio: settings.saltRatio.auto ? defaultInput.saltRatio : i.saltRatio,
-      honeyRatio: settings.honeyRatio.auto
-        ? defaultInput.honeyRatio
-        : i.honeyRatio,
-      pizzaWeight: settings.pizzaWeight.auto
-        ? defaultInput.pizzaWeight
-        : i.pizzaWeight,
-
-      oliveOilRatio: settings.oliveOilRatio.auto
-        ? defaultInput.oliveOilRatio
-        : i.oliveOilRatio,
-    };
-  }
-
-  init(mode: CALCULATOR_MODE, input?: Partial<CalculatorInput>): void {
+  init(mode: CALCULATOR_MODE, input?: Partial<ICalculatorInput>): void {
     this.mode = mode;
     // To be able to reset to default
     this._initInput = {
       ...DEFAULT_INPUT,
       ...input,
-    } as CalculatorInput;
+    } as ICalculatorInput;
 
     // Will trigger auto computed inputs
     this.update({
@@ -150,7 +85,7 @@ export class CalculatorStateService {
     });
   }
 
-  resetField(field: keyof CalculatorInput): void {
+  resetField(field: keyof ICalculatorInput): void {
     this.update({
       [field]: this._initInput?.[field] ?? DEFAULT_INPUT[field],
     });
@@ -160,7 +95,7 @@ export class CalculatorStateService {
     this.update(this._initInput ?? DEFAULT_INPUT);
   }
 
-  private loadFromStorage(): CalculatorInput | null {
-    return this.prefs.get<CalculatorInput>(this.STORAGE_KEY + ':' + this.mode);
+  private loadFromStorage(): ICalculatorInput | null {
+    return this.prefs.get<ICalculatorInput>(this.STORAGE_KEY + ':' + this.mode);
   }
 }

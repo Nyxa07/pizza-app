@@ -28,9 +28,9 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule, SaveIcon, EllipsisIcon } from 'lucide-angular';
-import { CalculatorInput } from '../services/calculator-state.service';
 import { CalculatorStateSaveManagerService } from '../services/calculator-state-save-manager.service';
 import { Dialog } from '@capacitor/dialog';
+import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 
 @Component({
   selector: 'app-calculator-state-saver',
@@ -66,7 +66,7 @@ export class CalculatorStateSaverComponent implements OnInit {
 
   readonly SaveIcon = SaveIcon;
   readonly EllipsisIcon = EllipsisIcon;
-  protected savedStates = signal<{ name: string; input: CalculatorInput }[]>(
+  protected savedStates = signal<{ name: string; input: ICalculatorInput }[]>(
     [],
   );
 
@@ -110,20 +110,20 @@ export class CalculatorStateSaverComponent implements OnInit {
     this.form.reset();
   }
 
-  overrideState(state: { name: string; input: CalculatorInput }) {
+  overrideState(state: { name: string; input: ICalculatorInput }) {
     this.stateSaveManagerService.saveState(state.name);
     this.savedStates.set(this.stateSaveManagerService.listSavedStates());
     this.toastMessage.set('calculator.stateSaver.stateOverridden');
     this.toast.present();
   }
 
-  loadState(state: { name: string; input: CalculatorInput }) {
+  loadState(state: { name: string; input: ICalculatorInput }) {
     this.stateSaveManagerService.loadState(state.name);
     this.toastMessage.set('calculator.stateSaver.stateLoaded');
     this.toast.present();
   }
 
-  deleteState(state: { name: string; input: CalculatorInput }) {
+  deleteState(state: { name: string; input: ICalculatorInput }) {
     this.stateSaveManagerService.deleteState(state.name);
     this.savedStates.set(this.stateSaveManagerService.listSavedStates());
     this.toastMessage.set('calculator.stateSaver.stateDeleted');
@@ -131,7 +131,7 @@ export class CalculatorStateSaverComponent implements OnInit {
     this.form.patchValue({ stateName: this.form.controls.stateName.value! });
   }
 
-  async presentActionSheet(state: { name: string; input: CalculatorInput }) {
+  async presentActionSheet(state: { name: string; input: ICalculatorInput }) {
     const actionSheet = await this.actionSheetCtrl.create({
       header: this.translate.instant('common.actions.title'),
       buttons: [

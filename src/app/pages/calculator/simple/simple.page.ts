@@ -16,8 +16,6 @@ import { RouterLink } from '@angular/router';
 import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
 import { LucideAngularModule } from 'lucide-angular';
 import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
-import { CALCULATOR_MODE } from 'src/app/features/calculator/services/calculator-settings.service';
-import { DoughType } from 'src/app/features/calculator/enums/dough-type.enum';
 import { CalculatorStateSaverComponent } from 'src/app/features/calculator/calculator-state-saver/calculator-state-saver.component';
 import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
 
@@ -51,22 +49,7 @@ export class CalculatorSimplePage implements OnInit {
 
   ngOnInit() {
     idleCallback(() => {
-      this.calculatorInitializer.init(CALCULATOR_MODE.SIMPLE, {
-        settings: {
-          saltRatio: { auto: true, visible: false },
-          honeyRatio: { auto: true, visible: false },
-          flourStrength: { auto: true, visible: false },
-          hydrationRatio: { auto: true, visible: false },
-          doughType: { auto: true, visible: false },
-          poolishRatio: { auto: true, visible: false },
-          yeastType: { auto: false, visible: true },
-          coldRestTime: { auto: true, visible: false },
-          pizzaWeight: { auto: true, visible: false },
-        },
-        input: {
-          doughType: DoughType.DIRECT,
-        },
-      });
+      this.calculatorInitializer.initSimple();
       this.isInitialized.set(true);
     });
   }

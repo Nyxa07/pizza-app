@@ -22,11 +22,14 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AsyncPipe } from '@angular/common';
 import { CalculatorStateService } from '../../services/calculator-state.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
+import { CalculatorService } from '../../services/calculator.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-dough-type-step',
   template: `
-    @let result = result$ | async;
+    @let result = results$ | async;
+
     <ion-card>
       <ion-card-header>
         <ion-card-title>{{
@@ -158,8 +161,8 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlannerStepComponent implements OnInit {
-  state = inject(CalculatorStateService);
-  result$ = this.state.result$;
+  calculator = inject(CalculatorService);
+  results$ = this.calculator.results$;
   @Input() parentGroup!: FormGroup;
 
   showLongRestOption = signal(false);

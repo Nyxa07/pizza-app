@@ -1,55 +1,57 @@
 import { Injectable } from '@angular/core';
-import { DoughType } from '../enums/dough-type.enum';
-import { RestTimeService } from './rest-time.service';
+import { IProcessor } from '../../interfaces/processor.interface';
+import { ITimings } from '../../interfaces/timing.interface';
+import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
+import { DoughType } from '../../enums/dough-type.enum';
 
 export const DOUGH_BASE_TIME = 1;
-
-export interface TimingPart {
-  coldRestTime: number;
-  rtRestTime: number;
-  prepTime: number;
-}
-
-export interface Timings {
-  poolish: TimingPart;
-  dough: TimingPart;
-  pizzaBalls: TimingPart;
-  total: TimingPart;
-}
 
 @Injectable({
   providedIn: 'root',
 })
-export class PlannerService {
-  constructor(private restTimeService: RestTimeService) {}
+export class TimingsProcessor implements IProcessor {
+  process(
+    input: ICalculatorInput,
+    acc: { pizzaBalls: { rtRestTime: number } },
+  ): ITimings {
+    const pizzaBallsRest = acc.pizzaBalls.rtRestTime;
+    const timings = this.computeTimingsFromRestTimes({
+      globalRestTime: input.globalRestTime,
+      rtRestTime: input.rtRestTime,
+      coldRestTime: input.coldRestTime,
+      method: input.doughType,
+      temperature: input.temperature,
+      pizzaBallsRestTime: pizzaBallsRest,
+    });
+
+    return timings;
+  }
 
   computeTimingsFromRestTimes(input: {
-    globalRestTime?: number;
-    rtRestTime?: number;
-    coldRestTime?: number;
+    globalRestTime: number | null;
+    rtRestTime: number | null;
+    coldRestTime: number | null;
     method: DoughType;
     temperature: number;
-  }): Timings {
-    if (!input.globalRestTime && !input.rtRestTime && !input.rtRestTime) {
-      throw new Error('At least one rest time must be provided');
+    pizzaBallsRestTime: number;
+  }): ITimings {
+    if (!input.globalRestTime && !input.rtRestTime && !input.coldRestTime) {
+      input.globalRestTime = 0; // To avoid errors if subscribed but not set yet
     }
 
-    let coldRestTime = 0;
-    let rtRestTime = 0;
+    let coldRestTime = input.coldRestTime ?? 0;
+    let rtRestTime = input.rtRestTime ?? 0;
     if (input.globalRestTime) {
-      const tmpRes = this.getRestTimesFromGlobalRestTime(
+      const tmpRes = this.computeRestTimesFromGlobalRestTime(
         input.globalRestTime,
         input.method,
       );
       coldRestTime = tmpRes.coldRestTime;
       rtRestTime = tmpRes.rtRestTime;
     }
+
     const hasPoolish = input.method === DoughType.POOLISH;
-    const pizzaBallsRestTime = this.restTimeService.computePizzaBallsRestTime(
-      input.temperature,
-      rtRestTime,
-      coldRestTime,
-    );
+    const pizzaBallsRestTime = input.pizzaBallsRestTime;
     const poolishPrepTime = hasPoolish
       ? DOUGH_BASE_TIME + rtRestTime + coldRestTime + (coldRestTime ? 1 : 0)
       : 0;
@@ -84,7 +86,10 @@ export class PlannerService {
     };
   }
 
-  getRestTimesFromGlobalRestTime(globalRestTime: number, doughType: DoughType) {
+  computeRestTimesFromGlobalRestTime(
+    globalRestTime: number,
+    doughType: DoughType,
+  ) {
     let coldRestTime = 0;
     let rtRestTime = 0;
     let restTimeLeft = globalRestTime;

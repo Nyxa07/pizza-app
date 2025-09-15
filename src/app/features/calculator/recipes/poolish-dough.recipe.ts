@@ -15,8 +15,8 @@ import {
   ArrowDownUpIcon,
   EclipseIcon,
 } from 'lucide-angular';
-import { DoughResult } from '../services/calculator.service';
 import { IRecipeDef } from '../../recipe/interfaces/recipe-def.interface';
+import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
 
 export class PoolishDoughRecipe implements IRecipeDef {
   readonly WheatIcon = WheatIcon;
@@ -37,7 +37,7 @@ export class PoolishDoughRecipe implements IRecipeDef {
 
   readonly baseStepsKey = 'calculator.recipe.steps.';
 
-  constructor(private result: DoughResult) {}
+  constructor(private result: ICalculatorOutput) {}
 
   private get quantity() {
     return (

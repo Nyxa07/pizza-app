@@ -7,6 +7,7 @@ export interface IRecipeDef {
       value: number;
       title: string;
       unit: string;
+      numberFormat?: string;
     }[];
   };
   method: {
