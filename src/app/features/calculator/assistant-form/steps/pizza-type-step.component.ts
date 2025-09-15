@@ -11,7 +11,7 @@ import {
   IonCardContent,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { PizzaType } from '../../../settings/enums/pizza-type.enum';
 
 @Component({

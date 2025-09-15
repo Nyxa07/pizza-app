@@ -1,12 +1,73 @@
 import { Injectable } from '@angular/core';
 import { YeastType } from 'src/app/features/calculator/enums/yeast-type.enum';
-import { CalculatorConfigService } from './calculator-config.service';
+import { CalculatorConfigService } from '../calculator-config.service';
+import { IProcessor } from '../../interfaces/processor.interface';
+import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
+import { DoughType } from '../../enums/dough-type.enum';
 
 @Injectable({
   providedIn: 'root',
 })
-export class YeastService {
+export class YeastProcessor implements IProcessor {
   constructor(private calculatorConfig: CalculatorConfigService) {}
+
+  process(
+    input: ICalculatorInput,
+    acc: {
+      hydrationRatio: number;
+      total: { flour: number };
+      poolish: {
+        flour: number;
+        rtRestTime: number;
+        coldRestTime: number;
+        honey: number;
+      };
+      dough: {
+        flour: number;
+        rtRestTime: number;
+        coldRestTime: number;
+        honey: number;
+        salt: number;
+      };
+    },
+  ) {
+    let yeast = 0;
+    if (input.doughType === DoughType.POOLISH) {
+      yeast = this.yeastForPoolish(
+        input.temperature,
+        input.yeastType,
+        acc.poolish.flour,
+        acc.poolish.rtRestTime,
+        acc.poolish.coldRestTime,
+        acc.poolish.honey,
+        input.flourStrength,
+      );
+    } else {
+      yeast = this.yeastForDough(
+        input.temperature,
+        input.yeastType,
+        acc.dough.flour,
+        acc.hydrationRatio,
+        acc.dough.honey,
+        acc.dough.salt,
+        acc.dough.rtRestTime,
+        acc.dough.coldRestTime,
+        input.flourStrength,
+      );
+    }
+
+    return {
+      total: {
+        yeast,
+      },
+      poolish: {
+        yeast: input.doughType === DoughType.POOLISH ? yeast : 0,
+      },
+      dough: {
+        yeast: input.doughType === DoughType.POOLISH ? 0 : yeast,
+      },
+    };
+  }
 
   private tEquivalent(tHot: number, tCold: number) {
     return tHot + tCold * this.calculatorConfig.constants.yeast.coldCoef;

@@ -39,9 +39,7 @@ import { DoughType } from '../enums/dough-type.enum';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { combineLatest } from 'rxjs';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
-import { PlannerService } from '../services/planner.service';
 
 export interface IAssistantData {
   pizzaType: PizzaType;
@@ -215,7 +213,6 @@ export class AssistantFormComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private prefStorage: PrefsStorage,
-    private plannerService: PlannerService,
   ) {
     this.assistantForm.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
       const assistantData = this.assistantForm

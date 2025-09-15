@@ -29,6 +29,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { RecipeService } from '../../recipe/services/recipe.service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CalculatorService } from '../services/calculator.service';
 
 @Component({
   selector: 'app-calculator-state-share',
@@ -59,7 +60,7 @@ export class CalculatorStateShareComponent implements OnInit {
 
   readonly ShareIcon = Share2Icon;
 
-  protected poolishDoughRecipe$ = this.calculatorState.result$.pipe(
+  protected poolishDoughRecipe$ = this.calculatorService.results$.pipe(
     map((result) =>
       result?.poolish
         ? this.recipeDefConverter.convert(new PoolishDoughRecipe(result))
@@ -67,7 +68,7 @@ export class CalculatorStateShareComponent implements OnInit {
     ),
   );
 
-  protected directDoughRecipe$ = this.calculatorState.result$.pipe(
+  protected directDoughRecipe$ = this.calculatorService.results$.pipe(
     map((result) =>
       result?.dough && !result?.poolish
         ? this.recipeDefConverter.convert(new DirectDoughRecipe(result))
@@ -75,7 +76,7 @@ export class CalculatorStateShareComponent implements OnInit {
     ),
   );
 
-  protected poolishRecipe$ = this.calculatorState.result$.pipe(
+  protected poolishRecipe$ = this.calculatorService.results$.pipe(
     map((result) =>
       result?.poolish
         ? this.recipeDefConverter.convert(new PoolishRecipe(result))
@@ -89,7 +90,7 @@ export class CalculatorStateShareComponent implements OnInit {
   });
 
   constructor(
-    private calculatorState: CalculatorStateService,
+    private calculatorService: CalculatorService,
     private recipeDefConverter: RecipeDefConverterService,
     private recipeService: RecipeService,
     private translateService: TranslateService,

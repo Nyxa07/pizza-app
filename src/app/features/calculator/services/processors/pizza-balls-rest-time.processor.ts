@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { CalculatorConfigService } from './calculator-config.service';
+import { CalculatorConfigService } from '../calculator-config.service';
+import {
+  IProcessor,
+  PartialCalculatorOutput,
+} from '../../interfaces/processor.interface';
+import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RestTimeService {
+export class PizzaBallsRestTimeProcessor implements IProcessor {
   constructor(private calculatorConfigService: CalculatorConfigService) {}
 
-  computePizzaBallsRestTime(
-    temperature: number,
-    rtRestTime: number,
-    coldRestTime: number,
-  ): number {
+  process(input: ICalculatorInput, acc?: PartialCalculatorOutput) {
     const constants = this.calculatorConfigService.constants.pizzaBallsRestTime;
     const coefMinTime = constants.minRestTimeCoef;
     const coefMaxTime = constants.maxRestTimeCoef;
@@ -21,14 +22,17 @@ export class RestTimeService {
     const minTemp = constants.minTemperature;
     const maxTemp = constants.maxTemperature;
 
-    const totalRestTime = Math.min(rtRestTime + coldRestTime, maxTotalRestTime);
+    const totalRestTime = Math.min(
+      (input.rtRestTime ?? 0) + (input.coldRestTime ?? 0),
+      maxTotalRestTime,
+    );
     const minRestTime = totalRestTime * coefMinTime;
     const maxRestTime = totalRestTime * coefMaxTime;
 
     // Clamp temperature to the range [19, 25]
     const clampedTemperature = Math.max(
       minTemp,
-      Math.min(temperature, maxTemp),
+      Math.min(input.temperature, maxTemp),
     );
 
     // Inverse linear interpolation: higher temp = lower rest time
@@ -36,6 +40,6 @@ export class RestTimeService {
     const slope = (minRestTime - maxRestTime) / (maxTemp - minTemp);
     const restTime = maxRestTime + slope * (clampedTemperature - minTemp);
 
-    return restTime;
+    return { pizzaBalls: { rtRestTime: restTime } };
   }
 }

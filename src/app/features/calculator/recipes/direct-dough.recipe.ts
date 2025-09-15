@@ -14,8 +14,8 @@ import {
   CookingPotIcon,
   ArrowDownUpIcon,
 } from 'lucide-angular';
-import { DoughResult } from '../services/calculator.service';
 import { IRecipeDef } from '../../recipe/interfaces/recipe-def.interface';
+import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
 
 export class DirectDoughRecipe implements IRecipeDef {
   readonly CookingPotIcon = CookingPotIcon;
@@ -32,7 +32,7 @@ export class DirectDoughRecipe implements IRecipeDef {
   readonly CircleIcon = CircleIcon;
   readonly EclipseIcon = EclipseIcon;
   readonly ArrowDownUpIcon = ArrowDownUpIcon;
-  constructor(private result: DoughResult) {}
+  constructor(private result: ICalculatorOutput) {}
 
   private get quantity() {
     return (

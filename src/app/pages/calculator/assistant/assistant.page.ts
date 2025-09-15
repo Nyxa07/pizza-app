@@ -4,9 +4,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { DoughType } from 'src/app/features/calculator/enums/dough-type.enum';
 import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
-import { CALCULATOR_MODE } from 'src/app/features/calculator/services/calculator-settings.service';
 import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 import {
   IonHeader,
@@ -33,9 +31,9 @@ import { AssistantFormComponent } from 'src/app/features/calculator/assistant-fo
     IonContent,
     IonBackButton,
     TranslatePipe,
-    AssistantFormComponent,
     IonItem,
     IonSkeletonText,
+    AssistantFormComponent,
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,22 +45,7 @@ export class CalculatorAssistantPage implements OnInit {
 
   ngOnInit() {
     idleCallback(() => {
-      this.calculatorInitializer.init(CALCULATOR_MODE.ASSIST, {
-        settings: {
-          saltRatio: { auto: true, visible: false },
-          honeyRatio: { auto: true, visible: false },
-          flourStrength: { auto: false, visible: true },
-          hydrationRatio: { auto: true, visible: false },
-          doughType: { auto: false, visible: true },
-          poolishRatio: { auto: true, visible: false },
-          yeastType: { auto: false, visible: true },
-          coldRestTime: { auto: true, visible: false },
-          rtRestTime: { auto: true, visible: false },
-          globalRestTime: { auto: false, visible: true },
-          pizzaWeight: { auto: true, visible: false },
-          oliveOilRatio: { auto: true, visible: false },
-        },
-      });
+      this.calculatorInitializer.initAssisted();
       this.isInitialized.set(true);
     });
   }

@@ -19,10 +19,7 @@ import {
   WavesIcon,
   FlaskRoundIcon,
 } from 'lucide-angular';
-import {
-  CalculatorSettingsService,
-  ICalculatorSettings,
-} from '../services/calculator-settings.service';
+import { CalculatorSettingsService } from '../services/calculator-settings.service';
 
 @Component({
   selector: 'app-calculator-settings-form',

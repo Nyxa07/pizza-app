@@ -3,22 +3,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { CalculatorStateService } from './calculator-state.service';
 import { Injector } from '@angular/core';
-
-export interface ICalculatorSettings {
-  pizzaWeight: { auto: boolean; visible: boolean };
-  saltRatio: { auto: boolean; visible: boolean };
-  honeyRatio: { auto: boolean; visible: boolean };
-  flourStrength: { auto: boolean; visible: boolean };
-  hydrationRatio: { auto: boolean; visible: boolean };
-  doughType: { auto: boolean; visible: boolean };
-  poolishRatio: { auto: boolean; visible: boolean };
-  yeastType: { auto: boolean; visible: boolean };
-  temperature: { auto: boolean; visible: boolean };
-  globalRestTime: { auto: boolean; visible: boolean };
-  rtRestTime: { auto: boolean; visible: boolean };
-  coldRestTime: { auto: boolean; visible: boolean };
-  oliveOilRatio: { auto: boolean; visible: boolean };
-}
+import { CALCULATOR_MODE } from '../enums/calculator-mode.enum';
+import { ICalculatorSettings } from '../interfaces/calculator-settings.interface';
 
 const DEFAULT_SETTINGS: ICalculatorSettings = {
   pizzaWeight: { auto: false, visible: true },
@@ -35,12 +21,6 @@ const DEFAULT_SETTINGS: ICalculatorSettings = {
   coldRestTime: { auto: false, visible: true },
   oliveOilRatio: { auto: false, visible: true },
 };
-
-export enum CALCULATOR_MODE {
-  SIMPLE = 'simple',
-  COMPLEX = 'complex',
-  ASSIST = 'assist',
-}
 
 @Injectable({
   providedIn: 'root',

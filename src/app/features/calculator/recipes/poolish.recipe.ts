@@ -8,8 +8,8 @@ import {
   ThermometerSunIcon,
   ThermometerSnowflakeIcon,
 } from 'lucide-angular';
-import { DoughResult } from '../services/calculator.service';
 import { IRecipeDef } from '../../recipe/interfaces/recipe-def.interface';
+import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
 
 export class PoolishRecipe implements IRecipeDef {
   readonly WheatIcon = WheatIcon;
@@ -21,7 +21,7 @@ export class PoolishRecipe implements IRecipeDef {
   readonly ThermometerSunIcon = ThermometerSunIcon;
   readonly ThermometerSnowflakeIcon = ThermometerSnowflakeIcon;
 
-  constructor(private result: DoughResult) {}
+  constructor(private result: ICalculatorOutput) {}
 
   private get quantity() {
     return (
