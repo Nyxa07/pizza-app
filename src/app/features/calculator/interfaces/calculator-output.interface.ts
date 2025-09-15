@@ -13,7 +13,6 @@ export interface ICalculatorOutput {
   total: Quantity;
   poolish: Quantity;
   dough: Quantity;
-  pizzaWeight: number;
-  pizzaBalls: ITimingPart;
+  pizzaBalls: ITimingPart & { weight: number };
   hydrationRatio: number;
 }

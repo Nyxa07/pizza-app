@@ -34,7 +34,8 @@
     "salt": "Salt",
     "dryActiveYeast": "Active dry yeast",
     "dryInstantYeast": "Instant dry yeast",
-    "freshYeast": "Fresh yeast"
+    "freshYeast": "Fresh yeast",
+    "oliveOil": "Olive oil"
   },
   "time": {
     "hours": "{count, plural, one {hour} other {hours}}",

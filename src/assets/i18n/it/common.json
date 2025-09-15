@@ -34,7 +34,8 @@
     "salt": "Sale",
     "dryActiveYeast": "Lievito secco attivo",
     "dryInstantYeast": "Lievito secco istantaneo",
-    "freshYeast": "Lievito fresco"
+    "freshYeast": "Lievito fresco",
+    "oliveOil": "Olio d'oliva"
   },
   "time": {
     "hours": "{count, plural, one {ora} other {ore}}",

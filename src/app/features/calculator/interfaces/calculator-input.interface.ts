@@ -15,7 +15,7 @@ export interface ICalculatorInput {
   flourStrength: number;
   saltRatio: number;
   honeyRatio: number;
-  pizzaWeight: number;
+  pizzaWeight: number | null;
   pizzaType: PizzaType;
-  oliveOilRatio: number;
+  oliveOilRatio: number | null;
 }

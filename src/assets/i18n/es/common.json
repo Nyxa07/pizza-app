@@ -34,7 +34,8 @@
     "salt": "Sal",
     "dryActiveYeast": "Levadura seca activa",
     "dryInstantYeast": "Levadura seca instantánea",
-    "freshYeast": "Levadura fresca"
+    "freshYeast": "Levadura fresca",
+    "oliveOil": "Aceite de oliva"
   },
   "time": {
     "hours": "{count, plural, one {hora} other {horas}}",

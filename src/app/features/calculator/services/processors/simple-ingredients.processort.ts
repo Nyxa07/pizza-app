@@ -8,13 +8,16 @@ import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
   providedIn: 'root',
 })
 export class SimpleIngredientsProcessor implements IProcessor {
-  process(input: ICalculatorInput, acc: { total: { flour: number } }) {
+  process(
+    input: ICalculatorInput,
+    acc: { total: { flour: number; oliveOil: number } },
+  ) {
     const salt = input.saltRatio * acc.total.flour;
     const honey = input.honeyRatio * acc.total.flour;
-    const oliveOil =
-      input.pizzaType === PizzaType.NEAPOLITAN
-        ? 0
-        : input.oliveOilRatio * acc.total.flour;
+    const oliveOilRatio =
+      input.oliveOilRatio ??
+      this.computeOliveOilRatioFromPizzaType(input.pizzaType);
+    const oliveOil = oliveOilRatio * acc.total.flour;
 
     return {
       total: {
@@ -31,5 +34,16 @@ export class SimpleIngredientsProcessor implements IProcessor {
         oliveOil,
       },
     };
+  }
+
+  computeOliveOilRatioFromPizzaType(pizzaType: PizzaType): number {
+    switch (pizzaType) {
+      case PizzaType.NEAPOLITAN:
+        return 0;
+      case PizzaType.ROMAN:
+        return 0.016;
+      default:
+        return 0;
+    }
   }
 }

@@ -5,6 +5,7 @@ import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
 
 interface FlourWaterQuantityProcessorPrevAcc {
   hydrationRatio: number;
+  pizzaBalls: { weight: number };
 }
 
 @Injectable({
@@ -13,15 +14,15 @@ interface FlourWaterQuantityProcessorPrevAcc {
 export class FlourWaterQuantityProcessor implements IProcessor {
   process(input: ICalculatorInput, acc: FlourWaterQuantityProcessorPrevAcc) {
     const hydrationRatio = acc.hydrationRatio;
-    const flourPerPizza = input.pizzaWeight / (1 + hydrationRatio);
-    const waterPerPizza = input.pizzaWeight - flourPerPizza;
+    const flourPerPizza = acc.pizzaBalls.weight / (1 + hydrationRatio);
+    const waterPerPizza = acc.pizzaBalls.weight - flourPerPizza;
     const totalFlour = input.nbPizzas * flourPerPizza;
     const totalWater = input.nbPizzas * waterPerPizza;
     const poolishTotal = this.computePoolishQuantity(
       input.doughType,
       input.poolishRatio,
       input.nbPizzas,
-      input.pizzaWeight,
+      acc.pizzaBalls.weight,
     );
     const poolishQuantity = poolishTotal / 2;
     const flourPerDough = totalFlour - poolishQuantity;

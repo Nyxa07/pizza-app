@@ -6,6 +6,26 @@ import { DoughType } from '../enums/dough-type.enum';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import { CALCULATOR_MODE } from '../enums/calculator-mode.enum';
 import { ICalculatorSettings } from '../interfaces/calculator-settings.interface';
+import { PizzaType } from '../../settings/enums/pizza-type.enum';
+import { YeastType } from '../enums/yeast-type.enum';
+
+export const DEFAULT_INPUT: ICalculatorInput = {
+  nbPizzas: 5,
+  doughType: DoughType.DIRECT,
+  yeastType: YeastType.DRY_ACTIVE,
+  hydrationRatio: 0.62,
+  temperature: 20,
+  globalRestTime: 24,
+  rtRestTime: 16,
+  coldRestTime: 0,
+  poolishRatio: 0.4,
+  flourStrength: 270,
+  saltRatio: 0.028,
+  honeyRatio: 0.004,
+  pizzaWeight: 250,
+  pizzaType: PizzaType.NEAPOLITAN,
+  oliveOilRatio: 0,
+};
 
 @Injectable({
   providedIn: 'root',
@@ -32,9 +52,7 @@ export class CalculatorInitializerService {
         pizzaWeight: { auto: true, visible: false },
         oliveOilRatio: { auto: true, visible: false },
       },
-      input: {
-        doughType: DoughType.DIRECT,
-      },
+      input: DEFAULT_INPUT,
     });
   }
 
@@ -54,9 +72,7 @@ export class CalculatorInitializerService {
         coldRestTime: { auto: false, visible: true },
         globalRestTime: { auto: true, visible: false },
       },
-      input: {
-        rtRestTime: 16,
-      },
+      input: DEFAULT_INPUT,
     });
   }
 
@@ -76,6 +92,7 @@ export class CalculatorInitializerService {
         pizzaWeight: { auto: true, visible: false },
         oliveOilRatio: { auto: true, visible: false },
       },
+      input: DEFAULT_INPUT,
     });
   }
 

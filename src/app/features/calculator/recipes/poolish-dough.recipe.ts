@@ -14,6 +14,7 @@ import {
   CircleIcon,
   ArrowDownUpIcon,
   EclipseIcon,
+  FlaskRoundIcon,
 } from 'lucide-angular';
 import { IRecipeDef } from '../../recipe/interfaces/recipe-def.interface';
 import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
@@ -34,7 +35,7 @@ export class PoolishDoughRecipe implements IRecipeDef {
   readonly CircleIcon = CircleIcon;
   readonly ArrowDownUpIcon = ArrowDownUpIcon;
   readonly EclipseIcon = EclipseIcon;
-
+  readonly FlaskRoundIcon = FlaskRoundIcon;
   readonly baseStepsKey = 'calculator.recipe.steps.';
 
   constructor(private result: ICalculatorOutput) {}
@@ -71,6 +72,12 @@ export class PoolishDoughRecipe implements IRecipeDef {
         title: 'common.ingredients.salt',
         unit: 'g',
       },
+      {
+        icon: FlaskRoundIcon,
+        value: this.quantity.oliveOil,
+        title: 'common.ingredients.oliveOil',
+        unit: 'g',
+      },
     ],
   };
 
@@ -78,7 +85,7 @@ export class PoolishDoughRecipe implements IRecipeDef {
     variables: {
       rtRestTime: Math.round(this.result.dough?.rtRestTime ?? 0),
       coldRestTime: Math.round(this.result.dough?.coldRestTime ?? 0),
-      pizzaWeight: this.result.pizzaWeight,
+      pizzaWeight: this.result.pizzaBalls.weight,
     },
     items: [
       {

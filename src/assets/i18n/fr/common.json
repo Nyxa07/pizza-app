@@ -34,7 +34,8 @@
     "salt": "Sel",
     "dryActiveYeast": "Levure sèche active",
     "dryInstantYeast": "Levure sèche instantanée",
-    "freshYeast": "Levure fraîche"
+    "freshYeast": "Levure fraîche",
+    "oliveOil": "Huile d'olive"
   },
   "time": {
     "hours": "{count, plural, one {heure} other {heures}}",

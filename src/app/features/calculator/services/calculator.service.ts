@@ -13,6 +13,7 @@ import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import { ICalculatorSettings } from '../interfaces/calculator-settings.interface';
 import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
 import { PizzaBallsRestTimeProcessor } from './processors/pizza-balls-rest-time.processor';
+import { PizzaBallsWeightProcessor } from './processors/pizza-balls-weight.processor';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +28,7 @@ export class CalculatorService {
     private settings: CalculatorSettingsService,
     private state: CalculatorStateService,
     private fillMissingPreProcessor: FillMissingPreProcessor,
+    private pizzaBallsWeightProcessor: PizzaBallsWeightProcessor,
     private hydrationProcessor: HydrationProcessor,
     private flourWaterQuantityProcessor: FlourWaterQuantityProcessor,
     private simpleIngredientsProcessor: SimpleIngredientsProcessor,
@@ -45,6 +47,7 @@ export class CalculatorService {
     );
 
     const output = runProcessors(processedInput, [
+      this.pizzaBallsWeightProcessor,
       this.hydrationProcessor,
       this.flourWaterQuantityProcessor,
       this.simpleIngredientsProcessor,

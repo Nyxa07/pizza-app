@@ -34,7 +34,8 @@
     "salt": "Salz",
     "dryActiveYeast": "Aktive Trockenhefe",
     "dryInstantYeast": "Instant-Trockenhefe",
-    "freshYeast": "Frische Hefe"
+    "freshYeast": "Frische Hefe",
+    "oliveOil": "Olivenöl"
   },
   "time": {
     "hours": "{count, plural, one {Stunde} other {Stunden}}",

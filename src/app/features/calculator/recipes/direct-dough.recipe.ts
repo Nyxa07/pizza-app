@@ -13,6 +13,7 @@ import {
   EclipseIcon,
   CookingPotIcon,
   ArrowDownUpIcon,
+  FlaskRoundIcon,
 } from 'lucide-angular';
 import { IRecipeDef } from '../../recipe/interfaces/recipe-def.interface';
 import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
@@ -32,6 +33,7 @@ export class DirectDoughRecipe implements IRecipeDef {
   readonly CircleIcon = CircleIcon;
   readonly EclipseIcon = EclipseIcon;
   readonly ArrowDownUpIcon = ArrowDownUpIcon;
+  readonly FlaskRoundIcon = FlaskRoundIcon;
   constructor(private result: ICalculatorOutput) {}
 
   private get quantity() {
@@ -81,6 +83,12 @@ export class DirectDoughRecipe implements IRecipeDef {
         title: 'common.ingredients.salt',
         unit: 'g',
       },
+      {
+        icon: FlaskRoundIcon,
+        value: this.quantity.oliveOil,
+        title: 'common.ingredients.oliveOil',
+        unit: 'g',
+      },
     ],
   };
 
@@ -88,7 +96,7 @@ export class DirectDoughRecipe implements IRecipeDef {
     variables: {
       rtRestTime: Math.round(this.result.dough?.rtRestTime ?? 0),
       coldRestTime: Math.round(this.result.dough?.coldRestTime ?? 0),
-      pizzaWeight: this.result.pizzaWeight,
+      pizzaWeight: this.result.pizzaBalls.weight,
     },
     items: [
       {

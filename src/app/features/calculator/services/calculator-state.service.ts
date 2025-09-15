@@ -1,46 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
-import { DoughType } from '../enums/dough-type.enum';
-import { YeastType } from '../enums/yeast-type.enum';
-import { PizzaType } from '../../settings/enums/pizza-type.enum';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import { CALCULATOR_MODE } from '../enums/calculator-mode.enum';
-
-export const DEFAULT_INPUT: ICalculatorInput = {
-  nbPizzas: 5,
-  doughType: DoughType.DIRECT,
-  yeastType: YeastType.DRY_ACTIVE,
-  hydrationRatio: 0.62,
-  temperature: 20,
-  globalRestTime: 24,
-  rtRestTime: 16,
-  coldRestTime: 0,
-  poolishRatio: 0.4,
-  flourStrength: 270,
-  saltRatio: 0.028,
-  honeyRatio: 0.004,
-  pizzaWeight: 250,
-  pizzaType: PizzaType.NEAPOLITAN,
-  oliveOilRatio: 0,
-};
-
-export const DEFAULT_INPUTS: Record<PizzaType, ICalculatorInput> = {
-  [PizzaType.NEAPOLITAN]: {
-    ...DEFAULT_INPUT,
-    pizzaType: PizzaType.NEAPOLITAN,
-    oliveOilRatio: 0,
-    hydrationRatio: 0.6,
-    pizzaWeight: 250,
-  },
-  [PizzaType.ROMAN]: {
-    ...DEFAULT_INPUT,
-    pizzaType: PizzaType.ROMAN,
-    oliveOilRatio: 0.016,
-    hydrationRatio: 0.55,
-    pizzaWeight: 180,
-  },
-};
+import { DEFAULT_INPUT } from './calculator-initializer.service';
 
 @Injectable({ providedIn: 'root' })
 export class CalculatorStateService {
@@ -74,7 +37,6 @@ export class CalculatorStateService {
     this.mode = mode;
     // To be able to reset to default
     this._initInput = {
-      ...DEFAULT_INPUT,
       ...input,
     } as ICalculatorInput;
 
@@ -87,12 +49,12 @@ export class CalculatorStateService {
 
   resetField(field: keyof ICalculatorInput): void {
     this.update({
-      [field]: this._initInput?.[field] ?? DEFAULT_INPUT[field],
+      [field]: this._initInput?.[field],
     });
   }
 
   reset(): void {
-    this.update(this._initInput ?? DEFAULT_INPUT);
+    this.update(this._initInput ?? {});
   }
 
   private loadFromStorage(): ICalculatorInput | null {
