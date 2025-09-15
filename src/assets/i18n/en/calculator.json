@@ -112,8 +112,6 @@
        "summary": {
          "subtitle": "Your configuration",
          "description": "Check your choices before generating the recipe.",
-         "ready": "Everything is ready!",
-         "readyDescription": "Your recipe will be generated according to your preferences.",
          "helpers": {
            "summary": "Summary"
          }

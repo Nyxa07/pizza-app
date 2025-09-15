@@ -58,34 +58,37 @@
 
       <ion-footer>
         <ion-toolbar>
-          <ion-button
-            fill="clear"
-            slot="start"
-            (click)="goBack()"
-            [disabled]="!canGoBack()"
-          >
-            <i-lucide [img]="ChevronLeft" slot="start"></i-lucide>
-            {{ "common.navigation.previous" | translate }}
-          </ion-button>
+          <ion-buttons slot="start">
+            <ion-button
+              fill="clear"
+              (click)="goBack()"
+              [disabled]="!canGoBack()"
+            >
+              <i-lucide [img]="ChevronLeft" slot="start"></i-lucide>
+              {{ "common.navigation.previous" | translate }}
+            </ion-button>
+          </ion-buttons>
 
-          <ion-button
-            slot="end"
-            (click)="proceed()"
-            [disabled]="!canProceed()"
-            [color]="isLastStep() ? 'success' : 'primary'"
-          >
-            {{
-              (isLastStep()
-                ? "common.navigation.finish"
-                : "common.navigation.next"
-              ) | translate
-            }}
-            @if (isLastStep()) {
-              <i-lucide [img]="CheckIcon" slot="end"></i-lucide>
-            } @else {
-              <i-lucide [img]="ChevronRight" slot="end"></i-lucide>
-            }
-          </ion-button>
+          <ion-buttons slot="end">
+            <ion-button
+              fill="solid"
+              (click)="proceed()"
+              [disabled]="!canProceed()"
+              [color]="isLastStep() ? 'success' : 'primary'"
+            >
+              {{
+                (isLastStep()
+                  ? "common.actions.validate"
+                  : "common.navigation.next"
+                ) | translate
+              }}
+              @if (isLastStep()) {
+                <i-lucide [img]="CheckIcon" slot="end"></i-lucide>
+              } @else {
+                <i-lucide [img]="ChevronRight" slot="end"></i-lucide>
+              }
+            </ion-button>
+          </ion-buttons>
         </ion-toolbar>
       </ion-footer>
     </ng-template>

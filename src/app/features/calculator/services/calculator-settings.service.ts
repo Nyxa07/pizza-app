@@ -14,6 +14,7 @@ export interface ICalculatorSettings {
   poolishRatio: { auto: boolean; visible: boolean };
   yeastType: { auto: boolean; visible: boolean };
   temperature: { auto: boolean; visible: boolean };
+  globalRestTime: { auto: boolean; visible: boolean };
   rtRestTime: { auto: boolean; visible: boolean };
   coldRestTime: { auto: boolean; visible: boolean };
   oliveOilRatio: { auto: boolean; visible: boolean };
@@ -29,6 +30,7 @@ const DEFAULT_SETTINGS: ICalculatorSettings = {
   poolishRatio: { auto: false, visible: true },
   yeastType: { auto: false, visible: true },
   temperature: { auto: false, visible: true },
+  globalRestTime: { auto: true, visible: false },
   rtRestTime: { auto: false, visible: true },
   coldRestTime: { auto: false, visible: true },
   oliveOilRatio: { auto: false, visible: true },

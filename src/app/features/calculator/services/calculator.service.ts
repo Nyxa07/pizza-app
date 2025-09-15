@@ -52,6 +52,7 @@ export class CalculatorService {
     return this.plannerService.computeTimingsFromRestTimes({
       rtRestTime: data.rtRestTime,
       coldRestTime: data.coldRestTime,
+      globalRestTime: data.globalRestTime,
       method: data.doughType,
       temperature: data.temperature,
     });

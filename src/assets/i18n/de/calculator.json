@@ -112,8 +112,6 @@
        "summary": {
          "subtitle": "Ihre Konfiguration",
          "description": "Überprüfen Sie Ihre Auswahl, bevor Sie das Rezept generieren.",
-         "ready": "Alles ist bereit!",
-         "readyDescription": "Ihr Rezept wird nach Ihren Vorlieben generiert.",
          "helpers": {
            "summary": "Zusammenfassung"
          }

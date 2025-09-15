@@ -15,6 +15,10 @@
     "complex": {
       "title": "Calcolatrice avanzata",
       "description": "Calcolare le quantità degli ingredienti in funzione di una moltitudine di parametri (Temperatura, Farina, Idratazione, Lievito, ecc.)"
+    },
+    "assistant": {
+      "title": "Assistente di configurazione",
+      "description": "Un assistente passo dopo passo per aiutarti a configurare la tua ricetta per l'impasto della pizza"
     }
   },
   "guides": {

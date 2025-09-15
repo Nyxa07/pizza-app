@@ -15,6 +15,10 @@
     "complex": {
       "title": "Erweiterter Rechner",
       "description": "Berechnen Sie die Zutatenmengen in Abhängigkeit von einer Vielzahl von Parametern (Temperatur, Mehl, Hydratation, Hefe, usw.)"
+    },
+    "assistant": {
+      "title": "Konfigurationsassistent",
+      "description": "Ein schrittweiser Assistent, der Ihnen bei der Konfiguration Ihres Pizzateig-Rezepts hilft"
     }
   },
   "guides": {

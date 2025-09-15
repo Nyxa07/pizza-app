@@ -112,8 +112,6 @@
        "summary": {
          "subtitle": "La tua configurazione",
          "description": "Verifica le tue scelte prima di generare la ricetta.",
-         "ready": "Tutto è pronto!",
-         "readyDescription": "La tua ricetta sarà generata secondo le tue preferenze.",
          "helpers": {
            "summary": "Riepilogo"
          }

@@ -81,9 +81,9 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
     @if (parentGroup.get('hasLongRestTime')?.value === false) {
       <ion-list lines="none" [formGroup]="parentGroup">
-        <ion-radio-group formControlName="restTime">
+        <ion-radio-group formControlName="globalRestTime">
           @for (i of shortRestTimes; track i) {
-            <ion-item button (click)="parentGroup.get('restTime')?.setValue(i)">
+            <ion-item button (click)="setGlobalRestTime(i)">
               <ion-radio [value]="i" slot="start"></ion-radio>
               <ion-label>
                 {{ i }} {{ 'common.time.hours' | translate: { count: i } }}
@@ -95,9 +95,9 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
     }
     @if (parentGroup.get('hasLongRestTime')?.value === true) {
       <ion-list lines="none" [formGroup]="parentGroup">
-        <ion-radio-group formControlName="restTime">
+        <ion-radio-group formControlName="globalRestTime">
           @for (i of longRestTimes; track i) {
-            <ion-item button (click)="parentGroup.get('restTime')?.setValue(i)">
+            <ion-item button (click)="setGlobalRestTime(i)">
               <ion-radio [value]="i" slot="start"></ion-radio>
               <ion-label>
                 {{ i }}
@@ -109,7 +109,7 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
       </ion-list>
     }
 
-    @if (parentGroup.get('restTime')?.value) {
+    @if (parentGroup.get('globalRestTime')?.value) {
       <ion-card>
         <ion-card-content class="ion-text-center">
           <h2>
@@ -167,10 +167,11 @@ export class PlannerStepComponent implements OnInit {
   longRestTimes = [16, 24, 48];
 
   setHasLongRestTime(value: boolean | null) {
-    // if (value !== this.parentGroup.get('hasLongRestTime')?.value) {
-    //   this.parentGroup.get('restTime')?.setValue(null);
-    // }
     this.parentGroup.get('hasLongRestTime')?.setValue(value);
+  }
+
+  setGlobalRestTime(value: number | null) {
+    this.parentGroup.get('globalRestTime')?.setValue(value);
   }
 
   ngOnInit(): void {

@@ -41,6 +41,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest } from 'rxjs';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
+import { PlannerService } from '../services/planner.service';
 
 export interface IAssistantData {
   pizzaType: PizzaType;
@@ -51,9 +52,7 @@ export interface IAssistantData {
   flourStrenghKnowledge: boolean;
   flourStrength: number;
   hasLongRestTime: boolean;
-  restTime: number;
-  rtRestTime: number;
-  coldRestTime: number;
+  globalRestTime: number;
   pizzaWeight: number;
 }
 
@@ -107,9 +106,7 @@ export class AssistantFormComponent implements OnInit {
     yeastType: this.fb.control<YeastType | null>(null, Validators.required),
 
     hasLongRestTime: this.fb.control<boolean | null>(null, Validators.required),
-    restTime: this.fb.control<number | null>(null, Validators.required),
-    rtRestTime: this.fb.control<number | null>(null, Validators.required),
-    coldRestTime: this.fb.control<number | null>(null, Validators.required),
+    globalRestTime: this.fb.control<number | null>(null, Validators.required),
 
     flourStrenghKnowledge: this.fb.control<boolean | null>(
       null,
@@ -168,8 +165,7 @@ export class AssistantFormComponent implements OnInit {
       key: 'planner',
       canProceed: () =>
         this.assistantForm.get('hasLongRestTime')?.valid &&
-        this.assistantForm.get('hasLongRestTime')?.valid &&
-        this.assistantForm.get('coldRestTime')?.valid,
+        this.assistantForm.get('globalRestTime')?.valid,
     },
     {
       load: () =>
@@ -219,6 +215,7 @@ export class AssistantFormComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private prefStorage: PrefsStorage,
+    private plannerService: PlannerService,
   ) {
     this.assistantForm.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => {
       const assistantData = this.assistantForm
@@ -229,8 +226,7 @@ export class AssistantFormComponent implements OnInit {
         nbPizzas: assistantData.nbPizzas,
         temperature: assistantData.temperature,
         yeastType: assistantData.yeastType,
-        rtRestTime: assistantData.rtRestTime,
-        coldRestTime: assistantData.coldRestTime,
+        globalRestTime: assistantData.globalRestTime,
         flourStrength: assistantData.flourStrength,
         pizzaWeight: assistantData.pizzaWeight,
       });
@@ -245,45 +241,6 @@ export class AssistantFormComponent implements OnInit {
         this.currentStepIndex(),
       );
     });
-
-    combineLatest([
-      this.assistantForm.controls.restTime.valueChanges,
-      this.assistantForm.controls.doughType.valueChanges,
-    ])
-      .pipe(takeUntilDestroyed())
-      .subscribe((value) => {
-        const [restTime, doughType] = value;
-        if (restTime === null) {
-          return;
-        }
-
-        let coldRestTime = 0;
-        let rtRestTime = 0;
-        let restTimeLeft = restTime;
-
-        if (doughType === DoughType.DIRECT) {
-          rtRestTime = Math.min(restTimeLeft, 24);
-          restTimeLeft -= rtRestTime;
-          coldRestTime = restTimeLeft;
-          restTimeLeft = 0;
-        }
-
-        if (doughType === DoughType.POOLISH) {
-          rtRestTime = 1;
-          coldRestTime = restTimeLeft;
-          restTimeLeft = 0;
-        }
-
-        this.assistantForm.get('rtRestTime')?.setValue(rtRestTime);
-        this.assistantForm.get('coldRestTime')?.setValue(coldRestTime);
-      });
-
-    // this.assistantForm
-    //   .get('hasLongRestTime')
-    //   ?.valueChanges.pipe(takeUntilDestroyed())
-    //   .subscribe((hasLongRestTime) => {
-    //     this.assistantForm.get('restTime')?.setValue(null);
-    //   });
 
     this.assistantForm
       .get('pizzaType')

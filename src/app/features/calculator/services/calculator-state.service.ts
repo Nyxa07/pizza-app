@@ -18,8 +18,9 @@ export interface CalculatorInput {
   hydrationRatio?: number;
   temperature: number;
   poolishRatio?: number;
-  rtRestTime: number;
-  coldRestTime: number;
+  globalRestTime?: number;
+  rtRestTime?: number;
+  coldRestTime?: number;
   flourStrength: number;
   saltRatio: number;
   honeyRatio: number;
@@ -34,6 +35,7 @@ export const DEFAULT_INPUT: CalculatorInput = {
   yeastType: YeastType.DRY_ACTIVE,
   hydrationRatio: 0.62,
   temperature: 20,
+  globalRestTime: undefined,
   rtRestTime: 16,
   coldRestTime: 0,
   poolishRatio: 0.4,
@@ -103,9 +105,11 @@ export class CalculatorStateService {
       nbPizzas: i.nbPizzas,
       pizzaType: i.pizzaType,
       temperature: i.temperature,
-      rtRestTime: settings.rtRestTime.auto
-        ? defaultInput.rtRestTime
-        : i.rtRestTime,
+      globalRestTime: settings.globalRestTime.auto
+        ? undefined
+        : i.globalRestTime,
+      rtRestTime: settings.rtRestTime.auto ? undefined : i.rtRestTime,
+      coldRestTime: settings.coldRestTime.auto ? undefined : i.coldRestTime,
       doughType: settings.doughType.auto ? DoughType.DIRECT : i.doughType,
       yeastType: settings.yeastType.auto ? YeastType.DRY_ACTIVE : i.yeastType,
       hydrationRatio: settings.hydrationRatio.auto
@@ -124,9 +128,7 @@ export class CalculatorStateService {
       pizzaWeight: settings.pizzaWeight.auto
         ? defaultInput.pizzaWeight
         : i.pizzaWeight,
-      coldRestTime: settings.coldRestTime.auto
-        ? defaultInput.coldRestTime
-        : i.coldRestTime,
+
       oliveOilRatio: settings.oliveOilRatio.auto
         ? defaultInput.oliveOilRatio
         : i.oliveOilRatio,

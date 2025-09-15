@@ -22,6 +22,7 @@ import {
   ThermometerSunIcon,
   ThermometerSnowflakeIcon,
   LassoSelectIcon,
+  ClockIcon,
 } from 'lucide-angular';
 import { FormGroup } from '@angular/forms';
 import { YeastType } from '../../enums/yeast-type.enum';
@@ -89,9 +90,9 @@ import { YeastType } from '../../enums/yeast-type.enum';
         </ion-label>
       </ion-item>
       <ion-item>
-        <i-lucide [img]="ThermometerSunIcon" slot="start"></i-lucide>
+        <i-lucide [img]="ClockIcon" slot="start"></i-lucide>
         <ion-label>
-          {{ 'calculator.assistant.form.titles.rtRestTime' | translate }}
+          {{ 'calculator.assistant.form.titles.globalRestTime' | translate }}
           <p>
             {{ assistantData.rtRestTime }}
             {{
@@ -101,32 +102,7 @@ import { YeastType } from '../../enums/yeast-type.enum';
           </p>
         </ion-label>
       </ion-item>
-      @if (assistantData.coldRestTime > 0) {
-        <ion-item>
-          <i-lucide [img]="ThermometerSnowflakeIcon" slot="start"></i-lucide>
-          <ion-label>
-            {{ 'calculator.assistant.form.titles.coldRestTime' | translate }}
-            <p>
-              {{ assistantData.coldRestTime }}
-              {{
-                'common.time.hours'
-                  | translate: { count: assistantData.coldRestTime }
-              }}
-            </p>
-          </ion-label>
-        </ion-item>
-      }
     </ion-list>
-
-    <ion-card color="success">
-      <ion-card-content class="ion-text-center">
-        <i-lucide [img]="CheckIcon" slot="start"></i-lucide>
-        <h3>{{ 'calculator.assistant.form.summary.ready' | translate }}</h3>
-        <p>
-          {{ 'calculator.assistant.form.summary.readyDescription' | translate }}
-        </p>
-      </ion-card-content>
-    </ion-card>
   `,
   standalone: true,
   imports: [
@@ -152,6 +128,8 @@ export class SummaryStepComponent {
   ThermometerSunIcon = ThermometerSunIcon;
   ThermometerSnowflakeIcon = ThermometerSnowflakeIcon;
   LassoSelectIcon = LassoSelectIcon;
+  ClockIcon = ClockIcon;
+
   @Input() parentGroup!: FormGroup;
 
   get assistantData() {

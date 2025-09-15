@@ -24,14 +24,27 @@ export class PlannerService {
   constructor(private restTimeService: RestTimeService) {}
 
   computeTimingsFromRestTimes(input: {
-    rtRestTime: number;
-    coldRestTime: number;
+    globalRestTime?: number;
+    rtRestTime?: number;
+    coldRestTime?: number;
     method: DoughType;
     temperature: number;
   }): Timings {
+    if (!input.globalRestTime && !input.rtRestTime && !input.rtRestTime) {
+      throw new Error('At least one rest time must be provided');
+    }
+
+    let coldRestTime = 0;
+    let rtRestTime = 0;
+    if (input.globalRestTime) {
+      const tmpRes = this.getRestTimesFromGlobalRestTime(
+        input.globalRestTime,
+        input.method,
+      );
+      coldRestTime = tmpRes.coldRestTime;
+      rtRestTime = tmpRes.rtRestTime;
+    }
     const hasPoolish = input.method === DoughType.POOLISH;
-    const rtRestTime = input.rtRestTime;
-    const coldRestTime = input.coldRestTime;
     const pizzaBallsRestTime = this.restTimeService.computePizzaBallsRestTime(
       input.temperature,
       rtRestTime,
@@ -46,6 +59,7 @@ export class PlannerService {
       (!hasPoolish ? rtRestTime + coldRestTime + (coldRestTime ? 1 : 0) : 0);
 
     const pizzaBallsPrepTime = pizzaBallsRestTime;
+
     return {
       poolish: {
         coldRestTime: hasPoolish ? coldRestTime : 0,
@@ -67,6 +81,36 @@ export class PlannerService {
         coldRestTime: coldRestTime,
         rtRestTime: rtRestTime + pizzaBallsRestTime,
       },
+    };
+  }
+
+  getRestTimesFromGlobalRestTime(globalRestTime: number, doughType: DoughType) {
+    let coldRestTime = 0;
+    let rtRestTime = 0;
+    let restTimeLeft = globalRestTime;
+
+    if (doughType === DoughType.DIRECT) {
+      rtRestTime = Math.min(restTimeLeft, 24);
+      restTimeLeft -= rtRestTime;
+      coldRestTime = restTimeLeft;
+      restTimeLeft = 0;
+    }
+
+    if (doughType === DoughType.POOLISH) {
+      rtRestTime = 1;
+      restTimeLeft -= 1;
+      if (restTimeLeft > 12) {
+        coldRestTime = restTimeLeft;
+        restTimeLeft = 0;
+      } else {
+        rtRestTime += restTimeLeft;
+        restTimeLeft = 0;
+      }
+    }
+
+    return {
+      coldRestTime,
+      rtRestTime,
     };
   }
 }

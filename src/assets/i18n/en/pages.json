@@ -15,6 +15,10 @@
     "complex": {
       "title": "Advanced calculator",
       "description": "Calculate ingredient quantities based on a multitude of parameters (Temperature, Flour, Hydration, Yeast, etc.)"
+    },
+    "assistant": {
+      "title": "Configuration assistant",
+      "description": "A step-by-step assistant to help you configure your pizza dough recipe"
     }
   },
   "guides": {

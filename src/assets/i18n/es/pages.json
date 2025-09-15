@@ -15,6 +15,10 @@
     "complex": {
       "title": "Calculadora avanzada",
       "description": "Calcular las cantidades de los ingredientes en función de una multitud de parámetros (Temperatura, Harina, Hidratación, Levadura, etc.)"
+    },
+    "assistant": {
+      "title": "Asistente de configuración",
+      "description": "Un asistente paso a paso para ayudarte a configurar tu receta de masa de pizza"
     }
   },
   "guides": {

@@ -46,8 +46,7 @@
          "yeastType": "Type de levure",
          "temperature": "Température ambiante",
          "planner": "Planificateur",
-         "rtRestTime": "Repos à température ambiante",
-         "coldRestTime": "Repos à froid",
+         "globalRestTime": "Temps de repos",
          "flourType": "Type de farine"
        },
        "pizzaType": {
@@ -112,8 +111,6 @@
        "summary": {
          "subtitle": "Votre configuration",
          "description": "Vérifiez vos choix avant de générer la recette.",
-         "ready": "Tout est prêt !",
-         "readyDescription": "Votre recette va être générée selon vos préférences.",
          "helpers": {
            "summary": "Récapitulatif"
          }
