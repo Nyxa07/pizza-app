@@ -60,7 +60,6 @@ export interface IAssistantData {
   flourStrength: number;
   hasLongRestTime: boolean;
   globalRestTime: number;
-  pizzaWeight: number;
 }
 
 @Component({
@@ -138,8 +137,6 @@ export class AssistantFormComponent implements OnInit {
       Validators.required,
     ),
     flourStrength: this.fb.control<number | null>(null, Validators.required),
-
-    pizzaWeight: this.fb.control<number | null>(null, Validators.required),
   });
 
   XIcon = XIcon;
@@ -154,9 +151,7 @@ export class AssistantFormComponent implements OnInit {
           (m) => m.PizzaTypeStepComponent,
         ),
       key: 'pizzaType',
-      canProceed: () =>
-        this.assistantForm.get('pizzaType')?.valid &&
-        this.assistantForm.get('pizzaWeight')?.valid,
+      canProceed: () => this.assistantForm.get('pizzaType')?.valid,
     },
     {
       load: () =>
@@ -254,7 +249,6 @@ export class AssistantFormComponent implements OnInit {
         yeastType: assistantData.yeastType,
         globalRestTime: assistantData.globalRestTime,
         flourStrength: assistantData.flourStrength,
-        pizzaWeight: assistantData.pizzaWeight,
       });
       // Store form data
       this.prefStorage.set('assistant:data', this.assistantForm.value);
