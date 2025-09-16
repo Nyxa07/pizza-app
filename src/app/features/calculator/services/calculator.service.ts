@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CalculatorStateService } from './calculator-state.service';
-import { combineLatest, filter, map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, shareReplay } from 'rxjs';
 import { runProcessors } from './processors/run-processors';
 import { FillMissingPreProcessor } from './processors/transform-input.pre-processor';
 import { HydrationProcessor } from './processors/hydration.processor';
@@ -22,7 +22,10 @@ export class CalculatorService {
   results$: Observable<ICalculatorOutput> = combineLatest([
     this.settings.getSettings$(),
     this.state.getInput$(),
-  ]).pipe(map(([settings, input]) => this.process(settings, input)));
+  ]).pipe(
+    map(([settings, input]) => this.process(settings, input)),
+    shareReplay({ refCount: true, bufferSize: 1 }),
+  );
 
   constructor(
     private settings: CalculatorSettingsService,

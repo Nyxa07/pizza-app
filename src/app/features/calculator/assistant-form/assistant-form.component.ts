@@ -269,17 +269,6 @@ export class AssistantFormComponent implements OnInit {
     });
 
     this.assistantForm
-      .get('pizzaType')
-      ?.valueChanges.pipe(takeUntilDestroyed())
-      .subscribe((value) => {
-        if (value === PizzaType.NEAPOLITAN) {
-          this.assistantForm.get('pizzaWeight')?.setValue(250);
-        } else if (value === PizzaType.ROMAN) {
-          this.assistantForm.get('pizzaWeight')?.setValue(180);
-        }
-      });
-
-    this.assistantForm
       .get('flourStrenghKnowledge')
       ?.valueChanges.pipe(takeUntilDestroyed())
       .subscribe((value) => {

@@ -23,9 +23,13 @@ export class PizzaBallsRestTimeProcessor implements IProcessor {
     const maxTemp = constants.maxTemperature;
 
     const totalRestTime = Math.min(
-      (input.rtRestTime ?? 0) + (input.coldRestTime ?? 0),
+      Math.max(
+        (input.rtRestTime ?? 0) + (input.coldRestTime ?? 0),
+        input.globalRestTime ?? 0,
+      ),
       maxTotalRestTime,
     );
+
     const minRestTime = totalRestTime * coefMinTime;
     const maxRestTime = totalRestTime * coefMaxTime;
 
