@@ -9,8 +9,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
   HouseIcon,
   CalculatorIcon,
-  BookIcon,
   LucideAngularModule,
+  NotebookIcon,
 } from 'lucide-angular';
 
 @Component({
@@ -30,8 +30,6 @@ import {
 export class TabsPage {
   HouseIcon = HouseIcon;
   CalculatorIcon = CalculatorIcon;
-  BookIcon = BookIcon;
-  constructor() {
-    LucideAngularModule.pick({ HouseIcon });
-  }
+  NotebookIcon = NotebookIcon;
+
 }
