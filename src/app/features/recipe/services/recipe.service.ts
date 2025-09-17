@@ -28,18 +28,20 @@ export class RecipeService {
     );
     const ingredientsLines: string[] = [ingredientsTitle + ':'];
 
-    recipe.ingredients.items.forEach((item) => {
-      const value = item.value?.toLocaleString(undefined, {
-        maximumFractionDigits: 2,
-        minimumFractionDigits: 0,
+    recipe.ingredients.items
+      .filter((item) => item.value > 0)
+      .forEach((item) => {
+        const value = item.value?.toLocaleString(undefined, {
+          maximumFractionDigits: 2,
+          minimumFractionDigits: 0,
+        });
+        const unit = item.unit ?? '';
+        const label = this.stripHtml(this.translateService.instant(item.title));
+        const description = item.description
+          ? ` – ${this.stripHtml(this.translateService.instant(item.description))}`
+          : '';
+        ingredientsLines.push(`• ${label}: ${value} ${unit}${description}`);
       });
-      const unit = item.unit ?? '';
-      const label = this.stripHtml(this.translateService.instant(item.title));
-      const description = item.description
-        ? ` – ${this.stripHtml(this.translateService.instant(item.description))}`
-        : '';
-      ingredientsLines.push(`• ${label}: ${value} ${unit}${description}`);
-    });
 
     // 2. Method steps ------------------------------------------------------
     const methodTitle = this.stripHtml(

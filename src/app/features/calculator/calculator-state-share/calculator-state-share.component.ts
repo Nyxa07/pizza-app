@@ -19,7 +19,6 @@ import {
 } from '@ionic/angular/standalone';
 import { LucideAngularModule, Share2Icon } from 'lucide-angular';
 import { Share } from '@capacitor/share';
-import { CalculatorStateService } from '../services/calculator-state.service';
 import { firstValueFrom, map } from 'rxjs';
 import { DirectDoughRecipe } from '../recipes/direct-dough.recipe';
 import { PoolishRecipe } from '../recipes/poolish.recipe';
@@ -62,7 +61,7 @@ export class CalculatorStateShareComponent implements OnInit {
 
   protected poolishDoughRecipe$ = this.calculatorService.results$.pipe(
     map((result) =>
-      result?.poolish
+      result.poolish.flour
         ? this.recipeDefConverter.convert(new PoolishDoughRecipe(result))
         : null,
     ),
@@ -70,7 +69,7 @@ export class CalculatorStateShareComponent implements OnInit {
 
   protected directDoughRecipe$ = this.calculatorService.results$.pipe(
     map((result) =>
-      result?.dough && !result?.poolish
+      result?.dough && result.poolish.flour === 0
         ? this.recipeDefConverter.convert(new DirectDoughRecipe(result))
         : null,
     ),
@@ -78,7 +77,7 @@ export class CalculatorStateShareComponent implements OnInit {
 
   protected poolishRecipe$ = this.calculatorService.results$.pipe(
     map((result) =>
-      result?.poolish
+      result.poolish.flour > 0
         ? this.recipeDefConverter.convert(new PoolishRecipe(result))
         : null,
     ),
@@ -133,12 +132,14 @@ export class CalculatorStateShareComponent implements OnInit {
           onlyIngredients,
         })
       : '';
+
     const directDoughText = directDoughRecipe
       ? this.recipeService.getRecipeText(directDoughRecipe, {
           withHelperDescriptions,
           onlyIngredients,
         })
       : '';
+
     const poolishDoughText = poolishDoughRecipe
       ? this.recipeService.getRecipeText(poolishDoughRecipe, {
           withHelperDescriptions,
