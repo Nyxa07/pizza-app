@@ -45,6 +45,7 @@ export class CalculatorSettingsService {
     this._state.next({
       ...DEFAULT_SETTINGS,
       ...defaultSettings,
+      ...(this.prefs.get(this.STORAGE_KEY + ':' + this.mode) ?? {}),
     });
   }
 
