@@ -130,12 +130,12 @@
     },
     "steps": {
       "mixIngredients": {
-        "title": "Mezclar agua, levadura y miel",
+        "title": "{hasHoney, select, true {Mezclar agua, levadura y miel} other {Mezclar agua y levadura}}",
         "helper": {
-          "title": "Mezclar agua, levadura y miel",
+          "title": "{hasHoney, select, true {Mezclar agua, levadura y miel} other {Mezclar agua y levadura}}",
           "descriptions": [
             "Pesar todos los ingredientes.",
-            "En un bol grande, disolver la levadura en el agua y añadir la miel."
+            "{hasHoney, select, true {En un bol grande, disolver la levadura en el agua y añadir la miel.} other {En un bol grande, disolver la levadura en el agua.}}"
           ]
         }
       },
@@ -180,12 +180,12 @@
         }
       },
       "addWaterSalt": {
-        "title": "En el poolish, añadir el agua y la sal",
+        "title": "{hasSalt, select, true {En el poolish, añadir el agua y la sal} other {En el poolish, añadir el agua}}",
         "helper": {
           "title": "Preparación de la masa",
           "descriptions": [
             "Pesar las cantidades a añadir en el poolish",
-            "En el bol del poolish, añadir el agua y la sal. Mezclar con una cuchara de madera hasta que el agua se absorba"
+            "{hasSalt, select, true {En el bol del poolish, añadir el agua y la sal. Mezclar con una cuchara de madera hasta que el agua se absorba} other {En el bol del poolish, añadir el agua. Mezclar con una cuchara de madera hasta que el agua se absorba}}"
           ]
         }
       },
@@ -281,12 +281,12 @@
           ]
         }
       },
-      "addFlourSalt": {
-        "title": "Añadir la harina y la sal",
+      "addFlourSaltOil": {
+        "title": "Añadir la harina, la sal {hasOliveOil, select, true { y el aceite de oliva} other {}}",
         "helper": {
           "title": "Introducción de la harina",
           "descriptions": [
-            "Añadir la sal y la harina poco a poco y mezclar con una cuchara de madera hasta obtener una mezcla homogénea"
+            "Añadir la harina, la sal {hasOliveOil, select, true { y el aceite de oliva} other {}} poco a poco y mezclar con una cuchara de madera hasta obtener una mezcla homogénea"
           ]
         }
       },

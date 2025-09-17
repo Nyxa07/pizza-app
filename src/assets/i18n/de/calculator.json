@@ -130,12 +130,12 @@
     },
     "steps": {
       "mixIngredients": {
-        "title": "Wasser, Hefe und Honig mischen",
+        "title": "{hasHoney, select, true {Wasser, Hefe und Honig mischen} other {Wasser und Hefe mischen}}",
         "helper": {
-          "title": "Wasser, Hefe und Honig mischen",
+          "title": "{hasHoney, select, true {Wasser, Hefe und Honig mischen} other {Wasser und Hefe mischen}}",
           "descriptions": [
             "Alle Zutaten abwiegen.",
-            "In einer großen Schüssel die Hefe im Wasser auflösen und den Honig hinzufügen."
+            "{hasHoney, select, true {In einer großen Schüssel die Hefe im Wasser auflösen und den Honig hinzufügen.} other {In einer großen Schüssel die Hefe im Wasser auflösen.}}"
           ]
         }
       },
@@ -180,12 +180,12 @@
         }
       },
       "addWaterSalt": {
-        "title": "Zum Poolish Wasser und Salz hinzufügen",
+        "title": "{hasSalt, select, true {Zum Poolish Wasser und Salz hinzufügen} other {Zum Poolish Wasser hinzufügen}}",
         "helper": {
           "title": "Teigzubereitung",
           "descriptions": [
             "Die zum Poolish hinzuzufügenden Mengen abwiegen",
-            "In die Schüssel mit dem Poolish Wasser und Salz geben. Mit einem Holzlöffel verrühren, bis das Wasser aufgenommen ist"
+            "{hasSalt, select, true {In die Schüssel mit dem Poolish Wasser und Salz geben. Mit einem Holzlöffel verrühren, bis das Wasser aufgenommen ist} other {In die Schüssel mit dem Poolish Wasser geben. Mit einem Holzlöffel verrühren, bis das Wasser aufgenommen ist}}"
           ]
         }
       },
@@ -281,12 +281,12 @@
           ]
         }
       },
-      "addFlourSalt": {
-        "title": "Mehl und Salz hinzufügen",
+      "addFlourSaltOil": {
+        "title": "Mehl, Salz {hasOliveOil, select, true { und Olivenöl} other {}} hinzufügen",
         "helper": {
           "title": "Einführung des Mehls",
           "descriptions": [
-            "Salz und Mehl nach und nach hinzufügen und mit einem Holzlöffel mischen, bis eine homogene Mischung entsteht"
+            "Mehl, Salz {hasOliveOil, select, true { und Olivenöl} other {}} nach und nach hinzufügen und mit einem Holzlöffel mischen, bis eine homogene Mischung entsteht"
           ]
         }
       },

@@ -130,12 +130,12 @@
     },
     "steps": {
       "mixIngredients": {
-        "title": "Mélanger l’eau, la levure et le miel",
+        "title": "{hasHoney, select, true {Mélanger l'eau, la levure et le miel} other {Mélanger l'eau et la levure}}",
         "helper": {
-          "title": "Mélanger l’eau, la levure et le miel",
+          "title": "{hasHoney, select, true {Mélanger l'eau, la levure et le miel} other {Mélanger l'eau et la levure}}",
           "descriptions": [
             "Peser tous les ingrédients.",
-            "Dans un grand bol, délayer la levure dans l'eau et ajouter le miel."
+            "{hasHoney, select, true {Dans un grand bol, délayer la levure dans l'eau et ajouter le miel.} other {Dans un grand bol, délayer la levure dans l'eau.}}"
           ]
         }
       },
@@ -180,12 +180,12 @@
         }
       },
       "addWaterSalt": {
-        "title": "Dans la poolish, ajouter l'eau et le sel",
+        "title": "{hasSalt, select, true {Dans la poolish, ajouter l'eau et le sel} other {Dans la poolish, ajouter l'eau}}",
         "helper": {
           "title": "Préparation de la pâte",
           "descriptions": [
             "Peser les quantités à ajouter dans la poolish",
-            "Dans le bol de la poolish, ajouter l'eau et le sel. Mélanger à la cuillère en bois jusqu'à l'absorption de l'eau"
+            "{hasSalt, select, true {Dans le bol de la poolish, ajouter l'eau et le sel. Mélanger à la cuillère en bois jusqu'à l'absorption de l'eau} other {Dans le bol de la poolish, ajouter l'eau. Mélanger à la cuillère en bois jusqu'à l'absorption de l'eau}}"
           ]
         }
       },
@@ -281,12 +281,12 @@
           ]
         }
       },
-      "addFlourSalt": {
-        "title": "Ajouter la farine et le sel",
+      "addFlourSaltOil": {
+        "title": "Ajouter la farine, le sel {hasOliveOil, select, true { et l'huile d'olive} other {}}",
         "helper": {
           "title": "Introduction de la farine",
           "descriptions": [
-            "Ajouter le sel et la farine petit à petit et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène"
+            "Ajouter la farine, le sel {hasOliveOil, select, true { et l'huile d'olive} other {}} petit à petit et mélanger avec une cuillère en bois jusqu'à l'obtention d'un mélange homogène"
           ]
         }
       },

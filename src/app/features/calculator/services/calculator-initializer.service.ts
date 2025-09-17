@@ -31,6 +31,8 @@ export const DEFAULT_INPUT: ICalculatorInput = {
   providedIn: 'root',
 })
 export class CalculatorInitializerService {
+  private _isInitialized = false;
+
   constructor(
     private calculatorState: CalculatorStateService,
     private calculatorSettings: CalculatorSettingsService,
@@ -96,6 +98,24 @@ export class CalculatorInitializerService {
     });
   }
 
+  // Facade to init the calculator with a mode
+  initWithMode(mode: CALCULATOR_MODE) {
+    if (this._isInitialized) {
+      return;
+    }
+    switch (mode) {
+      case CALCULATOR_MODE.SIMPLE:
+        this.initSimple();
+        break;
+      case CALCULATOR_MODE.COMPLEX:
+        this.initComplex();
+        break;
+      case CALCULATOR_MODE.ASSIST:
+        this.initAssisted();
+        break;
+    }
+  }
+
   private init(
     mode: CALCULATOR_MODE,
     options?: {
@@ -106,5 +126,6 @@ export class CalculatorInitializerService {
     this.calculatorSettings.init(mode, options?.settings);
     this.calculatorState.init(mode, options?.input);
     this.calculatorStateSaveManager.init(mode);
+    this._isInitialized = true;
   }
 }

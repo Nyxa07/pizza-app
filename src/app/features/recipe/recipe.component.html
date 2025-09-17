@@ -43,7 +43,10 @@
   <ng-template>
     <div class="ion-padding">
       <h2>
-        {{ currentMethodItem?.helper?.title | translate }}
+        {{
+          currentMethodItem?.helper?.title
+            | translate: currentMethodItem?.variables ?? {}
+        }}
       </h2>
       @for (
         description of currentMethodItem?.helper?.descriptions;

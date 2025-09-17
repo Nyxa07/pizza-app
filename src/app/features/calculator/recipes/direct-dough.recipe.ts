@@ -103,11 +103,17 @@ export class DirectDoughRecipe implements IRecipeDef {
         icon: this.WandIcon,
         helperDescriptions: 2,
         baseTranslationKey: this.getStepsKey('mixIngredients'),
+        variables: {
+          hasHoney: this.quantity.honey > 0,
+        },
       },
       {
         icon: this.WheatIcon,
         helperDescriptions: 1,
-        baseTranslationKey: this.getStepsKey('addFlourSalt'),
+        baseTranslationKey: this.getStepsKey('addFlourSaltOil'),
+        variables: {
+          hasOliveOil: this.quantity.oliveOil > 0,
+        },
       },
       {
         icon: this.ArrowDownUpIcon,

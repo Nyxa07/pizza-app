@@ -20,6 +20,9 @@ import { RecipeDefConverterService } from 'src/app/features/recipe/services/reci
 import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 import { CalculatorStateShareComponent } from 'src/app/features/calculator/calculator-state-share/calculator-state-share.component';
 import { CalculatorService } from 'src/app/features/calculator/services/calculator.service';
+import { ActivatedRoute } from '@angular/router';
+import { CALCULATOR_MODE } from 'src/app/features/calculator/enums/calculator-mode.enum';
+import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
 
 @Component({
   selector: 'calculator-results-page',
@@ -66,7 +69,14 @@ export class CalculatorResultsPage implements OnInit {
   constructor(
     private calculatorService: CalculatorService,
     private recipeDefConverter: RecipeDefConverterService,
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    private calculatorInitializer: CalculatorInitializerService,
+  ) {
+    this.activatedRoute.params.subscribe((params) => {
+      const mode = params['mode'] as CALCULATOR_MODE;
+      this.calculatorInitializer.initWithMode(mode);
+    });
+  }
 
   ngOnInit() {
     idleCallback(() => {

@@ -76,6 +76,9 @@ export class PoolishRecipe implements IRecipeDef {
         icon: this.WandIcon,
         helperDescriptions: 2,
         baseTranslationKey: this.getStepsKey('mixIngredients'),
+        variables: {
+          hasHoney: this.quantity.honey > 0,
+        },
       },
       {
         icon: this.WheatIcon,

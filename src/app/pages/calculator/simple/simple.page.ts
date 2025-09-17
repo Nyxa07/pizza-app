@@ -18,6 +18,7 @@ import { LucideAngularModule } from 'lucide-angular';
 import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 import { CalculatorStateSaverComponent } from 'src/app/features/calculator/calculator-state-saver/calculator-state-saver.component';
 import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
+import { CALCULATOR_MODE } from 'src/app/features/calculator/enums/calculator-mode.enum';
 
 @Component({
   selector: 'calculator-simple-page',
@@ -44,6 +45,7 @@ import { CalculatorInitializerService } from 'src/app/features/calculator/servic
 })
 export class CalculatorSimplePage implements OnInit {
   protected isInitialized = signal(false);
+  protected CALCULATOR_MODE = CALCULATOR_MODE;
 
   constructor(private calculatorInitializer: CalculatorInitializerService) {}
 

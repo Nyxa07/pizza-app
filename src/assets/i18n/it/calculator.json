@@ -130,12 +130,12 @@
     },
     "steps": {
       "mixIngredients": {
-        "title": "Mescolare acqua, lievito e miele",
+        "title": "{hasHoney, select, true {Mescolare acqua, lievito e miele} other {Mescolare acqua e lievito}}",
         "helper": {
-          "title": "Mescolare acqua, lievito e miele",
+          "title": "{hasHoney, select, true {Mescolare acqua, lievito e miele} other {Mescolare acqua e lievito}}",
           "descriptions": [
             "Pesare tutti gli ingredienti.",
-            "In una ciotola grande, sciogliere il lievito nell'acqua e aggiungere il miele."
+            "{hasHoney, select, true {In una ciotola grande, sciogliere il lievito nell'acqua e aggiungere il miele.} other {In una ciotola grande, sciogliere il lievito nell'acqua.}}"
           ]
         }
       },
@@ -180,12 +180,12 @@
         }
       },
       "addWaterSalt": {
-        "title": "Nel poolish, aggiungere l'acqua e il sale",
+        "title": "{hasSalt, select, true {Nel poolish, aggiungere l'acqua e il sale} other {Nel poolish, aggiungere l'acqua}}",
         "helper": {
           "title": "Preparazione dell'impasto",
           "descriptions": [
             "Pesare le quantità da aggiungere nel poolish",
-            "Nella ciotola del poolish, aggiungere l'acqua e il sale. Mescolare con un cucchiaio di legno fino a quando l'acqua non sarà assorbita"
+            "{hasSalt, select, true {Nella ciotola del poolish, aggiungere l'acqua e il sale. Mescolare con un cucchiaio di legno fino a quando l'acqua non sarà assorbita} other {Nella ciotola del poolish, aggiungere l'acqua. Mescolare con un cucchiaio di legno fino a quando l'acqua non sarà assorbita}}"
           ]
         }
       },
@@ -281,12 +281,12 @@
           ]
         }
       },
-      "addFlourSalt": {
-        "title": "Aggiungere la farina e il sale",
+      "addFlourSaltOil": {
+        "title": "Aggiungere la farina, il sale {hasOliveOil, select, true { e l'olio d'oliva} other {}}",
         "helper": {
           "title": "Introduzione della farina",
           "descriptions": [
-            "Aggiungere il sale e la farina poco a poco e mescolare con un cucchiaio di legno fino ad ottenere un composto omogeneo"
+            "Aggiungere la farina, il sale {hasOliveOil, select, true { e l'olio d'oliva} other {}} poco a poco e mescolare con un cucchiaio di legno fino ad ottenere un composto omogeneo"
           ]
         }
       },

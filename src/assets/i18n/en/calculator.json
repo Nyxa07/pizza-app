@@ -130,12 +130,12 @@
     },
     "steps": {
       "mixIngredients": {
-        "title": "Mix water, yeast and honey",
+        "title": "{hasHoney, select, true {Mix water, yeast and honey} other {Mix water and yeast}}",
         "helper": {
-          "title": "Mix water, yeast and honey",
+          "title": "{hasHoney, select, true {Mix water, yeast and honey} other {Mix water and yeast}}",
           "descriptions": [
             "Weigh all ingredients.",
-            "In a large bowl, dissolve the yeast in water and add honey."
+            "{hasHoney, select, true {In a large bowl, dissolve the yeast in water and add honey.} other {In a large bowl, dissolve the yeast in water.}}"
           ]
         }
       },
@@ -180,12 +180,12 @@
         }
       },
       "addWaterSalt": {
-        "title": "In poolish, add water and salt",
+        "title": "{hasSalt, select, true {In poolish, add water and salt} other {In poolish, add water}}",
         "helper": {
           "title": "Dough preparation",
           "descriptions": [
             "Weigh the quantities to add to poolish",
-            "In the poolish bowl, add water and salt. Mix with wooden spoon until water is absorbed"
+            "{hasSalt, select, true {In the poolish bowl, add water and salt. Mix with wooden spoon until water is absorbed} other {In the poolish bowl, add water. Mix with wooden spoon until water is absorbed}}"
           ]
         }
       },
@@ -281,12 +281,12 @@
           ]
         }
       },
-      "addFlourSalt": {
-        "title": "Add flour and salt",
+      "addFlourSaltOil": {
+        "title": "Add flour, salt {hasOliveOil, select, true { and olive oil} other {}}",
         "helper": {
           "title": "Introduction of flour",
           "descriptions": [
-            "Add salt and flour little by little and mix with wooden spoon until you get a homogeneous mixture"
+            "Add flour, salt {hasOliveOil, select, true { and olive oil} other {}} little by little and mix with wooden spoon until you get a homogeneous mixture"
           ]
         }
       },
