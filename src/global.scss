@@ -354,6 +354,10 @@ ion-tab-button {
   --color: var(--ion-text-color-step-400);
   --color-selected: var(--ion-color-primary);
   transition: all 0.2s ease;
+  font-family: var(--ion-font-family-heading) !important;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 
   &.tab-selected {
     text-shadow: 0 0 10px var(--glow-primary-soft);
@@ -377,6 +381,11 @@ ion-textarea {
   &:focus-within {
     --border-color: var(--ion-color-primary);
   }
+}
+
+ion-select::part(icon) {
+  color: var(--ion-color-primary);
+  opacity: 1;
 }
 
 ion-range {
