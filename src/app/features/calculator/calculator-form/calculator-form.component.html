@@ -16,7 +16,7 @@
         [max]="25"
       >
         <ion-label slot="end">
-          <h2>{{ form.get("nbPizzas")?.value }}</h2>
+          <span [style.font-size.rem]="1">{{ form.get("nbPizzas")?.value }}</span>
         </ion-label>
       </ion-range>
     </ion-item>
