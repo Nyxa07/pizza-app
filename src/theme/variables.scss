@@ -8,13 +8,13 @@
   // SPACE THEME - Orange/Amber Retro Terminal
   // ============================================
 
-  // Primary: Amber/Orange (vintage terminal)
-  --ion-color-primary: #ff9500;
-  --ion-color-primary-rgb: 255, 149, 0;
+  // Primary: Original warm orange
+  --ion-color-primary: #ff9860;
+  --ion-color-primary-rgb: 255, 152, 96;
   --ion-color-primary-contrast: #000000;
   --ion-color-primary-contrast-rgb: 0, 0, 0;
-  --ion-color-primary-shade: #e08300;
-  --ion-color-primary-tint: #ffa01a;
+  --ion-color-primary-shade: #e08654;
+  --ion-color-primary-tint: #ffa270;
 
   // Secondary: Burnt Orange
   --ion-color-secondary: #ff6b35;
@@ -84,9 +84,9 @@
   // Custom Space Theme Variables
   // ============================================
 
-  // Glow effects
-  --glow-primary: rgba(255, 149, 0, 0.4);
-  --glow-primary-soft: rgba(255, 149, 0, 0.15);
+  // Glow effects (based on original orange #ff9860)
+  --glow-primary: rgba(255, 152, 96, 0.4);
+  --glow-primary-soft: rgba(255, 152, 96, 0.15);
   --glow-secondary: rgba(255, 107, 53, 0.3);
   --glow-success: rgba(0, 210, 106, 0.3);
   --glow-danger: rgba(255, 71, 87, 0.3);
@@ -95,7 +95,7 @@
   --space-bg-dark: #0a0a0f;
   --space-bg-card: #12121a;
   --space-bg-elevated: #1a1a24;
-  --space-border: rgba(255, 149, 0, 0.2);
+  --space-border: rgba(255, 152, 96, 0.2);
 
   // ============================================
   // Always-Dark Mode Base Colors

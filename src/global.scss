@@ -134,14 +134,24 @@ h4,
 h5,
 h6 {
   font-family: var(--ion-font-family-heading) !important;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.02em;
+}
+
+// Tighten toolbar titles
+ion-title {
+  font-size: 1.1rem;
+}
+
+// Card titles - slightly smaller
+ion-card-title {
+  font-size: 1.05rem;
 }
 
 ion-card-subtitle {
   font-family: var(--ion-font-family-heading) !important;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   opacity: 0.8;
 }
 
@@ -153,14 +163,15 @@ ion-card-subtitle {
 ion-button[color="primary"],
 ion-button:not([color]) {
   --box-shadow:
-    0 0 15px var(--glow-primary-soft), 0 0 30px rgba(255, 149, 0, 0.1);
+    0 0 15px var(--glow-primary-soft), 0 0 30px rgba(255, 152, 96, 0.1);
   transition:
     box-shadow 0.3s ease,
     transform 0.2s ease;
 
   &:hover,
   &:focus {
-    --box-shadow: 0 0 20px var(--glow-primary), 0 0 40px rgba(255, 149, 0, 0.2);
+    --box-shadow:
+      0 0 20px var(--glow-primary), 0 0 40px rgba(255, 152, 96, 0.2);
     transform: translateY(-1px);
   }
 
@@ -192,18 +203,28 @@ ion-button[color="danger"] {
 ion-card {
   --background: var(--space-bg-card);
   border: 1px solid var(--space-border);
+
+  // Card shadow with glowing effect underneath
+  // Layer 1: Soft ambient glow around card
+  // Layer 2: Orange glow underneath (offset down)
+  // Layer 3: Deep shadow for depth
   box-shadow:
-    0 0 20px rgba(255, 149, 0, 0.05),
-    0 4px 20px rgba(0, 0, 0, 0.4);
+    0 0 15px rgba(255, 152, 96, 0.08),
+    0 12px 20px -5px rgba(255, 152, 96, 0.25),
+    0 8px 25px rgba(0, 0, 0, 0.4);
   transition:
     box-shadow 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease,
+    transform 0.3s ease;
 
   &:hover {
-    border-color: rgba(255, 149, 0, 0.35);
+    border-color: rgba(255, 152, 96, 0.4);
+    transform: translateY(-2px);
+    // Enhanced glow on hover
     box-shadow:
-      0 0 25px rgba(255, 149, 0, 0.1),
-      0 8px 30px rgba(0, 0, 0, 0.5);
+      0 0 20px rgba(255, 152, 96, 0.12),
+      0 16px 25px -5px rgba(255, 152, 96, 0.35),
+      0 12px 35px rgba(0, 0, 0, 0.5);
   }
 
   ion-card-header {
@@ -223,14 +244,36 @@ ion-list {
   --ion-item-background: var(--space-bg-card);
   background: var(--space-bg-card);
   border: 1px solid var(--space-border);
+
+  // List shadow with glowing effect underneath
+  // Layer 1: Soft ambient glow around list
+  // Layer 2: Orange glow underneath (offset down)
+  // Layer 3: Deep shadow for depth
+  box-shadow:
+    0 0 15px rgba(255, 152, 96, 0.08),
+    0 12px 20px -5px rgba(255, 152, 96, 0.25),
+    0 8px 25px rgba(0, 0, 0, 0.4);
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover {
+    border-color: rgba(255, 152, 96, 0.4);
+    // Enhanced glow on hover
+    box-shadow:
+      0 0 20px rgba(255, 152, 96, 0.12),
+      0 16px 25px -5px rgba(255, 152, 96, 0.35),
+      0 12px 35px rgba(0, 0, 0, 0.5);
+  }
 }
 
 ion-list-header {
   --background: transparent;
   color: var(--ion-color-primary);
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
+  font-size: 0.7rem;
   font-size: 0.75rem;
 }
 
@@ -247,17 +290,24 @@ ion-toolbar {
   --background: var(--space-bg-elevated);
   --border-color: var(--space-border);
 
-  &[color="primary"] {
-    --background: linear-gradient(
-      135deg,
-      rgba(255, 149, 0, 0.15) 0%,
-      var(--space-bg-elevated) 100%
-    );
-    --color: var(--ion-text-color);
+  // Default toolbar title styling (space theme)
+  ion-title {
+    color: var(--ion-color-primary);
+    text-shadow: 0 0 10px var(--glow-primary-soft);
+  }
 
+  // When toolbar has color="primary", use contrast color for visibility
+  &[color="primary"] {
+    // Title must use contrast color (black) on primary background
     ion-title {
-      color: var(--ion-color-primary);
-      text-shadow: 0 0 10px var(--glow-primary-soft);
+      color: var(--ion-color-primary-contrast) !important;
+      text-shadow: none;
+    }
+
+    // Back button and other buttons should also use contrast
+    ion-back-button,
+    ion-buttons ion-button {
+      --color: var(--ion-color-primary-contrast);
     }
   }
 }
@@ -358,7 +408,7 @@ ion-modal {
   &::part(content) {
     border: 1px solid var(--space-border);
     box-shadow:
-      0 0 40px rgba(255, 149, 0, 0.1),
+      0 0 40px rgba(255, 152, 96, 0.1),
       0 20px 60px rgba(0, 0, 0, 0.6);
   }
 }
