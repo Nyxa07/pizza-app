@@ -1,12 +1,8 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
+ * Space Theme - Modern/Geek/Retro Terminal Aesthetic
+ * ----------------------------------------------------------------------------
  */
 
 /* Core CSS required for Ionic components to work properly */
@@ -26,30 +22,350 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 /**
- * Ionic Dark Mode
+ * Ionic Dark Mode - Always Dark for Space Theme
  * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
  */
+@import "@ionic/angular/css/palettes/dark.always.css";
 
-// @import "@ionic/angular/css/palettes/dark.always.css";
-@import "@ionic/angular/css/palettes/dark.class.css";
-// @import "@ionic/angular/css/palettes/dark.system.css";
+// ============================================
+// STARFIELD BACKGROUND
+// ============================================
 
-// Ion list
-.md {
-  ion-list-header {
-    font-weight: 600;
-    // font-size: 1rem;
+// Starfield container - applied to the app background
+ion-app {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
   }
-  ion-list {
-    border-radius: 0.6rem !important;
-    margin: 0.4rem;
+
+  // Small faint stars
+  &::before {
+    background: transparent;
+    box-shadow:
+      // Layer 1: Tiny faint stars
+      347px 892px rgba(255, 255, 255, 0.3),
+      1203px 456px rgba(255, 255, 255, 0.25),
+      89px 1567px rgba(255, 255, 255, 0.35),
+      1456px 234px rgba(255, 255, 255, 0.2),
+      678px 1890px rgba(255, 255, 255, 0.3),
+      1789px 567px rgba(255, 255, 255, 0.25),
+      234px 1234px rgba(255, 255, 255, 0.35),
+      1567px 890px rgba(255, 255, 255, 0.2),
+      456px 345px rgba(255, 255, 255, 0.3),
+      1890px 1456px rgba(255, 255, 255, 0.25),
+      123px 678px rgba(255, 255, 255, 0.35),
+      1345px 1789px rgba(255, 255, 255, 0.2),
+      789px 123px rgba(255, 255, 255, 0.3),
+      1678px 1345px rgba(255, 255, 255, 0.25),
+      567px 1678px rgba(255, 255, 255, 0.35),
+      1234px 567px rgba(255, 255, 255, 0.2),
+      890px 1234px rgba(255, 255, 255, 0.3),
+      1123px 890px rgba(255, 255, 255, 0.25),
+      345px 1123px rgba(255, 255, 255, 0.35),
+      1890px 345px rgba(255, 255, 255, 0.2),
+      678px 1890px rgba(255, 255, 255, 0.3),
+      1456px 678px rgba(255, 255, 255, 0.25),
+      234px 1456px rgba(255, 255, 255, 0.35),
+      1567px 234px rgba(255, 255, 255, 0.2),
+      456px 1567px rgba(255, 255, 255, 0.3),
+      1789px 456px rgba(255, 255, 255, 0.25),
+      123px 1789px rgba(255, 255, 255, 0.35),
+      1345px 123px rgba(255, 255, 255, 0.2),
+      789px 1345px rgba(255, 255, 255, 0.3),
+      1678px 789px rgba(255, 255, 255, 0.25),
+      567px 1012px rgba(255, 255, 255, 0.35),
+      1012px 1678px rgba(255, 255, 255, 0.2),
+      890px 567px rgba(255, 255, 255, 0.3),
+      1234px 1012px rgba(255, 255, 255, 0.25),
+      1012px 1234px rgba(255, 255, 255, 0.35),
+      345px 890px rgba(255, 255, 255, 0.2);
+    animation: starDrift 120s linear infinite;
   }
-  ion-card {
-    border-radius: 0.6rem !important;
+
+  // Larger brighter stars (amber tinted)
+  &::after {
+    background: transparent;
+    box-shadow:
+      567px 234px rgba(255, 180, 100, 0.5),
+      1234px 890px rgba(255, 200, 150, 0.4),
+      345px 1567px rgba(255, 180, 100, 0.5),
+      1678px 456px rgba(255, 200, 150, 0.4),
+      890px 1234px rgba(255, 180, 100, 0.5),
+      123px 789px rgba(255, 200, 150, 0.4),
+      1456px 1678px rgba(255, 180, 100, 0.5),
+      678px 345px rgba(255, 200, 150, 0.4),
+      1789px 1123px rgba(255, 180, 100, 0.5),
+      234px 567px rgba(255, 200, 150, 0.4),
+      1345px 1890px rgba(255, 180, 100, 0.5),
+      789px 678px rgba(255, 200, 150, 0.4);
+    animation: starDrift 180s linear infinite reverse;
   }
 }
+
+@keyframes starDrift {
+  from {
+    transform: translateY(0) translateX(0);
+  }
+  to {
+    transform: translateY(-50px) translateX(-30px);
+  }
+}
+
+// ============================================
+// TYPOGRAPHY - Space Mono for Headings
+// ============================================
+
+ion-title,
+ion-card-title,
+ion-list-header,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ion-font-family-heading) !important;
+  letter-spacing: 0.02em;
+}
+
+ion-card-subtitle {
+  font-family: var(--ion-font-family-heading) !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+// ============================================
+// GLOW EFFECTS
+// ============================================
+
+// Primary button glow
+ion-button[color="primary"],
+ion-button:not([color]) {
+  --box-shadow:
+    0 0 15px var(--glow-primary-soft), 0 0 30px rgba(255, 149, 0, 0.1);
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
+
+  &:hover,
+  &:focus {
+    --box-shadow: 0 0 20px var(--glow-primary), 0 0 40px rgba(255, 149, 0, 0.2);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Secondary button glow
+ion-button[color="secondary"] {
+  --box-shadow:
+    0 0 15px var(--glow-secondary), 0 0 30px rgba(255, 107, 53, 0.1);
+}
+
+// Success button glow
+ion-button[color="success"] {
+  --box-shadow: 0 0 15px var(--glow-success), 0 0 30px rgba(0, 210, 106, 0.1);
+}
+
+// Danger button glow
+ion-button[color="danger"] {
+  --box-shadow: 0 0 15px var(--glow-danger), 0 0 30px rgba(255, 71, 87, 0.1);
+}
+
+// ============================================
+// CARD STYLING - Space Cards with Glow Border
+// ============================================
+
+ion-card {
+  --background: var(--space-bg-card);
+  border: 1px solid var(--space-border);
+  box-shadow:
+    0 0 20px rgba(255, 149, 0, 0.05),
+    0 4px 20px rgba(0, 0, 0, 0.4);
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover {
+    border-color: rgba(255, 149, 0, 0.35);
+    box-shadow:
+      0 0 25px rgba(255, 149, 0, 0.1),
+      0 8px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  ion-card-header {
+    padding-bottom: 8px;
+  }
+
+  ion-card-title {
+    color: var(--ion-color-primary);
+  }
+}
+
+// ============================================
+// LIST STYLING
+// ============================================
+
+ion-list {
+  --ion-item-background: var(--space-bg-card);
+  background: var(--space-bg-card);
+  border: 1px solid var(--space-border);
+}
+
+ion-list-header {
+  --background: transparent;
+  color: var(--ion-color-primary);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: var(--space-border);
+}
+
+// ============================================
+// TOOLBAR / HEADER
+// ============================================
+
+ion-toolbar {
+  --background: var(--space-bg-elevated);
+  --border-color: var(--space-border);
+
+  &[color="primary"] {
+    --background: linear-gradient(
+      135deg,
+      rgba(255, 149, 0, 0.15) 0%,
+      var(--space-bg-elevated) 100%
+    );
+    --color: var(--ion-text-color);
+
+    ion-title {
+      color: var(--ion-color-primary);
+      text-shadow: 0 0 10px var(--glow-primary-soft);
+    }
+  }
+}
+
+ion-header {
+  &::after {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--ion-color-primary) 50%,
+      transparent 100%
+    );
+    height: 1px !important;
+    opacity: 0.3;
+  }
+}
+
+// ============================================
+// TAB BAR
+// ============================================
+
+ion-tab-bar {
+  --background: var(--space-bg-elevated);
+  border-top: 1px solid var(--space-border);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--ion-color-primary) 50%,
+      transparent 100%
+    );
+    opacity: 0.4;
+  }
+}
+
+ion-tab-button {
+  --color: var(--ion-text-color-step-400);
+  --color-selected: var(--ion-color-primary);
+  transition: all 0.2s ease;
+
+  &.tab-selected {
+    text-shadow: 0 0 10px var(--glow-primary-soft);
+
+    i-lucide {
+      filter: drop-shadow(0 0 6px var(--glow-primary));
+    }
+  }
+}
+
+// ============================================
+// FORM CONTROLS
+// ============================================
+
+ion-select,
+ion-input,
+ion-textarea {
+  --background: var(--space-bg-card);
+  --border-color: var(--space-border);
+
+  &:focus-within {
+    --border-color: var(--ion-color-primary);
+  }
+}
+
+ion-range {
+  --bar-background: var(--space-bg-elevated);
+  --bar-background-active: var(--ion-color-primary);
+  --knob-background: var(--ion-color-primary);
+  --knob-box-shadow: 0 0 10px var(--glow-primary);
+}
+
+ion-toggle {
+  --track-background: var(--space-bg-elevated);
+  --track-background-checked: var(--ion-color-primary);
+  --handle-background: var(--ion-text-color);
+  --handle-background-checked: #000;
+
+  &.toggle-checked {
+    --handle-box-shadow: 0 0 8px var(--glow-primary);
+  }
+}
+
+// ============================================
+// MODAL
+// ============================================
+
+ion-modal {
+  --background: var(--space-bg-card);
+  --border-color: var(--space-border);
+
+  &::part(content) {
+    border: 1px solid var(--space-border);
+    box-shadow:
+      0 0 40px rgba(255, 149, 0, 0.1),
+      0 20px 60px rgba(0, 0, 0, 0.6);
+  }
+}
+
+// ============================================
+// LOADING SKELETON
+// ============================================
 
 .loading-skeleton {
   ion-item {
@@ -62,5 +378,53 @@
   ion-skeleton-text {
     height: 1.6rem;
     border-radius: 0.25rem;
+    --background: linear-gradient(
+      90deg,
+      var(--space-bg-elevated) 0%,
+      var(--space-bg-card) 50%,
+      var(--space-bg-elevated) 100%
+    );
   }
+}
+
+// ============================================
+// PLATFORM SPECIFIC OVERRIDES (Material Design)
+// ============================================
+
+.md {
+  ion-list-header {
+    font-weight: 600;
+  }
+
+  ion-list {
+    border-radius: 0.6rem !important;
+    margin: 0.4rem;
+  }
+
+  ion-card {
+    border-radius: 0.6rem !important;
+  }
+}
+
+// ============================================
+// UTILITY CLASSES
+// ============================================
+
+// Glow text effect
+.glow-text {
+  text-shadow: 0 0 10px var(--glow-primary-soft);
+}
+
+// Glow border effect
+.glow-border {
+  border: 1px solid var(--space-border);
+  box-shadow: 0 0 15px var(--glow-primary-soft);
+}
+
+// Space card variant
+.space-card {
+  background: var(--space-bg-card);
+  border: 1px solid var(--space-border);
+  border-radius: 0.6rem;
+  padding: 1rem;
 }

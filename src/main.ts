@@ -20,7 +20,7 @@ import {
 import { provideHttpClient } from '@angular/common/http';
 import { inject, provideAppInitializer } from '@angular/core';
 import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
-import { ThemeService } from './app/features/settings/services/theme.service';
+// ThemeService no longer needed - using always-dark space theme
 import { LocaleManagerService } from './app/features/settings/services/locale-manager.service';
 import { provideMultiTranslateLoader } from './app/features/settings/services/translation.loader';
 import { KeepAwakeService } from './app/features/settings/services/keep-awake.service';
@@ -41,8 +41,7 @@ bootstrapApplication(AppComponent, {
       },
     }),
     provideAppInitializer(() => {
-      const themeService = inject(ThemeService);
-      themeService.init();
+      // ThemeService.init() removed - using always-dark space theme
 
       const keepAwakeService = inject(KeepAwakeService);
       keepAwakeService.init();

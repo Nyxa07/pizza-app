@@ -341,3 +341,37 @@
     format("truetype");
   font-display: swap;
 }
+
+// Space Mono - Retro/Geek monospace font for headings
+@font-face {
+  font-family: "SpaceMono";
+  font-weight: 400;
+  font-style: normal;
+  src: url("/assets/fonts/SpaceMono/SpaceMono-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SpaceMono";
+  font-weight: 700;
+  font-style: normal;
+  src: url("/assets/fonts/SpaceMono/SpaceMono-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SpaceMono";
+  font-weight: 400;
+  font-style: italic;
+  src: url("/assets/fonts/SpaceMono/SpaceMono-Italic.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SpaceMono";
+  font-weight: 700;
+  font-style: italic;
+  src: url("/assets/fonts/SpaceMono/SpaceMono-BoldItalic.ttf")
+    format("truetype");
+  font-display: swap;
+}

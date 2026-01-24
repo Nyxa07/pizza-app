@@ -10,7 +10,7 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Locales } from '../enums/locales.enum';
-import { ThemeService } from '../services/theme.service';
+
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
 import { KeepAwakeService } from 'src/app/features/settings/services/keep-awake.service';
@@ -40,13 +40,11 @@ export class SettingsFormComponent implements OnInit {
 
   form = this.fb.group({
     locale: [this.localeManager.getLocale(), Validators.required],
-    paletteToggle: [this.themeService.isDarkMode()],
     keepAwake: [this.keepAwakeService.isKeptAwake()],
   });
 
   constructor(
     private localeManager: LocaleManagerService,
-    private themeService: ThemeService,
     private fb: FormBuilder,
     private keepAwakeService: KeepAwakeService,
   ) {
@@ -57,7 +55,6 @@ export class SettingsFormComponent implements OnInit {
           return;
         }
         this.localeManager.switchLocale(value.locale ?? '');
-        this.themeService.setDarkMode(value.paletteToggle ?? false);
         this.keepAwakeService.setKeepAwake(value.keepAwake ?? false);
       });
   }
