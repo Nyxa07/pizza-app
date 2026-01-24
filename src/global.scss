@@ -371,7 +371,7 @@ ion-tab-button {
 ion-select,
 ion-input,
 ion-textarea {
-  --background: var(--space-bg-card);
+  --background: transparent;
   --border-color: var(--space-border);
 
   &:focus-within {
