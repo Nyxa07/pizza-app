@@ -1,0 +1,563 @@
+// ============================================
+// MINECRAFT THEME - "The World" 🌍
+// ============================================
+// A procedural, asset-free reimplementation of the Minecraft aesthetic.
+// Focuses on "World" atmosphere, voxel UI, and pixel-perfect rendering.
+
+// ----------------------------------------------------------------------------
+// 1. MIXINS & TEXTURES (Procedural Generation)
+// ----------------------------------------------------------------------------
+
+// Noise texture for grit (Dirt, Stone)
+@mixin mc-noise($opacity: 0.1) {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='" + $opacity + "'/%3E%3C/svg%3E");
+}
+
+// Dirt Block Texture
+@mixin mc-texture-dirt {
+  background-color: var(--mc-dirt);
+  @include mc-noise(0.15);
+  // Subtle darker patches
+  background-image: 
+    linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0.1)),
+    linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0.1));
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+// Stone Block Texture
+@mixin mc-texture-stone {
+  background-color: var(--mc-stone);
+  @include mc-noise(0.1);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+}
+
+// Wood Plank Texture
+@mixin mc-texture-wood {
+  background-color: var(--mc-wood);
+  background-image: 
+    repeating-linear-gradient(90deg, 
+      transparent 0, 
+      transparent 15px, 
+      rgba(0,0,0,0.1) 15px, 
+      rgba(0,0,0,0.1) 16px
+    );
+  // Wood grain effect
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    @include mc-noise(0.05);
+    pointer-events: none;
+  }
+}
+
+// Grass Block Top (for Cards)
+@mixin mc-grass-top {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 12px; // The grass layer thickness
+    background-color: var(--mc-grass-side);
+    background-image: 
+      linear-gradient(180deg, var(--mc-grass-top) 0%, var(--mc-grass-top) 4px, transparent 4px),
+      repeating-linear-gradient(90deg, transparent 0, transparent 4px, var(--mc-grass-side-dark) 4px, var(--mc-grass-side-dark) 5px);
+    z-index: 1;
+    image-rendering: pixelated;
+  }
+}
+
+// Minecraft Button Bevel
+@mixin mc-bevel($bg-color, $border-light, $border-dark) {
+  background-color: $bg-color;
+  border-top: 2px solid $border-light;
+  border-left: 2px solid $border-light;
+  border-bottom: 2px solid $border-dark;
+  border-right: 2px solid $border-dark;
+  box-shadow: inset 2px 2px 0 rgba(255,255,255,0.1), inset -2px -2px 0 rgba(0,0,0,0.1);
+  
+  &:active {
+    border-top: 2px solid $border-dark;
+    border-left: 2px solid $border-dark;
+    border-bottom: 2px solid $border-light;
+    border-right: 2px solid $border-light;
+    box-shadow: inset 2px 2px 0 rgba(0,0,0,0.2);
+  }
+}
+
+// CSS Pixel Art Helper
+@mixin pixel-art($size, $color, $shadows) {
+  width: $size;
+  height: $size;
+  background: transparent;
+  box-shadow: $shadows;
+}
+
+body.minecraft-theme {
+  // --------------------------------------------------------------------------
+  // 2. PALETTE & VARIABLES
+  // --------------------------------------------------------------------------
+  
+  // Colors
+  --mc-sky-top: #87CEEB;
+  --mc-sky-bottom: #C0D8FF;
+  
+  --mc-dirt: #866043;
+  --mc-grass-top: #79C05A;
+  --mc-grass-side: #68A64C;
+  --mc-grass-side-dark: #578B3F;
+  
+  --mc-stone: #7D7D7D;
+  --mc-stone-dark: #585858;
+  --mc-stone-light: #9E9E9E;
+  
+  --mc-wood: #A07548;
+  --mc-wood-dark: #765634;
+  
+  --mc-diamond: #55FFFF;
+  --mc-gold: #FFD700;
+  
+  --mc-ui-bg: #C6C6C6; // Classic GUI grey
+  --mc-ui-border-light: #FFFFFF;
+  --mc-ui-border-dark: #555555;
+  --mc-ui-border-black: #000000;
+
+  // Ionic Overrides
+  --ion-font-family: 'VT323', 'Courier New', monospace;
+  --ion-background-color: transparent; // Let the world show through
+  --ion-text-color: #FFFFFF;
+  
+  --ion-color-primary: var(--mc-grass-top);
+  --ion-color-primary-contrast: #FFFFFF;
+  --ion-color-secondary: var(--mc-stone);
+  --ion-color-tertiary: var(--mc-wood);
+  
+  // --------------------------------------------------------------------------
+  // 3. WORLD BACKGROUND (Sky & Clouds)
+  // --------------------------------------------------------------------------
+  
+  background: linear-gradient(180deg, var(--mc-sky-top) 0%, var(--mc-sky-bottom) 100%) fixed;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+
+  // Clouds Layer
+  &::before {
+    content: '';
+    position: fixed;
+    top: 10%;
+    left: -200px;
+    width: 200px;
+    height: 60px;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 
+      300px 40px 0 rgba(255,255,255,0.8),
+      600px -20px 0 rgba(255,255,255,0.8),
+      900px 80px 0 rgba(255,255,255,0.8),
+      1200px 10px 0 rgba(255,255,255,0.8);
+    filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.1));
+    animation: mcClouds 60s linear infinite;
+    z-index: -1;
+    image-rendering: pixelated;
+  }
+
+  // Vignette
+  &::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.3) 100%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  // --------------------------------------------------------------------------
+  // 4. TYPOGRAPHY
+  // --------------------------------------------------------------------------
+  
+  * {
+    image-rendering: pixelated; // Crucial for the look
+    letter-spacing: 0.02em; // Subtle spacing
+  }
+  
+  h1, h2, h3, h4, h5, h6, ion-title, ion-card-title {
+    text-shadow: 2px 2px 0 #000000;
+    text-transform: uppercase;
+  }
+
+  // --------------------------------------------------------------------------
+  // 5. COMPONENT STYLING
+  // --------------------------------------------------------------------------
+
+  // -- Toolbar (Bedrock/Stone) --
+  ion-toolbar {
+    --background: var(--mc-stone-dark);
+    --border-color: var(--mc-stone-light);
+    border-bottom: 4px solid rgba(0,0,0,0.3);
+    
+    ion-title {
+      color: #FFFFFF;
+    }
+    
+    // Header Buttons - Floating Item Style
+    ion-buttons {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      // Force alignment override
+      position: relative;
+      top: 0;
+    }
+
+    ion-button, ion-back-button {
+      --color: #FFFFFF;
+      --background: transparent !important;
+      --background-hover: transparent !important;
+      --background-activated: transparent !important;
+      --background-focused: transparent !important;
+      --box-shadow: none !important;
+      --border-width: 0 !important;
+      --padding-top: 0;
+      --padding-bottom: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      margin-inline-end: 8px;
+      height: 100%; // Take full height of toolbar to center content
+      min-height: 48px; // Standard touch target
+      display: flex;
+      align-items: center;
+      
+      &::part(native) {
+        background: transparent !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        padding: 0;
+        width: 36px;
+        height: 36px;
+        overflow: visible;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto; // Center within the button container
+      }
+      
+      // Default: Hide original icon and use generic or specific replacement
+      ion-icon, i-lucide {
+        // Fallback for unknown icons: Heavy Drop Shadow
+        filter: drop-shadow(2px 2px 0 #000) drop-shadow(-1px -1px 0 #000); 
+        transform: scale(1.2);
+        color: var(--mc-gold);
+      }
+      
+      // Hover Effect (Bobbing Item)
+      &:hover {
+        animation: mcBob 1s ease-in-out infinite;
+        ion-icon, i-lucide {
+          filter: drop-shadow(2px 2px 0 #000) drop-shadow(-1px -1px 0 #000) brightness(1.2);
+        }
+      }
+    }
+    
+    // Back Button - Keep default icon visible with gold styling
+    ion-back-button {
+      --color: var(--mc-gold) !important;
+      --icon-font-size: 24px;
+      opacity: 1 !important;
+      
+      &::part(native) {
+        background: transparent !important;
+        color: var(--mc-gold) !important;
+        opacity: 1 !important;
+      }
+      
+      &::part(icon) {
+        color: var(--mc-gold) !important;
+        filter: drop-shadow(2px 2px 0 #000);
+      }
+      
+      &::part(text) {
+        display: none; // Hide text, just show arrow
+      }
+    }
+  }
+
+  // -- Cards (Grass Blocks) --
+  ion-card {
+    --background: var(--mc-dirt);
+    --color: #FFFFFF;
+    overflow: visible; // Allow borders to pop
+    margin: 16px;
+    border-radius: 0; // No rounded corners in Minecraft!
+    
+    // The Block Look
+    @include mc-texture-dirt;
+    @include mc-grass-top;
+    
+    // 3D Block Shadow
+    box-shadow: 
+      4px 4px 0 rgba(0,0,0,0.4),
+      inset 2px 2px 0 rgba(0,0,0,0.2); // Inner shadow for depth
+      
+    border: 2px solid rgba(0,0,0,0.5); // Outline
+    
+    ion-card-header {
+      padding-top: 20px; // Make room for grass
+      position: relative;
+      z-index: 2;
+    }
+    
+    ion-card-title {
+      color: #FFFFFF;
+      text-shadow: 2px 2px 0 #3e2723;
+    }
+    
+    ion-card-subtitle {
+      color: #DDD;
+      text-shadow: 1px 1px 0 #000;
+    }
+  }
+
+  // -- Buttons (Stone/Wood Style) --
+  ion-button {
+    --border-radius: 0;
+    --box-shadow: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 4px;
+    
+    // Default (Primary) -> Stone Button
+    &[color="primary"], &:not([color]) {
+      --background: var(--mc-stone);
+      --color: #FFFFFF;
+      
+      &::part(native) {
+        @include mc-bevel(var(--mc-stone), var(--mc-stone-light), var(--mc-stone-dark));
+        @include mc-texture-stone;
+        text-shadow: 2px 2px 0 #000;
+      }
+    }
+    
+    // Secondary -> Wood Button
+    &[color="secondary"] {
+      --background: var(--mc-wood);
+      
+      &::part(native) {
+        @include mc-bevel(var(--mc-wood), #C4986C, var(--mc-wood-dark));
+        @include mc-texture-wood;
+        text-shadow: 2px 2px 0 #3e2723;
+      }
+    }
+    
+    // Danger -> TNT / Redstone
+    &[color="danger"] {
+      --background: #D32F2F;
+      &::part(native) {
+        @include mc-bevel(#D32F2F, #EF5350, #B71C1C);
+        text-shadow: 2px 2px 0 #000;
+      }
+    }
+  }
+
+  // -- Tab Bar (Inventory Hotbar) --
+  ion-tab-bar {
+    --background: rgba(0,0,0,0.6);
+    border-top: 2px solid var(--mc-ui-border-light);
+    padding: 4px 0;
+    backdrop-filter: none;
+    
+    ion-tab-button {
+      background: var(--mc-ui-bg);
+      margin: 0 2px;
+      border: 2px solid var(--mc-ui-border-black);
+      border-top-color: var(--mc-ui-border-dark); // Inset look
+      border-left-color: var(--mc-ui-border-dark);
+      border-bottom-color: var(--mc-ui-border-light);
+      border-right-color: var(--mc-ui-border-light);
+      
+      --color: #555;
+      --color-selected: #FFF;
+      
+      // Selected Item Highlight
+      &.tab-selected {
+        background: rgba(255,255,255,0.2); // Highlight overlay
+        border-color: #FFF; // White selection border
+        transform: scale(1.05);
+        z-index: 10;
+        
+        ion-icon {
+          filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.5));
+          color: #FFF;
+        }
+      }
+    }
+  }
+
+  // -- Inputs & Lists --
+  ion-list {
+    background: rgba(0, 0, 0, 0.5); // Darker background for better readability
+    border: 2px solid var(--mc-stone-dark); // Stone border
+    padding: 4px;
+    margin: 8px 0;
+  }
+
+  ion-item {
+    --background: rgba(0,0,0,0.3); // Darkened glass pane look
+    --border-color: rgba(255,255,255,0.1);
+    --color: #FFF;
+    margin-bottom: 2px;
+    
+    ion-label {
+      text-shadow: 1px 1px 0 #000;
+    }
+  }
+  
+  ion-input, ion-textarea, ion-select {
+    --background: transparent;
+    border: none;
+    color: #FFF;
+    padding-left: 8px;
+    font-family: inherit;
+  }
+
+  // -- FABs (Floating Action Buttons) --
+  ion-fab-button {
+    --border-radius: 4px; // Square-ish
+    --box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+    
+    &::part(native) {
+      @include mc-bevel(var(--mc-diamond), #AFFFFF, #00AAAA);
+      color: #000; // Dark text on diamond
+    }
+    
+    animation: mcBob 3s ease-in-out infinite;
+  }
+  
+  // -- Modals (Full Screen) --
+  ion-modal {
+    --background: var(--mc-dirt);
+    --backdrop-opacity: 0.8;
+    --width: 100%;
+    --height: 100%;
+    --border-radius: 0;
+    
+    &::part(content) {
+      border: none;
+      border-radius: 0;
+      background: var(--mc-dirt);
+      color: #FFF;
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+    }
+    
+    // Modal Toolbar - Fix text truncation
+    ion-toolbar {
+      ion-title {
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+        text-align: center;
+      }
+      
+      // Modal header buttons should be smaller and not compete with title
+      ion-buttons {
+        ion-button {
+          font-size: 0.85rem;
+          min-width: auto;
+          --padding-start: 8px;
+          --padding-end: 8px;
+          
+          &::part(native) {
+            width: auto;
+            height: auto;
+            padding: 8px 12px;
+          }
+        }
+      }
+    }
+  }
+  
+  // -- Alerts, Popovers, Action Sheets (Not Full Screen) --
+  ion-alert, ion-popover, ion-action-sheet {
+    --background: var(--mc-stone-dark);
+    --backdrop-opacity: 0.8;
+    
+    &::part(content) {
+      border: 4px solid var(--mc-ui-bg);
+      border-radius: 0;
+      background: var(--mc-dirt);
+      color: #FFF;
+    }
+  }
+
+  // Specific Alert Styling (for Select interface)
+  .alert-wrapper {
+    background: var(--mc-dirt) !important; // Force background
+    border-radius: 0 !important;
+    box-shadow: 0 0 0 4px var(--mc-stone) !important; // Outer border
+    max-height: 90vh !important; // Prevent off-screen
+    
+    .alert-head {
+      background: rgba(0,0,0,0.2);
+      h2 { 
+        color: #FFF; 
+        text-shadow: 1px 1px 0 #000;
+        white-space: normal; // Allow wrapping
+      }
+    }
+    
+    .alert-radio-label, .alert-checkbox-label {
+      color: #FFF !important;
+    }
+    
+    [aria-checked="true"] .alert-radio-label {
+      color: var(--mc-gold) !important;
+      text-shadow: 1px 1px 0 #000;
+    }
+    
+    button.alert-button {
+      color: #FFF !important;
+      text-shadow: 1px 1px 0 #000;
+    }
+  }
+
+  // Popover Styling
+  ion-popover {
+    --background: var(--mc-stone-dark);
+    
+    &::part(content) {
+      border: 2px solid var(--mc-stone-light);
+      background: var(--mc-dirt);
+    }
+    
+    ion-item {
+      --background: transparent;
+      --color: #FFF;
+      
+      &:hover {
+        --background: rgba(255,255,255,0.1);
+      }
+    }
+  }
+}
+
+// ----------------------------------------------------------------------------
+// 6. ANIMATIONS
+// ----------------------------------------------------------------------------
+
+@keyframes mcClouds {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100vw); }
+}
+
+@keyframes mcBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}

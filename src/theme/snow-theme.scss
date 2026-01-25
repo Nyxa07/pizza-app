@@ -1,0 +1,626 @@
+// ============================================
+// SNOW THEME - Modern Pixel Art Aesthetic
+// ============================================
+// Inspired by Celeste, Hyper Light Drifter - monochrome with depth
+// Animated snow fall, soft rounded borders, atmospheric feel
+
+body.snow-theme {
+  // Typography - Clean, modern Inter for atmospheric feel
+  --ion-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ion-font-family-heading: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  // Core Monochrome Palette with subtle cool tint
+  --snow-void: #0a0a0c;
+  --snow-deep: #12121a;
+  --snow-surface: #1a1a24;
+  --snow-elevated: #22222e;
+  --snow-border: #2a2a38;
+  
+  --snow-text-primary: #e8e8ec;
+  --snow-text-secondary: #a0a0b0;
+  --snow-text-muted: #606070;
+  
+  // Accent - subtle blue-gray tint for depth
+  --snow-accent: #6080a0;
+  --snow-accent-glow: rgba(96, 128, 160, 0.4);
+  --snow-accent-soft: rgba(96, 128, 160, 0.15);
+  
+  // Data/highlight snow particles
+  --snow-data-bright: #ffffff;
+  --snow-data-dim: rgba(255, 255, 255, 0.3);
+
+  // Ionic overrides
+  --ion-color-primary: var(--snow-accent);
+  --ion-color-primary-rgb: 96, 128, 160;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-shade: #5070a0;
+  --ion-color-primary-tint: #7090b0;
+
+  --ion-background-color: transparent;
+  --ion-background-color-rgb: 10, 10, 12;
+  --ion-toolbar-background: var(--snow-deep);
+  --ion-item-background: transparent;
+  --ion-card-background: var(--snow-surface);
+  --ion-text-color: var(--snow-text-primary);
+
+  --space-border: var(--snow-border);
+  --space-bg-card: var(--snow-surface);
+  --space-bg-elevated: var(--snow-elevated);
+  --glow-primary: var(--snow-accent-glow);
+  --glow-primary-soft: var(--snow-accent-soft);
+
+  // ============================================
+  // SNOW FALL BACKGROUND
+  // ============================================
+  
+  // Hide default app stars
+  ion-app::before,
+  ion-app::after {
+    display: none !important;
+    box-shadow: none !important;
+  }
+
+  // Deep void background
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      var(--snow-void) 0%,
+      var(--snow-deep) 50%,
+      var(--snow-void) 100%
+    );
+    z-index: -3;
+    pointer-events: none;
+  }
+
+  // Snow fall layer 1 - slow, sparse, dim
+  &::after {
+    content: "";
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 300%;
+    background-image:
+      // Column 1
+      radial-gradient(2px 2px at 5% 10%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 5% 40%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 5% 70%, var(--snow-data-dim) 100%, transparent),
+      // Column 2
+      radial-gradient(2px 2px at 12% 5%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 12% 35%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 12% 65%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 12% 95%, var(--snow-data-dim) 100%, transparent),
+      // Column 3
+      radial-gradient(2px 2px at 20% 15%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 20% 45%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 20% 75%, var(--snow-data-dim) 100%, transparent),
+      // Column 4
+      radial-gradient(2px 2px at 28% 8%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 28% 38%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 28% 68%, var(--snow-data-dim) 100%, transparent),
+      // Column 5
+      radial-gradient(2px 2px at 35% 20%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 35% 50%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 35% 80%, var(--snow-data-dim) 100%, transparent),
+      // Column 6
+      radial-gradient(2px 2px at 42% 12%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 42% 42%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 42% 72%, var(--snow-data-dim) 100%, transparent),
+      // Column 7
+      radial-gradient(2px 2px at 50% 25%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 50% 55%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 50% 85%, var(--snow-data-dim) 100%, transparent),
+      // Column 8
+      radial-gradient(2px 2px at 58% 18%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 58% 48%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 58% 78%, var(--snow-data-dim) 100%, transparent),
+      // Column 9
+      radial-gradient(2px 2px at 65% 10%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 65% 40%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 65% 70%, var(--snow-data-dim) 100%, transparent),
+      // Column 10
+      radial-gradient(2px 2px at 72% 22%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 72% 52%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 72% 82%, var(--snow-data-dim) 100%, transparent),
+      // Column 11
+      radial-gradient(2px 2px at 80% 15%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 80% 45%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 80% 75%, var(--snow-data-dim) 100%, transparent),
+      // Column 12
+      radial-gradient(2px 2px at 88% 8%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 88% 38%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 88% 68%, var(--snow-data-dim) 100%, transparent),
+      // Column 13
+      radial-gradient(2px 2px at 95% 28%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 95% 58%, var(--snow-data-dim) 100%, transparent),
+      radial-gradient(2px 2px at 95% 88%, var(--snow-data-dim) 100%, transparent);
+    background-size: 100% 33.33%;
+    z-index: -2;
+    pointer-events: none;
+    animation: snowFallSlow 25s linear infinite;
+  }
+
+  // Faster snow fall layer - ion-router-outlet::after
+  ion-router-outlet::after {
+    content: "";
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 300%;
+    background-image:
+      // Bright data particles - sparse
+      radial-gradient(3px 3px at 8% 20%, var(--snow-data-bright) 100%, transparent),
+      radial-gradient(3px 3px at 25% 50%, var(--snow-data-bright) 100%, transparent),
+      radial-gradient(3px 3px at 45% 15%, var(--snow-data-bright) 100%, transparent),
+      radial-gradient(3px 3px at 62% 75%, var(--snow-data-bright) 100%, transparent),
+      radial-gradient(3px 3px at 78% 35%, var(--snow-data-bright) 100%, transparent),
+      radial-gradient(3px 3px at 92% 60%, var(--snow-data-bright) 100%, transparent),
+      // Medium dim particles
+      radial-gradient(2px 2px at 15% 30%, rgba(255, 255, 255, 0.5) 100%, transparent),
+      radial-gradient(2px 2px at 33% 70%, rgba(255, 255, 255, 0.5) 100%, transparent),
+      radial-gradient(2px 2px at 55% 25%, rgba(255, 255, 255, 0.5) 100%, transparent),
+      radial-gradient(2px 2px at 70% 55%, rgba(255, 255, 255, 0.5) 100%, transparent),
+      radial-gradient(2px 2px at 85% 80%, rgba(255, 255, 255, 0.5) 100%, transparent);
+    background-size: 100% 33.33%;
+    z-index: -1;
+    pointer-events: none;
+    animation: snowFallFast 15s linear infinite;
+    opacity: 0.7;
+  }
+
+  // Ensure content containers are transparent
+  ion-app,
+  ion-content,
+  ion-tabs,
+  ion-router-outlet,
+  .ion-page {
+    background: transparent !important;
+    --background: transparent !important;
+  }
+
+  ion-content::part(scroll),
+  ion-content::part(background) {
+    background: transparent !important;
+  }
+
+  // ============================================
+  // HEADER - Semi-transparent with blur
+  // ============================================
+  
+  ion-header {
+    background: transparent !important;
+    
+    &::after {
+      display: none !important;
+    }
+  }
+
+  ion-toolbar {
+    --background: rgba(18, 18, 26, 0.85) !important;
+    --border-color: transparent !important;
+    --ion-toolbar-background: rgba(18, 18, 26, 0.85) !important;
+    background: rgba(18, 18, 26, 0.85) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(96, 128, 160, 0.15) !important;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(96, 128, 160, 0.3), transparent);
+    }
+  }
+
+  // Handle color="primary" toolbars
+  ion-toolbar[color="primary"] {
+    --background: rgba(18, 18, 26, 0.9) !important;
+    --ion-toolbar-background: rgba(18, 18, 26, 0.9) !important;
+    --ion-color-primary: var(--snow-accent) !important;
+    --ion-color-base: rgba(18, 18, 26, 0.9) !important;
+    --ion-color-primary-contrast: var(--snow-text-primary) !important;
+    background: rgba(18, 18, 26, 0.9) !important;
+  }
+
+  ion-title {
+    font-family: var(--ion-font-family-heading) !important;
+    color: var(--snow-text-primary) !important;
+    --color: var(--snow-text-primary) !important;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    text-shadow: 0 0 8px rgba(96, 128, 160, 0.2);
+  }
+
+  // Header buttons - fully transparent
+  ion-toolbar ion-buttons,
+  ion-toolbar ion-button,
+  ion-toolbar ion-back-button {
+    --background: transparent !important;
+    --background-hover: transparent !important;
+    --background-activated: transparent !important;
+    --background-focused: transparent !important;
+    --box-shadow: none !important;
+    --color: var(--snow-text-secondary) !important;
+    background: transparent !important;
+    filter: none !important;
+    
+    &::part(native) {
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+    
+    &:hover {
+      --color: var(--snow-text-primary) !important;
+    }
+  }
+
+  ion-toolbar ion-back-button::part(native),
+  ion-toolbar ion-back-button::part(icon),
+  ion-toolbar ion-button i-lucide,
+  ion-toolbar ion-button ion-icon {
+    color: var(--snow-text-secondary) !important;
+    background: transparent !important;
+    filter: none !important;
+    box-shadow: none !important;
+  }
+
+  // ============================================
+  // CARDS - Soft rounded with inner glow
+  // ============================================
+  
+  ion-card {
+    --background: var(--snow-surface) !important;
+    background: var(--snow-surface) !important;
+    border: 1px solid var(--snow-border) !important;
+    border-radius: 12px !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      0 4px 20px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(96, 128, 160, 0.05) !important;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: rgba(96, 128, 160, 0.3) !important;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 8px 30px rgba(0, 0, 0, 0.5),
+        0 0 15px rgba(96, 128, 160, 0.1) !important;
+      transform: translateY(-2px);
+    }
+  }
+
+  ion-card-header {
+    border-bottom: 1px solid rgba(96, 128, 160, 0.1);
+  }
+
+  ion-card-title {
+    color: var(--snow-text-primary) !important;
+    font-family: var(--ion-font-family-heading) !important;
+    letter-spacing: 0.02em;
+  }
+
+  ion-card-subtitle {
+    font-family: var(--ion-font-family-heading) !important;
+    color: var(--snow-text-secondary) !important;
+  }
+
+  // ============================================
+  // LISTS - Matching card style
+  // ============================================
+  
+  ion-list {
+    --ion-item-background: transparent !important;
+    background: var(--snow-surface) !important;
+    border: 1px solid var(--snow-border) !important;
+    border-radius: 12px !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    
+    &:hover {
+      border-color: rgba(96, 128, 160, 0.25);
+    }
+  }
+
+  ion-list-header {
+    --background: transparent !important;
+    color: var(--snow-accent) !important;
+    font-family: var(--ion-font-family-heading) !important;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+  }
+
+  ion-item {
+    --background: transparent !important;
+    --border-color: rgba(96, 128, 160, 0.08) !important;
+    --color: var(--snow-text-primary) !important;
+    transition: background 0.2s ease;
+    
+    &:hover {
+      --background: rgba(96, 128, 160, 0.05) !important;
+    }
+  }
+
+  ion-label {
+    color: var(--snow-text-primary) !important;
+  }
+
+  ion-note {
+    color: var(--snow-text-muted) !important;
+  }
+
+  // ============================================
+  // TAB BAR - Soft glow on selected
+  // ============================================
+  
+  ion-tab-bar {
+    --background: rgba(18, 18, 26, 0.9) !important;
+    background: rgba(18, 18, 26, 0.9) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(96, 128, 160, 0.1) !important;
+    
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(96, 128, 160, 0.25), transparent);
+    }
+  }
+
+  ion-tab-button {
+    --color: var(--snow-text-muted) !important;
+    --color-selected: var(--snow-text-primary) !important;
+    font-family: var(--ion-font-family-heading) !important;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+    
+    i-lucide,
+    ion-icon {
+      color: var(--snow-text-muted) !important;
+      filter: none !important;
+      transition: all 0.2s ease;
+    }
+    
+    &.tab-selected {
+      text-shadow: 0 0 10px rgba(96, 128, 160, 0.4);
+      
+      i-lucide,
+      ion-icon {
+        color: var(--snow-text-primary) !important;
+        filter: drop-shadow(0 0 6px rgba(96, 128, 160, 0.5)) !important;
+      }
+    }
+  }
+
+  // ============================================
+  // BUTTONS - Rounded with subtle depth
+  // ============================================
+  
+  ion-button {
+    --border-radius: 8px !important;
+    font-family: var(--ion-font-family-heading) !important;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    
+    &[color="primary"],
+    &:not([color]) {
+      --background: var(--snow-accent) !important;
+      --background-hover: var(--snow-accent) !important;
+      --background-activated: #5070a0 !important;
+      --box-shadow: 0 2px 10px rgba(96, 128, 160, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+      
+      &:hover {
+        --box-shadow: 0 4px 15px rgba(96, 128, 160, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+        transform: translateY(-1px);
+      }
+      
+      &:active {
+        transform: translateY(1px);
+        --box-shadow: 0 1px 5px rgba(96, 128, 160, 0.3), inset 0 -1px 0 rgba(255, 255, 255, 0.05) !important;
+      }
+    }
+  }
+
+  // ============================================
+  // FORM CONTROLS
+  // ============================================
+  
+  ion-select {
+    --placeholder-color: var(--snow-text-muted) !important;
+    color: var(--snow-text-primary) !important;
+  }
+
+  ion-select::part(icon) {
+    color: var(--snow-accent) !important;
+    opacity: 0.8 !important;
+  }
+
+  ion-select::part(text) {
+    color: var(--snow-text-primary) !important;
+  }
+
+  ion-input,
+  ion-textarea {
+    --background: rgba(26, 26, 36, 0.5) !important;
+    --color: var(--snow-text-primary) !important;
+    --placeholder-color: var(--snow-text-muted) !important;
+    border-radius: 8px;
+    
+    &.has-focus {
+      --background: rgba(26, 26, 36, 0.8) !important;
+      box-shadow: 0 0 0 1px rgba(96, 128, 160, 0.3) !important;
+    }
+  }
+
+  ion-toggle {
+    --track-background: var(--snow-elevated) !important;
+    --track-background-checked: var(--snow-accent) !important;
+    --handle-background: var(--snow-text-secondary) !important;
+    --handle-background-checked: var(--snow-text-primary) !important;
+    
+    &.toggle-checked {
+      --handle-box-shadow: 0 0 8px rgba(96, 128, 160, 0.5);
+    }
+  }
+
+  ion-range {
+    --bar-background: var(--snow-elevated) !important;
+    --bar-background-active: var(--snow-accent) !important;
+    --knob-background: var(--snow-accent) !important;
+    --knob-box-shadow: 0 0 8px rgba(96, 128, 160, 0.4) !important;
+  }
+
+  // ============================================
+  // SEGMENTS
+  // ============================================
+  
+  ion-segment {
+    --background: var(--snow-elevated) !important;
+    border-radius: 8px !important;
+  }
+
+  ion-segment-button {
+    --background: transparent !important;
+    --background-checked: var(--snow-surface) !important;
+    --color: var(--snow-text-muted) !important;
+    --color-checked: var(--snow-text-primary) !important;
+    --indicator-color: transparent !important;
+    border-radius: 6px !important;
+    
+    &::part(indicator) {
+      background: var(--snow-accent) !important;
+      opacity: 0.1;
+      border-radius: 6px;
+    }
+  }
+
+  // ============================================
+  // BADGES & CHIPS
+  // ============================================
+  
+  ion-badge {
+    --background: var(--snow-accent) !important;
+    --color: #ffffff !important;
+    border-radius: 6px !important;
+  }
+
+  ion-chip {
+    --background: var(--snow-elevated) !important;
+    --color: var(--snow-text-primary) !important;
+    border: 1px solid var(--snow-border) !important;
+    border-radius: 8px !important;
+  }
+
+  // ============================================
+  // ALERTS & MODALS
+  // ============================================
+  
+  ion-alert {
+    --background: var(--snow-surface) !important;
+    --backdrop-opacity: 0.7 !important;
+    
+    .alert-wrapper {
+      background: var(--snow-surface) !important;
+      border: 1px solid var(--snow-border) !important;
+      border-radius: 12px !important;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+    }
+    
+    .alert-head {
+      border-bottom: 1px solid rgba(96, 128, 160, 0.1);
+    }
+    
+    .alert-title {
+      color: var(--snow-text-primary) !important;
+      font-family: var(--ion-font-family-heading) !important;
+    }
+    
+    .alert-button {
+      color: var(--snow-accent) !important;
+    }
+  }
+
+  ion-modal {
+    --background: var(--snow-surface) !important;
+    --backdrop-opacity: 0.7 !important;
+    
+    &::part(content) {
+      background: var(--snow-surface) !important;
+      border: 1px solid var(--snow-border) !important;
+      border-radius: 12px !important;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+    }
+  }
+
+  // ============================================
+  // SCROLLBAR
+  // ============================================
+  
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--snow-deep);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--snow-border);
+    border-radius: 3px;
+    
+    &:hover {
+      background: var(--snow-accent);
+    }
+  }
+
+  // ============================================
+  // PLATFORM SPECIFIC
+  // ============================================
+  
+  &.md {
+    ion-list,
+    ion-card {
+      border-radius: 12px !important;
+      margin: 0 !important;
+    }
+  }
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+
+@keyframes snowFallSlow {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(33.33%);
+  }
+}
+
+@keyframes snowFallFast {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(33.33%);
+  }
+}

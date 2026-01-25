@@ -1,622 +1,399 @@
 // ============================================
-// PIXEL THEME - Modern Pixel Art Aesthetic
+// PIXEL THEME - "Pretty Pixel" 👾
 // ============================================
-// Inspired by Celeste, Hyper Light Drifter - monochrome with depth
-// Animated pixel rain, soft rounded borders, atmospheric feel
+// A subtle, high-quality pixel art aesthetic with pastel colors
+// and destructive "dissolve" hover effects.
+
+@mixin noise-overlay($opacity: 0.1) {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='" + $opacity + "'/%3E%3C/svg%3E");
+}
+
+@mixin pixel-box($border-color, $bg-color: transparent) {
+  background-color: $bg-color;
+  box-shadow: 
+    inset 2px 2px 0px 0px #FFFFFF,
+    inset -2px -2px 0px 0px rgba(0,0,0,0.2),
+    0 0 0 2px $border-color;
+  border: none; 
+}
+
+// Destructive hover effect - uses filters and shadows that work with Shadow DOM
+@mixin destructive-hover {
+  transition: filter 0s, opacity 0s, transform 0s; // Instant effect
+  
+  &:hover {
+    animation: pixelJitter 0.1s steps(4) infinite;
+    filter: 
+      contrast(1.3) 
+      brightness(1.2) 
+      saturate(0.5)
+      drop-shadow(0 0 2px var(--pixel-primary))
+      drop-shadow(2px 0 0 rgba(255, 0, 0, 0.5))
+      drop-shadow(-2px 0 0 rgba(0, 255, 255, 0.5));
+    opacity: 0.85;
+  }
+  
+  &:active {
+    animation: pixelJitter 0.05s steps(8) infinite; // Faster, more chaotic
+    filter: 
+      contrast(1.5) 
+      brightness(1.4) 
+      saturate(0.3)
+      grayscale(0.3)
+      drop-shadow(0 0 4px var(--pixel-primary))
+      drop-shadow(3px 0 0 rgba(255, 0, 0, 0.7))
+      drop-shadow(-3px 0 0 rgba(0, 255, 255, 0.7));
+    opacity: 0.7;
+  }
+}
 
 body.pixel-theme {
-  // Core Monochrome Palette with subtle cool tint
-  --pixel-void: #0a0a0c;
-  --pixel-deep: #12121a;
-  --pixel-surface: #1a1a24;
-  --pixel-elevated: #22222e;
-  --pixel-border: #2a2a38;
+  // --------------------------------------------------------------------------
+  // 1. PALETTE & VARIABLES
+  // --------------------------------------------------------------------------
   
-  --pixel-text-primary: #e8e8ec;
-  --pixel-text-secondary: #a0a0b0;
-  --pixel-text-muted: #606070;
+  --pixel-bg-dark: #222224;
+  --pixel-bg-panel: #2D2D32;
   
-  // Accent - subtle blue-gray tint for depth
-  --pixel-accent: #6080a0;
-  --pixel-accent-glow: rgba(96, 128, 160, 0.4);
-  --pixel-accent-soft: rgba(96, 128, 160, 0.15);
+  --pixel-primary: #FF9AA2;   // Pastel Pink
+  --pixel-secondary: #B5EAD7; // Pastel Mint
+  --pixel-tertiary: #C7CEEA;  // Pastel Purple
+  --pixel-warning: #FFDAC1;   // Pastel Peach
+  --pixel-danger: #FF6961;    // Pastel Red
   
-  // Data/highlight pixels
-  --pixel-data-bright: #ffffff;
-  --pixel-data-dim: rgba(255, 255, 255, 0.3);
-
-  // Ionic overrides
-  --ion-color-primary: var(--pixel-accent);
-  --ion-color-primary-rgb: 96, 128, 160;
-  --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-shade: #5070a0;
-  --ion-color-primary-tint: #7090b0;
-
-  --ion-background-color: transparent;
-  --ion-background-color-rgb: 10, 10, 12;
-  --ion-toolbar-background: var(--pixel-deep);
-  --ion-item-background: transparent;
-  --ion-card-background: var(--pixel-surface);
-  --ion-text-color: var(--pixel-text-primary);
-
-  --space-border: var(--pixel-border);
-  --space-bg-card: var(--pixel-surface);
-  --space-bg-elevated: var(--pixel-elevated);
-  --glow-primary: var(--pixel-accent-glow);
-  --glow-primary-soft: var(--pixel-accent-soft);
-
-  // ============================================
-  // PIXEL RAIN BACKGROUND
-  // ============================================
+  --pixel-text: #FFFFFF;
+  --pixel-text-muted: #A0A0A0;
   
-  // Hide default app stars
-  ion-app::before,
-  ion-app::after {
-    display: none !important;
-    box-shadow: none !important;
+  // Ionic Overrides
+  --ion-font-family: 'VT323', 'Courier New', monospace;
+  --ion-background-color: var(--pixel-bg-dark);
+  --ion-text-color: var(--pixel-text);
+  
+  --ion-color-primary: var(--pixel-primary);
+  --ion-color-primary-rgb: 255, 154, 162;
+  --ion-color-primary-contrast: #222224;
+  
+  --ion-color-secondary: var(--pixel-secondary);
+  --ion-color-secondary-rgb: 181, 234, 215;
+  --ion-color-secondary-contrast: #222224;
+  
+  --ion-color-tertiary: var(--pixel-tertiary);
+  --ion-color-tertiary-rgb: 199, 206, 234;
+  --ion-color-tertiary-contrast: #222224;
+
+  --ion-color-danger: var(--pixel-danger);
+  
+  // --------------------------------------------------------------------------
+  // 2. TYPOGRAPHY
+  // --------------------------------------------------------------------------
+  
+  * {
+    image-rendering: pixelated;
+    letter-spacing: 0.05em; // Generous spacing for premium feel
+  }
+  
+  h1, h2, h3, h4, h5, h6, ion-title, ion-card-title {
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
   }
 
-  // Deep void background
+  // --------------------------------------------------------------------------
+  // 3. GLOBAL BACKGROUND
+  // --------------------------------------------------------------------------
+  
+  background-color: var(--pixel-bg-dark);
+  
+  // Star/Dust Animation
   &::before {
-    content: "";
+    content: '';
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      180deg,
-      var(--pixel-void) 0%,
-      var(--pixel-deep) 50%,
-      var(--pixel-void) 100%
-    );
-    z-index: -3;
-    pointer-events: none;
-  }
-
-  // Pixel rain layer 1 - slow, sparse, dim
-  &::after {
-    content: "";
-    position: fixed;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 300%;
-    background-image:
-      // Column 1
-      radial-gradient(2px 2px at 5% 10%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 5% 40%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 5% 70%, var(--pixel-data-dim) 100%, transparent),
-      // Column 2
-      radial-gradient(2px 2px at 12% 5%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 12% 35%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 12% 65%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 12% 95%, var(--pixel-data-dim) 100%, transparent),
-      // Column 3
-      radial-gradient(2px 2px at 20% 15%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 20% 45%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 20% 75%, var(--pixel-data-dim) 100%, transparent),
-      // Column 4
-      radial-gradient(2px 2px at 28% 8%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 28% 38%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 28% 68%, var(--pixel-data-dim) 100%, transparent),
-      // Column 5
-      radial-gradient(2px 2px at 35% 20%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 35% 50%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 35% 80%, var(--pixel-data-dim) 100%, transparent),
-      // Column 6
-      radial-gradient(2px 2px at 42% 12%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 42% 42%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 42% 72%, var(--pixel-data-dim) 100%, transparent),
-      // Column 7
-      radial-gradient(2px 2px at 50% 25%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 50% 55%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 50% 85%, var(--pixel-data-dim) 100%, transparent),
-      // Column 8
-      radial-gradient(2px 2px at 58% 18%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 58% 48%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 58% 78%, var(--pixel-data-dim) 100%, transparent),
-      // Column 9
-      radial-gradient(2px 2px at 65% 10%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 65% 40%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 65% 70%, var(--pixel-data-dim) 100%, transparent),
-      // Column 10
-      radial-gradient(2px 2px at 72% 22%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 72% 52%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 72% 82%, var(--pixel-data-dim) 100%, transparent),
-      // Column 11
-      radial-gradient(2px 2px at 80% 15%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 80% 45%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 80% 75%, var(--pixel-data-dim) 100%, transparent),
-      // Column 12
-      radial-gradient(2px 2px at 88% 8%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 88% 38%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 88% 68%, var(--pixel-data-dim) 100%, transparent),
-      // Column 13
-      radial-gradient(2px 2px at 95% 28%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 95% 58%, var(--pixel-data-dim) 100%, transparent),
-      radial-gradient(2px 2px at 95% 88%, var(--pixel-data-dim) 100%, transparent);
-    background-size: 100% 33.33%;
-    z-index: -2;
-    pointer-events: none;
-    animation: pixelRainSlow 25s linear infinite;
-  }
-
-  // Faster pixel rain layer - ion-router-outlet::after
-  ion-router-outlet::after {
-    content: "";
-    position: fixed;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 300%;
-    background-image:
-      // Bright data pixels - sparse
-      radial-gradient(3px 3px at 8% 20%, var(--pixel-data-bright) 100%, transparent),
-      radial-gradient(3px 3px at 25% 50%, var(--pixel-data-bright) 100%, transparent),
-      radial-gradient(3px 3px at 45% 15%, var(--pixel-data-bright) 100%, transparent),
-      radial-gradient(3px 3px at 62% 75%, var(--pixel-data-bright) 100%, transparent),
-      radial-gradient(3px 3px at 78% 35%, var(--pixel-data-bright) 100%, transparent),
-      radial-gradient(3px 3px at 92% 60%, var(--pixel-data-bright) 100%, transparent),
-      // Medium dim pixels
-      radial-gradient(2px 2px at 15% 30%, rgba(255, 255, 255, 0.5) 100%, transparent),
-      radial-gradient(2px 2px at 33% 70%, rgba(255, 255, 255, 0.5) 100%, transparent),
-      radial-gradient(2px 2px at 55% 25%, rgba(255, 255, 255, 0.5) 100%, transparent),
-      radial-gradient(2px 2px at 70% 55%, rgba(255, 255, 255, 0.5) 100%, transparent),
-      radial-gradient(2px 2px at 85% 80%, rgba(255, 255, 255, 0.5) 100%, transparent);
-    background-size: 100% 33.33%;
+    background-image: 
+      radial-gradient(white 1px, transparent 1px),
+      radial-gradient(white 1px, transparent 1px);
+    background-size: 50px 50px, 100px 100px;
+    background-position: 0 0, 25px 25px;
+    opacity: 0.1;
+    animation: starDrift 60s linear infinite;
     z-index: -1;
     pointer-events: none;
-    animation: pixelRainFast 15s linear infinite;
-    opacity: 0.7;
   }
 
-  // Ensure content containers are transparent
-  ion-app,
-  ion-content,
-  ion-tabs,
-  ion-router-outlet,
-  .ion-page {
-    background: transparent !important;
-    --background: transparent !important;
-  }
+  // --------------------------------------------------------------------------
+  // 4. COMPONENT STYLING
+  // --------------------------------------------------------------------------
 
-  ion-content::part(scroll),
-  ion-content::part(background) {
-    background: transparent !important;
-  }
-
-  // ============================================
-  // HEADER - Semi-transparent with blur
-  // ============================================
-  
-  ion-header {
-    background: transparent !important;
-    
-    &::after {
-      display: none !important;
-    }
-  }
-
+  // -- Toolbar --
   ion-toolbar {
-    --background: rgba(18, 18, 26, 0.85) !important;
-    --border-color: transparent !important;
-    --ion-toolbar-background: rgba(18, 18, 26, 0.85) !important;
-    background: rgba(18, 18, 26, 0.85) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(96, 128, 160, 0.15) !important;
+    --background: var(--pixel-bg-panel);
+    --border-color: var(--pixel-primary);
     
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 10%;
-      width: 80%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(96, 128, 160, 0.3), transparent);
+    // Pixel border bottom
+    border-bottom: 2px solid var(--pixel-primary);
+    box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+    
+    ion-title {
+      font-size: 1.2rem;
+      color: var(--pixel-primary);
     }
   }
-
-  // Handle color="primary" toolbars
-  ion-toolbar[color="primary"] {
-    --background: rgba(18, 18, 26, 0.9) !important;
-    --ion-toolbar-background: rgba(18, 18, 26, 0.9) !important;
-    --ion-color-primary: var(--pixel-accent) !important;
-    --ion-color-base: rgba(18, 18, 26, 0.9) !important;
-    --ion-color-primary-contrast: var(--pixel-text-primary) !important;
-    background: rgba(18, 18, 26, 0.9) !important;
-  }
-
-  ion-title {
-    font-family: var(--ion-font-family-heading) !important;
-    color: var(--pixel-text-primary) !important;
-    --color: var(--pixel-text-primary) !important;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    font-size: 0.95rem;
-    text-shadow: 0 0 8px rgba(96, 128, 160, 0.2);
-  }
-
-  // Header buttons - fully transparent
-  ion-toolbar ion-buttons,
-  ion-toolbar ion-button,
-  ion-toolbar ion-back-button {
+  
+  // Header buttons - at body level for proper specificity
+  ion-back-button,
+  ion-toolbar ion-button {
+    --color: #222224 !important;
     --background: transparent !important;
     --background-hover: transparent !important;
     --background-activated: transparent !important;
     --background-focused: transparent !important;
     --box-shadow: none !important;
-    --color: var(--pixel-text-secondary) !important;
-    background: transparent !important;
-    filter: none !important;
+    --border-width: 0 !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    
+    ion-icon,
+    i-lucide {
+      color: #222224 !important;
+      font-size: 24px !important;
+      width: 24px !important;
+      height: 24px !important;
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
     
     &::part(native) {
       background: transparent !important;
       box-shadow: none !important;
+      border: none !important;
+      padding: 10px !important;
+      color: #222224 !important;
+      opacity: 1 !important;
+    }
+  }
+  
+  ion-back-button {
+    --color: #222224 !important;
+    --icon-font-size: 24px !important;
+    color: #222224 !important;
+    
+    &::part(native) {
+      color: #222224 !important;
     }
     
-    &:hover {
-      --color: var(--pixel-text-primary) !important;
+    &::part(icon) {
+      color: #222224 !important;
+      font-size: 24px !important;
+    }
+    
+    &::part(text) {
+      display: none !important;
     }
   }
 
-  ion-toolbar ion-back-button::part(native),
-  ion-toolbar ion-back-button::part(icon),
-  ion-toolbar ion-button i-lucide,
-  ion-toolbar ion-button ion-icon {
-    color: var(--pixel-text-secondary) !important;
-    background: transparent !important;
-    filter: none !important;
-    box-shadow: none !important;
-  }
-
-  // ============================================
-  // CARDS - Soft rounded with inner glow
-  // ============================================
-  
+  // -- Cards --
   ion-card {
-    --background: var(--pixel-surface) !important;
-    background: var(--pixel-surface) !important;
-    border: 1px solid var(--pixel-border) !important;
-    border-radius: 12px !important;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.03),
-      0 4px 20px rgba(0, 0, 0, 0.4),
-      0 0 0 1px rgba(96, 128, 160, 0.05) !important;
-    transition: all 0.3s ease;
+    --background: var(--pixel-bg-panel);
+    --color: var(--pixel-text);
+    margin: 16px;
     
-    &:hover {
-      border-color: rgba(96, 128, 160, 0.3) !important;
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.05),
-        0 8px 30px rgba(0, 0, 0, 0.5),
-        0 0 15px rgba(96, 128, 160, 0.1) !important;
-      transform: translateY(-2px);
+    // Flat pastel border style
+    @include pixel-box(var(--pixel-secondary), var(--pixel-bg-panel));
+    
+    // Destructive Hover Effect
+    @include destructive-hover;
+    
+    // Hard pixel shadow
+    box-shadow: 
+      inset 2px 2px 0px 0px rgba(255,255,255,0.2),
+      inset -2px -2px 0px 0px rgba(0,0,0,0.2),
+      0 0 0 2px var(--pixel-secondary),
+      4px 4px 0 rgba(0,0,0,0.4);
+    
+    ion-card-header {
+      border-bottom: 2px dashed rgba(255,255,255,0.1);
+    }
+    
+    ion-card-title {
+      color: var(--pixel-secondary);
+    }
+    
+    ion-card-subtitle {
+      color: var(--pixel-text-muted);
     }
   }
 
-  ion-card-header {
-    border-bottom: 1px solid rgba(96, 128, 160, 0.1);
-  }
-
-  ion-card-title {
-    color: var(--pixel-text-primary) !important;
-    font-family: var(--ion-font-family-heading) !important;
-    letter-spacing: 0.02em;
-  }
-
-  ion-card-subtitle {
-    font-family: var(--ion-font-family-heading) !important;
-    color: var(--pixel-text-secondary) !important;
-  }
-
-  // ============================================
-  // LISTS - Matching card style
-  // ============================================
-  
-  ion-list {
-    --ion-item-background: transparent !important;
-    background: var(--pixel-surface) !important;
-    border: 1px solid var(--pixel-border) !important;
-    border-radius: 12px !important;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.03),
-      0 4px 20px rgba(0, 0, 0, 0.4) !important;
-    
-    &:hover {
-      border-color: rgba(96, 128, 160, 0.25);
-    }
-  }
-
-  ion-list-header {
-    --background: transparent !important;
-    color: var(--pixel-accent) !important;
-    font-family: var(--ion-font-family-heading) !important;
-    letter-spacing: 0.1em;
+  // -- Buttons --
+  ion-button {
+    --border-radius: 0;
+    --box-shadow: none;
+    font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.7rem;
+    margin: 8px;
+    
+    // Default / Primary
+    &[color="primary"], &:not([color]) {
+      --background: var(--pixel-primary);
+      --color: var(--pixel-bg-dark);
+      
+      &::part(native) {
+        @include pixel-box(var(--pixel-primary), var(--pixel-primary));
+        box-shadow: 
+          inset 2px 2px 0 rgba(255,255,255,0.4),
+          inset -2px -2px 0 rgba(0,0,0,0.2),
+          2px 2px 0 #000; // Hard shadow
+      }
+    }
+    
+    // Secondary
+    &[color="secondary"] {
+      --background: var(--pixel-secondary);
+      --color: var(--pixel-bg-dark);
+      
+      &::part(native) {
+        @include pixel-box(var(--pixel-secondary), var(--pixel-secondary));
+        box-shadow: 
+          inset 2px 2px 0 rgba(255,255,255,0.4),
+          inset -2px -2px 0 rgba(0,0,0,0.2),
+          2px 2px 0 #000;
+      }
+    }
+    
+    // Destructive Hover on Buttons
+    @include destructive-hover;
+  }
+
+  // -- Lists & Items --
+  ion-list {
+    background: transparent;
+    padding: 0;
   }
 
   ion-item {
-    --background: transparent !important;
-    --border-color: rgba(96, 128, 160, 0.08) !important;
-    --color: var(--pixel-text-primary) !important;
-    transition: background 0.2s ease;
+    --background: transparent;
+    --border-color: rgba(255,255,255,0.1);
+    --color: var(--pixel-text);
+    --min-height: 56px;
     
-    &:hover {
-      --background: rgba(96, 128, 160, 0.05) !important;
-    }
-  }
-
-  ion-label {
-    color: var(--pixel-text-primary) !important;
-  }
-
-  ion-note {
-    color: var(--pixel-text-muted) !important;
-  }
-
-  // ============================================
-  // TAB BAR - Soft glow on selected
-  // ============================================
-  
-  ion-tab-bar {
-    --background: rgba(18, 18, 26, 0.9) !important;
-    background: rgba(18, 18, 26, 0.9) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(96, 128, 160, 0.1) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
     
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 10%;
-      width: 80%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(96, 128, 160, 0.25), transparent);
-    }
-  }
-
-  ion-tab-button {
-    --color: var(--pixel-text-muted) !important;
-    --color-selected: var(--pixel-text-primary) !important;
-    font-family: var(--ion-font-family-heading) !important;
-    letter-spacing: 0.05em;
-    transition: all 0.2s ease;
-    
-    i-lucide,
-    ion-icon {
-      color: var(--pixel-text-muted) !important;
-      filter: none !important;
-      transition: all 0.2s ease;
+    ion-label {
+      font-size: 1.1rem;
     }
     
-    &.tab-selected {
-      text-shadow: 0 0 10px rgba(96, 128, 160, 0.4);
-      
-      i-lucide,
-      ion-icon {
-        color: var(--pixel-text-primary) !important;
-        filter: drop-shadow(0 0 6px rgba(96, 128, 160, 0.5)) !important;
-      }
-    }
+    // Hover effect on items
+    @include destructive-hover;
   }
 
-  // ============================================
-  // BUTTONS - Rounded with subtle depth
-  // ============================================
-  
-  ion-button {
-    --border-radius: 8px !important;
-    font-family: var(--ion-font-family-heading) !important;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    
-    &[color="primary"],
-    &:not([color]) {
-      --background: var(--pixel-accent) !important;
-      --background-hover: var(--pixel-accent) !important;
-      --background-activated: #5070a0 !important;
-      --box-shadow: 0 2px 10px rgba(96, 128, 160, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
-      
-      &:hover {
-        --box-shadow: 0 4px 15px rgba(96, 128, 160, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
-        transform: translateY(-1px);
-      }
-      
-      &:active {
-        transform: translateY(1px);
-        --box-shadow: 0 1px 5px rgba(96, 128, 160, 0.3), inset 0 -1px 0 rgba(255, 255, 255, 0.05) !important;
-      }
-    }
-  }
-
-  // ============================================
-  // FORM CONTROLS
-  // ============================================
-  
-  ion-select {
-    --placeholder-color: var(--pixel-text-muted) !important;
-    color: var(--pixel-text-primary) !important;
-  }
-
-  ion-select::part(icon) {
-    color: var(--pixel-accent) !important;
-    opacity: 0.8 !important;
-  }
-
-  ion-select::part(text) {
-    color: var(--pixel-text-primary) !important;
-  }
-
-  ion-input,
-  ion-textarea {
-    --background: rgba(26, 26, 36, 0.5) !important;
-    --color: var(--pixel-text-primary) !important;
-    --placeholder-color: var(--pixel-text-muted) !important;
-    border-radius: 8px;
+  // -- Inputs --
+  ion-input, ion-textarea {
+    --background: rgba(0,0,0,0.2);
+    --padding-start: 10px;
+    margin-top: 5px;
+    border: 2px solid var(--pixel-bg-panel);
     
     &.has-focus {
-      --background: rgba(26, 26, 36, 0.8) !important;
-      box-shadow: 0 0 0 1px rgba(96, 128, 160, 0.3) !important;
+      border-color: var(--pixel-tertiary);
     }
   }
-
-  ion-toggle {
-    --track-background: var(--pixel-elevated) !important;
-    --track-background-checked: var(--pixel-accent) !important;
-    --handle-background: var(--pixel-text-secondary) !important;
-    --handle-background-checked: var(--pixel-text-primary) !important;
-    
-    &.toggle-checked {
-      --handle-box-shadow: 0 0 8px rgba(96, 128, 160, 0.5);
-    }
-  }
-
-  ion-range {
-    --bar-background: var(--pixel-elevated) !important;
-    --bar-background-active: var(--pixel-accent) !important;
-    --knob-background: var(--pixel-accent) !important;
-    --knob-box-shadow: 0 0 8px rgba(96, 128, 160, 0.4) !important;
-  }
-
-  // ============================================
-  // SEGMENTS
-  // ============================================
   
-  ion-segment {
-    --background: var(--pixel-elevated) !important;
-    border-radius: 8px !important;
+  ion-select {
+    --background: transparent;
+    --padding-start: 0;
   }
 
-  ion-segment-button {
-    --background: transparent !important;
-    --background-checked: var(--pixel-surface) !important;
-    --color: var(--pixel-text-muted) !important;
-    --color-checked: var(--pixel-text-primary) !important;
-    --indicator-color: transparent !important;
-    border-radius: 6px !important;
-    
-    &::part(indicator) {
-      background: var(--pixel-accent) !important;
-      opacity: 0.1;
-      border-radius: 6px;
+  // -- Modals & Alerts --
+  ion-modal, ion-alert, ion-popover, ion-action-sheet {
+    --background: var(--pixel-bg-dark);
+    --backdrop-opacity: 0.8;
+
+    &::part(content) {
+      border: 4px solid var(--pixel-bg-panel);
+      box-shadow: 
+        0 0 0 2px var(--pixel-primary), // Double border
+        10px 10px 0 rgba(0,0,0,0.5);
+      border-radius: 0;
+      background: var(--pixel-bg-dark);
     }
   }
-
-  // ============================================
-  // BADGES & CHIPS
-  // ============================================
   
-  ion-badge {
-    --background: var(--pixel-accent) !important;
-    --color: #ffffff !important;
-    border-radius: 6px !important;
-  }
-
-  ion-chip {
-    --background: var(--pixel-elevated) !important;
-    --color: var(--pixel-text-primary) !important;
-    border: 1px solid var(--pixel-border) !important;
-    border-radius: 8px !important;
-  }
-
-  // ============================================
-  // ALERTS & MODALS
-  // ============================================
-  
-  ion-alert {
-    --background: var(--pixel-surface) !important;
-    --backdrop-opacity: 0.7 !important;
-    
-    .alert-wrapper {
-      background: var(--pixel-surface) !important;
-      border: 1px solid var(--pixel-border) !important;
-      border-radius: 12px !important;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
-    }
+  // Alert specific
+  .alert-wrapper {
+    border: 2px solid var(--pixel-primary);
+    box-shadow: 8px 8px 0 rgba(0,0,0,0.5);
+    border-radius: 0;
     
     .alert-head {
-      border-bottom: 1px solid rgba(96, 128, 160, 0.1);
+      background: var(--pixel-bg-panel);
+      h2 {
+        color: var(--pixel-primary);
+      }
     }
     
-    .alert-title {
-      color: var(--pixel-text-primary) !important;
-      font-family: var(--ion-font-family-heading) !important;
+    button.alert-button {
+      color: var(--pixel-secondary);
+      text-transform: uppercase;
+      
+      &.alert-button-role-cancel {
+        color: var(--pixel-danger);
+      }
     }
+  }
+
+  // -- Tab Bar --
+  ion-tab-bar {
+    --background: var(--pixel-bg-panel);
+    border-top: 2px solid var(--pixel-tertiary);
     
-    .alert-button {
-      color: var(--pixel-accent) !important;
-    }
-  }
-
-  ion-modal {
-    --background: var(--pixel-surface) !important;
-    --backdrop-opacity: 0.7 !important;
-    
-    &::part(content) {
-      background: var(--pixel-surface) !important;
-      border: 1px solid var(--pixel-border) !important;
-      border-radius: 12px !important;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
-    }
-  }
-
-  // ============================================
-  // SCROLLBAR
-  // ============================================
-  
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--pixel-deep);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--pixel-border);
-    border-radius: 3px;
-    
-    &:hover {
-      background: var(--pixel-accent);
-    }
-  }
-
-  // ============================================
-  // PLATFORM SPECIFIC
-  // ============================================
-  
-  &.md {
-    ion-list,
-    ion-card {
-      border-radius: 12px !important;
-      margin: 0 !important;
+    ion-tab-button {
+      --color: var(--pixel-text-muted);
+      --color-selected: var(--pixel-tertiary);
+      
+      &.tab-selected {
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 20%;
+          width: 60%;
+          height: 4px;
+          background: var(--pixel-tertiary);
+        }
+        
+        ion-icon {
+          animation: pixelJitter 2s infinite alternate;
+        }
+      }
     }
   }
 }
 
-// ============================================
-// ANIMATIONS
-// ============================================
+// ----------------------------------------------------------------------------
+// 5. ANIMATIONS
+// ----------------------------------------------------------------------------
 
-@keyframes pixelRainSlow {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(33.33%);
-  }
+@keyframes pixelJitter {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 2px); }
+  50% { transform: translate(2px, -2px); }
+  75% { transform: translate(-2px, -2px); }
+  100% { transform: translate(2px, 2px); }
 }
 
-@keyframes pixelRainFast {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(33.33%);
-  }
+@keyframes noiseFade {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; }
+}
+
+@keyframes starDrift {
+  from { background-position: 0 0, 25px 25px; }
+  to { background-position: 100px 100px, 125px 125px; }
 }

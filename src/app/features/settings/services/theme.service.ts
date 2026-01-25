@@ -15,9 +15,12 @@ const THEME_CLASSES: Record<Theme, string | null> = {
   [Theme.Original]: null, // Original theme has no extra class
   [Theme.Cyberpunk]: 'cyberpunk-theme',
   [Theme.Nexus]: 'nexus-theme',
-  [Theme.Pixel]: 'pixel-theme',
+  [Theme.Snow]: 'snow-theme',
   [Theme.Retro]: 'retro-theme',
   [Theme.Glass]: 'glass-theme',
+  [Theme.Minecraft]: 'minecraft-theme',
+  [Theme.Napolitain]: 'napolitain-theme',
+  [Theme.Pixel]: 'pixel-theme',
   [Theme.Konami]: 'konami-theme', // Secret theme, unlocked via easter egg
 };
 
@@ -44,9 +47,12 @@ const THEME_STATUS_BAR_COLORS: Record<Theme, string> = {
   [Theme.Original]: '#1a1a24', // space-bg-elevated
   [Theme.Cyberpunk]: '#0a0a12', // cyber-dark
   [Theme.Nexus]: '#02040a', // nexus-void (toolbar is semi-transparent over this)
-  [Theme.Pixel]: '#12121a', // pixel-deep
+  [Theme.Snow]: '#12121a', // snow-deep
   [Theme.Retro]: '#1a1a2e', // retro-surface
   [Theme.Glass]: '#0f0f18', // glass-deep
+  [Theme.Minecraft]: '#2a2218', // mc-deepslate (earth/wood)
+  [Theme.Napolitain]: '#1C1614', // wood-fired oven interior
+  [Theme.Pixel]: '#16213e', // pixel-surface
   [Theme.Konami]: '#1a0033', // dark purple from gradient
 };
 

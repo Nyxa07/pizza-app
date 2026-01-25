@@ -6,8 +6,11 @@ export enum Theme {
   Original = 'original',
   Cyberpunk = 'cyberpunk',
   Nexus = 'nexus',
-  Pixel = 'pixel',
+  Snow = 'snow',
   Retro = 'retro',
   Glass = 'glass',
+  Minecraft = 'minecraft',
+  Napolitain = 'napolitain',
+  Pixel = 'pixel',
   Konami = 'konami', // Secret theme, only visible after discovery
 }
