@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { StatusBar, Style } from '@capacitor/status-bar';
+import { Capacitor } from '@capacitor/core';
 
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { SecretTheme } from '../enums/secret-theme.enum';
@@ -32,6 +34,20 @@ const SECRET_THEME_CLASSES: Record<SecretTheme, string | null> = {
   // Future themes:
   // [SecretTheme.Retro]: 'retro-theme',
   // [SecretTheme.Neon]: 'neon-theme',
+};
+
+/**
+ * Status bar background color for each theme.
+ * These colors match the toolbar/header background for visual consistency.
+ */
+const THEME_STATUS_BAR_COLORS: Record<Theme, string> = {
+  [Theme.Original]: '#1a1a24', // space-bg-elevated
+  [Theme.Cyberpunk]: '#0a0a12', // cyber-dark
+  [Theme.Nexus]: '#02040a', // nexus-void (toolbar is semi-transparent over this)
+  [Theme.Pixel]: '#12121a', // pixel-deep
+  [Theme.Retro]: '#1a1a2e', // retro-surface
+  [Theme.Glass]: '#0f0f18', // glass-deep
+  [Theme.Konami]: '#1a0033', // dark purple from gradient
 };
 
 @Injectable({
@@ -84,6 +100,9 @@ export class ThemeService {
     );
     if (savedPublicTheme) {
       this.applyTheme(savedPublicTheme);
+    } else {
+      // Set status bar color for default Original theme
+      this.updateStatusBarColor(Theme.Original);
     }
 
     // Secret theme
@@ -185,6 +204,26 @@ export class ThemeService {
     if (className) {
       document.body.classList.add(className);
     }
+    this.updateStatusBarColor(theme);
+  }
+
+  /**
+   * Update the native status bar background color to match the theme.
+   * Only runs on native platforms (iOS/Android).
+   */
+  private async updateStatusBarColor(theme: Theme): Promise<void> {
+    if (!Capacitor.isNativePlatform()) {
+      return;
+    }
+
+    try {
+      const color = THEME_STATUS_BAR_COLORS[theme];
+      await StatusBar.setBackgroundColor({ color });
+      // Use dark style (light icons) since all themes are dark
+      await StatusBar.setStyle({ style: Style.Dark });
+    } catch (error) {
+      console.warn('Failed to update status bar color:', error);
+    }
   }
 
   private removeAllThemeClasses(): void {
@@ -272,6 +311,11 @@ export class ThemeService {
     const className = SECRET_THEME_CLASSES[theme];
     if (className) {
       document.body.classList.add(className);
+    }
+    // Update status bar using the corresponding public theme color
+    const publicTheme = this.mapSecretToPublicTheme(theme);
+    if (publicTheme !== null) {
+      this.updateStatusBarColor(publicTheme);
     }
   }
 

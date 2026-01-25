@@ -7,10 +7,11 @@ const config: CapacitorConfig = {
   plugins: {
     StatusBar: {
       overlaysWebView: false,
-      backgroundColor: '#ff9860',
+      backgroundColor: '#1a1a24', // Matches Original theme toolbar (space-bg-elevated)
+      style: 'DARK', // Light icons for dark background
     },
     EdgeToEdge: {
-      backgroundColor: '#ff9860',
+      backgroundColor: '#1a1a24',
     },
   },
 };
