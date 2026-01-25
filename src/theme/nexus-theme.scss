@@ -182,6 +182,10 @@ body.nexus-theme {
     letter-spacing: 0.05em;
   }
 
+  ion-card-subtitle {
+    font-family: var(--ion-font-family-heading) !important;
+  }
+
   // ============================================
   // Tabs
   // ============================================
@@ -193,6 +197,7 @@ body.nexus-theme {
   }
 
   ion-tab-button {
+    font-family: var(--ion-font-family-heading) !important;
     --color: rgba(230, 241, 255, 0.5) !important;
     --color-selected: var(--nexus-electric-blue) !important;
     

@@ -307,6 +307,7 @@ body.pixel-theme {
   }
 
   ion-card-subtitle {
+    font-family: var(--ion-font-family-heading) !important;
     color: var(--pixel-text-secondary) !important;
   }
 

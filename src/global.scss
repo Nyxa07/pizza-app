@@ -124,7 +124,6 @@ ion-app {
 // TYPOGRAPHY - Space Mono for Headings
 // ============================================
 
-ion-title,
 ion-card-title,
 ion-list-header,
 h1,
@@ -133,13 +132,14 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--ion-font-family-heading) !important;
+  font-family: var(--ion-font-family) !important;
   letter-spacing: -0.02em;
 }
 
-// Tighten toolbar titles
+// Toolbar titles - RedHat for original theme (themed versions override with Orbitron)
 ion-title {
-  font-size: 0.95rem;
+  font-family: var(--ion-font-family) !important;
+  font-size: 1.15rem;
   letter-spacing: -0.01em;
 }
 
@@ -149,7 +149,7 @@ ion-card-title {
 }
 
 ion-card-subtitle {
-  font-family: var(--ion-font-family-heading) !important;
+  font-family: var(--ion-font-family) !important;
   letter-spacing: 0.01em;
   text-transform: uppercase;
   font-size: 0.65rem;
@@ -355,8 +355,8 @@ ion-tab-button {
   --color: var(--ion-text-color-step-400);
   --color-selected: var(--ion-color-primary);
   transition: all 0.2s ease;
-  font-family: var(--ion-font-family-heading) !important;
-  font-size: 0.65rem;
+  font-family: var(--ion-font-family) !important;
+  font-size: 0.75rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 

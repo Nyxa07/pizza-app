@@ -207,6 +207,7 @@ body.cyberpunk-theme {
 
   // Title with yellow glow
   ion-title {
+    font-family: var(--ion-font-family-heading) !important;
     --color: var(--cyber-yellow) !important;
     color: var(--cyber-yellow) !important;
     text-shadow: 0 0 10px var(--cyber-glow), 0 0 20px var(--cyber-glow-soft) !important;
@@ -272,6 +273,7 @@ body.cyberpunk-theme {
   }
 
   ion-tab-button {
+    font-family: var(--ion-font-family-heading) !important;
     --color: rgba(255, 255, 255, 0.5);
     --color-selected: var(--cyber-yellow);
     position: relative;
@@ -324,11 +326,17 @@ body.cyberpunk-theme {
   }
 
   ion-card-title {
+    font-family: var(--ion-font-family-heading) !important;
     color: var(--cyber-yellow) !important;
     text-shadow: 0 0 8px var(--cyber-glow-soft);
   }
 
+  ion-card-subtitle {
+    font-family: var(--ion-font-family-heading) !important;
+  }
+
   ion-list-header {
+    font-family: var(--ion-font-family-heading) !important;
     color: var(--cyber-yellow) !important;
     text-shadow: 0 0 8px var(--cyber-glow-soft);
     font-weight: 600;

@@ -288,6 +288,7 @@ body.konami-theme {
 
   // Tab buttons bounce! (override original theme)
   ion-tab-button {
+    font-family: var(--ion-font-family-heading) !important;
     --color: rgba(255, 255, 255, 0.6) !important;
     --color-selected: #ff00ff !important;
     transition: none !important;
@@ -354,6 +355,7 @@ body.konami-theme {
 
   // Card titles with pink glow
   ion-card-title {
+    font-family: var(--ion-font-family-heading) !important;
     background: none !important;
     background-clip: unset !important;
     -webkit-background-clip: unset !important;
@@ -369,6 +371,7 @@ body.konami-theme {
 
   // Rainbow gradient title (same as selected tab text)
   ion-title {
+    font-family: var(--ion-font-family-heading) !important;
     background: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00, #00ffff, #ff00ff) !important;
     background-size: 200% auto !important;
     background-clip: text !important;
@@ -380,9 +383,14 @@ body.konami-theme {
 
   // List headers glow
   ion-list-header {
+    font-family: var(--ion-font-family-heading) !important;
     color: #00ffff !important;
     text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff !important;
     animation: textGlow 2s ease-in-out infinite alternate;
+  }
+
+  ion-card-subtitle {
+    font-family: var(--ion-font-family-heading) !important;
   }
 
   // Glowing labels (override cyberpunk's yellow)
