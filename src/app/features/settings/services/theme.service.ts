@@ -14,7 +14,11 @@ const THEME_CLASSES: Record<Theme, string | null> = {
   [Theme.Cyberpunk]: 'cyberpunk-theme',
   [Theme.Nexus]: 'nexus-theme',
   [Theme.Pixel]: 'pixel-theme',
+  [Theme.Konami]: 'konami-theme', // Secret theme, unlocked via easter egg
 };
+
+/** Themes that require discovery before appearing in settings */
+const SECRET_DISCOVERABLE_THEMES: Theme[] = [Theme.Konami];
 
 /**
  * Theme CSS class mapping for secret themes.
@@ -35,6 +39,7 @@ export class ThemeService {
   private readonly DARK_MODE_KEY = 'theme';
   private readonly PUBLIC_THEME_KEY = 'public-theme';
   private readonly SECRET_THEME_KEY = 'secret-theme';
+  private readonly DISCOVERED_THEMES_KEY = 'discovered-themes';
 
   private darkMode = this.prefsStorage.get<string>(this.DARK_MODE_KEY) === 'dark';
 
@@ -47,6 +52,11 @@ export class ThemeService {
     this.prefsStorage.get<SecretTheme>(this.SECRET_THEME_KEY) ?? SecretTheme.None
   );
   public secretTheme$ = this.secretTheme.asObservable();
+
+  private discoveredThemes = new BehaviorSubject<Theme[]>(
+    this.prefsStorage.get<Theme[]>(this.DISCOVERED_THEMES_KEY) ?? []
+  );
+  public discoveredThemes$ = this.discoveredThemes.asObservable();
 
   constructor(private prefsStorage: PrefsStorage) { }
 
@@ -89,6 +99,40 @@ export class ThemeService {
   }
 
   // ============================================
+  // Theme Discovery
+  // ============================================
+
+  /**
+   * Get all themes available for selection in settings.
+   * Filters out secret themes that haven't been discovered yet.
+   */
+  getAvailableThemes(): Theme[] {
+    const discovered = this.discoveredThemes.value;
+    return Object.values(Theme).filter(
+      (theme) => !SECRET_DISCOVERABLE_THEMES.includes(theme) || discovered.includes(theme)
+    );
+  }
+
+  /**
+   * Check if a theme has been discovered.
+   */
+  isThemeDiscovered(theme: Theme): boolean {
+    return this.discoveredThemes.value.includes(theme);
+  }
+
+  /**
+   * Mark a theme as discovered (unlocked).
+   */
+  discoverTheme(theme: Theme): void {
+    const current = this.discoveredThemes.value;
+    if (!current.includes(theme)) {
+      const updated = [...current, theme];
+      this.prefsStorage.set(this.DISCOVERED_THEMES_KEY, updated);
+      this.discoveredThemes.next(updated);
+    }
+  }
+
+  // ============================================
   // Public Themes
   // ============================================
 
@@ -101,18 +145,18 @@ export class ThemeService {
 
   /**
    * Set and persist a public theme.
-   * Does nothing if a secret theme is currently active.
+   * If a secret theme is active, it will be deactivated first.
    */
   setTheme(theme: Theme): void {
-    // Ignore theme changes while a secret theme is active
+    // Exit secret mode if active
     if (this.secretTheme.value !== SecretTheme.None) {
-      return;
+      this.removeAllSecretThemeClasses();
+      this.prefsStorage.set(this.SECRET_THEME_KEY, SecretTheme.None);
+      this.secretTheme.next(SecretTheme.None);
     }
 
-    // Remove previous theme class
+    // Apply the new theme
     this.removeAllThemeClasses();
-
-    // Apply new theme
     this.applyTheme(theme);
 
     // Persist

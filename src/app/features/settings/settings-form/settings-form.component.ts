@@ -40,10 +40,14 @@ export class SettingsFormComponent implements OnInit {
     value,
   }));
 
-  protected readonly availableThemes = Object.entries(Theme).map(([_, value]) => ({
-    translateKey: `settings.form.appearance.theme.${value}`,
-    value,
-  }));
+  protected availableThemes: { translateKey: string; value: Theme }[] = [];
+
+  private updateAvailableThemes(): void {
+    this.availableThemes = this.themeService.getAvailableThemes().map((value) => ({
+      translateKey: `settings.form.appearance.theme.${value}`,
+      value,
+    }));
+  }
 
   form = this.fb.group({
     locale: [this.localeManager.getLocale(), Validators.required],
@@ -57,6 +61,14 @@ export class SettingsFormComponent implements OnInit {
     private keepAwakeService: KeepAwakeService,
     private themeService: ThemeService,
   ) {
+    // Initialize available themes
+    this.updateAvailableThemes();
+
+    // Update theme list when new themes are discovered
+    this.themeService.discoveredThemes$
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.updateAvailableThemes());
+
     this.form.valueChanges
       .pipe(takeUntilDestroyed(), debounceTime(250))
       .subscribe((value) => {

@@ -3,6 +3,7 @@ import { fromEvent, Subscription } from 'rxjs';
 
 import { ThemeService } from 'src/app/features/settings/services/theme.service';
 import { SecretTheme } from 'src/app/features/settings/enums/secret-theme.enum';
+import { Theme } from 'src/app/features/settings/enums/theme.enum';
 
 /**
  * Service that listens for the Konami code (keyboard or mobile taps)
@@ -90,10 +91,13 @@ export class KonamiService implements OnDestroy {
   }
 
   /**
-   * Toggle the Pride theme when easter egg is triggered.
-   * Extend this method to cycle through multiple themes if desired.
+   * Toggle the Konami theme when easter egg is triggered.
+   * Also marks the theme as discovered so it appears in settings.
    */
   private activateEasterEgg(): void {
+    // Mark theme as discovered (unlocks it in settings)
+    this.themeService.discoverTheme(Theme.Konami);
+    // Toggle the secret theme
     this.themeService.toggleSecretTheme(SecretTheme.Konami);
   }
 
