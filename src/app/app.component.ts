@@ -31,8 +31,16 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
+    // Add initializing class to prevent visual glitches on load
+    document.body.classList.add('initializing');
+
     // Initialize themes from localStorage (dark mode + secret themes)
     this.themeService.init();
+
+    // Remove initializing class after theme is applied
+    requestAnimationFrame(() => {
+      document.body.classList.remove('initializing');
+    });
 
     // Start listening for Konami code easter egg
     this.konamiService.watch();

@@ -28,6 +28,20 @@
 @import "@ionic/angular/css/palettes/dark.always.css";
 
 // ============================================
+// DEFAULT BACKGROUND - Prevents white flash on load
+// ============================================
+
+body {
+  background: var(--space-bg-dark);
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+body.initializing {
+  opacity: 0;
+}
+
+// ============================================
 // STARFIELD BACKGROUND
 // ============================================
 
@@ -45,49 +59,51 @@ ion-app {
     height: 100%;
     pointer-events: none;
     z-index: -1;
+    opacity: 0;
+    animation: fadeInStars 0.5s ease-out 0.2s forwards;
   }
 
   // Small faint stars
   &::before {
     background: transparent;
     box-shadow:
-      // Layer 1: Tiny faint stars
-      347px 892px rgba(255, 255, 255, 0.3),
-      1203px 456px rgba(255, 255, 255, 0.25),
-      89px 1567px rgba(255, 255, 255, 0.35),
-      1456px 234px rgba(255, 255, 255, 0.2),
-      678px 1890px rgba(255, 255, 255, 0.3),
-      1789px 567px rgba(255, 255, 255, 0.25),
-      234px 1234px rgba(255, 255, 255, 0.35),
-      1567px 890px rgba(255, 255, 255, 0.2),
-      456px 345px rgba(255, 255, 255, 0.3),
-      1890px 1456px rgba(255, 255, 255, 0.25),
-      123px 678px rgba(255, 255, 255, 0.35),
-      1345px 1789px rgba(255, 255, 255, 0.2),
-      789px 123px rgba(255, 255, 255, 0.3),
-      1678px 1345px rgba(255, 255, 255, 0.25),
-      567px 1678px rgba(255, 255, 255, 0.35),
-      1234px 567px rgba(255, 255, 255, 0.2),
-      890px 1234px rgba(255, 255, 255, 0.3),
-      1123px 890px rgba(255, 255, 255, 0.25),
-      345px 1123px rgba(255, 255, 255, 0.35),
-      1890px 345px rgba(255, 255, 255, 0.2),
-      678px 1890px rgba(255, 255, 255, 0.3),
-      1456px 678px rgba(255, 255, 255, 0.25),
-      234px 1456px rgba(255, 255, 255, 0.35),
-      1567px 234px rgba(255, 255, 255, 0.2),
-      456px 1567px rgba(255, 255, 255, 0.3),
-      1789px 456px rgba(255, 255, 255, 0.25),
-      123px 1789px rgba(255, 255, 255, 0.35),
-      1345px 123px rgba(255, 255, 255, 0.2),
-      789px 1345px rgba(255, 255, 255, 0.3),
-      1678px 789px rgba(255, 255, 255, 0.25),
-      567px 1012px rgba(255, 255, 255, 0.35),
-      1012px 1678px rgba(255, 255, 255, 0.2),
-      890px 567px rgba(255, 255, 255, 0.3),
-      1234px 1012px rgba(255, 255, 255, 0.25),
-      1012px 1234px rgba(255, 255, 255, 0.35),
-      345px 890px rgba(255, 255, 255, 0.2);
+      // Layer 1: Tiny faint stars (reduced coordinates)
+      47px 92px rgba(255, 255, 255, 0.3),
+      203px 56px rgba(255, 255, 255, 0.25),
+      89px 267px rgba(255, 255, 255, 0.35),
+      456px 134px rgba(255, 255, 255, 0.2),
+      278px 390px rgba(255, 255, 255, 0.3),
+      589px 67px rgba(255, 255, 255, 0.25),
+      134px 234px rgba(255, 255, 255, 0.35),
+      367px 90px rgba(255, 255, 255, 0.2),
+      156px 45px rgba(255, 255, 255, 0.3),
+      490px 156px rgba(255, 255, 255, 0.25),
+      123px 178px rgba(255, 255, 255, 0.35),
+      345px 289px rgba(255, 255, 255, 0.2),
+      189px 23px rgba(255, 255, 255, 0.3),
+      378px 145px rgba(255, 255, 255, 0.25),
+      267px 178px rgba(255, 255, 255, 0.35),
+      234px 67px rgba(255, 255, 255, 0.2),
+      90px 134px rgba(255, 255, 255, 0.3),
+      123px 90px rgba(255, 255, 255, 0.25),
+      45px 123px rgba(255, 255, 255, 0.35),
+      390px 45px rgba(255, 255, 255, 0.2),
+      178px 190px rgba(255, 255, 255, 0.3),
+      456px 78px rgba(255, 255, 255, 0.25),
+      34px 156px rgba(255, 255, 255, 0.35),
+      167px 34px rgba(255, 255, 255, 0.2),
+      56px 167px rgba(255, 255, 255, 0.3),
+      389px 56px rgba(255, 255, 255, 0.25),
+      23px 189px rgba(255, 255, 255, 0.35),
+      345px 23px rgba(255, 255, 255, 0.2),
+      189px 145px rgba(255, 255, 255, 0.3),
+      378px 89px rgba(255, 255, 255, 0.25),
+      67px 12px rgba(255, 255, 255, 0.35),
+      12px 178px rgba(255, 255, 255, 0.2),
+      90px 67px rgba(255, 255, 255, 0.3),
+      134px 12px rgba(255, 255, 255, 0.25),
+      12px 134px rgba(255, 255, 255, 0.35),
+      45px 90px rgba(255, 255, 255, 0.2);
     animation: starDrift 120s linear infinite;
   }
 
@@ -95,19 +111,28 @@ ion-app {
   &::after {
     background: transparent;
     box-shadow:
-      567px 234px rgba(255, 180, 100, 0.5),
-      1234px 890px rgba(255, 200, 150, 0.4),
-      345px 1567px rgba(255, 180, 100, 0.5),
-      1678px 456px rgba(255, 200, 150, 0.4),
-      890px 1234px rgba(255, 180, 100, 0.5),
-      123px 789px rgba(255, 200, 150, 0.4),
-      1456px 1678px rgba(255, 180, 100, 0.5),
-      678px 345px rgba(255, 200, 150, 0.4),
-      1789px 1123px rgba(255, 180, 100, 0.5),
-      234px 567px rgba(255, 200, 150, 0.4),
-      1345px 1890px rgba(255, 180, 100, 0.5),
-      789px 678px rgba(255, 200, 150, 0.4);
+      67px 34px rgba(255, 180, 100, 0.5),
+      234px 90px rgba(255, 200, 150, 0.4),
+      45px 167px rgba(255, 180, 100, 0.5),
+      178px 56px rgba(255, 200, 150, 0.4),
+      90px 134px rgba(255, 180, 100, 0.5),
+      23px 89px rgba(255, 200, 150, 0.4),
+      156px 178px rgba(255, 180, 100, 0.5),
+      78px 45px rgba(255, 200, 150, 0.4),
+      189px 123px rgba(255, 180, 100, 0.5),
+      34px 67px rgba(255, 200, 150, 0.4),
+      145px 190px rgba(255, 180, 100, 0.5),
+      89px 78px rgba(255, 200, 150, 0.4);
     animation: starDrift 180s linear infinite reverse;
+  }
+}
+
+@keyframes fadeInStars {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
