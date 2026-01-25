@@ -10,6 +10,11 @@
       "title": "Aspetto",
       "paletteToggle": {
         "title": "Modalità scura"
+      },
+      "theme": {
+        "title": "Tema",
+        "original": "Originale",
+        "cyberpunk": "Cyberpunk"
       }
     },
     "system": {

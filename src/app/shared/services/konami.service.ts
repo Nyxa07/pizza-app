@@ -1,10 +1,22 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { fromEvent, Subscription, BehaviorSubject } from 'rxjs';
+import { inject, Injectable, OnDestroy } from '@angular/core';
+import { fromEvent, Subscription } from 'rxjs';
 
+import { ThemeService } from 'src/app/features/settings/services/theme.service';
+import { SecretTheme } from 'src/app/features/settings/enums/secret-theme.enum';
+
+/**
+ * Service that listens for the Konami code (keyboard or mobile taps)
+ * and toggles secret themes via ThemeService.
+ *
+ * Keyboard: ↑ ↑ ↓ ↓ ← → ← → B A
+ * Mobile: 10 quick taps within 3 seconds
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class KonamiService implements OnDestroy {
+  private readonly themeService = inject(ThemeService);
+
   private readonly konamiCode = [
     'ArrowUp',
     'ArrowUp',
@@ -18,17 +30,16 @@ export class KonamiService implements OnDestroy {
     'a',
   ];
 
-  private isPrideThemeActive = new BehaviorSubject<boolean>(false);
-  public isPrideThemeActive$ = this.isPrideThemeActive.asObservable();
-
   private subscriptions: Subscription[] = [];
 
   // Manual tracking for proper reset
   private keyBuffer: string[] = [];
   private tapTimestamps: number[] = [];
 
-  constructor() {}
-
+  /**
+   * Start listening for Konami code input.
+   * Call this once during app initialization.
+   */
   public watch(): void {
     // Keyboard sequence
     const keyboardSub = fromEvent<KeyboardEvent>(window, 'keydown').subscribe(
@@ -45,7 +56,7 @@ export class KonamiService implements OnDestroy {
           this.keyBuffer.length === 10 &&
           JSON.stringify(this.keyBuffer) === JSON.stringify(this.konamiCode)
         ) {
-          this.toggleTheme();
+          this.activateEasterEgg();
           this.keyBuffer = []; // Reset after trigger
         }
       }
@@ -68,7 +79,7 @@ export class KonamiService implements OnDestroy {
           const last = this.tapTimestamps[9];
 
           if (last - first < 3000) {
-            this.toggleTheme();
+            this.activateEasterEgg();
             this.tapTimestamps = []; // Reset after trigger
           }
         }
@@ -78,8 +89,12 @@ export class KonamiService implements OnDestroy {
     this.subscriptions.push(keyboardSub, tapSub);
   }
 
-  private toggleTheme(): void {
-    this.isPrideThemeActive.next(!this.isPrideThemeActive.value);
+  /**
+   * Toggle the Pride theme when easter egg is triggered.
+   * Extend this method to cycle through multiple themes if desired.
+   */
+  private activateEasterEgg(): void {
+    this.themeService.toggleSecretTheme(SecretTheme.Konami);
   }
 
   ngOnDestroy(): void {

@@ -1,5 +1,25 @@
 <form [formGroup]="form">
   <ion-list-header>{{
+    "settings.form.appearance.title" | translate
+  }}</ion-list-header>
+  <ion-list lines="none">
+    <ion-item>
+      <ion-select
+        formControlName="theme"
+        [cancelText]="'common.actions.cancel' | translate"
+        [okText]="'common.actions.ok' | translate"
+        [label]="'settings.form.appearance.theme.title' | translate"
+      >
+        @for (theme of availableThemes; track theme) {
+          <ion-select-option [value]="theme.value">
+            {{ theme.translateKey | translate }}
+          </ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-list-header>{{
     "settings.form.system.title" | translate
   }}</ion-list-header>
   <ion-list lines="none">

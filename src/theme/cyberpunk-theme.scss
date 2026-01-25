@@ -1,0 +1,578 @@
+// ============================================
+// CYBERPUNK THEME ⚡🔋
+// ============================================
+// A high-tech, futuristic theme with neon yellow accents,
+// circuit board patterns, and glowing UI elements.
+
+body.cyberpunk-theme {
+  // Override theme colors with cyberpunk palette
+  --ion-color-primary: #e0e000;
+  --ion-color-primary-rgb: 224, 224, 0;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-shade: #c5c500;
+  --ion-color-primary-tint: #e3e31a;
+
+  // Cyberpunk theme variables
+  --cyber-yellow: #e0e000;
+  --cyber-yellow-bright: #ffff00;
+  --cyber-cyan: #00e5ff;
+  --cyber-dark: #0a0a12;
+  --cyber-dark-elevated: #12121f;
+  --cyber-glow: rgba(224, 224, 0, 0.6);
+  --cyber-glow-soft: rgba(224, 224, 0, 0.3);
+  --cyber-cyan-glow: rgba(0, 229, 255, 0.4);
+  --cyber-border: rgba(224, 224, 0, 0.4);
+
+  // Override Ionic variables
+  --ion-background-color: transparent;
+  --ion-background-color-rgb: 10, 10, 18;
+  --ion-toolbar-background: var(--cyber-dark);
+  --ion-item-background: transparent;
+  --ion-card-background: var(--cyber-dark-elevated);
+
+  // Override all background-color-step variables to transparent/dark
+  --ion-background-color-step-50: var(--cyber-dark);
+  --ion-background-color-step-100: var(--cyber-dark);
+  --ion-background-color-step-150: var(--cyber-dark-elevated);
+  --ion-background-color-step-200: var(--cyber-dark-elevated);
+  --ion-background-color-step-250: var(--cyber-dark-elevated);
+  --ion-background-color-step-300: var(--cyber-dark-elevated);
+  --ion-background-color-step-350: var(--cyber-dark-elevated);
+  --ion-background-color-step-400: var(--cyber-dark-elevated);
+  --ion-background-color-step-450: var(--cyber-dark-elevated);
+  --ion-background-color-step-500: var(--cyber-dark-elevated);
+
+  // Deep dark background
+  background: var(--cyber-dark) !important;
+
+  // Animated grid pattern on body::before
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background-color: var(--cyber-dark);
+    // Subtle grid pattern
+    background-image: 
+      linear-gradient(rgba(224, 224, 0, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(224, 224, 0, 0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: 0 0;
+    animation: gridDrift 20s linear infinite;
+    opacity: 0.6;
+  }
+
+  // Animated light particles and depth on body::after
+  &::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    background: 
+      // Animated light particles (using multiple radial gradients)
+      radial-gradient(circle at 20% 30%, rgba(224, 224, 0, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 75% 65%, rgba(0, 229, 255, 0.08) 0%, transparent 45%),
+      radial-gradient(circle at 50% 50%, rgba(224, 224, 0, 0.08) 0%, transparent 60%),
+      radial-gradient(circle at 10% 80%, rgba(0, 229, 255, 0.06) 0%, transparent 40%),
+      radial-gradient(circle at 85% 25%, rgba(224, 224, 0, 0.1) 0%, transparent 45%),
+      // Depth gradient overlay
+      linear-gradient(
+        to bottom,
+        rgba(10, 10, 18, 0.2) 0%,
+        transparent 25%,
+        transparent 75%,
+        rgba(10, 10, 18, 0.3) 100%
+      );
+    animation: particleFloat 18s ease-in-out infinite;
+    opacity: 1;
+    overflow: hidden;
+  }
+
+  // Make ion-app background transparent to show circuit pattern
+  ion-app {
+    background: transparent !important;
+
+    // Hide original theme starfield pseudo-elements completely
+    &::before,
+    &::after {
+      display: none !important;
+      box-shadow: none !important;
+      background: none !important;
+      animation: none !important;
+    }
+  }
+
+  // Scanline overlay on a separate element
+  ion-router-outlet::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(224, 224, 0, 0.02) 2px,
+      rgba(224, 224, 0, 0.02) 4px
+    );
+    opacity: 0.5;
+  }
+
+  // Content backgrounds - force transparency on all container elements
+  ion-content {
+    --background: transparent !important;
+  }
+
+  ion-tabs {
+    background: transparent !important;
+    --background: transparent !important;
+  }
+
+  ion-router-outlet {
+    background: transparent !important;
+  }
+
+  .ion-page {
+    background: transparent !important;
+  }
+
+  // Ensure inner content wrappers are transparent
+  .inner-scroll,
+  .scroll-content,
+  ion-content::part(scroll),
+  ion-content::part(background) {
+    background: transparent !important;
+  }
+
+  // ============================================
+  // Header / Toolbar
+  // ============================================
+
+  ion-header {
+    &::after {
+      display: none !important;
+    }
+  }
+
+  ion-toolbar {
+    --background: var(--cyber-dark) !important;
+    --border-color: transparent !important;
+    --color: var(--cyber-yellow) !important;
+    --ion-toolbar-background: var(--cyber-dark) !important;
+    --ion-toolbar-color: var(--cyber-yellow) !important;
+    position: relative !important;
+    overflow: hidden !important;
+
+    // Yellow accent line at bottom
+    &::after {
+      content: "" !important;
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 2px !important;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--cyber-yellow) 20%,
+        var(--cyber-yellow-bright) 50%,
+        var(--cyber-yellow) 80%,
+        transparent 100%
+      ) !important;
+      box-shadow: 0 0 10px var(--cyber-glow), 0 0 20px var(--cyber-glow-soft) !important;
+      z-index: 10 !important;
+    }
+
+    // Ensure content is above decorations
+    .toolbar-container,
+    ion-buttons,
+    ion-title,
+    ion-back-button {
+      position: relative !important;
+      z-index: 1 !important;
+    }
+  }
+
+  // Title with yellow glow
+  ion-title {
+    --color: var(--cyber-yellow) !important;
+    color: var(--cyber-yellow) !important;
+    text-shadow: 0 0 10px var(--cyber-glow), 0 0 20px var(--cyber-glow-soft) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    // Override Ionic's internal text color and any inherited colors
+    .toolbar-title {
+      color: var(--cyber-yellow) !important;
+    }
+  }
+
+  // Override for primary-colored toolbars
+  ion-toolbar[color="primary"],
+  ion-toolbar {
+    --background: var(--cyber-dark) !important;
+    --color: var(--cyber-yellow) !important;
+    --ion-color-primary: var(--cyber-dark) !important;
+    --ion-color-primary-contrast: var(--cyber-yellow) !important;
+
+    ion-title {
+      --color: var(--cyber-yellow) !important;
+      color: var(--cyber-yellow) !important;
+      text-shadow: 0 0 10px var(--cyber-glow), 0 0 20px var(--cyber-glow-soft) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+  }
+
+  // Header buttons
+  ion-back-button,
+  ion-toolbar ion-button,
+  ion-toolbar ion-buttons ion-button {
+    --background: transparent !important;
+    --color: var(--cyber-yellow) !important;
+
+    ion-icon,
+    i-lucide {
+      filter: drop-shadow(0 0 4px var(--cyber-glow)) !important;
+    }
+  }
+
+  ion-back-button::part(native) {
+    background: transparent !important;
+  }
+
+  ion-back-button::part(icon) {
+    color: var(--cyber-yellow);
+    filter: drop-shadow(0 0 4px var(--cyber-glow));
+  }
+
+  // ============================================
+  // Tab Bar
+  // ============================================
+
+  ion-tab-bar {
+    --background: rgba(10, 10, 18, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--cyber-border) !important;
+    box-shadow: 0 -5px 30px rgba(224, 224, 0, 0.1) !important;
+  }
+
+  ion-tab-button {
+    --color: rgba(255, 255, 255, 0.5);
+    --color-selected: var(--cyber-yellow);
+    position: relative;
+    transition: all 0.3s ease;
+
+    &.tab-selected {
+      ion-label {
+        color: var(--cyber-yellow) !important;
+        text-shadow: 0 0 8px var(--cyber-glow);
+      }
+
+      i-lucide,
+      ion-icon {
+        filter: drop-shadow(0 0 6px var(--cyber-glow)) drop-shadow(0 0 12px var(--cyber-glow-soft)) !important;
+      }
+
+      // Glowing underline for selected tab
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 20%;
+        right: 20%;
+        height: 2px;
+        background: var(--cyber-yellow);
+        box-shadow: 0 0 8px var(--cyber-glow), 0 0 16px var(--cyber-glow-soft);
+        border-radius: 2px;
+      }
+    }
+  }
+
+  // ============================================
+  // Cards and Lists
+  // ============================================
+
+  ion-card,
+  ion-list {
+    background: rgba(18, 18, 31, 0.9) !important;
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--cyber-border) !important;
+    border-radius: 8px !important;
+    box-shadow:
+      0 0 15px rgba(224, 224, 0, 0.1),
+      inset 0 1px 0 rgba(224, 224, 0, 0.1) !important;
+    animation: cyberPulse 4s ease-in-out infinite;
+  }
+
+  ion-card-header {
+    border-bottom: 1px solid var(--cyber-border);
+  }
+
+  ion-card-title {
+    color: var(--cyber-yellow) !important;
+    text-shadow: 0 0 8px var(--cyber-glow-soft);
+  }
+
+  ion-list-header {
+    color: var(--cyber-yellow) !important;
+    text-shadow: 0 0 8px var(--cyber-glow-soft);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+
+  ion-item {
+    --background: transparent;
+    --border-color: rgba(224, 224, 0, 0.15);
+  }
+
+  // ============================================
+  // Buttons
+  // ============================================
+
+  ion-button {
+    --background: linear-gradient(135deg, var(--cyber-dark-elevated) 0%, var(--cyber-dark) 100%) !important;
+    --background-hover: var(--cyber-dark-elevated) !important;
+    --background-activated: var(--cyber-dark) !important;
+    --color: var(--cyber-yellow) !important;
+    --border-radius: 4px;
+    --box-shadow:
+      0 0 10px var(--cyber-glow-soft),
+      inset 0 0 0 1px var(--cyber-border) !important;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+
+    &:hover {
+      --box-shadow:
+        0 0 20px var(--cyber-glow),
+        inset 0 0 0 1px var(--cyber-yellow) !important;
+    }
+  }
+
+  // ============================================
+  // Form Controls
+  // ============================================
+
+  // Select dropdowns
+  ion-select {
+    color: var(--cyber-yellow) !important;
+  }
+
+  ion-select::part(icon) {
+    color: var(--cyber-yellow) !important;
+    opacity: 1 !important;
+    filter: drop-shadow(0 0 4px var(--cyber-glow-soft));
+  }
+
+  ion-select::part(text) {
+    color: #ffffff !important;
+  }
+
+  // Toggle switches
+  ion-toggle {
+    --track-background: rgba(255, 255, 255, 0.15) !important;
+    --track-background-checked: var(--cyber-yellow) !important;
+    --handle-background: #ffffff !important;
+    --handle-background-checked: var(--cyber-dark) !important;
+
+    &.toggle-checked {
+      --handle-box-shadow: 0 0 8px var(--cyber-glow) !important;
+
+      &::part(track) {
+        background: var(--cyber-yellow) !important;
+        box-shadow: 0 0 10px var(--cyber-glow), 0 0 20px var(--cyber-glow-soft) !important;
+      }
+    }
+
+    &::part(track) {
+      border: 1px solid rgba(224, 224, 0, 0.3);
+    }
+  }
+
+  // Range sliders
+  ion-range {
+    --bar-background: rgba(255, 255, 255, 0.15);
+    --bar-background-active: var(--cyber-yellow);
+    --knob-background: var(--cyber-yellow);
+    --knob-box-shadow: 0 0 10px var(--cyber-glow), 0 0 20px var(--cyber-glow-soft);
+    --pin-background: var(--cyber-yellow);
+    --pin-color: var(--cyber-dark);
+  }
+
+  // Input fields
+  ion-input,
+  ion-textarea {
+    --background: rgba(255, 255, 255, 0.05) !important;
+    --color: #ffffff !important;
+    --placeholder-color: rgba(255, 255, 255, 0.4) !important;
+    
+    &.has-focus {
+      --background: rgba(224, 224, 0, 0.05) !important;
+    }
+  }
+
+  // ============================================
+  // Labels and Text
+  // ============================================
+
+  ion-label {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  ion-note {
+    color: rgba(224, 224, 0, 0.7) !important;
+  }
+
+  // ============================================
+  // Segments
+  // ============================================
+
+  ion-segment {
+    --background: rgba(255, 255, 255, 0.05);
+  }
+
+  ion-segment-button {
+    --color: rgba(255, 255, 255, 0.6);
+    --color-checked: var(--cyber-yellow);
+    --indicator-color: var(--cyber-yellow);
+    --indicator-box-shadow: 0 0 10px var(--cyber-glow);
+  }
+
+  // ============================================
+  // Badges and Chips
+  // ============================================
+
+  ion-badge {
+    --background: var(--cyber-yellow);
+    --color: var(--cyber-dark);
+    font-weight: 700;
+    box-shadow: 0 0 8px var(--cyber-glow-soft);
+  }
+
+  ion-chip {
+    --background: rgba(224, 224, 0, 0.15);
+    --color: var(--cyber-yellow);
+    border: 1px solid var(--cyber-border);
+  }
+
+  // ============================================
+  // Alerts and Modals
+  // ============================================
+
+  ion-alert {
+    --background: var(--cyber-dark-elevated);
+    --backdrop-opacity: 0.7;
+
+    .alert-wrapper {
+      border: 1px solid var(--cyber-border);
+      box-shadow: 0 0 30px var(--cyber-glow-soft);
+    }
+
+    .alert-head {
+      border-bottom: 1px solid var(--cyber-border);
+    }
+
+    .alert-title {
+      color: var(--cyber-yellow);
+    }
+
+    .alert-button {
+      color: var(--cyber-yellow);
+    }
+  }
+
+  ion-modal {
+    --background: var(--cyber-dark-elevated);
+    --border-radius: 8px;
+
+    &::part(content) {
+      border: 1px solid var(--cyber-border);
+      box-shadow: 0 0 40px var(--cyber-glow-soft);
+    }
+  }
+
+  // ============================================
+  // Scrollbar styling (webkit browsers)
+  // ============================================
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--cyber-dark);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--cyber-border);
+    border-radius: 3px;
+
+    &:hover {
+      background: var(--cyber-yellow);
+      box-shadow: 0 0 6px var(--cyber-glow);
+    }
+  }
+}
+
+// ============================================
+// Cyberpunk theme animations
+// ============================================
+
+@keyframes gridDrift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 60px 60px;
+  }
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes cyberPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 15px rgba(224, 224, 0, 0.1),
+      inset 0 1px 0 rgba(224, 224, 0, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 25px rgba(224, 224, 0, 0.15),
+      inset 0 1px 0 rgba(224, 224, 0, 0.15);
+  }
+}
+
+@keyframes cyberGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(224, 224, 0, 0.6), 0 0 20px rgba(224, 224, 0, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(224, 224, 0, 0.8), 0 0 30px rgba(224, 224, 0, 0.4);
+  }
+}
