@@ -1,6 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { fromEvent, Subscription, merge, Subject } from 'rxjs';
-import { map, bufferCount, filter, timestamp, tap } from 'rxjs/operators';
+import { fromEvent, Subscription, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,41 +18,71 @@ export class KonamiService implements OnDestroy {
     'a',
   ];
 
-  private subscription?: Subscription;
+  private isPrideThemeActive = new BehaviorSubject<boolean>(false);
+  public isPrideThemeActive$ = this.isPrideThemeActive.asObservable();
+
+  private subscriptions: Subscription[] = [];
+
+  // Manual tracking for proper reset
+  private keyBuffer: string[] = [];
+  private tapTimestamps: number[] = [];
 
   constructor() {}
 
-  public watch(callback: () => void): void {
+  public watch(): void {
     // Keyboard sequence
-    const keyboard$ = fromEvent<KeyboardEvent>(window, 'keydown').pipe(
-      map((event) => event.key),
-      bufferCount(10, 1),
-      filter(
-        (sequence) => JSON.stringify(sequence) === JSON.stringify(this.konamiCode)
-      )
-    );
+    const keyboardSub = fromEvent<KeyboardEvent>(window, 'keydown').subscribe(
+      (event) => {
+        this.keyBuffer.push(event.key);
 
-    // Mobile: 10 taps sequence - must be quick (within 3 seconds for the whole sequence)
-    const taps$ = fromEvent<TouchEvent | MouseEvent>(window, 'click').pipe(
-      timestamp(),
-      bufferCount(10, 1),
-      filter((events) => {
-        const first = events[0].timestamp;
-        const last = events[events.length - 1].timestamp;
-        // 10 taps must happen within 3000ms (3 seconds)
-        return last - first < 3000;
-      }),
-      map(() => true)
-    );
+        // Keep only the last 10 keys
+        if (this.keyBuffer.length > 10) {
+          this.keyBuffer.shift();
+        }
 
-    this.subscription = merge(keyboard$.pipe(map(() => true)), taps$).subscribe(
-      () => {
-        callback();
+        // Check for Konami code
+        if (
+          this.keyBuffer.length === 10 &&
+          JSON.stringify(this.keyBuffer) === JSON.stringify(this.konamiCode)
+        ) {
+          this.toggleTheme();
+          this.keyBuffer = []; // Reset after trigger
+        }
       }
     );
+
+    // Mobile: 10 taps sequence - must be quick (within 3 seconds)
+    const tapSub = fromEvent<TouchEvent | MouseEvent>(window, 'click').subscribe(
+      () => {
+        const now = Date.now();
+        this.tapTimestamps.push(now);
+
+        // Keep only the last 10 taps
+        if (this.tapTimestamps.length > 10) {
+          this.tapTimestamps.shift();
+        }
+
+        // Check if we have 10 taps within 3 seconds
+        if (this.tapTimestamps.length === 10) {
+          const first = this.tapTimestamps[0];
+          const last = this.tapTimestamps[9];
+
+          if (last - first < 3000) {
+            this.toggleTheme();
+            this.tapTimestamps = []; // Reset after trigger
+          }
+        }
+      }
+    );
+
+    this.subscriptions.push(keyboardSub, tapSub);
+  }
+
+  private toggleTheme(): void {
+    this.isPrideThemeActive.next(!this.isPrideThemeActive.value);
   }
 
   ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 }

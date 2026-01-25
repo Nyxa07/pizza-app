@@ -28,18 +28,14 @@ export class AppComponent implements OnInit {
     });
   }
   async ngOnInit() {
-    this.konamiService.watch(() => {
-      this.triggerEasterEgg();
+    this.konamiService.watch();
+    this.konamiService.isPrideThemeActive$.subscribe((isActive) => {
+      const body = document.body;
+      if (isActive) {
+        this.renderer.addClass(body, 'pride-theme');
+      } else {
+        this.renderer.removeClass(body, 'pride-theme');
+      }
     });
-  }
-
-  private triggerEasterEgg() {
-    const body = document.body;
-    this.renderer.addClass(body, 'konami-active');
-
-    // Remove after some time
-    setTimeout(() => {
-      this.renderer.removeClass(body, 'konami-active');
-    }, 10000);
   }
 }
