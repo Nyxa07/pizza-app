@@ -1,0 +1,476 @@
+// ============================================
+// GLASS THEME - Modern Glassmorphism 🪟
+// ============================================
+// A professional, modern theme featuring frosted glass effects,
+// transparency, subtle gradients, and elegant blur aesthetics.
+
+body.glass-theme {
+  // Core palette - Soft, professional colors
+  --glass-void: #0f0f14;
+  --glass-deep: #1a1a24;
+  --glass-surface: #24243a;
+  --glass-elevated: #2e2e48;
+  --glass-accent: #6b7aff;
+  --glass-accent-light: #8b9aff;
+  --glass-accent-soft: rgba(107, 122, 255, 0.15);
+  --glass-text-primary: #f0f0f5;
+  --glass-text-secondary: #b8b8d0;
+  --glass-text-muted: #7878a0;
+
+  // Glass effects
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-bright: rgba(255, 255, 255, 0.2);
+  --glass-glow: rgba(107, 122, 255, 0.4);
+  --glass-glow-soft: rgba(107, 122, 255, 0.15);
+  --glass-overlay: rgba(26, 26, 36, 0.6);
+  --glass-overlay-light: rgba(36, 36, 58, 0.5);
+
+  // Ionic overrides
+  --ion-color-primary: var(--glass-accent);
+  --ion-color-primary-rgb: 107, 122, 255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-shade: #5a68e0;
+  --ion-color-primary-tint: #7b8aff;
+
+  --ion-background-color: transparent;
+  --ion-background-color-rgb: 15, 15, 20;
+  --ion-toolbar-background: var(--glass-overlay);
+  --ion-item-background: transparent;
+  --ion-card-background: var(--glass-overlay-light);
+
+  background: var(--glass-void) !important;
+
+  // Elegant gradient background
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(107, 122, 255, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(139, 154, 255, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, var(--glass-deep) 0%, var(--glass-void) 100%);
+    animation: glassGradientShift 30s ease-in-out infinite alternate;
+  }
+
+  // Subtle floating particles
+  &::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      radial-gradient(1px 1px at 15% 25%, rgba(255, 255, 255, 0.3) 100%, transparent),
+      radial-gradient(1.5px 1.5px at 85% 15%, rgba(255, 255, 255, 0.25) 100%, transparent),
+      radial-gradient(1px 1px at 45% 75%, rgba(255, 255, 255, 0.2) 100%, transparent),
+      radial-gradient(1.5px 1.5px at 65% 45%, rgba(255, 255, 255, 0.3) 100%, transparent),
+      radial-gradient(1px 1px at 25% 85%, rgba(255, 255, 255, 0.25) 100%, transparent);
+    background-size: 400px 400px, 500px 500px, 450px 450px, 550px 550px, 480px 480px;
+    animation: glassParticleFloat 60s linear infinite;
+    opacity: 0.4;
+  }
+
+  ion-app {
+    background: transparent !important;
+    &::before, &::after { display: none !important; }
+  }
+
+  ion-content { --background: transparent !important; }
+  ion-tabs { background: transparent !important; --background: transparent !important; }
+  ion-router-outlet { background: transparent !important; }
+  .ion-page { background: transparent !important; }
+  .inner-scroll, .scroll-content, ion-content::part(scroll), ion-content::part(background) {
+    background: transparent !important;
+  }
+
+  // ============================================
+  // Header - Frosted Glass
+  // ============================================
+  ion-header {
+    background: transparent !important;
+  }
+
+  ion-toolbar,
+  ion-toolbar[color="primary"] {
+    --background: var(--glass-overlay) !important;
+    --border-color: transparent !important;
+    --ion-toolbar-background: var(--glass-overlay) !important;
+    --ion-color-primary: var(--glass-overlay) !important;
+    --ion-color-base: var(--glass-overlay) !important;
+    --color: var(--glass-text-primary) !important;
+    --ion-toolbar-color: var(--glass-text-primary) !important;
+    --ion-color-primary-contrast: var(--glass-text-primary) !important;
+    background: var(--glass-overlay) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+
+    &::after {
+      content: "" !important;
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 1px !important;
+      background: linear-gradient(90deg, transparent, var(--glass-border-bright), transparent) !important;
+      opacity: 0.6;
+    }
+  }
+
+  ion-title {
+    font-family: var(--ion-font-family-heading) !important;
+    color: var(--glass-text-primary) !important;
+    --color: var(--glass-text-primary) !important;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  // Header buttons / icons
+  ion-toolbar ion-buttons,
+  ion-toolbar ion-button,
+  ion-toolbar ion-back-button {
+    --background: transparent !important;
+    --background-hover: rgba(255, 255, 255, 0.05) !important;
+    --background-activated: rgba(255, 255, 255, 0.1) !important;
+    --background-focused: transparent !important;
+    --color: var(--glass-text-primary) !important;
+    --box-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  ion-toolbar ion-button::part(native),
+  ion-toolbar ion-back-button::part(native) {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  ion-toolbar ion-icon,
+  ion-toolbar i-lucide {
+    color: var(--glass-text-primary) !important;
+    filter: none !important;
+    opacity: 0.9 !important;
+  }
+
+  // ============================================
+  // Cards & Lists - Frosted Glass Panels
+  // ============================================
+  ion-card, ion-list {
+    background: var(--glass-overlay-light) !important;
+    border: 1px solid var(--glass-border) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+      0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+    border-radius: 16px !important;
+    margin: 16px !important;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      opacity: 0.8;
+    }
+  }
+
+  ion-item {
+    --background: transparent !important;
+    --color: var(--glass-text-primary) !important;
+    --border-color: rgba(255, 255, 255, 0.08) !important;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --inner-padding-end: 8px;
+  }
+
+  ion-card-title, ion-list-header {
+    font-family: var(--ion-font-family-heading) !important;
+    color: var(--glass-accent-light) !important;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  ion-card-subtitle {
+    color: var(--glass-text-secondary) !important;
+  }
+
+  // ============================================
+  // Tabs - Floating Glass Bar
+  // ============================================
+  ion-tab-bar {
+    --background: var(--glass-overlay) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    border-top: 1px solid var(--glass-border);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  ion-tab-button {
+    font-family: var(--ion-font-family) !important;
+    --color: var(--glass-text-muted) !important;
+    --color-selected: var(--glass-accent-light) !important;
+
+    ion-icon, i-lucide {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &.tab-selected {
+      ion-icon, i-lucide {
+        filter: drop-shadow(0 0 8px var(--glass-glow));
+        transform: translateY(-1px) scale(1.05);
+      }
+    }
+  }
+
+  // ============================================
+  // Buttons - Elegant Glass Buttons
+  // ============================================
+  ion-button {
+    --background: var(--glass-accent) !important;
+    --color: #ffffff !important;
+    --border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    box-shadow:
+      0 4px 16px var(--glass-glow-soft),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      --background: var(--glass-accent-light) !important;
+      box-shadow:
+        0 6px 24px var(--glass-glow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // ============================================
+  // Form Controls - Modern Glass Inputs
+  // ============================================
+  ion-toggle {
+    --handle-background: #ffffff !important;
+    --handle-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --track-background: rgba(255, 255, 255, 0.15) !important;
+    --track-background-checked: var(--glass-accent) !important;
+  }
+
+  ion-range {
+    --bar-background: rgba(255, 255, 255, 0.15) !important;
+    --bar-background-active: var(--glass-accent) !important;
+    --knob-background: #ffffff !important;
+    --knob-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  ion-select {
+    color: var(--glass-text-primary) !important;
+  }
+
+  ion-select::part(icon) {
+    color: var(--glass-accent) !important;
+    opacity: 1 !important;
+  }
+
+  ion-select::part(text) {
+    color: var(--glass-text-primary) !important;
+  }
+
+
+  // ============================================
+  // Select Options (Alert/Popover) - Glass Dialogs
+  // ============================================
+  ion-alert {
+    --background: var(--glass-deep) !important;
+    --backdrop-opacity: 0.7 !important;
+
+    .alert-wrapper {
+      background: var(--glass-overlay) !important;
+      border: 1px solid var(--glass-border-bright) !important;
+      border-radius: 16px !important;
+      backdrop-filter: blur(24px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+      box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .alert-head {
+      background: rgba(255, 255, 255, 0.03) !important;
+      border-bottom: 1px solid var(--glass-border) !important;
+    }
+
+    .alert-title {
+      color: var(--glass-accent-light) !important;
+      font-family: var(--ion-font-family-heading) !important;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .alert-message {
+      color: var(--glass-text-primary) !important;
+    }
+
+    .alert-radio-group,
+    .alert-checkbox-group {
+      background: transparent !important;
+    }
+
+    .alert-radio-label,
+    .alert-checkbox-label {
+      color: var(--glass-text-primary) !important;
+    }
+
+    .alert-radio-inner {
+      background: var(--glass-accent) !important;
+    }
+
+    [aria-checked="true"] .alert-radio-label {
+      color: var(--glass-accent-light) !important;
+      font-weight: 500;
+    }
+
+    .alert-button-group {
+      background: rgba(255, 255, 255, 0.02) !important;
+      border-top: 1px solid var(--glass-border) !important;
+    }
+
+    .alert-button {
+      color: var(--glass-accent-light) !important;
+      font-weight: 500;
+
+      &.alert-button-role-cancel {
+        color: var(--glass-text-secondary) !important;
+        opacity: 0.8;
+      }
+    }
+  }
+
+  ion-popover {
+    --background: var(--glass-overlay) !important;
+
+    &::part(content) {
+      background: var(--glass-overlay) !important;
+      border: 1px solid var(--glass-border-bright) !important;
+      border-radius: 12px !important;
+      backdrop-filter: blur(24px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+      box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+    }
+
+    ion-select-popover {
+      background: var(--glass-overlay) !important;
+    }
+
+    ion-item {
+      --background: transparent !important;
+      --color: var(--glass-text-primary) !important;
+      --border-color: var(--glass-border) !important;
+
+      &.item-radio-checked,
+      &[aria-selected="true"] {
+        --color: var(--glass-accent-light) !important;
+        --background: rgba(107, 122, 255, 0.08) !important;
+      }
+    }
+
+    ion-label {
+      color: var(--glass-text-primary) !important;
+    }
+  }
+
+  ion-modal {
+    --background: var(--glass-overlay) !important;
+    --backdrop-opacity: 0.7 !important;
+
+    &::part(content) {
+      background: var(--glass-overlay) !important;
+      border: 1px solid var(--glass-border-bright) !important;
+      border-radius: 16px !important;
+      backdrop-filter: blur(24px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+      box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+    }
+  }
+
+  // ============================================
+  // Input Fields - Glass Inputs
+  // ============================================
+  ion-input,
+  ion-textarea {
+    --background: rgba(255, 255, 255, 0.05) !important;
+    --color: var(--glass-text-primary) !important;
+    --placeholder-color: var(--glass-text-muted) !important;
+    --border-color: var(--glass-border) !important;
+    --border-radius: 8px;
+    --padding-start: 12px;
+    --padding-end: 12px;
+  }
+
+  // ============================================
+  // Badges & Chips - Subtle Glass Elements
+  // ============================================
+  ion-badge {
+    background: var(--glass-accent-soft) !important;
+    color: var(--glass-accent-light) !important;
+    border: 1px solid rgba(107, 122, 255, 0.3);
+    backdrop-filter: blur(8px);
+    font-weight: 500;
+  }
+
+  ion-chip {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: var(--glass-text-primary) !important;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+  }
+}
+
+// ============================================
+// Animations
+// ============================================
+@keyframes glassGradientShift {
+  0% {
+    transform: scale(1) translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.1) translate(3%, 3%);
+    opacity: 0.9;
+  }
+}
+
+@keyframes glassParticleFloat {
+  from {
+    background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
+  }
+  to {
+    background-position: 400px 800px, -500px 1000px, 450px -900px, -550px 1100px, 480px 960px;
+  }
+}
+
+

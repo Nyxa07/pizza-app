@@ -14,6 +14,7 @@ const THEME_CLASSES: Record<Theme, string | null> = {
   [Theme.Cyberpunk]: 'cyberpunk-theme',
   [Theme.Nexus]: 'nexus-theme',
   [Theme.Pixel]: 'pixel-theme',
+  [Theme.Glass]: 'glass-theme',
   [Theme.Konami]: 'konami-theme', // Secret theme, unlocked via easter egg
 };
 
