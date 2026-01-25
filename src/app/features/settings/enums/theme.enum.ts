@@ -6,4 +6,5 @@ export enum Theme {
   Original = 'original',
   Cyberpunk = 'cyberpunk',
   Nexus = 'nexus',
+  Pixel = 'pixel',
 }

@@ -126,7 +126,7 @@ body.nexus-theme {
     color: var(--nexus-star-white) !important;
     --color: var(--nexus-star-white) !important;
     text-shadow: 0 0 12px rgba(230, 241, 255, 0.2);
-    letter-spacing: 0.15em;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
   }
 
@@ -236,6 +236,124 @@ body.nexus-theme {
   ion-range {
     --bar-background-active: var(--nexus-electric-blue) !important;
     --knob-background: var(--nexus-star-white) !important;
+  }
+
+  ion-select {
+    color: var(--nexus-star-white) !important;
+  }
+
+  ion-select::part(icon) {
+    color: var(--nexus-electric-blue) !important;
+    opacity: 1 !important;
+  }
+
+  ion-select::part(text) {
+    color: var(--nexus-star-white) !important;
+  }
+
+  // ============================================
+  // Select Options (Alert/Popover)
+  // ============================================
+  ion-alert {
+    --background: var(--nexus-deep-blue) !important;
+    --backdrop-opacity: 0.8 !important;
+
+    .alert-wrapper {
+      background: var(--nexus-deep-blue) !important;
+      border: 1px solid var(--nexus-border) !important;
+      border-radius: 12px !important;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 210, 255, 0.1) !important;
+    }
+
+    .alert-head {
+      background: rgba(0, 210, 255, 0.05) !important;
+      border-bottom: 1px solid var(--nexus-border) !important;
+    }
+
+    .alert-title {
+      color: var(--nexus-electric-blue) !important;
+      font-family: var(--ion-font-family-heading) !important;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .alert-message {
+      color: var(--nexus-star-white) !important;
+    }
+
+    .alert-radio-group,
+    .alert-checkbox-group {
+      background: transparent !important;
+    }
+
+    .alert-radio-label,
+    .alert-checkbox-label {
+      color: var(--nexus-star-white) !important;
+    }
+
+    .alert-radio-inner {
+      background: var(--nexus-electric-blue) !important;
+    }
+
+    [aria-checked="true"] .alert-radio-label {
+      color: var(--nexus-electric-blue) !important;
+    }
+
+    .alert-button-group {
+      background: rgba(0, 210, 255, 0.03) !important;
+      border-top: 1px solid var(--nexus-border) !important;
+    }
+
+    .alert-button {
+      color: var(--nexus-electric-blue) !important;
+      
+      &.alert-button-role-cancel {
+        color: var(--nexus-star-white) !important;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  ion-popover {
+    --background: var(--nexus-deep-blue) !important;
+    
+    &::part(content) {
+      background: var(--nexus-deep-blue) !important;
+      border: 1px solid var(--nexus-border) !important;
+      border-radius: 12px !important;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 210, 255, 0.1) !important;
+    }
+
+    ion-select-popover {
+      background: var(--nexus-deep-blue) !important;
+    }
+
+    ion-item {
+      --background: transparent !important;
+      --color: var(--nexus-star-white) !important;
+      --border-color: var(--nexus-border) !important;
+
+      &.item-radio-checked,
+      &[aria-selected="true"] {
+        --color: var(--nexus-electric-blue) !important;
+      }
+    }
+
+    ion-label {
+      color: var(--nexus-star-white) !important;
+    }
+  }
+
+  ion-modal {
+    --background: var(--nexus-deep-blue) !important;
+    --backdrop-opacity: 0.8 !important;
+    
+    &::part(content) {
+      background: var(--nexus-deep-blue) !important;
+      border: 1px solid var(--nexus-border) !important;
+      border-radius: 12px !important;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 210, 255, 0.1) !important;
+    }
   }
 }
 

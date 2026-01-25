@@ -139,7 +139,8 @@ h6 {
 
 // Tighten toolbar titles
 ion-title {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
 }
 
 // Card titles - slightly smaller
@@ -491,6 +492,7 @@ ion-modal {
 // Public Themes
 @import "theme/cyberpunk-theme";
 @import "theme/nexus-theme";
+@import "theme/pixel-theme";
 
 // Secret Konami Theme (Easter Egg) - imported last to take precedence
 @import "theme/konami-theme";
