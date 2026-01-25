@@ -12,6 +12,7 @@ import { Theme } from '../enums/theme.enum';
 const THEME_CLASSES: Record<Theme, string | null> = {
   [Theme.Original]: null, // Original theme has no extra class
   [Theme.Cyberpunk]: 'cyberpunk-theme',
+  [Theme.Nexus]: 'nexus-theme',
 };
 
 /**

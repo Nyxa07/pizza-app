@@ -1,0 +1,253 @@
+// ============================================
+// NEXUS THEME - Deep Space Blue 🌌
+// ============================================
+// A vast, immersive deep space aesthetic with nebula glows,
+// glassmorphism, and electric blue accents.
+
+body.nexus-theme {
+  // Core palette - Deep Space Blues
+  --nexus-void: #02040a;
+  --nexus-deep-blue: #0a192f;
+  --nexus-electric-blue: #00d2ff;
+  --nexus-nebula-purple: #3a1c71;
+  --nexus-star-white: #e6f1ff;
+  
+  --nexus-glow: rgba(0, 210, 255, 0.5);
+  --nexus-glow-soft: rgba(0, 210, 255, 0.2);
+  --nexus-nebula-glow: rgba(58, 28, 113, 0.3);
+  --nexus-border: rgba(0, 210, 255, 0.25);
+
+  --ion-color-primary: var(--nexus-electric-blue);
+  --ion-color-primary-rgb: 0, 210, 255;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-shade: #00b9e0;
+  --ion-color-primary-tint: #1ad7ff;
+
+  --ion-background-color: transparent;
+  --ion-background-color-rgb: 2, 4, 10;
+  --ion-toolbar-background: rgba(2, 4, 10, 0.9);
+  --ion-item-background: transparent;
+  --ion-card-background: rgba(10, 25, 47, 0.5);
+
+  background: var(--nexus-void) !important;
+
+  // Immersive Space Background
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    // Deep space gradient + stars
+    background: 
+      radial-gradient(circle at 50% 50%, var(--nexus-deep-blue) 0%, var(--nexus-void) 100%),
+      radial-gradient(1px 1px at 10% 10%, #fff 100%, transparent),
+      radial-gradient(1px 1px at 20% 30%, #fff 100%, transparent),
+      radial-gradient(2px 2px at 40% 70%, #fff 80%, transparent),
+      radial-gradient(1px 1px at 50% 20%, #fff 100%, transparent),
+      radial-gradient(1.5px 1.5px at 80% 40%, #fff 90%, transparent),
+      radial-gradient(1px 1px at 90% 80%, #fff 100%, transparent),
+      radial-gradient(2px 2px at 15% 85%, #fff 70%, transparent);
+    background-size: 100% 100%, 300px 300px, 400px 400px, 350px 350px, 450px 450px, 500px 500px, 250px 250px, 600px 600px;
+    animation: nexusSpaceDrift 100s linear infinite;
+  }
+
+  // Nebula Clouds
+  &::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    background: 
+      radial-gradient(circle at 20% 30%, var(--nexus-nebula-purple) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, var(--nexus-glow-soft) 0%, transparent 50%),
+      radial-gradient(circle at 50% 10%, rgba(0, 210, 255, 0.1) 0%, transparent 40%);
+    filter: blur(60px);
+    opacity: 0.6;
+    animation: nexusNebulaPulse 20s ease-in-out infinite alternate;
+  }
+
+  ion-app {
+    background: transparent !important;
+    &::before, &::after { display: none !important; }
+  }
+
+  ion-content { --background: transparent !important; }
+  ion-tabs { background: transparent !important; --background: transparent !important; }
+  ion-router-outlet { background: transparent !important; }
+  .ion-page { background: transparent !important; }
+  .inner-scroll, .scroll-content, ion-content::part(scroll), ion-content::part(background) {
+    background: transparent !important;
+  }
+
+  // ============================================
+  // Header - Glassmorphism
+  // ============================================
+  ion-header {
+    background: transparent !important;
+  }
+
+  ion-toolbar,
+  ion-toolbar[color="primary"] {
+    --background: rgba(2, 4, 10, 0.9) !important;
+    --border-color: transparent !important;
+    --ion-toolbar-background: rgba(2, 4, 10, 0.9) !important;
+    --ion-color-primary: rgba(2, 4, 10, 0.9) !important;
+    --ion-color-base: rgba(2, 4, 10, 0.9) !important;
+    --color: var(--nexus-star-white) !important;
+    --ion-toolbar-color: var(--nexus-star-white) !important;
+    --ion-color-primary-contrast: var(--nexus-star-white) !important;
+    background: rgba(2, 4, 10, 0.9) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(230, 241, 255, 0.1) !important;
+    
+    &::after {
+      content: "" !important;
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 1px !important;
+      background: linear-gradient(90deg, transparent, rgba(230, 241, 255, 0.3), transparent) !important;
+      box-shadow: 0 0 10px rgba(230, 241, 255, 0.1) !important;
+    }
+  }
+
+  ion-title {
+    font-family: var(--ion-font-family-heading) !important;
+    color: var(--nexus-star-white) !important;
+    --color: var(--nexus-star-white) !important;
+    text-shadow: 0 0 12px rgba(230, 241, 255, 0.2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  // Header buttons / icons
+  ion-toolbar ion-buttons,
+  ion-toolbar ion-button,
+  ion-toolbar ion-back-button {
+    --background: transparent !important;
+    --background-hover: transparent !important;
+    --background-activated: rgba(230, 241, 255, 0.1) !important;
+    --background-focused: transparent !important;
+    --color: var(--nexus-star-white) !important;
+    --box-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+  ion-toolbar ion-button::part(native),
+  ion-toolbar ion-back-button::part(native) {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  ion-toolbar ion-icon,
+  ion-toolbar i-lucide {
+    color: var(--nexus-star-white) !important;
+    filter: none !important;
+    opacity: 0.85 !important;
+  }
+
+  // ============================================
+  // Cards & Lists - Floating Glass
+  // ============================================
+  ion-card, ion-list {
+    background: rgba(10, 25, 47, 0.4) !important;
+    border: 1px solid var(--nexus-border) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 210, 255, 0.05) !important;
+    border-radius: 16px !important;
+    margin: 16px !important;
+  }
+
+  ion-item {
+    --background: transparent !important;
+    --color: var(--nexus-star-white) !important;
+    --border-color: rgba(0, 210, 255, 0.1) !important;
+  }
+
+  ion-card-title, ion-list-header {
+    font-family: var(--ion-font-family-heading) !important;
+    color: var(--nexus-electric-blue) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  // ============================================
+  // Tabs
+  // ============================================
+  ion-tab-bar {
+    --background: rgba(10, 25, 47, 0.8) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 210, 255, 0.2);
+  }
+
+  ion-tab-button {
+    --color: rgba(230, 241, 255, 0.5) !important;
+    --color-selected: var(--nexus-electric-blue) !important;
+    
+    ion-icon, i-lucide {
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    &.tab-selected {
+      ion-icon, i-lucide {
+        filter: drop-shadow(0 0 8px var(--nexus-glow));
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  // ============================================
+  // Buttons - Electric Pulse
+  // ============================================
+  ion-button {
+    --background: var(--nexus-electric-blue) !important;
+    --color: var(--nexus-void) !important;
+    --border-radius: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 0 15px var(--nexus-glow-soft) !important;
+    
+    &:hover {
+      box-shadow: 0 0 25px var(--nexus-glow) !important;
+    }
+  }
+
+  // ============================================
+  // Form Controls
+  // ============================================
+  ion-toggle {
+    --handle-background: var(--nexus-star-white) !important;
+    --track-background-checked: var(--nexus-electric-blue) !important;
+  }
+
+  ion-range {
+    --bar-background-active: var(--nexus-electric-blue) !important;
+    --knob-background: var(--nexus-star-white) !important;
+  }
+}
+
+// ============================================
+// Animations
+// ============================================
+@keyframes nexusSpaceDrift {
+  from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
+  to { background-position: 0 0, 300px 600px, -400px 800px, 700px 350px, -900px 450px, 500px -1000px, -250px 500px, 1200px 600px; }
+}
+
+@keyframes nexusNebulaPulse {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.4; }
+  100% { transform: scale(1.2) translate(5%, 5%); opacity: 0.7; }
+}
