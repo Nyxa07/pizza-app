@@ -39,3 +39,20 @@
   src: url("/assets/fonts/Orbitron/Orbitron-Bold.ttf") format("truetype");
   font-display: swap;
 }
+
+// Inter - Premium variable font for Glass theme
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("/assets/fonts/Inter/InterVariable.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 100 900;
+  src: url("/assets/fonts/Inter/InterVariable-Italic.ttf") format("truetype");
+  font-display: swap;
+}

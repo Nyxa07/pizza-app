@@ -14,6 +14,7 @@ const THEME_CLASSES: Record<Theme, string | null> = {
   [Theme.Cyberpunk]: 'cyberpunk-theme',
   [Theme.Nexus]: 'nexus-theme',
   [Theme.Pixel]: 'pixel-theme',
+  [Theme.Retro]: 'retro-theme',
   [Theme.Glass]: 'glass-theme',
   [Theme.Konami]: 'konami-theme', // Secret theme, unlocked via easter egg
 };
@@ -42,20 +43,22 @@ export class ThemeService {
   private readonly SECRET_THEME_KEY = 'secret-theme';
   private readonly DISCOVERED_THEMES_KEY = 'discovered-themes';
 
-  private darkMode = this.prefsStorage.get<string>(this.DARK_MODE_KEY) === 'dark';
+  private darkMode =
+    this.prefsStorage.get<string>(this.DARK_MODE_KEY) === 'dark';
 
   private theme = new BehaviorSubject<Theme>(
-    this.prefsStorage.get<Theme>(this.PUBLIC_THEME_KEY) ?? Theme.Original
+    this.prefsStorage.get<Theme>(this.PUBLIC_THEME_KEY) ?? Theme.Original,
   );
   public theme$ = this.theme.asObservable();
 
   private secretTheme = new BehaviorSubject<SecretTheme>(
-    this.prefsStorage.get<SecretTheme>(this.SECRET_THEME_KEY) ?? SecretTheme.None
+    this.prefsStorage.get<SecretTheme>(this.SECRET_THEME_KEY) ??
+    SecretTheme.None,
   );
   public secretTheme$ = this.secretTheme.asObservable();
 
   private discoveredThemes = new BehaviorSubject<Theme[]>(
-    this.prefsStorage.get<Theme[]>(this.DISCOVERED_THEMES_KEY) ?? []
+    this.prefsStorage.get<Theme[]>(this.DISCOVERED_THEMES_KEY) ?? [],
   );
   public discoveredThemes$ = this.discoveredThemes.asObservable();
 
@@ -69,17 +72,24 @@ export class ThemeService {
     const darkModeValue = this.prefsStorage.get<string>(this.DARK_MODE_KEY);
     if (darkModeValue) {
       this.darkMode = darkModeValue === 'dark';
-      document.documentElement.classList.toggle('ion-palette-dark', this.darkMode);
+      document.documentElement.classList.toggle(
+        'ion-palette-dark',
+        this.darkMode,
+      );
     }
 
     // Public theme
-    const savedPublicTheme = this.prefsStorage.get<Theme>(this.PUBLIC_THEME_KEY);
+    const savedPublicTheme = this.prefsStorage.get<Theme>(
+      this.PUBLIC_THEME_KEY,
+    );
     if (savedPublicTheme) {
       this.applyTheme(savedPublicTheme);
     }
 
     // Secret theme
-    const savedSecretTheme = this.prefsStorage.get<SecretTheme>(this.SECRET_THEME_KEY);
+    const savedSecretTheme = this.prefsStorage.get<SecretTheme>(
+      this.SECRET_THEME_KEY,
+    );
     if (savedSecretTheme && savedSecretTheme !== SecretTheme.None) {
       this.applySecretTheme(savedSecretTheme);
     }
@@ -92,7 +102,10 @@ export class ThemeService {
   setDarkMode(isDarkMode: boolean): void {
     this.darkMode = isDarkMode;
     this.prefsStorage.set(this.DARK_MODE_KEY, this.darkMode ? 'dark' : 'light');
-    document.documentElement.classList.toggle('ion-palette-dark', this.darkMode);
+    document.documentElement.classList.toggle(
+      'ion-palette-dark',
+      this.darkMode,
+    );
   }
 
   isDarkMode(): boolean {
@@ -110,7 +123,9 @@ export class ThemeService {
   getAvailableThemes(): Theme[] {
     const discovered = this.discoveredThemes.value;
     return Object.values(Theme).filter(
-      (theme) => !SECRET_DISCOVERABLE_THEMES.includes(theme) || discovered.includes(theme)
+      (theme) =>
+        !SECRET_DISCOVERABLE_THEMES.includes(theme) ||
+        discovered.includes(theme),
     );
   }
 
@@ -204,6 +219,13 @@ export class ThemeService {
       // Activating secret theme: remove public theme classes to avoid conflicts
       this.removeAllThemeClasses();
       this.applySecretTheme(theme);
+
+      // Sync public theme to match the secret theme (for settings dropdown)
+      const publicTheme = this.mapSecretToPublicTheme(theme);
+      if (publicTheme !== null) {
+        this.prefsStorage.set(this.PUBLIC_THEME_KEY, publicTheme);
+        this.theme.next(publicTheme);
+      }
     } else {
       // Deactivating secret theme: restore the saved public theme
       const savedPublicTheme = this.theme.value;
@@ -213,6 +235,18 @@ export class ThemeService {
     // Persist
     this.prefsStorage.set(this.SECRET_THEME_KEY, theme);
     this.secretTheme.next(theme);
+  }
+
+  /**
+   * Map a secret theme to its corresponding public theme (if any).
+   */
+  private mapSecretToPublicTheme(secret: SecretTheme): Theme | null {
+    switch (secret) {
+      case SecretTheme.Konami:
+        return Theme.Konami;
+      default:
+        return null;
+    }
   }
 
   /**

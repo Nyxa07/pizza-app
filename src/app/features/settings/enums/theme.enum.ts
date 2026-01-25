@@ -7,6 +7,7 @@ export enum Theme {
   Cyberpunk = 'cyberpunk',
   Nexus = 'nexus',
   Pixel = 'pixel',
+  Retro = 'retro',
   Glass = 'glass',
   Konami = 'konami', // Secret theme, only visible after discovery
 }
