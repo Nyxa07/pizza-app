@@ -138,11 +138,6 @@ Use blank lines between groups.
   - `imports: [ComponentUnderTest]` (and required providers like `provideRouter([])`)
 - Legacy tests may use `declarations: [...]` + `IonicModule.forRoot()`; keep style consistent within a file.
 
-## Cursor / Copilot Rules
-
-- No Cursor rules found (`.cursor/rules/` or `.cursorrules` not present).
-- No Copilot instructions found (`.github/copilot-instructions.md` not present).
-
 ## Practical Gotchas
 
 - `baseUrl` is set in `tsconfig.json`; prefer `src/...` imports to avoid deep `../../..` paths.
