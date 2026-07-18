@@ -18,9 +18,9 @@
   Lancer :  python3 -m http.server -d prototypes 8099
   puis sur téléphone (même réseau) : http://<ip-du-poste>:8099/expert-screen-v2.prototype.html
 
-  Les fontes finales restent à choisir : le prototype teste le PRINCIPE du
-  pairing (serif éditoriale pour la voix, sans système pour l'instrument)
-  avec les fontes système, pas des fichiers de fontes définitifs.
+  Pairing typographique candidat embarqué en local (OFL, sous-ensemble latin) :
+  Fraunces variable (voix serif éditoriale, roman + italique) + Inter variable
+  (instrument, chiffres tabulaires). Fichiers dans ./fonts/.
 -->
 <html lang="fr">
 <head>
@@ -28,6 +28,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PROTOTYPE — Calculer · Expert v2</title>
 <style>
+  /* ============ FONTES CANDIDATES (locales, OFL) ============ */
+  @font-face {
+    font-family: "Fraunces";
+    src: url("fonts/fraunces-var.woff2") format("woff2");
+    font-weight: 300 700; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "Fraunces";
+    src: url("fonts/fraunces-italic-var.woff2") format("woff2");
+    font-weight: 300 700; font-style: italic; font-display: swap;
+  }
+  @font-face {
+    font-family: "Inter";
+    src: url("fonts/inter-var.woff2") format("woff2");
+    font-weight: 300 800; font-style: normal; font-display: swap;
+  }
+
   /* ============ TOKENS (esquisse de la future couche sémantique) ============ */
   :root {
     --bg: #F6F4F0;              /* papier, à peine chaud */
@@ -41,8 +58,8 @@
     --on-accent: #FFFFFF;
     --accent-soft: #F6E7E0;
     --shadow: 0 1px 2px rgba(32,26,20,.05), 0 6px 20px rgba(32,26,20,.07);
-    --font-voice: ui-serif, Georgia, "Times New Roman", serif;
-    --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-voice: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+    --font-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   }
   :root[data-appearance="dark"] {
     --bg: #131211;              /* presque-noir chaud, pas bleu */
