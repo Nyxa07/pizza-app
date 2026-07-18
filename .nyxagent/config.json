@@ -6,7 +6,7 @@
     "permissions": "full",
     "timeout_seconds": 2400
   },
-  "polling_interval_seconds": 600,
+  "polling_interval_seconds": 3600,
   "phases": [
     {
       "name": "selection",
