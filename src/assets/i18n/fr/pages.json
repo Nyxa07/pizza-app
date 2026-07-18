@@ -8,11 +8,11 @@
     "expert": {
       "title": "Calculer"
     },
-    "results": {
-      "title": "Résultats calcul"
-    },
     "assistant": {
       "title": "Assistant de configuration"
+    },
+    "method": {
+      "title": "La Méthode"
     }
   },
   "recipes": {

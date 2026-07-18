@@ -1,0 +1,167 @@
+:host {
+  display: block;
+  padding: 0 14px 24px;
+}
+
+.ready,
+.card > h3 {
+  font-family: var(--font-voice);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.ready {
+  margin: 2px 4px 14px;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.card {
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow);
+
+  > h3 {
+    margin: 0;
+    padding: 14px 18px 6px;
+    font-size: 0.95rem;
+    color: var(--ink-2);
+  }
+}
+
+.part {
+  padding: 4px 18px 12px;
+
+  + .part {
+    border-top: 1px solid var(--hairline);
+    padding-top: 12px;
+  }
+
+  h4 {
+    margin: 0 0 4px;
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+}
+
+.ingredient {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px 0;
+  font-size: 0.92rem;
+}
+
+.label {
+  color: var(--ink-2);
+}
+
+.qty {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.steps {
+  margin: 0;
+  padding: 4px 18px 16px;
+  list-style: none;
+}
+
+.step {
+  position: relative;
+  padding: 9px 0 9px 40px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 13px;
+    width: 1px;
+    background: var(--hairline);
+  }
+
+  &:first-child::before {
+    top: 14px;
+  }
+
+  &:last-child::before {
+    bottom: auto;
+    height: 14px;
+  }
+
+  .icon {
+    position: absolute;
+    top: 9px;
+    left: 0;
+    display: grid;
+    place-items: center;
+    width: 27px;
+    height: 27px;
+    background: var(--surface-sunken);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-full);
+    color: var(--ink-2);
+  }
+}
+
+.when {
+  margin-bottom: 2px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.title {
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.quantities {
+  margin-top: 2px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+.helper {
+  margin-top: 4px;
+  font-size: 0.82rem;
+
+  summary {
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  p {
+    margin: 6px 0 0;
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+}
+
+// The finale gets the single warm accent.
+.step.bake {
+  .icon {
+    background: var(--accent-soft);
+    border-color: transparent;
+    color: var(--accent);
+  }
+
+  .title {
+    font-weight: 600;
+  }
+}

@@ -1,23 +1,19 @@
 import { Injectable } from '@angular/core';
 
-import type { IRecipeDef } from '../../recipe/interfaces/recipe-def.interface';
+import type {
+  IMethodDef,
+  MethodIngredientKey,
+  MethodQuantities,
+} from 'src/app/features/method/interfaces/method-def.interface';
+
 import { DoughType } from '../enums/dough-type.enum';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
-import {
-  ICalculatorOutput,
-  Quantity,
-} from '../interfaces/calculator-output.interface';
-import { DirectDoughRecipe } from '../recipes/direct-dough.recipe';
-import { PoolishDoughRecipe } from '../recipes/poolish-dough.recipe';
-import { PoolishRecipe } from '../recipes/poolish.recipe';
-
-export type MethodIngredientKey =
-  | 'flour'
-  | 'water'
-  | 'yeast'
-  | 'salt'
-  | 'honey'
-  | 'oliveOil';
+import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
+import { DirectDoughMethod } from '../methods/direct-dough.method';
+import { PoolishDoughMethod } from '../methods/poolish-dough.method';
+import { PoolishMethod } from '../methods/poolish.method';
+import { after, ceilToQuarterHour } from './method-clock';
+import { toMethodIngredients } from './method.service';
 
 export interface IMethodPreviewIngredient {
   key: MethodIngredientKey;
@@ -39,8 +35,6 @@ export interface IMethodPreview {
 }
 
 const STEPS_KEY = 'calculator.expert.method.steps.';
-const QUARTER_HOUR_MS = 15 * 60 * 1000;
-const HOUR_MS = 60 * 60 * 1000;
 
 const ALL_INGREDIENTS: MethodIngredientKey[] = [
   'flour',
@@ -64,14 +58,14 @@ export class MethodPreviewService {
     output: ICalculatorOutput,
     now: Date,
   ): IMethodPreview {
-    const start = this.ceilToQuarterHour(now);
+    const start = ceilToQuarterHour(now);
     const hasPoolish = input.doughType === DoughType.POOLISH;
 
     return {
       steps: hasPoolish
         ? this.poolishSteps(output, start)
         : this.directSteps(input, output, start),
-      readyAt: this.after(start, output.total.prepTime),
+      readyAt: after(start, output.total.prepTime),
       totalSteps: this.countMethodSteps(input.doughType, output),
     };
   }
@@ -94,7 +88,7 @@ export class MethodPreviewService {
         ]),
       },
       {
-        at: this.after(start, output.poolish.prepTime),
+        at: after(start, output.poolish.prepTime),
         bodyKey: STEPS_KEY + 'poolishKnead',
         bodyParams: {},
         ingredients: this.ingredients(output.dough, ALL_INGREDIENTS),
@@ -115,7 +109,7 @@ export class MethodPreviewService {
         ingredients: this.ingredients(output.dough, ALL_INGREDIENTS),
       },
       {
-        at: this.after(start, output.dough.prepTime),
+        at: after(start, output.dough.prepTime),
         bodyKey: STEPS_KEY + 'directBalls',
         bodyParams: {
           count: input.nbPizzas,
@@ -132,43 +126,24 @@ export class MethodPreviewService {
    * without its pinch of yeast would narrate a lie.
    */
   private ingredients(
-    quantity: Quantity,
+    quantity: MethodQuantities,
     keys: MethodIngredientKey[],
   ): IMethodPreviewIngredient[] {
-    return keys
-      .map((key) => ({
-        key,
-        grams:
-          key === 'yeast'
-            ? Math.max(0.1, Math.round(quantity[key] * 10) / 10)
-            : Math.round(quantity[key]),
-      }))
-      .filter(({ key, grams }) => quantity[key] > 0 && grams > 0);
+    return toMethodIngredients(quantity, keys);
   }
 
   private countMethodSteps(
     doughType: DoughType,
     output: ICalculatorOutput,
   ): number {
-    const defs: IRecipeDef[] =
+    const defs: IMethodDef[] =
       doughType === DoughType.POOLISH
-        ? [new PoolishRecipe(output), new PoolishDoughRecipe(output)]
-        : [new DirectDoughRecipe(output)];
+        ? [new PoolishMethod(output), new PoolishDoughMethod(output)]
+        : [new DirectDoughMethod(output)];
 
     return defs.reduce(
-      (count, def) =>
-        count + def.method.items.filter((item) => !item.hide).length,
+      (count, def) => count + def.steps.filter((step) => !step.hide).length,
       0,
     );
-  }
-
-  private ceilToQuarterHour(date: Date): Date {
-    return new Date(
-      Math.ceil(date.getTime() / QUARTER_HOUR_MS) * QUARTER_HOUR_MS,
-    );
-  }
-
-  private after(start: Date, hours: number): Date {
-    return this.ceilToQuarterHour(new Date(start.getTime() + hours * HOUR_MS));
   }
 }

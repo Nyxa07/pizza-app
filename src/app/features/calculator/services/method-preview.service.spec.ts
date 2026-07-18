@@ -161,16 +161,16 @@ describe('MethodPreviewService', () => {
       ]);
     });
 
-    it('counts the steps of the real poolish method (both recipes)', () => {
+    it('counts every step of the real poolish method through the bake', () => {
       const preview = service.buildPreview(
         makeInput(),
         makePoolishOutput(),
         now,
       );
 
-      // PoolishRecipe: 4 visible steps; PoolishDoughRecipe: 11 visible steps
-      // (cold rest > 0 and pizza-balls rest > 0 hide nothing).
-      expect(preview.totalSteps).toBe(15);
+      // PoolishMethod: 4 visible steps; PoolishDoughMethod: 12 visible steps
+      // including the bake (cold rest and final rest hide nothing).
+      expect(preview.totalSteps).toBe(16);
     });
 
     it('announces when the dough is ready, on the quarter-hour grid', () => {
@@ -243,9 +243,9 @@ describe('MethodPreviewService', () => {
         now,
       );
 
-      // DirectDoughRecipe has 12 steps; no cold rest hides restCold and
-      // takeOutDough.
-      expect(preview.totalSteps).toBe(10);
+      // DirectDoughMethod has 13 steps; no cold rest hides restCold and
+      // takeOutDough, leaving the bake as the final eleventh step.
+      expect(preview.totalSteps).toBe(11);
     });
 
     it('keeps a start time already on the grid untouched', () => {

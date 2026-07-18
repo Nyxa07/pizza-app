@@ -13,7 +13,6 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 import { RelativeDayPipe } from 'src/app/shared/pipes/relative-day.pipe';
 import { TimePipe } from 'src/app/shared/pipes/time.pipe';
 
-import { CALCULATOR_MODE } from '../enums/calculator-mode.enum';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
@@ -175,7 +174,7 @@ export class ExpertFormComponent {
   }
 
   protected goToMethod(): void {
-    this.router.navigate(['/tabs/calculator/results', CALCULATOR_MODE.COMPLEX]);
+    this.router.navigate(['/tabs/calculator/method']);
   }
 
   private buildVm(

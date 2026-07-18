@@ -49,7 +49,6 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
-import { CALCULATOR_MODE } from '../enums/calculator-mode.enum';
 
 export interface IAssistantData {
   pizzaType: PizzaType;
@@ -314,9 +313,7 @@ export class AssistantFormComponent implements OnInit {
 
   applyConfiguration() {
     this.modal.dismiss();
-    this.router.navigate([
-      '/tabs/calculator/results/' + CALCULATOR_MODE.ASSIST,
-    ]);
+    this.router.navigate(['/tabs/calculator/method']);
   }
 
   dismissModal() {

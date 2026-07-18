@@ -36,14 +36,6 @@
     "method": {
       "title": "La Méthode",
       "fullMethod": "Méthode complète — {count} étapes",
-      "ingredients": {
-        "flour": "{grams} g de farine",
-        "water": "{grams} g d'eau",
-        "yeast": "{grams} g de levure",
-        "salt": "{grams} g de sel",
-        "honey": "{grams} g de miel",
-        "oliveOil": "{grams} g d'huile d'olive"
-      },
       "steps": {
         "poolishMix": "Poolish : mélanger {ingredients}. Couvrir à température ambiante.",
         "poolishKnead": "Frasage : ajouter {ingredients} à la poolish, puis pétrir.",
@@ -55,8 +47,8 @@
   },
   "assistant": {
     "title": "Assistant Pizza",
-    "subtitle": "Créons votre recette parfaite",
-    "description": "Laissez-vous guider étape par étape pour créer la recette de pizza idéale selon vos préférences.",
+    "subtitle": "Créons votre pâte parfaite",
+    "description": "Laissez-vous guider étape par étape pour créer la pâte à pizza idéale selon vos préférences.",
     "startButton": "Commencer l'assistant",
     "continueButton": "Reprendre l'assistant",
     "form": {
@@ -110,7 +102,7 @@
         "withoutLongRestTime": "Repos court",
         "withoutLongRestTimeDescription": "Le repos court permet de... manger plus vite 🤣",
         "totalPrepTime": "Temps préparation total",
-        "totalPrepTimeDescription": "Cela vous donne une idée du temps total de préparation de votre recette, ce qui permet de commencer au bon moment 😊"
+        "totalPrepTimeDescription": "Cela vous donne une idée du temps total de préparation de votre pâte, ce qui permet de commencer au bon moment 😊"
       },
       "yeastType": {
         "subtitle": "Type de levure",
@@ -134,7 +126,7 @@
       },
       "summary": {
         "subtitle": "Votre configuration",
-        "description": "Vérifiez vos choix avant de générer la recette.",
+        "description": "Vérifiez vos choix avant de générer la méthode.",
         "helpers": {
           "summary": "Récapitulatif"
         }
@@ -146,7 +138,61 @@
       "restart": "Recommencer l'assistant"
     }
   },
-  "recipe": {
+  "enums": {
+    "doughTypes": {
+      "poolish": "Poolish",
+      "direct": "Directe"
+    },
+    "pizzaTypes": {
+      "neapolitan": "Napolitaine",
+      "roman": "Romaine"
+    },
+    "yeastTypes": {
+      "dryActive": "Sèche active",
+      "dryInstant": "Instantanée",
+      "fresh": "Fraîche"
+    }
+  },
+  "stateSaver": {
+    "title": "Sauvegarde",
+    "newSave": "Nouvelle sauvegarde",
+    "previousSaves": "Sauvegardes précédentes",
+    "saveStateName": "Nom de la sauvegarde",
+    "stateSaved": "Sauvegarde effectuée",
+    "stateOverridden": "Sauvegarde remplacée",
+    "stateLoaded": "Sauvegarde chargée",
+    "stateDeleted": "Sauvegarde supprimée",
+    "nameRequired": "Le nom est requis",
+    "nameAlreadyExists": "Le nom existe déjà",
+    "confirmDeletion": "Êtes-vous sûr de vouloir supprimer cette sauvegarde ?",
+    "confirmLoad": "Charger cette sauvegarde remplacera votre calcul en cours. Continuer ?",
+    "confirmOverride": "Êtes-vous sûr de vouloir remplacer cette sauvegarde ?"
+  },
+  "share": {
+    "title": "Ma pâte à pizza",
+    "dialogTitle": "Partager la méthode avec tes amis",
+    "form": {
+      "titles": {
+        "configuration": "Configuration du partage"
+      },
+      "onlyIngredients": "Seulement les ingrédients",
+      "withHelperDescriptions": "Avec les descriptions des étapes",
+      "withHelperDescriptionsMessage": "Êtes-vous sûr de vouloir partager la méthode avec les descriptions des étapes (le texte sera plus long) ?"
+    }
+  },
+  "newCalculation": "Nouveau calcul",
+  "method": {
+    "ready": "Prête à enfourner {day} à {time}",
+    "ingredientsTitle": "Ingrédients",
+    "stepsTitle": "Étapes",
+    "ingredients": {
+      "flour": "{grams} g de farine",
+      "water": "{grams} g d'eau",
+      "yeast": "{grams} g de levure",
+      "salt": "{grams} g de sel",
+      "honey": "{grams} g de miel",
+      "oliveOil": "{grams} g d'huile d'olive"
+    },
     "titles": {
       "poolish": "Poolish",
       "directDough": "Pâte méthode directe",
@@ -204,12 +250,12 @@
         }
       },
       "addWaterSalt": {
-        "title": "{hasSalt, select, true {Dans la poolish, ajouter l'eau et le sel} other {Dans la poolish, ajouter l'eau}}",
+        "title": "Dans la poolish, ajouter l'eau{hasSalt, select, true { et le sel} other {}}{hasOliveOil, select, true { puis l'huile d'olive} other {}}",
         "helper": {
           "title": "Préparation de la pâte",
           "descriptions": [
             "Peser les quantités à ajouter dans la poolish",
-            "{hasSalt, select, true {Dans le bol de la poolish, ajouter l'eau et le sel. Mélanger à la cuillère en bois jusqu'à l'absorption de l'eau} other {Dans le bol de la poolish, ajouter l'eau. Mélanger à la cuillère en bois jusqu'à l'absorption de l'eau}}"
+            "Dans le bol de la poolish, ajouter l'eau{hasSalt, select, true { et le sel} other {}}. Mélanger à la cuillère en bois jusqu'à l'absorption de l'eau{hasOliveOil, select, true {, puis incorporer l'huile d'olive} other {}}"
           ]
         }
       },
@@ -332,50 +378,16 @@
             "Sortir la pâte 1 heure avant utilisation, pour qu'elle est le temps de revenir à température ambiante"
           ]
         }
+      },
+      "bake": {
+        "title": "Étaler, garnir et enfourner",
+        "helper": {
+          "title": "La cuisson",
+          "descriptions": [
+            "Préchauffer le four au maximum bien à l'avance (pierre ou plaque déjà à l'intérieur), étaler les pâtons, garnir et enfourner."
+          ]
+        }
       }
     }
-  },
-  "enums": {
-    "doughTypes": {
-      "poolish": "Poolish",
-      "direct": "Directe"
-    },
-    "pizzaTypes": {
-      "neapolitan": "Napolitaine",
-      "roman": "Romaine"
-    },
-    "yeastTypes": {
-      "dryActive": "Sèche active",
-      "dryInstant": "Instantanée",
-      "fresh": "Fraîche"
-    }
-  },
-  "stateSaver": {
-    "title": "Sauvegarde",
-    "newSave": "Nouvelle sauvegarde",
-    "previousSaves": "Sauvegardes précédentes",
-    "saveStateName": "Nom de la sauvegarde",
-    "stateSaved": "Sauvegarde effectuée",
-    "stateOverridden": "Sauvegarde remplacée",
-    "stateLoaded": "Sauvegarde chargée",
-    "stateDeleted": "Sauvegarde supprimée",
-    "nameRequired": "Le nom est requis",
-    "nameAlreadyExists": "Le nom existe déjà",
-    "confirmDeletion": "Êtes-vous sûr de vouloir supprimer cette sauvegarde ?",
-    "confirmLoad": "Charger cette sauvegarde remplacera votre calcul en cours. Continuer ?",
-    "confirmOverride": "Êtes-vous sûr de vouloir remplacer cette sauvegarde ?"
-  },
-  "share": {
-    "title": "Ma recette de pizza",
-    "dialogTitle": "Partager la recette avec tes amis",
-    "form": {
-      "titles": {
-        "configuration": "Configuration du partage"
-      },
-      "onlyIngredients": "Seulement les ingrédients",
-      "withHelperDescriptions": "Avec les descriptions des étapes",
-      "withHelperDescriptionsMessage": "Êtes-vous sûr de vouloir partager la recette avec les descriptions des étapes (le texte sera plus long) ?"
-    }
-  },
-  "newCalculation": "Nouveau calcul"
+  }
 }

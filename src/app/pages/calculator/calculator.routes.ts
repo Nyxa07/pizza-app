@@ -34,8 +34,13 @@ export const CALCULATOR_ROUTES: Route[] = [
     redirectTo: 'expert',
   },
   {
-    path: 'results/:mode',
+    path: 'method',
     loadComponent: () =>
-      import('./results/results.page').then((m) => m.CalculatorResultsPage),
+      import('./method/method.page').then((m) => m.CalculatorMethodPage),
+  },
+  // Legacy v1 results URL — the Method screen replaces it (issue #72).
+  {
+    path: 'results/:mode',
+    redirectTo: 'method',
   },
 ];

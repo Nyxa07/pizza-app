@@ -55,10 +55,6 @@
       "sunday": "dimanche"
     }
   },
-  "recipe": {
-    "ingredients": "Ingrédients",
-    "method": "Méthode"
-  },
   "sheets": {
     "open": "En savoir plus",
     "tip": "Astuce",
