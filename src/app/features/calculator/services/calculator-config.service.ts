@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { DEFAULT_DOUGH_CONSTANTS, DoughConstants } from '../dough.constants';
@@ -14,6 +14,7 @@ import { PrefsStorage } from '../../../shared/services/prefs-storage.service';
 @Injectable({ providedIn: 'root' })
 export class CalculatorConfigService {
   private readonly STORAGE_KEY = 'calculator:config';
+  private readonly prefs = inject(PrefsStorage);
 
   private readonly _state = new BehaviorSubject<DoughConstants>(
     this.loadInitial(),
@@ -29,8 +30,6 @@ export class CalculatorConfigService {
   get constants(): DoughConstants {
     return this._state.value;
   }
-
-  constructor(private prefs: PrefsStorage) {}
 
   // ---------------------------------------------------------------------------
   // Public API

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { YeastType } from 'src/app/features/calculator/enums/yeast-type.enum';
 import { CalculatorConfigService } from '../calculator-config.service';
 import { IProcessor } from '../../interfaces/processor.interface';
@@ -9,7 +9,7 @@ import { DoughType } from '../../enums/dough-type.enum';
   providedIn: 'root',
 })
 export class YeastProcessor implements IProcessor {
-  constructor(private calculatorConfig: CalculatorConfigService) {}
+  private readonly calculatorConfig = inject(CalculatorConfigService);
 
   process(
     input: ICalculatorInput,

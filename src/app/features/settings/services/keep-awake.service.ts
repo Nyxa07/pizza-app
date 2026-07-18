@@ -1,5 +1,5 @@
 import { KeepAwake } from '@capacitor-community/keep-awake';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,8 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 export class KeepAwakeService {
   private STORAGE_KEY = 'keepAwake';
   private _isKeptAwake = new BehaviorSubject<boolean>(false);
-
-  constructor(private prefs: PrefsStorage) {}
+  private readonly prefs = inject(PrefsStorage);
 
   async init() {
     const isSupported = await this.isSupported();

@@ -61,7 +61,12 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
   styles: `
     :host {
       position: relative;
-      display: block;
+      display: grid;
+      grid-template-areas:
+        'label label'
+        'value controls';
+      grid-template-columns: minmax(0, 1fr) auto;
+      column-gap: 8px;
       background: var(--surface);
       border: 1px solid var(--hairline);
       border-radius: var(--radius-m);
@@ -70,6 +75,7 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
     }
 
     .label {
+      grid-area: label;
       display: flex;
       align-items: center;
       gap: 2px;
@@ -86,6 +92,8 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
     }
 
     .value {
+      grid-area: value;
+      min-width: 0;
       padding: 4px 0 2px;
       font-size: 1.6rem;
       font-weight: 700;
@@ -107,9 +115,8 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
     }
 
     .ctrl {
-      position: absolute;
-      top: 10px;
-      right: 10px;
+      grid-area: controls;
+      align-self: end;
       display: flex;
       gap: 6px;
 
