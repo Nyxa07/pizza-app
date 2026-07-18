@@ -1,9 +1,9 @@
-import { CalculatorStateService } from './calculator-state.service';
-import { CalculatorSettingsService } from './calculator-settings.service';
 import { Injectable, inject } from '@angular/core';
-import { CalculatorStateSaveManagerService } from './calculator-state-save-manager.service';
-import { CALCULATOR_MODE } from '../enums/calculator-mode.enum';
+
+import { CalculatorPath } from '../enums/calculator-path.enum';
 import { ICalculatorSettings } from '../interfaces/calculator-settings.interface';
+import { CalculatorSettingsService } from './calculator-settings.service';
+import { CalculatorStateService } from './calculator-state.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +11,7 @@ import { ICalculatorSettings } from '../interfaces/calculator-settings.interface
 export class CalculatorInitializerService {
   private readonly calculatorState = inject(CalculatorStateService);
   private readonly calculatorSettings = inject(CalculatorSettingsService);
-  private readonly calculatorStateSaveManager = inject(
-    CalculatorStateSaveManagerService,
-  );
-
-  private _isInitialized = false;
+  private activePath: CalculatorPath | null = null;
 
   /**
    * The Expert path (issue #71): every field is explicit — whatever the
@@ -24,8 +20,8 @@ export class CalculatorInitializerService {
    * technical mode underneath: it keys the persisted saves silo (merged
    * into Doughs by #74) and the results/:mode URL (redesigned by #72).
    */
-  initExpert() {
-    this.init(CALCULATOR_MODE.COMPLEX, {
+  initExpert(): void {
+    this.init(CalculatorPath.EXPERT, {
       settings: {
         pizzaWeight: { auto: false },
         saltRatio: { auto: false },
@@ -44,8 +40,9 @@ export class CalculatorInitializerService {
     });
   }
 
-  initAssisted() {
-    this.init(CALCULATOR_MODE.ASSIST, {
+  /** The Guided path only asks for fields a beginner can answer plainly. */
+  initGuided(): void {
+    this.init(CalculatorPath.GUIDED, {
       settings: {
         saltRatio: { auto: true },
         honeyRatio: { auto: true },
@@ -54,8 +51,10 @@ export class CalculatorInitializerService {
         doughType: { auto: false },
         poolishRatio: { auto: true },
         yeastType: { auto: false },
-        coldRestTime: { auto: true },
-        rtRestTime: { auto: true },
+        // A Draft coming from Expert can carry an explicit ambient/cold
+        // split instead of a global rest. Keep either representation live.
+        coldRestTime: { auto: false },
+        rtRestTime: { auto: false },
         globalRestTime: { auto: false },
         pizzaWeight: { auto: true },
         oliveOilRatio: { auto: true },
@@ -63,32 +62,21 @@ export class CalculatorInitializerService {
     });
   }
 
-  // Facade to init the calculator behind a deep link (results/:mode); the
-  // retired simple/complex modes resolve to the Expert configuration.
-  initWithMode(mode: CALCULATOR_MODE) {
-    if (this._isInitialized) {
-      return;
-    }
-    switch (mode) {
-      case CALCULATOR_MODE.SIMPLE:
-      case CALCULATOR_MODE.COMPLEX:
-        this.initExpert();
-        break;
-      case CALCULATOR_MODE.ASSIST:
-        this.initAssisted();
-        break;
+  /** Deep-linked Methods use Expert settings unless a path is already active. */
+  initMethod(): void {
+    if (this.activePath === null) {
+      this.initExpert();
     }
   }
 
   private init(
-    mode: CALCULATOR_MODE,
+    path: CalculatorPath,
     options?: {
       settings?: Partial<ICalculatorSettings>;
     },
-  ) {
+  ): void {
     this.calculatorSettings.init(options?.settings);
     this.calculatorState.init();
-    this.calculatorStateSaveManager.init(mode);
-    this._isInitialized = true;
+    this.activePath = path;
   }
 }

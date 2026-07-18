@@ -1,26 +1,24 @@
-import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
-import { CalculatorStateService } from './calculator-state.service';
 import { Injectable, inject } from '@angular/core';
+
+import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
+
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
-import { CALCULATOR_MODE } from '../enums/calculator-mode.enum';
+import { CalculatorStateService } from './calculator-state.service';
 
 @Injectable({ providedIn: 'root' })
 export class CalculatorStateSaveManagerService {
   private readonly prefs = inject(PrefsStorage);
   private readonly state = inject(CalculatorStateService);
 
-  private readonly STORAGE_KEY = 'calculator';
-  private mode: CALCULATOR_MODE = CALCULATOR_MODE.SIMPLE;
-
-  init(mode: CALCULATOR_MODE): void {
-    this.mode = mode;
-  }
+  // Kept until the saved-Dough migration (#74). The Expert screen was the
+  // former complex mode, so retaining this key preserves existing saves.
+  private readonly SAVE_KEY = 'calculator:complex:states';
 
   saveState(name: string): void {
-    const saveKey = this.STORAGE_KEY + ':' + this.mode + ':states';
     const savedStates =
-      this.prefs.get<{ name: string; input: ICalculatorInput }[]>(saveKey) ??
-      [];
+      this.prefs.get<{ name: string; input: ICalculatorInput }[]>(
+        this.SAVE_KEY,
+      ) ?? [];
 
     const existingStateIndex = savedStates.findIndex((s) => s.name === name);
     const stateToSave = {
@@ -34,7 +32,7 @@ export class CalculatorStateSaveManagerService {
       savedStates.push(stateToSave);
     }
 
-    this.prefs.set(saveKey, savedStates);
+    this.prefs.set(this.SAVE_KEY, savedStates);
   }
 
   loadState(name: string): void {
@@ -52,14 +50,13 @@ export class CalculatorStateSaveManagerService {
     if (stateIndex !== -1) {
       savedStates.splice(stateIndex, 1);
     }
-    this.prefs.set(this.STORAGE_KEY + ':' + this.mode + ':states', savedStates);
+    this.prefs.set(this.SAVE_KEY, savedStates);
   }
 
   listSavedStates(): { name: string; input: ICalculatorInput }[] {
-    const saveKey = this.STORAGE_KEY + ':' + this.mode + ':states';
     return (
       this.prefs
-        .get<{ name: string; input: ICalculatorInput }[]>(saveKey)
+        .get<{ name: string; input: ICalculatorInput }[]>(this.SAVE_KEY)
         ?.sort((a, b) => a.name.localeCompare(b.name)) ?? []
     );
   }

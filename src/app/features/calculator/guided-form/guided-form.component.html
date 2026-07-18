@@ -1,0 +1,341 @@
+@if (input$ | async; as input) {
+  <div class="progress-copy num">
+    {{
+      "calculator.guided.progress"
+        | translate: { current: currentStepIndex() + 1, total: stepCount }
+    }}
+  </div>
+  <div
+    class="progress-track"
+    role="progressbar"
+    [attr.aria-valuemin]="1"
+    [attr.aria-valuemax]="stepCount"
+    [attr.aria-valuenow]="currentStepIndex() + 1"
+    [attr.aria-label]="'calculator.guided.progressLabel' | translate"
+  >
+    <span [style.width.%]="progress()"></span>
+  </div>
+
+  <section
+    class="question"
+    [attr.aria-labelledby]="'guided-question-' + currentStep().id"
+  >
+    <p class="eyebrow">{{ currentStep().eyebrow | translate }}</p>
+    <h1 [id]="'guided-question-' + currentStep().id">
+      {{ currentStep().question | translate }}
+    </h1>
+    <p class="description">{{ currentStep().description | translate }}</p>
+
+    @switch (currentStep().id) {
+      @case ("pizzaType") {
+        <div
+          class="choices"
+          role="radiogroup"
+          [attr.aria-labelledby]="'guided-question-pizzaType'"
+        >
+          <button
+            type="button"
+            class="choice"
+            [class.selected]="input.pizzaType === PizzaType.NEAPOLITAN"
+            role="radio"
+            [attr.aria-checked]="input.pizzaType === PizzaType.NEAPOLITAN"
+            (click)="selectPizzaType(PizzaType.NEAPOLITAN)"
+          >
+            <strong>{{
+              "calculator.enums.pizzaTypes.neapolitan" | translate
+            }}</strong>
+            <span>{{
+              "calculator.guided.options.neapolitan" | translate
+            }}</span>
+          </button>
+          <button
+            type="button"
+            class="choice"
+            [class.selected]="input.pizzaType === PizzaType.ROMAN"
+            role="radio"
+            [attr.aria-checked]="input.pizzaType === PizzaType.ROMAN"
+            (click)="selectPizzaType(PizzaType.ROMAN)"
+          >
+            <strong>{{
+              "calculator.enums.pizzaTypes.roman" | translate
+            }}</strong>
+            <span>{{ "calculator.guided.options.roman" | translate }}</span>
+          </button>
+        </div>
+      }
+      @case ("quantity") {
+        <div class="counter">
+          <button
+            type="button"
+            class="counter-button"
+            [disabled]="input.nbPizzas <= 1"
+            [attr.aria-label]="
+              'calculator.guided.quantity.decrease' | translate
+            "
+            (click)="changeQuantity(-1)"
+          >
+            −
+          </button>
+          <div class="counter-value num" aria-live="polite">
+            <strong>{{ input.nbPizzas }}</strong>
+            <span>
+              {{
+                "calculator.guided.quantity.pizzas"
+                  | translate: { count: input.nbPizzas }
+              }}
+            </span>
+          </div>
+          <button
+            type="button"
+            class="counter-button"
+            [attr.aria-label]="
+              'calculator.guided.quantity.increase' | translate
+            "
+            (click)="changeQuantity(1)"
+          >
+            +
+          </button>
+        </div>
+      }
+      @case ("doughType") {
+        <div
+          class="choices"
+          role="radiogroup"
+          [attr.aria-labelledby]="'guided-question-doughType'"
+        >
+          <div class="choice-row">
+            <button
+              type="button"
+              class="choice"
+              [class.selected]="input.doughType === DoughType.DIRECT"
+              role="radio"
+              [attr.aria-checked]="input.doughType === DoughType.DIRECT"
+              (click)="selectDoughType(DoughType.DIRECT)"
+            >
+              <strong>{{
+                "calculator.enums.doughTypes.direct" | translate
+              }}</strong>
+              <span>{{ "calculator.guided.options.direct" | translate }}</span>
+            </button>
+            <app-info-sheet-button [sheetId]="InfoSheetId.DIRECT" />
+          </div>
+          <div class="choice-row">
+            <button
+              type="button"
+              class="choice"
+              [class.selected]="input.doughType === DoughType.POOLISH"
+              role="radio"
+              [attr.aria-checked]="input.doughType === DoughType.POOLISH"
+              (click)="selectDoughType(DoughType.POOLISH)"
+            >
+              <strong>{{
+                "calculator.enums.doughTypes.poolish" | translate
+              }}</strong>
+              <span>{{ "calculator.guided.options.poolish" | translate }}</span>
+            </button>
+            <app-info-sheet-button [sheetId]="InfoSheetId.POOLISH" />
+          </div>
+        </div>
+      }
+      @case ("restTime") {
+        <div class="question-heading-with-info">
+          <span>{{ "calculator.guided.restTime.hint" | translate }}</span>
+          <app-info-sheet-button [sheetId]="InfoSheetId.WARM_REST" />
+          <app-info-sheet-button [sheetId]="InfoSheetId.COLD_REST" />
+        </div>
+        <div
+          class="pill-grid"
+          role="radiogroup"
+          [attr.aria-labelledby]="'guided-question-restTime'"
+        >
+          @if (!hasSuggestedRestTime(input)) {
+            <button
+              type="button"
+              class="pill num selected"
+              role="radio"
+              aria-checked="true"
+              (click)="selectRestTime(effectiveRestTime(input))"
+            >
+              {{ effectiveRestTime(input) }} h
+            </button>
+          }
+          @for (hours of restTimes; track hours) {
+            <button
+              type="button"
+              class="pill num"
+              [class.selected]="effectiveRestTime(input) === hours"
+              role="radio"
+              [attr.aria-checked]="effectiveRestTime(input) === hours"
+              (click)="selectRestTime(hours)"
+            >
+              {{ hours }} h
+            </button>
+          }
+        </div>
+      }
+      @case ("temperature") {
+        <div class="question-heading-with-info">
+          <span>{{ "calculator.guided.temperature.hint" | translate }}</span>
+          <app-info-sheet-button [sheetId]="InfoSheetId.TEMPERATURE" />
+        </div>
+        <div
+          class="pill-grid"
+          role="radiogroup"
+          [attr.aria-labelledby]="'guided-question-temperature'"
+        >
+          @if (!hasSuggestedTemperature(input)) {
+            <button
+              type="button"
+              class="pill num selected"
+              role="radio"
+              aria-checked="true"
+              (click)="selectTemperature(input.temperature)"
+            >
+              {{ input.temperature }} °C
+            </button>
+          }
+          @for (temperature of temperatures; track temperature) {
+            <button
+              type="button"
+              class="pill num"
+              [class.selected]="input.temperature === temperature"
+              role="radio"
+              [attr.aria-checked]="input.temperature === temperature"
+              (click)="selectTemperature(temperature)"
+            >
+              {{ temperature }} °C
+            </button>
+          }
+        </div>
+      }
+      @case ("yeastType") {
+        <div class="question-heading-with-info">
+          <span>{{ "calculator.guided.yeastType.hint" | translate }}</span>
+          <app-info-sheet-button [sheetId]="InfoSheetId.YEASTS" />
+        </div>
+        <div
+          class="choices"
+          role="radiogroup"
+          [attr.aria-labelledby]="'guided-question-yeastType'"
+        >
+          <button
+            type="button"
+            class="choice compact"
+            [class.selected]="input.yeastType === YeastType.DRY_ACTIVE"
+            role="radio"
+            [attr.aria-checked]="input.yeastType === YeastType.DRY_ACTIVE"
+            (click)="selectYeastType(YeastType.DRY_ACTIVE)"
+          >
+            <strong>{{
+              "calculator.enums.yeastTypes.dryActive" | translate
+            }}</strong>
+          </button>
+          <button
+            type="button"
+            class="choice compact"
+            [class.selected]="input.yeastType === YeastType.DRY_INSTANT"
+            role="radio"
+            [attr.aria-checked]="input.yeastType === YeastType.DRY_INSTANT"
+            (click)="selectYeastType(YeastType.DRY_INSTANT)"
+          >
+            <strong>{{
+              "calculator.enums.yeastTypes.dryInstant" | translate
+            }}</strong>
+          </button>
+          <button
+            type="button"
+            class="choice compact"
+            [class.selected]="input.yeastType === YeastType.FRESH"
+            role="radio"
+            [attr.aria-checked]="input.yeastType === YeastType.FRESH"
+            (click)="selectYeastType(YeastType.FRESH)"
+          >
+            <strong>{{
+              "calculator.enums.yeastTypes.fresh" | translate
+            }}</strong>
+          </button>
+        </div>
+      }
+      @case ("summary") {
+        <dl class="summary">
+          <div>
+            <dt>{{ "calculator.guided.summary.style" | translate }}</dt>
+            <dd>
+              {{ "calculator.enums.pizzaTypes." + input.pizzaType | translate }}
+            </dd>
+          </div>
+          <div>
+            <dt>{{ "calculator.guided.summary.quantity" | translate }}</dt>
+            <dd class="num">{{ input.nbPizzas }}</dd>
+          </div>
+          <div>
+            <dt>{{ "calculator.guided.summary.dough" | translate }}</dt>
+            <dd>
+              {{ "calculator.enums.doughTypes." + input.doughType | translate }}
+            </dd>
+          </div>
+          <div>
+            <dt>{{ "calculator.guided.summary.rest" | translate }}</dt>
+            <dd class="num">{{ effectiveRestTime(input) }} h</dd>
+          </div>
+          <div>
+            <dt>{{ "calculator.guided.summary.temperature" | translate }}</dt>
+            <dd class="num">{{ input.temperature }} °C</dd>
+          </div>
+          <div>
+            <dt>{{ "calculator.guided.summary.yeast" | translate }}</dt>
+            <dd>
+              @switch (input.yeastType) {
+                @case (YeastType.DRY_ACTIVE) {
+                  {{ "calculator.enums.yeastTypes.dryActive" | translate }}
+                }
+                @case (YeastType.DRY_INSTANT) {
+                  {{ "calculator.enums.yeastTypes.dryInstant" | translate }}
+                }
+                @case (YeastType.FRESH) {
+                  {{ "calculator.enums.yeastTypes.fresh" | translate }}
+                }
+              }
+            </dd>
+          </div>
+        </dl>
+        <button
+          type="button"
+          class="method-cta"
+          data-testid="open-method"
+          (click)="openMethod()"
+        >
+          {{ "calculator.guided.openMethod" | translate }}
+          <i-lucide [img]="ChevronRight" [size]="18" aria-hidden="true" />
+        </button>
+      }
+    }
+  </section>
+
+  <nav
+    class="step-navigation"
+    [attr.aria-label]="'calculator.guided.navigation' | translate"
+  >
+    <button
+      type="button"
+      class="back"
+      [disabled]="isFirstStep()"
+      data-testid="previous-step"
+      (click)="previous()"
+    >
+      <i-lucide [img]="ChevronLeft" [size]="18" aria-hidden="true" />
+      {{ "common.navigation.previous" | translate }}
+    </button>
+    @if (!isLastStep()) {
+      <button
+        type="button"
+        class="next"
+        data-testid="next-step"
+        (click)="next()"
+      >
+        {{ "common.navigation.next" | translate }}
+        <i-lucide [img]="ChevronRight" [size]="18" aria-hidden="true" />
+      </button>
+    }
+  </nav>
+}

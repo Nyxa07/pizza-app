@@ -75,12 +75,14 @@ describe('CalculatorStateService (the single Draft)', () => {
   it('an explicit new calculation restarts the Draft from the current Defaults', () => {
     state = startApp();
     state.update({ hydrationRatio: 0.65, nbPizzas: 8 });
+    prefs.set('calculator:guided:step', 6);
     defaults.update({ hydrationRatio: 0.8 });
 
     state.newCalculation();
 
     expect(state.getInput().hydrationRatio).toBe(0.8);
     expect(state.getInput().nbPizzas).toBe(5);
+    expect(prefs.get('calculator:guided:step')).toBeNull();
 
     const resumed = startApp();
     expect(resumed.getInput().hydrationRatio).toBe(0.8);

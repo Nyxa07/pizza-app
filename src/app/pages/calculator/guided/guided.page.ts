@@ -1,4 +1,10 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+  signal,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import {
@@ -15,22 +21,18 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
 
-import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
 import { CalculatorPathSwitchComponent } from 'src/app/features/calculator/calculator-path-switch/calculator-path-switch.component';
-import { CalculatorStateSaverComponent } from 'src/app/features/calculator/calculator-state-saver/calculator-state-saver.component';
-import { ExpertFormComponent } from 'src/app/features/calculator/expert-form/expert-form.component';
+import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
+import { GuidedFormComponent } from 'src/app/features/calculator/guided-form/guided-form.component';
 import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
 import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 
-/**
- * The Expert path screen (issue #71): replaces the v1 Simple and Complex
- * pages with the single dense calculator of prototype variant D.
- */
+/** The approachable, one-question-at-a-time calculator path. */
 @Component({
-  selector: 'app-expert-page',
-  templateUrl: './expert.page.html',
-  styleUrls: ['./expert.page.scss'],
+  selector: 'app-calculator-guided-page',
+  templateUrl: './guided.page.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     IonHeader,
     IonToolbar,
@@ -43,21 +45,20 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
     RouterLink,
     TranslatePipe,
     LucideAngularModule,
-    CalculatorRefreshButtonComponent,
     CalculatorPathSwitchComponent,
-    CalculatorStateSaverComponent,
-    ExpertFormComponent,
+    CalculatorRefreshButtonComponent,
+    GuidedFormComponent,
   ],
 })
-export class CalculatorExpertPage implements OnInit {
+export class CalculatorGuidedPage implements OnInit {
   private readonly calculatorInitializer = inject(CalculatorInitializerService);
 
   protected readonly SettingsIcon = SettingsIcon;
-  protected isInitialized = signal(false);
+  protected readonly isInitialized = signal(false);
 
-  ngOnInit() {
+  ngOnInit(): void {
     idleCallback(() => {
-      this.calculatorInitializer.initExpert();
+      this.calculatorInitializer.initGuided();
       this.isInitialized.set(true);
     });
   }

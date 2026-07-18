@@ -16,6 +16,7 @@ import { DoughDefaultsService } from './dough-defaults.service';
 @Injectable({ providedIn: 'root' })
 export class CalculatorStateService {
   private readonly DRAFT_KEY = 'calculator:draft';
+  private readonly GUIDED_STEP_KEY = 'calculator:guided:step';
   private readonly prefs = inject(PrefsStorage);
   private readonly defaults = inject(DoughDefaultsService);
   private readonly _input = new BehaviorSubject<ICalculatorInput>(
@@ -49,6 +50,7 @@ export class CalculatorStateService {
 
   /** Explicitly abandons the Draft and starts over from the user Defaults. */
   newCalculation(): void {
+    this.prefs.remove(this.GUIDED_STEP_KEY);
     this.update(this.defaults.getDefaults());
   }
 

@@ -22,7 +22,7 @@ const V2_LOCALES = ['en', 'fr'] as const;
 const SCHEMA_VERSION_KEY = 'schema-version';
 
 /** Bumped when a release changes the shape of persisted preferences. */
-const SCHEMA_VERSION = 4;
+const SCHEMA_VERSION = 5;
 
 /**
  * Per-mode field-visibility settings written by the v1 personalisation
@@ -33,6 +33,12 @@ const V1_FIELD_VISIBILITY_KEYS = [
   'calculator:settings:simple',
   'calculator:settings:complex',
   'calculator:settings:assist',
+] as const;
+
+/** The retired v1 assistant kept a second, conflicting copy of its state. */
+const V1_ASSISTANT_KEYS = [
+  'assistant:data',
+  'assistant:currentStepIndex',
 ] as const;
 
 /**
@@ -74,6 +80,9 @@ export class MigrationService {
     }
     if (version < 4) {
       this.removeFieldVisibilitySettings();
+    }
+    if (version < 5) {
+      this.removeAssistantState();
     }
 
     this.prefsStorage.set(SCHEMA_VERSION_KEY, SCHEMA_VERSION);
@@ -129,6 +138,13 @@ export class MigrationService {
    */
   private removeFieldVisibilitySettings(): void {
     for (const key of V1_FIELD_VISIBILITY_KEYS) {
+      this.prefsStorage.remove(key);
+    }
+  }
+
+  /** v4→v5 (issue #73): Guided reads only the shared Draft. */
+  private removeAssistantState(): void {
+    for (const key of V1_ASSISTANT_KEYS) {
       this.prefsStorage.remove(key);
     }
   }

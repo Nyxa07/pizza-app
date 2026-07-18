@@ -22,7 +22,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { combineLatest, filter, map } from 'rxjs';
 
 import { CalculatorStateShareComponent } from 'src/app/features/calculator/calculator-state-share/calculator-state-share.component';
-import { CALCULATOR_MODE } from 'src/app/features/calculator/enums/calculator-mode.enum';
 import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
 import { CalculatorService } from 'src/app/features/calculator/services/calculator.service';
 import { CalculatorStateService } from 'src/app/features/calculator/services/calculator-state.service';
@@ -80,7 +79,7 @@ export class CalculatorMethodPage implements OnInit {
       // Deep links land here cold: the Expert configuration is the
       // technical mode under the Method. The guard keeps the init of a
       // path the cook already opened.
-      this.calculatorInitializer.initWithMode(CALCULATOR_MODE.COMPLEX);
+      this.calculatorInitializer.initMethod();
       this.isInitialized.set(true);
     });
   }

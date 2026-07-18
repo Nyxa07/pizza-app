@@ -1,0 +1,29 @@
+:host {
+  display: block;
+}
+
+.seg {
+  display: inline-flex;
+  gap: 2px;
+  margin: 2px 14px 14px;
+  padding: 2px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-s);
+
+  a {
+    padding: 5px 14px;
+    border-radius: calc(var(--radius-s) - 2px);
+    color: var(--ink-2);
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .on {
+    background: var(--surface);
+    color: var(--ink);
+    font-weight: 600;
+    box-shadow: var(--shadow);
+  }
+}

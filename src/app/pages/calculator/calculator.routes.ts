@@ -1,37 +1,42 @@
 import { Route } from '@angular/router';
 
+import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
+
 export const CALCULATOR_ROUTES: Route[] = [
   {
     // The app opens straight on the calculation screen: the Expert path.
     path: '',
-    redirectTo: 'expert',
+    redirectTo: CalculatorPath.EXPERT,
     pathMatch: 'full',
   },
   {
-    path: 'expert',
+    path: CalculatorPath.EXPERT,
     loadComponent: () =>
       import('./expert/expert.page').then((m) => m.CalculatorExpertPage),
   },
   {
-    path: 'assistant',
+    path: CalculatorPath.GUIDED,
     loadComponent: () =>
-      import('./assistant/assistant.page').then(
-        (m) => m.CalculatorAssistantPage,
-      ),
+      import('./guided/guided.page').then((m) => m.CalculatorGuidedPage),
+  },
+  // The v1 assistant is gone; old deep links enter the Guided path.
+  {
+    path: 'assistant',
+    redirectTo: CalculatorPath.GUIDED,
   },
   // Legacy v1 calculator routes — the Simple/Complex pages and the
   // field-visibility screen are replaced by the Expert screen (issue #71).
   {
     path: 'simple',
-    redirectTo: 'expert',
+    redirectTo: CalculatorPath.EXPERT,
   },
   {
     path: 'complex',
-    redirectTo: 'expert',
+    redirectTo: CalculatorPath.EXPERT,
   },
   {
     path: 'settings',
-    redirectTo: 'expert',
+    redirectTo: CalculatorPath.EXPERT,
   },
   {
     path: 'method',

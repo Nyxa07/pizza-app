@@ -1,10 +1,10 @@
 {
+  "paths": {
+    "label": "Parcours",
+    "guided": "Guidé",
+    "expert": "Expert"
+  },
   "expert": {
-    "seg": {
-      "label": "Parcours",
-      "guided": "Guidé",
-      "expert": "Expert"
-    },
     "livebar": {
       "split": "{flour} farine · {water} eau · {salt} sel · {yeast} levure"
     },
@@ -45,98 +45,76 @@
     },
     "cta": "Commencer — prêt {day} à {time}"
   },
-  "assistant": {
-    "title": "Assistant Pizza",
-    "subtitle": "Créons votre pâte parfaite",
-    "description": "Laissez-vous guider étape par étape pour créer la pâte à pizza idéale selon vos préférences.",
-    "startButton": "Commencer l'assistant",
-    "continueButton": "Reprendre l'assistant",
-    "form": {
-      "titles": {
-        "pizzaType": "Type de pizza",
-        "doughType": "Type de pâte",
-        "quantity": "Quantité",
-        "rest": "Repos",
-        "ingredients": "Ingrédients",
-        "summary": "Récapitulatif",
-        "yeastType": "Type de levure",
-        "temperature": "Température ambiante",
-        "planner": "Planificateur",
-        "globalRestTime": "Temps de repos",
-        "flourType": "Type de farine"
-      },
+  "guided": {
+    "progress": "Étape {current} sur {total}",
+    "progressLabel": "Progression du parcours Guidé",
+    "navigation": "Navigation entre les étapes",
+    "steps": {
       "pizzaType": {
-        "subtitle": "Choisissez votre style",
-        "description": "Sélectionnez le type de pizza que vous souhaitez préparer.",
-        "helpers": {
-          "neapolitan": "Pizza traditionnelle avec pâte fine et moelleuse",
-          "roman": "Pizza à pâte fine et croustillante"
-        }
-      },
-      "doughType": {
-        "subtitle": "Méthode de préparation",
-        "description": "Choisissez la technique de fermentation pour votre pâte.",
-        "helpers": {
-          "direct": "Méthode rapide, fermentation courte",
-          "poolish": "Méthode longue, saveur développée"
-        }
+        "eyebrow": "Votre pizza",
+        "question": "Quel résultat aimez-vous ?",
+        "description": "Nous adapterons automatiquement l'hydratation et le poids des pâtons."
       },
       "quantity": {
-        "subtitle": "Combien de pizzas ?",
-        "description": "Indiquez le nombre de pizzas que vous souhaitez préparer.",
-        "pizzas": "pizza(s)"
+        "eyebrow": "La tablée",
+        "question": "Combien de pizzas préparez-vous ?",
+        "description": "Comptez une pizza par personne. Vous pourrez ajuster le poids en Expert."
+      },
+      "doughType": {
+        "eyebrow": "La pâte",
+        "question": "Quelle méthode voulez-vous suivre ?",
+        "description": "La méthode directe est la plus simple. La poolish développe davantage les arômes."
+      },
+      "restTime": {
+        "eyebrow": "Le temps",
+        "question": "Combien de temps pouvez-vous laisser reposer la pâte ?",
+        "description": "Choisissez simplement votre fenêtre disponible : nous répartissons les repos pour vous."
       },
       "temperature": {
-        "subtitle": "Température ambiante",
-        "description": "Indiquez la température qu'il fait chez vous.",
-        "temperature": "°C",
-        "helpers": {
-          "temperature": "Température ambiante"
-        }
-      },
-      "planner": {
-        "subtitle": "Temps de repos",
-        "description": "Indiquez le temps de repos désiré parmis les choix proposés. Certains choix n'apparaissent qu'avec une faire spéciale pizza (forte).",
-        "withLongRestTime": "Repos long",
-        "withLongRestTimeDescription": "Le repos long permet de développer la saveur de la pâte.",
-        "withoutLongRestTime": "Repos court",
-        "withoutLongRestTimeDescription": "Le repos court permet de... manger plus vite 🤣",
-        "totalPrepTime": "Temps préparation total",
-        "totalPrepTimeDescription": "Cela vous donne une idée du temps total de préparation de votre pâte, ce qui permet de commencer au bon moment 😊"
+        "eyebrow": "Votre cuisine",
+        "question": "Quelle température fait-il dans la pièce ?",
+        "description": "Une estimation suffit. Elle nous aide à doser la levure correctement."
       },
       "yeastType": {
-        "subtitle": "Type de levure",
-        "description": "Choisissez le type de levure que vous souhaitez utiliser.",
-        "helpers": {
-          "dryActive": "Levure sèche active",
-          "dryInstant": "Levure sèche instantanée",
-          "fresh": "Levure fraîche"
-        }
-      },
-      "flourType": {
-        "subtitle": "Type de farine",
-        "description": "La force de la farine mesure sa capacité à supporter une fermentation prolongée.",
-        "helpers": {
-          "yes": "Je connais la force de ma farine",
-          "no": "Je ne connais pas la force de ma farine",
-          "standard": "Farine standard",
-          "specialPizza": "Farine spéciale pizza",
-          "strength": "Force de la farine (W)"
-        }
+        "eyebrow": "La levure",
+        "question": "Quelle levure avez-vous ?",
+        "description": "Choisissez ce qui est écrit sur le paquet ; la quantité sera calculée automatiquement."
       },
       "summary": {
-        "subtitle": "Votre configuration",
-        "description": "Vérifiez vos choix avant de générer la méthode.",
-        "helpers": {
-          "summary": "Récapitulatif"
-        }
+        "eyebrow": "Tout est prêt",
+        "question": "Voici votre pâte",
+        "description": "Vos choix sont enregistrés dans le Calcul en cours. La Méthode donne maintenant les grammages et chaque geste."
       }
     },
-    "results": {
-      "title": "Votre Configuration",
-      "apply": "Appliquer cette configuration",
-      "restart": "Recommencer l'assistant"
-    }
+    "options": {
+      "neapolitan": "Souple, gonflée et moelleuse",
+      "roman": "Fine, légère et croustillante",
+      "direct": "Tout mélanger en une fois",
+      "poolish": "Préparer un pré-ferment pour plus d'arômes"
+    },
+    "quantity": {
+      "decrease": "Retirer une pizza",
+      "increase": "Ajouter une pizza",
+      "pizzas": "{count, plural, one {pizza} other {pizzas}}"
+    },
+    "restTime": {
+      "hint": "En savoir plus sur les repos"
+    },
+    "temperature": {
+      "hint": "Pourquoi la température compte"
+    },
+    "yeastType": {
+      "hint": "Reconnaître les types de levure"
+    },
+    "summary": {
+      "style": "Style",
+      "quantity": "Pizzas",
+      "dough": "Méthode",
+      "rest": "Repos",
+      "temperature": "Température",
+      "yeast": "Levure"
+    },
+    "openMethod": "Voir ma Méthode"
   },
   "enums": {
     "doughTypes": {

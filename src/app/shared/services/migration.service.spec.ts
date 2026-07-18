@@ -59,14 +59,14 @@ describe('MigrationService', () => {
   it('handles pristine preferences without crashing', () => {
     expect(() => service.run()).not.toThrow();
 
-    expect(prefs.get('schema-version')).toBe(4);
+    expect(prefs.get('schema-version')).toBe(5);
   });
 
   it('marks the schema as migrated and never runs twice', () => {
     prefs.set('theme', 'dark');
 
     service.run();
-    expect(prefs.get('schema-version')).toBe(4);
+    expect(prefs.get('schema-version')).toBe(5);
     expect(prefs.get('theme')).toBeNull();
 
     // A theming key reappearing after migration must survive a second run().
@@ -137,7 +137,7 @@ describe('MigrationService', () => {
 
     expect(prefs.get('theme')).toBe('written-after-v2');
     expect(prefs.get('calculator:draft')).toEqual({ nbPizzas: 3 });
-    expect(prefs.get('schema-version')).toBe(4);
+    expect(prefs.get('schema-version')).toBe(5);
   });
 
   it('drops the per-mode field-visibility settings (issue #71)', () => {
@@ -169,6 +169,20 @@ describe('MigrationService', () => {
     expect(prefs.get('calculator:draft')).toBeNull();
     expect(prefs.get('calculator:complex')).toEqual({ nbPizzas: 3 });
     expect(prefs.get('calculator:settings:complex')).toBeNull();
-    expect(prefs.get('schema-version')).toBe(4);
+    expect(prefs.get('schema-version')).toBe(5);
+  });
+
+  it('drops the retired assistant state without touching the shared Draft', () => {
+    prefs.set('schema-version', 4);
+    prefs.set('assistant:data', { nbPizzas: 2 });
+    prefs.set('assistant:currentStepIndex', 3);
+    prefs.set('calculator:draft', { nbPizzas: 7 });
+
+    service.run();
+
+    expect(prefs.get('assistant:data')).toBeNull();
+    expect(prefs.get('assistant:currentStepIndex')).toBeNull();
+    expect(prefs.get('calculator:draft')).toEqual({ nbPizzas: 7 });
+    expect(prefs.get('schema-version')).toBe(5);
   });
 });

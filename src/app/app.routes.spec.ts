@@ -69,6 +69,14 @@ describe('App navigation (v2)', () => {
     expect(router.url).toBe('/tabs/calculator/expert');
   });
 
+  it('exposes the Guided path and redirects the retired assistant to it', async () => {
+    await harness.navigateByUrl('/tabs/calculator/guided');
+    expect(router.url).toBe('/tabs/calculator/guided');
+
+    await harness.navigateByUrl('/tabs/calculator/assistant');
+    expect(router.url).toBe('/tabs/calculator/guided');
+  });
+
   it('redirects the removed field-visibility screen to the Expert screen', async () => {
     await harness.navigateByUrl('/tabs/calculator/settings');
 

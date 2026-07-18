@@ -1,10 +1,10 @@
 {
+  "paths": {
+    "label": "Path",
+    "guided": "Guided",
+    "expert": "Expert"
+  },
   "expert": {
-    "seg": {
-      "label": "Path",
-      "guided": "Guided",
-      "expert": "Expert"
-    },
     "livebar": {
       "split": "{flour} flour · {water} water · {salt} salt · {yeast} yeast"
     },
@@ -45,98 +45,76 @@
     },
     "cta": "Start — ready {day} at {time}"
   },
-  "assistant": {
-    "title": "Pizza Assistant",
-    "subtitle": "Let's create your perfect dough",
-    "description": "Let yourself be guided step by step to create the ideal pizza dough for your preferences.",
-    "startButton": "Start assistant",
-    "continueButton": "Resume assistant",
-    "form": {
-      "titles": {
-        "pizzaType": "Pizza type",
-        "doughType": "Dough type",
-        "quantity": "Quantity",
-        "rest": "Rest",
-        "ingredients": "Ingredients",
-        "summary": "Summary",
-        "yeastType": "Yeast type",
-        "temperature": "Room temperature",
-        "planner": "Planner",
-        "globalRestTime": "Rest time",
-        "flourType": "Flour type"
-      },
+  "guided": {
+    "progress": "Step {current} of {total}",
+    "progressLabel": "Guided path progress",
+    "navigation": "Step navigation",
+    "steps": {
       "pizzaType": {
-        "subtitle": "Choose your style",
-        "description": "Select the type of pizza you want to prepare.",
-        "helpers": {
-          "neapolitan": "Traditional pizza with thin and soft dough",
-          "roman": "Pizza with thin and crispy dough"
-        }
-      },
-      "doughType": {
-        "subtitle": "Preparation method",
-        "description": "Choose the fermentation technique for your dough.",
-        "helpers": {
-          "direct": "Quick method, short fermentation",
-          "poolish": "Long method, developed flavor"
-        }
+        "eyebrow": "Your pizza",
+        "question": "What result do you enjoy?",
+        "description": "We will automatically adapt hydration and dough-ball weight."
       },
       "quantity": {
-        "subtitle": "How many pizzas?",
-        "description": "Indicate the number of pizzas you want to prepare.",
-        "pizzas": "pizza(s)"
+        "eyebrow": "Around the table",
+        "question": "How many pizzas are you making?",
+        "description": "Allow one pizza per person. You can fine-tune the weight in Expert."
+      },
+      "doughType": {
+        "eyebrow": "The dough",
+        "question": "Which method would you like to follow?",
+        "description": "The direct method is the simplest. Poolish develops deeper flavour."
+      },
+      "restTime": {
+        "eyebrow": "Your time",
+        "question": "How long can you let the dough rest?",
+        "description": "Just choose the time you have available: we split the rests for you."
       },
       "temperature": {
-        "subtitle": "Room temperature",
-        "description": "Indicate the temperature at your place.",
-        "temperature": "°C",
-        "helpers": {
-          "temperature": "Room temperature"
-        }
-      },
-      "planner": {
-        "subtitle": "Rest time",
-        "description": "Indicate the desired rest time among the proposed choices. Some choices only appear with special pizza flour (strong).",
-        "withLongRestTime": "Long rest",
-        "withLongRestTimeDescription": "Long rest allows developing the flavor of the dough.",
-        "withoutLongRestTime": "Short rest",
-        "withoutLongRestTimeDescription": "Short rest allows... eating faster 🤣",
-        "totalPrepTime": "Total preparation time",
-        "totalPrepTimeDescription": "This gives you an idea of the total preparation time for your dough, which allows you to start at the right time 😊"
+        "eyebrow": "Your kitchen",
+        "question": "How warm is the room?",
+        "description": "An estimate is enough. It helps us calculate the right yeast amount."
       },
       "yeastType": {
-        "subtitle": "Yeast type",
-        "description": "Choose the type of yeast you want to use.",
-        "helpers": {
-          "dryActive": "Active dry yeast",
-          "dryInstant": "Instant dry yeast",
-          "fresh": "Fresh yeast"
-        }
-      },
-      "flourType": {
-        "subtitle": "Flour type",
-        "description": "Flour strength measures its ability to withstand prolonged fermentation.",
-        "helpers": {
-          "yes": "I know my flour strength",
-          "no": "I don't know my flour strength",
-          "standard": "Standard flour",
-          "specialPizza": "Special pizza flour",
-          "strength": "Flour strength (W)"
-        }
+        "eyebrow": "The yeast",
+        "question": "Which yeast do you have?",
+        "description": "Choose what is written on the packet; the amount is calculated automatically."
       },
       "summary": {
-        "subtitle": "Your configuration",
-        "description": "Check your choices before generating the method.",
-        "helpers": {
-          "summary": "Summary"
-        }
+        "eyebrow": "Ready to go",
+        "question": "Here is your dough",
+        "description": "Your choices are saved in the current Draft. The Method now gives you every weight and action."
       }
     },
-    "results": {
-      "title": "Your Configuration",
-      "apply": "Apply this configuration",
-      "restart": "Restart assistant"
-    }
+    "options": {
+      "neapolitan": "Soft, airy and tender",
+      "roman": "Thin, light and crisp",
+      "direct": "Mix everything in one go",
+      "poolish": "Make a preferment for deeper flavour"
+    },
+    "quantity": {
+      "decrease": "Remove one pizza",
+      "increase": "Add one pizza",
+      "pizzas": "{count, plural, one {pizza} other {pizzas}}"
+    },
+    "restTime": {
+      "hint": "Learn about resting times"
+    },
+    "temperature": {
+      "hint": "Why temperature matters"
+    },
+    "yeastType": {
+      "hint": "Recognise yeast types"
+    },
+    "summary": {
+      "style": "Style",
+      "quantity": "Pizzas",
+      "dough": "Method",
+      "rest": "Rest",
+      "temperature": "Temperature",
+      "yeast": "Yeast"
+    },
+    "openMethod": "View my Method"
   },
   "enums": {
     "doughTypes": {

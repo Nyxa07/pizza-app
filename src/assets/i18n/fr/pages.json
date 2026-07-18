@@ -8,8 +8,8 @@
     "expert": {
       "title": "Calculer"
     },
-    "assistant": {
-      "title": "Assistant de configuration"
+    "guided": {
+      "title": "Calculer"
     },
     "method": {
       "title": "La Méthode"
