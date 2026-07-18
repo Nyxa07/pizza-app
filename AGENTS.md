@@ -143,3 +143,17 @@ Use blank lines between groups.
 - `baseUrl` is set in `tsconfig.json`; prefer `src/...` imports to avoid deep `../../..` paths.
 - The ESLint config enforces Angular selector conventions; existing pages may not fully align.
   - When adding new components, prefer `app-*` selectors unless matching an existing page pattern.
+
+## Agent skills
+
+### Issue tracker
+
+Issues tracked on GitHub Issues (`Nyxa07/pizza-app`) via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default five-label vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout: one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
