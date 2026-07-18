@@ -92,10 +92,14 @@ describe('App navigation (v2)', () => {
     ).toBeTruthy();
   });
 
-  it('resolves the recipes tab placeholder', async () => {
+  it('resolves the Recipe catalog route', async () => {
     await harness.navigateByUrl('/tabs/recipes');
-
     expect(router.url).toBe('/tabs/recipes');
+  });
+
+  it('resolves a Recipe detail route', async () => {
+    await harness.navigateByUrl('/tabs/recipes/margherita');
+    expect(router.url).toBe('/tabs/recipes/margherita');
   });
 
   it('resolves the Dough document library and detail routes', async () => {

@@ -17,7 +17,20 @@
   },
   "recipes": {
     "title": "Recettes",
-    "placeholder": "Le catalogue de Recettes arrive bientôt."
+    "eyebrow": "Le carnet de la maison",
+    "catalogTitle": "Choisissez votre prochaine pizza",
+    "intro": "Des garnitures simples, éprouvées et pensées avec la pâte qui leur convient.",
+    "suggestedDough": "Pâte suggérée",
+    "balls": "Pâtons",
+    "hydration": "Hydratation",
+    "rest": "Repos",
+    "prepareDough": "Préparer cette pâte",
+    "prepareHint": "Votre Calcul en cours sera remplacé par cette suggestion, puis ouvert dans l'Expert.",
+    "ingredients": "Pour la garniture",
+    "preparation": "Préparation",
+    "photoCredit": "Photo : {photographer} · Pexels",
+    "notFoundTitle": "Recette introuvable",
+    "notFoundBody": "Cette Recette n'existe pas dans le catalogue embarqué."
   },
   "doughs": {
     "title": "Mes pâtes",

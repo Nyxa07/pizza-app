@@ -2,17 +2,48 @@
   <ion-toolbar>
     <ion-title>{{ "pages.recipes.title" | translate }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/settings']">
+      <ion-button
+        [routerLink]="['/settings']"
+        [attr.aria-label]="'pages.settings.title' | translate"
+      >
         <i-lucide slot="icon-only" [img]="SettingsIcon"></i-lucide>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <div class="placeholder">
-    <i-lucide [img]="PizzaIcon" [size]="40"></i-lucide>
-    <h2>{{ "pages.recipes.title" | translate }}</h2>
-    <p>{{ "pages.recipes.placeholder" | translate }}</p>
-  </div>
+<ion-content [fullscreen]="true">
+  <section class="catalog ion-padding">
+    <header class="intro">
+      <p>{{ "pages.recipes.eyebrow" | translate }}</p>
+      <h1>{{ "pages.recipes.catalogTitle" | translate }}</h1>
+      <span>{{ "pages.recipes.intro" | translate }}</span>
+    </header>
+
+    <div class="recipe-grid">
+      @for (recipe of recipes; track recipe.id) {
+        <article class="recipe-card">
+          <button type="button" (click)="open(recipe.id)">
+            <span class="visual">
+              <img
+                [src]="recipe.image.path"
+                [alt]="recipe.content.imageAlt"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="category">{{ recipe.content.category }}</span>
+            </span>
+            <span class="copy">
+              <span class="name-row">
+                <strong>{{ recipe.content.name }}</strong>
+                <i-lucide [img]="ArrowRightIcon" [size]="19"></i-lucide>
+              </span>
+              <span class="summary">{{ recipe.content.summary }}</span>
+              <span class="dough">{{ recipe.content.doughSuggestion }}</span>
+            </span>
+          </button>
+        </article>
+      }
+    </div>
+  </section>
 </ion-content>

@@ -1,0 +1,62 @@
+{
+  "margherita": {
+    "name": "Margherita",
+    "category": "The Neapolitan essential",
+    "summary": "Tomato, fior di latte and basil: three clear flavours on a soft, light dough.",
+    "description": "A Margherita leaves nowhere to hide. Bright tomato, well-drained mozzarella and a few basil leaves are enough when every ingredient is used with restraint.",
+    "imageAlt": "Top view of a Margherita pizza topped with mozzarella and basil",
+    "doughSuggestion": "Direct Neapolitan dough · 24 hours",
+    "ingredients": [
+      "80 g hand-crushed peeled tomatoes per pizza",
+      "80 g well-drained fior di latte per pizza",
+      "3 to 4 fresh basil leaves",
+      "Extra-virgin olive oil and a pinch of salt"
+    ],
+    "steps": [
+      "Crush the tomatoes by hand with a pinch of salt; do not cook them.",
+      "Open the dough while keeping a puffy rim, then spread the tomato in a spiral.",
+      "Add small, spaced pieces of fior di latte and a drizzle of oil.",
+      "Bake very hot, then add the basil as soon as the pizza leaves the oven."
+    ]
+  },
+  "marinara": {
+    "name": "Marinara",
+    "category": "The stripped-back one",
+    "summary": "Tomato, garlic, oregano and olive oil: a cheeseless pizza with a clean, intense aroma.",
+    "description": "The Marinara is all about contrast between fresh tomato, finely sliced garlic and oregano. Its light topping lets the dough take centre stage.",
+    "imageAlt": "Artisan tomato pizza with basil and garlic on a wooden table",
+    "doughSuggestion": "Direct Neapolitan dough · 24 hours",
+    "ingredients": [
+      "90 g hand-crushed peeled tomatoes per pizza",
+      "1 small garlic clove, finely sliced",
+      "A pinch of dried oregano",
+      "Extra-virgin olive oil and a few basil leaves"
+    ],
+    "steps": [
+      "Season the crushed tomatoes lightly with salt.",
+      "Open the dough, then spread the tomato to within two centimetres of the rim.",
+      "Scatter over the garlic and oregano, then finish with a drizzle of olive oil.",
+      "Bake very hot and add the fresh basil as the pizza leaves the oven."
+    ]
+  },
+  "reine": {
+    "name": "Reine",
+    "category": "The French classic",
+    "summary": "Ham, mushrooms and mozzarella on a thin, golden dough with just enough crunch.",
+    "description": "A balanced Reine keeps every topping distinct: mushrooms seared so they stay dry, restrained slices of ham and a light scattering of mozzarella.",
+    "imageAlt": "Golden pizza topped with ham, mushrooms, mozzarella and herbs",
+    "doughSuggestion": "Direct thin-crust dough with oil · 24 hours",
+    "ingredients": [
+      "70 g tomato sauce per pizza",
+      "70 g well-drained mozzarella per pizza",
+      "50 g cooked ham cut into strips per pizza",
+      "60 g sliced and seared chestnut mushrooms per pizza"
+    ],
+    "steps": [
+      "Sear the mushrooms over high heat to remove their water, then leave them to cool.",
+      "Open the dough thinly and spread over a light layer of tomato sauce.",
+      "Add the mozzarella, mushrooms and finally the strips of ham.",
+      "Bake until the base is golden and serve with a twist of black pepper."
+    ]
+  }
+}

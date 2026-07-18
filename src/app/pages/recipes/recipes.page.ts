@@ -1,22 +1,28 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 import {
-  IonHeader,
-  IonToolbar,
-  IonButtons,
   IonButton,
-  IonTitle,
+  IonButtons,
   IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
 } from '@ionic/angular/standalone';
 
 import { TranslatePipe } from '@ngx-translate/core';
-import { LucideAngularModule, PizzaIcon, SettingsIcon } from 'lucide-angular';
+import {
+  ArrowRightIcon,
+  LucideAngularModule,
+  SettingsIcon,
+} from 'lucide-angular';
+
+import { RecipeCatalogService } from 'src/app/features/recipes/services/recipe-catalog.service';
 
 @Component({
   selector: 'app-recipes-page',
   templateUrl: './recipes.page.html',
-  styleUrls: ['../tab-placeholder.scss'],
+  styleUrls: ['./recipes.page.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
@@ -32,6 +38,14 @@ import { LucideAngularModule, PizzaIcon, SettingsIcon } from 'lucide-angular';
   ],
 })
 export class RecipesPage {
-  protected readonly PizzaIcon = PizzaIcon;
+  private readonly catalog = inject(RecipeCatalogService);
+  private readonly router = inject(Router);
+
+  protected readonly ArrowRightIcon = ArrowRightIcon;
   protected readonly SettingsIcon = SettingsIcon;
+  protected readonly recipes = this.catalog.list();
+
+  protected open(id: string): void {
+    this.router.navigate(['/tabs/recipes', id]);
+  }
 }

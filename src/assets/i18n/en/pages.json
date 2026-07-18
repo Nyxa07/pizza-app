@@ -17,7 +17,20 @@
   },
   "recipes": {
     "title": "Recipes",
-    "placeholder": "The Recipes catalog is coming soon."
+    "eyebrow": "From our house notebook",
+    "catalogTitle": "Choose your next pizza",
+    "intro": "Simple, proven toppings paired with the dough that suits them best.",
+    "suggestedDough": "Suggested dough",
+    "balls": "Balls",
+    "hydration": "Hydration",
+    "rest": "Rest",
+    "prepareDough": "Prepare this dough",
+    "prepareHint": "Your current Draft will be replaced with this suggestion, then opened in Expert.",
+    "ingredients": "For the topping",
+    "preparation": "Preparation",
+    "photoCredit": "Photo: {photographer} · Pexels",
+    "notFoundTitle": "Recipe not found",
+    "notFoundBody": "This Recipe does not exist in the bundled catalog."
   },
   "doughs": {
     "title": "My doughs",

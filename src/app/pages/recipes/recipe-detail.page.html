@@ -1,0 +1,101 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/recipes"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{
+      recipe?.content?.name ?? ("pages.recipes.title" | translate)
+    }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  @if (recipe) {
+    <article class="recipe">
+      <figure class="hero">
+        <img
+          [src]="recipe.image.path"
+          [alt]="recipe.content.imageAlt"
+          decoding="async"
+        />
+        <figcaption>
+          <a
+            [href]="recipe.image.sourceUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{
+              "pages.recipes.photoCredit"
+                | translate: { photographer: recipe.image.photographer }
+            }}
+          </a>
+        </figcaption>
+      </figure>
+
+      <div class="body ion-padding-horizontal">
+        <header class="recipe-heading">
+          <p>{{ recipe.content.category }}</p>
+          <h1>{{ recipe.content.name }}</h1>
+          <span>{{ recipe.content.description }}</span>
+        </header>
+
+        <section class="suggestion">
+          <div>
+            <p>{{ "pages.recipes.suggestedDough" | translate }}</p>
+            <h2>{{ recipe.content.doughSuggestion }}</h2>
+          </div>
+          <dl class="dough-facts num">
+            <div>
+              <dt>{{ "pages.recipes.balls" | translate }}</dt>
+              <dd>{{ recipe.suggestedDough.input.nbPizzas }}</dd>
+            </div>
+            <div>
+              <dt>{{ "pages.recipes.hydration" | translate }}</dt>
+              <dd>
+                {{
+                  (recipe.suggestedDough.input.hydrationRatio ?? 0) * 100
+                    | number: "1.0-0"
+                }}%
+              </dd>
+            </div>
+            <div>
+              <dt>{{ "pages.recipes.rest" | translate }}</dt>
+              <dd>{{ restHours | number: "1.0-0" }} h</dd>
+            </div>
+          </dl>
+          <ion-button expand="block" (click)="prepareSuggestedDough()">
+            {{ "pages.recipes.prepareDough" | translate }}
+          </ion-button>
+          <small>{{ "pages.recipes.prepareHint" | translate }}</small>
+        </section>
+
+        <div class="instructions">
+          <section>
+            <h2>{{ "pages.recipes.ingredients" | translate }}</h2>
+            <ul>
+              @for (
+                ingredient of recipe.content.ingredients;
+                track ingredient
+              ) {
+                <li>{{ ingredient }}</li>
+              }
+            </ul>
+          </section>
+          <section>
+            <h2>{{ "pages.recipes.preparation" | translate }}</h2>
+            <ol>
+              @for (step of recipe.content.steps; track $index) {
+                <li>{{ step }}</li>
+              }
+            </ol>
+          </section>
+        </div>
+      </div>
+    </article>
+  } @else {
+    <div class="not-found ion-padding">
+      <h2>{{ "pages.recipes.notFoundTitle" | translate }}</h2>
+      <p>{{ "pages.recipes.notFoundBody" | translate }}</p>
+    </div>
+  }
+</ion-content>

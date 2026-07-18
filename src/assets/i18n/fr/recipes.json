@@ -1,0 +1,62 @@
+{
+  "margherita": {
+    "name": "Margherita",
+    "category": "L'essentiel napolitain",
+    "summary": "Tomate, fiordilatte et basilic : trois saveurs franches sur une pâte souple et légère.",
+    "description": "La Margherita ne cache rien. Une tomate vive, une mozzarella bien égouttée et quelques feuilles de basilic suffisent quand chaque ingrédient est posé avec mesure.",
+    "imageAlt": "Pizza Margherita vue du dessus, garnie de mozzarella et de basilic",
+    "doughSuggestion": "Pâte napolitaine directe · 24 h",
+    "ingredients": [
+      "80 g de tomates pelées concassées par pizza",
+      "80 g de fiordilatte bien égoutté par pizza",
+      "3 à 4 feuilles de basilic frais",
+      "Huile d'olive vierge extra et une pincée de sel"
+    ],
+    "steps": [
+      "Écraser les tomates à la main avec une pincée de sel, sans les cuire.",
+      "Étaler la pâte en gardant un bord gonflé, puis répartir la tomate en spirale.",
+      "Ajouter le fiordilatte en petits morceaux espacés et un filet d'huile.",
+      "Cuire très chaud, puis poser le basilic dès la sortie du four."
+    ]
+  },
+  "marinara": {
+    "name": "Marinara",
+    "category": "La plus dépouillée",
+    "summary": "Tomate, ail, origan et huile d'olive : une pizza sans fromage, nette et intensément parfumée.",
+    "description": "La Marinara mise tout sur le contraste entre une tomate fraîche, l'ail finement tranché et l'origan. Sa garniture légère laisse la pâte prendre toute sa place.",
+    "imageAlt": "Pizza artisanale à la tomate, au basilic et à l'ail sur une table en bois",
+    "doughSuggestion": "Pâte napolitaine directe · 24 h",
+    "ingredients": [
+      "90 g de tomates pelées concassées par pizza",
+      "1 petite gousse d'ail finement émincée",
+      "Une pincée d'origan séché",
+      "Huile d'olive vierge extra et quelques feuilles de basilic"
+    ],
+    "steps": [
+      "Assaisonner légèrement les tomates concassées avec du sel.",
+      "Étaler la pâte, puis répartir la tomate jusqu'à deux centimètres du bord.",
+      "Parsemer l'ail et l'origan, puis terminer par un filet d'huile d'olive.",
+      "Cuire très chaud et ajouter le basilic frais à la sortie du four."
+    ]
+  },
+  "reine": {
+    "name": "Reine",
+    "category": "Le classique français",
+    "summary": "Jambon, champignons et mozzarella sur une pâte fine, dorée et juste assez croustillante.",
+    "description": "Une Reine équilibrée garde une garniture lisible : des champignons saisis pour rester secs, un jambon ajouté sans excès et une mozzarella répartie avec légèreté.",
+    "imageAlt": "Pizza dorée garnie de jambon, de champignons, de mozzarella et d'herbes",
+    "doughSuggestion": "Pâte fine directe à l'huile · 24 h",
+    "ingredients": [
+      "70 g de sauce tomate par pizza",
+      "70 g de mozzarella bien égouttée par pizza",
+      "50 g de jambon blanc en lanières par pizza",
+      "60 g de champignons bruns émincés et poêlés par pizza"
+    ],
+    "steps": [
+      "Poêler vivement les champignons pour évaporer leur eau, puis laisser refroidir.",
+      "Étaler finement la pâte et répartir une couche légère de sauce tomate.",
+      "Ajouter la mozzarella, les champignons et enfin les lanières de jambon.",
+      "Cuire jusqu'à obtenir un dessous doré et servir avec un tour de poivre."
+    ]
+  }
+}

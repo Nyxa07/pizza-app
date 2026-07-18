@@ -1,0 +1,136 @@
+.catalog {
+  max-width: 920px;
+  margin: 0 auto;
+  padding-bottom: 36px;
+}
+
+.intro {
+  max-width: 620px;
+  margin: 8px 0 24px;
+
+  p {
+    margin: 0 0 7px;
+    color: var(--accent);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0 0 8px;
+    color: var(--ink);
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
+    line-height: 1.05;
+  }
+
+  span {
+    color: var(--ink-2);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.recipe-card {
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+
+  button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+}
+
+.visual {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--surface-sunken);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 220ms ease;
+  }
+}
+
+.recipe-card button:hover img,
+.recipe-card button:focus-visible img {
+  transform: scale(1.025);
+}
+
+.recipe-card button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.category {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 6px 9px;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.68rem;
+  font-weight: 650;
+  box-shadow: var(--shadow);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 17px;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  strong {
+    font-family: var(--font-voice);
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  i-lucide {
+    flex: none;
+    color: var(--accent);
+  }
+}
+
+.summary {
+  min-height: 3.9em;
+  color: var(--ink-2);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.dough {
+  padding-top: 10px;
+  border-top: 1px solid var(--hairline);
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 600;
+}

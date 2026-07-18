@@ -15,8 +15,20 @@ export const routes: Routes = [
       },
       {
         path: 'recipes',
-        loadComponent: () =>
-          import('../recipes/recipes.page').then((m) => m.RecipesPage),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('../recipes/recipes.page').then((m) => m.RecipesPage),
+          },
+          {
+            path: ':id',
+            loadComponent: () =>
+              import('../recipes/recipe-detail.page').then(
+                (m) => m.RecipeDetailPage,
+              ),
+          },
+        ],
       },
       {
         path: 'doughs',
