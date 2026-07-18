@@ -1,0 +1,617 @@
+<!doctype html>
+<!--
+  PROTOTYPE JETABLE — NE PAS SHIPPER, NE PAS RÉUTILISER TEL QUEL
+  ================================================================
+  Trois variantes structurelles de l'écran Calculer (parcours Expert) v2,
+  commutables via ?variant=A|B|C (flèches ←/→ ou barre flottante),
+  apparence via ?appearance=light|dark (bouton ☾/☀).
+
+  Questions auxquelles ce prototype répond (spec GitHub #65) :
+    1. La direction « hybride éditorial » (chrome froid, contenu chaud)
+       rend-elle premium sur l'écran le plus dense ?
+    2. La palette (neutres + accent terracotta) et le pairing typographique
+       (voix serif / instrument sans, chiffres tabulaires) tiennent-ils
+       en light ET en dark ?
+    3. La divulgation progressive (avancé replié) reste-t-elle lisible
+       pour le prosumer ?
+
+  Lancer :  python3 -m http.server -d prototypes 8099
+  puis sur téléphone (même réseau) : http://<ip-du-poste>:8099/expert-screen-v2.prototype.html
+
+  Les fontes finales restent à choisir : le prototype teste le PRINCIPE du
+  pairing (serif éditoriale pour la voix, sans système pour l'instrument)
+  avec les fontes système, pas des fichiers de fontes définitifs.
+-->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PROTOTYPE — Calculer · Expert v2</title>
+<style>
+  /* ============ TOKENS (esquisse de la future couche sémantique) ============ */
+  :root {
+    --bg: #F6F4F0;              /* papier, à peine chaud */
+    --surface: #FFFFFF;
+    --surface-sunken: #EFECE5;
+    --ink: #201D1A;
+    --ink-2: #6F6A62;
+    --ink-3: #A39D93;
+    --hairline: #E6E2DB;
+    --accent: #C14E2C;          /* terracotta */
+    --on-accent: #FFFFFF;
+    --accent-soft: #F6E7E0;
+    --shadow: 0 1px 2px rgba(32,26,20,.05), 0 6px 20px rgba(32,26,20,.07);
+    --font-voice: ui-serif, Georgia, "Times New Roman", serif;
+    --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  :root[data-appearance="dark"] {
+    --bg: #131211;              /* presque-noir chaud, pas bleu */
+    --surface: #1C1A18;
+    --surface-sunken: #100F0E;
+    --ink: #EDEAE4;
+    --ink-2: #9C968C;
+    --ink-3: #6B665E;
+    --hairline: #2B2823;
+    --accent: #E0653C;
+    --on-accent: #1A0F0A;
+    --accent-soft: #31201A;
+    --shadow: none;
+  }
+
+  /* ============ BASE ============ */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--font-ui);
+    background: var(--surface-sunken);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* Cadre téléphone : plein écran sur mobile, colonne centrée sur desktop */
+  .phone {
+    position: relative;
+    max-width: 420px;
+    margin: 0 auto;
+    min-height: 100dvh;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+  }
+  @media (min-width: 500px) {
+    body { padding: 24px 0; }
+    .phone { min-height: calc(100dvh - 48px); border-radius: 28px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,.18); }
+  }
+
+  /* ============ CHROME v2 : header + tab bar ============ */
+  .app-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding: calc(14px + env(safe-area-inset-top)) 20px 10px;
+  }
+  .app-header h1 { font-family: var(--font-voice); font-weight: 600; font-size: 28px; letter-spacing: -.01em; }
+  .icon-btn { color: var(--ink-2); padding: 6px; margin: -6px; border-radius: 10px; }
+  .icon-btn svg { display: block; }
+
+  main { flex: 1; overflow-y: auto; padding-bottom: 140px; }
+
+  .tabbar {
+    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 420px;
+    display: flex;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--hairline);
+    padding-bottom: env(safe-area-inset-bottom);
+    z-index: 40;
+  }
+  .tabbar button {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 9px 0 7px; color: var(--ink-3); font-size: 10.5px; letter-spacing: .02em; font-weight: 500;
+  }
+  .tabbar button.active { color: var(--accent); }
+  .tabbar svg { display: block; }
+
+  /* Segmenté Guidé | Expert (chrome commun aux variantes) */
+  .seg {
+    display: inline-flex; background: var(--surface-sunken);
+    border: 1px solid var(--hairline); border-radius: 10px; padding: 2px; gap: 2px;
+  }
+  .seg button { padding: 5px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--ink-2); }
+  .seg button.on { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); font-weight: 600; }
+  :root[data-appearance="dark"] .seg button.on { background: #2A2724; }
+
+  .screen-intro { display: flex; align-items: center; justify-content: space-between; padding: 2px 20px 14px; }
+  .screen-intro .resume { font-size: 12.5px; color: var(--ink-3); }
+
+  /* ⓘ fiche */
+  .info {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 17px; height: 17px; border-radius: 50%;
+    border: 1.2px solid var(--ink-3); color: var(--ink-3);
+    font-size: 10.5px; font-family: var(--font-voice); font-style: italic;
+    vertical-align: 2px; margin-left: 6px;
+  }
+
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+
+  /* ============ VARIANTE A — Formulaire sectionné ============ */
+  .vA .section-title {
+    font-family: var(--font-voice); font-size: 15px; font-weight: 600; font-style: italic;
+    color: var(--ink-2); padding: 22px 20px 8px;
+  }
+  .vA .card {
+    background: var(--surface); border-radius: 14px; margin: 0 14px;
+    box-shadow: var(--shadow); border: 1px solid var(--hairline);
+  }
+  .vA .row {
+    display: flex; align-items: center; justify-content: space-between;
+    min-height: 52px; padding: 8px 16px; gap: 12px;
+  }
+  .vA .row + .row { border-top: 1px solid var(--hairline); }
+  .vA .row .label { font-size: 15px; }
+  .vA .row .value { font-size: 15px; font-weight: 600; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+  .vA .row .value .chev { color: var(--ink-3); font-size: 12px; }
+  .vA .stepper { display: flex; align-items: center; gap: 14px; }
+  .vA .stepper button {
+    width: 30px; height: 30px; border-radius: 9px; background: var(--surface-sunken);
+    border: 1px solid var(--hairline); font-size: 17px; line-height: 1; color: var(--ink-2);
+  }
+  .vA .stepper .num { font-size: 17px; font-weight: 700; min-width: 26px; text-align: center; }
+  .vA .advanced summary .row .label { color: var(--ink-2); font-weight: 500; }
+  .vA .advanced summary .caret { transition: transform .18s ease; color: var(--ink-3); }
+  .vA .advanced[open] summary .caret { transform: rotate(90deg); }
+  .vA .cta-zone {
+    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 420px; padding: 10px 14px calc(58px + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, var(--bg) 55%, transparent); z-index: 30;
+  }
+  .vA .summary-line { text-align: center; font-size: 12px; color: var(--ink-2); padding-bottom: 8px; }
+  .cta {
+    display: flex; align-items: center; justify-content: center; width: 100%;
+    background: var(--accent); color: var(--on-accent);
+    border-radius: 14px; padding: 15px; font-size: 16px; font-weight: 600; letter-spacing: .01em;
+  }
+
+  /* ============ VARIANTE B — Instrument ============ */
+  .vB { --tile-gap: 10px; }
+  .vB .livebar {
+    position: sticky; top: 0; z-index: 10;
+    margin: 0 14px 12px; padding: 12px 16px;
+    background: var(--ink); color: var(--bg);
+    border-radius: 14px; display: flex; justify-content: space-between; align-items: baseline;
+  }
+  :root[data-appearance="dark"] .vB .livebar { background: var(--surface); color: var(--ink); border: 1px solid var(--hairline); }
+  .vB .livebar .total { font-size: 20px; font-weight: 700; }
+  .vB .livebar .split { font-size: 11.5px; opacity: .75; }
+  .vB .grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--tile-gap); padding: 0 14px; }
+  .vB .tile {
+    background: var(--surface); border: 1px solid var(--hairline); border-radius: 14px;
+    padding: 12px 14px 10px; box-shadow: var(--shadow); position: relative;
+  }
+  .vB .tile .t-label { font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-2); font-weight: 600; }
+  .vB .tile .t-value { font-size: 26px; font-weight: 700; letter-spacing: -.01em; padding: 4px 0 2px; }
+  .vB .tile .t-value small { font-size: 14px; font-weight: 500; color: var(--ink-2); margin-left: 2px; }
+  .vB .tile .t-ctrl { position: absolute; right: 10px; top: 10px; display: flex; gap: 6px; }
+  .vB .tile .t-ctrl button {
+    width: 24px; height: 24px; border-radius: 7px; background: var(--surface-sunken);
+    border: 1px solid var(--hairline); color: var(--ink-2); font-size: 14px; line-height: 1;
+  }
+  .vB .tile.select .t-value { font-size: 17px; padding-top: 8px; }
+  .vB .timeline { margin: 14px 14px 0; }
+  .vB .timeline .tl-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-2); padding-bottom: 5px; }
+  .vB .timeline .tl-bar { display: flex; height: 10px; border-radius: 6px; overflow: hidden; border: 1px solid var(--hairline); }
+  .vB .timeline .tl-ta { flex: 16; background: var(--accent); opacity: .85; }
+  .vB .timeline .tl-froid { flex: 8; background: var(--surface-sunken); }
+  .vB .adv-toggle {
+    margin: 14px 14px 0; width: calc(100% - 28px);
+    display: flex; justify-content: center; gap: 8px; align-items: center;
+    padding: 10px; border-radius: 12px; border: 1px dashed var(--hairline);
+    color: var(--ink-2); font-size: 13px; font-weight: 500;
+  }
+  .vB .advgrid { padding-top: var(--tile-gap); }
+  .vB .cta { width: calc(100% - 28px); margin: 16px 14px 0; }
+
+  /* ============ VARIANTE C — Fiche vivante ============ */
+  .vC { padding: 6px 22px 0; }
+  .vC .prose { font-family: var(--font-voice); font-size: 23px; line-height: 1.55; letter-spacing: -.005em; }
+  .vC .prose .tok {
+    font-weight: 700; color: var(--accent);
+    border-bottom: 2px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    padding: 0 1px; white-space: nowrap;
+  }
+  .vC .expand { margin-top: 14px; }
+  .vC .expand summary {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-ui); font-size: 13.5px; font-weight: 600; color: var(--ink-2);
+    background: var(--surface-sunken); border: 1px solid var(--hairline);
+    border-radius: 999px; padding: 6px 14px;
+  }
+  .vC .expand[open] summary { display: none; }
+  .vC .expand .prose { margin-top: 12px; }
+  .method {
+    margin-top: 26px; background: var(--surface); border: 1px solid var(--hairline);
+    border-radius: 16px; box-shadow: var(--shadow); overflow: hidden;
+  }
+  .method h3 {
+    font-family: var(--font-voice); font-style: italic; font-weight: 600; font-size: 15px;
+    color: var(--ink-2); padding: 14px 18px 0;
+  }
+  .method .step { display: flex; gap: 14px; padding: 14px 18px; }
+  .method .step + .step { border-top: 1px solid var(--hairline); }
+  .method .step .when { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; color: var(--accent); white-space: nowrap; padding-top: 2px; }
+  .method .step .what { font-size: 14px; line-height: 1.45; color: var(--ink); }
+  .method .step .what b { font-weight: 650; }
+  .method .more { display: block; width: 100%; text-align: center; padding: 12px; font-size: 13px; font-weight: 600; color: var(--accent); border-top: 1px solid var(--hairline); }
+  .vB .method { margin: 16px 14px 0; }
+  .vC .cta { margin-top: 18px; }
+
+  /* ============ BARRE PROTOTYPE (hors design) ============ */
+  .proto-bar {
+    position: fixed; bottom: calc(64px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 2px;
+    background: #111; color: #fff; border-radius: 999px; padding: 4px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.4); z-index: 100;
+    font-size: 12.5px; border: 1px solid rgba(255,255,255,.25);
+  }
+  .proto-bar button { color: #fff; padding: 6px 10px; border-radius: 999px; }
+  .proto-bar button:active { background: rgba(255,255,255,.15); }
+  /* La variante A a un CTA fixé en bas : la pilule monte au-dessus */
+  body[data-variant="A"] .proto-bar { bottom: calc(158px + env(safe-area-inset-bottom)); }
+  .proto-bar .plabel { min-width: 150px; text-align: center; font-weight: 600; }
+  .proto-bar .sep { width: 1px; height: 16px; background: rgba(255,255,255,.25); }
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <header class="app-header">
+    <h1>Calculer</h1>
+    <button class="icon-btn" aria-label="Réglages">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+  </header>
+
+  <div class="screen-intro">
+    <div class="seg" role="tablist">
+      <button>Guidé</button>
+      <button class="on">Expert</button>
+    </div>
+    <span class="resume">Repris · hier 18:42</span>
+  </div>
+
+  <main>
+
+    <!-- ================= VARIANTE A — Formulaire sectionné ================= -->
+    <section data-variant="A" class="vA">
+      <div class="section-title">L’essentiel</div>
+      <div class="card">
+        <div class="row">
+          <span class="label">Pâtons</span>
+          <span class="stepper"><button data-step="-1">−</button><span class="num" data-count>5</span><button data-step="1">+</button></span>
+        </div>
+        <div class="row">
+          <span class="label">Poids par pâton</span>
+          <span class="value num">250 g <span class="chev">›</span></span>
+        </div>
+        <div class="row">
+          <span class="label">Type de pâte</span>
+          <span class="seg"><button>Directe</button><button class="on">Poolish</button></span>
+        </div>
+        <div class="row">
+          <span class="label">Hydratation<span class="info">i</span></span>
+          <span class="value num">62 % <span class="chev">›</span></span>
+        </div>
+      </div>
+
+      <div class="section-title">Fermentation</div>
+      <div class="card">
+        <div class="row">
+          <span class="label">Durée totale</span>
+          <span class="value num">24 h <span class="chev">›</span></span>
+        </div>
+        <div class="row">
+          <span class="label">dont température ambiante</span>
+          <span class="value num">16 h <span class="chev">›</span></span>
+        </div>
+        <div class="row">
+          <span class="label">Température<span class="info">i</span></span>
+          <span class="value num">20 °C <span class="chev">›</span></span>
+        </div>
+        <div class="row">
+          <span class="label">Levure</span>
+          <span class="value">Sèche active <span class="chev">›</span></span>
+        </div>
+      </div>
+
+      <details class="advanced card" style="margin-top: 22px;">
+        <summary>
+          <div class="row">
+            <span class="label">Options avancées</span>
+            <span class="value"><span class="caret">›</span></span>
+          </div>
+        </summary>
+        <div class="row"><span class="label">Sel</span><span class="value num">2,8 %</span></div>
+        <div class="row"><span class="label">Force de la farine (W)<span class="info">i</span></span><span class="value num">270</span></div>
+        <div class="row"><span class="label">Ratio poolish<span class="info">i</span></span><span class="value num">40 %</span></div>
+        <div class="row"><span class="label">Huile d’olive</span><span class="value num">0 %</span></div>
+        <div class="row"><span class="label">Miel</span><span class="value num">0,4 %</span></div>
+      </details>
+
+      <div class="cta-zone">
+        <div class="summary-line num">1 250 g de pâte — 755 g farine · 468 g eau · 21 g sel · 2,1 g levure</div>
+        <button class="cta">Voir la Méthode</button>
+      </div>
+    </section>
+
+    <!-- ================= VARIANTE B — Instrument ================= -->
+    <section data-variant="B" class="vB" hidden>
+      <div class="livebar num">
+        <span class="total">1 250 g</span>
+        <span class="split num">755 farine · 468 eau · 21 sel · 2,1 levure</span>
+      </div>
+
+      <div class="grid">
+        <div class="tile">
+          <div class="t-label">Pâtons</div>
+          <div class="t-value num" data-count>5</div>
+          <div class="t-ctrl"><button data-step="-1">−</button><button data-step="1">+</button></div>
+        </div>
+        <div class="tile">
+          <div class="t-label">Poids</div>
+          <div class="t-value num">250<small>g</small></div>
+          <div class="t-ctrl"><button>−</button><button>+</button></div>
+        </div>
+        <div class="tile">
+          <div class="t-label">Hydratation</div>
+          <div class="t-value num">62<small>%</small></div>
+          <div class="t-ctrl"><button>−</button><button>+</button></div>
+        </div>
+        <div class="tile">
+          <div class="t-label">Ratio poolish</div>
+          <div class="t-value num">40<small>%</small></div>
+          <div class="t-ctrl"><button>−</button><button>+</button></div>
+        </div>
+        <div class="tile">
+          <div class="t-label">Levée totale</div>
+          <div class="t-value num">24<small>h</small></div>
+          <div class="t-ctrl"><button>−</button><button>+</button></div>
+        </div>
+        <div class="tile">
+          <div class="t-label">Température</div>
+          <div class="t-value num">20<small>°C</small></div>
+          <div class="t-ctrl"><button>−</button><button>+</button></div>
+        </div>
+        <div class="tile select">
+          <div class="t-label">Type de pâte</div>
+          <div class="t-value">Poolish ›</div>
+        </div>
+        <div class="tile select">
+          <div class="t-label">Levure</div>
+          <div class="t-value">Sèche active ›</div>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-labels num"><span>16 h ambiante</span><span>8 h froid</span></div>
+        <div class="tl-bar"><span class="tl-ta"></span><span class="tl-froid"></span></div>
+      </div>
+
+      <details class="advdetails">
+        <summary class="adv-toggle">Avancé — sel 2,8 % · W 270 · huile 0 % · miel 0,4 % <span>▾</span></summary>
+        <div class="grid advgrid">
+          <div class="tile"><div class="t-label">Sel</div><div class="t-value num">2,8<small>%</small></div><div class="t-ctrl"><button>−</button><button>+</button></div></div>
+          <div class="tile"><div class="t-label">Farine (W)</div><div class="t-value num">270</div><div class="t-ctrl"><button>−</button><button>+</button></div></div>
+          <div class="tile"><div class="t-label">Huile d’olive</div><div class="t-value num">0<small>%</small></div><div class="t-ctrl"><button>−</button><button>+</button></div></div>
+          <div class="tile"><div class="t-label">Miel</div><div class="t-value num">0,4<small>%</small></div><div class="t-ctrl"><button>−</button><button>+</button></div></div>
+        </div>
+      </details>
+
+      <button class="cta">Voir la Méthode</button>
+    </section>
+
+    <!-- ================= VARIANTE D — Instrument + Méthode (verdict : B ⊕ C) ================= -->
+    <section data-variant="D" class="vB" hidden>
+      <div class="livebar num">
+        <span class="total">1 250 g</span>
+        <span class="split num">755 farine · 468 eau · 21 sel · 2,1 levure</span>
+      </div>
+
+      <div class="grid">
+        <div class="tile">
+          <div class="t-label">Pâtons</div>
+          <div class="t-value num" data-count>5</div>
+          <div class="t-ctrl"><button data-step="-1">−</button><button data-step="1">+</button></div>
+        </div>
+        <div class="tile">
+          <div class="t-label">Poids</div>
+          <div class="t-value num">250<small>g</small></div>
+          <div class="t-ctrl"><button>−</button><button>+</button></div>
+        </div>
+        <div class="tile">
+          <div class="t-label">Hydratation</div>
+          <div class="t-value num">62<small>%</small></div>
+          <div class="t-ctrl"><button>−</button><button>+</button></div>
+        </div>
+        <div class="tile">
+          <div class="t-label">Ratio poolish</div>
+          <div class="t-value num">40<small>%</small></div>
+          <div class="t-ctrl"><button>−</button><button>+</button></div>
+        </div>
+        <div class="tile">
+          <div class="t-label">Levée totale</div>
+          <div class="t-value num">24<small>h</small></div>
+          <div class="t-ctrl"><button>−</button><button>+</button></div>
+        </div>
+        <div class="tile">
+          <div class="t-label">Température</div>
+          <div class="t-value num">20<small>°C</small></div>
+          <div class="t-ctrl"><button>−</button><button>+</button></div>
+        </div>
+        <div class="tile select">
+          <div class="t-label">Type de pâte</div>
+          <div class="t-value">Poolish ›</div>
+        </div>
+        <div class="tile select">
+          <div class="t-label">Levure</div>
+          <div class="t-value">Sèche active ›</div>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-labels num"><span>16 h ambiante</span><span>8 h froid</span></div>
+        <div class="tl-bar"><span class="tl-ta"></span><span class="tl-froid"></span></div>
+      </div>
+
+      <details>
+        <summary class="adv-toggle">Avancé — sel 2,8 % · W 270 · huile 0 % · miel 0,4 % <span>▾</span></summary>
+        <div class="grid advgrid">
+          <div class="tile"><div class="t-label">Sel</div><div class="t-value num">2,8<small>%</small></div><div class="t-ctrl"><button>−</button><button>+</button></div></div>
+          <div class="tile"><div class="t-label">Farine (W)</div><div class="t-value num">270</div><div class="t-ctrl"><button>−</button><button>+</button></div></div>
+          <div class="tile"><div class="t-label">Huile d’olive</div><div class="t-value num">0<small>%</small></div><div class="t-ctrl"><button>−</button><button>+</button></div></div>
+          <div class="tile"><div class="t-label">Miel</div><div class="t-value num">0,4<small>%</small></div><div class="t-ctrl"><button>−</button><button>+</button></div></div>
+        </div>
+      </details>
+
+      <div class="method">
+        <h3>La Méthode</h3>
+        <div class="step">
+          <span class="when">Ce soir<br>21:00</span>
+          <span class="what">Poolish : mélanger <b>302 g de farine</b>, <b>302 g d’eau</b> et <b>0,8 g de levure</b>. Couvrir à température ambiante.</span>
+        </div>
+        <div class="step">
+          <span class="when">Demain<br>09:00</span>
+          <span class="what">Frasage : ajouter <b>453 g de farine</b>, <b>166 g d’eau</b>, <b>21 g de sel</b> et <b>3 g de miel</b> à la poolish.</span>
+        </div>
+        <button class="more">Méthode complète — 6 étapes</button>
+      </div>
+
+      <button class="cta">Commencer — prêt demain à 19 h</button>
+    </section>
+
+    <!-- ================= VARIANTE C — Fiche vivante ================= -->
+    <section data-variant="C" class="vC" hidden>
+      <p class="prose">
+        <span class="tok num" data-count>5</span> pâtons de
+        <span class="tok num">250 g</span>, pâte
+        <span class="tok">poolish</span>, hydratation
+        <span class="tok num">62 %</span>.
+      </p>
+
+      <details class="expand">
+        <summary>Affiner la fermentation ▾</summary>
+        <p class="prose">
+          Levée de <span class="tok num">24 h</span>, dont
+          <span class="tok num">16 h</span> à
+          <span class="tok num">20 °C</span>, levure
+          <span class="tok">sèche active</span>.
+        </p>
+      </details>
+
+      <details class="expand">
+        <summary>Options avancées ▾</summary>
+        <p class="prose">
+          Sel <span class="tok num">2,8 %</span>, farine
+          <span class="tok num">W 270</span>, miel
+          <span class="tok num">0,4 %</span>, ratio poolish
+          <span class="tok num">40 %</span>.
+        </p>
+      </details>
+
+      <div class="method">
+        <h3>La Méthode — 1 250 g de pâte</h3>
+        <div class="step">
+          <span class="when">Ce soir<br>21:00</span>
+          <span class="what">Poolish : mélanger <b>302 g de farine</b>, <b>302 g d’eau</b> et <b>0,8 g de levure</b>. Couvrir à température ambiante.</span>
+        </div>
+        <div class="step">
+          <span class="when">Demain<br>09:00</span>
+          <span class="what">Frasage : ajouter <b>453 g de farine</b>, <b>166 g d’eau</b>, <b>21 g de sel</b> et <b>3 g de miel</b> à la poolish.</span>
+        </div>
+        <button class="more">Méthode complète — 6 étapes</button>
+      </div>
+
+      <button class="cta">Commencer — prêt demain à 19 h</button>
+    </section>
+
+  </main>
+
+  <nav class="tabbar">
+    <button class="active">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 7.5h8M8 12h3M8 16h3M14.5 12h1.5M14.5 16h1.5"/></svg>
+      Calculer
+    </button>
+    <button>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5 12 4l8.5 5.5-2 10a1.8 1.8 0 0 1-1.8 1.5H7.3a1.8 1.8 0 0 1-1.8-1.5z"/><circle cx="10" cy="12" r=".9" fill="currentColor"/><circle cx="14.5" cy="15" r=".9" fill="currentColor"/></svg>
+      Recettes
+    </button>
+    <button>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z"/></svg>
+      Mes pâtes
+    </button>
+  </nav>
+
+</div>
+
+<div class="proto-bar">
+  <button id="prev" aria-label="Variante précédente">←</button>
+  <span class="plabel" id="plabel"></span>
+  <button id="next" aria-label="Variante suivante">→</button>
+  <span class="sep"></span>
+  <button id="mode" aria-label="Basculer light/dark">☾</button>
+</div>
+
+<script>
+  const VARIANTS = { A: 'Formulaire sectionné', B: 'Instrument', C: 'Fiche vivante', D: 'Instrument + Méthode' };
+  const ORDER = Object.keys(VARIANTS);
+  const params = new URLSearchParams(location.search);
+  let variant = ORDER.includes(params.get('variant')) ? params.get('variant') : 'A';
+  let appearance = ['light', 'dark'].includes(params.get('appearance'))
+    ? params.get('appearance')
+    : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+  function apply() {
+    document.documentElement.dataset.appearance = appearance;
+    document.body.dataset.variant = variant;
+    document.querySelectorAll('[data-variant]').forEach(s => { s.hidden = s.dataset.variant !== variant; });
+    document.getElementById('plabel').textContent = variant + ' — ' + VARIANTS[variant];
+    document.getElementById('mode').textContent = appearance === 'dark' ? '☀' : '☾';
+    history.replaceState(null, '', '?' + new URLSearchParams({ variant, appearance }));
+  }
+
+  function cycle(dir) {
+    variant = ORDER[(ORDER.indexOf(variant) + dir + ORDER.length) % ORDER.length];
+    apply();
+  }
+
+  document.getElementById('prev').addEventListener('click', () => cycle(-1));
+  document.getElementById('next').addEventListener('click', () => cycle(1));
+  document.getElementById('mode').addEventListener('click', () => {
+    appearance = appearance === 'dark' ? 'light' : 'dark';
+    apply();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    const t = document.activeElement;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    if (e.key === 'ArrowLeft') cycle(-1);
+    if (e.key === 'ArrowRight') cycle(1);
+  });
+
+  // Steppers « pâtons » : juste assez de vie pour sentir le contrôle (pas de recalcul).
+  document.querySelectorAll('[data-step]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const scope = btn.closest('.row, .tile');
+      const target = scope && scope.querySelector('[data-count]');
+      if (!target) return;
+      const next = Math.max(1, parseInt(target.textContent, 10) + parseInt(btn.dataset.step, 10));
+      document.querySelectorAll('[data-count]').forEach(el => { el.textContent = next; });
+    });
+  });
+
+  apply();
+</script>
+</body>
+</html>
