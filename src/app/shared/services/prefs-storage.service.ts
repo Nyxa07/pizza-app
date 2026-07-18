@@ -38,6 +38,6 @@ export class PrefsStorage {
   }
 
   remove(key: string): void {
-    this.storage.removeItem(key);
+    this.storage.removeItem(`${this.cacheVersion}:${key}`);
   }
 }

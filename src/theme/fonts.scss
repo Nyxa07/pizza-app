@@ -1,58 +1,28 @@
-// RedHat - Variable font for main text
+// v2 type pairing (issue #66) — variable fonts, OFL, latin subset,
+// embedded locally so the app works fully offline:
+// - Fraunces: editorial serif voice (titles, sections, editorial moments)
+// - Inter: instrument (UI, values, tabular figures)
+
 @font-face {
-  font-family: "RedHat";
+  font-family: "Fraunces";
+  src: url("/assets/fonts/fraunces-var.woff2") format("woff2");
+  font-weight: 300 700;
   font-style: normal;
-  src: url("/assets/fonts/RedHat/RedHatDisplay-VariableFont_wght.ttf")
-    format("truetype");
   font-display: swap;
 }
 
 @font-face {
-  font-family: "RedHat";
+  font-family: "Fraunces";
+  src: url("/assets/fonts/fraunces-italic-var.woff2") format("woff2");
+  font-weight: 300 700;
   font-style: italic;
-  src: url("/assets/fonts/RedHat/RedHatDisplay-Italic-VariableFont_wght.ttf")
-    format("truetype");
-  font-display: swap;
-}
-
-// Orbitron - Futuristic/Space font for headings
-@font-face {
-  font-family: "Orbitron";
-  font-weight: 400;
-  font-style: normal;
-  src: url("/assets/fonts/Orbitron/Orbitron-Regular.ttf") format("truetype");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Orbitron";
-  font-weight: 600;
-  font-style: normal;
-  src: url("/assets/fonts/Orbitron/Orbitron-SemiBold.ttf") format("truetype");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Orbitron";
-  font-weight: 700;
-  font-style: normal;
-  src: url("/assets/fonts/Orbitron/Orbitron-Bold.ttf") format("truetype");
-  font-display: swap;
-}
-
-// Inter - Premium variable font for Glass theme
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 100 900;
-  src: url("/assets/fonts/Inter/InterVariable.ttf") format("truetype");
   font-display: swap;
 }
 
 @font-face {
   font-family: "Inter";
-  font-style: italic;
-  font-weight: 100 900;
-  src: url("/assets/fonts/Inter/InterVariable-Italic.ttf") format("truetype");
+  src: url("/assets/fonts/inter-var.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: normal;
   font-display: swap;
 }

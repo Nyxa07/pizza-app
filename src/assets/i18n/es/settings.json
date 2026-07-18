@@ -8,21 +8,11 @@
     },
     "appearance": {
       "title": "Apariencia",
-      "paletteToggle": {
-        "title": "Modo oscuro"
-      },
-      "theme": {
-        "title": "Tema",
-        "original": "Original",
-        "cyberpunk": "Cyberpunk",
-        "nexus": "Nexus",
-        "snow": "Nieve",
-        "retro": "Retro",
-        "glass": "Cristal",
-        "minecraft": "Minecraft",
-        "napolitain": "Napolitano",
-        "pixel": "Pixel",
-        "konami": "Konami ✨"
+      "select": {
+        "title": "Apariencia",
+        "system": "Sistema",
+        "light": "Claro",
+        "dark": "Oscuro"
       }
     },
     "system": {

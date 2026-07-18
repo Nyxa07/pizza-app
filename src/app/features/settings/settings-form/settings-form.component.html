@@ -5,14 +5,14 @@
   <ion-list lines="none">
     <ion-item>
       <ion-select
-        formControlName="theme"
+        formControlName="appearance"
         [cancelText]="'common.actions.cancel' | translate"
         [okText]="'common.actions.ok' | translate"
-        [label]="'settings.form.appearance.theme.title' | translate"
+        [label]="'settings.form.appearance.select.title' | translate"
       >
-        @for (theme of availableThemes; track theme) {
-          <ion-select-option [value]="theme.value">
-            {{ theme.translateKey | translate }}
+        @for (appearance of availableAppearances; track appearance) {
+          <ion-select-option [value]="appearance.value">
+            {{ appearance.translateKey | translate }}
           </ion-select-option>
         }
       </ion-select>

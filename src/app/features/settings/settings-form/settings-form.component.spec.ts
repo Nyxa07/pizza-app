@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { provideTranslateService } from '@ngx-translate/core';
+
+import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
+import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 
 import { SettingsFormComponent } from './settings-form.component';
 
@@ -9,8 +12,11 @@ describe('SettingsFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SettingsFormComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [SettingsFormComponent],
+      providers: [
+        provideTranslateService(),
+        { provide: PrefsStorage, useValue: new FakePrefsStorage() },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SettingsFormComponent);

@@ -8,21 +8,11 @@
     },
     "appearance": {
       "title": "Erscheinungsbild",
-      "paletteToggle": {
-        "title": "Dunkler Modus"
-      },
-      "theme": {
-        "title": "Design",
-        "original": "Original",
-        "cyberpunk": "Cyberpunk",
-        "nexus": "Nexus",
-        "snow": "Schnee",
-        "retro": "Retro",
-        "glass": "Glas",
-        "minecraft": "Minecraft",
-        "napolitain": "Neapolitanisch",
-        "pixel": "Pixel",
-        "konami": "Konami ✨"
+      "select": {
+        "title": "Erscheinungsbild",
+        "system": "System",
+        "light": "Hell",
+        "dark": "Dunkel"
       }
     },
     "system": {
