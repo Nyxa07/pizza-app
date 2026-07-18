@@ -1,40 +1,47 @@
 <ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>{{ "pages.calculator.complex.title" | translate }}</ion-title>
+    <ion-title>{{ "pages.calculator.expert.title" | translate }}</ion-title>
     <ion-buttons slot="end">
       <app-calculator-refresh-button></app-calculator-refresh-button>
       @if (isInitialized()) {
         <app-calculator-state-saver></app-calculator-state-saver>
       }
-      <ion-button [routerLink]="['/settings']">
+      <ion-button
+        [routerLink]="['/settings']"
+        [attr.aria-label]="'pages.settings.title' | translate"
+      >
         <i-lucide slot="icon-only" [img]="SettingsIcon"></i-lucide>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">{{
-        "pages.calculator.complex.title" | translate
+        "pages.calculator.expert.title" | translate
       }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
+  <nav
+    class="seg"
+    [attr.aria-label]="'calculator.expert.seg.label' | translate"
+  >
+    <a [routerLink]="['/tabs/calculator/assistant']">{{
+      "calculator.expert.seg.guided" | translate
+    }}</a>
+    <span class="on" aria-current="page">{{
+      "calculator.expert.seg.expert" | translate
+    }}</span>
+  </nav>
+
   @if (isInitialized()) {
-    <app-calculator-form></app-calculator-form>
-    <ion-button
-      class="ion-margin-top"
-      expand="block"
-      color="primary"
-      [routerLink]="['/tabs/calculator/results/complex']"
-    >
-      {{ "pages.calculator.compute" | translate }}
-    </ion-button>
+    <app-expert-form></app-expert-form>
   } @else {
     <!-- Loading skeleton -->
-    <div class="loading-skeleton">
+    <div class="loading-skeleton ion-padding">
       <ion-item lines="none">
         <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
       </ion-item>

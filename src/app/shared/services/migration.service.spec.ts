@@ -59,14 +59,14 @@ describe('MigrationService', () => {
   it('handles pristine preferences without crashing', () => {
     expect(() => service.run()).not.toThrow();
 
-    expect(prefs.get('schema-version')).toBe(3);
+    expect(prefs.get('schema-version')).toBe(4);
   });
 
   it('marks the schema as migrated and never runs twice', () => {
     prefs.set('theme', 'dark');
 
     service.run();
-    expect(prefs.get('schema-version')).toBe(3);
+    expect(prefs.get('schema-version')).toBe(4);
     expect(prefs.get('theme')).toBeNull();
 
     // A theming key reappearing after migration must survive a second run().
@@ -127,7 +127,7 @@ describe('MigrationService', () => {
     expect(prefs.get('calculator:complex')).toBeNull();
   });
 
-  it('a user already at schema 2 only gets the draft merge', () => {
+  it('a user already at schema 2 skips the v1→v2 wipe', () => {
     prefs.set('schema-version', 2);
     // Written after the v1→v2 step ran: must not be wiped again.
     prefs.set('theme', 'written-after-v2');
@@ -137,6 +137,38 @@ describe('MigrationService', () => {
 
     expect(prefs.get('theme')).toBe('written-after-v2');
     expect(prefs.get('calculator:draft')).toEqual({ nbPizzas: 3 });
-    expect(prefs.get('schema-version')).toBe(3);
+    expect(prefs.get('schema-version')).toBe(4);
+  });
+
+  it('drops the per-mode field-visibility settings (issue #71)', () => {
+    // The field-visibility screen is gone (ADR-0002): a v1 user who hid
+    // fields must not carry those toggles into the Expert screen's engine.
+    prefs.set('calculator:settings:simple', { saltRatio: { auto: true } });
+    prefs.set('calculator:settings:complex', {
+      hydrationRatio: { auto: true, visible: false },
+    });
+    prefs.set('calculator:settings:assist', { doughType: { auto: false } });
+    prefs.set('calculator:defaults', { saltRatio: 0.03 });
+
+    service.run();
+
+    expect(prefs.get('calculator:settings:simple')).toBeNull();
+    expect(prefs.get('calculator:settings:complex')).toBeNull();
+    expect(prefs.get('calculator:settings:assist')).toBeNull();
+    expect(prefs.get('calculator:defaults')).toEqual({ saltRatio: 0.03 });
+  });
+
+  it('a user already at schema 3 only gets the settings purge', () => {
+    prefs.set('schema-version', 3);
+    // A silo reappearing after the v2→v3 merge must not be re-merged.
+    prefs.set('calculator:complex', { nbPizzas: 3 });
+    prefs.set('calculator:settings:complex', { saltRatio: { auto: true } });
+
+    service.run();
+
+    expect(prefs.get('calculator:draft')).toBeNull();
+    expect(prefs.get('calculator:complex')).toEqual({ nbPizzas: 3 });
+    expect(prefs.get('calculator:settings:complex')).toBeNull();
+    expect(prefs.get('schema-version')).toBe(4);
   });
 });

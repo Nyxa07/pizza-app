@@ -11,10 +11,7 @@ import { ICalculatorSettings } from '../../interfaces/calculator-settings.interf
 import { DoughDefaultsService } from '../dough-defaults.service';
 import { FillMissingPreProcessor } from './transform-input.pre-processor';
 
-const flag = (auto = false): { auto: boolean; visible: boolean } => ({
-  auto,
-  visible: !auto,
-});
+const flag = (auto = false): { auto: boolean } => ({ auto });
 
 const settingsWithAuto = (
   auto: Partial<Record<keyof ICalculatorSettings, boolean>>,

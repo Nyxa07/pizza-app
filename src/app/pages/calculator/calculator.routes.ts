@@ -2,11 +2,15 @@ import { Route } from '@angular/router';
 
 export const CALCULATOR_ROUTES: Route[] = [
   {
-    // The app opens straight on the calculation screen; the complex
-    // calculator stands in until the Expert screen lands (#71).
+    // The app opens straight on the calculation screen: the Expert path.
     path: '',
-    redirectTo: 'complex',
+    redirectTo: 'expert',
     pathMatch: 'full',
+  },
+  {
+    path: 'expert',
+    loadComponent: () =>
+      import('./expert/expert.page').then((m) => m.CalculatorExpertPage),
   },
   {
     path: 'assistant',
@@ -15,24 +19,23 @@ export const CALCULATOR_ROUTES: Route[] = [
         (m) => m.CalculatorAssistantPage,
       ),
   },
+  // Legacy v1 calculator routes — the Simple/Complex pages and the
+  // field-visibility screen are replaced by the Expert screen (issue #71).
   {
     path: 'simple',
-    loadComponent: () =>
-      import('./simple/simple.page').then((m) => m.CalculatorSimplePage),
+    redirectTo: 'expert',
   },
   {
     path: 'complex',
-    loadComponent: () =>
-      import('./complex/complex.page').then((m) => m.CalculatorComplexPage),
+    redirectTo: 'expert',
+  },
+  {
+    path: 'settings',
+    redirectTo: 'expert',
   },
   {
     path: 'results/:mode',
     loadComponent: () =>
       import('./results/results.page').then((m) => m.CalculatorResultsPage),
-  },
-  {
-    path: 'settings',
-    loadComponent: () =>
-      import('./settings/settings.page').then((m) => m.CalculatorSettingsPage),
   },
 ];

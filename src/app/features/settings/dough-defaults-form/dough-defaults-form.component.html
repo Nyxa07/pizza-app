@@ -10,10 +10,7 @@
         [okText]="'common.actions.ok' | translate"
         [label]="'settings.form.doughDefaults.hydration' | translate"
       >
-        @for (
-          hydrationRatio of range(0.55, 0.8, 0.01, 2);
-          track hydrationRatio
-        ) {
+        @for (hydrationRatio of options.hydrationRatio; track hydrationRatio) {
           <ion-select-option [value]="hydrationRatio">
             {{ hydrationRatio * 100 | number: "1.0-0" }}%
           </ion-select-option>
@@ -27,7 +24,7 @@
         [okText]="'common.actions.ok' | translate"
         [label]="'settings.form.doughDefaults.salt' | translate"
       >
-        @for (saltRatio of range(0.02, 0.04, 0.001, 3); track saltRatio) {
+        @for (saltRatio of options.saltRatio; track saltRatio) {
           <ion-select-option [value]="saltRatio">
             {{ saltRatio * 100 | number: "1.1-1" }}%
           </ion-select-option>
@@ -41,7 +38,7 @@
         [okText]="'common.actions.ok' | translate"
         [label]="'settings.form.doughDefaults.ballWeight' | translate"
       >
-        @for (pizzaWeight of range(150, 400, 10); track pizzaWeight) {
+        @for (pizzaWeight of options.pizzaWeight; track pizzaWeight) {
           <ion-select-option [value]="pizzaWeight">
             {{ pizzaWeight | number: "1.0-0" }} g
           </ion-select-option>

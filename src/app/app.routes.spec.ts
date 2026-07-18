@@ -34,19 +34,19 @@ describe('App navigation (v2)', () => {
   it('opens directly on the calculation screen', async () => {
     await harness.navigateByUrl('/');
 
-    expect(router.url).toBe('/tabs/calculator/complex');
+    expect(router.url).toBe('/tabs/calculator/expert');
   });
 
   it('serves the calculation screen at the calculator tab root (no index menu)', async () => {
     await harness.navigateByUrl('/tabs/calculator');
 
-    expect(router.url).toBe('/tabs/calculator/complex');
+    expect(router.url).toBe('/tabs/calculator/expert');
   });
 
   it('redirects the legacy home menu to the calculation screen', async () => {
     await harness.navigateByUrl('/tabs/home');
 
-    expect(router.url).toBe('/tabs/calculator/complex');
+    expect(router.url).toBe('/tabs/calculator/expert');
   });
 
   it('redirects the legacy app-settings page to the unified settings screen', async () => {
@@ -58,7 +58,21 @@ describe('App navigation (v2)', () => {
   it('redirects the dissolved guides tab to the calculation screen', async () => {
     await harness.navigateByUrl('/tabs/guides/faq');
 
-    expect(router.url).toBe('/tabs/calculator/complex');
+    expect(router.url).toBe('/tabs/calculator/expert');
+  });
+
+  it('redirects the retired simple and complex calculators to the Expert screen', async () => {
+    await harness.navigateByUrl('/tabs/calculator/simple');
+    expect(router.url).toBe('/tabs/calculator/expert');
+
+    await harness.navigateByUrl('/tabs/calculator/complex');
+    expect(router.url).toBe('/tabs/calculator/expert');
+  });
+
+  it('redirects the removed field-visibility screen to the Expert screen', async () => {
+    await harness.navigateByUrl('/tabs/calculator/settings');
+
+    expect(router.url).toBe('/tabs/calculator/expert');
   });
 
   it('resolves the unified settings screen with the settings form', async () => {

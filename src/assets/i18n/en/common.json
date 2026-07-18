@@ -40,7 +40,20 @@
   "time": {
     "hours": "{count, plural, one {hour} other {hours}}",
     "minutes": "{count, plural, one {minute} other {minutes}}",
-    "seconds": "{count, plural, one {second} other {seconds}}"
+    "seconds": "{count, plural, one {second} other {seconds}}",
+    "relativeDay": {
+      "today": "today",
+      "tonight": "tonight",
+      "tomorrow": "tomorrow",
+      "inTwoDays": "in two days",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    }
   },
   "recipe": {
     "ingredients": "Ingredients",

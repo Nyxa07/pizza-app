@@ -15,12 +15,12 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { debounceTime } from 'rxjs';
 
+import { EXPERT_FIELD_OPTIONS } from 'src/app/features/calculator/expert-form/expert-field-options';
 import { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
 import {
   DoughDefaultsService,
   FACTORY_DEFAULTS,
 } from 'src/app/features/calculator/services/dough-defaults.service';
-import { range } from 'src/app/shared/helpers/range';
 
 /**
  * « Mes défauts de pâte » — the user-editable seed values every new
@@ -50,7 +50,8 @@ export class DoughDefaultsFormComponent {
   private readonly doughDefaults = inject(DoughDefaultsService);
   private readonly seed = this.doughDefaults.getDefaults();
 
-  protected readonly range = range;
+  // Shared with the Expert tiles so both forms walk the same value grids.
+  protected readonly options = EXPERT_FIELD_OPTIONS;
 
   protected readonly form = this.fb.nonNullable.group({
     hydrationRatio: this.seed.hydrationRatio ?? FACTORY_DEFAULTS.hydrationRatio,

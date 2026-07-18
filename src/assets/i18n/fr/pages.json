@@ -5,18 +5,11 @@
     "doughs": "Mes pâtes"
   },
   "calculator": {
-    "compute": "Calculer",
+    "expert": {
+      "title": "Calculer"
+    },
     "results": {
       "title": "Résultats calcul"
-    },
-    "settings": {
-      "title": "Configuration calculateur"
-    },
-    "simple": {
-      "title": "Calculateur basique"
-    },
-    "complex": {
-      "title": "Calculateur avancé"
     },
     "assistant": {
       "title": "Assistant de configuration"

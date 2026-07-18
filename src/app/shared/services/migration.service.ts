@@ -22,7 +22,18 @@ const V2_LOCALES = ['en', 'fr'] as const;
 const SCHEMA_VERSION_KEY = 'schema-version';
 
 /** Bumped when a release changes the shape of persisted preferences. */
-const SCHEMA_VERSION = 3;
+const SCHEMA_VERSION = 4;
+
+/**
+ * Per-mode field-visibility settings written by the v1 personalisation
+ * screen, gone with the Expert screen's progressive disclosure
+ * (issue #71, ADR-0002).
+ */
+const V1_FIELD_VISIBILITY_KEYS = [
+  'calculator:settings:simple',
+  'calculator:settings:complex',
+  'calculator:settings:assist',
+] as const;
 
 /**
  * v1 kept one auto-persisted draft per calculator mode. v1 drafts carry no
@@ -61,6 +72,9 @@ export class MigrationService {
     if (version < 3) {
       this.mergeModeDraftsIntoSingleDraft();
     }
+    if (version < 4) {
+      this.removeFieldVisibilitySettings();
+    }
 
     this.prefsStorage.set(SCHEMA_VERSION_KEY, SCHEMA_VERSION);
   }
@@ -98,9 +112,23 @@ export class MigrationService {
   private mergeModeDraftsIntoSingleDraft(): void {
     for (const key of V1_MODE_DRAFT_KEYS) {
       const draft = this.prefsStorage.get<unknown>(key);
-      if (draft !== null && this.prefsStorage.get<unknown>(DRAFT_KEY) === null) {
+      if (
+        draft !== null &&
+        this.prefsStorage.get<unknown>(DRAFT_KEY) === null
+      ) {
         this.prefsStorage.set(DRAFT_KEY, draft);
       }
+      this.prefsStorage.remove(key);
+    }
+  }
+
+  /**
+   * v3→v4 (issue #71): the field-visibility screen is gone; its persisted
+   * per-mode toggles would otherwise keep overriding which fields the
+   * engine treats as auto on the Expert screen.
+   */
+  private removeFieldVisibilitySettings(): void {
+    for (const key of V1_FIELD_VISIBILITY_KEYS) {
       this.prefsStorage.remove(key);
     }
   }

@@ -1,6 +1,6 @@
 import { CalculatorStateService } from './calculator-state.service';
 import { CalculatorSettingsService } from './calculator-settings.service';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CalculatorStateSaveManagerService } from './calculator-state-save-manager.service';
 import { CALCULATOR_MODE } from '../enums/calculator-mode.enum';
 import { ICalculatorSettings } from '../interfaces/calculator-settings.interface';
@@ -9,47 +9,37 @@ import { ICalculatorSettings } from '../interfaces/calculator-settings.interface
   providedIn: 'root',
 })
 export class CalculatorInitializerService {
+  private readonly calculatorState = inject(CalculatorStateService);
+  private readonly calculatorSettings = inject(CalculatorSettingsService);
+  private readonly calculatorStateSaveManager = inject(
+    CalculatorStateSaveManagerService,
+  );
+
   private _isInitialized = false;
 
-  constructor(
-    private calculatorState: CalculatorStateService,
-    private calculatorSettings: CalculatorSettingsService,
-    private calculatorStateSaveManager: CalculatorStateSaveManagerService,
-  ) {}
-
-  initSimple() {
-    return this.init(CALCULATOR_MODE.SIMPLE, {
-      settings: {
-        saltRatio: { auto: true, visible: false },
-        honeyRatio: { auto: true, visible: false },
-        flourStrength: { auto: true, visible: false },
-        hydrationRatio: { auto: true, visible: false },
-        doughType: { auto: true, visible: false },
-        poolishRatio: { auto: true, visible: false },
-        yeastType: { auto: false, visible: true },
-        coldRestTime: { auto: true, visible: false },
-        globalRestTime: { auto: true, visible: false },
-        pizzaWeight: { auto: true, visible: false },
-        oliveOilRatio: { auto: true, visible: false },
-      },
-    });
-  }
-
-  initComplex() {
+  /**
+   * The Expert path (issue #71): every field is explicit — whatever the
+   * shared Draft holds passes through to the engine untouched, including a
+   * globalRestTime written by the Guided path. COMPLEX stays as the
+   * technical mode underneath: it keys the persisted saves silo (merged
+   * into Doughs by #74) and the results/:mode URL (redesigned by #72).
+   */
+  initExpert() {
     this.init(CALCULATOR_MODE.COMPLEX, {
       settings: {
-        pizzaWeight: { auto: false, visible: true },
-        saltRatio: { auto: false, visible: true },
-        honeyRatio: { auto: false, visible: true },
-        flourStrength: { auto: false, visible: true },
-        hydrationRatio: { auto: false, visible: true },
-        doughType: { auto: false, visible: true },
-        poolishRatio: { auto: false, visible: true },
-        yeastType: { auto: false, visible: true },
-        temperature: { auto: false, visible: true },
-        rtRestTime: { auto: false, visible: true },
-        coldRestTime: { auto: false, visible: true },
-        globalRestTime: { auto: true, visible: false },
+        pizzaWeight: { auto: false },
+        saltRatio: { auto: false },
+        honeyRatio: { auto: false },
+        flourStrength: { auto: false },
+        hydrationRatio: { auto: false },
+        doughType: { auto: false },
+        poolishRatio: { auto: false },
+        yeastType: { auto: false },
+        temperature: { auto: false },
+        globalRestTime: { auto: false },
+        rtRestTime: { auto: false },
+        coldRestTime: { auto: false },
+        oliveOilRatio: { auto: false },
       },
     });
   }
@@ -57,33 +47,32 @@ export class CalculatorInitializerService {
   initAssisted() {
     this.init(CALCULATOR_MODE.ASSIST, {
       settings: {
-        saltRatio: { auto: true, visible: false },
-        honeyRatio: { auto: true, visible: false },
-        flourStrength: { auto: false, visible: true },
-        hydrationRatio: { auto: true, visible: false },
-        doughType: { auto: false, visible: true },
-        poolishRatio: { auto: true, visible: false },
-        yeastType: { auto: false, visible: true },
-        coldRestTime: { auto: true, visible: false },
-        rtRestTime: { auto: true, visible: false },
-        globalRestTime: { auto: false, visible: true },
-        pizzaWeight: { auto: true, visible: false },
-        oliveOilRatio: { auto: true, visible: false },
+        saltRatio: { auto: true },
+        honeyRatio: { auto: true },
+        flourStrength: { auto: false },
+        hydrationRatio: { auto: true },
+        doughType: { auto: false },
+        poolishRatio: { auto: true },
+        yeastType: { auto: false },
+        coldRestTime: { auto: true },
+        rtRestTime: { auto: true },
+        globalRestTime: { auto: false },
+        pizzaWeight: { auto: true },
+        oliveOilRatio: { auto: true },
       },
     });
   }
 
-  // Facade to init the calculator with a mode
+  // Facade to init the calculator behind a deep link (results/:mode); the
+  // retired simple/complex modes resolve to the Expert configuration.
   initWithMode(mode: CALCULATOR_MODE) {
     if (this._isInitialized) {
       return;
     }
     switch (mode) {
       case CALCULATOR_MODE.SIMPLE:
-        this.initSimple();
-        break;
       case CALCULATOR_MODE.COMPLEX:
-        this.initComplex();
+        this.initExpert();
         break;
       case CALCULATOR_MODE.ASSIST:
         this.initAssisted();
@@ -97,7 +86,7 @@ export class CalculatorInitializerService {
       settings?: Partial<ICalculatorSettings>;
     },
   ) {
-    this.calculatorSettings.init(mode, options?.settings);
+    this.calculatorSettings.init(options?.settings);
     this.calculatorState.init();
     this.calculatorStateSaveManager.init(mode);
     this._isInitialized = true;

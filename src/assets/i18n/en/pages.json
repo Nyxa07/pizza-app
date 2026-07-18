@@ -5,18 +5,11 @@
     "doughs": "My doughs"
   },
   "calculator": {
-    "compute": "Calculate",
+    "expert": {
+      "title": "Calculate"
+    },
     "results": {
       "title": "Calculation results"
-    },
-    "settings": {
-      "title": "Calculator configuration"
-    },
-    "simple": {
-      "title": "Basic calculator"
-    },
-    "complex": {
-      "title": "Advanced calculator"
     },
     "assistant": {
       "title": "Configuration assistant"

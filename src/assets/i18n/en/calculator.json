@@ -1,127 +1,151 @@
 {
-  "form": {
-    "titles": {
-      "quantity": "Dough quantity",
-      "doughType": "Dough type",
-      "rest": "Rest",
-      "ingredients": "Ingredients"
+  "expert": {
+    "seg": {
+      "label": "Path",
+      "guided": "Guided",
+      "expert": "Expert"
     },
-    "pizzasNumber": "Number of pizzas",
-    "doughType": "Method",
-    "yeastType": "Yeast type",
-    "hydration": "Hydration",
-    "temperature": "Temperature",
-    "poolishRatio": "Poolish ratio",
-    "rtRestTime": "At room temperature",
-    "coldRestTime": "Cold",
-    "restTimeUnit": "{count, plural, one {Hour} other {Hours}}",
-    "flourStrength": "Flour strength (W)",
-    "saltRatio": "Salt ratio",
-    "honeyRatio": "Honey ratio",
-    "pizzaWeight": "Dough ball weight",
-    "hydrationHelperText": "Recommended for flour strength (W): {minHydration}% - {maxHydration}%",
-    "oliveOilRatio": "Olive oil ratio",
-    "pizzaType": "Pizza type",
-    "infos": {
-      "title": "Additional information",
-      "totalPrepTime": "Total preparation time",
-      "totalPrepTimeDescription": "This takes the recipe into account",
-      "hoursUnit": "hours"
+    "livebar": {
+      "split": "{flour} flour · {water} water · {salt} salt · {yeast} yeast"
+    },
+    "tiles": {
+      "balls": "Dough balls",
+      "weight": "Weight",
+      "hydration": "Hydration",
+      "poolishRatio": "Poolish ratio",
+      "ambientRest": "Ambient",
+      "coldRest": "Cold",
+      "temperature": "Temperature",
+      "pizzaType": "Pizza style",
+      "doughType": "Dough type",
+      "yeast": "Yeast",
+      "salt": "Salt",
+      "flourStrength": "Flour (W)",
+      "oliveOil": "Olive oil",
+      "honey": "Honey",
+      "increase": "Increase",
+      "decrease": "Decrease"
+    },
+    "timeline": {
+      "ambient": "{hours} h ambient",
+      "cold": "{hours} h cold"
+    },
+    "advanced": {
+      "summary": "Advanced — salt {salt}% · W {w} · oil {oil}% · honey {honey}%"
+    },
+    "method": {
+      "title": "The Method",
+      "fullMethod": "Full method — {count} steps",
+      "ingredients": {
+        "flour": "{grams} g flour",
+        "water": "{grams} g water",
+        "yeast": "{grams} g yeast",
+        "salt": "{grams} g salt",
+        "honey": "{grams} g honey",
+        "oliveOil": "{grams} g olive oil"
+      },
+      "steps": {
+        "poolishMix": "Poolish: mix {ingredients}. Cover at room temperature.",
+        "poolishKnead": "Final dough: add {ingredients} to the poolish, then knead.",
+        "directMix": "Kneading: mix {ingredients}, then knead until smooth.",
+        "directBalls": "Shape {count} dough balls of {weight} g."
+      }
+    },
+    "cta": "Start — ready {day} at {time}"
+  },
+  "assistant": {
+    "title": "Pizza Assistant",
+    "subtitle": "Let's create your perfect recipe",
+    "description": "Let yourself be guided step by step to create the ideal pizza recipe according to your preferences.",
+    "startButton": "Start assistant",
+    "continueButton": "Resume assistant",
+    "form": {
+      "titles": {
+        "pizzaType": "Pizza type",
+        "doughType": "Dough type",
+        "quantity": "Quantity",
+        "rest": "Rest",
+        "ingredients": "Ingredients",
+        "summary": "Summary",
+        "yeastType": "Yeast type",
+        "temperature": "Room temperature",
+        "planner": "Planner",
+        "globalRestTime": "Rest time",
+        "flourType": "Flour type"
+      },
+      "pizzaType": {
+        "subtitle": "Choose your style",
+        "description": "Select the type of pizza you want to prepare.",
+        "helpers": {
+          "neapolitan": "Traditional pizza with thin and soft dough",
+          "roman": "Pizza with thin and crispy dough"
+        }
+      },
+      "doughType": {
+        "subtitle": "Preparation method",
+        "description": "Choose the fermentation technique for your dough.",
+        "helpers": {
+          "direct": "Quick method, short fermentation",
+          "poolish": "Long method, developed flavor"
+        }
+      },
+      "quantity": {
+        "subtitle": "How many pizzas?",
+        "description": "Indicate the number of pizzas you want to prepare.",
+        "pizzas": "pizza(s)"
+      },
+      "temperature": {
+        "subtitle": "Room temperature",
+        "description": "Indicate the temperature at your place.",
+        "temperature": "°C",
+        "helpers": {
+          "temperature": "Room temperature"
+        }
+      },
+      "planner": {
+        "subtitle": "Rest time",
+        "description": "Indicate the desired rest time among the proposed choices. Some choices only appear with special pizza flour (strong).",
+        "withLongRestTime": "Long rest",
+        "withLongRestTimeDescription": "Long rest allows developing the flavor of the dough.",
+        "withoutLongRestTime": "Short rest",
+        "withoutLongRestTimeDescription": "Short rest allows... eating faster 🤣",
+        "totalPrepTime": "Total preparation time",
+        "totalPrepTimeDescription": "This gives you an idea of the total preparation time for your recipe, which allows you to start at the right time 😊"
+      },
+      "yeastType": {
+        "subtitle": "Yeast type",
+        "description": "Choose the type of yeast you want to use.",
+        "helpers": {
+          "dryActive": "Active dry yeast",
+          "dryInstant": "Instant dry yeast",
+          "fresh": "Fresh yeast"
+        }
+      },
+      "flourType": {
+        "subtitle": "Flour type",
+        "description": "Flour strength measures its ability to withstand prolonged fermentation.",
+        "helpers": {
+          "yes": "I know my flour strength",
+          "no": "I don't know my flour strength",
+          "standard": "Standard flour",
+          "specialPizza": "Special pizza flour",
+          "strength": "Flour strength (W)"
+        }
+      },
+      "summary": {
+        "subtitle": "Your configuration",
+        "description": "Check your choices before generating the recipe.",
+        "helpers": {
+          "summary": "Summary"
+        }
+      }
+    },
+    "results": {
+      "title": "Your Configuration",
+      "apply": "Apply this configuration",
+      "restart": "Restart assistant"
     }
   },
-   "assistant": {
-     "title": "Pizza Assistant",
-     "subtitle": "Let's create your perfect recipe",
-     "description": "Let yourself be guided step by step to create the ideal pizza recipe according to your preferences.",
-     "startButton": "Start assistant",
-     "continueButton": "Resume assistant",
-     "form": {
-       "titles": {
-         "pizzaType": "Pizza type",
-         "doughType": "Dough type",
-         "quantity": "Quantity",
-         "rest": "Rest",
-         "ingredients": "Ingredients",
-         "summary": "Summary",
-         "yeastType": "Yeast type",
-         "temperature": "Room temperature",
-         "planner": "Planner",
-         "globalRestTime": "Rest time",
-         "flourType": "Flour type"
-       },
-       "pizzaType": {
-         "subtitle": "Choose your style",
-         "description": "Select the type of pizza you want to prepare.",
-         "helpers": {
-           "neapolitan": "Traditional pizza with thin and soft dough",
-           "roman": "Pizza with thin and crispy dough"
-         }
-       },
-       "doughType": {
-         "subtitle": "Preparation method",
-         "description": "Choose the fermentation technique for your dough.",
-         "helpers": {
-           "direct": "Quick method, short fermentation",
-           "poolish": "Long method, developed flavor"
-         }
-       },
-       "quantity": {
-         "subtitle": "How many pizzas?",
-         "description": "Indicate the number of pizzas you want to prepare.",
-         "pizzas": "pizza(s)"
-       },
-       "temperature": {
-         "subtitle": "Room temperature",
-         "description": "Indicate the temperature at your place.",
-         "temperature": "°C",
-         "helpers": {
-           "temperature": "Room temperature"
-         }
-       },
-       "planner": {
-         "subtitle": "Rest time",
-         "description": "Indicate the desired rest time among the proposed choices. Some choices only appear with special pizza flour (strong).",
-         "withLongRestTime": "Long rest",
-         "withLongRestTimeDescription": "Long rest allows developing the flavor of the dough.",
-         "withoutLongRestTime": "Short rest",
-         "withoutLongRestTimeDescription": "Short rest allows... eating faster 🤣",
-         "totalPrepTime": "Total preparation time",
-         "totalPrepTimeDescription": "This gives you an idea of the total preparation time for your recipe, which allows you to start at the right time 😊"
-       },
-       "yeastType": {
-         "subtitle": "Yeast type",
-         "description": "Choose the type of yeast you want to use.",
-         "helpers": {
-           "dryActive": "Active dry yeast",
-           "dryInstant": "Instant dry yeast",
-           "fresh": "Fresh yeast"
-         }
-       },
-       "flourType": {
-         "subtitle": "Flour type",
-         "description": "Flour strength measures its ability to withstand prolonged fermentation.",
-         "helpers": {
-           "yes": "I know my flour strength",
-           "no": "I don't know my flour strength",
-           "standard": "Standard flour",
-           "specialPizza": "Special pizza flour",
-           "strength": "Flour strength (W)"
-         }
-       },
-       "summary": {
-         "subtitle": "Your configuration",
-         "description": "Check your choices before generating the recipe.",
-         "helpers": {
-           "summary": "Summary"
-         }
-       }
-     },
-     "results": {
-       "title": "Your Configuration",
-       "apply": "Apply this configuration",
-       "restart": "Restart assistant"
-     }
-   },
   "recipe": {
     "titles": {
       "poolish": "Poolish",
@@ -313,8 +337,8 @@
   },
   "enums": {
     "doughTypes": {
-    "poolish": "Poolish",
-    "direct": "Direct"
+      "poolish": "Poolish",
+      "direct": "Direct"
     },
     "pizzaTypes": {
       "neapolitan": "Neapolitan",
@@ -324,19 +348,6 @@
       "dryActive": "Active dry",
       "dryInstant": "Instant",
       "fresh": "Fresh"
-    }
-  },
-  "settings": {
-    "visibility": {
-      "title": "Additional fields",
-      "pizzaWeight": "Dough ball weight",
-      "saltRatio": "Salt ratio",
-      "honeyRatio": "Honey ratio",
-      "flourStrength": "Flour strength",
-      "hydrationRatio": "Hydration ratio",
-      "poolishRatio": "Poolish ratio",
-      "oliveOilRatio": "Olive oil ratio",
-      "all": "Enable all"
     }
   },
   "stateSaver": {

@@ -1,20 +1,16 @@
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
-import { CalculatorSettingsService } from './calculator-settings.service';
 import { CalculatorStateService } from './calculator-state.service';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import { CALCULATOR_MODE } from '../enums/calculator-mode.enum';
 
 @Injectable({ providedIn: 'root' })
 export class CalculatorStateSaveManagerService {
+  private readonly prefs = inject(PrefsStorage);
+  private readonly state = inject(CalculatorStateService);
+
   private readonly STORAGE_KEY = 'calculator';
   private mode: CALCULATOR_MODE = CALCULATOR_MODE.SIMPLE;
-
-  constructor(
-    private prefs: PrefsStorage,
-    private settings: CalculatorSettingsService,
-    private state: CalculatorStateService,
-  ) {}
 
   init(mode: CALCULATOR_MODE): void {
     this.mode = mode;
