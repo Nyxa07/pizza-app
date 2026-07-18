@@ -1,6 +1,6 @@
 Récupère le ticket à implémenter dans {{ current.selection.artefacts.selected.md }} tu y trouvera le ticket choisi ainsi qu'un peu de contexte (issue parente, branche à utiliser etc..). Si la branche spécifiée n'existe pas, créer la, sinon réutilise l'existant.
 
-Il est possible que l'issue séléctionnée ai déjà été commencée par un agent précécent (qui aurait planté).
+Il est possible que l'issue séléctionnée ai déjà été commencée par un agent précécent (qui aurait planté). Dans ce cas analyse ce qui a été fait et reprend le travail la ou il en était.
 
 Implémente en utilisant /implement
 
