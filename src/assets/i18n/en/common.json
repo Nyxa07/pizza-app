@@ -45,5 +45,8 @@
   "recipe": {
     "ingredients": "Ingredients",
     "method": "Method"
+  },
+  "titles": {
+    "confirm": "Confirm"
   }
 }

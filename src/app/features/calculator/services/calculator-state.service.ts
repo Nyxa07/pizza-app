@@ -1,21 +1,26 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
-import { ICalculatorInput } from '../interfaces/calculator-input.interface';
-import { CALCULATOR_MODE } from '../enums/calculator-mode.enum';
-import { DEFAULT_INPUT } from './calculator-initializer.service';
+import { Injectable, inject } from '@angular/core';
 
+import { BehaviorSubject, Observable } from 'rxjs';
+
+import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
+
+import { ICalculatorInput } from '../interfaces/calculator-input.interface';
+import { DoughDefaultsService } from './dough-defaults.service';
+
+/**
+ * The single Draft (« Calcul en cours ») — one in-progress calculation,
+ * shared by every calculator path and persisted automatically (ADR-0002).
+ * It survives restarts and is only ever replaced by an explicit act:
+ * `newCalculation()`.
+ */
 @Injectable({ providedIn: 'root' })
 export class CalculatorStateService {
-  private mode: CALCULATOR_MODE = CALCULATOR_MODE.SIMPLE;
-  private readonly STORAGE_KEY = 'calculator';
+  private readonly DRAFT_KEY = 'calculator:draft';
+  private readonly prefs = inject(PrefsStorage);
+  private readonly defaults = inject(DoughDefaultsService);
   private readonly _input = new BehaviorSubject<ICalculatorInput>(
-    DEFAULT_INPUT,
+    this.defaults.getDefaults(),
   );
-
-  private _initInput: ICalculatorInput | null = null;
-
-  constructor(private prefs: PrefsStorage) {}
 
   getInput(): ICalculatorInput {
     return this._input.value;
@@ -26,38 +31,34 @@ export class CalculatorStateService {
   }
 
   update(input: Partial<ICalculatorInput>): void {
-    this._input.next({
-      ...this._input.value,
-      ...input,
-    } as ICalculatorInput);
-    this.prefs.set(this.STORAGE_KEY + ':' + this.mode, this._input.value);
+    this._input.next({ ...this._input.value, ...input });
+    this.prefs.set(this.DRAFT_KEY, this._input.value);
   }
 
-  init(mode: CALCULATOR_MODE, input?: Partial<ICalculatorInput>): void {
-    this.mode = mode;
-    // To be able to reset to default
-    this._initInput = {
-      ...input,
-    } as ICalculatorInput;
-
+  /**
+   * Resumes the persisted Draft; a brand-new user starts from their
+   * Defaults. Called once by every calculator page (« Reprendre »).
+   */
+  init(): void {
     // Will trigger auto computed inputs
     this.update({
-      ...this._initInput,
-      ...this.loadFromStorage(),
+      ...this.defaults.getDefaults(),
+      ...(this.loadDraft() ?? {}),
     });
+  }
+
+  /** Explicitly abandons the Draft and starts over from the user Defaults. */
+  newCalculation(): void {
+    this.update(this.defaults.getDefaults());
   }
 
   resetField(field: keyof ICalculatorInput): void {
     this.update({
-      [field]: this._initInput?.[field],
+      [field]: this.defaults.getDefaults()[field],
     });
   }
 
-  reset(): void {
-    this.update(this._initInput ?? {});
-  }
-
-  private loadFromStorage(): ICalculatorInput | null {
-    return this.prefs.get<ICalculatorInput>(this.STORAGE_KEY + ':' + this.mode);
+  private loadDraft(): ICalculatorInput | null {
+    return this.prefs.get<ICalculatorInput>(this.DRAFT_KEY);
   }
 }

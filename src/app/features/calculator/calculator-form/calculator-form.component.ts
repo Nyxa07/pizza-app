@@ -15,6 +15,7 @@ import { AsyncPipe, LowerCasePipe } from '@angular/common';
 import { combineLatest, debounceTime, filter, map, startWith } from 'rxjs';
 import { CalculatorStateService } from '../services/calculator-state.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
+import { range } from 'src/app/shared/helpers/range';
 import { CalculatorSettingsService } from '../services/calculator-settings.service';
 import { DoughType } from '../enums/dough-type.enum';
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
@@ -123,15 +124,5 @@ export class CalculatorFormComponent implements OnInit {
     return `${value}`;
   }
 
-  protected range(
-    start: number,
-    end: number,
-    step: number = 1,
-    decimal: number = 0,
-  ) {
-    return Array.from(
-      { length: (end - start) / step + 1 },
-      (_, i) => Math.round((start + i * step) * 10 ** decimal) / 10 ** decimal,
-    );
-  }
+  protected readonly range = range;
 }

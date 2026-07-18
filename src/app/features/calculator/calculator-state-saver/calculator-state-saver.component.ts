@@ -131,6 +131,17 @@ export class CalculatorStateSaverComponent implements OnInit {
     this.form.patchValue({ stateName: this.form.controls.stateName.value! });
   }
 
+  /** Explicit confirmation before an action that replaces or destroys data. */
+  private async confirm(messageKey: string, okKey: string): Promise<boolean> {
+    const { value } = await Dialog.confirm({
+      title: this.translate.instant('common.titles.confirm'),
+      message: this.translate.instant(messageKey),
+      okButtonTitle: this.translate.instant(okKey),
+      cancelButtonTitle: this.translate.instant('common.actions.cancel'),
+    });
+    return value;
+  }
+
   async presentActionSheet(state: { name: string; input: ICalculatorInput }) {
     const actionSheet = await this.actionSheetCtrl.create({
       header: this.translate.instant('common.actions.title'),
@@ -140,9 +151,17 @@ export class CalculatorStateSaverComponent implements OnInit {
           data: {
             action: 'load',
           },
-          handler: () => {
-            this.loadState(state);
-            this.modal.dismiss();
+          handler: async () => {
+            // Loading replaces the single shared Draft — never silently
+            // (ADR-0002, « aucun écrasement implicite »).
+            const confirmed = await this.confirm(
+              'calculator.stateSaver.confirmLoad',
+              'common.actions.load',
+            );
+            if (confirmed) {
+              this.loadState(state);
+              this.modal.dismiss();
+            }
           },
         },
         {
@@ -151,17 +170,11 @@ export class CalculatorStateSaverComponent implements OnInit {
             action: 'override',
           },
           handler: async () => {
-            const { value } = await Dialog.confirm({
-              title: 'Confirm',
-              message: this.translate.instant(
-                'calculator.stateSaver.confirmOverride',
-              ),
-              okButtonTitle: this.translate.instant('common.actions.override'),
-              cancelButtonTitle: this.translate.instant(
-                'common.actions.cancel',
-              ),
-            });
-            if (value) {
+            const confirmed = await this.confirm(
+              'calculator.stateSaver.confirmOverride',
+              'common.actions.override',
+            );
+            if (confirmed) {
               this.overrideState(state);
               this.modal.dismiss();
             }
@@ -174,17 +187,11 @@ export class CalculatorStateSaverComponent implements OnInit {
             action: 'delete',
           },
           handler: async () => {
-            const { value } = await Dialog.confirm({
-              title: 'Confirm',
-              message: this.translate.instant(
-                'calculator.stateSaver.confirmDeletion',
-              ),
-              okButtonTitle: this.translate.instant('common.actions.delete'),
-              cancelButtonTitle: this.translate.instant(
-                'common.actions.cancel',
-              ),
-            });
-            if (value) {
+            const confirmed = await this.confirm(
+              'calculator.stateSaver.confirmDeletion',
+              'common.actions.delete',
+            );
+            if (confirmed) {
               this.deleteState(state);
             }
           },

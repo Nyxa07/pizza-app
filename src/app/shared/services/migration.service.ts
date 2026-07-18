@@ -22,7 +22,22 @@ const V2_LOCALES = ['en', 'fr'] as const;
 const SCHEMA_VERSION_KEY = 'schema-version';
 
 /** Bumped when a release changes the shape of persisted preferences. */
-const SCHEMA_VERSION = 2;
+const SCHEMA_VERSION = 3;
+
+/**
+ * v1 kept one auto-persisted draft per calculator mode. v1 drafts carry no
+ * timestamp, so "most recent" is unknowable; the merge keeps the first
+ * existing draft in this order — the mode exposing the most fields wins,
+ * as the best proxy for the user's real work (ADR-0002).
+ */
+const V1_MODE_DRAFT_KEYS = [
+  'calculator:complex',
+  'calculator:assist',
+  'calculator:simple',
+] as const;
+
+/** The single Draft shared by every calculator path (ADR-0002). */
+const DRAFT_KEY = 'calculator:draft';
 
 /**
  * Single entry point for migrating persisted preferences between app
@@ -39,8 +54,13 @@ export class MigrationService {
       return;
     }
 
-    this.removeV1ThemingKeys();
-    this.removeDroppedLocale();
+    if (version < 2) {
+      this.removeV1ThemingKeys();
+      this.removeDroppedLocale();
+    }
+    if (version < 3) {
+      this.mergeModeDraftsIntoSingleDraft();
+    }
 
     this.prefsStorage.set(SCHEMA_VERSION_KEY, SCHEMA_VERSION);
   }
@@ -67,6 +87,21 @@ export class MigrationService {
       V2_LOCALES.some((lang) => locale.startsWith(lang));
     if (!isStillShipped) {
       this.prefsStorage.remove(LOCALE_KEY);
+    }
+  }
+
+  /**
+   * v2→v3 (issue #68): the per-mode drafts collapse into the single Draft.
+   * An already-written Draft is never overwritten (no implicit overwrite,
+   * ever); the v1 silos are dropped either way.
+   */
+  private mergeModeDraftsIntoSingleDraft(): void {
+    for (const key of V1_MODE_DRAFT_KEYS) {
+      const draft = this.prefsStorage.get<unknown>(key);
+      if (draft !== null && this.prefsStorage.get<unknown>(DRAFT_KEY) === null) {
+        this.prefsStorage.set(DRAFT_KEY, draft);
+      }
+      this.prefsStorage.remove(key);
     }
   }
 }

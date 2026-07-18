@@ -1,3 +1,7 @@
-<ion-button (click)="refresh()">
+<ion-button
+  (click)="refresh()"
+  [attr.aria-label]="'calculator.newCalculation' | translate"
+  [title]="'calculator.newCalculation' | translate"
+>
   <i-lucide slot="icon-only" [img]="RefreshCwIcon"></i-lucide>
 </ion-button>

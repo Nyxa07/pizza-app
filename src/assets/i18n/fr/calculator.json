@@ -351,6 +351,7 @@
     "nameRequired": "Le nom est requis",
     "nameAlreadyExists": "Le nom existe déjà",
     "confirmDeletion": "Êtes-vous sûr de vouloir supprimer cette sauvegarde ?",
+    "confirmLoad": "Charger cette sauvegarde remplacera votre calcul en cours. Continuer ?",
     "confirmOverride": "Êtes-vous sûr de vouloir remplacer cette sauvegarde ?"
   },
   "share": {
@@ -364,6 +365,6 @@
       "withHelperDescriptions": "Avec les descriptions des étapes",
       "withHelperDescriptionsMessage": "Êtes-vous sûr de vouloir partager la recette avec les descriptions des étapes (le texte sera plus long) ?"
     }
-  }
+  },
+  "newCalculation": "Nouveau calcul"
 }
-

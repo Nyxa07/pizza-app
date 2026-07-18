@@ -351,6 +351,7 @@
     "nameRequired": "Name is required",
     "nameAlreadyExists": "Name already exists",
     "confirmDeletion": "Are you sure you want to delete this save?",
+    "confirmLoad": "Loading this save will replace your current calculation. Continue?",
     "confirmOverride": "Are you sure you want to overwrite this save?"
   },
   "share": {
@@ -364,5 +365,6 @@
       "withHelperDescriptions": "With step descriptions",
       "withHelperDescriptionsMessage": "Are you sure you want to share the recipe with step descriptions (the text will be longer)?"
     }
-  }
+  },
+  "newCalculation": "New calculation"
 }

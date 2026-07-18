@@ -59,19 +59,84 @@ describe('MigrationService', () => {
   it('handles pristine preferences without crashing', () => {
     expect(() => service.run()).not.toThrow();
 
-    expect(prefs.get('schema-version')).toBe(2);
+    expect(prefs.get('schema-version')).toBe(3);
   });
 
   it('marks the schema as migrated and never runs twice', () => {
     prefs.set('theme', 'dark');
 
     service.run();
-    expect(prefs.get('schema-version')).toBe(2);
+    expect(prefs.get('schema-version')).toBe(3);
     expect(prefs.get('theme')).toBeNull();
 
     // A theming key reappearing after migration must survive a second run().
     prefs.set('theme', 'written-after-migration');
     service.run();
     expect(prefs.get('theme')).toBe('written-after-migration');
+  });
+
+  it('merges a v1 per-mode draft into the single Draft and drops the silo', () => {
+    prefs.set('calculator:simple', { nbPizzas: 7, hydrationRatio: 0.66 });
+
+    service.run();
+
+    expect(prefs.get('calculator:draft')).toEqual({
+      nbPizzas: 7,
+      hydrationRatio: 0.66,
+    });
+    expect(prefs.get('calculator:simple')).toBeNull();
+  });
+
+  it('several v1 drafts: the most invested mode wins (complex > assist > simple)', () => {
+    // v1 drafts carry no timestamp, so "most recent" is unknowable; the
+    // migration keeps the draft of the mode exposing the most fields.
+    prefs.set('calculator:simple', { nbPizzas: 1 });
+    prefs.set('calculator:assist', { nbPizzas: 2 });
+    prefs.set('calculator:complex', { nbPizzas: 3 });
+
+    service.run();
+
+    expect(prefs.get('calculator:draft')).toEqual({ nbPizzas: 3 });
+    expect(prefs.get('calculator:simple')).toBeNull();
+    expect(prefs.get('calculator:assist')).toBeNull();
+    expect(prefs.get('calculator:complex')).toBeNull();
+  });
+
+  it('an assist draft wins over a simple one', () => {
+    prefs.set('calculator:simple', { nbPizzas: 1 });
+    prefs.set('calculator:assist', { nbPizzas: 2 });
+
+    service.run();
+
+    expect(prefs.get('calculator:draft')).toEqual({ nbPizzas: 2 });
+  });
+
+  it('creates no Draft when there is no v1 draft to merge', () => {
+    service.run();
+
+    expect(prefs.get('calculator:draft')).toBeNull();
+  });
+
+  it('never overwrites an already-written Draft', () => {
+    prefs.set('calculator:draft', { nbPizzas: 9 });
+    prefs.set('calculator:complex', { nbPizzas: 3 });
+
+    service.run();
+
+    expect(prefs.get('calculator:draft')).toEqual({ nbPizzas: 9 });
+    expect(prefs.get('calculator:complex')).toBeNull();
+  });
+
+  it('a user already at schema 2 only gets the draft merge', () => {
+    prefs.set('schema-version', 2);
+    // Written after the v1→v2 step ran: must not be wiped again.
+    prefs.set('theme', 'written-after-v2');
+    prefs.set('calculator:complex', { nbPizzas: 3 });
+
+    service.run();
+
+    expect(prefs.get('theme')).toBe('written-after-v2');
+    expect(prefs.get('calculator:draft')).toEqual({ nbPizzas: 3 });
+    expect(prefs.get('schema-version')).toBe(3);
   });
 });
