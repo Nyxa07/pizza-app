@@ -20,8 +20,20 @@ export const routes: Routes = [
       },
       {
         path: 'doughs',
-        loadComponent: () =>
-          import('../doughs/doughs.page').then((m) => m.DoughsPage),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('../doughs/doughs.page').then((m) => m.DoughsPage),
+          },
+          {
+            path: ':id',
+            loadComponent: () =>
+              import('../doughs/dough-detail.page').then(
+                (m) => m.DoughDetailPage,
+              ),
+          },
+        ],
       },
       // Legacy v1 routes (menu pages removed by the v2 navigation, #69;
       // guides tab dissolved into contextual Fiches, #70)

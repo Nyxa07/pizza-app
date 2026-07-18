@@ -21,7 +21,34 @@
   },
   "doughs": {
     "title": "Mes pâtes",
-    "placeholder": "Vos Pâtes sauvegardées apparaîtront bientôt ici."
+    "emptyTitle": "Votre carnet de pâtes",
+    "emptyBody": "Sauvegardez un calcul depuis l'écran Expert pour retrouver ici sa fiche et sa Méthode.",
+    "saveAction": "Sauvegarder comme Pâte",
+    "saveTitle": "Nommer cette Pâte",
+    "nameLabel": "Nom de la Pâte",
+    "nameRequired": "Le nom est requis",
+    "nameExists": "Une Pâte porte déjà ce nom",
+    "saved": "Pâte sauvegardée",
+    "renamed": "Pâte renommée",
+    "duplicated": "Pâte dupliquée",
+    "deleted": "Pâte supprimée",
+    "renameTitle": "Renommer la Pâte",
+    "copyName": "{name} — copie",
+    "confirmDelete": "Supprimer « {name} » ? Cette action est définitive.",
+    "actionsFor": "Actions pour {name}",
+    "balls": "pâtons",
+    "adjust": "Ajuster",
+    "adjustInExpert": "Ajuster dans l'Expert",
+    "adjustHint": "Une copie sera chargée dans votre Calcul en cours. Cette Pâte restera intacte.",
+    "documentHint": "Cette fiche est un document sauvegardé : la consulter ne modifie jamais votre Calcul en cours.",
+    "notFoundTitle": "Pâte introuvable",
+    "notFoundBody": "Cette Pâte a peut-être été supprimée.",
+    "summary": {
+      "balls": "Pâtons",
+      "ballWeight": "Poids",
+      "hydration": "Hydratation",
+      "rest": "Repos ambiant + froid"
+    }
   },
   "settings": {
     "title": "Réglages"

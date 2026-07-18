@@ -1,0 +1,62 @@
+.document-header,
+.adjust {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.document-header > p,
+.adjust > p {
+  color: var(--ink-2);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  overflow: hidden;
+  margin: 14px 0;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-m);
+  background: var(--hairline);
+  gap: 1px;
+
+  div {
+    padding: 13px 15px;
+    background: var(--surface);
+  }
+
+  dt {
+    margin-bottom: 4px;
+    color: var(--ink-2);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--ink);
+    font-weight: 650;
+  }
+}
+
+.adjust {
+  padding-bottom: 28px;
+  text-align: center;
+}
+
+.not-found {
+  display: grid;
+  place-content: center;
+  height: 100%;
+  text-align: center;
+
+  h2 {
+    color: var(--ink);
+  }
+
+  p {
+    color: var(--ink-2);
+  }
+}

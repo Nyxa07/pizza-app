@@ -97,4 +97,16 @@ describe('CalculatorStateService (the single Draft)', () => {
 
     expect(state.getInput().saltRatio).toBe(0.03);
   });
+
+  it('explicitly replaces the Draft with a detached snapshot copy', () => {
+    state = startApp();
+    const snapshot = { ...state.getInput(), nbPizzas: 9 };
+    prefs.set('calculator:guided:step', 4);
+
+    state.replaceWithCopy(snapshot);
+    snapshot.nbPizzas = 2;
+
+    expect(state.getInput().nbPizzas).toBe(9);
+    expect(prefs.get('calculator:guided:step')).toBeNull();
+  });
 });

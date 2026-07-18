@@ -5,6 +5,23 @@ import { ICalculatorSettings } from '../interfaces/calculator-settings.interface
 import { CalculatorSettingsService } from './calculator-settings.service';
 import { CalculatorStateService } from './calculator-state.service';
 
+/** Stable engine settings used by Expert and saved Dough documents. */
+export const EXPERT_CALCULATOR_SETTINGS: ICalculatorSettings = {
+  pizzaWeight: { auto: false },
+  saltRatio: { auto: false },
+  honeyRatio: { auto: false },
+  flourStrength: { auto: false },
+  hydrationRatio: { auto: false },
+  doughType: { auto: false },
+  poolishRatio: { auto: false },
+  yeastType: { auto: false },
+  temperature: { auto: false },
+  globalRestTime: { auto: false },
+  rtRestTime: { auto: false },
+  coldRestTime: { auto: false },
+  oliveOilRatio: { auto: false },
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -16,27 +33,11 @@ export class CalculatorInitializerService {
   /**
    * The Expert path (issue #71): every field is explicit — whatever the
    * shared Draft holds passes through to the engine untouched, including a
-   * globalRestTime written by the Guided path. COMPLEX stays as the
-   * technical mode underneath: it keys the persisted saves silo (merged
-   * into Doughs by #74) and the results/:mode URL (redesigned by #72).
+   * globalRestTime written by the Guided path.
    */
   initExpert(): void {
     this.init(CalculatorPath.EXPERT, {
-      settings: {
-        pizzaWeight: { auto: false },
-        saltRatio: { auto: false },
-        honeyRatio: { auto: false },
-        flourStrength: { auto: false },
-        hydrationRatio: { auto: false },
-        doughType: { auto: false },
-        poolishRatio: { auto: false },
-        yeastType: { auto: false },
-        temperature: { auto: false },
-        globalRestTime: { auto: false },
-        rtRestTime: { auto: false },
-        coldRestTime: { auto: false },
-        oliveOilRatio: { auto: false },
-      },
+      settings: EXPERT_CALCULATOR_SETTINGS,
     });
   }
 

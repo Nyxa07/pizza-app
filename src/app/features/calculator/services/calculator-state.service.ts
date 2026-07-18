@@ -11,7 +11,7 @@ import { DoughDefaultsService } from './dough-defaults.service';
  * The single Draft (« Calcul en cours ») — one in-progress calculation,
  * shared by every calculator path and persisted automatically (ADR-0002).
  * It survives restarts and is only ever replaced by an explicit act:
- * `newCalculation()`.
+ * `newCalculation()` or `replaceWithCopy()`.
  */
 @Injectable({ providedIn: 'root' })
 export class CalculatorStateService {
@@ -52,6 +52,13 @@ export class CalculatorStateService {
   newCalculation(): void {
     this.prefs.remove(this.GUIDED_STEP_KEY);
     this.update(this.defaults.getDefaults());
+  }
+
+  /** Explicitly replaces the Draft with a detached document snapshot copy. */
+  replaceWithCopy(input: ICalculatorInput): void {
+    this.prefs.remove(this.GUIDED_STEP_KEY);
+    this._input.next({ ...input });
+    this.prefs.set(this.DRAFT_KEY, this._input.value);
   }
 
   resetField(field: keyof ICalculatorInput): void {

@@ -17,9 +17,9 @@ import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
 
 import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
 import { CalculatorPathSwitchComponent } from 'src/app/features/calculator/calculator-path-switch/calculator-path-switch.component';
-import { CalculatorStateSaverComponent } from 'src/app/features/calculator/calculator-state-saver/calculator-state-saver.component';
 import { ExpertFormComponent } from 'src/app/features/calculator/expert-form/expert-form.component';
 import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
+import { DoughSaverComponent } from 'src/app/features/doughs/dough-saver/dough-saver.component';
 import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 
 /**
@@ -45,7 +45,7 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
     LucideAngularModule,
     CalculatorRefreshButtonComponent,
     CalculatorPathSwitchComponent,
-    CalculatorStateSaverComponent,
+    DoughSaverComponent,
     ExpertFormComponent,
   ],
 })

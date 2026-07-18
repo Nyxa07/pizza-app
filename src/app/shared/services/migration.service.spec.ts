@@ -59,14 +59,14 @@ describe('MigrationService', () => {
   it('handles pristine preferences without crashing', () => {
     expect(() => service.run()).not.toThrow();
 
-    expect(prefs.get('schema-version')).toBe(5);
+    expect(prefs.get('schema-version')).toBe(6);
   });
 
   it('marks the schema as migrated and never runs twice', () => {
     prefs.set('theme', 'dark');
 
     service.run();
-    expect(prefs.get('schema-version')).toBe(5);
+    expect(prefs.get('schema-version')).toBe(6);
     expect(prefs.get('theme')).toBeNull();
 
     // A theming key reappearing after migration must survive a second run().
@@ -137,7 +137,7 @@ describe('MigrationService', () => {
 
     expect(prefs.get('theme')).toBe('written-after-v2');
     expect(prefs.get('calculator:draft')).toEqual({ nbPizzas: 3 });
-    expect(prefs.get('schema-version')).toBe(5);
+    expect(prefs.get('schema-version')).toBe(6);
   });
 
   it('drops the per-mode field-visibility settings (issue #71)', () => {
@@ -169,7 +169,7 @@ describe('MigrationService', () => {
     expect(prefs.get('calculator:draft')).toBeNull();
     expect(prefs.get('calculator:complex')).toEqual({ nbPizzas: 3 });
     expect(prefs.get('calculator:settings:complex')).toBeNull();
-    expect(prefs.get('schema-version')).toBe(5);
+    expect(prefs.get('schema-version')).toBe(6);
   });
 
   it('drops the retired assistant state without touching the shared Draft', () => {
@@ -183,6 +183,76 @@ describe('MigrationService', () => {
     expect(prefs.get('assistant:data')).toBeNull();
     expect(prefs.get('assistant:currentStepIndex')).toBeNull();
     expect(prefs.get('calculator:draft')).toEqual({ nbPizzas: 7 });
-    expect(prefs.get('schema-version')).toBe(5);
+    expect(prefs.get('schema-version')).toBe(6);
+  });
+
+  it('merges every v1 named-save silo into one Dough list without loss', () => {
+    prefs.set('calculator:complex:states', [
+      { name: 'Saturday', input: { nbPizzas: 8 } },
+    ]);
+    prefs.set('calculator:assist:states', [
+      { name: 'Saturday', input: { nbPizzas: 4 } },
+    ]);
+    prefs.set('calculator:simple:states', [
+      { name: 'Quick', input: { nbPizzas: 2 } },
+    ]);
+
+    service.run();
+
+    const doughs =
+      prefs.get<{ id: string; name: string; input: { nbPizzas: number } }[]>(
+        'calculator:doughs',
+      );
+    expect(doughs?.map(({ name }) => name)).toEqual([
+      'Saturday',
+      'Saturday',
+      'Quick',
+    ]);
+    expect(doughs?.map(({ input }) => input.nbPizzas)).toEqual([8, 4, 2]);
+    expect(new Set(doughs?.map(({ id }) => id)).size).toBe(3);
+    expect(prefs.get('calculator:complex:states')).toBeNull();
+    expect(prefs.get('calculator:assist:states')).toBeNull();
+    expect(prefs.get('calculator:simple:states')).toBeNull();
+  });
+
+  it('appends legacy saves to an existing Dough list without overwriting it', () => {
+    prefs.set('schema-version', 5);
+    prefs.set('calculator:doughs', [
+      {
+        id: 'existing',
+        name: 'Existing',
+        input: { nbPizzas: 6 },
+        createdAt: null,
+        updatedAt: null,
+      },
+    ]);
+    prefs.set('calculator:complex:states', [
+      { name: 'Legacy', input: { nbPizzas: 3 } },
+    ]);
+    // A key from an older step must not be touched when only v5→v6 runs.
+    prefs.set('assistant:data', { nbPizzas: 12 });
+
+    service.run();
+
+    const doughs = prefs.get<{ name: string }[]>('calculator:doughs');
+    expect(doughs?.map(({ name }) => name)).toEqual(['Existing', 'Legacy']);
+    expect(prefs.get('assistant:data')).toEqual({ nbPizzas: 12 });
+    expect(prefs.get('schema-version')).toBe(6);
+  });
+
+  it('drops malformed legacy entries without blocking valid saves', () => {
+    prefs.set('calculator:simple:states', [
+      null,
+      { name: '', input: { nbPizzas: 1 } },
+      { name: 'Valid', input: { nbPizzas: 2 } },
+    ]);
+
+    expect(() => service.run()).not.toThrow();
+
+    expect(
+      prefs
+        .get<{ name: string }[]>('calculator:doughs')
+        ?.map(({ name }) => name),
+    ).toEqual(['Valid']);
   });
 });

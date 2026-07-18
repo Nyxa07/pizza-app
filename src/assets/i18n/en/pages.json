@@ -21,7 +21,34 @@
   },
   "doughs": {
     "title": "My doughs",
-    "placeholder": "Your saved Doughs will soon appear here."
+    "emptyTitle": "Your dough notebook",
+    "emptyBody": "Save a calculation from the Expert screen to find its document and Method here.",
+    "saveAction": "Save as Dough",
+    "saveTitle": "Name this Dough",
+    "nameLabel": "Dough name",
+    "nameRequired": "A name is required",
+    "nameExists": "A Dough already has this name",
+    "saved": "Dough saved",
+    "renamed": "Dough renamed",
+    "duplicated": "Dough duplicated",
+    "deleted": "Dough deleted",
+    "renameTitle": "Rename Dough",
+    "copyName": "{name} — copy",
+    "confirmDelete": "Delete “{name}”? This cannot be undone.",
+    "actionsFor": "Actions for {name}",
+    "balls": "balls",
+    "adjust": "Adjust",
+    "adjustInExpert": "Adjust in Expert",
+    "adjustHint": "A copy will be loaded into your current Draft. This Dough will stay unchanged.",
+    "documentHint": "This saved document is read-only: opening it never changes your current Draft.",
+    "notFoundTitle": "Dough not found",
+    "notFoundBody": "This Dough may have been deleted.",
+    "summary": {
+      "balls": "Balls",
+      "ballWeight": "Weight",
+      "hydration": "Hydration",
+      "rest": "Ambient + cold rest"
+    }
   },
   "settings": {
     "title": "Settings"

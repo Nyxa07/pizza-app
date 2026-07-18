@@ -1,5 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 
+import type { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
+import type { Dough } from 'src/app/features/doughs/interfaces/dough.interface';
+
 import { PrefsStorage } from './prefs-storage.service';
 
 /**
@@ -22,7 +25,7 @@ const V2_LOCALES = ['en', 'fr'] as const;
 const SCHEMA_VERSION_KEY = 'schema-version';
 
 /** Bumped when a release changes the shape of persisted preferences. */
-const SCHEMA_VERSION = 5;
+const SCHEMA_VERSION = 6;
 
 /**
  * Per-mode field-visibility settings written by the v1 personalisation
@@ -56,6 +59,21 @@ const V1_MODE_DRAFT_KEYS = [
 /** The single Draft shared by every calculator path (ADR-0002). */
 const DRAFT_KEY = 'calculator:draft';
 
+/** v1 named saves were isolated by calculator mode. */
+const V1_MODE_SAVE_KEYS = [
+  { mode: 'complex', key: 'calculator:complex:states' },
+  { mode: 'assist', key: 'calculator:assist:states' },
+  { mode: 'simple', key: 'calculator:simple:states' },
+] as const;
+
+/** The unified Dough document library (ADR-0002). */
+const DOUGHS_KEY = 'calculator:doughs';
+
+interface LegacySavedState {
+  name: string;
+  input: ICalculatorInput;
+}
+
 /**
  * Single entry point for migrating persisted preferences between app
  * versions. Runs once at startup, before any other service reads its
@@ -83,6 +101,9 @@ export class MigrationService {
     }
     if (version < 5) {
       this.removeAssistantState();
+    }
+    if (version < 6) {
+      this.mergeModeSavesIntoDoughs();
     }
 
     this.prefsStorage.set(SCHEMA_VERSION_KEY, SCHEMA_VERSION);
@@ -147,5 +168,64 @@ export class MigrationService {
     for (const key of V1_ASSISTANT_KEYS) {
       this.prefsStorage.remove(key);
     }
+  }
+
+  /**
+   * v5→v6 (issue #74): every named save becomes a Dough document in one
+   * library. Duplicate names are deliberately preserved; document ids, not
+   * names, carry identity. Existing v2 Doughs are never overwritten.
+   */
+  private mergeModeSavesIntoDoughs(): void {
+    const doughs = this.prefsStorage.get<Dough[]>(DOUGHS_KEY) ?? [];
+    const usedIds = new Set(doughs.map(({ id }) => id));
+    const migrated: Dough[] = [];
+
+    for (const { key, mode } of V1_MODE_SAVE_KEYS) {
+      const saves = this.prefsStorage.get<unknown>(key);
+      if (Array.isArray(saves)) {
+        saves.forEach((value, index) => {
+          if (!this.isLegacySavedState(value)) {
+            return;
+          }
+          migrated.push({
+            id: this.uniqueLegacyId(`legacy-${mode}-${index}`, usedIds),
+            name: value.name,
+            input: { ...value.input },
+            // v1 did not persist save timestamps; do not invent them.
+            createdAt: null,
+            updatedAt: null,
+          });
+        });
+      }
+      this.prefsStorage.remove(key);
+    }
+
+    if (migrated.length > 0) {
+      this.prefsStorage.set(DOUGHS_KEY, [...doughs, ...migrated]);
+    }
+  }
+
+  private isLegacySavedState(value: unknown): value is LegacySavedState {
+    if (typeof value !== 'object' || value === null) {
+      return false;
+    }
+    const candidate = value as { name?: unknown; input?: unknown };
+    return (
+      typeof candidate.name === 'string' &&
+      candidate.name.trim().length > 0 &&
+      typeof candidate.input === 'object' &&
+      candidate.input !== null
+    );
+  }
+
+  private uniqueLegacyId(base: string, usedIds: Set<string>): string {
+    let id = base;
+    let suffix = 2;
+    while (usedIds.has(id)) {
+      id = `${base}-${suffix}`;
+      suffix += 1;
+    }
+    usedIds.add(id);
+    return id;
   }
 }

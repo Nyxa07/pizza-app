@@ -1,0 +1,73 @@
+.library {
+  display: grid;
+  gap: 12px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.dough-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow);
+}
+
+.open-document {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  padding: 17px 8px 17px 18px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.document-name {
+  overflow: hidden;
+  font-family: var(--font-voice);
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.document-meta {
+  color: var(--ink-2);
+  font-size: 0.78rem;
+}
+
+.actions {
+  margin-right: 7px;
+  color: var(--ink-2);
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: var(--ink-3);
+
+  h2 {
+    margin: 0.7rem 0 0.25rem;
+    color: var(--ink);
+    font-size: 1.35rem;
+  }
+
+  p {
+    max-width: 32ch;
+    margin: 0;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+}

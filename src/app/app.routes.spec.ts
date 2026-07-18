@@ -98,9 +98,11 @@ describe('App navigation (v2)', () => {
     expect(router.url).toBe('/tabs/recipes');
   });
 
-  it('resolves the doughs tab placeholder', async () => {
+  it('resolves the Dough document library and detail routes', async () => {
     await harness.navigateByUrl('/tabs/doughs');
-
     expect(router.url).toBe('/tabs/doughs');
+
+    await harness.navigateByUrl('/tabs/doughs/missing-document');
+    expect(router.url).toBe('/tabs/doughs/missing-document');
   });
 });
