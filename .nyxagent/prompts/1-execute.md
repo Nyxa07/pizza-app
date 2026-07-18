@@ -1,4 +1,3 @@
-Read the plan in {{ current.plan.artefacts.plan.md }} and carry it out.
-
-When you are done, write a summary of what you changed and how you verified it to
-{{ current.artefacts.result.md }}.
+Récupère le ticket à implémenter dans {{ current.selection.artefacts.selected.md }}
+Implémente en utilisant /implement
+Une fois terminé, ajoute un label `implemented` sur l'issue.

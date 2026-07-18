@@ -9,8 +9,8 @@
   "polling_interval_seconds": 300,
   "phases": [
     {
-      "name": "plan",
-      "prompt": ".nyxagent/prompts/0-plan.md"
+      "name": "selection",
+      "prompt": ".nyxagent/prompts/0-selection.md"
     },
     {
       "name": "execute",
