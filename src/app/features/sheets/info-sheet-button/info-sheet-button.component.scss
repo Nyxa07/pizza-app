@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+
+ion-button {
+  --color: var(--ink-3);
+  --padding-start: 0.4rem;
+  --padding-end: 0.4rem;
+  margin: 0;
+}

@@ -55,6 +55,12 @@ describe('App navigation (v2)', () => {
     expect(router.url).toBe('/settings');
   });
 
+  it('redirects the dissolved guides tab to the calculation screen', async () => {
+    await harness.navigateByUrl('/tabs/guides/faq');
+
+    expect(router.url).toBe('/tabs/calculator/complex');
+  });
+
   it('resolves the unified settings screen with the settings form', async () => {
     await harness.navigateByUrl('/settings');
 

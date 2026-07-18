@@ -16,6 +16,8 @@ import { combineLatest, debounceTime, filter, map, startWith } from 'rxjs';
 import { CalculatorStateService } from '../services/calculator-state.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 import { range } from 'src/app/shared/helpers/range';
+import { InfoSheetId } from 'src/app/features/sheets/enums/info-sheet-id.enum';
+import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-button/info-sheet-button.component';
 import { CalculatorSettingsService } from '../services/calculator-settings.service';
 import { DoughType } from '../enums/dough-type.enum';
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
@@ -39,6 +41,7 @@ import { CalculatorService } from '../services/calculator.service';
     NumberPipe,
     IonListHeader,
     IonLabel,
+    InfoSheetButtonComponent,
   ],
   standalone: true,
 })
@@ -63,6 +66,16 @@ export class CalculatorFormComponent implements OnInit {
     map(
       ([doughType, settings]) =>
         doughType === DoughType.POOLISH && settings.poolishRatio.visible,
+    ),
+  );
+
+  // The ⓘ on the method field opens the Fiche of the selected method;
+  // its sibling methods stay one « Voir aussi » tap away (issue #70).
+  protected methodSheetId$ = this.doughType$.pipe(
+    map((doughType) =>
+      doughType === DoughType.POOLISH
+        ? InfoSheetId.POOLISH
+        : InfoSheetId.DIRECT,
     ),
   );
 
@@ -125,4 +138,5 @@ export class CalculatorFormComponent implements OnInit {
   }
 
   protected readonly range = range;
+  protected readonly InfoSheetId = InfoSheetId;
 }

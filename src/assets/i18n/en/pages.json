@@ -32,12 +32,5 @@
   },
   "settings": {
     "title": "Settings"
-  },
-  "guides": {
-    "title": "Guides",
-    "faq": {
-      "title": "FAQ",
-      "description": "Frequently Asked Questions"
-    }
   }
 }

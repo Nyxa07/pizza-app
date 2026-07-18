@@ -1,0 +1,82 @@
+{
+  "direct": {
+    "title": "The direct method",
+    "subtitle": "The dough is prepared in a single step",
+    "body": [
+      "It's a simpler preparation method than the indirect ones.",
+      "All ingredients are incorporated at once and, after a shorter or longer rest, the dough is ready to use."
+    ]
+  },
+  "poolish": {
+    "title": "Poolish",
+    "subtitle": "A liquid dough made of flour, water and yeast",
+    "body": [
+      "Poolish is a pre-fermentation of the dough that rests for several hours before being used for the pizza dough.",
+      "It is prepared by mixing 1 part flour and 1 part water, with a small amount of yeast.",
+      "It's an indirect method of preparing pizza dough."
+    ]
+  },
+  "biga": {
+    "title": "Biga",
+    "subtitle": "A dry pre-fermentation made of flour, water and yeast",
+    "body": [
+      "Biga is a pre-fermentation of the dough that rests for several hours before being used for the pizza dough.",
+      "Unlike poolish, it is a so-called dry preparation: its hydration sits around 45 to 50%.",
+      "It is prepared by roughly mixing the flour, water and yeast; it gives the dough strength and more complex flavours."
+    ]
+  },
+  "yeasts": {
+    "title": "Yeasts",
+    "subtitle": "The calculator offers three types of yeast",
+    "body": [
+      "Active dry yeast is the \"classic\" baker's yeast found in shops — not the rapid kind. It is usually sold in sachets of small pellets.",
+      "Instant dry yeast is freeze-dried yeast in fine flakes. It doesn't need to be hydrated before use and allows quick rises.",
+      "Fresh yeast is the baker's yeast found in shops as a \"fresh\" paste, in cubes."
+    ],
+    "tips": [
+      "The calculator makes it easy to switch from one yeast to another."
+    ]
+  },
+  "hydration": {
+    "title": "Hydration",
+    "subtitle": "The ratio of total water to total flour",
+    "body": [
+      "Ex. 1: with 100 g of total water and 151.5 g of total flour, the dough hydration is 66%. Calculation: 100 ÷ 151.5 = 0.66, i.e. 66%.",
+      "Ex. 2: to know how much water to add with 151.5 g of flour and a target hydration of 66%, the calculation is: 0.66 × 151.5 = 100 g of total water."
+    ],
+    "tips": [
+      "The more hydrated the dough, the harder it is to handle: more liquid, therefore stickier. Recommended hydration: between 62 and 75%."
+    ]
+  },
+  "poolishRatio": {
+    "title": "Poolish ratio",
+    "subtitle": "The ratio of poolish to the total amount of dough",
+    "body": [
+      "Between 30 and 60% of poolish is commonly used in the final dough quantity.",
+      "Ex.: for 30% poolish and 1 kg of final dough, the calculation is: 1000 × 0.3 = 300 g. The poolish will weigh 300 g, made of 150 g of flour and 150 g of water."
+    ],
+    "tips": [
+      "A higher poolish ratio is generally used in winter than in summer, as fermentation is partly influenced by temperature: more poolish in winter can help the final development of the dough."
+    ]
+  },
+  "temperature": {
+    "title": "Temperature",
+    "subtitle": "The ambient temperature of the room, outside the fridge",
+    "body": [
+      "It's the temperature of the room where the poolish, the biga, the dough and the dough balls will rest.",
+      "It is used to compute the warm rest."
+    ]
+  },
+  "warmRest": {
+    "title": "Warm rest",
+    "subtitle": "The time spent at room temperature",
+    "body": [
+      "The rest time of the various preparations at the selected room temperature."
+    ]
+  },
+  "coldRest": {
+    "title": "Cold rest",
+    "subtitle": "The time spent in the fridge",
+    "body": ["The rest time of the various preparations in the fridge."]
+  }
+}

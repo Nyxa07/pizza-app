@@ -46,6 +46,11 @@
     "ingredients": "Ingredients",
     "method": "Method"
   },
+  "sheets": {
+    "open": "Learn more",
+    "tip": "Tip",
+    "seeAlso": "See also"
+  },
   "titles": {
     "confirm": "Confirm"
   }

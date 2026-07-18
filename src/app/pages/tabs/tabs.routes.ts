@@ -23,14 +23,12 @@ export const routes: Routes = [
         loadComponent: () =>
           import('../doughs/doughs.page').then((m) => m.DoughsPage),
       },
+      // Legacy v1 routes (menu pages removed by the v2 navigation, #69;
+      // guides tab dissolved into contextual Fiches, #70)
       {
-        // No tab button anymore; stays routable until #70 turns the
-        // content into contextual Fiches.
         path: 'guides',
-        loadChildren: () =>
-          import('../guides/guides.routes').then((m) => m.GUIDES_ROUTES),
+        redirectTo: '/tabs/calculator',
       },
-      // Legacy v1 routes (menu pages removed by the v2 navigation, #69)
       {
         path: 'home/settings',
         redirectTo: '/settings',

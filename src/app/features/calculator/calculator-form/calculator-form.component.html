@@ -16,7 +16,9 @@
         [max]="25"
       >
         <ion-label slot="end">
-          <span [style.font-size.rem]="1">{{ form.get("nbPizzas")?.value }}</span>
+          <span [style.font-size.rem]="1">{{
+            form.get("nbPizzas")?.value
+          }}</span>
         </ion-label>
       </ion-range>
     </ion-item>
@@ -70,6 +72,9 @@
             }}</ion-select-option>
           }
         </ion-select>
+        @if (methodSheetId$ | async; as methodSheetId) {
+          <app-info-sheet-button slot="end" [sheetId]="methodSheetId" />
+        }
       </ion-item>
     }
     @if (showPoolishRatio$ | async) {
@@ -86,6 +91,10 @@
             </ion-select-option>
           }
         </ion-select>
+        <app-info-sheet-button
+          slot="end"
+          [sheetId]="InfoSheetId.POOLISH_RATIO"
+        />
       </ion-item>
     }
     @if (settings?.yeastType?.visible) {
@@ -106,6 +115,7 @@
             "calculator.enums.yeastTypes.fresh" | translate
           }}</ion-select-option>
         </ion-select>
+        <app-info-sheet-button slot="end" [sheetId]="InfoSheetId.YEASTS" />
       </ion-item>
     }
     @if (settings?.flourStrength?.visible) {
@@ -141,6 +151,7 @@
             </ion-select-option>
           }
         </ion-select>
+        <app-info-sheet-button slot="end" [sheetId]="InfoSheetId.HYDRATION" />
       </ion-item>
     }
   </ion-list>
@@ -227,6 +238,7 @@
             </ion-select-option>
           }
         </ion-select>
+        <app-info-sheet-button slot="end" [sheetId]="InfoSheetId.TEMPERATURE" />
       </ion-item>
     }
     @if (settings?.rtRestTime?.visible) {
@@ -249,6 +261,7 @@
             </ion-select-option>
           }
         </ion-select>
+        <app-info-sheet-button slot="end" [sheetId]="InfoSheetId.WARM_REST" />
       </ion-item>
     }
     @if (settings?.coldRestTime?.visible) {
@@ -271,6 +284,7 @@
             </ion-select-option>
           }
         </ion-select>
+        <app-info-sheet-button slot="end" [sheetId]="InfoSheetId.COLD_REST" />
       </ion-item>
     }
   </ion-list>
