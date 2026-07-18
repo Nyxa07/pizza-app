@@ -1,0 +1,20 @@
+{
+  "defaults": {
+    "harness": "claude",
+    "model": "claude-fable-5",
+    "reasoning_effort": "max",
+    "permissions": "full",
+    "timeout_seconds": 1800
+  },
+  "polling_interval_seconds": 300,
+  "phases": [
+    {
+      "name": "plan",
+      "prompt": ".nyxagent/prompts/0-plan.md"
+    },
+    {
+      "name": "execute",
+      "prompt": ".nyxagent/prompts/1-execute.md"
+    }
+  ]
+}
