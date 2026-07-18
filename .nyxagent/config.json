@@ -4,9 +4,9 @@
     "model": "claude-fable-5",
     "reasoning_effort": "max",
     "permissions": "full",
-    "timeout_seconds": 1800
+    "timeout_seconds": 2400
   },
-  "polling_interval_seconds": 300,
+  "polling_interval_seconds": 600,
   "phases": [
     {
       "name": "selection",
