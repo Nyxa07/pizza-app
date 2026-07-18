@@ -13,6 +13,12 @@ const V1_THEMING_KEYS = [
   'discovered-themes',
 ] as const;
 
+/** Preference key holding the user's language, kept across v1→v2. */
+const LOCALE_KEY = 'locale:current';
+
+/** Locales shipped by v2 (issue #67); v1 also had de/es/it. */
+const V2_LOCALES = ['en', 'fr'] as const;
+
 const SCHEMA_VERSION_KEY = 'schema-version';
 
 /** Bumped when a release changes the shape of persisted preferences. */
@@ -34,6 +40,7 @@ export class MigrationService {
     }
 
     this.removeV1ThemingKeys();
+    this.removeDroppedLocale();
 
     this.prefsStorage.set(SCHEMA_VERSION_KEY, SCHEMA_VERSION);
   }
@@ -42,6 +49,24 @@ export class MigrationService {
   private removeV1ThemingKeys(): void {
     for (const key of V1_THEMING_KEYS) {
       this.prefsStorage.remove(key);
+    }
+  }
+
+  /**
+   * v1→v2: locales are reduced to FR + EN (issue #67). A persisted locale
+   * v2 no longer ships is dropped so the next launch falls back to the
+   * system language, exactly like a first install.
+   */
+  private removeDroppedLocale(): void {
+    const locale = this.prefsStorage.get<unknown>(LOCALE_KEY);
+    if (locale === null) {
+      return;
+    }
+    const isStillShipped =
+      typeof locale === 'string' &&
+      V2_LOCALES.some((lang) => locale.startsWith(lang));
+    if (!isStillShipped) {
+      this.prefsStorage.remove(LOCALE_KEY);
     }
   }
 }

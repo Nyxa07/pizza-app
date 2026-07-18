@@ -32,6 +32,30 @@ describe('MigrationService', () => {
     expect(prefs.get('keepAwake')).toBeTrue();
   });
 
+  it('drops a persisted locale that v2 no longer ships', () => {
+    prefs.set('locale:current', 'de');
+
+    service.run();
+
+    expect(prefs.get('locale:current')).toBeNull();
+  });
+
+  it('keeps a persisted locale that v2 still supports', () => {
+    prefs.set('locale:current', 'fr');
+
+    service.run();
+
+    expect(prefs.get('locale:current')).toBe('fr');
+  });
+
+  it('drops a corrupted locale value without crashing', () => {
+    prefs.set('locale:current', 42);
+
+    expect(() => service.run()).not.toThrow();
+
+    expect(prefs.get('locale:current')).toBeNull();
+  });
+
   it('handles pristine preferences without crashing', () => {
     expect(() => service.run()).not.toThrow();
 

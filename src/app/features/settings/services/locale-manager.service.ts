@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { Platform } from '@ionic/angular';
-import { Device } from '@capacitor/device';
-import { Locales } from '../enums/locales.enum';
-import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { registerLocaleData } from '@angular/common';
+import { Injectable, inject } from '@angular/core';
+
+import { Platform } from '@ionic/angular';
+
+import { Device } from '@capacitor/device';
+import { TranslateService } from '@ngx-translate/core';
+
+import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
+
+import { Locales } from '../enums/locales.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +18,9 @@ export class LocaleManagerService {
   private readonly STORAGE_KEY = 'locale:current';
   private registeredLocales = new Set<string>();
 
-  constructor(
-    private translateService: TranslateService,
-    private platform: Platform,
-    private prefsStorage: PrefsStorage,
-  ) {}
+  private readonly translateService = inject(TranslateService);
+  private readonly platform = inject(Platform);
+  private readonly prefsStorage = inject(PrefsStorage);
 
   /**
    * Initialize the current language of the app
@@ -37,14 +39,24 @@ export class LocaleManagerService {
    * @param locale - The locale to switch to
    */
   async switchLocale(locale: string) {
-    // Register Angular locale data if not already registered
-    await this.ensureLocaleRegistered(locale);
+    const resolved = this.resolveLocale(locale);
 
-    this.translateService.use(
-      Object.values(Locales).find((lang) => locale.startsWith(lang)) ??
-        Locales.EN,
+    // Register Angular locale data if not already registered
+    await this.ensureLocaleRegistered(resolved);
+
+    this.translateService.use(resolved);
+    this.prefsStorage.set(this.STORAGE_KEY, resolved);
+  }
+
+  /**
+   * Map any requested locale (persisted value, device language, regional
+   * variant like 'fr-CA') onto a shipped locale, falling back to English.
+   */
+  private resolveLocale(locale: string | null): Locales {
+    return (
+      Object.values(Locales).find((lang) => locale?.startsWith(lang)) ??
+      Locales.EN
     );
-    this.prefsStorage.set(this.STORAGE_KEY, locale);
   }
 
   /**
@@ -71,18 +83,10 @@ export class LocaleManagerService {
   /**
    * Dynamically import locale data
    */
-  private async loadLocaleData(locale: string): Promise<any> {
+  private async loadLocaleData(locale: string): Promise<unknown> {
     switch (locale) {
-      case 'en':
-        return (await import('@angular/common/locales/en')).default;
       case 'fr':
         return (await import('@angular/common/locales/fr')).default;
-      case 'de':
-        return (await import('@angular/common/locales/de')).default;
-      case 'es':
-        return (await import('@angular/common/locales/es')).default;
-      case 'it':
-        return (await import('@angular/common/locales/it')).default;
       default:
         // Fallback to English
         return (await import('@angular/common/locales/en')).default;
@@ -93,15 +97,11 @@ export class LocaleManagerService {
    * Get current Angular-compatible locale ID
    */
   getCurrentAngularLocale(): string {
-    const locale = this.getLocale();
-    const localeMap: Record<string, string> = {
-      en: 'en-US',
-      fr: 'fr-FR',
-      de: 'de-DE',
-      es: 'es-ES',
-      it: 'it-IT',
+    const localeMap: Record<Locales, string> = {
+      [Locales.EN]: 'en-US',
+      [Locales.FR]: 'fr-FR',
     };
-    return localeMap[locale] || 'en-US';
+    return localeMap[this.getLocale()];
   }
 
   private async detectLocale(): Promise<string> {
@@ -118,7 +118,7 @@ export class LocaleManagerService {
     return navigator.language.substring(0, 2);
   }
 
-  getLocale() {
-    return this.prefsStorage.get<string>(this.STORAGE_KEY) ?? Locales.EN;
+  getLocale(): Locales {
+    return this.resolveLocale(this.prefsStorage.get<string>(this.STORAGE_KEY));
   }
 }
