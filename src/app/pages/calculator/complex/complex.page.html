@@ -1,15 +1,12 @@
 <ion-header [translucent]="false">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/calculator"></ion-back-button>
-    </ion-buttons>
+  <ion-toolbar>
     <ion-title>{{ "pages.calculator.complex.title" | translate }}</ion-title>
     <ion-buttons slot="end">
       <app-calculator-refresh-button></app-calculator-refresh-button>
       @if (isInitialized()) {
         <app-calculator-state-saver></app-calculator-state-saver>
       }
-      <ion-button [routerLink]="['/tabs/calculator/settings']">
+      <ion-button [routerLink]="['/settings']">
         <i-lucide slot="icon-only" [img]="SettingsIcon"></i-lucide>
       </ion-button>
     </ion-buttons>

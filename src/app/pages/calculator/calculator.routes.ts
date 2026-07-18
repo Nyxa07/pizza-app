@@ -2,9 +2,11 @@ import { Route } from '@angular/router';
 
 export const CALCULATOR_ROUTES: Route[] = [
   {
+    // The app opens straight on the calculation screen; the complex
+    // calculator stands in until the Expert screen lands (#71).
     path: '',
-    loadComponent: () =>
-      import('./index/index.page').then((m) => m.CalculatorIndexPage),
+    redirectTo: 'complex',
+    pathMatch: 'full',
   },
   {
     path: 'assistant',

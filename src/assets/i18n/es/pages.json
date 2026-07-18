@@ -1,6 +1,10 @@
 {
+  "tabs": {
+    "calculate": "Calcular",
+    "recipes": "Recetas",
+    "doughs": "Mis masas"
+  },
   "calculator": {
-    "title": "Calculadora",
     "compute": "Calcular",
     "results": {
       "title": "Resultados del cálculo"
@@ -9,39 +13,31 @@
       "title": "Configuración de la calculadora"
     },
     "simple": {
-      "title": "Calculadora básica",
-      "description": "Calcular las cantidades de ingredientes basándose en un mínimo de parámetros"
+      "title": "Calculadora básica"
     },
     "complex": {
-      "title": "Calculadora avanzada",
-      "description": "Calcular las cantidades de los ingredientes en función de una multitud de parámetros (Temperatura, Harina, Hidratación, Levadura, etc.)"
+      "title": "Calculadora avanzada"
     },
     "assistant": {
-      "title": "Asistente de configuración",
-      "description": "Un asistente paso a paso para ayudarte a configurar tu receta de masa de pizza"
+      "title": "Asistente de configuración"
     }
+  },
+  "recipes": {
+    "title": "Recetas",
+    "placeholder": "El catálogo de Recetas llegará pronto."
+  },
+  "doughs": {
+    "title": "Mis masas",
+    "placeholder": "Tus Masas guardadas aparecerán pronto aquí."
+  },
+  "settings": {
+    "title": "Ajustes"
   },
   "guides": {
     "title": "Guías",
     "faq": {
       "title": "FAQ",
       "description": "Preguntas frecuentes"
-    }
-  },
-  "home": {
-    "title": "Pizza Maker",
-    "settings": {
-      "title": "Configuración global"
-    },
-    "calculator": {
-      "title": "Calculadora",
-      "subtitle": "Calculadora de masa de pizza",
-      "content": "Calcular las cantidades de los ingredientes en función de una multitud de parámetros (Temperatura, Harina, Hidratación, Levadura, etc.)"
-    },
-    "faq": {
-      "title": "FAQ",
-      "subtitle": "Preguntas frecuentes",
-      "content": "Encuentre aquí las preguntas frecuentes sobre masa de pizza y cálculos."
     }
   }
 }

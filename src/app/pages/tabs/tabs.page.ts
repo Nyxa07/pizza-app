@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
+
 import {
   IonTabs,
   IonTabBar,
   IonTabButton,
   IonLabel,
 } from '@ionic/angular/standalone';
+
 import { TranslateModule } from '@ngx-translate/core';
 import {
-  HouseIcon,
   CalculatorIcon,
+  LibraryIcon,
   LucideAngularModule,
-  NotebookIcon,
+  PizzaIcon,
 } from 'lucide-angular';
 
 @Component({
@@ -23,13 +25,11 @@ import {
     IonTabButton,
     IonLabel,
     TranslateModule,
-    IonLabel,
     LucideAngularModule,
   ],
 })
 export class TabsPage {
-  HouseIcon = HouseIcon;
-  CalculatorIcon = CalculatorIcon;
-  NotebookIcon = NotebookIcon;
-
+  protected readonly CalculatorIcon = CalculatorIcon;
+  protected readonly PizzaIcon = PizzaIcon;
+  protected readonly LibraryIcon = LibraryIcon;
 }

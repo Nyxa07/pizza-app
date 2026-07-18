@@ -1,13 +1,12 @@
 {
   "form": {
+    "application": {
+      "title": "Aplicación"
+    },
     "language": {
-      "title": "Idioma",
-      "selector": {
-        "title": "Seleccionar idioma"
-      }
+      "title": "Idioma"
     },
     "appearance": {
-      "title": "Apariencia",
       "select": {
         "title": "Apariencia",
         "system": "Sistema",
@@ -16,12 +15,10 @@
       }
     },
     "system": {
-      "title": "Sistema",
       "keepAwake": {
         "title": "Mantener pantalla encendida"
       },
       "language": {
-        "title": "Idioma",
         "en": "Inglés",
         "fr": "Francés",
         "it": "Italiano",

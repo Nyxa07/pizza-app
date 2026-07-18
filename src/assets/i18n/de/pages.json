@@ -1,6 +1,10 @@
 {
+  "tabs": {
+    "calculate": "Berechnen",
+    "recipes": "Rezepte",
+    "doughs": "Meine Teige"
+  },
   "calculator": {
-    "title": "Rechner",
     "compute": "Berechnen",
     "results": {
       "title": "Berechnungsergebnisse"
@@ -9,39 +13,31 @@
       "title": "Rechnerkonfiguration"
     },
     "simple": {
-      "title": "Einfacher Rechner",
-      "description": "Berechnen Sie die Zutatenmengen basierend auf minimalen Parametern"
+      "title": "Einfacher Rechner"
     },
     "complex": {
-      "title": "Erweiterter Rechner",
-      "description": "Berechnen Sie die Zutatenmengen in Abhängigkeit von einer Vielzahl von Parametern (Temperatur, Mehl, Hydratation, Hefe, usw.)"
+      "title": "Erweiterter Rechner"
     },
     "assistant": {
-      "title": "Konfigurationsassistent",
-      "description": "Ein schrittweiser Assistent, der Ihnen bei der Konfiguration Ihres Pizzateig-Rezepts hilft"
+      "title": "Konfigurationsassistent"
     }
+  },
+  "recipes": {
+    "title": "Rezepte",
+    "placeholder": "Der Rezeptkatalog kommt bald."
+  },
+  "doughs": {
+    "title": "Meine Teige",
+    "placeholder": "Ihre gespeicherten Teige erscheinen bald hier."
+  },
+  "settings": {
+    "title": "Einstellungen"
   },
   "guides": {
     "title": "Anleitungen",
     "faq": {
       "title": "FAQ",
       "description": "Häufig gestellte Fragen"
-    }
-  },
-  "home": {
-    "title": "Pizza Maker",
-    "settings": {
-      "title": "Globale Konfiguration"
-    },
-    "calculator": {
-      "title": "Rechner",
-      "subtitle": "Pizzateig-Rechner",
-      "content": "Berechnen Sie die Zutatenmengen in Abhängigkeit von einer Vielzahl von Parametern (Temperatur, Mehl, Hydratation, Hefe, usw.)"
-    },
-    "faq": {
-      "title": "FAQ",
-      "subtitle": "Häufig gestellte Fragen",
-      "content": "Hier finden Sie häufig gestellte Fragen zu Pizzateig und Berechnungen."
     }
   }
 }

@@ -1,6 +1,10 @@
 {
+  "tabs": {
+    "calculate": "Calculer",
+    "recipes": "Recettes",
+    "doughs": "Mes pâtes"
+  },
   "calculator": {
-    "title": "Calculateur",
     "compute": "Calculer",
     "results": {
       "title": "Résultats calcul"
@@ -9,39 +13,31 @@
       "title": "Configuration calculateur"
     },
     "simple": {
-      "title": "Calculateur basique",
-      "description": "Calculer les quantités des ingrédients en fonction d'un minimum de paramètres"
+      "title": "Calculateur basique"
     },
     "complex": {
-      "title": "Calculateur avancé",
-      "description": "Calculer les quantités des ingrédients en fonction d'une multitude de paramètres (Témperature, Farine, Hydratation, Levure, etc.)"
+      "title": "Calculateur avancé"
     },
     "assistant": {
-      "title": "Assistant de configuration",
-      "description": "Un assistant pas à pas pour vous aider à configurer votre recette de pâte à pizza"
+      "title": "Assistant de configuration"
     }
+  },
+  "recipes": {
+    "title": "Recettes",
+    "placeholder": "Le catalogue de Recettes arrive bientôt."
+  },
+  "doughs": {
+    "title": "Mes pâtes",
+    "placeholder": "Vos Pâtes sauvegardées apparaîtront bientôt ici."
+  },
+  "settings": {
+    "title": "Réglages"
   },
   "guides": {
     "title": "Guides",
     "faq": {
       "title": "FAQ",
       "description": "Foire aux questions"
-    }
-  },
-  "home": {
-    "title": "Pizza Maker",
-    "settings": {
-      "title": "Configuration globale"
-    },
-    "calculator": {
-      "title": "Calculateur",
-      "subtitle": "Calculateur de pâte à pizza",
-      "content": "Calculer les quantités des ingrédients en fonction d'une multitude de paramètres (Témperature, Farine, Hydratation, Levure, etc.)"
-    },
-    "faq": {
-      "title": "FAQ",
-      "subtitle": "Foire aux questions",
-      "content": "Retrouvez ici les questions fréquentes sur la pâte à pizza et les calculs."
     }
   }
 }

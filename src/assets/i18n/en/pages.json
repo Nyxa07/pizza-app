@@ -1,6 +1,10 @@
 {
+  "tabs": {
+    "calculate": "Calculate",
+    "recipes": "Recipes",
+    "doughs": "My doughs"
+  },
   "calculator": {
-    "title": "Calculator",
     "compute": "Calculate",
     "results": {
       "title": "Calculation results"
@@ -9,39 +13,31 @@
       "title": "Calculator configuration"
     },
     "simple": {
-      "title": "Basic calculator",
-      "description": "Calculate ingredient quantities based on a minimum of parameters"
+      "title": "Basic calculator"
     },
     "complex": {
-      "title": "Advanced calculator",
-      "description": "Calculate ingredient quantities based on a multitude of parameters (Temperature, Flour, Hydration, Yeast, etc.)"
+      "title": "Advanced calculator"
     },
     "assistant": {
-      "title": "Configuration assistant",
-      "description": "A step-by-step assistant to help you configure your pizza dough recipe"
+      "title": "Configuration assistant"
     }
+  },
+  "recipes": {
+    "title": "Recipes",
+    "placeholder": "The Recipes catalog is coming soon."
+  },
+  "doughs": {
+    "title": "My doughs",
+    "placeholder": "Your saved Doughs will soon appear here."
+  },
+  "settings": {
+    "title": "Settings"
   },
   "guides": {
     "title": "Guides",
     "faq": {
       "title": "FAQ",
       "description": "Frequently Asked Questions"
-    }
-  },
-  "home": {
-    "title": "Pizza Maker",
-    "settings": {
-      "title": "Global configuration"
-    },
-    "calculator": {
-      "title": "Calculator",
-      "subtitle": "Pizza dough calculator",
-      "content": "Calculate ingredient quantities based on a multitude of parameters (Temperature, Flour, Hydration, Yeast, etc.)"
-    },
-    "faq": {
-      "title": "FAQ",
-      "subtitle": "Frequently Asked Questions",
-      "content": "Find here frequently asked questions about pizza dough and calculations."
     }
   }
 }

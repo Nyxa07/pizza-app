@@ -1,26 +1,6 @@
 <form [formGroup]="form">
   <ion-list-header>{{
-    "settings.form.appearance.title" | translate
-  }}</ion-list-header>
-  <ion-list lines="none">
-    <ion-item>
-      <ion-select
-        formControlName="appearance"
-        [cancelText]="'common.actions.cancel' | translate"
-        [okText]="'common.actions.ok' | translate"
-        [label]="'settings.form.appearance.select.title' | translate"
-      >
-        @for (appearance of availableAppearances; track appearance) {
-          <ion-select-option [value]="appearance.value">
-            {{ appearance.translateKey | translate }}
-          </ion-select-option>
-        }
-      </ion-select>
-    </ion-item>
-  </ion-list>
-
-  <ion-list-header>{{
-    "settings.form.system.title" | translate
+    "settings.form.application.title" | translate
   }}</ion-list-header>
   <ion-list lines="none">
     <ion-item>
@@ -33,6 +13,20 @@
         @for (locale of availableLocales; track locale) {
           <ion-select-option [value]="locale.value">
             {{ locale.translateKey | translate }}
+          </ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-select
+        formControlName="appearance"
+        [cancelText]="'common.actions.cancel' | translate"
+        [okText]="'common.actions.ok' | translate"
+        [label]="'settings.form.appearance.select.title' | translate"
+      >
+        @for (appearance of availableAppearances; track appearance) {
+          <ion-select-option [value]="appearance.value">
+            {{ appearance.translateKey | translate }}
           </ion-select-option>
         }
       </ion-select>
