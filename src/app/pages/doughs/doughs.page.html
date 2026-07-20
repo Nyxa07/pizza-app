@@ -14,13 +14,13 @@
 
 <ion-content [fullscreen]="true">
   @if (doughs().length === 0) {
-    <div class="empty ion-padding">
+    <div class="empty app-page-layout">
       <i-lucide [img]="LibraryIcon" [size]="40"></i-lucide>
       <h2>{{ "pages.doughs.emptyTitle" | translate }}</h2>
       <p>{{ "pages.doughs.emptyBody" | translate }}</p>
     </div>
   } @else {
-    <div class="library ion-padding">
+    <div class="library app-page-layout">
       @for (dough of doughs(); track dough.id) {
         <article class="dough-card">
           <button class="open-document" type="button" (click)="open(dough)">

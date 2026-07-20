@@ -21,21 +21,23 @@
     </ion-toolbar>
   </ion-header>
 
-  @if (isInitialized()) {
-    @if (method(); as method) {
-      <app-method [method]="method"></app-method>
+  <div class="app-page-layout">
+    @if (isInitialized()) {
+      @if (method(); as method) {
+        <app-method [method]="method"></app-method>
+      } @else {
+        <div class="loading-skeleton">
+          <ion-item lines="none">
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </ion-item>
+        </div>
+      }
     } @else {
-      <div class="loading-skeleton ion-padding">
+      <div class="loading-skeleton">
         <ion-item lines="none">
           <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
         </ion-item>
       </div>
     }
-  } @else {
-    <div class="loading-skeleton ion-padding">
-      <ion-item lines="none">
-        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-      </ion-item>
-    </div>
-  }
+  </div>
 </ion-content>

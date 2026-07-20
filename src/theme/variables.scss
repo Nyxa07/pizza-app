@@ -116,7 +116,11 @@ $primitive-negative-bright: #e06a5a;
   --accent-soft: #{$primitive-terracotta-wash-dark};
   --shadow: none;
 
-  @include ion-color("primary", $primitive-terracotta-bright, $primitive-espresso);
+  @include ion-color(
+    "primary",
+    $primitive-terracotta-bright,
+    $primitive-espresso
+  );
   @include ion-color("secondary", $primitive-bone, $primitive-night);
   @include ion-color("tertiary", $primitive-bone-soft, $primitive-night);
   @include ion-color("success", $primitive-positive-bright, $primitive-night);
@@ -139,6 +143,9 @@ $primitive-negative-bright: #e06a5a;
   --radius-m: 14px;
   --radius-l: 16px;
   --radius-full: 999px;
+
+  // Page layout
+  --page-inset: 16px;
 
   @include appearance-light;
 

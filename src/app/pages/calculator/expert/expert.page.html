@@ -25,16 +25,18 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-calculator-path-switch />
+  <div class="app-page-layout">
+    <app-calculator-path-switch />
 
-  @if (isInitialized()) {
-    <app-expert-form></app-expert-form>
-  } @else {
-    <!-- Loading skeleton -->
-    <div class="loading-skeleton ion-padding">
-      <ion-item lines="none">
-        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-      </ion-item>
-    </div>
-  }
+    @if (isInitialized()) {
+      <app-expert-form></app-expert-form>
+    } @else {
+      <!-- Loading skeleton -->
+      <div class="loading-skeleton">
+        <ion-item lines="none">
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </ion-item>
+      </div>
+    }
+  </div>
 </ion-content>

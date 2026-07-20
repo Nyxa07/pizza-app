@@ -11,7 +11,7 @@
 
 <ion-content [fullscreen]="true">
   @if (recipe) {
-    <article class="recipe">
+    <article class="recipe app-page-layout app-page-layout--edge-to-edge">
       <figure class="hero">
         <img
           [src]="recipe.image.path"
@@ -93,7 +93,7 @@
       </div>
     </article>
   } @else {
-    <div class="not-found ion-padding">
+    <div class="not-found app-page-layout">
       <h2>{{ "pages.recipes.notFoundTitle" | translate }}</h2>
       <p>{{ "pages.recipes.notFoundBody" | translate }}</p>
     </div>

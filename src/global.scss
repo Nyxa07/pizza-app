@@ -38,6 +38,18 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+// Routed page bodies use one shared inset. Keep this wrapper after any
+// collapsing Ionic header so large-title behaviour remains untouched.
+.app-page-layout {
+  box-sizing: border-box;
+  min-height: 100%;
+  padding: var(--page-inset);
+}
+
+.app-page-layout--edge-to-edge {
+  padding: 0;
+}
+
 // ============================================
 // TYPOGRAPHY — serif voice for titles, Inter for everything else
 // ============================================
