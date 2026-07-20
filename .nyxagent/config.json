@@ -1,12 +1,12 @@
 {
   "defaults": {
-    "harness": "claude",
-    "model": "claude-fable-5",
-    "reasoning_effort": "max",
+    "harness": "codex",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh",
     "permissions": "full",
-    "timeout_seconds": 3600
+    "timeout_seconds": 2800
   },
-  "polling_interval_seconds": 3600,
+  "polling_interval_seconds": 300,
   "phases": [
     {
       "name": "selection",
