@@ -124,7 +124,7 @@ export class ExpertMethodPreviewComponent {
     const items = step.ingredients.map(
       (ingredient) =>
         `<b>${this.translate.instant(
-          'calculator.expert.method.ingredients.' + ingredient.key,
+          'calculator.method.ingredients.' + ingredient.key,
           {
             grams: this.numberPipe.transform(
               ingredient.grams,
