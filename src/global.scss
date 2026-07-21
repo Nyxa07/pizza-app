@@ -33,8 +33,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-// Tabular figures for aligned numeric values
+// Tabular figures for aligned numeric values. Ionic sets `word-wrap:
+// break-word` on body — never let it split a number between digits.
 .num {
+  overflow-wrap: normal;
   font-variant-numeric: tabular-nums;
 }
 
@@ -96,6 +98,38 @@ ion-list-header {
   letter-spacing: 0;
 }
 
+// Accent eyebrow above editorial headings — the single microcopy voice
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+// Editorial intro block above catalog-style content (eyebrow + h1 + lead)
+.editorial-intro {
+  max-width: 620px;
+  margin: 8px 0 24px;
+
+  .eyebrow {
+    margin: 0 0 7px;
+  }
+
+  h1 {
+    margin: 0 0 8px;
+    color: var(--ink);
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
+    line-height: 1.05;
+  }
+
+  .lead {
+    color: var(--ink-2);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+}
+
 // ============================================
 // SURFACES — cards and lists on hairline borders
 // ============================================
@@ -113,7 +147,7 @@ ion-list {
   border: 1px solid var(--hairline);
   border-radius: var(--radius-m);
   box-shadow: var(--shadow);
-  margin: 0.4rem;
+  margin: 0;
 }
 
 ion-item {
@@ -199,6 +233,114 @@ ion-modal {
 }
 
 // ============================================
+// INTERACTION STATES — one shared feedback language
+// ============================================
+// Ionic controls keep their own states; these rules cover the app's
+// custom buttons (choices, pills, counters, CTAs, tile steppers).
+
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.choice,
+.pill,
+.counter-button,
+.method-cta,
+.step-navigation button {
+  transition:
+    transform 0.08s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .choice:hover,
+  .pill:hover:not(:disabled),
+  .counter-button:hover:not(:disabled) {
+    border-color: var(--ink-3);
+  }
+
+  .step-navigation .back:hover:not(:disabled) {
+    color: var(--ink);
+  }
+}
+
+.choice:active,
+.pill:active:not(:disabled),
+.counter-button:active:not(:disabled),
+.method-cta:active,
+.step-navigation button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+// ============================================
+// FACT GRID — hairline-separated summary cells
+// ============================================
+
+.fact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-m);
+  background: var(--hairline);
+  box-shadow: var(--shadow);
+
+  > div {
+    padding: 14px;
+    background: var(--surface);
+  }
+
+  dt {
+    margin-bottom: 4px;
+    color: var(--ink-2);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--ink);
+    font-weight: 650;
+  }
+}
+
+// ============================================
+// EMPTY STATES — one shared centered pattern
+// ============================================
+.app-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: var(--ink-3);
+
+  h2 {
+    margin: 0.7rem 0 0.25rem;
+    color: var(--ink);
+    font-size: 1.35rem;
+  }
+
+  p {
+    max-width: 32ch;
+    margin: 0;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+
+  ion-button {
+    margin-top: 20px;
+  }
+}
+
+// ============================================
 // LOADING SKELETON
 // ============================================
 
@@ -215,9 +357,9 @@ ion-modal {
     border-radius: var(--radius-s);
     --background: linear-gradient(
       90deg,
-      var(--surface-sunken) 0%,
-      var(--surface) 50%,
-      var(--surface-sunken) 100%
+      color-mix(in srgb, var(--ink) 7%, var(--bg)) 0%,
+      color-mix(in srgb, var(--ink) 16%, var(--bg)) 50%,
+      color-mix(in srgb, var(--ink) 7%, var(--bg)) 100%
     );
   }
 }
@@ -306,6 +448,9 @@ app-guided-form {
 
     &:disabled {
       color: var(--ink-3);
+      box-shadow: none;
+      opacity: 0.55;
+      cursor: default;
     }
   }
 
@@ -354,33 +499,7 @@ app-guided-form {
   }
 
   .summary {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
     max-width: 620px;
-    overflow: hidden;
-    border: 1px solid var(--hairline);
-    border-radius: var(--radius-m);
-    background: var(--hairline);
-    box-shadow: var(--shadow);
-
-    div {
-      padding: 14px;
-      background: var(--surface);
-    }
-
-    dt {
-      margin-bottom: 4px;
-      color: var(--ink-2);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-    }
-
-    dd {
-      margin: 0;
-      color: var(--ink);
-      font-weight: 650;
-    }
   }
 
   .method-cta,
@@ -425,10 +544,5 @@ app-guided-form {
       background: var(--ink);
       color: var(--bg);
     }
-  }
-
-  button:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
   }
 }

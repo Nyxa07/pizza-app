@@ -19,7 +19,6 @@ import {
   IonToolbar,
 } from '@ionic/angular/standalone';
 
-import { Dialog } from '@capacitor/dialog';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import {
   EllipsisIcon,
@@ -141,18 +140,27 @@ export class DoughsPage {
   }
 
   private async confirmDelete(dough: Dough): Promise<void> {
-    const { value } = await Dialog.confirm({
-      title: this.translate.instant('common.titles.confirm'),
+    const alert = await this.alertController.create({
+      header: this.translate.instant('common.titles.confirm'),
       message: this.translate.instant('pages.doughs.confirmDelete', {
         name: dough.name,
       }),
-      okButtonTitle: this.translate.instant('common.actions.delete'),
-      cancelButtonTitle: this.translate.instant('common.actions.cancel'),
+      buttons: [
+        {
+          text: this.translate.instant('common.actions.cancel'),
+          role: 'cancel',
+        },
+        {
+          text: this.translate.instant('common.actions.delete'),
+          role: 'destructive',
+          handler: () => {
+            this.doughsService.delete(dough.id);
+            this.showToast('pages.doughs.deleted');
+          },
+        },
+      ],
     });
-    if (value) {
-      this.doughsService.delete(dough.id);
-      this.showToast('pages.doughs.deleted');
-    }
+    await alert.present();
   }
 
   private showToast(messageKey: string): void {

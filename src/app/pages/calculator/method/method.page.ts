@@ -6,19 +6,21 @@ import {
   signal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 
 import {
   IonBackButton,
+  IonButton,
   IonButtons,
   IonContent,
   IonHeader,
-  IonItem,
   IonSkeletonText,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
 
 import { TranslatePipe } from '@ngx-translate/core';
+import { ChefHatIcon, LucideAngularModule } from 'lucide-angular';
 import { combineLatest, filter, map } from 'rxjs';
 
 import { CalculatorStateShareComponent } from 'src/app/features/calculator/calculator-state-share/calculator-state-share.component';
@@ -46,11 +48,13 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
     IonToolbar,
     IonButtons,
     IonBackButton,
+    IonButton,
     IonTitle,
     IonContent,
-    IonItem,
     IonSkeletonText,
+    RouterLink,
     TranslatePipe,
+    LucideAngularModule,
     CalculatorStateShareComponent,
     MethodComponent,
   ],
@@ -63,6 +67,7 @@ export class CalculatorMethodPage implements OnInit {
 
   private readonly methodStart = new Date();
 
+  protected readonly ChefHatIcon = ChefHatIcon;
   protected readonly isInitialized = signal(false);
   protected readonly method = toSignal(
     combineLatest([this.state.getInput$(), this.calculator.results$]).pipe(

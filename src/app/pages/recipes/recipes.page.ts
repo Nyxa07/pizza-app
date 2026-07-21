@@ -14,6 +14,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import {
   ArrowRightIcon,
   LucideAngularModule,
+  PizzaIcon,
   SettingsIcon,
 } from 'lucide-angular';
 
@@ -42,6 +43,7 @@ export class RecipesPage {
   private readonly router = inject(Router);
 
   protected readonly ArrowRightIcon = ArrowRightIcon;
+  protected readonly PizzaIcon = PizzaIcon;
   protected readonly SettingsIcon = SettingsIcon;
   protected readonly recipes = this.catalog.list();
 

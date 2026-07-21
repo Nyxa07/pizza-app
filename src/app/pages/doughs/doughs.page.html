@@ -14,13 +14,21 @@
 
 <ion-content [fullscreen]="true">
   @if (doughs().length === 0) {
-    <div class="empty app-page-layout">
+    <div class="app-empty-state app-page-layout">
       <i-lucide [img]="LibraryIcon" [size]="40"></i-lucide>
       <h2>{{ "pages.doughs.emptyTitle" | translate }}</h2>
       <p>{{ "pages.doughs.emptyBody" | translate }}</p>
+      <ion-button color="secondary" [routerLink]="['/tabs/calculator']">
+        {{ "pages.doughs.emptyCta" | translate }}
+      </ion-button>
     </div>
   } @else {
     <div class="library app-page-layout">
+      <header class="editorial-intro">
+        <p class="eyebrow">{{ "pages.doughs.eyebrow" | translate }}</p>
+        <h1>{{ "pages.doughs.title" | translate }}</h1>
+        <span class="lead">{{ "pages.doughs.intro" | translate }}</span>
+      </header>
       @for (dough of doughs(); track dough.id) {
         <article class="dough-card">
           <button class="open-document" type="button" (click)="open(dough)">
@@ -55,6 +63,5 @@
   [isOpen]="!!toastMessage()"
   [message]="toastMessage() | translate"
   [duration]="2200"
-  color="success"
   (didDismiss)="toastMessage.set('')"
 ></ion-toast>

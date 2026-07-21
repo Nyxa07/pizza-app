@@ -14,10 +14,10 @@
 
 <ion-content [fullscreen]="true">
   <section class="catalog app-page-layout">
-    <header class="intro">
-      <p>{{ "pages.recipes.eyebrow" | translate }}</p>
+    <header class="editorial-intro">
+      <p class="eyebrow">{{ "pages.recipes.eyebrow" | translate }}</p>
       <h1>{{ "pages.recipes.catalogTitle" | translate }}</h1>
-      <span>{{ "pages.recipes.intro" | translate }}</span>
+      <span class="lead">{{ "pages.recipes.intro" | translate }}</span>
     </header>
 
     <div class="recipe-grid">
@@ -43,6 +43,12 @@
             </span>
           </button>
         </article>
+      } @empty {
+        <div class="app-empty-state empty-catalog">
+          <i-lucide [img]="PizzaIcon" [size]="40"></i-lucide>
+          <h2>{{ "pages.recipes.emptyTitle" | translate }}</h2>
+          <p>{{ "pages.recipes.emptyBody" | translate }}</p>
+        </div>
       }
     </div>
   </section>

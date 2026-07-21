@@ -1,6 +1,8 @@
 @if (vm$ | async; as vm) {
-  <div class="livebar num" aria-live="polite">
-    <span class="total">{{ vm.total | number: "1.0-0" }} g</span>
+  <div class="livebar num">
+    <span class="total" aria-live="polite"
+      >{{ vm.total | number: "1.0-0" }} g</span
+    >
     <span class="split">{{
       "calculator.expert.livebar.split"
         | translate
@@ -17,6 +19,8 @@
     <app-expert-tile
       [label]="'calculator.expert.tiles.balls' | translate"
       [value]="vm.input.nbPizzas | number: '1.0-0'"
+      [canStepUp]="canStep(vm, 'nbPizzas', 1)"
+      [canStepDown]="canStep(vm, 'nbPizzas', -1)"
       (stepUp)="stepField(vm, 'nbPizzas', 1)"
       (stepDown)="stepField(vm, 'nbPizzas', -1)"
     />
@@ -24,6 +28,8 @@
       [label]="'calculator.expert.tiles.weight' | translate"
       [value]="vm.weight | number: '1.0-0'"
       unit="g"
+      [canStepUp]="canStep(vm, 'pizzaWeight', 1)"
+      [canStepDown]="canStep(vm, 'pizzaWeight', -1)"
       (stepUp)="stepField(vm, 'pizzaWeight', 1)"
       (stepDown)="stepField(vm, 'pizzaWeight', -1)"
     />
@@ -32,6 +38,8 @@
       [value]="vm.hydrationPct | number: '1.0-0'"
       unit="%"
       [sheetId]="InfoSheetId.HYDRATION"
+      [canStepUp]="canStep(vm, 'hydrationRatio', 1)"
+      [canStepDown]="canStep(vm, 'hydrationRatio', -1)"
       (stepUp)="stepField(vm, 'hydrationRatio', 1)"
       (stepDown)="stepField(vm, 'hydrationRatio', -1)"
     />
@@ -41,6 +49,8 @@
         [value]="vm.poolishRatioPct | number: '1.0-0'"
         unit="%"
         [sheetId]="InfoSheetId.POOLISH_RATIO"
+        [canStepUp]="canStep(vm, 'poolishRatio', 1)"
+        [canStepDown]="canStep(vm, 'poolishRatio', -1)"
         (stepUp)="stepField(vm, 'poolishRatio', 1)"
         (stepDown)="stepField(vm, 'poolishRatio', -1)"
       />
@@ -50,6 +60,8 @@
       [value]="vm.ambientHours | number: '1.0-0'"
       unit="h"
       [sheetId]="InfoSheetId.WARM_REST"
+      [canStepUp]="canStep(vm, 'rtRestTime', 1)"
+      [canStepDown]="canStep(vm, 'rtRestTime', -1)"
       (stepUp)="stepRest(vm, 'rtRestTime', 1)"
       (stepDown)="stepRest(vm, 'rtRestTime', -1)"
     />
@@ -58,6 +70,8 @@
       [value]="vm.coldHours | number: '1.0-0'"
       unit="h"
       [sheetId]="InfoSheetId.COLD_REST"
+      [canStepUp]="canStep(vm, 'coldRestTime', 1)"
+      [canStepDown]="canStep(vm, 'coldRestTime', -1)"
       (stepUp)="stepRest(vm, 'coldRestTime', 1)"
       (stepDown)="stepRest(vm, 'coldRestTime', -1)"
     />
@@ -66,6 +80,8 @@
       [value]="vm.input.temperature | number: '1.0-0'"
       unit="°C"
       [sheetId]="InfoSheetId.TEMPERATURE"
+      [canStepUp]="canStep(vm, 'temperature', 1)"
+      [canStepDown]="canStep(vm, 'temperature', -1)"
       (stepUp)="stepField(vm, 'temperature', 1)"
       (stepDown)="stepField(vm, 'temperature', -1)"
     />
@@ -148,12 +164,16 @@
         [label]="'calculator.expert.tiles.salt' | translate"
         [value]="vm.input.saltRatio * 100 | number: '1.1-1'"
         unit="%"
+        [canStepUp]="canStep(vm, 'saltRatio', 1)"
+        [canStepDown]="canStep(vm, 'saltRatio', -1)"
         (stepUp)="stepField(vm, 'saltRatio', 1)"
         (stepDown)="stepField(vm, 'saltRatio', -1)"
       />
       <app-expert-tile
         [label]="'calculator.expert.tiles.flourStrength' | translate"
         [value]="vm.input.flourStrength | number: '1.0-0'"
+        [canStepUp]="canStep(vm, 'flourStrength', 1)"
+        [canStepDown]="canStep(vm, 'flourStrength', -1)"
         (stepUp)="stepField(vm, 'flourStrength', 1)"
         (stepDown)="stepField(vm, 'flourStrength', -1)"
       />
@@ -161,6 +181,8 @@
         [label]="'calculator.expert.tiles.oliveOil' | translate"
         [value]="(vm.input.oliveOilRatio ?? 0) * 100 | number: '1.0-1'"
         unit="%"
+        [canStepUp]="canStep(vm, 'oliveOilRatio', 1)"
+        [canStepDown]="canStep(vm, 'oliveOilRatio', -1)"
         (stepUp)="stepField(vm, 'oliveOilRatio', 1)"
         (stepDown)="stepField(vm, 'oliveOilRatio', -1)"
       />
@@ -168,6 +190,8 @@
         [label]="'calculator.expert.tiles.honey' | translate"
         [value]="vm.input.honeyRatio * 100 | number: '1.1-1'"
         unit="%"
+        [canStepUp]="canStep(vm, 'honeyRatio', 1)"
+        [canStepDown]="canStep(vm, 'honeyRatio', -1)"
         (stepUp)="stepField(vm, 'honeyRatio', 1)"
         (stepDown)="stepField(vm, 'honeyRatio', -1)"
       />

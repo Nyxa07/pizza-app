@@ -12,7 +12,6 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
-  IonItem,
   IonSkeletonText,
   IonTitle,
   IonToolbar,
@@ -31,6 +30,7 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 @Component({
   selector: 'app-calculator-guided-page',
   templateUrl: './guided.page.html',
+  styleUrls: ['./guided.page.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
@@ -40,7 +40,6 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
     IonTitle,
     IonContent,
     IonButton,
-    IonItem,
     IonSkeletonText,
     RouterLink,
     TranslatePipe,

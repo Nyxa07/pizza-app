@@ -1,5 +1,7 @@
 :host {
   display: block;
+  max-width: 720px;
+  margin: 0 auto;
   padding-bottom: 24px;
 }
 
@@ -20,15 +22,19 @@
   border-radius: var(--radius-m);
 
   .total {
+    flex-shrink: 0;
     font-size: 1.25rem;
     font-weight: 700;
     white-space: nowrap;
   }
 
   .split {
+    min-width: 0;
+    overflow: hidden;
     font-size: 0.72rem;
     text-align: right;
-    opacity: 0.75;
+    text-overflow: ellipsis;
+    color: color-mix(in srgb, currentColor 78%, transparent);
   }
 }
 
@@ -83,10 +89,20 @@ app-expert-tile ion-select {
     font-size: 0.8rem;
     font-weight: 500;
     text-align: center;
+    transition:
+      border-color 0.15s,
+      color 0.15s;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--ink);
+        border-color: var(--ink-3);
+      }
+    }
   }
 
   .caret {
-    transition: transform 0.18s ease;
+    transition: transform 0.18s;
   }
 
   &[open] .caret {
@@ -118,4 +134,18 @@ app-expert-tile ion-select {
   font-weight: 600;
   letter-spacing: 0.01em;
   cursor: pointer;
+  transition:
+    transform 0.08s,
+    filter 0.15s;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      filter: brightness(1.06);
+    }
+  }
+
+  &:active {
+    transform: scale(0.99);
+    filter: brightness(0.96);
+  }
 }

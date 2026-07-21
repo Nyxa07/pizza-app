@@ -42,16 +42,15 @@ import { TranslatePipe } from '@ngx-translate/core';
       height: 10px;
       overflow: hidden;
       border: 1px solid var(--hairline);
-      border-radius: 6px;
+      border-radius: var(--radius-s);
     }
 
     .ambient {
-      background: var(--accent);
-      opacity: 0.85;
+      background: color-mix(in srgb, var(--accent) 85%, var(--surface));
     }
 
     .cold {
-      background: var(--surface-sunken);
+      background: color-mix(in srgb, var(--ink) 15%, var(--surface));
     }
   `,
 })

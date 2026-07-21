@@ -37,6 +37,7 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
       <div class="ctrl">
         <button
           type="button"
+          [disabled]="!canStepDown()"
           (click)="stepDown.emit()"
           [attr.aria-label]="
             ('calculator.expert.tiles.decrease' | translate) + ' ' + label()
@@ -46,6 +47,7 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
         </button>
         <button
           type="button"
+          [disabled]="!canStepUp()"
           (click)="stepUp.emit()"
           [attr.aria-label]="
             ('calculator.expert.tiles.increase' | translate) + ' ' + label()
@@ -66,11 +68,11 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
         'label label'
         'value controls';
       grid-template-columns: minmax(0, 1fr) auto;
-      column-gap: 8px;
+      column-gap: 6px;
       background: var(--surface);
       border: 1px solid var(--hairline);
       border-radius: var(--radius-m);
-      padding: 12px 14px 10px;
+      padding: 12px 12px 10px;
       box-shadow: var(--shadow);
     }
 
@@ -118,20 +120,40 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
       grid-area: controls;
       align-self: end;
       display: flex;
-      gap: 6px;
+      gap: 4px;
 
       button {
-        width: 26px;
-        height: 26px;
+        width: 38px;
+        height: 38px;
         padding: 0;
         border: 1px solid var(--hairline);
         border-radius: var(--radius-s);
         background: var(--surface-sunken);
         color: var(--ink-2);
         font: inherit;
-        font-size: 0.95rem;
+        font-size: 1.05rem;
         line-height: 1;
         cursor: pointer;
+        transition:
+          transform 0.08s ease,
+          border-color 0.15s ease,
+          color 0.15s ease;
+
+        @media (hover: hover) and (pointer: fine) {
+          &:hover:not(:disabled) {
+            border-color: var(--ink-3);
+            color: var(--ink);
+          }
+        }
+
+        &:active:not(:disabled) {
+          transform: scale(0.92);
+        }
+
+        &:disabled {
+          opacity: 0.35;
+          cursor: default;
+        }
       }
     }
   `,
@@ -141,6 +163,8 @@ export class ExpertTileComponent {
   readonly value = input<string | null>(null);
   readonly unit = input<string | null>(null);
   readonly sheetId = input<InfoSheetId | null>(null);
+  readonly canStepUp = input(true);
+  readonly canStepDown = input(true);
 
   readonly stepUp = output<void>();
   readonly stepDown = output<void>();

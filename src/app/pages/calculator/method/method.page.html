@@ -21,22 +21,27 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="app-page-layout">
+  <div class="app-page-layout page-body">
     @if (isInitialized()) {
       @if (method(); as method) {
         <app-method [method]="method"></app-method>
       } @else {
-        <div class="loading-skeleton">
-          <ion-item lines="none">
-            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-          </ion-item>
+        <!-- Initialized with an empty Draft: a way out, not a dead end -->
+        <div class="app-empty-state">
+          <i-lucide [img]="ChefHatIcon" [size]="40"></i-lucide>
+          <h2>{{ "pages.calculator.method.emptyTitle" | translate }}</h2>
+          <p>{{ "pages.calculator.method.emptyBody" | translate }}</p>
+          <ion-button color="secondary" [routerLink]="['/tabs/calculator']">
+            {{ "pages.calculator.method.emptyCta" | translate }}
+          </ion-button>
         </div>
       }
     } @else {
-      <div class="loading-skeleton">
-        <ion-item lines="none">
-          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-        </ion-item>
+      <!-- Loading skeleton: mirrors the ready line + cards -->
+      <div class="loading-skeleton method-skeleton">
+        <ion-skeleton-text animated class="sk-ready" />
+        <ion-skeleton-text animated class="sk-card" />
+        <ion-skeleton-text animated class="sk-card tall" />
       </div>
     }
   </div>

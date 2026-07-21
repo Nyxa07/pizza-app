@@ -12,7 +12,10 @@
       "title": "Calculate"
     },
     "method": {
-      "title": "The Method"
+      "title": "The Method",
+      "emptyTitle": "No dough on the board",
+      "emptyBody": "Configure a calculation in the Expert or Guided path, then come back for the full timed Method.",
+      "emptyCta": "Open the calculator"
     }
   },
   "recipes": {
@@ -30,7 +33,9 @@
     "preparation": "Preparation",
     "photoCredit": "Photo: {photographer} · Pexels",
     "notFoundTitle": "Recipe not found",
-    "notFoundBody": "This Recipe does not exist in the bundled catalog."
+    "notFoundBody": "This Recipe does not exist in the bundled catalog.",
+    "emptyTitle": "No recipes yet",
+    "emptyBody": "The house notebook is still being written."
   },
   "doughs": {
     "title": "My doughs",
@@ -61,7 +66,10 @@
       "ballWeight": "Weight",
       "hydration": "Hydration",
       "rest": "Ambient + cold rest"
-    }
+    },
+    "emptyCta": "Calculate a dough",
+    "eyebrow": "Your notebook",
+    "intro": "Every saved calculation, ready to open again."
   },
   "settings": {
     "title": "Settings"

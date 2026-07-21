@@ -12,7 +12,10 @@
       "title": "Calculer"
     },
     "method": {
-      "title": "La Méthode"
+      "title": "La Méthode",
+      "emptyTitle": "Aucune pâte en cours",
+      "emptyBody": "Configurez un calcul dans le parcours Expert ou Guidé, puis revenez pour la Méthode minutée complète.",
+      "emptyCta": "Ouvrir le calculateur"
     }
   },
   "recipes": {
@@ -30,7 +33,9 @@
     "preparation": "Préparation",
     "photoCredit": "Photo : {photographer} · Pexels",
     "notFoundTitle": "Recette introuvable",
-    "notFoundBody": "Cette Recette n'existe pas dans le catalogue embarqué."
+    "notFoundBody": "Cette Recette n'existe pas dans le catalogue embarqué.",
+    "emptyTitle": "Aucune recette",
+    "emptyBody": "Le carnet de la maison est encore en cours d'écriture."
   },
   "doughs": {
     "title": "Mes pâtes",
@@ -61,7 +66,10 @@
       "ballWeight": "Poids",
       "hydration": "Hydratation",
       "rest": "Repos ambiant + froid"
-    }
+    },
+    "emptyCta": "Calculer une pâte",
+    "eyebrow": "Votre carnet",
+    "intro": "Chaque calcul sauvegardé, prêt à être rouvert."
   },
   "settings": {
     "title": "Réglages"

@@ -31,11 +31,14 @@
     @if (isInitialized()) {
       <app-expert-form></app-expert-form>
     } @else {
-      <!-- Loading skeleton -->
-      <div class="loading-skeleton">
-        <ion-item lines="none">
-          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-        </ion-item>
+      <!-- Loading skeleton: mirrors the livebar + tile grid -->
+      <div class="loading-skeleton expert-skeleton">
+        <ion-skeleton-text animated class="sk-livebar" />
+        <div class="sk-grid">
+          @for (tile of [1, 2, 3, 4, 5, 6, 7, 8]; track tile) {
+            <ion-skeleton-text animated class="sk-tile" />
+          }
+        </div>
       </div>
     }
   </div>

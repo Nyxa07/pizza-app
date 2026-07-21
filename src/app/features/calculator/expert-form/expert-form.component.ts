@@ -155,6 +155,24 @@ export class ExpertFormComponent {
     );
   }
 
+  /** Whether a step in `dir` would move — false pins the stepper disabled. */
+  protected canStep(
+    vm: ExpertVm,
+    field: SteppableField | 'rtRestTime' | 'coldRestTime',
+    dir: 1 | -1,
+  ): boolean {
+    const values = EXPERT_FIELD_OPTIONS[field];
+    const current =
+      field === 'rtRestTime'
+        ? vm.ambientHours
+        : field === 'coldRestTime'
+          ? vm.coldHours
+          : this.effectiveValue(vm, field);
+    return dir === 1
+      ? values[values.length - 1] > current
+      : values[0] < current;
+  }
+
   protected onDoughType(event: Event): void {
     this.state.update({
       doughType: (event as CustomEvent<{ value: DoughType }>).detail.value,

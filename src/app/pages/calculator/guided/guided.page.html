@@ -28,10 +28,14 @@
     @if (isInitialized()) {
       <app-guided-form />
     } @else {
-      <div class="loading-skeleton">
-        <ion-item lines="none">
-          <ion-skeleton-text animated style="width: 60%" />
-        </ion-item>
+      <!-- Loading skeleton: mirrors the progress bar + question + choices -->
+      <div class="loading-skeleton guided-skeleton">
+        <ion-skeleton-text animated class="sk-progress" />
+        <ion-skeleton-text animated class="sk-eyebrow" />
+        <ion-skeleton-text animated class="sk-question" />
+        <ion-skeleton-text animated class="sk-question short" />
+        <ion-skeleton-text animated class="sk-choice" />
+        <ion-skeleton-text animated class="sk-choice" />
       </div>
     }
   </div>

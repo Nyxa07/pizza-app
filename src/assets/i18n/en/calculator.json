@@ -367,5 +367,9 @@
         }
       }
     }
+  },
+  "refresh": {
+    "confirmTitle": "Start over?",
+    "confirmBody": "Your current Draft will be reset to your defaults."
   }
 }

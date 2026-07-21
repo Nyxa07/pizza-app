@@ -104,6 +104,17 @@ import type {
       font-weight: 600;
       text-align: center;
       cursor: pointer;
+      transition: background-color 0.15s ease;
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background: var(--surface-sunken);
+        }
+      }
+
+      &:active {
+        background: var(--surface-sunken);
+      }
     }
   `,
 })

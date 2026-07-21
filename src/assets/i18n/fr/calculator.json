@@ -367,5 +367,9 @@
         }
       }
     }
+  },
+  "refresh": {
+    "confirmTitle": "Tout recommencer ?",
+    "confirmBody": "Votre Calcul en cours sera réinitialisé avec vos défauts."
   }
 }
