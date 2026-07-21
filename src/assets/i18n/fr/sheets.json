@@ -1,0 +1,82 @@
+{
+  "direct": {
+    "title": "La méthode directe",
+    "subtitle": "Préparation de la pâte en une seule fois",
+    "body": [
+      "C'est une méthode de préparation plus simple que les méthodes indirectes.",
+      "On incorpore directement tous les ingrédients et, après un repos plus ou moins long, la pâte peut être utilisée."
+    ]
+  },
+  "poolish": {
+    "title": "La poolish",
+    "subtitle": "Une pâte liquide à base de farine, d'eau et de levure",
+    "body": [
+      "La poolish est une pré-fermentation de la pâte qui repose pendant plusieurs heures avant d'être utilisée pour la pâte à pizza.",
+      "Elle se prépare en mélangeant 1 part de farine et 1 part d'eau, ainsi qu'une petite quantité de levure.",
+      "C'est une méthode indirecte de préparation de la pâte à pizza."
+    ]
+  },
+  "biga": {
+    "title": "La biga",
+    "subtitle": "Une pré-fermentation sèche à base de farine, d'eau et de levure",
+    "body": [
+      "La biga est une pré-fermentation de la pâte qui repose pendant plusieurs heures avant d'être utilisée pour la pâte à pizza.",
+      "Contrairement à la poolish, c'est une préparation dite sèche : son hydratation se situe autour de 45 à 50 %.",
+      "On la prépare en mélangeant grossièrement la farine, l'eau et la levure ; elle apporte à la pâte de la force et des arômes plus complexes."
+    ]
+  },
+  "yeasts": {
+    "title": "Les levures",
+    "subtitle": "Le calculateur propose trois types de levures",
+    "body": [
+      "La levure sèche active est la levure que l'on trouve dans le commerce sous forme de levure de boulanger « classique », et non pas rapide. Elle est généralement vendue en sachet de petites billes.",
+      "La levure sèche instantanée est la levure lyophilisée sous forme de fines paillettes. Elle n'a pas besoin d'être hydratée avant d'être utilisée et permet de faire des pousses rapides.",
+      "La levure fraîche est la levure que l'on trouve dans le commerce sous forme de levure de boulanger « fraîche », en pâte, en cube."
+    ],
+    "tips": [
+      "Le calculateur permet facilement de passer de l'une à l'autre des levures."
+    ]
+  },
+  "hydration": {
+    "title": "L'hydratation",
+    "subtitle": "Le ratio entre la quantité d'eau totale et la quantité de farine totale",
+    "body": [
+      "Ex. 1 : pour 100 g d'eau au total et 151,5 g de farine au total, l'hydratation de la pâte est de 66 %. Calcul : 100 ÷ 151,5 = 0,66, soit 66 %.",
+      "Ex. 2 : pour connaître la quantité d'eau à ajouter avec 151,5 g de farine et une hydratation visée de 66 %, le calcul est : 0,66 × 151,5 = 100 g d'eau au total."
+    ],
+    "tips": [
+      "Plus la pâte est hydratée, plus elle est difficile à manipuler : plus liquide, donc plus collante. Hydratation recommandée : entre 62 et 75 %."
+    ]
+  },
+  "poolishRatio": {
+    "title": "Le ratio de poolish",
+    "subtitle": "Le ratio entre la quantité de poolish et la quantité totale de pâte",
+    "body": [
+      "On utilise couramment entre 30 et 60 % de poolish dans la quantité de pâte finale.",
+      "Ex. : pour 30 % de poolish et 1 kg de pâte finale, le calcul est : 1000 × 0,3 = 300 g. La poolish pèsera donc 300 g, composée de 150 g de farine et 150 g d'eau."
+    ],
+    "tips": [
+      "On met en général un ratio de poolish plus élevé l'hiver que l'été, car la fermentation est en partie influencée par la température : davantage de poolish en hiver peut aider au développement final de la pâte."
+    ]
+  },
+  "temperature": {
+    "title": "La température",
+    "subtitle": "La température ambiante de la pièce, en dehors du frigo",
+    "body": [
+      "C'est la température de la pièce où reposeront la poolish, la biga, la pâte et les pâtons.",
+      "Elle sert au calcul du repos à chaud."
+    ]
+  },
+  "warmRest": {
+    "title": "Le repos à chaud",
+    "subtitle": "Le temps passé à température ambiante",
+    "body": [
+      "Le temps de repos des différentes préparations à la température ambiante sélectionnée."
+    ]
+  },
+  "coldRest": {
+    "title": "Le repos à froid",
+    "subtitle": "Le temps passé au réfrigérateur",
+    "body": ["Le temps de repos des différentes préparations au réfrigérateur."]
+  }
+}

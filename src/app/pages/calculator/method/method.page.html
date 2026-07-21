@@ -1,0 +1,48 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/calculator/expert"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ "pages.calculator.method.title" | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <app-calculator-state-share
+        [method]="isInitialized() ? method() : null"
+      ></app-calculator-state-share>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{
+        "pages.calculator.method.title" | translate
+      }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="app-page-layout page-body">
+    @if (isInitialized()) {
+      @if (method(); as method) {
+        <app-method [method]="method"></app-method>
+      } @else {
+        <!-- Initialized with an empty Draft: a way out, not a dead end -->
+        <div class="app-empty-state">
+          <i-lucide [img]="ChefHatIcon" [size]="40"></i-lucide>
+          <h2>{{ "pages.calculator.method.emptyTitle" | translate }}</h2>
+          <p>{{ "pages.calculator.method.emptyBody" | translate }}</p>
+          <ion-button color="secondary" [routerLink]="['/tabs/calculator']">
+            {{ "pages.calculator.method.emptyCta" | translate }}
+          </ion-button>
+        </div>
+      }
+    } @else {
+      <!-- Loading skeleton: mirrors the ready line + cards -->
+      <div class="loading-skeleton method-skeleton">
+        <ion-skeleton-text animated class="sk-ready" />
+        <ion-skeleton-text animated class="sk-card" />
+        <ion-skeleton-text animated class="sk-card tall" />
+      </div>
+    }
+  </div>
+</ion-content>

@@ -1,0 +1,47 @@
+@if (activeSheet(); as sheet) {
+  <ion-content class="ion-padding">
+    <article class="fiche">
+      <header>
+        <h2 class="fiche__title">{{ sheet.content.title }}</h2>
+        @if (sheet.content.subtitle) {
+          <p class="fiche__subtitle">{{ sheet.content.subtitle }}</p>
+        }
+      </header>
+
+      @for (paragraph of sheet.content.body; track $index) {
+        <p class="fiche__paragraph">{{ paragraph }}</p>
+      }
+
+      @if (sheet.content.tips?.length) {
+        <aside class="fiche__tip">
+          <span class="fiche__tip-label">
+            {{ "common.sheets.tip" | translate }}
+          </span>
+          @for (tip of sheet.content.tips; track $index) {
+            <p>{{ tip }}</p>
+          }
+        </aside>
+      }
+
+      @if (sheet.related.length > 0) {
+        <footer class="fiche__related">
+          <span class="fiche__related-label">
+            {{ "common.sheets.seeAlso" | translate }}
+          </span>
+          <div class="fiche__related-links">
+            @for (related of sheet.related; track related.id) {
+              <ion-button
+                size="small"
+                fill="outline"
+                shape="round"
+                (click)="show(related.id)"
+              >
+                {{ related.title }}
+              </ion-button>
+            }
+          </div>
+        </footer>
+      }
+    </article>
+  </ion-content>
+}

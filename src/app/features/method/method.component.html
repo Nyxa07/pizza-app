@@ -1,0 +1,74 @@
+<p class="ready">
+  {{
+    "calculator.method.ready"
+      | translate
+        : {
+            day: (method().readyAt | relativeDay),
+            time: (method().readyAt | time),
+          }
+  }}
+</p>
+
+<section class="card">
+  <h3>{{ "calculator.method.ingredientsTitle" | translate }}</h3>
+  @for (section of method().sections; track section.title) {
+    <div class="part">
+      @if (method().sections.length > 1) {
+        <h4>{{ section.title | translate }}</h4>
+      }
+      @for (ingredient of section.ingredients; track ingredient.key) {
+        <div class="ingredient">
+          <span class="label">{{
+            "common.ingredients." + ingredient.key | translate
+          }}</span>
+          <span class="qty num">
+            {{
+              ingredient.grams
+                | number: (ingredient.key === "yeast" ? "1.0-1" : "1.0-0")
+            }}
+            g
+          </span>
+        </div>
+      }
+    </div>
+  }
+</section>
+
+<section class="card">
+  <h3>{{ "calculator.method.stepsTitle" | translate }}</h3>
+  <ol class="steps">
+    @for (step of method().steps; track step.title; let last = $last) {
+      <li class="step" [class.bake]="last">
+        @if (step.at) {
+          <div class="when">
+            {{ step.at | relativeDay }} ·
+            <span class="num">{{ step.at | time }}</span>
+          </div>
+        }
+        <span class="icon" aria-hidden="true">
+          <i-lucide [img]="step.icon" [size]="15"></i-lucide>
+        </span>
+        <div class="body">
+          <div
+            class="title"
+            [innerHTML]="step.title | translate: step.variables"
+          ></div>
+          @if (step.ingredients.length) {
+            <div class="quantities num">{{ quantitiesLine(step) }}</div>
+          }
+          @if (step.helper) {
+            <details class="helper">
+              <summary>{{ "common.sheets.open" | translate }}</summary>
+              @for (
+                description of step.helper.descriptions;
+                track description
+              ) {
+                <p [innerHTML]="description | translate: step.variables"></p>
+              }
+            </details>
+          }
+        </div>
+      </li>
+    }
+  </ol>
+</section>

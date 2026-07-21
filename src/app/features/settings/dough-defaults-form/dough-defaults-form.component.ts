@@ -1,0 +1,86 @@
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+
+import {
+  IonItem,
+  IonList,
+  IonListHeader,
+  IonNote,
+  IonSelect,
+  IonSelectOption,
+} from '@ionic/angular/standalone';
+
+import { TranslatePipe } from '@ngx-translate/core';
+import { debounceTime } from 'rxjs';
+
+import { EXPERT_FIELD_OPTIONS } from 'src/app/features/calculator/expert-form/expert-field-options';
+import { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
+import {
+  DoughDefaultsService,
+  FACTORY_DEFAULTS,
+} from 'src/app/features/calculator/services/dough-defaults.service';
+
+/**
+ * « Mes défauts de pâte » — the user-editable seed values every new
+ * calculation starts from (issue #68). Temporarily hosted in the current
+ * settings screen; moves with the v2 navigation.
+ */
+@Component({
+  selector: 'app-dough-defaults-form',
+  templateUrl: './dough-defaults-form.component.html',
+  styleUrls: ['./dough-defaults-form.component.scss'],
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    DecimalPipe,
+    IonItem,
+    IonList,
+    IonListHeader,
+    IonNote,
+    IonSelect,
+    IonSelectOption,
+    ReactiveFormsModule,
+    TranslatePipe,
+  ],
+})
+export class DoughDefaultsFormComponent {
+  private readonly fb = inject(FormBuilder);
+  private readonly doughDefaults = inject(DoughDefaultsService);
+  private readonly seed = this.doughDefaults.getDefaults();
+
+  // Shared with the Expert tiles so both forms walk the same value grids.
+  protected readonly options = EXPERT_FIELD_OPTIONS;
+
+  protected readonly form = this.fb.nonNullable.group({
+    hydrationRatio: this.seed.hydrationRatio ?? FACTORY_DEFAULTS.hydrationRatio,
+    saltRatio: this.seed.saltRatio,
+    pizzaWeight: this.seed.pizzaWeight ?? FACTORY_DEFAULTS.pizzaWeight,
+  });
+
+  constructor() {
+    this.form.valueChanges
+      .pipe(takeUntilDestroyed(), debounceTime(250))
+      .subscribe(() => this.doughDefaults.update(this.dirtyValues()));
+  }
+
+  /**
+   * Only the fields the user actually changed: an untouched field must keep
+   * following FACTORY_DEFAULTS if a future release re-tunes it.
+   */
+  private dirtyValues(): Partial<ICalculatorInput> {
+    const { hydrationRatio, saltRatio, pizzaWeight } = this.form.controls;
+    const dirty: Partial<ICalculatorInput> = {};
+    if (hydrationRatio.dirty) {
+      dirty.hydrationRatio = hydrationRatio.value;
+    }
+    if (saltRatio.dirty) {
+      dirty.saltRatio = saltRatio.value;
+    }
+    if (pizzaWeight.dirty) {
+      dirty.pizzaWeight = pizzaWeight.value;
+    }
+    return dirty;
+  }
+}

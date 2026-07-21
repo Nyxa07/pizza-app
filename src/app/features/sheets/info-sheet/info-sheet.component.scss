@@ -1,0 +1,62 @@
+.fiche__title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--ink);
+}
+
+.fiche__subtitle {
+  margin: 0.35rem 0 0;
+  color: var(--ink-2);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.fiche__paragraph {
+  margin: 0.85rem 0 0;
+  color: var(--ink);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.fiche__tip {
+  margin-top: 1.1rem;
+  padding: 0.85rem 1rem;
+  background: var(--accent-soft);
+  border-radius: var(--radius-m);
+
+  p {
+    margin: 0.35rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+}
+
+.fiche__tip-label,
+.fiche__related-label {
+  display: block;
+  font-family: var(--font-voice);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.fiche__tip-label {
+  color: var(--accent);
+}
+
+.fiche__related {
+  margin-top: 1.25rem;
+}
+
+.fiche__related-label {
+  color: var(--ink-2);
+}
+
+.fiche__related-links {
+  margin-top: 0.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}

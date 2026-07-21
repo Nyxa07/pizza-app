@@ -1,0 +1,1 @@
+Pizza Maker 2.0 is a complete redesign: Guided and Expert calculators, one shared Draft, saved Dough documents, timed Methods, contextual help, curated pizza Recipes and a new premium light/dark interface. Existing 1.0.3 calculations and saves migrate automatically.

@@ -1,3 +1,10 @@
-Récupère le ticket à implémenter dans {{ current.selection.artefacts.selected.md }}
+Récupère le ticket à implémenter dans {{ current.selection.artefacts.selected.md }} tu y trouvera le ticket choisi ainsi qu'un peu de contexte (issue parente, branche à utiliser etc..). Si la branche spécifiée n'existe pas, créer la, sinon réutilise l'existant.
+
+Il est possible que l'issue séléctionnée ai déjà été commencée par un agent précécent (qui aurait planté). Dans ce cas analyse ce qui a été fait et reprend le travail la ou il en était.
+
 Implémente en utilisant /implement
-Une fois terminé, ajoute un label `implemented` sur l'issue.
+
+Une fois terminé:
+- ajoute un label `implemented` sur l'issue et produit un petit résumé de ton travail dans {{ current.artefacts.implementation.md }}
+- Si l'issue fait partie d'un lot (sous issue) et que toutes les issues on étés implémentées, tu peux ouvrir une PR qui cloture toutes les sous issues + l'issue parente.
+- Si l'issue est isolée, ouvre une PR qui cloture cette issue.

@@ -20,10 +20,12 @@ import {
 import { provideHttpClient } from '@angular/common/http';
 import { inject, provideAppInitializer } from '@angular/core';
 import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
-// ThemeService no longer needed - using always-dark space theme
+
+import { AppearanceService } from './app/features/settings/services/appearance.service';
 import { LocaleManagerService } from './app/features/settings/services/locale-manager.service';
 import { provideMultiTranslateLoader } from './app/features/settings/services/translation.loader';
 import { KeepAwakeService } from './app/features/settings/services/keep-awake.service';
+import { MigrationService } from './app/shared/services/migration.service';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -41,7 +43,9 @@ bootstrapApplication(AppComponent, {
       },
     }),
     provideAppInitializer(() => {
-      // ThemeService.init() removed - using always-dark space theme
+      // Preferences must be migrated before any service reads its keys.
+      inject(MigrationService).run();
+      inject(AppearanceService).init();
 
       const keepAwakeService = inject(KeepAwakeService);
       keepAwakeService.init();

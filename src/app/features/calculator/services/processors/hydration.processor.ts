@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { PizzaType } from '../../../settings/enums/pizza-type.enum';
 import { IProcessor } from '../../interfaces/processor.interface';
 import { CalculatorConfigService } from '../calculator-config.service';
@@ -13,7 +13,7 @@ export interface HydrationRange {
 
 @Injectable({ providedIn: 'root' })
 export class HydrationProcessor implements IProcessor {
-  constructor(private calculatorConfigService: CalculatorConfigService) {}
+  private readonly calculatorConfigService = inject(CalculatorConfigService);
 
   process(input: ICalculatorInput) {
     return {

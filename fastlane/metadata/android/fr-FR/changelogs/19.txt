@@ -1,0 +1,1 @@
+Pizza Maker 2.0 est entièrement repensé : parcours Guidé et Expert, Calcul en cours partagé, Pâtes enregistrées, Méthodes horodatées, Fiches contextuelles, Recettes de pizzas et nouvelle interface premium claire/sombre. Vos calculs et sauvegardes 1.0.3 migrent automatiquement.

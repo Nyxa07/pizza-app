@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Injectable, Pipe, PipeTransform } from '@angular/core';
+import { Injectable, Pipe, PipeTransform, inject } from '@angular/core';
 import { LocaleManagerService } from 'src/app/features/settings/services/locale-manager.service';
 
 @Pipe({
@@ -13,8 +13,7 @@ import { LocaleManagerService } from 'src/app/features/settings/services/locale-
 export class NumberPipe implements PipeTransform {
   private cachedLocale = '';
   private cachedPipe?: DecimalPipe;
-
-  constructor(private localeManager: LocaleManagerService) {}
+  private readonly localeManager = inject(LocaleManagerService);
 
   transform(value: number | null | undefined, format: string): string {
     if (value === null || value === undefined) {

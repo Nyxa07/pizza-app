@@ -1,20 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { IPreProcessor } from '../../interfaces/pre-processor.interface';
 import { DoughType } from '../../enums/dough-type.enum';
 import { YeastType } from '../../enums/yeast-type.enum';
 import { ICalculatorSettings } from '../../interfaces/calculator-settings.interface';
 import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
-import { DEFAULT_INPUT } from '../calculator-initializer.service';
+import { DoughDefaultsService } from '../dough-defaults.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FillMissingPreProcessor implements IPreProcessor {
+  private readonly defaults = inject(DoughDefaultsService);
+
   process(
     settings: ICalculatorSettings,
     input: ICalculatorInput,
   ): ICalculatorInput {
-    const defaultInput = DEFAULT_INPUT;
+    // Auto fields fall back to the user's Defaults (« Mes défauts de pâte »).
+    const defaultInput = this.defaults.getDefaults();
     return {
       nbPizzas: input.nbPizzas,
       pizzaType: input.pizzaType,

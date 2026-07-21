@@ -1,174 +1,198 @@
-:root {
-  // Fonts
-  --ion-dynamic-font: var(--ion-default-dynamic-font);
-  --ion-font-family: "RedHat";
-  --ion-font-family-heading: "Orbitron", sans-serif;
+@use "sass:color";
 
-  // ============================================
-  // SPACE THEME - Orange/Amber Retro Terminal
-  // ============================================
+// ============================================================
+// Design tokens — the app's single visual identity (ADR-0001)
+// ============================================================
+// Two layers:
+//   1. Sass primitives (build-time palette) — the ONLY place raw
+//      color values may exist.
+//   2. Semantic CSS custom properties (runtime), mapped per
+//      appearance. Screens and components consume these tokens
+//      exclusively — never raw colors/shadows/radii.
+// Designed light-first, dark derived (issue #66; palette validated
+// on prototype/expert-screen-v2, variant D).
 
-  // Primary: Original warm orange
-  --ion-color-primary: #ff9860;
-  --ion-color-primary-rgb: 255, 152, 96;
-  --ion-color-primary-contrast: #000000;
-  --ion-color-primary-contrast-rgb: 0, 0, 0;
-  --ion-color-primary-shade: #e08654;
-  --ion-color-primary-tint: #ffa270;
+// ------------------------------------------------------------
+// 1. Primitives
+// ------------------------------------------------------------
 
-  // Secondary: Burnt Orange
-  --ion-color-secondary: #ff6b35;
-  --ion-color-secondary-rgb: 255, 107, 53;
-  --ion-color-secondary-contrast: #000000;
-  --ion-color-secondary-contrast-rgb: 0, 0, 0;
-  --ion-color-secondary-shade: #e05e2f;
-  --ion-color-secondary-tint: #ff7a49;
+// Warm neutrals — light
+$primitive-paper: #f6f4f0;
+$primitive-white: #ffffff;
+$primitive-linen: #efece5;
+$primitive-ink: #201d1a;
+$primitive-ink-soft: #6f6a62;
+$primitive-ink-faint: #a39d93;
+$primitive-hairline: #e6e2db;
 
-  // Tertiary: Deep Space Blue
-  --ion-color-tertiary: #1a1a2e;
-  --ion-color-tertiary-rgb: 26, 26, 46;
-  --ion-color-tertiary-contrast: #ffffff;
-  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #171728;
-  --ion-color-tertiary-tint: #313143;
+// Warm neutrals — dark
+$primitive-night: #131211;
+$primitive-night-raised: #1c1a18;
+$primitive-night-sunken: #100f0e;
+$primitive-night-hairline: #2b2823;
+$primitive-bone: #edeae4;
+$primitive-bone-soft: #9c968c;
+$primitive-bone-faint: #6b665e;
 
-  // Success: Neon Green
-  --ion-color-success: #00d26a;
-  --ion-color-success-rgb: 0, 210, 106;
-  --ion-color-success-contrast: #000000;
-  --ion-color-success-contrast-rgb: 0, 0, 0;
-  --ion-color-success-shade: #00b95d;
-  --ion-color-success-tint: #1ad779;
+// Accent — terracotta, the single warm accent of the food register
+$primitive-terracotta: #c14e2c;
+$primitive-terracotta-bright: #e0653c;
+$primitive-terracotta-wash-light: #f6e7e0;
+$primitive-terracotta-wash-dark: #31201a;
+$primitive-espresso: #1a0f0a;
 
-  // Warning: Warm Amber
-  --ion-color-warning: #ffb347;
-  --ion-color-warning-rgb: 255, 179, 71;
-  --ion-color-warning-contrast: #000000;
-  --ion-color-warning-contrast-rgb: 0, 0, 0;
-  --ion-color-warning-shade: #e09e3e;
-  --ion-color-warning-tint: #ffbb59;
+// Functional colors, desaturated to sit quietly in the neutral chrome
+$primitive-positive: #3e7a52;
+$primitive-positive-bright: #7fb08d;
+$primitive-caution: #9a6b1f;
+$primitive-caution-bright: #d3a54c;
+$primitive-negative: #b03a2e;
+$primitive-negative-bright: #e06a5a;
 
-  // Danger: Neon Red
-  --ion-color-danger: #ff4757;
-  --ion-color-danger-rgb: 255, 71, 87;
-  --ion-color-danger-contrast: #ffffff;
-  --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: #e03e4d;
-  --ion-color-danger-tint: #ff5968;
+// ------------------------------------------------------------
+// Helpers
+// ------------------------------------------------------------
 
-  // Light: Soft space gray
-  --ion-color-light: #2a2a3a;
-  --ion-color-light-rgb: 42, 42, 58;
-  --ion-color-light-contrast: #ffffff;
-  --ion-color-light-contrast-rgb: 255, 255, 255;
-  --ion-color-light-shade: #252533;
-  --ion-color-light-tint: #3f3f4e;
-
-  // Medium: Space gray
-  --ion-color-medium: #6b6b7b;
-  --ion-color-medium-rgb: 107, 107, 123;
-  --ion-color-medium-contrast: #ffffff;
-  --ion-color-medium-contrast-rgb: 255, 255, 255;
-  --ion-color-medium-shade: #5e5e6c;
-  --ion-color-medium-tint: #7a7a88;
-
-  // Dark: Near black
-  --ion-color-dark: #16161d;
-  --ion-color-dark-rgb: 22, 22, 29;
-  --ion-color-dark-contrast: #ffffff;
-  --ion-color-dark-contrast-rgb: 255, 255, 255;
-  --ion-color-dark-shade: #13131a;
-  --ion-color-dark-tint: #2d2d34;
-
-  // ============================================
-  // Custom Space Theme Variables
-  // ============================================
-
-  // Glow effects (based on original orange #ff9860)
-  --glow-primary: rgba(255, 152, 96, 0.4);
-  --glow-primary-soft: rgba(255, 152, 96, 0.15);
-  --glow-secondary: rgba(255, 107, 53, 0.3);
-  --glow-success: rgba(0, 210, 106, 0.3);
-  --glow-danger: rgba(255, 71, 87, 0.3);
-
-  // Space backgrounds
-  --space-bg-dark: #0a0a0f;
-  --space-bg-card: #12121a;
-  --space-bg-elevated: #1a1a24;
-  --space-border: rgba(255, 152, 96, 0.2);
-
-  // ============================================
-  // Always-Dark Mode Base Colors
-  // ============================================
-
-  --ion-item-border-color: var(--space-border);
-  --ion-item-background: var(--space-bg-card);
-
-  --ion-background-color: var(--space-bg-dark);
-  --ion-background-color-rgb: 10, 10, 15;
-
-  --ion-text-color: #e0e0e0;
-  --ion-text-color-rgb: 224, 224, 224;
-
-  // Text color steps (light to dark for dark theme)
-  --ion-text-color-step-50: #d6d6d6;
-  --ion-text-color-step-100: #cccccc;
-  --ion-text-color-step-150: #c2c2c2;
-  --ion-text-color-step-200: #b8b8b8;
-  --ion-text-color-step-250: #aeaeae;
-  --ion-text-color-step-300: #a4a4a4;
-  --ion-text-color-step-350: #9a9a9a;
-  --ion-text-color-step-400: #909090;
-  --ion-text-color-step-450: #868686;
-  --ion-text-color-step-500: #7c7c7c;
-  --ion-text-color-step-550: #727272;
-  --ion-text-color-step-600: #686868;
-  --ion-text-color-step-650: #5e5e5e;
-  --ion-text-color-step-700: #545454;
-  --ion-text-color-step-750: #4a4a4a;
-  --ion-text-color-step-800: #404040;
-  --ion-text-color-step-850: #363636;
-  --ion-text-color-step-900: #2c2c2c;
-  --ion-text-color-step-950: #222222;
-
-  // Background color steps (dark to light for dark theme)
-  --ion-background-color-step-50: #141419;
-  --ion-background-color-step-100: #1e1e24;
-  --ion-background-color-step-150: #28282f;
-  --ion-background-color-step-200: #32323a;
-  --ion-background-color-step-250: #3c3c45;
-  --ion-background-color-step-300: #464650;
-  --ion-background-color-step-350: #50505b;
-  --ion-background-color-step-400: #5a5a66;
-  --ion-background-color-step-450: #646471;
-  --ion-background-color-step-500: #6e6e7c;
-  --ion-background-color-step-550: #787887;
-  --ion-background-color-step-600: #828292;
-  --ion-background-color-step-650: #8c8c9d;
-  --ion-background-color-step-700: #9696a8;
-  --ion-background-color-step-750: #a0a0b3;
-  --ion-background-color-step-800: #aaaabe;
-  --ion-background-color-step-850: #b4b4c9;
-  --ion-background-color-step-900: #bebed4;
-  --ion-background-color-step-950: #c8c8df;
-
-  // Toolbar styling
-  --ion-toolbar-background: var(--space-bg-elevated);
-  --ion-toolbar-color: var(--ion-text-color);
-
-  // Card styling
-  --ion-card-background: var(--space-bg-card);
+@function rgb-triplet($c) {
+  @return #{color.channel($c, "red", $space: rgb)},
+    #{color.channel($c, "green", $space: rgb)},
+    #{color.channel($c, "blue", $space: rgb)};
 }
 
-// ============================================
-// Dark palette class compatibility
-// (for any components that might still use it)
-// ============================================
-.ion-palette-dark.ios,
-.ion-palette-dark.md {
-  --ion-item-background: var(--space-bg-card);
-  --ion-background-color: var(--space-bg-dark);
-  --ion-background-color-rgb: 10, 10, 15;
-  --ion-text-color: #e0e0e0;
-  --ion-text-color-rgb: 224, 224, 224;
+// Full Ionic color contract (base/rgb/contrast/shade/tint) for one color.
+@mixin ion-color($name, $base, $contrast) {
+  --ion-color-#{$name}: #{$base};
+  --ion-color-#{$name}-rgb: #{rgb-triplet($base)};
+  --ion-color-#{$name}-contrast: #{$contrast};
+  --ion-color-#{$name}-contrast-rgb: #{rgb-triplet($contrast)};
+  --ion-color-#{$name}-shade: #{color.mix(black, $base, 12%)};
+  --ion-color-#{$name}-tint: #{color.mix(white, $base, 10%)};
+}
+
+// ------------------------------------------------------------
+// 2. Semantic tokens, mapped per appearance
+// ------------------------------------------------------------
+
+@mixin appearance-light {
+  --bg: #{$primitive-paper};
+  --bg-rgb: #{rgb-triplet($primitive-paper)};
+  --surface: #{$primitive-white};
+  --surface-sunken: #{$primitive-linen};
+  --ink: #{$primitive-ink};
+  --ink-rgb: #{rgb-triplet($primitive-ink)};
+  --ink-2: #{$primitive-ink-soft};
+  --ink-3: #{$primitive-ink-faint};
+  --hairline: #{$primitive-hairline};
+  --accent: #{$primitive-terracotta};
+  --on-accent: #{$primitive-white};
+  --accent-soft: #{$primitive-terracotta-wash-light};
+  --shadow:
+    0 1px 2px rgba(#{rgb-triplet($primitive-ink)}, 0.05),
+    0 6px 20px rgba(#{rgb-triplet($primitive-ink)}, 0.07);
+
+  @include ion-color("primary", $primitive-terracotta, $primitive-white);
+  @include ion-color("secondary", $primitive-ink, $primitive-paper);
+  @include ion-color("tertiary", $primitive-ink-soft, $primitive-paper);
+  @include ion-color("success", $primitive-positive, $primitive-white);
+  @include ion-color("warning", $primitive-caution, $primitive-white);
+  @include ion-color("danger", $primitive-negative, $primitive-white);
+  @include ion-color("light", $primitive-linen, $primitive-ink);
+  @include ion-color("medium", $primitive-ink-soft, $primitive-white);
+  @include ion-color("dark", $primitive-ink, $primitive-paper);
+}
+
+@mixin appearance-dark {
+  --bg: #{$primitive-night};
+  --bg-rgb: #{rgb-triplet($primitive-night)};
+  --surface: #{$primitive-night-raised};
+  --surface-sunken: #{$primitive-night-sunken};
+  --ink: #{$primitive-bone};
+  --ink-rgb: #{rgb-triplet($primitive-bone)};
+  --ink-2: #{$primitive-bone-soft};
+  --ink-3: #{$primitive-bone-faint};
+  --hairline: #{$primitive-night-hairline};
+  --accent: #{$primitive-terracotta-bright};
+  --on-accent: #{$primitive-espresso};
+  --accent-soft: #{$primitive-terracotta-wash-dark};
+  --shadow: none;
+
+  @include ion-color(
+    "primary",
+    $primitive-terracotta-bright,
+    $primitive-espresso
+  );
+  @include ion-color("secondary", $primitive-bone, $primitive-night);
+  @include ion-color("tertiary", $primitive-bone-soft, $primitive-night);
+  @include ion-color("success", $primitive-positive-bright, $primitive-night);
+  @include ion-color("warning", $primitive-caution-bright, $primitive-night);
+  @include ion-color("danger", $primitive-negative-bright, $primitive-night);
+  @include ion-color("light", $primitive-night-sunken, $primitive-bone);
+  @include ion-color("medium", $primitive-bone-soft, $primitive-night);
+  @include ion-color("dark", $primitive-bone, $primitive-night);
+}
+
+:root {
+  // Typography — Fraunces is the editorial serif voice, Inter the instrument
+  --font-voice: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-ui:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  // Shape
+  --radius-s: 10px;
+  --radius-m: 14px;
+  --radius-l: 16px;
+  --radius-full: 999px;
+
+  // Page layout
+  --page-inset: 16px;
+
+  @include appearance-light;
+
+  // ---- Ionic application variables → semantic tokens ----
+  // Defined once; they follow whichever appearance is active.
+  --ion-dynamic-font: var(--ion-default-dynamic-font);
+  --ion-font-family: var(--font-ui);
+
+  --ion-background-color: var(--bg);
+  --ion-background-color-rgb: var(--bg-rgb);
+  --ion-text-color: var(--ink);
+  --ion-text-color-rgb: var(--ink-rgb);
+
+  --ion-toolbar-background: var(--bg);
+  --ion-toolbar-color: var(--ink);
+  --ion-item-background: var(--surface);
+  --ion-item-border-color: var(--hairline);
+  --ion-card-background: var(--surface);
+  --ion-border-color: var(--hairline);
+
+  // Stepped colors consumed internally by Ionic components; color-mix
+  // keeps every step derived from the active appearance's tokens.
+  @for $i from 1 through 19 {
+    $step: $i * 50;
+    $mix: (100 - $i * 5) * 1%;
+    --ion-text-color-step-#{$step}: color-mix(
+      in srgb,
+      var(--ink) #{$mix},
+      var(--bg)
+    );
+    --ion-background-color-step-#{$step}: color-mix(
+      in srgb,
+      var(--bg) #{$mix},
+      var(--ink)
+    );
+  }
+}
+
+// Pre-boot fallback: until AppearanceService resolves the preference and
+// stamps data-appearance on <html>, follow the system scheme so a dark
+// device never flashes light while the app loads.
+@media (prefers-color-scheme: dark) {
+  :root:not([data-appearance]) {
+    @include appearance-dark;
+  }
+}
+
+:root[data-appearance="dark"] {
+  @include appearance-dark;
 }

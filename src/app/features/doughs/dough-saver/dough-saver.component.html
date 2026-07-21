@@ -1,0 +1,53 @@
+<ion-button
+  id="open-save-dough"
+  [attr.aria-label]="'pages.doughs.saveAction' | translate"
+>
+  <i-lucide slot="icon-only" [img]="SaveIcon"></i-lucide>
+</ion-button>
+
+<ion-modal trigger="open-save-dough">
+  <ng-template>
+    <ion-header [translucent]="false">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="close()">
+            {{ "common.actions.cancel" | translate }}
+          </ion-button>
+        </ion-buttons>
+        <ion-title>{{ "pages.doughs.saveTitle" | translate }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button
+            (click)="save()"
+            [strong]="true"
+            [disabled]="form.invalid"
+          >
+            {{ "common.actions.save" | translate }}
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <ion-item>
+          <ion-input
+            [label]="'pages.doughs.nameLabel' | translate"
+            labelPlacement="floating"
+            formControlName="name"
+            [errorText]="
+              form.controls.name.errors?.['doughNameExists']
+                ? ('pages.doughs.nameExists' | translate)
+                : ('pages.doughs.nameRequired' | translate)
+            "
+          ></ion-input>
+        </ion-item>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-toast
+  [message]="'pages.doughs.saved' | translate"
+  [duration]="2500"
+  color="success"
+></ion-toast>

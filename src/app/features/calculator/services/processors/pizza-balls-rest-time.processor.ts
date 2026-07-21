@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CalculatorConfigService } from '../calculator-config.service';
 import {
   IProcessor,
@@ -10,7 +10,7 @@ import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
   providedIn: 'root',
 })
 export class PizzaBallsRestTimeProcessor implements IProcessor {
-  constructor(private calculatorConfigService: CalculatorConfigService) {}
+  private readonly calculatorConfigService = inject(CalculatorConfigService);
 
   process(input: ICalculatorInput, acc?: PartialCalculatorOutput) {
     const constants = this.calculatorConfigService.constants.pizzaBallsRestTime;

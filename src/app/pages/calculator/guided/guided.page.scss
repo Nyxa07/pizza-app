@@ -1,0 +1,35 @@
+.guided-skeleton {
+  ion-skeleton-text {
+    display: block;
+    margin: 0 0 14px;
+  }
+
+  .sk-progress {
+    width: 100%;
+    height: 3px;
+    margin-bottom: 34px;
+  }
+
+  .sk-eyebrow {
+    width: 34%;
+    height: 0.8rem;
+    margin-bottom: 16px;
+  }
+
+  .sk-question {
+    width: 82%;
+    height: 2.2rem;
+    margin-bottom: 8px;
+
+    &.short {
+      width: 55%;
+      margin-bottom: 26px;
+    }
+  }
+
+  .sk-choice {
+    width: 100%;
+    height: 74px;
+    border-radius: var(--radius-m);
+  }
+}

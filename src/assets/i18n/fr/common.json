@@ -5,6 +5,8 @@
     "cancel": "Annuler",
     "delete": "Supprimer",
     "edit": "Modifier",
+    "rename": "Renommer",
+    "duplicate": "Dupliquer",
     "add": "Ajouter",
     "ok": "OK",
     "reset": "Réinitialiser",
@@ -40,10 +42,27 @@
   "time": {
     "hours": "{count, plural, one {heure} other {heures}}",
     "minutes": "{count, plural, one {minute} other {minutes}}",
-    "seconds": "{count, plural, one {seconde} other {secondes}}"
+    "seconds": "{count, plural, one {seconde} other {secondes}}",
+    "relativeDay": {
+      "today": "aujourd'hui",
+      "tonight": "ce soir",
+      "tomorrow": "demain",
+      "inTwoDays": "après-demain",
+      "monday": "lundi",
+      "tuesday": "mardi",
+      "wednesday": "mercredi",
+      "thursday": "jeudi",
+      "friday": "vendredi",
+      "saturday": "samedi",
+      "sunday": "dimanche"
+    }
   },
-  "recipe": {
-    "ingredients": "Ingrédients",
-    "method": "Méthode"
+  "sheets": {
+    "open": "En savoir plus",
+    "tip": "Astuce",
+    "seeAlso": "Voir aussi"
+  },
+  "titles": {
+    "confirm": "Confirmer"
   }
 }

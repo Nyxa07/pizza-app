@@ -1,0 +1,36 @@
+.document-header,
+.adjust {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.document-header > p,
+.adjust > p {
+  color: var(--ink-2);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.summary {
+  margin: 14px 0;
+}
+
+.adjust {
+  padding-bottom: 28px;
+  text-align: center;
+}
+
+.not-found {
+  display: grid;
+  place-content: center;
+  height: 100%;
+  text-align: center;
+
+  h2 {
+    color: var(--ink);
+  }
+
+  p {
+    color: var(--ink-2);
+  }
+}

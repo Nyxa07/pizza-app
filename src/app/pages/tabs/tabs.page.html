@@ -1,24 +1,28 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home" routerLink="/tabs/home">
-      <i-lucide [img]="HouseIcon"></i-lucide>
-      <ion-label>{{ 'pages.home.title' | translate }}</ion-label>
-    </ion-tab-button>
     <ion-tab-button
       tab="calculator"
       routerLink="/tabs/calculator"
       routerDirection="root"
     >
       <i-lucide [img]="CalculatorIcon"></i-lucide>
-      <ion-label>{{ 'pages.calculator.title' | translate }}</ion-label>
+      <ion-label>{{ 'pages.tabs.calculate' | translate }}</ion-label>
     </ion-tab-button>
     <ion-tab-button
-      tab="guides"
-      routerLink="/tabs/guides"
+      tab="recipes"
+      routerLink="/tabs/recipes"
       routerDirection="root"
     >
-      <i-lucide [img]="NotebookIcon"></i-lucide>
-      <ion-label>{{ 'pages.guides.title' | translate }}</ion-label>
+      <i-lucide [img]="PizzaIcon"></i-lucide>
+      <ion-label>{{ 'pages.tabs.recipes' | translate }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button
+      tab="doughs"
+      routerLink="/tabs/doughs"
+      routerDirection="root"
+    >
+      <i-lucide [img]="LibraryIcon"></i-lucide>
+      <ion-label>{{ 'pages.tabs.doughs' | translate }}</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

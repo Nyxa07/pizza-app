@@ -1,36 +1,51 @@
 import { Route } from '@angular/router';
 
+import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
+
 export const CALCULATOR_ROUTES: Route[] = [
   {
+    // The app opens straight on the calculation screen: the Expert path.
     path: '',
-    loadComponent: () =>
-      import('./index/index.page').then((m) => m.CalculatorIndexPage),
+    redirectTo: CalculatorPath.EXPERT,
+    pathMatch: 'full',
   },
+  {
+    path: CalculatorPath.EXPERT,
+    loadComponent: () =>
+      import('./expert/expert.page').then((m) => m.CalculatorExpertPage),
+  },
+  {
+    path: CalculatorPath.GUIDED,
+    loadComponent: () =>
+      import('./guided/guided.page').then((m) => m.CalculatorGuidedPage),
+  },
+  // The v1 assistant is gone; old deep links enter the Guided path.
   {
     path: 'assistant',
-    loadComponent: () =>
-      import('./assistant/assistant.page').then(
-        (m) => m.CalculatorAssistantPage,
-      ),
+    redirectTo: CalculatorPath.GUIDED,
   },
+  // Legacy v1 calculator routes — the Simple/Complex pages and the
+  // field-visibility screen are replaced by the Expert screen (issue #71).
   {
     path: 'simple',
-    loadComponent: () =>
-      import('./simple/simple.page').then((m) => m.CalculatorSimplePage),
+    redirectTo: CalculatorPath.EXPERT,
   },
   {
     path: 'complex',
-    loadComponent: () =>
-      import('./complex/complex.page').then((m) => m.CalculatorComplexPage),
-  },
-  {
-    path: 'results/:mode',
-    loadComponent: () =>
-      import('./results/results.page').then((m) => m.CalculatorResultsPage),
+    redirectTo: CalculatorPath.EXPERT,
   },
   {
     path: 'settings',
+    redirectTo: CalculatorPath.EXPERT,
+  },
+  {
+    path: 'method',
     loadComponent: () =>
-      import('./settings/settings.page').then((m) => m.CalculatorSettingsPage),
+      import('./method/method.page').then((m) => m.CalculatorMethodPage),
+  },
+  // Legacy v1 results URL — the Method screen replaces it (issue #72).
+  {
+    path: 'results/:mode',
+    redirectTo: 'method',
   },
 ];

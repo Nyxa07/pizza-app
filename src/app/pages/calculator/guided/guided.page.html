@@ -1,0 +1,42 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-title>{{ "pages.calculator.guided.title" | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <app-calculator-refresh-button />
+      <ion-button
+        [routerLink]="['/settings']"
+        [attr.aria-label]="'pages.settings.title' | translate"
+      >
+        <i-lucide slot="icon-only" [img]="SettingsIcon" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{
+        "pages.calculator.guided.title" | translate
+      }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="app-page-layout">
+    <app-calculator-path-switch />
+
+    @if (isInitialized()) {
+      <app-guided-form />
+    } @else {
+      <!-- Loading skeleton: mirrors the progress bar + question + choices -->
+      <div class="loading-skeleton guided-skeleton">
+        <ion-skeleton-text animated class="sk-progress" />
+        <ion-skeleton-text animated class="sk-eyebrow" />
+        <ion-skeleton-text animated class="sk-question" />
+        <ion-skeleton-text animated class="sk-question short" />
+        <ion-skeleton-text animated class="sk-choice" />
+        <ion-skeleton-text animated class="sk-choice" />
+      </div>
+    }
+  </div>
+</ion-content>

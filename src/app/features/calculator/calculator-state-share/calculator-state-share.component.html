@@ -1,11 +1,11 @@
-<ion-button id="open-share-modal">
+<ion-button id="open-share-modal" [disabled]="!method()">
   <i-lucide slot="icon-only" [img]="ShareIcon"></i-lucide>
 </ion-button>
 
 <ion-modal trigger="open-share-modal">
   <ng-template>
     <ion-header [translucent]="false">
-      <ion-toolbar color="primary">
+      <ion-toolbar>
         <ion-buttons slot="start">
           <ion-button (click)="cancel()">{{
             "common.actions.cancel" | translate

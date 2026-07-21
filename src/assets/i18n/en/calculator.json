@@ -1,128 +1,176 @@
 {
-  "form": {
-    "titles": {
-      "quantity": "Dough quantity",
-      "doughType": "Dough type",
-      "rest": "Rest",
-      "ingredients": "Ingredients"
+  "paths": {
+    "label": "Path",
+    "guided": "Guided",
+    "expert": "Expert"
+  },
+  "expert": {
+    "livebar": {
+      "split": "{flour} flour · {water} water · {salt} salt · {yeast} yeast"
     },
-    "pizzasNumber": "Number of pizzas",
-    "doughType": "Method",
-    "yeastType": "Yeast type",
-    "hydration": "Hydration",
-    "temperature": "Temperature",
-    "poolishRatio": "Poolish ratio",
-    "rtRestTime": "At room temperature",
-    "coldRestTime": "Cold",
-    "restTimeUnit": "{count, plural, one {Hour} other {Hours}}",
-    "flourStrength": "Flour strength (W)",
-    "saltRatio": "Salt ratio",
-    "honeyRatio": "Honey ratio",
-    "pizzaWeight": "Dough ball weight",
-    "hydrationHelperText": "Recommended for flour strength (W): {minHydration}% - {maxHydration}%",
-    "oliveOilRatio": "Olive oil ratio",
-    "pizzaType": "Pizza type",
-    "infos": {
-      "title": "Additional information",
-      "totalPrepTime": "Total preparation time",
-      "totalPrepTimeDescription": "This takes the recipe into account",
-      "hoursUnit": "hours"
+    "tiles": {
+      "balls": "Dough balls",
+      "weight": "Weight",
+      "hydration": "Hydration",
+      "poolishRatio": "Poolish ratio",
+      "ambientRest": "Ambient",
+      "coldRest": "Cold",
+      "temperature": "Temperature",
+      "pizzaType": "Pizza style",
+      "doughType": "Dough type",
+      "yeast": "Yeast",
+      "salt": "Salt",
+      "flourStrength": "Flour (W)",
+      "oliveOil": "Olive oil",
+      "honey": "Honey",
+      "increase": "Increase",
+      "decrease": "Decrease"
+    },
+    "timeline": {
+      "ambient": "{hours} h ambient",
+      "cold": "{hours} h cold"
+    },
+    "advanced": {
+      "summary": "Advanced — salt {salt}% · W {w} · oil {oil}% · honey {honey}%"
+    },
+    "method": {
+      "title": "The Method",
+      "fullMethod": "Full method — {count} steps",
+      "steps": {
+        "poolishMix": "Poolish: mix {ingredients}. Cover at room temperature.",
+        "poolishKnead": "Final dough: add {ingredients} to the poolish, then knead.",
+        "directMix": "Kneading: mix {ingredients}, then knead until smooth.",
+        "directBalls": "Shape {count} dough balls of {weight} g."
+      }
+    },
+    "cta": "Start — ready {day} at {time}"
+  },
+  "guided": {
+    "progress": "Step {current} of {total}",
+    "progressLabel": "Guided path progress",
+    "navigation": "Step navigation",
+    "steps": {
+      "pizzaType": {
+        "eyebrow": "Your pizza",
+        "question": "What result do you enjoy?",
+        "description": "We will automatically adapt hydration and dough-ball weight."
+      },
+      "quantity": {
+        "eyebrow": "Around the table",
+        "question": "How many pizzas are you making?",
+        "description": "Allow one pizza per person. You can fine-tune the weight in Expert."
+      },
+      "doughType": {
+        "eyebrow": "The dough",
+        "question": "Which method would you like to follow?",
+        "description": "The direct method is the simplest. Poolish develops deeper flavour."
+      },
+      "restTime": {
+        "eyebrow": "Your time",
+        "question": "How long can you let the dough rest?",
+        "description": "Just choose the time you have available: we split the rests for you."
+      },
+      "temperature": {
+        "eyebrow": "Your kitchen",
+        "question": "How warm is the room?",
+        "description": "An estimate is enough. It helps us calculate the right yeast amount."
+      },
+      "yeastType": {
+        "eyebrow": "The yeast",
+        "question": "Which yeast do you have?",
+        "description": "Choose what is written on the packet; the amount is calculated automatically."
+      },
+      "summary": {
+        "eyebrow": "Ready to go",
+        "question": "Here is your dough",
+        "description": "Your choices are saved in the current Draft. The Method now gives you every weight and action."
+      }
+    },
+    "options": {
+      "neapolitan": "Soft, airy and tender",
+      "roman": "Thin, light and crisp",
+      "direct": "Mix everything in one go",
+      "poolish": "Make a preferment for deeper flavour"
+    },
+    "quantity": {
+      "decrease": "Remove one pizza",
+      "increase": "Add one pizza",
+      "pizzas": "{count, plural, one {pizza} other {pizzas}}"
+    },
+    "restTime": {
+      "hint": "Learn about resting times"
+    },
+    "temperature": {
+      "hint": "Why temperature matters"
+    },
+    "yeastType": {
+      "hint": "Recognise yeast types"
+    },
+    "summary": {
+      "style": "Style",
+      "quantity": "Pizzas",
+      "dough": "Method",
+      "rest": "Rest",
+      "temperature": "Temperature",
+      "yeast": "Yeast"
+    },
+    "openMethod": "View my Method"
+  },
+  "enums": {
+    "doughTypes": {
+      "poolish": "Poolish",
+      "direct": "Direct"
+    },
+    "pizzaTypes": {
+      "neapolitan": "Neapolitan",
+      "roman": "Roman"
+    },
+    "yeastTypes": {
+      "dryActive": "Active dry",
+      "dryInstant": "Instant",
+      "fresh": "Fresh"
     }
   },
-   "assistant": {
-     "title": "Pizza Assistant",
-     "subtitle": "Let's create your perfect recipe",
-     "description": "Let yourself be guided step by step to create the ideal pizza recipe according to your preferences.",
-     "startButton": "Start assistant",
-     "continueButton": "Resume assistant",
-     "form": {
-       "titles": {
-         "pizzaType": "Pizza type",
-         "doughType": "Dough type",
-         "quantity": "Quantity",
-         "rest": "Rest",
-         "ingredients": "Ingredients",
-         "summary": "Summary",
-         "yeastType": "Yeast type",
-         "temperature": "Room temperature",
-         "planner": "Planner",
-         "globalRestTime": "Rest time",
-         "flourType": "Flour type"
-       },
-       "pizzaType": {
-         "subtitle": "Choose your style",
-         "description": "Select the type of pizza you want to prepare.",
-         "helpers": {
-           "neapolitan": "Traditional pizza with thin and soft dough",
-           "roman": "Pizza with thin and crispy dough"
-         }
-       },
-       "doughType": {
-         "subtitle": "Preparation method",
-         "description": "Choose the fermentation technique for your dough.",
-         "helpers": {
-           "direct": "Quick method, short fermentation",
-           "poolish": "Long method, developed flavor"
-         }
-       },
-       "quantity": {
-         "subtitle": "How many pizzas?",
-         "description": "Indicate the number of pizzas you want to prepare.",
-         "pizzas": "pizza(s)"
-       },
-       "temperature": {
-         "subtitle": "Room temperature",
-         "description": "Indicate the temperature at your place.",
-         "temperature": "°C",
-         "helpers": {
-           "temperature": "Room temperature"
-         }
-       },
-       "planner": {
-         "subtitle": "Rest time",
-         "description": "Indicate the desired rest time among the proposed choices. Some choices only appear with special pizza flour (strong).",
-         "withLongRestTime": "Long rest",
-         "withLongRestTimeDescription": "Long rest allows developing the flavor of the dough.",
-         "withoutLongRestTime": "Short rest",
-         "withoutLongRestTimeDescription": "Short rest allows... eating faster 🤣",
-         "totalPrepTime": "Total preparation time",
-         "totalPrepTimeDescription": "This gives you an idea of the total preparation time for your recipe, which allows you to start at the right time 😊"
-       },
-       "yeastType": {
-         "subtitle": "Yeast type",
-         "description": "Choose the type of yeast you want to use.",
-         "helpers": {
-           "dryActive": "Active dry yeast",
-           "dryInstant": "Instant dry yeast",
-           "fresh": "Fresh yeast"
-         }
-       },
-       "flourType": {
-         "subtitle": "Flour type",
-         "description": "Flour strength measures its ability to withstand prolonged fermentation.",
-         "helpers": {
-           "yes": "I know my flour strength",
-           "no": "I don't know my flour strength",
-           "standard": "Standard flour",
-           "specialPizza": "Special pizza flour",
-           "strength": "Flour strength (W)"
-         }
-       },
-       "summary": {
-         "subtitle": "Your configuration",
-         "description": "Check your choices before generating the recipe.",
-         "helpers": {
-           "summary": "Summary"
-         }
-       }
-     },
-     "results": {
-       "title": "Your Configuration",
-       "apply": "Apply this configuration",
-       "restart": "Restart assistant"
-     }
-   },
-  "recipe": {
+  "stateSaver": {
+    "title": "Saves",
+    "newSave": "New save",
+    "previousSaves": "Previous saves",
+    "saveStateName": "Save name",
+    "stateSaved": "Save completed",
+    "stateOverridden": "Save overridden",
+    "stateLoaded": "Save loaded",
+    "stateDeleted": "Save deleted",
+    "nameRequired": "Name is required",
+    "nameAlreadyExists": "Name already exists",
+    "confirmDeletion": "Are you sure you want to delete this save?",
+    "confirmLoad": "Loading this save will replace your current calculation. Continue?",
+    "confirmOverride": "Are you sure you want to overwrite this save?"
+  },
+  "share": {
+    "title": "My pizza dough",
+    "dialogTitle": "Share the method with your friends",
+    "form": {
+      "titles": {
+        "configuration": "Share configuration"
+      },
+      "onlyIngredients": "Ingredients only",
+      "withHelperDescriptions": "With step descriptions",
+      "withHelperDescriptionsMessage": "Are you sure you want to share the method with step descriptions (the text will be longer)?"
+    }
+  },
+  "newCalculation": "New calculation",
+  "method": {
+    "ready": "Ready to bake {day} at {time}",
+    "ingredientsTitle": "Ingredients",
+    "stepsTitle": "Steps",
+    "ingredients": {
+      "flour": "{grams} g flour",
+      "water": "{grams} g water",
+      "yeast": "{grams} g yeast",
+      "salt": "{grams} g salt",
+      "honey": "{grams} g honey",
+      "oliveOil": "{grams} g olive oil"
+    },
     "titles": {
       "poolish": "Poolish",
       "directDough": "Direct method dough",
@@ -180,12 +228,12 @@
         }
       },
       "addWaterSalt": {
-        "title": "{hasSalt, select, true {In poolish, add water and salt} other {In poolish, add water}}",
+        "title": "Add water{hasSalt, select, true { and salt} other {}} to the poolish{hasOliveOil, select, true {, then add the olive oil} other {}}",
         "helper": {
           "title": "Dough preparation",
           "descriptions": [
             "Weigh the quantities to add to poolish",
-            "{hasSalt, select, true {In the poolish bowl, add water and salt. Mix with wooden spoon until water is absorbed} other {In the poolish bowl, add water. Mix with wooden spoon until water is absorbed}}"
+            "In the poolish bowl, add water{hasSalt, select, true { and salt} other {}}. Mix with a wooden spoon until the water is absorbed{hasOliveOil, select, true {, then incorporate the olive oil} other {}}"
           ]
         }
       },
@@ -308,61 +356,20 @@
             "Take out dough 1 hour before use, so it has time to return to room temperature"
           ]
         }
+      },
+      "bake": {
+        "title": "Stretch, top and bake",
+        "helper": {
+          "title": "The bake",
+          "descriptions": [
+            "Preheat the oven to its maximum well ahead (stone or tray already inside), stretch the balls, top and bake."
+          ]
+        }
       }
     }
   },
-  "enums": {
-    "doughTypes": {
-    "poolish": "Poolish",
-    "direct": "Direct"
-    },
-    "pizzaTypes": {
-      "neapolitan": "Neapolitan",
-      "roman": "Roman"
-    },
-    "yeastTypes": {
-      "dryActive": "Active dry",
-      "dryInstant": "Instant",
-      "fresh": "Fresh"
-    }
-  },
-  "settings": {
-    "visibility": {
-      "title": "Additional fields",
-      "pizzaWeight": "Dough ball weight",
-      "saltRatio": "Salt ratio",
-      "honeyRatio": "Honey ratio",
-      "flourStrength": "Flour strength",
-      "hydrationRatio": "Hydration ratio",
-      "poolishRatio": "Poolish ratio",
-      "oliveOilRatio": "Olive oil ratio",
-      "all": "Enable all"
-    }
-  },
-  "stateSaver": {
-    "title": "Saves",
-    "newSave": "New save",
-    "previousSaves": "Previous saves",
-    "saveStateName": "Save name",
-    "stateSaved": "Save completed",
-    "stateOverridden": "Save overridden",
-    "stateLoaded": "Save loaded",
-    "stateDeleted": "Save deleted",
-    "nameRequired": "Name is required",
-    "nameAlreadyExists": "Name already exists",
-    "confirmDeletion": "Are you sure you want to delete this save?",
-    "confirmOverride": "Are you sure you want to overwrite this save?"
-  },
-  "share": {
-    "title": "My pizza recipe",
-    "dialogTitle": "Share the recipe with your friends",
-    "form": {
-      "titles": {
-        "configuration": "Share configuration"
-      },
-      "onlyIngredients": "Ingredients only",
-      "withHelperDescriptions": "With step descriptions",
-      "withHelperDescriptionsMessage": "Are you sure you want to share the recipe with step descriptions (the text will be longer)?"
-    }
+  "refresh": {
+    "confirmTitle": "Start over?",
+    "confirmBody": "Your current Draft will be reset to your defaults."
   }
 }

@@ -1,43 +1,34 @@
 {
   "form": {
+    "application": {
+      "title": "Application"
+    },
     "language": {
-      "title": "Langue",
-      "selector": {
-        "title": "Sélectionner la langue"
-      }
+      "title": "Langue"
     },
     "appearance": {
-      "title": "Apparence",
-      "paletteToggle": {
-        "title": "Mode sombre"
-      },
-      "theme": {
-        "title": "Thème",
-        "original": "Original",
-        "cyberpunk": "Cyberpunk",
-        "nexus": "Nexus",
-        "snow": "Neige",
-        "retro": "Rétro",
-        "glass": "Verre",
-        "minecraft": "Minecraft",
-        "napolitain": "Napolitain",
-        "pixel": "Pixel",
-        "konami": "Konami ✨"
+      "select": {
+        "title": "Apparence",
+        "system": "Système",
+        "light": "Clair",
+        "dark": "Sombre"
       }
     },
     "system": {
-      "title": "Système",
       "keepAwake": {
         "title": "Garder l'écran allumé"
       },
       "language": {
-        "title": "Langue",
         "en": "Anglais",
-        "fr": "Français",
-        "it": "Italien",
-        "es": "Espagnol",
-        "de": "Allemand"
+        "fr": "Français"
       }
+    },
+    "doughDefaults": {
+      "title": "Mes défauts de pâte",
+      "hint": "Tout nouveau calcul démarre de ces valeurs.",
+      "hydration": "Hydratation",
+      "salt": "Ratio de sel",
+      "ballWeight": "Poids du pâton"
     }
   }
 }

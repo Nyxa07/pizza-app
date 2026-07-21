@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CalculatorStateService } from './calculator-state.service';
 import { combineLatest, map, Observable, shareReplay } from 'rxjs';
 import { runProcessors } from './processors/run-processors';
@@ -19,26 +19,30 @@ import { PizzaBallsWeightProcessor } from './processors/pizza-balls-weight.proce
   providedIn: 'root',
 })
 export class CalculatorService {
-  results$: Observable<ICalculatorOutput> = combineLatest([
+  private readonly settings = inject(CalculatorSettingsService);
+  private readonly state = inject(CalculatorStateService);
+  private readonly fillMissingPreProcessor = inject(FillMissingPreProcessor);
+  private readonly pizzaBallsWeightProcessor = inject(
+    PizzaBallsWeightProcessor,
+  );
+  private readonly hydrationProcessor = inject(HydrationProcessor);
+  private readonly flourWaterQuantityProcessor = inject(
+    FlourWaterQuantityProcessor,
+  );
+  private readonly simpleIngredientsProcessor = inject(
+    SimpleIngredientsProcessor,
+  );
+  private readonly ballsRestTimeProcessor = inject(PizzaBallsRestTimeProcessor);
+  private readonly timingsProcessor = inject(TimingsProcessor);
+  private readonly yeastProcessor = inject(YeastProcessor);
+
+  readonly results$: Observable<ICalculatorOutput> = combineLatest([
     this.settings.getSettings$(),
     this.state.getInput$(),
   ]).pipe(
     map(([settings, input]) => this.process(settings, input)),
     shareReplay({ refCount: true, bufferSize: 1 }),
   );
-
-  constructor(
-    private settings: CalculatorSettingsService,
-    private state: CalculatorStateService,
-    private fillMissingPreProcessor: FillMissingPreProcessor,
-    private pizzaBallsWeightProcessor: PizzaBallsWeightProcessor,
-    private hydrationProcessor: HydrationProcessor,
-    private flourWaterQuantityProcessor: FlourWaterQuantityProcessor,
-    private simpleIngredientsProcessor: SimpleIngredientsProcessor,
-    private ballsRestTimeProcessor: PizzaBallsRestTimeProcessor,
-    private timingsProcessor: TimingsProcessor,
-    private yeastProcessor: YeastProcessor,
-  ) {}
 
   process(
     settings: ICalculatorSettings,

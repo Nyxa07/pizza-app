@@ -1,0 +1,40 @@
+:host {
+  display: block;
+}
+
+.seg {
+  display: inline-flex;
+  gap: 2px;
+  margin: 0 0 14px;
+  padding: 2px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-s);
+
+  a {
+    padding: 8px 14px;
+    border: 1px solid transparent;
+    border-radius: calc(var(--radius-s) - 2px);
+    color: var(--ink-2);
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(.on) {
+        color: var(--ink);
+      }
+    }
+  }
+
+  .on {
+    background: var(--surface);
+    border-color: var(--hairline);
+    color: var(--ink);
+    font-weight: 600;
+    box-shadow: var(--shadow);
+  }
+}

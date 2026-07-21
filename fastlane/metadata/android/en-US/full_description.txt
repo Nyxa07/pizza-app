@@ -1,0 +1,26 @@
+Make pizza dough with confidence, whether this is your first batch or your hundredth.
+
+Pizza Maker gives you two ways to calculate:
+
+• Guided walks you through one clear choice at a time and applies sensible defaults.
+• Expert keeps every important parameter in one precise, compact workspace.
+
+Your calculation stays with you as a single Draft, even when you switch between Guided and Expert. When a dough is worth keeping, save it to My doughs: open it as a document, review its complete Method, duplicate or rename it, and adjust a copy without changing the original.
+
+Every calculation produces exact ingredient weights and a timed Method through to baking. Contextual info sheets explain hydration, fermentation, flour strength, yeast and poolish right where you need them.
+
+Looking for inspiration? Browse the built-in Recipe collection, discover the toppings for Margherita, Marinara and Reine, then prepare the suggested dough in one tap.
+
+Pizza Maker works offline and includes:
+
+• Guided and Expert dough calculators
+• Direct and poolish doughs
+• User defaults for your usual hydration, salt and dough-ball weight
+• A reusable My doughs library
+• Timed, step-by-step Methods
+• Curated topped-pizza Recipes
+• English and French
+• System, light and dark appearances
+• Keep-awake support while you cook
+
+No account. No connection required. Just a dependable tool for better pizza.

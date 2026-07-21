@@ -1,0 +1,11 @@
+<nav class="seg" [attr.aria-label]="'calculator.paths.label' | translate">
+  @for (path of paths; track path.path) {
+    <a
+      [routerLink]="['/tabs/calculator', path.path]"
+      routerLinkActive="on"
+      ariaCurrentWhenActive="page"
+    >
+      {{ path.label | translate }}
+    </a>
+  }
+</nav>

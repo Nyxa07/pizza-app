@@ -1,0 +1,63 @@
+:host {
+  display: block;
+  padding-bottom: 24px;
+}
+
+.progress-copy {
+  margin-bottom: 6px;
+  color: var(--ink-2);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.progress-track {
+  height: 3px;
+  overflow: hidden;
+  background: var(--surface-sunken);
+  border-radius: var(--radius-full);
+
+  span {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    border-radius: inherit;
+    transition: width 180ms ease;
+  }
+}
+
+.question {
+  min-height: min(500px, calc(100dvh - 290px));
+  padding: clamp(28px, 7vh, 64px) 0 24px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+}
+
+h1 {
+  max-width: 620px;
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-voice);
+  font-size: clamp(1.75rem, 8vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.description {
+  max-width: 520px;
+  margin: 12px 0 28px;
+  color: var(--ink-2);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 720px) {
+  :host {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+}

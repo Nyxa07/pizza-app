@@ -1,10 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { pizza, settings, helpCircle } from 'ionicons/icons';
+import { Component } from '@angular/core';
 
-import { ThemeService } from 'src/app/features/settings/services/theme.service';
-import { KonamiService } from 'src/app/shared/services/konami.service';
+import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-root',
@@ -12,37 +8,4 @@ import { KonamiService } from 'src/app/shared/services/konami.service';
   imports: [IonApp, IonRouterOutlet],
   standalone: true,
 })
-export class AppComponent implements OnInit {
-  private themeService = inject(ThemeService);
-  private konamiService = inject(KonamiService);
-
-  public appPages = [
-    { title: 'route.dough.index.title', url: '/dough', icon: 'pizza' },
-    { title: 'route.settings.index.title', url: '/settings', icon: 'settings' },
-    { title: 'route.faq.index.title', url: '/faq', icon: 'help-circle' },
-  ];
-
-  constructor() {
-    addIcons({
-      pizza,
-      settings,
-      helpCircle,
-    });
-  }
-
-  async ngOnInit() {
-    // Add initializing class to prevent visual glitches on load
-    document.body.classList.add('initializing');
-
-    // Initialize themes from localStorage (dark mode + secret themes)
-    this.themeService.init();
-
-    // Remove initializing class after theme is applied
-    requestAnimationFrame(() => {
-      document.body.classList.remove('initializing');
-    });
-
-    // Start listening for Konami code easter egg
-    this.konamiService.watch();
-  }
-}
+export class AppComponent {}

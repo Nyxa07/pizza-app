@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   IonItem,
@@ -9,14 +9,14 @@ import {
   IonToggle,
 } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Appearance } from '../enums/appearance.enum';
 import { Locales } from '../enums/locales.enum';
-import { Theme } from '../enums/theme.enum';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
 import { KeepAwakeService } from 'src/app/features/settings/services/keep-awake.service';
+import { AppearanceService } from '../services/appearance.service';
 import { LocaleManagerService } from '../services/locale-manager.service';
-import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-settings-form',
@@ -34,41 +34,31 @@ import { ThemeService } from '../services/theme.service';
     IonListHeader,
   ],
 })
-export class SettingsFormComponent implements OnInit {
+export class SettingsFormComponent {
+  private readonly localeManager = inject(LocaleManagerService);
+  private readonly fb = inject(FormBuilder);
+  private readonly keepAwakeService = inject(KeepAwakeService);
+  private readonly appearanceService = inject(AppearanceService);
+
   protected readonly availableLocales = Object.entries(Locales).map(([_, value]) => ({
     translateKey: `settings.form.system.language.${value}`,
     value,
   }));
 
-  protected availableThemes: { translateKey: string; value: Theme }[] = [];
-
-  private updateAvailableThemes(): void {
-    this.availableThemes = this.themeService.getAvailableThemes().map((value) => ({
-      translateKey: `settings.form.appearance.theme.${value}`,
+  protected readonly availableAppearances = Object.values(Appearance).map(
+    (value) => ({
+      translateKey: `settings.form.appearance.select.${value}`,
       value,
-    }));
-  }
+    }),
+  );
 
   form = this.fb.group({
     locale: [this.localeManager.getLocale(), Validators.required],
     keepAwake: [this.keepAwakeService.isKeptAwake()],
-    theme: [this.themeService.getTheme(), Validators.required],
+    appearance: [this.appearanceService.appearance(), Validators.required],
   });
 
-  constructor(
-    private localeManager: LocaleManagerService,
-    private fb: FormBuilder,
-    private keepAwakeService: KeepAwakeService,
-    private themeService: ThemeService,
-  ) {
-    // Initialize available themes
-    this.updateAvailableThemes();
-
-    // Update theme list when new themes are discovered
-    this.themeService.discoveredThemes$
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.updateAvailableThemes());
-
+  constructor() {
     this.form.valueChanges
       .pipe(takeUntilDestroyed(), debounceTime(250))
       .subscribe((value) => {
@@ -77,11 +67,9 @@ export class SettingsFormComponent implements OnInit {
         }
         this.localeManager.switchLocale(value.locale ?? '');
         this.keepAwakeService.setKeepAwake(value.keepAwake ?? false);
-        if (value.theme) {
-          this.themeService.setTheme(value.theme);
+        if (value.appearance) {
+          this.appearanceService.setAppearance(value.appearance);
         }
       });
   }
-
-  ngOnInit() {}
 }

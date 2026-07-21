@@ -1,0 +1,15 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/calculator"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ "pages.settings.title" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="app-page-layout">
+    <app-settings-form></app-settings-form>
+    <app-dough-defaults-form></app-dough-defaults-form>
+  </div>
+</ion-content>

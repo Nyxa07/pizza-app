@@ -12,7 +12,7 @@ A modern, multi-language Ionic/Angular application for calculating and managing 
 - **Multiple yeast types** support (dry and fresh yeast)
 
 ### 🌍 **Multi-Language Support**
-- **5 Languages**: English, French, Italian, Spanish, German
+- **2 Languages**: English, French
 - **Dynamic language switching** at runtime
 - **Localized content** for all app sections
 - **Automatic language detection** based on browser/device settings
@@ -95,12 +95,9 @@ pizza-app/
 │   │   │       └── translation-keys.service.ts  # Translation management
 │   │   └── tabs/                          # Main navigation tabs
 │   ├── assets/
-│   │   └── i18n/                          # Translation files
-│   │       ├── en.json                     # English translations
-│   │       ├── fr.json                     # French translations
-│   │       ├── it.json                     # Italian translations
-│   │       ├── es.json                     # Spanish translations
-│   │       └── de.json                     # German translations
+│   │   └── i18n/                          # Translation files (per-language folders)
+│   │       ├── en/                         # English translations
+│   │       └── fr/                         # French translations
 │   └── locale/                             # Angular i18n files (legacy)
 ├── android/                                # Android native code
 ├── ios/                                    # iOS native code (if added)
@@ -120,15 +117,16 @@ pizza-app/
 |----------|------|------|--------|
 | English  | `en` | 🇺🇸 | ✅ Complete |
 | French   | `fr` | 🇫🇷 | ✅ Complete |
-| Italian  | `it` | 🇮🇹 | ✅ Complete |
-| Spanish  | `es` | 🇪🇸 | ✅ Complete |
-| German   | `de` | 🇩🇪 | ✅ Complete |
+
+Since v2.0, the app ships French and English only; a v1 user whose
+persisted language was de/es/it falls back to English (or French on a
+French-speaking device) on first launch.
 
 ### **Adding New Languages**
-1. Create new translation file: `src/assets/i18n/[lang].json`
-2. Add language key to `TranslationKeys.LANGUAGE.SELECTOR`
-3. Update language switcher component
-4. Add locale detection in `main.ts`
+1. Create the domain files: `src/assets/i18n/[lang]/{common,pages,calculator,faq,settings}.json`
+2. Add the language to the `Locales` enum (`src/app/features/settings/enums/locales.enum.ts`) — the settings selector derives from it
+3. Map the locale in `LocaleManagerService` (`loadLocaleData`, `getCurrentAngularLocale`)
+4. Add the selector label under `form.system.language` in every language's `settings.json`
 
 ## 🍕 **Pizza Recipe Features**
 

@@ -1,0 +1,62 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/doughs"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{
+      dough?.name ?? ("pages.doughs.title" | translate)
+    }}</ion-title>
+    @if (dough) {
+      <ion-buttons slot="end">
+        <ion-button (click)="adjust()">
+          {{ "pages.doughs.adjust" | translate }}
+        </ion-button>
+      </ion-buttons>
+    }
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  @if (dough && output && method) {
+    <div class="app-page-layout">
+      <div class="document-header">
+        <p>{{ "pages.doughs.documentHint" | translate }}</p>
+        <dl class="fact-grid summary num">
+          <div>
+            <dt>{{ "pages.doughs.summary.balls" | translate }}</dt>
+            <dd>{{ dough.input.nbPizzas }}</dd>
+          </div>
+          <div>
+            <dt>{{ "pages.doughs.summary.ballWeight" | translate }}</dt>
+            <dd>{{ output.pizzaBalls.weight | number: "1.0-0" }} g</dd>
+          </div>
+          <div>
+            <dt>{{ "pages.doughs.summary.hydration" | translate }}</dt>
+            <dd>{{ output.hydrationRatio * 100 | number: "1.0-0" }}%</dd>
+          </div>
+          <div>
+            <dt>{{ "pages.doughs.summary.rest" | translate }}</dt>
+            <dd>
+              {{ ambientHours | number: "1.0-0" }} h +
+              {{ coldHours | number: "1.0-0" }} h
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <app-method [method]="method"></app-method>
+
+      <div class="adjust">
+        <ion-button expand="block" (click)="adjust()">
+          {{ "pages.doughs.adjustInExpert" | translate }}
+        </ion-button>
+        <p>{{ "pages.doughs.adjustHint" | translate }}</p>
+      </div>
+    </div>
+  } @else {
+    <div class="not-found app-page-layout">
+      <h2>{{ "pages.doughs.notFoundTitle" | translate }}</h2>
+      <p>{{ "pages.doughs.notFoundBody" | translate }}</p>
+    </div>
+  }
+</ion-content>

@@ -1,0 +1,67 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-title>{{ "pages.doughs.title" | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        [routerLink]="['/settings']"
+        [attr.aria-label]="'pages.settings.title' | translate"
+      >
+        <i-lucide slot="icon-only" [img]="SettingsIcon"></i-lucide>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  @if (doughs().length === 0) {
+    <div class="app-empty-state app-page-layout">
+      <i-lucide [img]="LibraryIcon" [size]="40"></i-lucide>
+      <h2>{{ "pages.doughs.emptyTitle" | translate }}</h2>
+      <p>{{ "pages.doughs.emptyBody" | translate }}</p>
+      <ion-button color="secondary" [routerLink]="['/tabs/calculator']">
+        {{ "pages.doughs.emptyCta" | translate }}
+      </ion-button>
+    </div>
+  } @else {
+    <div class="library app-page-layout">
+      <header class="editorial-intro">
+        <p class="eyebrow">{{ "pages.doughs.eyebrow" | translate }}</p>
+        <h1>{{ "pages.doughs.title" | translate }}</h1>
+        <span class="lead">{{ "pages.doughs.intro" | translate }}</span>
+      </header>
+      @for (dough of doughs(); track dough.id) {
+        <article class="dough-card">
+          <button class="open-document" type="button" (click)="open(dough)">
+            <span class="document-name">{{ dough.name }}</span>
+            <span class="document-meta num">
+              {{ dough.input.nbPizzas }}
+              {{ "pages.doughs.balls" | translate }} ·
+              {{ (dough.input.hydrationRatio ?? 0) * 100 | number: "1.0-0" }}% ·
+              {{
+                "calculator.enums.doughTypes." + dough.input.doughType
+                  | translate
+              }}
+            </span>
+          </button>
+          <ion-button
+            class="actions"
+            fill="clear"
+            [attr.aria-label]="
+              'pages.doughs.actionsFor' | translate: { name: dough.name }
+            "
+            (click)="presentActions($event, dough)"
+          >
+            <i-lucide slot="icon-only" [img]="EllipsisIcon"></i-lucide>
+          </ion-button>
+        </article>
+      }
+    </div>
+  }
+</ion-content>
+
+<ion-toast
+  [isOpen]="!!toastMessage()"
+  [message]="toastMessage() | translate"
+  [duration]="2200"
+  (didDismiss)="toastMessage.set('')"
+></ion-toast>

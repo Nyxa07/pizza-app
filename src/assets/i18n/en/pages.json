@@ -1,47 +1,77 @@
 {
+  "tabs": {
+    "calculate": "Calculate",
+    "recipes": "Recipes",
+    "doughs": "My doughs"
+  },
   "calculator": {
-    "title": "Calculator",
-    "compute": "Calculate",
-    "results": {
-      "title": "Calculation results"
+    "expert": {
+      "title": "Calculate"
     },
-    "settings": {
-      "title": "Calculator configuration"
+    "guided": {
+      "title": "Calculate"
     },
-    "simple": {
-      "title": "Basic calculator",
-      "description": "Calculate ingredient quantities based on a minimum of parameters"
-    },
-    "complex": {
-      "title": "Advanced calculator",
-      "description": "Calculate ingredient quantities based on a multitude of parameters (Temperature, Flour, Hydration, Yeast, etc.)"
-    },
-    "assistant": {
-      "title": "Configuration assistant",
-      "description": "A step-by-step assistant to help you configure your pizza dough recipe"
+    "method": {
+      "title": "The Method",
+      "emptyTitle": "No dough on the board",
+      "emptyBody": "Configure a calculation in the Expert or Guided path, then come back for the full timed Method.",
+      "emptyCta": "Open the calculator"
     }
   },
-  "guides": {
-    "title": "Guides",
-    "faq": {
-      "title": "FAQ",
-      "description": "Frequently Asked Questions"
-    }
+  "recipes": {
+    "title": "Recipes",
+    "eyebrow": "From our house notebook",
+    "catalogTitle": "Choose your next pizza",
+    "intro": "Simple, proven toppings paired with the dough that suits them best.",
+    "suggestedDough": "Suggested dough",
+    "balls": "Balls",
+    "hydration": "Hydration",
+    "rest": "Rest",
+    "prepareDough": "Prepare this dough",
+    "prepareHint": "Your current Draft will be replaced with this suggestion, then opened in Expert.",
+    "ingredients": "For the topping",
+    "preparation": "Preparation",
+    "photoCredit": "Photo: {photographer} · Pexels",
+    "notFoundTitle": "Recipe not found",
+    "notFoundBody": "This Recipe does not exist in the bundled catalog.",
+    "emptyTitle": "No recipes yet",
+    "emptyBody": "The house notebook is still being written."
   },
-  "home": {
-    "title": "Pizza Maker",
-    "settings": {
-      "title": "Global configuration"
+  "doughs": {
+    "title": "My doughs",
+    "emptyTitle": "Your dough notebook",
+    "emptyBody": "Save a calculation from the Expert screen to find its document and Method here.",
+    "saveAction": "Save as Dough",
+    "saveTitle": "Name this Dough",
+    "nameLabel": "Dough name",
+    "nameRequired": "A name is required",
+    "nameExists": "A Dough already has this name",
+    "saved": "Dough saved",
+    "renamed": "Dough renamed",
+    "duplicated": "Dough duplicated",
+    "deleted": "Dough deleted",
+    "renameTitle": "Rename Dough",
+    "copyName": "{name} — copy",
+    "confirmDelete": "Delete “{name}”? This cannot be undone.",
+    "actionsFor": "Actions for {name}",
+    "balls": "balls",
+    "adjust": "Adjust",
+    "adjustInExpert": "Adjust in Expert",
+    "adjustHint": "A copy will be loaded into your current Draft. This Dough will stay unchanged.",
+    "documentHint": "This saved document is read-only: opening it never changes your current Draft.",
+    "notFoundTitle": "Dough not found",
+    "notFoundBody": "This Dough may have been deleted.",
+    "summary": {
+      "balls": "Balls",
+      "ballWeight": "Weight",
+      "hydration": "Hydration",
+      "rest": "Ambient + cold rest"
     },
-    "calculator": {
-      "title": "Calculator",
-      "subtitle": "Pizza dough calculator",
-      "content": "Calculate ingredient quantities based on a multitude of parameters (Temperature, Flour, Hydration, Yeast, etc.)"
-    },
-    "faq": {
-      "title": "FAQ",
-      "subtitle": "Frequently Asked Questions",
-      "content": "Find here frequently asked questions about pizza dough and calculations."
-    }
+    "emptyCta": "Calculate a dough",
+    "eyebrow": "Your notebook",
+    "intro": "Every saved calculation, ready to open again."
+  },
+  "settings": {
+    "title": "Settings"
   }
 }

@@ -1,43 +1,34 @@
 {
   "form": {
+    "application": {
+      "title": "Application"
+    },
     "language": {
-      "title": "Language",
-      "selector": {
-        "title": "Select language"
-      }
+      "title": "Language"
     },
     "appearance": {
-      "title": "Appearance",
-      "paletteToggle": {
-        "title": "Dark mode"
-      },
-      "theme": {
-        "title": "Theme",
-        "original": "Original",
-        "cyberpunk": "Cyberpunk",
-        "nexus": "Nexus",
-        "snow": "Snow",
-        "retro": "Retro",
-        "glass": "Glass",
-        "minecraft": "Minecraft",
-        "napolitain": "Napolitain",
-        "pixel": "Pixel",
-        "konami": "Konami ✨"
+      "select": {
+        "title": "Appearance",
+        "system": "System",
+        "light": "Light",
+        "dark": "Dark"
       }
     },
     "system": {
-      "title": "System",
       "keepAwake": {
         "title": "Keep screen on"
       },
       "language": {
-        "title": "Language",
         "en": "English",
-        "fr": "French",
-        "it": "Italian",
-        "es": "Spanish",
-        "de": "German"
+        "fr": "French"
       }
+    },
+    "doughDefaults": {
+      "title": "My dough defaults",
+      "hint": "Every new calculation starts from these values.",
+      "hydration": "Hydration",
+      "salt": "Salt ratio",
+      "ballWeight": "Ball weight"
     }
   }
 }
