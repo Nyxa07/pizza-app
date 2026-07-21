@@ -1,0 +1,62 @@
+import { TestBed } from '@angular/core/testing';
+
+import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
+
+import { CalculatorExpertPage } from './expert.page';
+
+/**
+ * The Expert page must re-assert its engine settings on *every* view entry,
+ * not only on first construction: Ionic caches the page in the router-outlet
+ * stack, so `ngOnInit` does not re-run when returning from the Guided path.
+ * Without this, Guided's `auto` flags survive and fields look blocked —
+ * hydration most visibly (issue #79).
+ */
+describe('CalculatorExpertPage', () => {
+  let initializer: jasmine.SpyObj<CalculatorInitializerService>;
+  let originalRequestIdleCallback: typeof window.requestIdleCallback;
+
+  const createPage = (): CalculatorExpertPage =>
+    TestBed.runInInjectionContext(() => new CalculatorExpertPage());
+
+  beforeEach(() => {
+    // idleCallback() defers through requestIdleCallback — run it synchronously
+    // so the assertions do not hinge on idle scheduling.
+    originalRequestIdleCallback = window.requestIdleCallback;
+    window.requestIdleCallback = ((cb: IdleRequestCallback) => {
+      cb({ didTimeout: false, timeRemaining: () => 0 } as IdleDeadline);
+      return 0;
+    }) as typeof window.requestIdleCallback;
+
+    initializer = jasmine.createSpyObj<CalculatorInitializerService>(
+      'CalculatorInitializerService',
+      ['initExpert'],
+    );
+
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: CalculatorInitializerService, useValue: initializer },
+      ],
+    });
+  });
+
+  afterEach(() => {
+    window.requestIdleCallback = originalRequestIdleCallback;
+  });
+
+  it('applies the Expert settings when the view is entered', () => {
+    createPage().ionViewWillEnter();
+
+    expect(initializer.initExpert).toHaveBeenCalledTimes(1);
+  });
+
+  it('re-applies the Expert settings on every re-entry (issue #79)', () => {
+    const page = createPage();
+
+    // Expert → Guided → Expert: Ionic re-shows the cached instance, firing
+    // ionViewWillEnter again without a fresh ngOnInit.
+    page.ionViewWillEnter();
+    page.ionViewWillEnter();
+
+    expect(initializer.initExpert).toHaveBeenCalledTimes(2);
+  });
+});

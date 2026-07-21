@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   inject,
   signal,
 } from '@angular/core';
@@ -16,6 +15,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
+import type { ViewWillEnter } from '@ionic/angular/standalone';
 
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
@@ -49,13 +49,16 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
     GuidedFormComponent,
   ],
 })
-export class CalculatorGuidedPage implements OnInit {
+export class CalculatorGuidedPage implements ViewWillEnter {
   private readonly calculatorInitializer = inject(CalculatorInitializerService);
 
   protected readonly SettingsIcon = SettingsIcon;
   protected readonly isInitialized = signal(false);
 
-  ngOnInit(): void {
+  // Ionic caches this page in the router-outlet stack, so ngOnInit does not
+  // re-run on re-entry. Re-assert the Guided settings on every entry so the
+  // engine's `auto` map always matches the visible path (issue #79).
+  ionViewWillEnter(): void {
     idleCallback(() => {
       this.calculatorInitializer.initGuided();
       this.isInitialized.set(true);
