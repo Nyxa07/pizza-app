@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import {
@@ -10,6 +10,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
+import type { ViewWillEnter } from '@ionic/angular/standalone';
 
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
@@ -47,13 +48,17 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
     ExpertFormComponent,
   ],
 })
-export class CalculatorExpertPage implements OnInit {
+export class CalculatorExpertPage implements ViewWillEnter {
   private readonly calculatorInitializer = inject(CalculatorInitializerService);
 
   protected readonly SettingsIcon = SettingsIcon;
   protected isInitialized = signal(false);
 
-  ngOnInit() {
+  // Ionic caches this page in the router-outlet stack, so ngOnInit does not
+  // re-run when returning from the Guided path. Re-assert the Expert settings
+  // on every entry, otherwise fields stay stuck in Guided's `auto` mode and
+  // look blocked — hydration most visibly (issue #79).
+  ionViewWillEnter(): void {
     idleCallback(() => {
       this.calculatorInitializer.initExpert();
       this.isInitialized.set(true);
