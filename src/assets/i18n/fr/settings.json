@@ -23,6 +23,10 @@
         "fr": "Français"
       }
     },
+    "legal": {
+      "title": "Informations légales",
+      "privacyPolicy": "Politique de confidentialité"
+    },
     "doughDefaults": {
       "title": "Mes défauts de pâte",
       "hint": "Tout nouveau calcul démarre de ces valeurs.",

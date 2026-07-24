@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   IonItem,
+  IonLabel,
   IonList,
   IonListHeader,
   IonSelect,
@@ -25,6 +26,7 @@ import { LocaleManagerService } from '../services/locale-manager.service';
   standalone: true,
   imports: [
     IonItem,
+    IonLabel,
     IonSelect,
     IonSelectOption,
     TranslatePipe,
@@ -35,15 +37,20 @@ import { LocaleManagerService } from '../services/locale-manager.service';
   ],
 })
 export class SettingsFormComponent {
+  protected readonly privacyPolicyUrl =
+    'https://nyxa07.github.io/pizza-app/privacy/';
+
   private readonly localeManager = inject(LocaleManagerService);
   private readonly fb = inject(FormBuilder);
   private readonly keepAwakeService = inject(KeepAwakeService);
   private readonly appearanceService = inject(AppearanceService);
 
-  protected readonly availableLocales = Object.entries(Locales).map(([_, value]) => ({
-    translateKey: `settings.form.system.language.${value}`,
-    value,
-  }));
+  protected readonly availableLocales = Object.entries(Locales).map(
+    ([_, value]) => ({
+      translateKey: `settings.form.system.language.${value}`,
+      value,
+    }),
+  );
 
   protected readonly availableAppearances = Object.values(Appearance).map(
     (value) => ({

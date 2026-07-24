@@ -23,6 +23,10 @@
         "fr": "French"
       }
     },
+    "legal": {
+      "title": "Legal",
+      "privacyPolicy": "Privacy policy"
+    },
     "doughDefaults": {
       "title": "My dough defaults",
       "hint": "Every new calculation starts from these values.",
