@@ -1,17 +1,22 @@
+/// <reference types="@capawesome/capacitor-android-edge-to-edge-support" />
+
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.pizza.maker',
+  appId: 'com.pizzamaker.app',
   appName: 'pizza-app',
   webDir: 'www',
   plugins: {
-    StatusBar: {
-      overlaysWebView: false,
-      backgroundColor: '#1a1a24', // Matches Original theme toolbar (space-bg-elevated)
-      style: 'DARK', // Light icons for dark background
+    SystemBars: {
+      insetsHandling: 'disable',
+      style: 'DARK',
     },
     EdgeToEdge: {
-      backgroundColor: '#1a1a24',
+      statusBarColor: '#1a1a24',
+      navigationBarColor: '#1a1a24',
+    },
+    Keyboard: {
+      resizeOnFullScreen: false,
     },
   },
 };
