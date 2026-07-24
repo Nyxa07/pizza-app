@@ -1,11 +1,11 @@
 import { Injectable, inject, signal } from '@angular/core';
 
-import { Capacitor } from '@capacitor/core';
-import { StatusBar, Style } from '@capacitor/status-bar';
+import { Capacitor, SystemBarsStyle } from '@capacitor/core';
 
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 
 import { Appearance } from '../enums/appearance.enum';
+import { NativeSystemBarsService } from './native-system-bars.service';
 
 /** The two concrete renderings an appearance preference can resolve to. */
 type ResolvedAppearance = Appearance.Light | Appearance.Dark;
@@ -17,12 +17,13 @@ const DARK_SCHEME_QUERY = '(prefers-color-scheme: dark)';
  * Applies the app's appearance (system / light / dark) by stamping
  * [data-appearance] on <html>, which the semantic token layer in
  * src/theme/variables.scss maps to the light or dark palette. Also keeps
- * the native status bar in sync, reading the computed --bg token so no
- * color table is duplicated here.
+ * the native system bars in sync, reading the computed --bg token so no color
+ * table is duplicated here.
  */
 @Injectable({ providedIn: 'root' })
 export class AppearanceService {
   private readonly prefsStorage = inject(PrefsStorage);
+  private readonly nativeSystemBars = inject(NativeSystemBarsService);
 
   private readonly _appearance = signal<Appearance>(Appearance.System);
 
@@ -68,10 +69,10 @@ export class AppearanceService {
   private apply(): void {
     const resolved = this.resolvedAppearance();
     document.documentElement.dataset['appearance'] = resolved;
-    void this.syncStatusBar(resolved);
+    void this.syncSystemBars(resolved);
   }
 
-  private async syncStatusBar(resolved: ResolvedAppearance): Promise<void> {
+  private async syncSystemBars(resolved: ResolvedAppearance): Promise<void> {
     if (!Capacitor.isNativePlatform()) {
       return;
     }
@@ -80,14 +81,16 @@ export class AppearanceService {
       const background = getComputedStyle(document.documentElement)
         .getPropertyValue('--bg')
         .trim();
-      await StatusBar.setStyle({
-        style: resolved === Appearance.Dark ? Style.Dark : Style.Light,
-      });
+      await this.nativeSystemBars.setStyle(
+        resolved === Appearance.Dark
+          ? SystemBarsStyle.Dark
+          : SystemBarsStyle.Light,
+      );
       if (background) {
-        await StatusBar.setBackgroundColor({ color: background });
+        await this.nativeSystemBars.setBackgroundColor(background);
       }
     } catch (error) {
-      console.warn('Failed to sync status bar with appearance:', error);
+      console.warn('Failed to sync system bars with appearance:', error);
     }
   }
 }

@@ -28,8 +28,8 @@ A modern, multi-language Ionic/Angular application for calculating and managing 
 ## 🚀 **Quick Start**
 
 ### **Prerequisites**
-- Node.js (v18 or higher)
-- npm (v8 or higher)
+- Node.js (v22 or higher)
+- npm (v10 or higher)
 - Ionic CLI (optional, for additional commands)
 
 ### **Installation**
@@ -180,7 +180,7 @@ French-speaking device) on first launch.
 - **Responsive design** for all screen sizes
 
 ### **Mobile**
-- **Android 6.0+** (API level 23+)
+- **Android 7.0+** (API level 24+)
 - **iOS 13+** (iPhone and iPad)
 - **Native performance** with Capacitor
 
@@ -201,14 +201,19 @@ npm run build
 
 ### **Mobile App Stores**
 ```bash
-# Build native apps
-ionic capacitor build android
-ionic capacitor build ios
+# Build the signed Android App Bundle for Google Play
+make android-bundle-release
 
-# Follow platform-specific deployment guides
-# Google Play Console for Android
-# App Store Connect for iOS
+# Keep the local APK-oriented Android workflow
+make android-build
+
+# Build iOS
+ionic capacitor build ios
 ```
+
+See [docs/android-release.md](docs/android-release.md) for API 36 prerequisites,
+local upload-key configuration, signature verification and the manual Google
+Play internal-track workflow.
 
 ## 🔧 **Configuration**
 

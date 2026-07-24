@@ -1,6 +1,16 @@
+SHELL := /usr/bin/env bash
+
+.PHONY: android-build android-bundle-release android-livereload android-signing-report assets-generation ios-build serve web-build
+
 android-build:
 	ionic cap sync
 	ionic cap build android
+
+android-signing-report:
+	./scripts/android-release.sh signing-report
+
+android-bundle-release:
+	./scripts/android-release.sh bundle
 
 ios-build:
 	ionic cap sync
