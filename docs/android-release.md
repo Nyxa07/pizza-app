@@ -15,6 +15,50 @@ artifact used for local installation and device testing.
 
 Android 7 (API 24) is the minimum supported Android version.
 
+## Choose the release version
+
+Android and Google Play use two version values from
+`android/app/build.gradle`:
+
+```groovy
+defaultConfig {
+    versionCode 20
+    versionName "2.0.1"
+}
+```
+
+- `versionCode` is the internal integer used by Google Play to order releases.
+  A newly uploaded AAB must use a code greater than every code already present
+  in the production, open, closed and internal tracks.
+- `versionName` is the version displayed to users.
+
+Before building a new AAB:
+
+1. Check the highest `versionCode` in every Google Play track.
+2. Choose a greater, unused code. Skipping a number is harmless.
+3. Update the visible project version:
+
+   ```bash
+   npm version 2.0.2 --no-git-tag-version
+   ```
+
+   This updates `package.json` and `package-lock.json`.
+
+4. Update both Android values in `android/app/build.gradle`:
+
+   ```groovy
+   versionCode 21
+   versionName "2.0.2"
+   ```
+
+The version in `package.json` is kept in sync for project consistency, but
+Google Play reads the values generated from the Android Gradle configuration.
+Do not edit a generated Android manifest.
+
+Promoting the same AAB from internal testing to closed testing or production
+does not require a version bump. Building and uploading a corrected AAB does:
+increase `versionCode` again, even if `versionName` stays unchanged.
+
 ## Local signing configuration
 
 Create the ignored local environment file:
@@ -76,17 +120,76 @@ android/app/build/outputs/bundle/release/app-release.aab
 An AAB is not installed directly on a device. Keep using `make android-build`
 for the existing local APK-oriented workflow.
 
-## Google Play validation
+## Deploy through Google Play
 
-1. Confirm that the configured `versionCode` is greater than every code already
-   present in production, open, closed and internal tracks.
-2. Upload the AAB manually to the internal test track.
-3. Confirm that Play accepts `com.pizzamaker.app`, the upload-key signature,
-   version code 20 and target SDK 36.
-4. Review the pre-launch report for new crashes, ANRs and blocking visual
+The recommended release path is:
+
+```text
+Internal test → Closed test (beta) → Production
+```
+
+Open testing is optional when any Google Play user should be able to join the
+beta. Upload and promotion remain manual.
+
+### 1. Internal test
+
+1. Open **Test and release → Testing → Internal testing**.
+2. Create a release and upload
+   `android/app/build/outputs/bundle/release/app-release.aab`.
+3. Confirm that Play accepts:
+   - package `com.pizzamaker.app`;
+   - the upload-key signature;
+   - the expected version code and name;
+   - target SDK 36.
+4. Publish the internal release and share its opt-in link with the internal
+   testers.
+5. Install the Play-generated build and perform the device smoke tests.
+
+Use this track first because it provides the quickest validation that Google
+Play accepts the real release artifact.
+
+### 2. Closed test (beta)
+
+1. Open **Testing → Closed testing** and create or select a track such as
+   `beta`.
+2. Configure testers using email lists or a Google Group.
+3. Promote the tested internal release, or select its existing AAB from the app
+   bundle library.
+4. Publish the closed release and share the opt-in link.
+
+Do not rebuild or bump the version merely to move the same artifact to the
+closed track. A user enrolled in the internal test must leave it before joining
+a closed or open test.
+
+### 3. Production
+
+1. Review the pre-launch report for crashes, ANRs and blocking visual
    regressions.
-5. Promote manually only after device validation on API 24, API 35 and API 36,
-   including an API 36 phone and large-screen device.
+2. Confirm device coverage on API 24, API 35 and API 36, including an API 36
+   phone and large-screen device.
+3. Promote the same validated AAB to production.
+4. Review the release notes, countries and rollout settings before publishing.
+
+### Correct an uploaded build
+
+An uploaded AAB cannot be overwritten with different content under the same
+`versionCode`. If a correction is required:
+
+1. increment `versionCode`;
+2. update `versionName` when the user-visible version changes;
+3. rebuild with `make android-bundle-release`;
+4. upload the new AAB to the internal track and repeat validation.
+
+## Release checklist
+
+- [ ] The working tree contains only the intended release changes.
+- [ ] `versionCode` is greater than the highest code in every Play track.
+- [ ] `versionName`, `package.json` and `package-lock.json` are consistent.
+- [ ] `make android-signing-report` matches the Play upload certificate.
+- [ ] `make android-bundle-release` completes and verifies the signature.
+- [ ] Google Play accepts the AAB on the internal track.
+- [ ] Device and pre-launch validation pass.
+- [ ] The tested AAB is promoted without rebuilding it.
 
 Android release upload and production promotion are intentionally not
 automated.
