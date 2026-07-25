@@ -3,7 +3,9 @@ import { join, resolve } from "node:path";
 
 import { chromium } from "playwright";
 
-const baseUrl = (process.argv[2] ?? "http://127.0.0.1:4200").replace(/\/$/, "");
+// `localhost` so a plain `npm start` is found on a dual-stack box, where the
+// dev server binds ::1 and the IPv4 literal answers nothing.
+const baseUrl = (process.argv[2] ?? "http://localhost:4200").replace(/\/$/, "");
 const chromeBinary =
   process.env["STORE_CHROME_BINARY"] ?? "/usr/bin/google-chrome";
 const projectRoot = resolve(import.meta.dirname, "..");

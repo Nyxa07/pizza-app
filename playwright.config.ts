@@ -11,7 +11,7 @@ export default defineConfig({
   reporter: 'list',
   outputDir: 'test-results',
   use: {
-    baseURL: 'http://127.0.0.1:4200',
+    baseURL: 'http://localhost:4200',
     channel: 'chrome',
     headless: true,
     // Match the Ionic mobile shell (same metrics as the store capture script).
@@ -20,9 +20,12 @@ export default defineConfig({
     isMobile: true,
     hasTouch: true,
   },
+  // `localhost`, not `127.0.0.1`: bare `npm start` binds whatever localhost
+  // resolves to (::1 on a dual-stack box), so pinning the IPv4 literal here
+  // made reuseExistingServer miss a running dev server and boot a second one.
   webServer: {
-    command: 'npm start -- --host 127.0.0.1 --port 4200',
-    url: 'http://127.0.0.1:4200',
+    command: 'npm start -- --host localhost --port 4200',
+    url: 'http://localhost:4200',
     reuseExistingServer: true,
     timeout: 120_000,
   },
