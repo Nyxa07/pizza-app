@@ -26,28 +26,36 @@ $primitive-ink-faint: #a39d93;
 $primitive-hairline: #e6e2db;
 
 // Warm neutrals — dark
-$primitive-night: #131211;
-$primitive-night-raised: #1c1a18;
+// Rebalanced for legibility (issue #85): the page background is lifted off
+// pure black and the raised surface follows it up, so the three planes read
+// as distinct without anything getting darker than it already was. The faint
+// ink clears AA on all three planes, sunken included — no "large text only"
+// carve-out. Contrast budget enforced by src/theme/theme-contrast.spec.ts.
+$primitive-night: #1d1b18;
+$primitive-night-raised: #2b2724;
 $primitive-night-sunken: #100f0e;
-$primitive-night-hairline: #2b2823;
+$primitive-night-hairline: #4c4539;
 $primitive-bone: #edeae4;
-$primitive-bone-soft: #9c968c;
-$primitive-bone-faint: #6b665e;
+$primitive-bone-soft: #aca69b;
+$primitive-bone-faint: #979083;
 
 // Accent — terracotta, the single warm accent of the food register
 $primitive-terracotta: #c14e2c;
-$primitive-terracotta-bright: #e0653c;
+// The -bright and -wash-dark variants are dark-only; they were raised with the
+// dark neutrals (issue #85) so the accent keeps AA on the lifted surfaces.
+$primitive-terracotta-bright: #e8724a;
 $primitive-terracotta-wash-light: #f6e7e0;
-$primitive-terracotta-wash-dark: #31201a;
+$primitive-terracotta-wash-dark: #3d2620;
 $primitive-espresso: #1a0f0a;
 
-// Functional colors, desaturated to sit quietly in the neutral chrome
+// Functional colors, desaturated to sit quietly in the neutral chrome.
+// The -bright variants are dark-only (see the accent note above).
 $primitive-positive: #3e7a52;
 $primitive-positive-bright: #7fb08d;
 $primitive-caution: #9a6b1f;
 $primitive-caution-bright: #d3a54c;
 $primitive-negative: #b03a2e;
-$primitive-negative-bright: #e06a5a;
+$primitive-negative-bright: #e5776b;
 
 // ------------------------------------------------------------
 // Helpers
