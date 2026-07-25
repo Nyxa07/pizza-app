@@ -36,6 +36,7 @@ export type ImplementationResultSuccess = Extract<
 function getPrompt(input: ImplementInput) {
   return [
     `/implement l'issue #${input.issue}, utilise la branche ${input.devBranch} qui à déjà étée créée. Si la branche est manquant ou stale, tu échoue immédiatement avec le statut "implementation_failed"`,
+    "Inutile de faire des captures d'écrans de l'application, elles seront générées le moment venu avant un déploiement",
     input.pullRequest
       ? `Une fois terminé, commit, push et ouvre une pull request (PR) GitHub.`
       : `La pull request existe déjà : ${input.pullRequest}, commit et push`,
