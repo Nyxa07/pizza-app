@@ -26,7 +26,9 @@ export class GuidedDraftService {
   private readonly draft = new BehaviorSubject<IGuidedCalculatorDraft>(
     this.createSeed(),
   );
-  private readonly stepIndex = new BehaviorSubject<number>(0);
+  private readonly stepIndex = new BehaviorSubject<number>(
+    this.loadStepIndex(),
+  );
 
   getDraft(): IGuidedCalculatorDraft {
     return this.draft.value;
@@ -34,10 +36,6 @@ export class GuidedDraftService {
 
   getDraft$(): Observable<IGuidedCalculatorDraft> {
     return this.draft.asObservable();
-  }
-
-  getStepIndex(): number {
-    return this.stepIndex.value;
   }
 
   getStepIndex$(): Observable<number> {
@@ -89,7 +87,7 @@ export class GuidedDraftService {
 
   private loadStepIndex(): number {
     return this.sanitizeStepIndex(
-      this.prefs.get<number>(GUIDED_STEP_STORAGE_KEY),
+      this.prefs.get<unknown>(GUIDED_STEP_STORAGE_KEY),
     );
   }
 
@@ -97,11 +95,10 @@ export class GuidedDraftService {
    * Only the lower bound is enforced here: the number of steps belongs to the
    * Guided form, which clamps the upper bound when it reads this stream.
    */
-  private sanitizeStepIndex(index: number | null): number {
-    if (index === null || !Number.isInteger(index)) {
-      return 0;
-    }
-    return Math.max(0, index);
+  private sanitizeStepIndex(index: unknown): number {
+    return typeof index === 'number' && Number.isInteger(index)
+      ? Math.max(0, index)
+      : 0;
   }
 
   private persist(draft: IGuidedCalculatorDraft): void {

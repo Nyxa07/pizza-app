@@ -35,11 +35,17 @@ describe('GuidedFormComponent', () => {
     fixture.detectChanges();
   };
 
-  const currentStepId = (): string | null =>
+  /** The last step, reached the way a user does: one answer at a time. */
+  const goToSummary = (): void => {
+    for (let step = 0; step < 7; step += 1) {
+      next();
+    }
+  };
+
+  const currentStepId = (): string =>
     fixture.nativeElement
-      .querySelector('.question')
-      ?.getAttribute('aria-labelledby')
-      ?.replace('guided-question-', '') ?? null;
+      .querySelector('.question h1')
+      ?.id.replace('guided-question-', '') ?? '';
 
   const renderedSheetIds = (): InfoSheetId[] =>
     fixture.debugElement
@@ -80,9 +86,7 @@ describe('GuidedFormComponent', () => {
       ),
     ).toBeTruthy();
 
-    for (let step = 0; step < 7; step += 1) {
-      next();
-    }
+    goToSummary();
 
     expect(
       fixture.nativeElement.querySelector('[data-testid="open-method"]'),
@@ -161,9 +165,7 @@ describe('GuidedFormComponent', () => {
   it('opens the Guided Method from the final summary', () => {
     const router = TestBed.inject(Router);
     spyOn(router, 'navigate').and.resolveTo(true);
-    for (let step = 0; step < 7; step += 1) {
-      next();
-    }
+    goToSummary();
 
     const button = fixture.debugElement.query(
       By.css('[data-testid="open-method"]'),
@@ -176,9 +178,7 @@ describe('GuidedFormComponent', () => {
   });
 
   it('returns to the first question when a new calculation is started', () => {
-    for (let step = 0; step < 7; step += 1) {
-      next();
-    }
+    goToSummary();
     expect(currentStepId()).withContext('summary reached').toBe('summary');
 
     // What the header refresh button does once the alert is confirmed.
@@ -198,19 +198,15 @@ describe('GuidedFormComponent', () => {
   });
 
   it('offers Dough saving from the summary with the resolved Guided input', () => {
-    for (let step = 0; step < 7; step += 1) {
-      next();
-    }
+    goToSummary();
 
-    const saver = fixture.debugElement.query(
-      By.directive(DoughSaverComponent),
-    );
+    const saver = fixture.debugElement.query(By.directive(DoughSaverComponent));
     expect(saver).toBeTruthy();
     const expected = TestBed.inject(GuidedInputAdapter).resolve(
       draft.getDraft(),
     );
-    expect(
-      (saver.componentInstance as DoughSaverComponent).input(),
-    ).toEqual(expected);
+    expect((saver.componentInstance as DoughSaverComponent).input()).toEqual(
+      expected,
+    );
   });
 });

@@ -137,11 +137,12 @@ export class GuidedFormComponent {
   protected readonly temperatures = [18, 20, 22, 24, 26] as const;
 
   /** The step lives in the Draft service, so a reset brings the form back here. */
-  private readonly persistedStepIndex = toSignal(this.draft.getStepIndex$(), {
+  private readonly draftStepIndex = toSignal(this.draft.getStepIndex$(), {
     initialValue: 0,
   });
+  /** The service knows nothing of the steps, so the upper bound is clamped here. */
   protected readonly currentStepIndex = computed(() =>
-    Math.min(this.persistedStepIndex(), GUIDED_STEPS.length - 1),
+    Math.min(this.draftStepIndex(), GUIDED_STEPS.length - 1),
   );
   protected readonly currentStep = computed(
     () => GUIDED_STEPS[this.currentStepIndex()],
