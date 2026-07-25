@@ -1,6 +1,6 @@
 import {
+  claudeCode,
   InferSchema,
-  kimiCode,
   schema,
   type WorkflowContext,
 } from '@nyxa/automation';
@@ -34,7 +34,7 @@ export type InitializeResult = InferSchema<typeof initializeOutputSchema>;
 export default async function runInitialize(
   context: WorkflowContext<never>,
 ): Promise<InitializeResult> {
-  const harness = kimiCode({ model: 'kimi-code/k3', effort: 'low' });
+  const harness = claudeCode({ model: 'claude-opus-5', effort: 'low' });
   const result = await context.run(
     [
       "Ton rôle est de sélectionner une issue GitHub éligible à la plannification ou à l'implémentation.",

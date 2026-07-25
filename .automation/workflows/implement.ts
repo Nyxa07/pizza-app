@@ -1,6 +1,6 @@
 import {
+  claudeCode,
   InferSchema,
-  kimiCode,
   schema,
   type WorkflowContext,
 } from '@nyxa/automation';
@@ -40,9 +40,9 @@ function getPrompt(input: ImplementInput) {
       ? `Une fois terminé, commit, push et ouvre une pull request (PR) GitHub.`
       : `La pull request existe déjà : ${input.pullRequest}, commit et push`,
     `Ajoute le 'Closes #${input.issue} à la PR pour que l'issue se clôture lors de du merge de la PR (que tu ne fais surtout pas toi meme).`,
-    `Si les modifications impliquent des changements visuels / style etc.. Alors produit des screenshots que tu peux ajouter à la pull request pour faciliter les retours.`,
-    `Ne commit jamais les screenshots temporaires (par exemple destinés à la PR). Ceux de fastlane sont commités (c'est normal)`,
-    `Ne regénère pas les screenshots fastlane, ce sera fait au moment d'une release.`,
+    // `Si les modifications impliquent des changements visuels / style etc.. Alors produit des screenshots que tu peux ajouter à la pull request pour faciliter les retours.`,
+    // `Ne commit jamais les screenshots temporaires (par exemple destinés à la PR). Ceux de fastlane sont commités (c'est normal)`,
+    // `Ne regénère pas les screenshots fastlane, ce sera fait au moment d'une release.`,
     `Retire le label 'ready-for-agent' et ajoute le label 'implemented' sur l'issue.`,
   ].join('\n');
 }
@@ -51,7 +51,7 @@ export default async function runImplementation(
   context: WorkflowContext<never>,
   input: ImplementInput,
 ) {
-  const harness = kimiCode({ model: 'kimi-code/k3', effort: 'max' });
+  const harness = claudeCode({ model: 'claude-opus-5', effort: 'xhigh' });
 
   const result = await context.run(getPrompt(input), {
     harness,

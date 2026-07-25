@@ -1,4 +1,4 @@
-import { kimiCode, schema, type WorkflowContext } from '@nyxa/automation';
+import { claudeCode, schema, type WorkflowContext } from '@nyxa/automation';
 
 const planifyOutputSchema = schema.union([
   schema.object({
@@ -37,9 +37,10 @@ export default async function runToPlanify(
   context: WorkflowContext<never>,
   input: PlanifyInput,
 ) {
-  const harness = kimiCode({ model: 'kimi-code/k3', effort: 'max' });
+  const harness = claudeCode({ model: 'claude-opus-5', effort: 'xhigh' });
 
   const result = await context.run(getPrompt(input.issue), {
+    harness,
     approval: 'auto',
     access: 'full',
     output: planifyOutputSchema,

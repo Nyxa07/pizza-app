@@ -1,4 +1,4 @@
-import { kimiCode, defineWorkflow, schema } from '@nyxa/automation';
+import { claudeCode, defineWorkflow } from '@nyxa/automation';
 import runInitialize from './initialize.js';
 import runToPlanify from './planify.js';
 import runImplementation from './implement.js';
@@ -12,7 +12,7 @@ async function sleep(seconds: number) {
 }
 
 const workflow = defineWorkflow({
-  harness: kimiCode({ model: 'kimi-code/k3', effort: 'max' }),
+  harness: claudeCode({ model: 'claude-opus-5', effort: 'xhigh' }),
   async run(context) {
     for (let attempt = 0; attempt < 20; attempt++) {
       const initResult = await runInitialize(context);
