@@ -25,10 +25,9 @@ type PlanifyInput = {
 
 function getPrompt(issue: number) {
   return [
-    `Analyse l'issue ${issue} et propose un plan d'implémentation robuste et détaillé.`,
+    `/skill:to-spec ${issue}`,
     `N'oublie pas de lire les commentaires qui pourraient etre des retours a prendre en compte lors d'une deuxième passe de planification.`,
-    'Si plusieurs design / architectures sont possibles, propose les dans ton plan et nous choisirons plus tard.',
-    "Une fois le plan achevé, écrit le dans l'issue GitHub sans remplacer le corps de l'issue, créer un nouveau commentaire.",
+    "Une fois le plan achevé, écrit le dans le corps de l'issue GitHub puis ajoute un commentaire résumant en 2 ou 3 phrases le plan / spec.",
     "Retire le label `ready-for-agent` ainsi que `to-planify` (si présent), et ajoute le label `ready-for-human` pour qu'on puisse valider le plan.",
     'Si tu as fais des propositions de design qui nécéssite une décision ajoute aussi le label `needs-triage`',
   ].join('\n');

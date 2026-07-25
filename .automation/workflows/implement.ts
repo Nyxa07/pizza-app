@@ -36,7 +36,6 @@ export type ImplementationResultSuccess = Extract<
 function getPrompt(input: ImplementInput) {
   return [
     `/skill:implement l'issue #${input.issue}, utilise la branche ${input.devBranch} qui à déjà étée créée. Si la branche est manquant ou stale, tu échoue immédiatement avec le statut "implementation_failed"`,
-    `Lit aussi les commentaires qui pourront indiquer / préciser une direction plutot qu'une autre. L'issue est une discussion ayant pris place avant l'implémentation, considère la en tant que telle et prend bien en compte les dernières informations.`,
     input.pullRequest
       ? `Une fois terminé, commit, push et ouvre une pull request (PR) GitHub.`
       : `La pull request existe déjà : ${input.pullRequest}, commit et push`,
