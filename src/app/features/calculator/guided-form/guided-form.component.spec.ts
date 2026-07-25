@@ -15,6 +15,7 @@ import { InfoSheetButtonComponent } from '../../sheets/info-sheet-button/info-sh
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
 import { CalculatorPath } from '../enums/calculator-path.enum';
 import { UNKNOWN_FLOUR_STRENGTH } from '../interfaces/guided-calculator-draft.interface';
+import { GUIDED_STEP_STORAGE_KEY } from '../services/calculator-draft-storage.constants';
 import { CalculatorInitializerService } from '../services/calculator-initializer.service';
 import { ExpertDraftService } from '../services/expert-draft.service';
 import { GuidedDraftService } from '../services/guided-draft.service';
@@ -24,6 +25,7 @@ import { GuidedFormComponent } from './guided-form.component';
 describe('GuidedFormComponent', () => {
   let fixture: ComponentFixture<GuidedFormComponent>;
   let draft: GuidedDraftService;
+  let prefs: FakePrefsStorage;
 
   const next = (): void => {
     const button = fixture.debugElement.query(
@@ -33,6 +35,18 @@ describe('GuidedFormComponent', () => {
     fixture.detectChanges();
   };
 
+  /** The last step, reached the way a user does: one answer at a time. */
+  const goToSummary = (): void => {
+    for (let step = 0; step < 7; step += 1) {
+      next();
+    }
+  };
+
+  const currentStepId = (): string =>
+    fixture.nativeElement
+      .querySelector('.question h1')
+      ?.id.replace('guided-question-', '') ?? '';
+
   const renderedSheetIds = (): InfoSheetId[] =>
     fixture.debugElement
       .queryAll(By.directive(InfoSheetButtonComponent))
@@ -41,13 +55,14 @@ describe('GuidedFormComponent', () => {
       );
 
   beforeEach(waitForAsync(() => {
+    prefs = new FakePrefsStorage();
     TestBed.configureTestingModule({
       imports: [GuidedFormComponent],
       providers: [
         provideIonicAngular(),
         provideTranslateService(),
         provideRouter([]),
-        { provide: PrefsStorage, useValue: new FakePrefsStorage() },
+        { provide: PrefsStorage, useValue: prefs },
       ],
     }).compileComponents();
 
@@ -71,9 +86,7 @@ describe('GuidedFormComponent', () => {
       ),
     ).toBeTruthy();
 
-    for (let step = 0; step < 7; step += 1) {
-      next();
-    }
+    goToSummary();
 
     expect(
       fixture.nativeElement.querySelector('[data-testid="open-method"]'),
@@ -152,9 +165,7 @@ describe('GuidedFormComponent', () => {
   it('opens the Guided Method from the final summary', () => {
     const router = TestBed.inject(Router);
     spyOn(router, 'navigate').and.resolveTo(true);
-    for (let step = 0; step < 7; step += 1) {
-      next();
-    }
+    goToSummary();
 
     const button = fixture.debugElement.query(
       By.css('[data-testid="open-method"]'),
@@ -166,20 +177,36 @@ describe('GuidedFormComponent', () => {
     ]);
   });
 
-  it('offers Dough saving from the summary with the resolved Guided input', () => {
-    for (let step = 0; step < 7; step += 1) {
-      next();
-    }
+  it('returns to the first question when a new calculation is started', () => {
+    goToSummary();
+    expect(currentStepId()).withContext('summary reached').toBe('summary');
 
-    const saver = fixture.debugElement.query(
-      By.directive(DoughSaverComponent),
-    );
+    // What the header refresh button does once the alert is confirmed.
+    draft.newCalculation();
+    fixture.detectChanges();
+
+    expect(currentStepId()).toBe('pizzaType');
+    expect(prefs.get(GUIDED_STEP_STORAGE_KEY)).toBe(0);
+  });
+
+  it('restores the persisted step when the Guided page is entered again', () => {
+    prefs.set(GUIDED_STEP_STORAGE_KEY, 2);
+    TestBed.inject(CalculatorInitializerService).initGuided();
+    fixture.detectChanges();
+
+    expect(currentStepId()).toBe('quantity');
+  });
+
+  it('offers Dough saving from the summary with the resolved Guided input', () => {
+    goToSummary();
+
+    const saver = fixture.debugElement.query(By.directive(DoughSaverComponent));
     expect(saver).toBeTruthy();
     const expected = TestBed.inject(GuidedInputAdapter).resolve(
       draft.getDraft(),
     );
-    expect(
-      (saver.componentInstance as DoughSaverComponent).input(),
-    ).toEqual(expected);
+    expect((saver.componentInstance as DoughSaverComponent).input()).toEqual(
+      expected,
+    );
   });
 });

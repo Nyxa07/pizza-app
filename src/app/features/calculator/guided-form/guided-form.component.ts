@@ -4,7 +4,6 @@ import {
   Component,
   computed,
   inject,
-  signal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
@@ -14,7 +13,6 @@ import { ChevronLeft, ChevronRight, LucideAngularModule } from 'lucide-angular';
 import { map } from 'rxjs';
 
 import { DoughSaverComponent } from 'src/app/features/doughs/dough-saver/dough-saver.component';
-import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 
 import { InfoSheetId } from '../../sheets/enums/info-sheet-id.enum';
 import { InfoSheetButtonComponent } from '../../sheets/info-sheet-button/info-sheet-button.component';
@@ -119,9 +117,6 @@ export class GuidedFormComponent {
   private readonly draft = inject(GuidedDraftService);
   private readonly guidedInputAdapter = inject(GuidedInputAdapter);
   private readonly router = inject(Router);
-  private readonly prefs = inject(PrefsStorage);
-
-  private readonly STEP_KEY = 'calculator:guided:step';
 
   protected readonly DoughType = DoughType;
   protected readonly InfoSheetId = InfoSheetId;
@@ -141,7 +136,14 @@ export class GuidedFormComponent {
   protected readonly restTimes = [4, 8, 12, 24, 48] as const;
   protected readonly temperatures = [18, 20, 22, 24, 26] as const;
 
-  protected readonly currentStepIndex = signal(this.loadStepIndex());
+  /** The step lives in the Draft service, so a reset brings the form back here. */
+  private readonly draftStepIndex = toSignal(this.draft.getStepIndex$(), {
+    initialValue: 0,
+  });
+  /** The service knows nothing of the steps, so the upper bound is clamped here. */
+  protected readonly currentStepIndex = computed(() =>
+    Math.min(this.draftStepIndex(), GUIDED_STEPS.length - 1),
+  );
   protected readonly currentStep = computed(
     () => GUIDED_STEPS[this.currentStepIndex()],
   );
@@ -201,27 +203,17 @@ export class GuidedFormComponent {
     if (this.isFirstStep()) {
       return;
     }
-    this.setStep(this.currentStepIndex() - 1);
+    this.draft.setStepIndex(this.currentStepIndex() - 1);
   }
 
   protected next(): void {
     if (this.isLastStep()) {
       return;
     }
-    this.setStep(this.currentStepIndex() + 1);
+    this.draft.setStepIndex(this.currentStepIndex() + 1);
   }
 
   protected openMethod(): void {
     this.router.navigate(['/tabs/calculator/method/guided']);
-  }
-
-  private loadStepIndex(): number {
-    const persisted = this.prefs.get<number>(this.STEP_KEY) ?? 0;
-    return Math.min(Math.max(0, persisted), GUIDED_STEPS.length - 1);
-  }
-
-  private setStep(index: number): void {
-    this.currentStepIndex.set(index);
-    this.prefs.set(this.STEP_KEY, index);
   }
 }
