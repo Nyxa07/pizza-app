@@ -31,10 +31,11 @@ const workflow = defineWorkflow({
       }
 
       if (!initResult.toPlanify) {
-        const implementationResult = await runImplementation(
-          context,
-          initResult,
-        );
+        const implementationResult = await runImplementation(context, {
+          issue: initResult.issue,
+          devBranch: initResult.devBranch,
+          pullRequest: initResult.existingPullRequest,
+        });
 
         if (implementationResult.status === 'implementation_failed') {
           throw new Error(implementationResult.reason);

@@ -44,7 +44,7 @@ function getPrompt(input: ImplementInput) {
     `Si les modifications impliquent des changements visuels / style etc.. Alors produit des screenshots que tu peux ajouter à la pull request pour faciliter les retours.`,
     `Ne commit jamais les screenshots temporaires (par exemple destinés à la PR). Ceux de fastlane sont commités (c'est normal)`,
     `Ne regénère pas les screenshots fastlane, ce sera fait au moment d'une release.`,
-    `Retire le label 'ready-for-agent'`,
+    `Retire le label 'ready-for-agent' et ajoute le label 'implemented' sur l'issue.`,
   ].join('\n');
 }
 
