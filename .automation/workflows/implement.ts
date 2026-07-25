@@ -8,7 +8,7 @@ type ImplementInput = { issue: number };
 
 function getPrompt(input: ImplementInput) {
   return [
-    `/skill:implement l'issue #${input.issue}.`,
+    `/skill:implement l'issue #${input.issue}, utilise une branche dédiée.`,
     `Lit aussi les commentaires qui pourront indiquer / préciser une direction plutot qu'une autre. L'issue est une discussion ayant pris place avant l'implémentation, considère la en tant que telle et prend bien en compte les dernières informations.`,
     `Une fois terminé, ouvre une pull request (PR) GitHub et ajoute y le 'Closes #${input.issue}'.`,
     `Si les modifications impliquent des changements visuels / style etc.. Alors produit des screenshots que tu peux ajouter à la pull request pour faciliter les retours.`,
@@ -23,10 +23,12 @@ export default async function runImplementation(
 ) {
   const harness = kimiCode({ model: 'kimi-code/k3', effort: 'max' });
 
-  const result = context.run(getPrompt(input), {
+  const result = await context.run(getPrompt(input), {
     harness,
     approval: 'auto',
     access: 'full',
     output: implementOutputSchema,
   });
+
+  return result;
 }
