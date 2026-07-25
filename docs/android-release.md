@@ -22,8 +22,8 @@ Android and Google Play use two version values from
 
 ```groovy
 defaultConfig {
-    versionCode 20
-    versionName "2.0.1"
+    versionCode 21
+    versionName "2.0.2"
 }
 ```
 
@@ -39,7 +39,7 @@ Before building a new AAB:
 3. Update the visible project version:
 
    ```bash
-   npm version 2.0.2 --no-git-tag-version
+   npm version 2.0.3 --no-git-tag-version
    ```
 
    This updates `package.json` and `package-lock.json`.
@@ -47,8 +47,8 @@ Before building a new AAB:
 4. Update both Android values in `android/app/build.gradle`:
 
    ```groovy
-   versionCode 21
-   versionName "2.0.2"
+   versionCode 22
+   versionName "2.0.3"
    ```
 
 The version in `package.json` is kept in sync for project consistency, but
