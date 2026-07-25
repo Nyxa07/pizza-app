@@ -40,7 +40,7 @@
   "doughs": {
     "title": "My doughs",
     "emptyTitle": "Your dough notebook",
-    "emptyBody": "Save a calculation from the Expert screen to find its document and Method here.",
+    "emptyBody": "Save a calculation from the Expert, Guided or Method screen to find its document and Method here.",
     "saveAction": "Save as Dough",
     "saveTitle": "Name this Dough",
     "nameLabel": "Dough name",

@@ -1,11 +1,12 @@
 <ion-button
-  id="open-save-dough"
+  data-testid="save-dough"
   [attr.aria-label]="'pages.doughs.saveAction' | translate"
+  (click)="open()"
 >
   <i-lucide slot="icon-only" [img]="SaveIcon"></i-lucide>
 </ion-button>
 
-<ion-modal trigger="open-save-dough">
+<ion-modal>
   <ng-template>
     <ion-header [translucent]="false">
       <ion-toolbar>

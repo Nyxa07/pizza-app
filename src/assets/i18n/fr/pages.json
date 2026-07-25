@@ -40,7 +40,7 @@
   "doughs": {
     "title": "Mes pâtes",
     "emptyTitle": "Votre carnet de pâtes",
-    "emptyBody": "Sauvegardez un calcul depuis l'écran Expert pour retrouver ici sa fiche et sa Méthode.",
+    "emptyBody": "Sauvegardez un calcul depuis l'écran Expert, Guidé ou Méthode pour retrouver ici sa fiche et sa Méthode.",
     "saveAction": "Sauvegarder comme Pâte",
     "saveTitle": "Nommer cette Pâte",
     "nameLabel": "Nom de la Pâte",

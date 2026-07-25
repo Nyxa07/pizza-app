@@ -9,6 +9,7 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 
+import { DoughSaverComponent } from '../../doughs/dough-saver/dough-saver.component';
 import { InfoSheetId } from '../../sheets/enums/info-sheet-id.enum';
 import { InfoSheetButtonComponent } from '../../sheets/info-sheet-button/info-sheet-button.component';
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
@@ -17,6 +18,7 @@ import { UNKNOWN_FLOUR_STRENGTH } from '../interfaces/guided-calculator-draft.in
 import { CalculatorInitializerService } from '../services/calculator-initializer.service';
 import { ExpertDraftService } from '../services/expert-draft.service';
 import { GuidedDraftService } from '../services/guided-draft.service';
+import { GuidedInputAdapter } from '../services/guided-input.adapter';
 import { GuidedFormComponent } from './guided-form.component';
 
 describe('GuidedFormComponent', () => {
@@ -162,5 +164,22 @@ describe('GuidedFormComponent', () => {
     expect(router.navigate).toHaveBeenCalledWith([
       '/tabs/calculator/method/guided',
     ]);
+  });
+
+  it('offers Dough saving from the summary with the resolved Guided input', () => {
+    for (let step = 0; step < 7; step += 1) {
+      next();
+    }
+
+    const saver = fixture.debugElement.query(
+      By.directive(DoughSaverComponent),
+    );
+    expect(saver).toBeTruthy();
+    const expected = TestBed.inject(GuidedInputAdapter).resolve(
+      draft.getDraft(),
+    );
+    expect(
+      (saver.componentInstance as DoughSaverComponent).input(),
+    ).toEqual(expected);
   });
 });
