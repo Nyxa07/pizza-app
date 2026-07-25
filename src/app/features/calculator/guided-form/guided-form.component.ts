@@ -6,11 +6,14 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 
 import { TranslatePipe } from '@ngx-translate/core';
 import { ChevronLeft, ChevronRight, LucideAngularModule } from 'lucide-angular';
+import { map } from 'rxjs';
 
+import { DoughSaverComponent } from 'src/app/features/doughs/dough-saver/dough-saver.component';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 
 import { InfoSheetId } from '../../sheets/enums/info-sheet-id.enum';
@@ -24,6 +27,7 @@ import {
   UNKNOWN_FLOUR_STRENGTH,
 } from '../interfaces/guided-calculator-draft.interface';
 import { GuidedDraftService } from '../services/guided-draft.service';
+import { GuidedInputAdapter } from '../services/guided-input.adapter';
 
 type GuidedStepId =
   | 'pizzaType'
@@ -108,10 +112,12 @@ const GUIDED_STEPS: readonly GuidedStep[] = [
     TranslatePipe,
     LucideAngularModule,
     InfoSheetButtonComponent,
+    DoughSaverComponent,
   ],
 })
 export class GuidedFormComponent {
   private readonly draft = inject(GuidedDraftService);
+  private readonly guidedInputAdapter = inject(GuidedInputAdapter);
   private readonly router = inject(Router);
   private readonly prefs = inject(PrefsStorage);
 
@@ -126,6 +132,11 @@ export class GuidedFormComponent {
   protected readonly ChevronRight = ChevronRight;
 
   protected readonly draft$ = this.draft.getDraft$();
+  /** The Guided draft resolved to a full input, saved as-is by the Dough saver. */
+  protected readonly resolvedInput = toSignal(
+    this.draft$.pipe(map((draft) => this.guidedInputAdapter.resolve(draft))),
+    { initialValue: null },
+  );
   protected readonly flourStrengths = [270, 300, 320, 350] as const;
   protected readonly restTimes = [4, 8, 12, 24, 48] as const;
   protected readonly temperatures = [18, 20, 22, 24, 26] as const;

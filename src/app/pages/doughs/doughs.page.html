@@ -36,7 +36,9 @@
             <span class="document-meta num">
               {{ dough.input.nbPizzas }}
               {{ "pages.doughs.balls" | translate }} ·
-              {{ (dough.input.hydrationRatio ?? 0) * 100 | number: "1.0-0" }}% ·
+              @if (dough.input.hydrationRatio !== null) {
+                {{ dough.input.hydrationRatio * 100 | number: "1.0-0" }}% ·
+              }
               {{
                 "calculator.enums.doughTypes." + dough.input.doughType
                   | translate

@@ -345,15 +345,20 @@
             </dd>
           </div>
         </dl>
-        <button
-          type="button"
-          class="method-cta"
-          data-testid="open-method"
-          (click)="openMethod()"
-        >
-          {{ "calculator.guided.openMethod" | translate }}
-          <i-lucide [img]="ChevronRight" [size]="18" aria-hidden="true" />
-        </button>
+        <div class="summary-actions">
+          @if (resolvedInput(); as input) {
+            <app-dough-saver [input]="input"></app-dough-saver>
+          }
+          <button
+            type="button"
+            class="method-cta"
+            data-testid="open-method"
+            (click)="openMethod()"
+          >
+            {{ "calculator.guided.openMethod" | translate }}
+            <i-lucide [img]="ChevronRight" [size]="18" aria-hidden="true" />
+          </button>
+        </div>
       }
     }
   </section>
