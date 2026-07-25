@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
+import type { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
 import { GUIDED_DRAFT_STORAGE_KEY } from 'src/app/features/calculator/services/calculator-draft-storage.constants';
 import { ExpertDraftService } from 'src/app/features/calculator/services/expert-draft.service';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
@@ -73,5 +74,33 @@ describe('DoughsService (Doughs are documents)', () => {
 
     expect(service.delete(original.id)).toBeTrue();
     expect(service.list().map(({ id }) => id)).toEqual([duplicate!.id]);
+  });
+
+  it('save() stores an arbitrary input without touching the Expert Draft', () => {
+    const before = state.getInput();
+    const input: ICalculatorInput = {
+      ...before,
+      nbPizzas: 4,
+      hydrationRatio: 0.62,
+    };
+
+    const dough = service.save('  From the Method  ', input);
+
+    expect(dough.name).toBe('From the Method');
+    expect(dough.input.nbPizzas).toBe(4);
+    expect(dough.input.hydrationRatio).toBe(0.62);
+    expect(dough.createdAt).not.toBeNull();
+    expect(dough.updatedAt).toBe(dough.createdAt);
+    expect(service.nameExists('from the method')).toBeTrue();
+    expect(state.getInput()).toEqual(before);
+  });
+
+  it('save() snapshots the input so later caller mutations cannot leak in', () => {
+    const input: ICalculatorInput = { ...state.getInput(), nbPizzas: 4 };
+    const dough = service.save('Snapshot', input);
+
+    input.nbPizzas = 99;
+
+    expect(service.get(dough.id)?.input.nbPizzas).toBe(4);
   });
 });

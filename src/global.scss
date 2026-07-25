@@ -525,6 +525,32 @@ app-guided-form {
     color: var(--on-accent);
   }
 
+  .summary-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 620px;
+    margin-top: 14px;
+
+    .method-cta {
+      flex: 1;
+      margin-top: 0;
+    }
+
+    app-dough-saver ion-button {
+      margin: 0;
+
+      &::part(native) {
+        width: 48px;
+        height: 48px;
+        border: 1px solid var(--hairline);
+        border-radius: var(--radius-m);
+        background: var(--surface);
+        color: var(--ink);
+      }
+    }
+  }
+
   .step-navigation {
     display: flex;
     gap: 12px;

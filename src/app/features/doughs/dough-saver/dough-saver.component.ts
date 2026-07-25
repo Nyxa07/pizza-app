@@ -3,6 +3,7 @@ import {
   Component,
   ViewChild,
   inject,
+  input,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, ValidatorFn } from '@angular/forms';
 
@@ -22,9 +23,14 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule, SaveIcon } from 'lucide-angular';
 
+import type { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
+
 import { DoughsService } from '../services/doughs.service';
 
-/** Saves the current Draft as a new named Dough document from Expert. */
+/**
+ * Saves a calculator input as a new named Dough document. With no `input`
+ * bound, it snapshots the Expert Draft (the Expert screen behavior).
+ */
 @Component({
   selector: 'app-dough-saver',
   templateUrl: './dough-saver.component.html',
@@ -47,6 +53,9 @@ import { DoughsService } from '../services/doughs.service';
   ],
 })
 export class DoughSaverComponent {
+  /** The input to save; when null, the Expert Draft is snapshotted instead. */
+  readonly input = input<ICalculatorInput | null>(null);
+
   @ViewChild(IonModal) private modal!: IonModal;
   @ViewChild(IonToast) private toast!: IonToast;
 
@@ -69,11 +78,21 @@ export class DoughSaverComponent {
     this.modal.dismiss();
   }
 
+  protected open(): void {
+    void this.modal.present();
+  }
+
   protected save(): void {
     if (this.form.invalid) {
       return;
     }
-    this.doughs.saveDraft(this.form.controls.name.value);
+    const name = this.form.controls.name.value;
+    const input = this.input();
+    if (input) {
+      this.doughs.save(name, input);
+    } else {
+      this.doughs.saveDraft(name);
+    }
     this.form.reset();
     this.modal.dismiss();
     this.toast.present();

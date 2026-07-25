@@ -36,6 +36,7 @@ import { ExpertDraftService } from 'src/app/features/calculator/services/expert-
 import { GuidedDraftService } from 'src/app/features/calculator/services/guided-draft.service';
 import { GuidedInputAdapter } from 'src/app/features/calculator/services/guided-input.adapter';
 import { MethodService } from 'src/app/features/calculator/services/method.service';
+import { DoughSaverComponent } from 'src/app/features/doughs/dough-saver/dough-saver.component';
 import { IMethod } from 'src/app/features/method/interfaces/method.interface';
 import { MethodComponent } from 'src/app/features/method/method.component';
 import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
@@ -64,6 +65,7 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
     TranslatePipe,
     LucideAngularModule,
     CalculatorStateShareComponent,
+    DoughSaverComponent,
     MethodComponent,
   ],
 })
@@ -94,6 +96,10 @@ export class CalculatorMethodPage implements OnInit {
   protected readonly ChefHatIcon = ChefHatIcon;
   protected readonly backHref = `/tabs/calculator/${this.path}`;
   protected readonly isInitialized = signal(false);
+  /** The resolved input of the current path, saved as-is by the Dough saver. */
+  protected readonly currentInput = toSignal(this.input$, {
+    initialValue: null,
+  });
   protected readonly method = toSignal(
     combineLatest([this.input$, this.output$]).pipe(
       filter(([, output]) => output.total.flour > 0),

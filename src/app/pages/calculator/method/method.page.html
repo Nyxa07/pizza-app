@@ -5,6 +5,9 @@
     </ion-buttons>
     <ion-title>{{ "pages.calculator.method.title" | translate }}</ion-title>
     <ion-buttons slot="end">
+      @if (currentInput(); as input) {
+        <app-dough-saver [input]="input"></app-dough-saver>
+      }
       <app-calculator-state-share
         [method]="isInitialized() ? method() : null"
       ></app-calculator-state-share>

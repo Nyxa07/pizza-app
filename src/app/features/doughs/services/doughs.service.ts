@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
+import type { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
 import { ExpertDraftService } from 'src/app/features/calculator/services/expert-draft.service';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 
@@ -36,19 +37,24 @@ export class DoughsService {
     );
   }
 
-  /** Saves a snapshot of the Expert Draft; later edits cannot mutate it. */
-  saveDraft(name: string): Dough {
+  /** Saves an arbitrary calculator input as a new named Dough document. */
+  save(name: string, input: ICalculatorInput): Dough {
     const now = new Date().toISOString();
     const dough: Dough = {
       id: this.createId(),
       name: this.requireName(name),
-      input: { ...this.state.getInput() },
+      input: { ...input },
       createdAt: now,
       updatedAt: now,
     };
 
     this.persist([...this.doughs.value, dough]);
     return this.clone(dough);
+  }
+
+  /** Saves a snapshot of the Expert Draft; later edits cannot mutate it. */
+  saveDraft(name: string): Dough {
+    return this.save(name, this.state.getInput());
   }
 
   rename(id: string, name: string): boolean {
