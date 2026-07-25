@@ -4,12 +4,20 @@ import { provideRouter, Router } from '@angular/router';
 
 import { provideIonicAngular } from '@ionic/angular/standalone';
 
-import { provideTranslateService } from '@ngx-translate/core';
+import {
+  TranslateCompiler,
+  TranslateService,
+  provideTranslateService,
+} from '@ngx-translate/core';
+import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 
 import { InfoSheetId } from 'src/app/features/sheets/enums/info-sheet-id.enum';
 import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-button/info-sheet-button.component';
+import { Locales } from 'src/app/features/settings/enums/locales.enum';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
+import enCalculator from 'src/assets/i18n/en/calculator.json';
+import frCalculator from 'src/assets/i18n/fr/calculator.json';
 
 import { DoughType } from '../enums/dough-type.enum';
 import { CalculatorInitializerService } from '../services/calculator-initializer.service';
@@ -44,6 +52,31 @@ describe('ExpertFormComponent', () => {
     (fixture.nativeElement as HTMLElement).querySelector('.livebar .total')!
       .textContent!;
 
+  const livebarSplit = (): string =>
+    (fixture.nativeElement as HTMLElement)
+      .querySelector('.livebar .split')!
+      .textContent!.trim();
+
+  // Loading a catalog is opt-in: the other specs match tiles on their raw
+  // translation keys, which is what an empty catalog renders.
+  const speaks = (locale: Locales): void => {
+    const translate = TestBed.inject(TranslateService);
+    translate.setTranslation(locale, {
+      calculator: locale === Locales.FR ? frCalculator : enCalculator,
+    });
+    translate.use(locale);
+    fixture.detectChanges();
+  };
+
+  // These specs pin the wording, not the number format: the quantity is left
+  // loose enough for whichever separators the locale-aware `number` pipe uses.
+  const QUANTITY = '[\\d.,\\u00a0\\u202f ]+';
+
+  const splitReads = (...ingredients: string[]): RegExp =>
+    new RegExp(
+      `^${ingredients.map((name) => `${QUANTITY}g ${name}`).join(' · ')}$`,
+    );
+
   const renderedSheetIds = (): InfoSheetId[] =>
     fixture.debugElement
       .queryAll(By.directive(InfoSheetButtonComponent))
@@ -61,7 +94,14 @@ describe('ExpertFormComponent', () => {
       imports: [ExpertFormComponent],
       providers: [
         provideIonicAngular(),
-        provideTranslateService(),
+        provideTranslateService({
+          // The catalogs interpolate with MessageFormat (`{flour}`), so the
+          // live bar only renders its real wording through that compiler.
+          compiler: {
+            provide: TranslateCompiler,
+            useClass: TranslateMessageFormatCompiler,
+          },
+        }),
         provideRouter([]),
         { provide: PrefsStorage, useValue: new FakePrefsStorage() },
       ],
@@ -82,6 +122,22 @@ describe('ExpertFormComponent', () => {
     const after = livebarTotal();
     expect(after).not.toBe(before);
     expect(grams(after)).toBeGreaterThan(grams(before));
+  });
+
+  it('units every live bar quantity and capitalises the ingredients (fr)', () => {
+    speaks(Locales.FR);
+
+    expect(livebarSplit()).toMatch(
+      splitReads('Farine', 'Eau', 'Sel', 'Levure'),
+    );
+  });
+
+  it('units every live bar quantity and capitalises the ingredients (en)', () => {
+    speaks(Locales.EN);
+
+    expect(livebarSplit()).toMatch(
+      splitReads('Flour', 'Water', 'Salt', 'Yeast'),
+    );
   });
 
   it('carries the ⓘ Fiches on the concept tiles', () => {

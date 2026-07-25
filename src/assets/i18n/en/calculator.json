@@ -6,7 +6,7 @@
   },
   "expert": {
     "livebar": {
-      "split": "{flour} flour · {water} water · {salt} salt · {yeast} yeast"
+      "split": "{flour} g Flour · {water} g Water · {salt} g Salt · {yeast} g Yeast"
     },
     "tiles": {
       "balls": "Dough balls",

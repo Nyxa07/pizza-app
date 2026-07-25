@@ -6,7 +6,7 @@
   },
   "expert": {
     "livebar": {
-      "split": "{flour} farine · {water} eau · {salt} sel · {yeast} levure"
+      "split": "{flour} g Farine · {water} g Eau · {salt} g Sel · {yeast} g Levure"
     },
     "tiles": {
       "balls": "Pâtons",
