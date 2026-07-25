@@ -32,7 +32,7 @@ export default async function runInitialize(
   const harness = kimiCode({ model: 'kimi-code/k3', effort: 'low' });
   const result = await context.run(
     [
-      "Ton rôle est de sélectionner une issue GitHub éligible à la plannification ou à l'implémentation, puis créer la branche de dev à utiliser.",
+      "Ton rôle est de sélectionner une issue GitHub éligible à la plannification ou à l'implémentation, puis créer la branche de dev à utiliser à partie de origin/main.",
       'Une issue est éligible si elle à le label `ready-for-agent`.',
       'Elle peut ou non avoir le label `to-planify`',
       'Si une issue `ready-for-agent` sans label `to-planify existe`, choisi la en priorité',
