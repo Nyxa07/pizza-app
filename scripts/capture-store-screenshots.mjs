@@ -1,16 +1,7 @@
-import { spawn } from "node:child_process";
-import { once } from "node:events";
-import {
-  existsSync,
-  mkdirSync,
-  mkdtempSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from "node:fs";
-import { tmpdir } from "node:os";
+import { existsSync, mkdirSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { setTimeout as delay } from "node:timers/promises";
+
+import { chromium } from "playwright";
 
 const baseUrl = (process.argv[2] ?? "http://127.0.0.1:4200").replace(/\/$/, "");
 const chromeBinary =
@@ -21,7 +12,6 @@ const metadataRoot = resolve(
   process.env["PIZZA_SCREENSHOT_OUTPUT_ROOT"] ??
     join(projectRoot, "fastlane", "metadata", "android"),
 );
-const profileDirectory = mkdtempSync(join(tmpdir(), "pizza-store-shots-"));
 
 const demoInput = {
   nbPizzas: 6,
@@ -80,47 +70,27 @@ if (!response.ok) {
   );
 }
 
-const chrome = spawn(
-  chromeBinary,
-  [
-    "--headless=new",
-    "--no-sandbox",
-    "--disable-gpu",
-    "--hide-scrollbars",
-    "--remote-debugging-port=0",
-    `--user-data-dir=${profileDirectory}`,
-    "about:blank",
-  ],
-  { stdio: "ignore" },
-);
+const browser = await chromium.launch({
+  executablePath: chromeBinary,
+  args: ["--no-sandbox", "--hide-scrollbars"],
+});
 
 try {
-  const port = await readDevToolsPort(profileDirectory);
-  const targets = await fetch(`http://127.0.0.1:${port}/json/list`).then(
-    (res) => res.json(),
-  );
-  const page = targets.find((target) => target.type === "page");
-  if (!page) {
-    throw new Error("Chrome did not expose a page target.");
-  }
-
-  const cdp = await connectCdp(page.webSocketDebuggerUrl);
-  await cdp.send("Page.enable");
-  await cdp.send("Runtime.enable");
-  await cdp.send("Emulation.setDeviceMetricsOverride", {
-    width: 360,
-    height: 640,
-    deviceScaleFactor: 3,
-    mobile: true,
-    screenWidth: 360,
-    screenHeight: 640,
-  });
-  await cdp.send("Emulation.setTouchEmulationEnabled", { enabled: true });
-  await cdp.send("Emulation.setScrollbarsHidden", { hidden: true });
-
   for (const locale of locales) {
-    await seedPreferences(cdp, locale.language);
-    await cdp.send("Emulation.setLocaleOverride", { locale: locale.id });
+    const context = await browser.newContext({
+      viewport: { width: 360, height: 640 },
+      deviceScaleFactor: 3,
+      isMobile: true,
+      hasTouch: true,
+      locale: locale.id,
+    });
+    // Seeded before any app script runs, on every navigation of this context.
+    await context.addInitScript(seedPreferences, {
+      language: locale.language,
+      appearance,
+      demoInput,
+      demoDoughs: demoDoughs(locale.language),
+    });
 
     const outputDirectory = join(
       metadataRoot,
@@ -130,53 +100,33 @@ try {
     );
     mkdirSync(outputDirectory, { recursive: true });
 
+    const page = await context.newPage();
     for (const [filename, route] of locale.screenshots) {
-      await navigateAndSettle(cdp, `${baseUrl}${route}`);
-      const screenshot = await cdp.send("Page.captureScreenshot", {
-        format: "png",
-        fromSurface: true,
-        captureBeyondViewport: false,
-      });
-      writeFileSync(
-        join(outputDirectory, filename),
-        Buffer.from(screenshot.data, "base64"),
-      );
+      await page.goto(`${baseUrl}${route}`);
+      await waitForAppRender(page);
+      await page.screenshot({ path: join(outputDirectory, filename) });
+      console.log(`✓ ${locale.id}/${filename}`);
     }
+    await context.close();
   }
-
-  cdp.close();
 } finally {
-  if (chrome.exitCode === null) {
-    chrome.kill("SIGTERM");
-    await Promise.race([once(chrome, "exit"), delay(2_000)]);
-  }
-  if (chrome.exitCode === null) {
-    chrome.kill("SIGKILL");
-    await once(chrome, "exit");
-  }
-  rmSync(profileDirectory, {
-    recursive: true,
-    force: true,
-    maxRetries: 3,
-    retryDelay: 100,
-  });
+  await browser.close();
 }
 
-async function seedPreferences(cdp, language) {
-  await navigateAndSettle(cdp, baseUrl);
-  const preferences = {
-    "3:schema-version": stored(6),
-    "3:locale:current": stored(language),
-    "3:appearance": stored(appearance),
-    "3:keepAwake": stored(false),
-    "3:calculator:draft": stored(demoInput),
-    "3:calculator:doughs": stored(demoDoughs(language)),
-  };
-  await cdp.send("Runtime.evaluate", {
-    expression: `localStorage.clear(); Object.entries(${JSON.stringify(
-      preferences,
-    )}).forEach(([key, value]) => localStorage.setItem(key, value));`,
-  });
+// Runs in the page; keep it dependency-free (Playwright serializes it).
+function seedPreferences({ language, appearance, demoInput, demoDoughs }) {
+  try {
+    const stored = (value) => JSON.stringify({ value, expiresAt: null });
+    localStorage.clear();
+    localStorage.setItem("3:schema-version", stored(6));
+    localStorage.setItem("3:locale:current", stored(language));
+    localStorage.setItem("3:appearance", stored(appearance));
+    localStorage.setItem("3:keepAwake", stored(false));
+    localStorage.setItem("3:calculator:draft", stored(demoInput));
+    localStorage.setItem("3:calculator:doughs", stored(demoDoughs));
+  } catch {
+    // Opaque origins (about:blank) expose no usable localStorage; ignore.
+  }
 }
 
 function demoDoughs(language) {
@@ -210,77 +160,13 @@ function demoDoughs(language) {
   ];
 }
 
-async function navigateAndSettle(cdp, url) {
-  await cdp.send("Page.navigate", { url });
-  await cdp.send("Runtime.evaluate", {
-    expression: `new Promise((resolve, reject) => {
-      const deadline = Date.now() + 15000;
-      const ready = () => {
-        const app = document.querySelector('ion-app');
-        const content = document.body?.innerText?.trim() ?? '';
-        if (document.readyState === 'complete' && app && content.length > 40) {
-          document.fonts.ready.then(() => setTimeout(resolve, 800));
-        } else if (Date.now() > deadline) {
-          reject(new Error('Timed out waiting for the app to render'));
-        } else {
-          setTimeout(ready, 100);
-        }
-      };
-      ready();
-    })`,
-    awaitPromise: true,
+async function waitForAppRender(page) {
+  await page.waitForFunction(() => {
+    const app = document.querySelector("ion-app");
+    const content = document.body?.innerText?.trim() ?? "";
+    return document.readyState === "complete" && app && content.length > 40;
   });
-}
-
-async function readDevToolsPort(directory) {
-  const portFile = join(directory, "DevToolsActivePort");
-  for (let attempt = 0; attempt < 100; attempt += 1) {
-    if (existsSync(portFile)) {
-      return Number.parseInt(readFileSync(portFile, "utf8").split("\n")[0], 10);
-    }
-    await delay(100);
-  }
-  throw new Error("Chrome DevTools did not start.");
-}
-
-async function connectCdp(url) {
-  const socket = new WebSocket(url);
-  await new Promise((resolveOpen, rejectOpen) => {
-    socket.addEventListener("open", resolveOpen, { once: true });
-    socket.addEventListener("error", rejectOpen, { once: true });
-  });
-
-  let nextId = 1;
-  const pending = new Map();
-  socket.addEventListener("message", ({ data }) => {
-    const message = JSON.parse(data);
-    if (!message.id || !pending.has(message.id)) {
-      return;
-    }
-    const { resolve: resolveCall, reject } = pending.get(message.id);
-    pending.delete(message.id);
-    if (message.error) {
-      reject(new Error(message.error.message));
-    } else {
-      resolveCall(message.result);
-    }
-  });
-
-  return {
-    send(method, params = {}) {
-      const id = nextId;
-      nextId += 1;
-      return new Promise((resolveCall, reject) => {
-        pending.set(id, { resolve: resolveCall, reject });
-        socket.send(JSON.stringify({ id, method, params }));
-      });
-    },
-    close() {
-      socket.close();
-    },
-  };
-}
-
-function stored(value) {
-  return JSON.stringify({ value, expiresAt: null });
+  await page.evaluate(() => document.fonts.ready);
+  // Let Ionic transitions and late paints settle before capturing.
+  await page.waitForTimeout(800);
 }

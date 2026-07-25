@@ -22,8 +22,9 @@ npm start -- --host 127.0.0.1 --port 4200
 node scripts/capture-store-screenshots.mjs http://127.0.0.1:4200
 ```
 
-The capture script uses Chrome DevTools directly, seeds isolated demo data,
-forces the light appearance and writes both localized screenshot sets.
+The capture script uses Playwright on top of the system Chrome, seeds
+isolated demo data, forces the light appearance and writes both localized
+screenshot sets.
 For a dark-appearance QA pass without replacing Store assets, set
 `PIZZA_SCREENSHOT_APPEARANCE=dark` and point
 `PIZZA_SCREENSHOT_OUTPUT_ROOT` to a temporary directory.

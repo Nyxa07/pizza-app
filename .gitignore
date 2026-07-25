@@ -23,6 +23,11 @@ log.txt
 /platforms
 /plugins
 
+# Playwright
+/test-results
+/playwright-report
+/blob-report
+
 # Compiled output
 /dist
 /tmp

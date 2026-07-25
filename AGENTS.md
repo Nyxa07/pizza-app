@@ -27,6 +27,21 @@ Notes:
 - Coverage output: `coverage/app/`
 - The project uses `tsconfig.spec.json` and `karma.conf.js`.
 
+## E2E tests (Playwright)
+
+- Run all e2e specs (headless, system Chrome — no `playwright install` needed):
+  - `npm run e2e`
+- The dev server is started automatically by `playwright.config.ts` (`webServer`, port 4200, reused if already running).
+- Specs live in `e2e/` (outside `src/`, so Karma never picks them up); shared seeding/wait helpers are in `e2e/fixtures.ts`.
+- Run a single spec: `npm run e2e -- e2e/tabs.spec.ts`
+
+## Store screenshots
+
+- Regenerate the Google Play screenshots (requires the dev server on port 4200):
+  - `npm run screenshots`
+- Output: `fastlane/metadata/android/<locale>/images/phoneScreenshots/`.
+- For a QA pass without touching Store assets, set `PIZZA_SCREENSHOT_OUTPUT_ROOT` to a temp dir (and optionally `PIZZA_SCREENSHOT_APPEARANCE=dark`).
+
 ## Build Targets / Mobile
 
 - Web build (Makefile): `make web-build` (runs `npm run build:prod`)
