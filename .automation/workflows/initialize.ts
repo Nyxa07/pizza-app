@@ -9,6 +9,11 @@ const initializeOutputSchema = schema.union([
   schema.object({
     status: schema.literal('initialized'),
     issue: schema.integer().minimum(1).describe('La GitHub issue sélectionnée'),
+    devBranch: schema
+      .string()
+      .describe(
+        "Le nom choisi pour la branche de dev servant à implementer l'issue",
+      ),
     toPlanify: schema
       .boolean()
       .describe("L'issue porte t-elle le label `to-planify` ?"),
@@ -27,7 +32,7 @@ export default async function runInitialize(
   const harness = kimiCode({ model: 'kimi-code/k3', effort: 'low' });
   const result = await context.run(
     [
-      "Ton rôle est de sélectionner une issue GitHub éligible à la plannification ou à l'implémentation.",
+      "Ton rôle est de sélectionner une issue GitHub éligible à la plannification ou à l'implémentation, puis créer la branche de dev à utiliser.",
       'Une issue est éligible si elle à le label `ready-for-agent`.',
       'Elle peut ou non avoir le label `to-planify`',
       'Si une issue `ready-for-agent` sans label `to-planify existe`, choisi la en priorité',
