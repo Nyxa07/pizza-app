@@ -38,8 +38,8 @@ function getPrompt(input: ImplementInput) {
     `/skill:implement l'issue #${input.issue}, utilise la branche ${input.devBranch} qui à déjà étée créée. Si la branche est manquant ou stale, tu échoue immédiatement avec le statut "implementation_failed"`,
     `Lit aussi les commentaires qui pourront indiquer / préciser une direction plutot qu'une autre. L'issue est une discussion ayant pris place avant l'implémentation, considère la en tant que telle et prend bien en compte les dernières informations.`,
     input.pullRequest
-      ? `Une fois terminé, ouvre une pull request (PR) GitHub.`
-      : `La pull request existe déjà : ${input.pullRequest}.`,
+      ? `Une fois terminé, commit, push et ouvre une pull request (PR) GitHub.`
+      : `La pull request existe déjà : ${input.pullRequest}, commit et push`,
     `Ajoute le 'Closes #${input.issue} à la PR pour que l'issue se clôture lors de du merge de la PR (que tu ne fais surtout pas toi meme).`,
     `Si les modifications impliquent des changements visuels / style etc.. Alors produit des screenshots que tu peux ajouter à la pull request pour faciliter les retours.`,
     `Ne commit jamais les screenshots temporaires (par exemple destinés à la PR). Ceux de fastlane sont commités (c'est normal)`,
