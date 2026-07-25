@@ -1,6 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 
 import type { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
+import {
+  EXPERT_DRAFT_STORAGE_KEY,
+  GUIDED_STEP_STORAGE_KEY,
+  LEGACY_CALCULATOR_DRAFT_STORAGE_KEY,
+} from 'src/app/features/calculator/services/calculator-draft-storage.constants';
 import type { Dough } from 'src/app/features/doughs/interfaces/dough.interface';
 
 import { PrefsStorage } from './prefs-storage.service';
@@ -25,7 +30,7 @@ const V2_LOCALES = ['en', 'fr'] as const;
 const SCHEMA_VERSION_KEY = 'schema-version';
 
 /** Bumped when a release changes the shape of persisted preferences. */
-const SCHEMA_VERSION = 6;
+const SCHEMA_VERSION = 7;
 
 /**
  * Per-mode field-visibility settings written by the v1 personalisation
@@ -55,9 +60,6 @@ const V1_MODE_DRAFT_KEYS = [
   'calculator:assist',
   'calculator:simple',
 ] as const;
-
-/** The single Draft shared by every calculator path (ADR-0002). */
-const DRAFT_KEY = 'calculator:draft';
 
 /** v1 named saves were isolated by calculator mode. */
 const V1_MODE_SAVE_KEYS = [
@@ -105,6 +107,9 @@ export class MigrationService {
     if (version < 6) {
       this.mergeModeSavesIntoDoughs();
     }
+    if (version < 7) {
+      this.moveSharedDraftToExpert();
+    }
 
     this.prefsStorage.set(SCHEMA_VERSION_KEY, SCHEMA_VERSION);
   }
@@ -144,9 +149,10 @@ export class MigrationService {
       const draft = this.prefsStorage.get<unknown>(key);
       if (
         draft !== null &&
-        this.prefsStorage.get<unknown>(DRAFT_KEY) === null
+        this.prefsStorage.get<unknown>(LEGACY_CALCULATOR_DRAFT_STORAGE_KEY) ===
+          null
       ) {
-        this.prefsStorage.set(DRAFT_KEY, draft);
+        this.prefsStorage.set(LEGACY_CALCULATOR_DRAFT_STORAGE_KEY, draft);
       }
       this.prefsStorage.remove(key);
     }
@@ -203,6 +209,24 @@ export class MigrationService {
     if (migrated.length > 0) {
       this.prefsStorage.set(DOUGHS_KEY, [...doughs, ...migrated]);
     }
+  }
+
+  /**
+   * v6→v7: Guided and Expert no longer share in-progress answers. Preserve
+   * the richer legacy Draft in Expert and start Guided independently.
+   */
+  private moveSharedDraftToExpert(): void {
+    const draft = this.prefsStorage.get<unknown>(
+      LEGACY_CALCULATOR_DRAFT_STORAGE_KEY,
+    );
+    if (
+      draft !== null &&
+      this.prefsStorage.get<unknown>(EXPERT_DRAFT_STORAGE_KEY) === null
+    ) {
+      this.prefsStorage.set(EXPERT_DRAFT_STORAGE_KEY, draft);
+    }
+    this.prefsStorage.remove(LEGACY_CALCULATOR_DRAFT_STORAGE_KEY);
+    this.prefsStorage.remove(GUIDED_STEP_STORAGE_KEY);
   }
 
   private isLegacySavedState(value: unknown): value is LegacySavedState {

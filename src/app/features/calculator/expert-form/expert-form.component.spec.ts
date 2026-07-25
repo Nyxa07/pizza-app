@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 
 import { provideIonicAngular } from '@ionic/angular/standalone';
 
@@ -13,17 +13,17 @@ import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 
 import { DoughType } from '../enums/dough-type.enum';
 import { CalculatorInitializerService } from '../services/calculator-initializer.service';
-import { CalculatorStateService } from '../services/calculator-state.service';
+import { ExpertDraftService } from '../services/expert-draft.service';
 import { ExpertFormComponent } from './expert-form.component';
 import { ExpertTileComponent } from './parts/expert-tile.component';
 
 /**
- * The Expert screen (issue #71): a dense instrument over the single shared
- * Draft, recomputing through the real engine on every edit.
+ * The Expert screen (issue #71): a dense instrument over its own Draft,
+ * recomputing through the real engine on every edit.
  */
 describe('ExpertFormComponent', () => {
   let fixture: ComponentFixture<ExpertFormComponent>;
-  let state: CalculatorStateService;
+  let state: ExpertDraftService;
 
   const tile = (labelKey: string) =>
     fixture.debugElement
@@ -51,9 +51,7 @@ describe('ExpertFormComponent', () => {
         (button.componentInstance as InfoSheetButtonComponent).sheetId(),
       );
 
-  const draftHolds = (
-    partial: Parameters<CalculatorStateService['update']>[0],
-  ) => {
+  const draftHolds = (partial: Parameters<ExpertDraftService['update']>[0]) => {
     state.update(partial);
     fixture.detectChanges();
   };
@@ -70,7 +68,7 @@ describe('ExpertFormComponent', () => {
     }).compileComponents();
 
     TestBed.inject(CalculatorInitializerService).initExpert();
-    state = TestBed.inject(CalculatorStateService);
+    state = TestBed.inject(ExpertDraftService);
     fixture = TestBed.createComponent(ExpertFormComponent);
     fixture.detectChanges();
   }));
@@ -131,7 +129,18 @@ describe('ExpertFormComponent', () => {
     expect(host.querySelector('.cta')).toBeTruthy();
   });
 
-  it('shows the engine-effective rest split when the Draft only holds a Guided global rest', () => {
+  it('opens the Expert Method explicitly', () => {
+    const router = TestBed.inject(Router);
+    spyOn(router, 'navigate').and.resolveTo(true);
+
+    (fixture.nativeElement.querySelector('.cta') as HTMLButtonElement).click();
+
+    expect(router.navigate).toHaveBeenCalledWith([
+      '/tabs/calculator/method/expert',
+    ]);
+  });
+
+  it('shows the engine-effective rest split when Expert holds a global rest', () => {
     draftHolds({
       doughType: DoughType.POOLISH,
       globalRestTime: 24,
@@ -144,7 +153,7 @@ describe('ExpertFormComponent', () => {
     expect(tile('coldRest')!.nativeElement.textContent).toContain('23');
   });
 
-  it('editing a rest tile pins both rests and drops the Guided global rest', () => {
+  it('editing a rest tile pins both rests and drops the global rest', () => {
     draftHolds({
       doughType: DoughType.POOLISH,
       globalRestTime: 24,

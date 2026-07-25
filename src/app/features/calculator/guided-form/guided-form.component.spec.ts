@@ -13,14 +13,15 @@ import { InfoSheetId } from '../../sheets/enums/info-sheet-id.enum';
 import { InfoSheetButtonComponent } from '../../sheets/info-sheet-button/info-sheet-button.component';
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
 import { CalculatorPath } from '../enums/calculator-path.enum';
+import { UNKNOWN_FLOUR_STRENGTH } from '../interfaces/guided-calculator-draft.interface';
 import { CalculatorInitializerService } from '../services/calculator-initializer.service';
-import { CalculatorStateService } from '../services/calculator-state.service';
+import { ExpertDraftService } from '../services/expert-draft.service';
+import { GuidedDraftService } from '../services/guided-draft.service';
 import { GuidedFormComponent } from './guided-form.component';
 
 describe('GuidedFormComponent', () => {
   let fixture: ComponentFixture<GuidedFormComponent>;
-  let state: CalculatorStateService;
-  let initializer: CalculatorInitializerService;
+  let draft: GuidedDraftService;
 
   const next = (): void => {
     const button = fixture.debugElement.query(
@@ -48,9 +49,8 @@ describe('GuidedFormComponent', () => {
       ],
     }).compileComponents();
 
-    initializer = TestBed.inject(CalculatorInitializerService);
-    initializer.initGuided();
-    state = TestBed.inject(CalculatorStateService);
+    TestBed.inject(CalculatorInitializerService).initGuided();
+    draft = TestBed.inject(GuidedDraftService);
     fixture = TestBed.createComponent(GuidedFormComponent);
     fixture.detectChanges();
   }));
@@ -62,42 +62,71 @@ describe('GuidedFormComponent', () => {
     ]);
   });
 
-  it('starts from smart defaults and can reach the Method without technical input', () => {
+  it('starts from smart defaults and reaches the Method in eight steps', () => {
     expect(
       fixture.nativeElement.querySelector(
         '[role="radio"][aria-checked="true"]',
       ),
     ).toBeTruthy();
 
-    for (let step = 0; step < 6; step += 1) {
+    for (let step = 0; step < 7; step += 1) {
       next();
     }
 
     expect(
       fixture.nativeElement.querySelector('[data-testid="open-method"]'),
     ).toBeTruthy();
+    expect(fixture.nativeElement.textContent).toContain(
+      'calculator.guided.summary.unknownFlourStrength',
+    );
   });
 
-  it('edits the shared Draft without dropping Expert-only values', () => {
-    state.update({ hydrationRatio: 0.71, saltRatio: 0.031 });
+  it('offers the sampled flour strengths and defaults unknown to W270', () => {
+    next();
+
+    const choices = fixture.debugElement.queryAll(By.css('.pill'));
+    expect(choices.map(({ nativeElement }) => nativeElement.textContent.trim()))
+      .withContext('flour choices')
+      .toEqual([
+        'W270',
+        'W300',
+        'W320',
+        'W350',
+        'calculator.guided.options.unknownFlourStrength',
+      ]);
+    expect(draft.getDraft().flourStrengthChoice).toBe(UNKNOWN_FLOUR_STRENGTH);
+
+    (choices[3].nativeElement as HTMLButtonElement).click();
+    fixture.detectChanges();
+
+    expect(draft.getDraft().flourStrengthChoice).toBe(350);
+  });
+
+  it('never reads or mutates the Expert Draft', () => {
+    const expert = TestBed.inject(ExpertDraftService);
+    expert.init();
+    expert.update({
+      pizzaType: PizzaType.NEAPOLITAN,
+      flourStrength: 350,
+      hydrationRatio: 0.71,
+      rtRestTime: 6,
+      coldRestTime: 18,
+      globalRestTime: null,
+    });
 
     const pizzaChoices = fixture.debugElement.queryAll(By.css('.choice'));
     (pizzaChoices[1].nativeElement as HTMLButtonElement).click();
     fixture.detectChanges();
 
-    expect(state.getInput().pizzaType).toBe(PizzaType.ROMAN);
-    expect(state.getInput().hydrationRatio).toBe(0.71);
-    expect(state.getInput().saltRatio).toBe(0.031);
-
-    initializer.initExpert();
-    expect(state.getInput().pizzaType).toBe(PizzaType.ROMAN);
-    expect(state.getInput().hydrationRatio).toBe(0.71);
-
-    initializer.initGuided();
-    expect(state.getInput().saltRatio).toBe(0.031);
+    expect(draft.getDraft().pizzaType).toBe(PizzaType.ROMAN);
+    expect(draft.getDraft().flourStrengthChoice).toBe(UNKNOWN_FLOUR_STRENGTH);
+    expect(draft.getDraft().globalRestTime).toBe(24);
+    expect(expert.getInput().pizzaType).toBe(PizzaType.NEAPOLITAN);
+    expect(expert.getInput().flourStrength).toBe(350);
   });
 
   it('places contextual Fiches on the moments of choice', () => {
+    next();
     next();
     next();
     expect(renderedSheetIds()).toEqual([
@@ -118,28 +147,10 @@ describe('GuidedFormComponent', () => {
     expect(renderedSheetIds()).toEqual([InfoSheetId.YEASTS]);
   });
 
-  it('shows an Expert ambient/cold split as one approachable rest duration', () => {
-    state.update({
-      globalRestTime: null,
-      rtRestTime: 6,
-      coldRestTime: 18,
-    });
-    next();
-    next();
-    next();
-
-    const selected = fixture.debugElement.query(
-      By.css('.pill[aria-checked="true"]'),
-    );
-    expect(selected.nativeElement.textContent).toContain('24 h');
-    expect(state.getInput().rtRestTime).toBe(6);
-    expect(state.getInput().coldRestTime).toBe(18);
-  });
-
-  it('opens the full Method from the final summary', () => {
+  it('opens the Guided Method from the final summary', () => {
     const router = TestBed.inject(Router);
     spyOn(router, 'navigate').and.resolveTo(true);
-    for (let step = 0; step < 6; step += 1) {
+    for (let step = 0; step < 7; step += 1) {
       next();
     }
 
@@ -148,6 +159,8 @@ describe('GuidedFormComponent', () => {
     );
     (button.nativeElement as HTMLButtonElement).click();
 
-    expect(router.navigate).toHaveBeenCalledWith(['/tabs/calculator/method']);
+    expect(router.navigate).toHaveBeenCalledWith([
+      '/tabs/calculator/method/guided',
+    ]);
   });
 });

@@ -77,6 +77,21 @@ describe('App navigation (v2)', () => {
     expect(router.url).toBe('/tabs/calculator/guided');
   });
 
+  it('keeps the Guided Method origin explicit', async () => {
+    await harness.navigateByUrl('/tabs/calculator/method/guided');
+    expect(router.url).toBe('/tabs/calculator/method/guided');
+  });
+
+  it('keeps the Expert Method origin explicit', async () => {
+    await harness.navigateByUrl('/tabs/calculator/method/expert');
+    expect(router.url).toBe('/tabs/calculator/method/expert');
+  });
+
+  it('keeps the legacy Method URL as an Expert-compatible entry', async () => {
+    await harness.navigateByUrl('/tabs/calculator/method');
+    expect(router.url).toBe('/tabs/calculator/method');
+  });
+
   it('redirects the removed field-visibility screen to the Expert screen', async () => {
     await harness.navigateByUrl('/tabs/calculator/settings');
 

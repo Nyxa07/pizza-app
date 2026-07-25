@@ -55,6 +55,11 @@
         "question": "Quel résultat aimez-vous ?",
         "description": "Nous adapterons automatiquement l'hydratation et le poids des pâtons."
       },
+      "flourStrength": {
+        "eyebrow": "Votre farine",
+        "question": "Quelle est la force de votre farine ?",
+        "description": "Cherchez la valeur W sur le paquet. Si elle n'est pas indiquée, choisissez « Je ne sais pas »."
+      },
       "quantity": {
         "eyebrow": "La tablée",
         "question": "Combien de pizzas préparez-vous ?",
@@ -90,7 +95,8 @@
       "neapolitan": "Souple, gonflée et moelleuse",
       "roman": "Fine, légère et croustillante",
       "direct": "Tout mélanger en une fois",
-      "poolish": "Préparer un pré-ferment pour plus d'arômes"
+      "poolish": "Préparer un pré-ferment pour plus d'arômes",
+      "unknownFlourStrength": "Je ne sais pas"
     },
     "quantity": {
       "decrease": "Retirer une pizza",
@@ -108,6 +114,8 @@
     },
     "summary": {
       "style": "Style",
+      "flourStrength": "Force de la farine",
+      "unknownFlourStrength": "Je ne sais pas (W270)",
       "quantity": "Pizzas",
       "dough": "Méthode",
       "rest": "Repos",

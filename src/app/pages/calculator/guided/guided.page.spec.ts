@@ -5,9 +5,8 @@ import { CalculatorInitializerService } from 'src/app/features/calculator/servic
 import { CalculatorGuidedPage } from './guided.page';
 
 /**
- * Symmetric to the Expert page (issue #79): the Guided page re-asserts its
- * engine settings on *every* view entry, so the `auto` map always matches the
- * visible path even when Ionic re-shows the cached page without `ngOnInit`.
+ * The Guided page reloads its own Draft on every view entry because Ionic
+ * caches pages in the router-outlet stack.
  */
 describe('CalculatorGuidedPage', () => {
   let initializer: jasmine.SpyObj<CalculatorInitializerService>;
@@ -41,13 +40,13 @@ describe('CalculatorGuidedPage', () => {
     window.requestIdleCallback = originalRequestIdleCallback;
   });
 
-  it('applies the Guided settings when the view is entered', () => {
+  it('initializes the Guided Draft when the view is entered', () => {
     createPage().ionViewWillEnter();
 
     expect(initializer.initGuided).toHaveBeenCalledTimes(1);
   });
 
-  it('re-applies the Guided settings on every re-entry (issue #79)', () => {
+  it('reloads the Guided Draft on every re-entry', () => {
     const page = createPage();
 
     page.ionViewWillEnter();

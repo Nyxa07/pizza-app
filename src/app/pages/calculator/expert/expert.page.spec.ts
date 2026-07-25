@@ -5,11 +5,8 @@ import { CalculatorInitializerService } from 'src/app/features/calculator/servic
 import { CalculatorExpertPage } from './expert.page';
 
 /**
- * The Expert page must re-assert its engine settings on *every* view entry,
- * not only on first construction: Ionic caches the page in the router-outlet
- * stack, so `ngOnInit` does not re-run when returning from the Guided path.
- * Without this, Guided's `auto` flags survive and fields look blocked —
- * hydration most visibly (issue #79).
+ * The Expert page reloads its own Draft on every view entry because Ionic
+ * caches pages in the router-outlet stack.
  */
 describe('CalculatorExpertPage', () => {
   let initializer: jasmine.SpyObj<CalculatorInitializerService>;
@@ -43,17 +40,15 @@ describe('CalculatorExpertPage', () => {
     window.requestIdleCallback = originalRequestIdleCallback;
   });
 
-  it('applies the Expert settings when the view is entered', () => {
+  it('initializes the Expert Draft when the view is entered', () => {
     createPage().ionViewWillEnter();
 
     expect(initializer.initExpert).toHaveBeenCalledTimes(1);
   });
 
-  it('re-applies the Expert settings on every re-entry (issue #79)', () => {
+  it('reloads the Expert Draft on every re-entry', () => {
     const page = createPage();
 
-    // Expert → Guided → Expert: Ionic re-shows the cached instance, firing
-    // ionViewWillEnter again without a fresh ngOnInit.
     page.ionViewWillEnter();
     page.ionViewWillEnter();
 

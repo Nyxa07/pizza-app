@@ -58,7 +58,7 @@ export type DoughConstants = {
     };
   };
 
-  /** Parameters for recommended hydration based on flour strength */
+  /** Parameters for effective hydration based on flour strength */
   hydrationRecommendation: {
     [key in PizzaType]: HydrationCfg;
   };
@@ -114,16 +114,16 @@ export const DEFAULT_DOUGH_CONSTANTS: DoughConstants = {
 
   hydrationRecommendation: {
     [PizzaType.NEAPOLITAN]: {
-      referenceW: 160,
-      baseHydration: 0.55,
+      referenceW: 270,
+      baseHydration: 0.607,
       slope: 0.0007,
       minHydration: 0.55,
-      maxHydration: 0.8,
+      maxHydration: 0.78,
     },
     [PizzaType.ROMAN]: {
-      referenceW: 160,
+      referenceW: 270,
       baseHydration: 0.55,
-      slope: 0.0007,
+      slope: 0.000625,
       minHydration: 0.55,
       maxHydration: 0.6,
     },

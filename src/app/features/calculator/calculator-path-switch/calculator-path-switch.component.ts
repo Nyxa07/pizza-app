@@ -5,7 +5,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 import { CalculatorPath } from '../enums/calculator-path.enum';
 
-/** The v2 calculator has exactly two paths over the same Draft. */
+/** The calculator exposes two paths, each with its own persisted Draft. */
 @Component({
   selector: 'app-calculator-path-switch',
   templateUrl: './calculator-path-switch.component.html',

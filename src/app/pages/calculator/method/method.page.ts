@@ -6,7 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import {
   IonBackButton,
@@ -21,12 +21,20 @@ import {
 
 import { TranslatePipe } from '@ngx-translate/core';
 import { ChefHatIcon, LucideAngularModule } from 'lucide-angular';
-import { combineLatest, filter, map } from 'rxjs';
+import { combineLatest, filter, map, Observable } from 'rxjs';
 
 import { CalculatorStateShareComponent } from 'src/app/features/calculator/calculator-state-share/calculator-state-share.component';
-import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
+import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
+import { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
+import {
+  CalculatorInitializerService,
+  EXPERT_CALCULATOR_SETTINGS,
+  GUIDED_CALCULATOR_SETTINGS,
+} from 'src/app/features/calculator/services/calculator-initializer.service';
 import { CalculatorService } from 'src/app/features/calculator/services/calculator.service';
-import { CalculatorStateService } from 'src/app/features/calculator/services/calculator-state.service';
+import { ExpertDraftService } from 'src/app/features/calculator/services/expert-draft.service';
+import { GuidedDraftService } from 'src/app/features/calculator/services/guided-draft.service';
+import { GuidedInputAdapter } from 'src/app/features/calculator/services/guided-input.adapter';
 import { MethodService } from 'src/app/features/calculator/services/method.service';
 import { IMethod } from 'src/app/features/method/interfaces/method.interface';
 import { MethodComponent } from 'src/app/features/method/method.component';
@@ -60,17 +68,34 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
   ],
 })
 export class CalculatorMethodPage implements OnInit {
+  private readonly route = inject(ActivatedRoute);
   private readonly calculator = inject(CalculatorService);
-  private readonly state = inject(CalculatorStateService);
+  private readonly expertDraft = inject(ExpertDraftService);
+  private readonly guidedDraft = inject(GuidedDraftService);
+  private readonly guidedInputAdapter = inject(GuidedInputAdapter);
   private readonly methodService = inject(MethodService);
   private readonly calculatorInitializer = inject(CalculatorInitializerService);
 
   private readonly methodStart = new Date();
+  private readonly path = this.readPath();
+  private readonly input$: Observable<ICalculatorInput> =
+    this.path === CalculatorPath.GUIDED
+      ? this.guidedDraft
+          .getDraft$()
+          .pipe(map((draft) => this.guidedInputAdapter.resolve(draft)))
+      : this.expertDraft.getInput$();
+  private readonly output$ = this.calculator.resultsFor$(
+    this.path === CalculatorPath.GUIDED
+      ? GUIDED_CALCULATOR_SETTINGS
+      : EXPERT_CALCULATOR_SETTINGS,
+    this.input$,
+  );
 
   protected readonly ChefHatIcon = ChefHatIcon;
+  protected readonly backHref = `/tabs/calculator/${this.path}`;
   protected readonly isInitialized = signal(false);
   protected readonly method = toSignal(
-    combineLatest([this.state.getInput$(), this.calculator.results$]).pipe(
+    combineLatest([this.input$, this.output$]).pipe(
       filter(([, output]) => output.total.flour > 0),
       map(([input, output]) =>
         this.methodService.build(input, output, this.methodStart),
@@ -81,11 +106,14 @@ export class CalculatorMethodPage implements OnInit {
 
   ngOnInit() {
     idleCallback(() => {
-      // Deep links land here cold: the Expert configuration is the
-      // technical mode under the Method. The guard keeps the init of a
-      // path the cook already opened.
-      this.calculatorInitializer.initMethod();
+      this.calculatorInitializer.initMethod(this.path);
       this.isInitialized.set(true);
     });
+  }
+
+  private readPath(): CalculatorPath {
+    return this.route.snapshot.data['calculatorPath'] === CalculatorPath.GUIDED
+      ? CalculatorPath.GUIDED
+      : CalculatorPath.EXPERT;
   }
 }

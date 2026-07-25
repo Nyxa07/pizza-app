@@ -55,9 +55,25 @@ h1 {
   line-height: 1.5;
 }
 
+.flour-strength-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  .pill:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (min-width: 720px) {
   :host {
     max-width: 720px;
     margin: 0 auto;
+  }
+
+  .flour-strength-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    .pill:last-child {
+      grid-column: auto;
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CalculatorStateService } from 'src/app/features/calculator/services/calculator-state.service';
+import { GUIDED_DRAFT_STORAGE_KEY } from 'src/app/features/calculator/services/calculator-draft-storage.constants';
+import { ExpertDraftService } from 'src/app/features/calculator/services/expert-draft.service';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 
@@ -8,7 +9,7 @@ import { DOUGHS_STORAGE_KEY, DoughsService } from './doughs.service';
 
 describe('DoughsService (Doughs are documents)', () => {
   let prefs: FakePrefsStorage;
-  let state: CalculatorStateService;
+  let state: ExpertDraftService;
   let service: DoughsService;
 
   beforeEach(() => {
@@ -16,7 +17,7 @@ describe('DoughsService (Doughs are documents)', () => {
     TestBed.configureTestingModule({
       providers: [{ provide: PrefsStorage, useValue: prefs }],
     });
-    state = TestBed.inject(CalculatorStateService);
+    state = TestBed.inject(ExpertDraftService);
     state.init();
     service = TestBed.inject(DoughsService);
   });
@@ -47,9 +48,11 @@ describe('DoughsService (Doughs are documents)', () => {
     state.update({ nbPizzas: 8, hydrationRatio: 0.68 });
     const dough = service.saveDraft('Document');
     state.update({ nbPizzas: 3, hydrationRatio: 0.55 });
+    prefs.set(GUIDED_DRAFT_STORAGE_KEY, { nbPizzas: 6 });
 
     expect(service.adjust(dough.id)).toBeTrue();
     expect(state.getInput().nbPizzas).toBe(8);
+    expect(prefs.get(GUIDED_DRAFT_STORAGE_KEY)).toEqual({ nbPizzas: 6 });
 
     state.update({ nbPizzas: 12 });
     expect(service.get(dough.id)?.input.nbPizzas).toBe(8);

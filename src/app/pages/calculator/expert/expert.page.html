@@ -2,7 +2,9 @@
   <ion-toolbar>
     <ion-title>{{ "pages.calculator.expert.title" | translate }}</ion-title>
     <ion-buttons slot="end">
-      <app-calculator-refresh-button></app-calculator-refresh-button>
+      <app-calculator-refresh-button
+        [path]="CalculatorPath.EXPERT"
+      ></app-calculator-refresh-button>
       @if (isInitialized()) {
         <app-dough-saver></app-dough-saver>
       }

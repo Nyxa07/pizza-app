@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>{{ "pages.calculator.guided.title" | translate }}</ion-title>
     <ion-buttons slot="end">
-      <app-calculator-refresh-button />
+      <app-calculator-refresh-button [path]="CalculatorPath.GUIDED" />
       <ion-button
         [routerLink]="['/settings']"
         [attr.aria-label]="'pages.settings.title' | translate"

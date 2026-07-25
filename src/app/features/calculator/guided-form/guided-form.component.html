@@ -1,4 +1,4 @@
-@if (input$ | async; as input) {
+@if (draft$ | async; as draft) {
   <div class="progress-copy num">
     {{
       "calculator.guided.progress"
@@ -36,9 +36,9 @@
           <button
             type="button"
             class="choice"
-            [class.selected]="input.pizzaType === PizzaType.NEAPOLITAN"
+            [class.selected]="draft.pizzaType === PizzaType.NEAPOLITAN"
             role="radio"
-            [attr.aria-checked]="input.pizzaType === PizzaType.NEAPOLITAN"
+            [attr.aria-checked]="draft.pizzaType === PizzaType.NEAPOLITAN"
             (click)="selectPizzaType(PizzaType.NEAPOLITAN)"
           >
             <strong>{{
@@ -51,9 +51,9 @@
           <button
             type="button"
             class="choice"
-            [class.selected]="input.pizzaType === PizzaType.ROMAN"
+            [class.selected]="draft.pizzaType === PizzaType.ROMAN"
             role="radio"
-            [attr.aria-checked]="input.pizzaType === PizzaType.ROMAN"
+            [attr.aria-checked]="draft.pizzaType === PizzaType.ROMAN"
             (click)="selectPizzaType(PizzaType.ROMAN)"
           >
             <strong>{{
@@ -63,12 +63,46 @@
           </button>
         </div>
       }
+      @case ("flourStrength") {
+        <div
+          class="pill-grid flour-strength-grid"
+          role="radiogroup"
+          [attr.aria-labelledby]="'guided-question-flourStrength'"
+        >
+          @for (strength of flourStrengths; track strength) {
+            <button
+              type="button"
+              class="pill num"
+              [class.selected]="draft.flourStrengthChoice === strength"
+              role="radio"
+              [attr.aria-checked]="draft.flourStrengthChoice === strength"
+              (click)="selectFlourStrength(strength)"
+            >
+              W{{ strength }}
+            </button>
+          }
+          <button
+            type="button"
+            class="pill"
+            [class.selected]="
+              draft.flourStrengthChoice === UNKNOWN_FLOUR_STRENGTH
+            "
+            role="radio"
+            [attr.aria-checked]="
+              draft.flourStrengthChoice === UNKNOWN_FLOUR_STRENGTH
+            "
+            (click)="selectFlourStrength(UNKNOWN_FLOUR_STRENGTH)"
+          >
+            {{ "calculator.guided.options.unknownFlourStrength" | translate }}
+          </button>
+        </div>
+      }
       @case ("quantity") {
         <div class="counter">
           <button
             type="button"
             class="counter-button"
-            [disabled]="input.nbPizzas <= 1"
+            [disabled]="draft.nbPizzas <= 1"
             [attr.aria-label]="
               'calculator.guided.quantity.decrease' | translate
             "
@@ -77,11 +111,11 @@
             −
           </button>
           <div class="counter-value num" aria-live="polite">
-            <strong>{{ input.nbPizzas }}</strong>
+            <strong>{{ draft.nbPizzas }}</strong>
             <span>
               {{
                 "calculator.guided.quantity.pizzas"
-                  | translate: { count: input.nbPizzas }
+                  | translate: { count: draft.nbPizzas }
               }}
             </span>
           </div>
@@ -107,9 +141,9 @@
             <button
               type="button"
               class="choice"
-              [class.selected]="input.doughType === DoughType.DIRECT"
+              [class.selected]="draft.doughType === DoughType.DIRECT"
               role="radio"
-              [attr.aria-checked]="input.doughType === DoughType.DIRECT"
+              [attr.aria-checked]="draft.doughType === DoughType.DIRECT"
               (click)="selectDoughType(DoughType.DIRECT)"
             >
               <strong>{{
@@ -123,9 +157,9 @@
             <button
               type="button"
               class="choice"
-              [class.selected]="input.doughType === DoughType.POOLISH"
+              [class.selected]="draft.doughType === DoughType.POOLISH"
               role="radio"
-              [attr.aria-checked]="input.doughType === DoughType.POOLISH"
+              [attr.aria-checked]="draft.doughType === DoughType.POOLISH"
               (click)="selectDoughType(DoughType.POOLISH)"
             >
               <strong>{{
@@ -148,24 +182,24 @@
           role="radiogroup"
           [attr.aria-labelledby]="'guided-question-restTime'"
         >
-          @if (!hasSuggestedRestTime(input)) {
+          @if (!hasSuggestedRestTime(draft)) {
             <button
               type="button"
               class="pill num selected"
               role="radio"
               aria-checked="true"
-              (click)="selectRestTime(effectiveRestTime(input))"
+              (click)="selectRestTime(draft.globalRestTime)"
             >
-              {{ effectiveRestTime(input) }} h
+              {{ draft.globalRestTime }} h
             </button>
           }
           @for (hours of restTimes; track hours) {
             <button
               type="button"
               class="pill num"
-              [class.selected]="effectiveRestTime(input) === hours"
+              [class.selected]="draft.globalRestTime === hours"
               role="radio"
-              [attr.aria-checked]="effectiveRestTime(input) === hours"
+              [attr.aria-checked]="draft.globalRestTime === hours"
               (click)="selectRestTime(hours)"
             >
               {{ hours }} h
@@ -183,24 +217,24 @@
           role="radiogroup"
           [attr.aria-labelledby]="'guided-question-temperature'"
         >
-          @if (!hasSuggestedTemperature(input)) {
+          @if (!hasSuggestedTemperature(draft)) {
             <button
               type="button"
               class="pill num selected"
               role="radio"
               aria-checked="true"
-              (click)="selectTemperature(input.temperature)"
+              (click)="selectTemperature(draft.temperature)"
             >
-              {{ input.temperature }} °C
+              {{ draft.temperature }} °C
             </button>
           }
           @for (temperature of temperatures; track temperature) {
             <button
               type="button"
               class="pill num"
-              [class.selected]="input.temperature === temperature"
+              [class.selected]="draft.temperature === temperature"
               role="radio"
-              [attr.aria-checked]="input.temperature === temperature"
+              [attr.aria-checked]="draft.temperature === temperature"
               (click)="selectTemperature(temperature)"
             >
               {{ temperature }} °C
@@ -221,9 +255,9 @@
           <button
             type="button"
             class="choice compact"
-            [class.selected]="input.yeastType === YeastType.DRY_ACTIVE"
+            [class.selected]="draft.yeastType === YeastType.DRY_ACTIVE"
             role="radio"
-            [attr.aria-checked]="input.yeastType === YeastType.DRY_ACTIVE"
+            [attr.aria-checked]="draft.yeastType === YeastType.DRY_ACTIVE"
             (click)="selectYeastType(YeastType.DRY_ACTIVE)"
           >
             <strong>{{
@@ -233,9 +267,9 @@
           <button
             type="button"
             class="choice compact"
-            [class.selected]="input.yeastType === YeastType.DRY_INSTANT"
+            [class.selected]="draft.yeastType === YeastType.DRY_INSTANT"
             role="radio"
-            [attr.aria-checked]="input.yeastType === YeastType.DRY_INSTANT"
+            [attr.aria-checked]="draft.yeastType === YeastType.DRY_INSTANT"
             (click)="selectYeastType(YeastType.DRY_INSTANT)"
           >
             <strong>{{
@@ -245,9 +279,9 @@
           <button
             type="button"
             class="choice compact"
-            [class.selected]="input.yeastType === YeastType.FRESH"
+            [class.selected]="draft.yeastType === YeastType.FRESH"
             role="radio"
-            [attr.aria-checked]="input.yeastType === YeastType.FRESH"
+            [attr.aria-checked]="draft.yeastType === YeastType.FRESH"
             (click)="selectYeastType(YeastType.FRESH)"
           >
             <strong>{{
@@ -261,31 +295,43 @@
           <div>
             <dt>{{ "calculator.guided.summary.style" | translate }}</dt>
             <dd>
-              {{ "calculator.enums.pizzaTypes." + input.pizzaType | translate }}
+              {{ "calculator.enums.pizzaTypes." + draft.pizzaType | translate }}
+            </dd>
+          </div>
+          <div>
+            <dt>{{ "calculator.guided.summary.flourStrength" | translate }}</dt>
+            <dd class="num">
+              @if (draft.flourStrengthChoice === UNKNOWN_FLOUR_STRENGTH) {
+                {{
+                  "calculator.guided.summary.unknownFlourStrength" | translate
+                }}
+              } @else {
+                W{{ draft.flourStrengthChoice }}
+              }
             </dd>
           </div>
           <div>
             <dt>{{ "calculator.guided.summary.quantity" | translate }}</dt>
-            <dd class="num">{{ input.nbPizzas }}</dd>
+            <dd class="num">{{ draft.nbPizzas }}</dd>
           </div>
           <div>
             <dt>{{ "calculator.guided.summary.dough" | translate }}</dt>
             <dd>
-              {{ "calculator.enums.doughTypes." + input.doughType | translate }}
+              {{ "calculator.enums.doughTypes." + draft.doughType | translate }}
             </dd>
           </div>
           <div>
             <dt>{{ "calculator.guided.summary.rest" | translate }}</dt>
-            <dd class="num">{{ effectiveRestTime(input) }} h</dd>
+            <dd class="num">{{ draft.globalRestTime }} h</dd>
           </div>
           <div>
             <dt>{{ "calculator.guided.summary.temperature" | translate }}</dt>
-            <dd class="num">{{ input.temperature }} °C</dd>
+            <dd class="num">{{ draft.temperature }} °C</dd>
           </div>
           <div>
             <dt>{{ "calculator.guided.summary.yeast" | translate }}</dt>
             <dd>
-              @switch (input.yeastType) {
+              @switch (draft.yeastType) {
                 @case (YeastType.DRY_ACTIVE) {
                   {{ "calculator.enums.yeastTypes.dryActive" | translate }}
                 }

@@ -14,6 +14,8 @@ describe('MigrationService 1.0.3 integration', () => {
   const v2Keys = [
     '3:schema-version',
     '3:calculator:draft',
+    '3:calculator:draft:expert',
+    '3:calculator:draft:guided',
     '3:calculator:doughs',
   ];
   const fixtureKeys = Object.keys(V1_0_3_LOCAL_STORAGE_FIXTURE);
@@ -34,7 +36,7 @@ describe('MigrationService 1.0.3 integration', () => {
   it('migrates an authentic 1.0.3 snapshot without loss or stale v1 keys', () => {
     expect(() => migration.run()).not.toThrow();
 
-    const draft = prefs.get<ICalculatorInput>('calculator:draft');
+    const draft = prefs.get<ICalculatorInput>('calculator:draft:expert');
     expect(draft).toEqual(
       jasmine.objectContaining({
         nbPizzas: 8,
@@ -68,7 +70,9 @@ describe('MigrationService 1.0.3 integration', () => {
     expect(prefs.get('calculator:config')).toEqual({
       yeast: { dryActive: 0.006 },
     });
-    expect(prefs.get('schema-version')).toBe(6);
+    expect(prefs.get('schema-version')).toBe(7);
+    expect(prefs.get('calculator:draft')).toBeNull();
+    expect(prefs.get('calculator:draft:guided')).toBeNull();
 
     const removedV1Keys = fixtureKeys.filter(
       (key) => key !== '3:keepAwake' && key !== '3:calculator:config',
@@ -80,12 +84,12 @@ describe('MigrationService 1.0.3 integration', () => {
 
   it('is idempotent after the complete 1.0.3 migration', () => {
     migration.run();
-    const firstDraft = prefs.get<ICalculatorInput>('calculator:draft');
+    const firstDraft = prefs.get<ICalculatorInput>('calculator:draft:expert');
     const firstDoughs = prefs.get<Dough[]>('calculator:doughs');
 
     expect(() => migration.run()).not.toThrow();
 
-    expect(prefs.get('calculator:draft')).toEqual(firstDraft);
+    expect(prefs.get('calculator:draft:expert')).toEqual(firstDraft);
     expect(prefs.get('calculator:doughs')).toEqual(firstDoughs);
   });
 

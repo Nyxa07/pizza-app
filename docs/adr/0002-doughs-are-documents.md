@@ -1,5 +1,8 @@
 # Doughs are documents; the calculator has a single shared draft
 
+> The single-Draft decision in this ADR is superseded by ADR-0003. Dough
+> documents and explicit « Ajuster » copies remain unchanged.
+
 v1 kept one auto-persisted work-in-progress per calculator mode (simple/complex/assist), with named saves siloed per mode, and loading a save silently overwrote the current values — persisted immediately, unrecoverable. For v2 we decided: a saved **Dough** is a document opened in its own view (detail + its Method); loading it into the calculator is an explicit copy (« Ajuster »); there is exactly **one Draft** shared by the Guided and Expert paths; a new calculation seeds from the user's **Defaults** (which become real, user-editable values instead of the hardcoded `DEFAULT_INPUT`).
 
 ## Why

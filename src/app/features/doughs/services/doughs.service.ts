@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
-import { CalculatorStateService } from 'src/app/features/calculator/services/calculator-state.service';
+import { ExpertDraftService } from 'src/app/features/calculator/services/expert-draft.service';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 
 import type { Dough } from '../interfaces/dough.interface';
@@ -13,7 +13,7 @@ export const DOUGHS_STORAGE_KEY = 'calculator:doughs';
 @Injectable({ providedIn: 'root' })
 export class DoughsService {
   private readonly prefs = inject(PrefsStorage);
-  private readonly state = inject(CalculatorStateService);
+  private readonly state = inject(ExpertDraftService);
   private readonly doughs = new BehaviorSubject<Dough[]>(this.read());
 
   getDoughs$(): Observable<Dough[]> {
@@ -36,7 +36,7 @@ export class DoughsService {
     );
   }
 
-  /** Saves a snapshot of the Draft; later Draft edits cannot mutate it. */
+  /** Saves a snapshot of the Expert Draft; later edits cannot mutate it. */
   saveDraft(name: string): Dough {
     const now = new Date().toISOString();
     const dough: Dough = {
@@ -100,7 +100,7 @@ export class DoughsService {
     return true;
   }
 
-  /** Explicitly loads a copy into the Draft; the saved Dough stays immutable. */
+  /** Loads a copy into the Expert Draft; the saved Dough stays immutable. */
   adjust(id: string): boolean {
     const dough = this.doughs.value.find((item) => item.id === id);
     if (!dough) {

@@ -1,17 +1,22 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
 import { AlertController } from '@ionic/angular/standalone';
+
 import { provideTranslateService } from '@ngx-translate/core';
 
-import { CalculatorStateService } from 'src/app/features/calculator/services/calculator-state.service';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 
+import { CalculatorPath } from '../enums/calculator-path.enum';
+import { ExpertDraftService } from '../services/expert-draft.service';
+import { GuidedDraftService } from '../services/guided-draft.service';
 import { CalculatorRefreshButtonComponent } from './calculator-refresh-button.component';
 
 describe('CalculatorRefreshButtonComponent', () => {
-  let component: CalculatorRefreshButtonComponent;
   let fixture: ComponentFixture<CalculatorRefreshButtonComponent>;
+  let guided: GuidedDraftService;
+  let expert: ExpertDraftService;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -22,18 +27,19 @@ describe('CalculatorRefreshButtonComponent', () => {
       ],
     }).compileComponents();
 
+    guided = TestBed.inject(GuidedDraftService);
+    expert = TestBed.inject(ExpertDraftService);
+    guided.init();
+    expert.init();
+
     fixture = TestBed.createComponent(CalculatorRefreshButtonComponent);
-    component = fixture.componentInstance;
+    fixture.componentRef.setInput('path', CalculatorPath.GUIDED);
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('clicking asks for confirmation before touching the Draft', async () => {
-    const state = TestBed.inject(CalculatorStateService);
-    state.update({ nbPizzas: 9 });
+  it('clicking asks for confirmation before touching either Draft', async () => {
+    guided.update({ nbPizzas: 9 });
+    expert.update({ nbPizzas: 12 });
     const alertController = TestBed.inject(AlertController);
     const present = jasmine.createSpy('present');
     const create = spyOn(alertController, 'create').and.resolveTo({
@@ -47,12 +53,13 @@ describe('CalculatorRefreshButtonComponent', () => {
 
     expect(create).toHaveBeenCalled();
     expect(present).toHaveBeenCalled();
-    expect(state.getInput().nbPizzas).toBe(9);
+    expect(guided.getDraft().nbPizzas).toBe(9);
+    expect(expert.getInput().nbPizzas).toBe(12);
   });
 
-  it('confirming restarts the Draft from the user Defaults', async () => {
-    const state = TestBed.inject(CalculatorStateService);
-    state.update({ nbPizzas: 9 });
+  it('confirming resets only the requested path', async () => {
+    guided.update({ nbPizzas: 9 });
+    expert.update({ nbPizzas: 12 });
     const alertController = TestBed.inject(AlertController);
     let confirmHandler: (() => void) | undefined;
     spyOn(alertController, 'create').and.callFake(async (config) => {
@@ -74,6 +81,7 @@ describe('CalculatorRefreshButtonComponent', () => {
     await fixture.whenStable();
     confirmHandler?.();
 
-    expect(state.getInput().nbPizzas).toBe(5);
+    expect(guided.getDraft().nbPizzas).toBe(5);
+    expect(expert.getInput().nbPizzas).toBe(12);
   });
 });

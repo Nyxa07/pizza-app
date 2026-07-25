@@ -17,6 +17,7 @@ import { LucideAngularModule, SettingsIcon } from 'lucide-angular';
 
 import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
 import { CalculatorPathSwitchComponent } from 'src/app/features/calculator/calculator-path-switch/calculator-path-switch.component';
+import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
 import { ExpertFormComponent } from 'src/app/features/calculator/expert-form/expert-form.component';
 import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
 import { DoughSaverComponent } from 'src/app/features/doughs/dough-saver/dough-saver.component';
@@ -52,12 +53,11 @@ export class CalculatorExpertPage implements ViewWillEnter {
   private readonly calculatorInitializer = inject(CalculatorInitializerService);
 
   protected readonly SettingsIcon = SettingsIcon;
+  protected readonly CalculatorPath = CalculatorPath;
   protected isInitialized = signal(false);
 
-  // Ionic caches this page in the router-outlet stack, so ngOnInit does not
-  // re-run when returning from the Guided path. Re-assert the Expert settings
-  // on every entry, otherwise fields stay stuck in Guided's `auto` mode and
-  // look blocked — hydration most visibly (issue #79).
+  // Ionic caches this page in the router-outlet stack, so reload the Expert
+  // Draft from persistence on every entry.
   ionViewWillEnter(): void {
     idleCallback(() => {
       this.calculatorInitializer.initExpert();

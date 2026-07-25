@@ -11,8 +11,8 @@ A named, saved snapshot of calculator inputs, opened as a document (detail + its
 _Avoid_: calculator state, saved state
 
 **Draft**:
-The single in-progress calculation, shared by the Guided and Expert paths and persisted automatically. Replaced only by an explicit act (new calculation, « Ajuster » from a Dough). UI: « Calcul en cours », « Reprendre ».
-_Avoid_: per-mode state, scratchpad
+An in-progress calculation owned and persisted by one calculator path. Guided and Expert each resume their own Draft; switching paths never copies values. A Dough is adjusted into the Expert Draft only. UI: « Calcul en cours », « Reprendre ».
+_Avoid_: shared calculator state, scratchpad
 
 **Defaults**:
 User-configurable seed values (hydration, salt, ball weight…) applied when starting a new calculation. Live in settings. UI: « Mes défauts de pâte ».

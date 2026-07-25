@@ -39,7 +39,20 @@ export const CALCULATOR_ROUTES: Route[] = [
     redirectTo: CalculatorPath.EXPERT,
   },
   {
+    path: 'method/guided',
+    data: { calculatorPath: CalculatorPath.GUIDED },
+    loadComponent: () =>
+      import('./method/method.page').then((m) => m.CalculatorMethodPage),
+  },
+  {
+    path: 'method/expert',
+    data: { calculatorPath: CalculatorPath.EXPERT },
+    loadComponent: () =>
+      import('./method/method.page').then((m) => m.CalculatorMethodPage),
+  },
+  {
     path: 'method',
+    data: { calculatorPath: CalculatorPath.EXPERT },
     loadComponent: () =>
       import('./method/method.page').then((m) => m.CalculatorMethodPage),
   },

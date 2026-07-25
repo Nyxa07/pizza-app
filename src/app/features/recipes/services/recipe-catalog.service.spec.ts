@@ -2,7 +2,8 @@ import { TestBed } from '@angular/core/testing';
 
 import { provideTranslateService } from '@ngx-translate/core';
 
-import { CalculatorStateService } from 'src/app/features/calculator/services/calculator-state.service';
+import { GUIDED_DRAFT_STORAGE_KEY } from 'src/app/features/calculator/services/calculator-draft-storage.constants';
+import { ExpertDraftService } from 'src/app/features/calculator/services/expert-draft.service';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { collectKeys } from 'src/app/shared/testing/collect-keys';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
@@ -114,20 +115,24 @@ describe('RecipeCatalogService', () => {
     expect(service.get('reine')?.content.category).toBe('The French classic');
   });
 
-  it('explicitly replaces the Draft with the detached suggested dough', () => {
-    const state = TestBed.inject(CalculatorStateService);
+  it('explicitly replaces the Expert Draft with the detached suggested dough', () => {
+    const state = TestBed.inject(ExpertDraftService);
+    state.init();
     state.update({ nbPizzas: 9, hydrationRatio: 0.8 });
     prefs.set('calculator:guided:step', 5);
+    prefs.set(GUIDED_DRAFT_STORAGE_KEY, { nbPizzas: 6 });
 
     expect(service.prepareSuggestedDough('margherita')).toBeTrue();
     expect(state.getInput().nbPizzas).toBe(4);
     expect(state.getInput().hydrationRatio).toBe(0.63);
-    expect(prefs.get('calculator:guided:step')).toBeNull();
-    expect(prefs.get('calculator:draft')).toEqual(state.getInput());
+    expect(prefs.get('calculator:guided:step')).toBe(5);
+    expect(prefs.get(GUIDED_DRAFT_STORAGE_KEY)).toEqual({ nbPizzas: 6 });
+    expect(prefs.get('calculator:draft:expert')).toEqual(state.getInput());
   });
 
-  it('leaves the Draft untouched for an unknown Recipe', () => {
-    const state = TestBed.inject(CalculatorStateService);
+  it('leaves the Expert Draft untouched for an unknown Recipe', () => {
+    const state = TestBed.inject(ExpertDraftService);
+    state.init();
     state.update({ nbPizzas: 7 });
 
     expect(service.prepareSuggestedDough('missing')).toBeFalse();

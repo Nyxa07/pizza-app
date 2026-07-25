@@ -18,11 +18,16 @@ import { InfoSheetButtonComponent } from '../../sheets/info-sheet-button/info-sh
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
-import { ICalculatorInput } from '../interfaces/calculator-input.interface';
-import { CalculatorStateService } from '../services/calculator-state.service';
+import {
+  GuidedFlourStrengthChoice,
+  IGuidedCalculatorDraft,
+  UNKNOWN_FLOUR_STRENGTH,
+} from '../interfaces/guided-calculator-draft.interface';
+import { GuidedDraftService } from '../services/guided-draft.service';
 
 type GuidedStepId =
   | 'pizzaType'
+  | 'flourStrength'
   | 'quantity'
   | 'doughType'
   | 'restTime'
@@ -43,6 +48,12 @@ const GUIDED_STEPS: readonly GuidedStep[] = [
     eyebrow: 'calculator.guided.steps.pizzaType.eyebrow',
     question: 'calculator.guided.steps.pizzaType.question',
     description: 'calculator.guided.steps.pizzaType.description',
+  },
+  {
+    id: 'flourStrength',
+    eyebrow: 'calculator.guided.steps.flourStrength.eyebrow',
+    question: 'calculator.guided.steps.flourStrength.question',
+    description: 'calculator.guided.steps.flourStrength.description',
   },
   {
     id: 'quantity',
@@ -83,9 +94,8 @@ const GUIDED_STEPS: readonly GuidedStep[] = [
 ] as const;
 
 /**
- * The Guided path: one plain-language decision at a time, with every answer
- * pre-filled from the shared Draft. It only patches fields it owns so a switch
- * to or from Expert can never discard advanced values.
+ * The Guided path: one plain-language decision at a time, persisted in its
+ * own Draft. Hidden technical inputs are derived later by GuidedInputAdapter.
  */
 @Component({
   selector: 'app-guided-form',
@@ -101,7 +111,7 @@ const GUIDED_STEPS: readonly GuidedStep[] = [
   ],
 })
 export class GuidedFormComponent {
-  private readonly state = inject(CalculatorStateService);
+  private readonly draft = inject(GuidedDraftService);
   private readonly router = inject(Router);
   private readonly prefs = inject(PrefsStorage);
 
@@ -110,11 +120,13 @@ export class GuidedFormComponent {
   protected readonly DoughType = DoughType;
   protected readonly InfoSheetId = InfoSheetId;
   protected readonly PizzaType = PizzaType;
+  protected readonly UNKNOWN_FLOUR_STRENGTH = UNKNOWN_FLOUR_STRENGTH;
   protected readonly YeastType = YeastType;
   protected readonly ChevronLeft = ChevronLeft;
   protected readonly ChevronRight = ChevronRight;
 
-  protected readonly input$ = this.state.getInput$();
+  protected readonly draft$ = this.draft.getDraft$();
+  protected readonly flourStrengths = [270, 300, 320, 350] as const;
   protected readonly restTimes = [4, 8, 12, 24, 48] as const;
   protected readonly temperatures = [18, 20, 22, 24, 26] as const;
 
@@ -134,50 +146,43 @@ export class GuidedFormComponent {
   protected readonly stepCount = GUIDED_STEPS.length;
 
   protected selectPizzaType(pizzaType: PizzaType): void {
-    this.state.update({ pizzaType });
+    this.draft.update({ pizzaType });
+  }
+
+  protected selectFlourStrength(
+    flourStrengthChoice: GuidedFlourStrengthChoice,
+  ): void {
+    this.draft.update({ flourStrengthChoice });
   }
 
   protected changeQuantity(delta: 1 | -1): void {
-    const nbPizzas = Math.max(1, this.state.getInput().nbPizzas + delta);
-    this.state.update({ nbPizzas });
+    const nbPizzas = Math.max(1, this.draft.getDraft().nbPizzas + delta);
+    this.draft.update({ nbPizzas });
   }
 
   protected selectDoughType(doughType: DoughType): void {
-    this.state.update({ doughType });
+    this.draft.update({ doughType });
   }
 
   protected selectRestTime(globalRestTime: number): void {
-    this.state.update({
-      globalRestTime,
-      rtRestTime: null,
-      coldRestTime: null,
-    });
+    this.draft.update({ globalRestTime });
   }
 
   protected selectTemperature(temperature: number): void {
-    this.state.update({ temperature });
+    this.draft.update({ temperature });
   }
 
   protected selectYeastType(yeastType: YeastType): void {
-    this.state.update({ yeastType });
+    this.draft.update({ yeastType });
   }
 
-  protected effectiveRestTime(input: ICalculatorInput): number {
-    return (
-      input.globalRestTime ??
-      (input.rtRestTime ?? 0) + (input.coldRestTime ?? 0)
-    );
+  protected hasSuggestedRestTime(draft: IGuidedCalculatorDraft): boolean {
+    return this.restTimes.some((hours) => hours === draft.globalRestTime);
   }
 
-  protected hasSuggestedRestTime(input: ICalculatorInput): boolean {
-    return this.restTimes.some(
-      (hours) => hours === this.effectiveRestTime(input),
-    );
-  }
-
-  protected hasSuggestedTemperature(input: ICalculatorInput): boolean {
+  protected hasSuggestedTemperature(draft: IGuidedCalculatorDraft): boolean {
     return this.temperatures.some(
-      (temperature) => temperature === input.temperature,
+      (temperature) => temperature === draft.temperature,
     );
   }
 
@@ -196,7 +201,7 @@ export class GuidedFormComponent {
   }
 
   protected openMethod(): void {
-    this.router.navigate(['/tabs/calculator/method']);
+    this.router.navigate(['/tabs/calculator/method/guided']);
   }
 
   private loadStepIndex(): number {

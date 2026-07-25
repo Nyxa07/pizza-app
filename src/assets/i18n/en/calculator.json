@@ -55,6 +55,11 @@
         "question": "What result do you enjoy?",
         "description": "We will automatically adapt hydration and dough-ball weight."
       },
+      "flourStrength": {
+        "eyebrow": "Your flour",
+        "question": "How strong is your flour?",
+        "description": "Look for the W value on the bag. If it is not listed, choose “I don’t know”."
+      },
       "quantity": {
         "eyebrow": "Around the table",
         "question": "How many pizzas are you making?",
@@ -90,7 +95,8 @@
       "neapolitan": "Soft, airy and tender",
       "roman": "Thin, light and crisp",
       "direct": "Mix everything in one go",
-      "poolish": "Make a preferment for deeper flavour"
+      "poolish": "Make a preferment for deeper flavour",
+      "unknownFlourStrength": "I don’t know"
     },
     "quantity": {
       "decrease": "Remove one pizza",
@@ -108,6 +114,8 @@
     },
     "summary": {
       "style": "Style",
+      "flourStrength": "Flour strength",
+      "unknownFlourStrength": "I don’t know (W270)",
       "quantity": "Pizzas",
       "dough": "Method",
       "rest": "Rest",

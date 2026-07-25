@@ -17,8 +17,9 @@ import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
+import { EXPERT_CALCULATOR_SETTINGS } from '../services/calculator-initializer.service';
 import { CalculatorService } from '../services/calculator.service';
-import { CalculatorStateService } from '../services/calculator-state.service';
+import { ExpertDraftService } from '../services/expert-draft.service';
 import {
   IMethodPreview,
   MethodPreviewService,
@@ -45,10 +46,9 @@ type SteppableField =
   | 'temperature';
 
 /**
- * Everything the template shows, derived once per Draft/engine emission.
- * Tiles display the engine's EFFECTIVE values (a Draft written by the
- * Guided path may hold nulls or only a global rest); edits write explicit
- * values back into the shared Draft.
+ * Everything the template shows, derived once per Expert Draft/engine
+ * emission. Tiles display the engine's effective values and edits write
+ * explicit values back into the Expert Draft.
  */
 interface ExpertVm {
   input: ICalculatorInput;
@@ -71,8 +71,8 @@ const POOLISH_RATIO_FALLBACK = 0.3;
 /**
  * The Expert path (issue #71, prototype variant D): pinned live result
  * bar, parametric tile grid, fermentation timeline, folded advanced
- * options, dated Method preview and narrative CTA — all reading and
- * writing the single shared Draft through the real engine.
+ * options, dated Method preview and narrative CTA — all reading and writing
+ * the Expert Draft through the real engine.
  */
 @Component({
   selector: 'app-expert-form',
@@ -94,7 +94,7 @@ const POOLISH_RATIO_FALLBACK = 0.3;
   ],
 })
 export class ExpertFormComponent {
-  private readonly state = inject(CalculatorStateService);
+  private readonly state = inject(ExpertDraftService);
   private readonly calculator = inject(CalculatorService);
   private readonly methodPreview = inject(MethodPreviewService);
   private readonly router = inject(Router);
@@ -125,7 +125,10 @@ export class ExpertFormComponent {
 
   protected readonly vm$: Observable<ExpertVm> = combineLatest([
     this.state.getInput$(),
-    this.calculator.results$,
+    this.calculator.resultsFor$(
+      EXPERT_CALCULATOR_SETTINGS,
+      this.state.getInput$(),
+    ),
   ]).pipe(map(([input, output]) => this.buildVm(input, output)));
 
   protected stepField(vm: ExpertVm, field: SteppableField, dir: 1 | -1): void {
@@ -192,7 +195,7 @@ export class ExpertFormComponent {
   }
 
   protected goToMethod(): void {
-    this.router.navigate(['/tabs/calculator/method']);
+    this.router.navigate(['/tabs/calculator/method/expert']);
   }
 
   private buildVm(
