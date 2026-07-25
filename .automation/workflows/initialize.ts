@@ -18,6 +18,11 @@ const initializeOutputSchema = schema.union([
       .boolean()
       .describe("L'issue porte t-elle le label `to-planify` ?"),
     reason: schema.string().describe('Pourquoi ce choix ?'),
+    existingPullRequest: schema
+      .integer()
+      .minimum(1)
+      .optional()
+      .describe('La pull request existante le cas échéant'),
   }),
   schema.object({
     status: schema.literal('no_work'),
