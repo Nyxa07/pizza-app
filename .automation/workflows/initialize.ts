@@ -38,7 +38,7 @@ export default async function runInitialize(
   const result = await context.run(
     [
       "Ton rôle est de sélectionner une issue GitHub éligible à la plannification ou à l'implémentation.",
-      "Si une PR existe pour l'issue sélectionnée, ne créer pas de branche et réutilise celle existante (celle de la PR), sinon créer la branche de dev à utiliser à partie de origin/main.",
+      "Si une PR existe pour l'issue sélectionnée, ne créer pas de branche et réutilise celle existante (celle de la PR), sinon créer la branche de dev à utiliser à partir de origin/main.",
       'La branche de dev doit suivre le modèle : `feat/[issue_number]-...`, `chore/[issue_number]-...`, `fix/[issue_number]-...`',
       "Ne push pas la branch immédiatement, ce sera fait lors de l'implémentation qui est hors scope ici.",
       'Une issue est éligible si elle à le label `ready-for-agent`',
