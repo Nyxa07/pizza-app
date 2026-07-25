@@ -47,7 +47,7 @@ export default async function runInitialize(
     ].join('\n'),
     {
       harness,
-      approval: 'auto',
+      approval: 'deny',
       access: 'full',
       output: initializeOutputSchema,
     },
