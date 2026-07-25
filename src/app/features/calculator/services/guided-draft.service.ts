@@ -14,7 +14,11 @@ import {
 } from './calculator-draft-storage.constants';
 import { DoughDefaultsService } from './dough-defaults.service';
 
-/** The persisted answers owned exclusively by the Guided path. */
+/**
+ * The persisted answers owned exclusively by the Guided path, plus the step
+ * the user stopped on: both are streamed from here so that a reset reaches
+ * every consumer, including a Guided form still cached in the router-outlet.
+ */
 @Injectable({ providedIn: 'root' })
 export class GuidedDraftService {
   private readonly prefs = inject(PrefsStorage);
@@ -22,6 +26,7 @@ export class GuidedDraftService {
   private readonly draft = new BehaviorSubject<IGuidedCalculatorDraft>(
     this.createSeed(),
   );
+  private readonly stepIndex = new BehaviorSubject<number>(0);
 
   getDraft(): IGuidedCalculatorDraft {
     return this.draft.value;
@@ -29,6 +34,20 @@ export class GuidedDraftService {
 
   getDraft$(): Observable<IGuidedCalculatorDraft> {
     return this.draft.asObservable();
+  }
+
+  getStepIndex(): number {
+    return this.stepIndex.value;
+  }
+
+  getStepIndex$(): Observable<number> {
+    return this.stepIndex.asObservable();
+  }
+
+  setStepIndex(index: number): void {
+    const step = this.sanitizeStepIndex(index);
+    this.stepIndex.next(step);
+    this.prefs.set(GUIDED_STEP_STORAGE_KEY, step);
   }
 
   update(partial: Partial<IGuidedCalculatorDraft>): void {
@@ -40,10 +59,11 @@ export class GuidedDraftService {
       ...this.createSeed(),
       ...(this.load() ?? {}),
     });
+    this.stepIndex.next(this.loadStepIndex());
   }
 
   newCalculation(): void {
-    this.prefs.remove(GUIDED_STEP_STORAGE_KEY);
+    this.setStepIndex(0);
     this.persist(this.createSeed());
   }
 
@@ -65,6 +85,23 @@ export class GuidedDraftService {
 
   private load(): IGuidedCalculatorDraft | null {
     return this.prefs.get<IGuidedCalculatorDraft>(GUIDED_DRAFT_STORAGE_KEY);
+  }
+
+  private loadStepIndex(): number {
+    return this.sanitizeStepIndex(
+      this.prefs.get<number>(GUIDED_STEP_STORAGE_KEY),
+    );
+  }
+
+  /**
+   * Only the lower bound is enforced here: the number of steps belongs to the
+   * Guided form, which clamps the upper bound when it reads this stream.
+   */
+  private sanitizeStepIndex(index: number | null): number {
+    if (index === null || !Number.isInteger(index)) {
+      return 0;
+    }
+    return Math.max(0, index);
   }
 
   private persist(draft: IGuidedCalculatorDraft): void {

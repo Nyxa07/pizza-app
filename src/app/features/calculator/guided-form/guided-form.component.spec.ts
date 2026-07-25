@@ -15,6 +15,7 @@ import { InfoSheetButtonComponent } from '../../sheets/info-sheet-button/info-sh
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
 import { CalculatorPath } from '../enums/calculator-path.enum';
 import { UNKNOWN_FLOUR_STRENGTH } from '../interfaces/guided-calculator-draft.interface';
+import { GUIDED_STEP_STORAGE_KEY } from '../services/calculator-draft-storage.constants';
 import { CalculatorInitializerService } from '../services/calculator-initializer.service';
 import { ExpertDraftService } from '../services/expert-draft.service';
 import { GuidedDraftService } from '../services/guided-draft.service';
@@ -24,6 +25,7 @@ import { GuidedFormComponent } from './guided-form.component';
 describe('GuidedFormComponent', () => {
   let fixture: ComponentFixture<GuidedFormComponent>;
   let draft: GuidedDraftService;
+  let prefs: FakePrefsStorage;
 
   const next = (): void => {
     const button = fixture.debugElement.query(
@@ -33,6 +35,12 @@ describe('GuidedFormComponent', () => {
     fixture.detectChanges();
   };
 
+  const currentStepId = (): string | null =>
+    fixture.nativeElement
+      .querySelector('.question')
+      ?.getAttribute('aria-labelledby')
+      ?.replace('guided-question-', '') ?? null;
+
   const renderedSheetIds = (): InfoSheetId[] =>
     fixture.debugElement
       .queryAll(By.directive(InfoSheetButtonComponent))
@@ -41,13 +49,14 @@ describe('GuidedFormComponent', () => {
       );
 
   beforeEach(waitForAsync(() => {
+    prefs = new FakePrefsStorage();
     TestBed.configureTestingModule({
       imports: [GuidedFormComponent],
       providers: [
         provideIonicAngular(),
         provideTranslateService(),
         provideRouter([]),
-        { provide: PrefsStorage, useValue: new FakePrefsStorage() },
+        { provide: PrefsStorage, useValue: prefs },
       ],
     }).compileComponents();
 
@@ -164,6 +173,28 @@ describe('GuidedFormComponent', () => {
     expect(router.navigate).toHaveBeenCalledWith([
       '/tabs/calculator/method/guided',
     ]);
+  });
+
+  it('returns to the first question when a new calculation is started', () => {
+    for (let step = 0; step < 7; step += 1) {
+      next();
+    }
+    expect(currentStepId()).withContext('summary reached').toBe('summary');
+
+    // What the header refresh button does once the alert is confirmed.
+    draft.newCalculation();
+    fixture.detectChanges();
+
+    expect(currentStepId()).toBe('pizzaType');
+    expect(prefs.get(GUIDED_STEP_STORAGE_KEY)).toBe(0);
+  });
+
+  it('restores the persisted step when the Guided page is entered again', () => {
+    prefs.set(GUIDED_STEP_STORAGE_KEY, 2);
+    TestBed.inject(CalculatorInitializerService).initGuided();
+    fixture.detectChanges();
+
+    expect(currentStepId()).toBe('quantity');
   });
 
   it('offers Dough saving from the summary with the resolved Guided input', () => {

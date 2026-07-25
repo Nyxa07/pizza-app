@@ -52,14 +52,46 @@ describe('GuidedDraftService', () => {
 
   it('new calculation resets only Guided answers and its step', () => {
     service.update({ nbPizzas: 9, flourStrengthChoice: 350 });
-    prefs.set(GUIDED_STEP_STORAGE_KEY, 7);
+    service.setStepIndex(7);
     prefs.set(EXPERT_DRAFT_STORAGE_KEY, { nbPizzas: 12 });
 
     service.newCalculation();
 
     expect(service.getDraft().nbPizzas).toBe(5);
     expect(service.getDraft().flourStrengthChoice).toBe(UNKNOWN_FLOUR_STRENGTH);
-    expect(prefs.get(GUIDED_STEP_STORAGE_KEY)).toBeNull();
+    expect(service.getStepIndex()).toBe(0);
+    expect(prefs.get(GUIDED_STEP_STORAGE_KEY)).toBe(0);
     expect(prefs.get(EXPERT_DRAFT_STORAGE_KEY)).toEqual({ nbPizzas: 12 });
+  });
+
+  it('notifies subscribers of every step change, reset included', () => {
+    const seen: number[] = [];
+    service.getStepIndex$().subscribe((index) => seen.push(index));
+
+    service.setStepIndex(4);
+    service.newCalculation();
+
+    expect(seen).toEqual([0, 4, 0]);
+  });
+
+  it('persists the step and reloads it on every init', () => {
+    service.setStepIndex(3);
+    expect(prefs.get(GUIDED_STEP_STORAGE_KEY)).toBe(3);
+
+    // Ionic caches the Guided page, so entering it re-inits the service.
+    prefs.set(GUIDED_STEP_STORAGE_KEY, 5);
+    service.init();
+
+    expect(service.getStepIndex()).toBe(5);
+  });
+
+  it('falls back to the first step when the persisted step is unusable', () => {
+    prefs.set(GUIDED_STEP_STORAGE_KEY, 'summary');
+    service.init();
+    expect(service.getStepIndex()).withContext('not a number').toBe(0);
+
+    prefs.set(GUIDED_STEP_STORAGE_KEY, -2);
+    service.init();
+    expect(service.getStepIndex()).withContext('negative').toBe(0);
   });
 });
