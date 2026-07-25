@@ -1,6 +1,7 @@
 import { kimiCode, defineWorkflow, schema } from '@nyxa/automation';
 import runInitialize from './initialize.js';
 import runToPlanify from './planify.js';
+import runImplementation from './implement.js';
 
 async function sleep(seconds: number) {
   return new Promise<void>((res) => {
@@ -11,7 +12,7 @@ async function sleep(seconds: number) {
 }
 
 const workflow = defineWorkflow({
-  harness: kimiCode(),
+  harness: kimiCode({ model: 'kimi-code/k3', effort: 'max' }),
   async run(context) {
     for (let attempt = 0; attempt < 20; attempt++) {
       const initResult = await runInitialize(context);
@@ -30,6 +31,10 @@ const workflow = defineWorkflow({
       }
 
       if (!initResult.toPlanify) {
+        const implementationResult = await runImplementation(context, {
+          issue: initResult.issue,
+        });
+        console.error('Implementation result', implementationResult);
       }
     }
   },
