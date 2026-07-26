@@ -2,8 +2,11 @@ import { TestBed } from '@angular/core/testing';
 
 import { provideTranslateService } from '@ngx-translate/core';
 
+import { DoughType } from 'src/app/features/calculator/enums/dough-type.enum';
 import { GUIDED_DRAFT_STORAGE_KEY } from 'src/app/features/calculator/services/calculator-draft-storage.constants';
 import { ExpertDraftService } from 'src/app/features/calculator/services/expert-draft.service';
+import { DoughSummaryService } from 'src/app/features/doughs/services/dough-summary.service';
+import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { collectKeys } from 'src/app/shared/testing/collect-keys';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
@@ -81,6 +84,91 @@ describe('Recipe catalog integrity', () => {
   });
 });
 
+describe('The dough each Recipe recommends', () => {
+  /**
+   * The house recommendation per Recipe, as the user reads it: the style and
+   * method carried by the preset, plus the hydration and the rest split the
+   * engine resolves. A silent preset edit fails here, not in production.
+   */
+  const HOUSE_DOUGH_FACTS = [
+    {
+      id: 'margherita',
+      pizzaType: PizzaType.NEAPOLITAN,
+      doughType: DoughType.DIRECT,
+      hydrationRatio: 0.62,
+      flourStrength: 270,
+      balls: 4,
+      ballWeight: 250,
+      ambientHours: 24,
+      coldHours: 0,
+    },
+    {
+      id: 'marinara',
+      pizzaType: PizzaType.NEAPOLITAN,
+      doughType: DoughType.DIRECT,
+      hydrationRatio: 0.66,
+      flourStrength: 270,
+      balls: 4,
+      ballWeight: 250,
+      ambientHours: 24,
+      coldHours: 0,
+    },
+    {
+      id: 'reine',
+      pizzaType: PizzaType.ROMAN,
+      doughType: DoughType.DIRECT,
+      hydrationRatio: 0.55,
+      flourStrength: 270,
+      balls: 4,
+      ballWeight: 260,
+      ambientHours: 24,
+      coldHours: 0,
+    },
+  ] as const;
+
+  let catalog: RecipeCatalogService;
+  let summaries: DoughSummaryService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        provideTranslateService(),
+        { provide: PrefsStorage, useValue: new FakePrefsStorage() },
+      ],
+    });
+    catalog = TestBed.inject(RecipeCatalogService);
+    summaries = TestBed.inject(DoughSummaryService);
+  });
+
+  it('covers every shipped Recipe', () => {
+    expect(PIZZA_RECIPE_CATALOG.map(({ id }) => id)).toEqual(
+      HOUSE_DOUGH_FACTS.map(({ id }) => id),
+    );
+  });
+
+  for (const expected of HOUSE_DOUGH_FACTS) {
+    it(`resolves the house dough facts of "${expected.id}"`, () => {
+      const recipe = catalog.get(expected.id);
+      if (!recipe) {
+        throw new Error(`Missing Recipe: ${expected.id}`);
+      }
+      const { input } = recipe.suggestedDough;
+
+      // The style and the flour are carried by the preset, not resolved.
+      expect(input.pizzaType).toBe(expected.pizzaType);
+      expect(input.flourStrength).toBe(expected.flourStrength);
+
+      const summary = summaries.summarize(input);
+      expect(summary.doughType).toBe(expected.doughType);
+      expect(summary.hydrationRatio).toBe(expected.hydrationRatio);
+      expect(summary.balls).toBe(expected.balls);
+      expect(summary.ballWeight).toBe(expected.ballWeight);
+      expect(summary.ambientHours).toBe(expected.ambientHours);
+      expect(summary.coldHours).toBe(expected.coldHours);
+    });
+  }
+});
+
 describe('RecipeCatalogService', () => {
   let prefs: FakePrefsStorage;
   let service: RecipeCatalogService;
@@ -124,7 +212,7 @@ describe('RecipeCatalogService', () => {
 
     expect(service.prepareSuggestedDough('margherita')).toBeTrue();
     expect(state.getInput().nbPizzas).toBe(4);
-    expect(state.getInput().hydrationRatio).toBe(0.63);
+    expect(state.getInput().hydrationRatio).toBe(0.62);
     expect(prefs.get('calculator:guided:step')).toBe(5);
     expect(prefs.get(GUIDED_DRAFT_STORAGE_KEY)).toEqual({ nbPizzas: 6 });
     expect(prefs.get('calculator:draft:expert')).toEqual(state.getInput());
