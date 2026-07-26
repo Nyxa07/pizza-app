@@ -20,7 +20,7 @@ const workflow = defineWorkflow({
       console.error('Init result', initResult);
 
       if (initResult.status === 'no_work') {
-        await sleep(300);
+        await sleep(1800);
         continue;
       }
 
