@@ -57,6 +57,7 @@ export default async function runImplementation(
     access: 'full',
     output: implementOutputSchema,
     skill: 'implement',
+    timeout: false,
   });
 
   return result;
