@@ -27,7 +27,8 @@ function getPrompt(issue: number) {
   return [
     `Créer la spec pour l'issue ${issue}.`,
     `N'oublie pas de lire les commentaires qui pourraient etre des retours a prendre en compte lors d'une deuxième passe de planification.`,
-    "Une fois le plan achevé, écrit le dans le corps de l'issue GitHub puis ajoute un commentaire résumant en quelques phrases le plan / spec pour des utilisateurs moins techniques.",
+    "Une fois le plan achevé, écrit le dans le corps de l'issue GitHub.",
+    'Lorsque des décisions doivent être tranchée, ajoute un commentaire les reprennant une à une avec leurs conséquences.',
     "Retire le label `ready-for-agent` ainsi que `to-planify` (si présent), et ajoute le label `ready-for-human` pour qu'on puisse valider le plan.",
     'Si tu as fais des propositions de design qui nécéssite une décision ajoute aussi le label `needs-triage`',
   ].join('\n');
