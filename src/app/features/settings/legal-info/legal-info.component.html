@@ -1,0 +1,12 @@
+<ion-list-header>{{ "settings.form.legal.title" | translate }}</ion-list-header>
+<ion-list lines="none">
+  <ion-item
+    data-testid="privacy-policy-link"
+    [href]="privacyPolicyUrl"
+    target="_blank"
+    rel="noopener noreferrer"
+    detail="true"
+  >
+    <ion-label>{{ "settings.form.legal.privacyPolicy" | translate }}</ion-label>
+  </ion-item>
+</ion-list>

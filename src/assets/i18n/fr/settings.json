@@ -28,7 +28,7 @@
       "privacyPolicy": "Politique de confidentialité"
     },
     "doughDefaults": {
-      "title": "Mes défauts de pâte",
+      "title": "Mes pâtes par défaut",
       "hint": "Tout nouveau calcul démarre de ces valeurs.",
       "hydration": "Hydratation",
       "salt": "Ratio de sel",
