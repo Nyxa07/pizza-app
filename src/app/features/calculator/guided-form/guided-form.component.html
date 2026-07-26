@@ -63,40 +63,6 @@
           </button>
         </div>
       }
-      @case ("flourStrength") {
-        <div
-          class="pill-grid flour-strength-grid"
-          role="radiogroup"
-          [attr.aria-labelledby]="'guided-question-flourStrength'"
-        >
-          @for (strength of flourStrengths; track strength) {
-            <button
-              type="button"
-              class="pill num"
-              [class.selected]="draft.flourStrengthChoice === strength"
-              role="radio"
-              [attr.aria-checked]="draft.flourStrengthChoice === strength"
-              (click)="selectFlourStrength(strength)"
-            >
-              W{{ strength }}
-            </button>
-          }
-          <button
-            type="button"
-            class="pill"
-            [class.selected]="
-              draft.flourStrengthChoice === UNKNOWN_FLOUR_STRENGTH
-            "
-            role="radio"
-            [attr.aria-checked]="
-              draft.flourStrengthChoice === UNKNOWN_FLOUR_STRENGTH
-            "
-            (click)="selectFlourStrength(UNKNOWN_FLOUR_STRENGTH)"
-          >
-            {{ "calculator.guided.options.unknownFlourStrength" | translate }}
-          </button>
-        </div>
-      }
       @case ("quantity") {
         <div class="counter">
           <button
@@ -296,18 +262,6 @@
             <dt>{{ "calculator.guided.summary.style" | translate }}</dt>
             <dd>
               {{ "calculator.enums.pizzaTypes." + draft.pizzaType | translate }}
-            </dd>
-          </div>
-          <div>
-            <dt>{{ "calculator.guided.summary.flourStrength" | translate }}</dt>
-            <dd class="num">
-              @if (draft.flourStrengthChoice === UNKNOWN_FLOUR_STRENGTH) {
-                {{
-                  "calculator.guided.summary.unknownFlourStrength" | translate
-                }}
-              } @else {
-                W{{ draft.flourStrengthChoice }}
-              }
             </dd>
           </div>
           <div>

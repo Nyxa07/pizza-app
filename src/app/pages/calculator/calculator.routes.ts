@@ -19,6 +19,13 @@ export const CALCULATOR_ROUTES: Route[] = [
     loadComponent: () =>
       import('./guided/guided.page').then((m) => m.CalculatorGuidedPage),
   },
+  {
+    path: CalculatorPath.INTERMEDIATE,
+    loadComponent: () =>
+      import('./intermediate/intermediate.page').then(
+        (m) => m.CalculatorIntermediatePage,
+      ),
+  },
   // The v1 assistant is gone; old deep links enter the Guided path.
   {
     path: 'assistant',
@@ -41,6 +48,12 @@ export const CALCULATOR_ROUTES: Route[] = [
   {
     path: 'method/guided',
     data: { calculatorPath: CalculatorPath.GUIDED },
+    loadComponent: () =>
+      import('./method/method.page').then((m) => m.CalculatorMethodPage),
+  },
+  {
+    path: 'method/intermediate',
+    data: { calculatorPath: CalculatorPath.INTERMEDIATE },
     loadComponent: () =>
       import('./method/method.page').then((m) => m.CalculatorMethodPage),
   },

@@ -1,11 +1,21 @@
 import { DoughType } from '../calculator/enums/dough-type.enum';
 import { YeastType } from '../calculator/enums/yeast-type.enum';
 import type { ICalculatorInput } from '../calculator/interfaces/calculator-input.interface';
+import { weightForSize } from '../calculator/pizza-format.model';
 import { PizzaType } from '../settings/enums/pizza-type.enum';
 import type {
   PizzaRecipeDefinition,
   SuggestedDough,
 } from './interfaces/pizza-recipe.interface';
+
+/**
+ * Each preset states the pizza it aims for; the pizza format model turns that
+ * size into a ball weight. Writing the weight here would be a fourth source of
+ * truth, and one that silently goes stale the next time the model is retuned.
+ */
+const NEAPOLITAN_SIZE_CM = 28;
+/** The most generous pizza the Roman style still describes. */
+const ROMAN_SIZE_CM = 33;
 
 /**
  * Everything the two 24 h Neapolitan presets have in common. They differ on
@@ -23,7 +33,7 @@ const NEAPOLITAN_DIRECT_24H = {
   flourStrength: 270,
   saltRatio: 0.028,
   honeyRatio: 0,
-  pizzaWeight: 250,
+  pizzaWeight: weightForSize(PizzaType.NEAPOLITAN, NEAPOLITAN_SIZE_CM),
   pizzaType: PizzaType.NEAPOLITAN,
   oliveOilRatio: 0,
 } satisfies Omit<ICalculatorInput, 'hydrationRatio'>;
@@ -62,7 +72,7 @@ export const SUGGESTED_DOUGHS = [
       flourStrength: 270,
       saltRatio: 0.026,
       honeyRatio: 0,
-      pizzaWeight: 260,
+      pizzaWeight: weightForSize(PizzaType.ROMAN, ROMAN_SIZE_CM),
       pizzaType: PizzaType.ROMAN,
       oliveOilRatio: 0.02,
     },

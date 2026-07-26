@@ -5,7 +5,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 import { CalculatorPath } from '../enums/calculator-path.enum';
 
-/** The calculator exposes two paths, each with its own persisted Draft. */
+/** The calculator exposes three paths, each with its own persisted Draft. */
 @Component({
   selector: 'app-calculator-path-switch',
   templateUrl: './calculator-path-switch.component.html',
@@ -19,6 +19,10 @@ export class CalculatorPathSwitchComponent {
     {
       path: CalculatorPath.GUIDED,
       label: 'calculator.paths.guided',
+    },
+    {
+      path: CalculatorPath.INTERMEDIATE,
+      label: 'calculator.paths.intermediate',
     },
     {
       path: CalculatorPath.EXPERT,

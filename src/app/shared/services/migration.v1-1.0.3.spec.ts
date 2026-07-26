@@ -70,7 +70,7 @@ describe('MigrationService 1.0.3 integration', () => {
     expect(prefs.get('calculator:config')).toEqual({
       yeast: { dryActive: 0.006 },
     });
-    expect(prefs.get('schema-version')).toBe(7);
+    expect(prefs.get('schema-version')).toBe(8);
     expect(prefs.get('calculator:draft')).toBeNull();
     expect(prefs.get('calculator:draft:guided')).toBeNull();
 

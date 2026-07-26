@@ -1,0 +1,143 @@
+:host {
+  display: block;
+  max-width: 720px;
+  margin: 0 auto;
+  padding-bottom: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+
+  + .grid,
+  + .field {
+    margin-top: 10px;
+  }
+}
+
+.field {
+  margin: 0 0 10px;
+
+  + .grid {
+    margin-top: 10px;
+  }
+}
+
+.field-heading {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.field-label {
+  margin: 0;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.field-hint {
+  margin: 4px 0 8px;
+  font-size: 0.78rem;
+  color: var(--ink-2);
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.choice {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+
+  strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  span {
+    font-size: 0.75rem;
+    color: var(--ink-2);
+  }
+
+  &.selected {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  }
+}
+
+// The single rest control: a slider for the sweep, steppers for the last hour.
+.rest {
+  padding: 12px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  .rest-range {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+    --bar-height: 4px;
+  }
+
+  .slider-value {
+    min-width: 44px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: right;
+    color: var(--ink);
+  }
+}
+
+.timeline {
+  display: block;
+  margin: 14px 0 0;
+}
+
+.read-only {
+  margin: 14px 0 0;
+  padding: 12px;
+  border: 1px dashed var(--hairline);
+  border-radius: var(--radius-m);
+
+  h2 {
+    margin: 0 0 8px;
+    font-family: var(--font-voice);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink-2);
+  }
+
+  dt app-info-sheet-button {
+    margin: -8px 0;
+  }
+}
+
+.method {
+  margin: 16px 0 0;
+}

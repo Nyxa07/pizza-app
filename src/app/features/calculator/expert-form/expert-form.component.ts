@@ -17,6 +17,11 @@ import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
+import {
+  clampWeight,
+  sizeForWeight,
+  weightOptions,
+} from '../pizza-format.model';
 import { EXPERT_CALCULATOR_SETTINGS } from '../services/calculator-initializer.service';
 import { CalculatorService } from '../services/calculator.service';
 import { ExpertDraftService } from '../services/expert-draft.service';
@@ -29,9 +34,9 @@ import {
   restTimePatch,
   stepInList,
 } from './expert-field-options';
-import { ExpertMethodPreviewComponent } from './parts/expert-method-preview.component';
-import { ExpertTileComponent } from './parts/expert-tile.component';
-import { ExpertTimelineComponent } from './parts/expert-timeline.component';
+import { CalculatorMethodPreviewComponent } from '../parts/calculator-method-preview.component';
+import { CalculatorTileComponent } from '../parts/calculator-tile.component';
+import { CalculatorTimelineComponent } from '../parts/calculator-timeline.component';
 
 /** Fields stepped with a plain `state.update`, on their shared value grid. */
 type SteppableField =
@@ -58,6 +63,10 @@ interface ExpertVm {
   total: number;
   split: { flour: number; water: number; salt: number; yeast: number };
   weight: number;
+  /** The pizza the current ball weight amounts to, shown as a caption. */
+  sizeCm: number;
+  /** The weight grid of the current style — the only style-dependent grid. */
+  weightOptions: readonly number[];
   hydrationPct: number;
   poolishRatioPct: number;
   ambientHours: number;
@@ -88,9 +97,9 @@ const POOLISH_RATIO_FALLBACK = 0.3;
     NumberPipe,
     RelativeDayPipe,
     TimePipe,
-    ExpertMethodPreviewComponent,
-    ExpertTileComponent,
-    ExpertTimelineComponent,
+    CalculatorMethodPreviewComponent,
+    CalculatorTileComponent,
+    CalculatorTimelineComponent,
   ],
 })
 export class ExpertFormComponent {
@@ -133,7 +142,7 @@ export class ExpertFormComponent {
 
   protected stepField(vm: ExpertVm, field: SteppableField, dir: 1 | -1): void {
     const next = stepInList(
-      EXPERT_FIELD_OPTIONS[field],
+      this.optionsFor(vm, field),
       this.effectiveValue(vm, field),
       dir,
     );
@@ -164,7 +173,7 @@ export class ExpertFormComponent {
     field: SteppableField | 'rtRestTime' | 'coldRestTime',
     dir: 1 | -1,
   ): boolean {
-    const values = EXPERT_FIELD_OPTIONS[field];
+    const values = this.optionsFor(vm, field);
     const current =
       field === 'rtRestTime'
         ? vm.ambientHours
@@ -188,9 +197,15 @@ export class ExpertFormComponent {
     });
   }
 
-  protected onPizzaType(event: Event): void {
+  /**
+   * Changing the style re-seats the ball weight inside the new style: a 340 g
+   * Neapolitan becomes a 210 g Roman rather than a pizza the style never makes.
+   */
+  protected onPizzaType(vm: ExpertVm, event: Event): void {
+    const pizzaType = (event as CustomEvent<{ value: PizzaType }>).detail.value;
     this.state.update({
-      pizzaType: (event as CustomEvent<{ value: PizzaType }>).detail.value,
+      pizzaType,
+      pizzaWeight: clampWeight(pizzaType, vm.weight),
     });
   }
 
@@ -205,6 +220,9 @@ export class ExpertFormComponent {
     const isPoolish = input.doughType === DoughType.POOLISH;
     const restPart = isPoolish ? output.poolish : output.dough;
     const total = output.total;
+    // The engine already clamped the weight to the style, so the screen shows
+    // — and steps from — a value the style can actually produce.
+    const weight = Math.round(output.pizzaBalls.weight);
 
     return {
       input,
@@ -225,7 +243,9 @@ export class ExpertFormComponent {
         salt: Math.round(total.salt),
         yeast: Math.round(total.yeast * 10) / 10,
       },
-      weight: Math.round(output.pizzaBalls.weight),
+      weight,
+      sizeCm: sizeForWeight(input.pizzaType, weight),
+      weightOptions: weightOptions(input.pizzaType),
       hydrationPct: Math.round(output.hydrationRatio * 100),
       poolishRatioPct: Math.round(
         (input.poolishRatio ?? POOLISH_RATIO_FALLBACK) * 100,
@@ -234,6 +254,16 @@ export class ExpertFormComponent {
       coldHours: Math.round(restPart.coldRestTime),
       preview: this.methodPreview.buildPreview(input, output, new Date()),
     };
+  }
+
+  /** The grid a tile steps through — only the weight depends on the style. */
+  private optionsFor(
+    vm: ExpertVm,
+    field: SteppableField | 'rtRestTime' | 'coldRestTime',
+  ): readonly number[] {
+    return field === 'pizzaWeight'
+      ? vm.weightOptions
+      : EXPERT_FIELD_OPTIONS[field];
   }
 
   /** What the tile currently shows — the engine's effective value. */

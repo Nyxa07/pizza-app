@@ -6,6 +6,10 @@ import { PizzaType } from '../../settings/enums/pizza-type.enum';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
+import { fallbackWeight } from '../pizza-format.model';
+
+/** The style every factory Default is expressed in. */
+const FACTORY_PIZZA_TYPE = PizzaType.NEAPOLITAN;
 
 /**
  * Factory seed for the user's Defaults (« Mes pâtes par défaut »). Only a
@@ -25,8 +29,9 @@ export const FACTORY_DEFAULTS = {
   flourStrength: 270,
   saltRatio: 0.028,
   honeyRatio: 0.004,
-  pizzaWeight: 250,
-  pizzaType: PizzaType.NEAPOLITAN,
+  // Derived, not written: the pizza format model owns every ball weight.
+  pizzaWeight: fallbackWeight(FACTORY_PIZZA_TYPE),
+  pizzaType: FACTORY_PIZZA_TYPE,
   oliveOilRatio: 0,
 } satisfies ICalculatorInput;
 

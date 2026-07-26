@@ -4,10 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 
-import {
-  IGuidedCalculatorDraft,
-  UNKNOWN_FLOUR_STRENGTH,
-} from '../interfaces/guided-calculator-draft.interface';
+import { IGuidedCalculatorDraft } from '../interfaces/guided-calculator-draft.interface';
 import {
   GUIDED_DRAFT_STORAGE_KEY,
   GUIDED_STEP_STORAGE_KEY,
@@ -72,7 +69,6 @@ export class GuidedDraftService {
 
     return {
       pizzaType: defaults.pizzaType,
-      flourStrengthChoice: UNKNOWN_FLOUR_STRENGTH,
       nbPizzas: defaults.nbPizzas,
       doughType: defaults.doughType,
       globalRestTime: defaults.globalRestTime ?? splitRestTime,

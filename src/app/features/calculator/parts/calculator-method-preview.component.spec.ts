@@ -14,17 +14,17 @@ import { Locales } from 'src/app/features/settings/enums/locales.enum';
 import { LocaleManagerService } from 'src/app/features/settings/services/locale-manager.service';
 import frCalculator from 'src/assets/i18n/fr/calculator.json';
 
-import type { IMethodPreview } from '../../services/method-preview.service';
-import { ExpertMethodPreviewComponent } from './expert-method-preview.component';
+import type { IMethodPreview } from '../services/method-preview.service';
+import { CalculatorMethodPreviewComponent } from './calculator-method-preview.component';
 
-describe('ExpertMethodPreviewComponent', () => {
-  let fixture: ComponentFixture<ExpertMethodPreviewComponent>;
+describe('CalculatorMethodPreviewComponent', () => {
+  let fixture: ComponentFixture<CalculatorMethodPreviewComponent>;
 
   beforeEach(async () => {
     registerLocaleData(localeFr);
 
     await TestBed.configureTestingModule({
-      imports: [ExpertMethodPreviewComponent],
+      imports: [CalculatorMethodPreviewComponent],
       providers: [
         provideTranslateService({
           compiler: {
@@ -46,7 +46,7 @@ describe('ExpertMethodPreviewComponent', () => {
     translate.setTranslation(Locales.FR, { calculator: frCalculator });
     await firstValueFrom(translate.use(Locales.FR));
 
-    fixture = TestBed.createComponent(ExpertMethodPreviewComponent);
+    fixture = TestBed.createComponent(CalculatorMethodPreviewComponent);
   });
 
   it('renders every ingredient quantity without leaking translation keys', () => {
@@ -54,7 +54,7 @@ describe('ExpertMethodPreviewComponent', () => {
       steps: [
         {
           at: new Date(2026, 6, 20, 10, 45),
-          bodyKey: 'calculator.expert.method.steps.directMix',
+          bodyKey: 'calculator.shared.method.steps.directMix',
           bodyParams: {},
           ingredients: [
             { key: 'flour', grams: 755 },
@@ -67,7 +67,7 @@ describe('ExpertMethodPreviewComponent', () => {
         },
         {
           at: new Date(2026, 6, 21, 11, 45),
-          bodyKey: 'calculator.expert.method.steps.directBalls',
+          bodyKey: 'calculator.shared.method.steps.directBalls',
           bodyParams: { count: 4, weight: 250 },
           ingredients: [],
         },

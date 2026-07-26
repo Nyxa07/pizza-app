@@ -11,15 +11,22 @@ import { InfoSheetId } from 'src/app/features/sheets/enums/info-sheet-id.enum';
 import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-button/info-sheet-button.component';
 
 /**
- * One parametric tile of the Expert grid (variant D): uppercase label, big
- * tabular value with its unit and − / + steppers — or, when no `value` is
- * given, a projected select for enum fields.
+ * One parametric tile of a calculator grid (variant D): uppercase label, big
+ * tabular value with its unit, an optional caption and − / + steppers — or,
+ * when no `value` is given, a projected select for enum fields. Shared by the
+ * Expert and Intermediate screens so the two can never drift apart.
  */
 @Component({
-  selector: 'app-expert-tile',
+  selector: 'app-calculator-tile',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [InfoSheetButtonComponent, TranslatePipe],
+  // A tile whose reading matters to a screen reader announces itself as one
+  // group carrying its current value and unit, rather than as loose text.
+  host: {
+    '[attr.role]': 'ariaLabel() ? "group" : null',
+    '[attr.aria-label]': 'ariaLabel()',
+  },
   template: `
     <div class="label">
       <span>{{ label() }}</span>
@@ -28,10 +35,15 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
       }
     </div>
     @if (value() !== null) {
-      <div class="value num">
-        {{ value() }}
-        @if (unit(); as u) {
-          <small>{{ u }}</small>
+      <div class="value-block">
+        <div class="value num">
+          {{ value() }}
+          @if (unit(); as u) {
+            <small>{{ u }}</small>
+          }
+        </div>
+        @if (caption(); as text) {
+          <div class="caption num">{{ text }}</div>
         }
       </div>
       <div class="ctrl">
@@ -40,7 +52,7 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
           [disabled]="!canStepDown()"
           (click)="stepDown.emit()"
           [attr.aria-label]="
-            ('calculator.expert.tiles.decrease' | translate) + ' ' + label()
+            ('calculator.shared.tiles.decrease' | translate) + ' ' + label()
           "
         >
           −
@@ -50,7 +62,7 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
           [disabled]="!canStepUp()"
           (click)="stepUp.emit()"
           [attr.aria-label]="
-            ('calculator.expert.tiles.increase' | translate) + ' ' + label()
+            ('calculator.shared.tiles.increase' | translate) + ' ' + label()
           "
         >
           +
@@ -102,10 +114,20 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
       }
     }
 
-    .value {
+    .value-block {
       grid-area: value;
       align-self: center;
       min-width: 0;
+    }
+
+    .caption {
+      margin-top: 2px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--ink-2);
+    }
+
+    .value {
       font-size: 1.6rem;
       font-weight: 700;
       letter-spacing: -0.01em;
@@ -119,7 +141,11 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
       }
     }
 
+    // The projected-select variant stands alone in the value cell.
     .value.select {
+      grid-area: value;
+      align-self: center;
+      min-width: 0;
       font-size: 1.05rem;
       font-weight: 600;
     }
@@ -166,10 +192,14 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
     }
   `,
 })
-export class ExpertTileComponent {
+export class CalculatorTileComponent {
   readonly label = input.required<string>();
   readonly value = input<string | null>(null);
   readonly unit = input<string | null>(null);
+  /** A derived reading under the value, e.g. the size a weight amounts to. */
+  readonly caption = input<string | null>(null);
+  /** Spoken name of the tile, value and unit included. */
+  readonly ariaLabel = input<string | null>(null);
   readonly sheetId = input<InfoSheetId | null>(null);
   readonly canStepUp = input(true);
   readonly canStepDown = input(true);

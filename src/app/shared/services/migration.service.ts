@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import type { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
 import {
   EXPERT_DRAFT_STORAGE_KEY,
+  GUIDED_DRAFT_STORAGE_KEY,
   GUIDED_STEP_STORAGE_KEY,
   LEGACY_CALCULATOR_DRAFT_STORAGE_KEY,
 } from 'src/app/features/calculator/services/calculator-draft-storage.constants';
@@ -30,7 +31,7 @@ const V2_LOCALES = ['en', 'fr'] as const;
 const SCHEMA_VERSION_KEY = 'schema-version';
 
 /** Bumped when a release changes the shape of persisted preferences. */
-const SCHEMA_VERSION = 7;
+const SCHEMA_VERSION = 8;
 
 /**
  * Per-mode field-visibility settings written by the v1 personalisation
@@ -109,6 +110,9 @@ export class MigrationService {
     }
     if (version < 7) {
       this.moveSharedDraftToExpert();
+    }
+    if (version < 8) {
+      this.resetGuidedDraft();
     }
 
     this.prefsStorage.set(SCHEMA_VERSION_KEY, SCHEMA_VERSION);
@@ -226,6 +230,18 @@ export class MigrationService {
       this.prefsStorage.set(EXPERT_DRAFT_STORAGE_KEY, draft);
     }
     this.prefsStorage.remove(LEGACY_CALCULATOR_DRAFT_STORAGE_KEY);
+    this.prefsStorage.remove(GUIDED_STEP_STORAGE_KEY);
+  }
+
+  /**
+   * v7→v8: the Guided path lost its flour-strength step (issue #99), so its
+   * Draft and step index no longer describe the same journey. The app is in
+   * beta: rather than converting them, the in-progress Guided calculation
+   * simply starts over. Saved Doughs and Defaults are untouched — those are
+   * what the user deliberately kept.
+   */
+  private resetGuidedDraft(): void {
+    this.prefsStorage.remove(GUIDED_DRAFT_STORAGE_KEY);
     this.prefsStorage.remove(GUIDED_STEP_STORAGE_KEY);
   }
 

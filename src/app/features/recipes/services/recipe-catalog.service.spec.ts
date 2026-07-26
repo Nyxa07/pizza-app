@@ -120,7 +120,9 @@ describe('The dough each Recipe recommends', () => {
       hydrationRatio: 0.55,
       flourStrength: 270,
       balls: 4,
-      ballWeight: 260,
+      // The largest pizza the Roman style still describes: 33 cm (issue #99).
+      // The former 260 g amounted to a 37 cm pizza, outside the style.
+      ballWeight: 210,
       ambientHours: 24,
       coldHours: 0,
     },

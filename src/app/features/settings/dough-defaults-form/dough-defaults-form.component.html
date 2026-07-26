@@ -38,7 +38,7 @@
         [okText]="'common.actions.ok' | translate"
         [label]="'settings.form.doughDefaults.ballWeight' | translate"
       >
-        @for (pizzaWeight of options.pizzaWeight; track pizzaWeight) {
+        @for (pizzaWeight of weightOptions; track pizzaWeight) {
           <ion-select-option [value]="pizzaWeight">
             {{ pizzaWeight | number: "1.0-0" }} g
           </ion-select-option>

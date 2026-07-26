@@ -2,12 +2,34 @@
   "paths": {
     "label": "Parcours",
     "guided": "Guidé",
+    "intermediate": "Intermédiaire",
     "expert": "Expert"
   },
-  "expert": {
+  "shared": {
+    "tiles": {
+      "increase": "Augmenter",
+      "decrease": "Diminuer"
+    },
+    "timeline": {
+      "ambient": "{hours} h ambiante",
+      "cold": "{hours} h froid"
+    },
+    "method": {
+      "title": "La Méthode",
+      "fullMethod": "Méthode complète — {count} étapes",
+      "steps": {
+        "poolishMix": "Poolish : mélanger {ingredients}. Couvrir à température ambiante.",
+        "poolishKnead": "Frasage : ajouter {ingredients} à la poolish, puis pétrir.",
+        "directMix": "Pétrissage : mélanger {ingredients}, puis pétrir jusqu'à une pâte lisse.",
+        "directBalls": "Façonner {count} pâtons de {weight} g."
+      }
+    },
     "livebar": {
       "split": "{flour} g Farine · {water} g Eau · {salt} g Sel · {yeast} g Levure"
     },
+    "cta": "Commencer — prêt {day} à {time}"
+  },
+  "expert": {
     "tiles": {
       "balls": "Pâtons",
       "weight": "Poids",
@@ -22,28 +44,48 @@
       "salt": "Sel",
       "flourStrength": "Farine (W)",
       "oliveOil": "Huile d'olive",
-      "honey": "Miel",
-      "increase": "Augmenter",
-      "decrease": "Diminuer"
+      "honey": "Miel"
     },
-    "timeline": {
-      "ambient": "{hours} h ambiante",
-      "cold": "{hours} h froid"
-    },
+    "sizeCaption": "≈ {size} cm",
     "advanced": {
       "summary": "Avancé — sel {salt} % · W {w} · huile {oil} % · miel {honey} %"
+    }
+  },
+  "intermediate": {
+    "fields": {
+      "pizzaType": "Type de pizza",
+      "balls": "Nombre de pâtons",
+      "size": "Taille de la pizza",
+      "doughType": "Type de pâte",
+      "restTime": "Temps de repos",
+      "temperature": "Température de la pièce",
+      "yeastType": "Type de levure"
     },
-    "method": {
-      "title": "La Méthode",
-      "fullMethod": "Méthode complète — {count} étapes",
-      "steps": {
-        "poolishMix": "Poolish : mélanger {ingredients}. Couvrir à température ambiante.",
-        "poolishKnead": "Frasage : ajouter {ingredients} à la poolish, puis pétrir.",
-        "directMix": "Pétrissage : mélanger {ingredients}, puis pétrir jusqu'à une pâte lisse.",
-        "directBalls": "Façonner {count} pâtons de {weight} g."
-      }
+    "hints": {
+      "pizzaType": "Le style décide de l'hydratation, de l'huile et des tailles proposées.",
+      "size": "Nous en déduisons le poids de vos pâtons.",
+      "restTime": "Au-delà de 24 h, nous répartissons le repos entre l'ambiante et le froid.",
+      "temperature": "Une estimation suffit : elle ajuste le dosage de la levure.",
+      "yeastType": "Choisissez ce qui est écrit sur votre paquet."
     },
-    "cta": "Commencer — prêt {day} à {time}"
+    "units": {
+      "size": "{size} cm",
+      "restTime": "{hours} h",
+      "temperature": "{temperature} °C"
+    },
+    "readOnly": {
+      "title": "Ce que nous avons décidé pour vous",
+      "ballWeight": "Poids du pâton",
+      "hydration": "Hydratation",
+      "restSplit": "Répartition du repos",
+      "restSplitValue": "{ambient} h ambiante + {cold} h froid",
+      "restSplitAmbientOnly": "{ambient} h à l'ambiante"
+    },
+    "a11y": {
+      "size": "Taille de la pizza, {size} centimètres",
+      "restTime": "Temps de repos, {hours} heures",
+      "balls": "Nombre de pâtons, {count}"
+    }
   },
   "guided": {
     "progress": "Étape {current} sur {total}",
@@ -54,11 +96,6 @@
         "eyebrow": "Votre pizza",
         "question": "Quel résultat aimez-vous ?",
         "description": "Nous adapterons automatiquement l'hydratation et le poids des pâtons."
-      },
-      "flourStrength": {
-        "eyebrow": "Votre farine",
-        "question": "Quelle est la force de votre farine ?",
-        "description": "Cherchez la valeur W sur le paquet. Si elle n'est pas indiquée, choisissez « Je ne sais pas »."
       },
       "quantity": {
         "eyebrow": "La tablée",
@@ -95,8 +132,7 @@
       "neapolitan": "Souple, gonflée et moelleuse",
       "roman": "Fine, légère et croustillante",
       "direct": "Tout mélanger en une fois",
-      "poolish": "Préparer un pré-ferment pour plus d'arômes",
-      "unknownFlourStrength": "Je ne sais pas"
+      "poolish": "Préparer un pré-ferment pour plus d'arômes"
     },
     "quantity": {
       "decrease": "Retirer une pizza",
@@ -114,8 +150,6 @@
     },
     "summary": {
       "style": "Style",
-      "flourStrength": "Force de la farine",
-      "unknownFlourStrength": "Je ne sais pas (W270)",
       "quantity": "Pizzas",
       "dough": "Méthode",
       "rest": "Repos",

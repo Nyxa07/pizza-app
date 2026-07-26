@@ -59,14 +59,14 @@ describe('MigrationService', () => {
   it('handles pristine preferences without crashing', () => {
     expect(() => service.run()).not.toThrow();
 
-    expect(prefs.get('schema-version')).toBe(7);
+    expect(prefs.get('schema-version')).toBe(8);
   });
 
   it('marks the schema as migrated and never runs twice', () => {
     prefs.set('theme', 'dark');
 
     service.run();
-    expect(prefs.get('schema-version')).toBe(7);
+    expect(prefs.get('schema-version')).toBe(8);
     expect(prefs.get('theme')).toBeNull();
 
     // A theming key reappearing after migration must survive a second run().
@@ -140,7 +140,7 @@ describe('MigrationService', () => {
 
     expect(prefs.get('theme')).toBe('written-after-v2');
     expect(prefs.get('calculator:draft:expert')).toEqual({ nbPizzas: 3 });
-    expect(prefs.get('schema-version')).toBe(7);
+    expect(prefs.get('schema-version')).toBe(8);
   });
 
   it('drops the per-mode field-visibility settings (issue #71)', () => {
@@ -173,7 +173,7 @@ describe('MigrationService', () => {
     expect(prefs.get('calculator:draft:expert')).toBeNull();
     expect(prefs.get('calculator:complex')).toEqual({ nbPizzas: 3 });
     expect(prefs.get('calculator:settings:complex')).toBeNull();
-    expect(prefs.get('schema-version')).toBe(7);
+    expect(prefs.get('schema-version')).toBe(8);
   });
 
   it('drops the retired assistant state and moves the shared Draft to Expert', () => {
@@ -188,7 +188,7 @@ describe('MigrationService', () => {
     expect(prefs.get('assistant:currentStepIndex')).toBeNull();
     expect(prefs.get('calculator:draft')).toBeNull();
     expect(prefs.get('calculator:draft:expert')).toEqual({ nbPizzas: 7 });
-    expect(prefs.get('schema-version')).toBe(7);
+    expect(prefs.get('schema-version')).toBe(8);
   });
 
   it('merges every v1 named-save silo into one Dough list without loss', () => {
@@ -242,7 +242,7 @@ describe('MigrationService', () => {
     const doughs = prefs.get<{ name: string }[]>('calculator:doughs');
     expect(doughs?.map(({ name }) => name)).toEqual(['Existing', 'Legacy']);
     expect(prefs.get('assistant:data')).toEqual({ nbPizzas: 12 });
-    expect(prefs.get('schema-version')).toBe(7);
+    expect(prefs.get('schema-version')).toBe(8);
   });
 
   it('moves a v6 shared Draft to Expert and resets Guided progress', () => {
@@ -259,7 +259,33 @@ describe('MigrationService', () => {
     });
     expect(prefs.get('calculator:draft:guided')).toBeNull();
     expect(prefs.get('calculator:guided:step')).toBeNull();
-    expect(prefs.get('schema-version')).toBe(7);
+    expect(prefs.get('schema-version')).toBe(8);
+  });
+
+  it('resets the Guided Draft rather than converting it (v7→v8)', () => {
+    // Beta: the flour-strength step is gone (issue #99), so a Draft written
+    // before it cannot be replayed. What the user deliberately kept stays.
+    prefs.set('schema-version', 7);
+    prefs.set('calculator:draft:guided', {
+      pizzaType: 'roman',
+      flourStrengthChoice: 350,
+      nbPizzas: 9,
+    });
+    prefs.set('calculator:guided:step', 7);
+    prefs.set('calculator:draft:expert', { nbPizzas: 12 });
+    prefs.set('calculator:doughs', [{ id: 'kept', name: 'Kept' }]);
+    prefs.set('calculator:defaults', { pizzaWeight: 400 });
+
+    service.run();
+
+    expect(prefs.get('calculator:draft:guided')).toBeNull();
+    expect(prefs.get('calculator:guided:step')).toBeNull();
+    expect(prefs.get('calculator:draft:expert')).toEqual({ nbPizzas: 12 });
+    expect(prefs.get('calculator:doughs')).toEqual([
+      { id: 'kept', name: 'Kept' },
+    ]);
+    expect(prefs.get('calculator:defaults')).toEqual({ pizzaWeight: 400 });
+    expect(prefs.get('schema-version')).toBe(8);
   });
 
   it('never overwrites an Expert Draft during the v7 migration', () => {

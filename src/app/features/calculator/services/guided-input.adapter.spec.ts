@@ -5,10 +5,7 @@ import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
-import {
-  IGuidedCalculatorDraft,
-  UNKNOWN_FLOUR_STRENGTH,
-} from '../interfaces/guided-calculator-draft.interface';
+import { IGuidedCalculatorDraft } from '../interfaces/guided-calculator-draft.interface';
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
 import { GuidedInputAdapter } from './guided-input.adapter';
 
@@ -23,7 +20,6 @@ describe('GuidedInputAdapter', () => {
     adapter = TestBed.inject(GuidedInputAdapter);
     draft = {
       pizzaType: PizzaType.ROMAN,
-      flourStrengthChoice: UNKNOWN_FLOUR_STRENGTH,
       nbPizzas: 4,
       doughType: DoughType.POOLISH,
       globalRestTime: 24,
@@ -32,7 +28,7 @@ describe('GuidedInputAdapter', () => {
     };
   });
 
-  it('maps unknown flour to W270 and removes hidden rest splits', () => {
+  it('always applies W270 and removes hidden rest splits', () => {
     const input = adapter.resolve(draft);
 
     expect(input.flourStrength).toBe(270);
@@ -43,12 +39,12 @@ describe('GuidedInputAdapter', () => {
   });
 
   it('maps every explicit Guided answer without hidden Expert data', () => {
-    const input = adapter.resolve({ ...draft, flourStrengthChoice: 350 });
+    const input = adapter.resolve(draft);
 
     expect(input).toEqual(
       jasmine.objectContaining({
         pizzaType: PizzaType.ROMAN,
-        flourStrength: 350,
+        flourStrength: 270,
         nbPizzas: 4,
         doughType: DoughType.POOLISH,
         temperature: 22,

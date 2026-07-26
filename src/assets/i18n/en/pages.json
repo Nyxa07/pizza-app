@@ -11,10 +11,13 @@
     "guided": {
       "title": "Calculate"
     },
+    "intermediate": {
+      "title": "Calculate"
+    },
     "method": {
       "title": "The Method",
       "emptyTitle": "No dough on the board",
-      "emptyBody": "Configure a calculation in the Expert or Guided path, then come back for the full timed Method.",
+      "emptyBody": "Configure a calculation in the Guided, Intermediate or Expert path, then come back for the full timed Method.",
       "emptyCta": "Open the calculator"
     }
   },
@@ -40,7 +43,7 @@
   "doughs": {
     "title": "My doughs",
     "emptyTitle": "Your dough notebook",
-    "emptyBody": "Save a calculation from the Expert, Guided or Method screen to find its document and Method here.",
+    "emptyBody": "Save a calculation from the Guided, Intermediate, Expert or Method screen to find its document and Method here.",
     "saveAction": "Save as Dough",
     "saveTitle": "Name this Dough",
     "nameLabel": "Dough name",

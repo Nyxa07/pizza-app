@@ -7,7 +7,7 @@ import { provideTranslateService } from '@ngx-translate/core';
 
 import { InfoSheetId } from 'src/app/features/sheets/enums/info-sheet-id.enum';
 
-import { ExpertTileComponent } from './expert-tile.component';
+import { CalculatorTileComponent } from './calculator-tile.component';
 
 /**
  * Every tile must let its label breathe above the content it names — a value
@@ -21,21 +21,26 @@ const TOLERANCE_PX = 0.5;
 @Component({
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ExpertTileComponent],
+  imports: [CalculatorTileComponent],
   template: `
     <div class="grid">
-      <app-expert-tile
+      <app-calculator-tile
         class="stepper-tile"
         label="Hydratation"
         value="65"
         unit="%"
         [sheetId]="sheetId"
       />
-      <app-expert-tile class="select-tile" label="Type de pâte">
+      <app-calculator-tile class="select-tile" label="Type de pâte">
         <span class="projected">Napolitaine</span>
-      </app-expert-tile>
-      <app-expert-tile class="tall-tile" label="Poids" value="260" unit="g" />
-      <app-expert-tile class="stretched-tile" label="Pâtons" value="6" />
+      </app-calculator-tile>
+      <app-calculator-tile
+        class="tall-tile"
+        label="Poids"
+        value="260"
+        unit="g"
+      />
+      <app-calculator-tile class="stretched-tile" label="Pâtons" value="6" />
     </div>
   `,
   styles: `
@@ -58,7 +63,7 @@ class TileGridHostComponent {
   readonly sheetId = InfoSheetId.HYDRATION;
 }
 
-describe('ExpertTileComponent', () => {
+describe('CalculatorTileComponent', () => {
   let host: HTMLElement;
 
   beforeEach(() => {
