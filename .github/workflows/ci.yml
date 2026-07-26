@@ -1,0 +1,129 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  # Superseded pull request runs are disposable; a run that may publish a
+  # release is not.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  test:
+    name: Lint and tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npm test -- --watch=false --browsers=ChromeHeadlessCI
+
+      # Playwright drives the system Chrome, preinstalled on the runner.
+      - run: npm run e2e
+
+  apk:
+    name: Development APK
+    needs: test
+    # Secrets are unavailable to forked pull requests, and a test build has no
+    # reason to exist before the code is merged or explicitly requested.
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      # Serialize publication so two runs never race on the same tag or purge.
+      group: android-dev-apk
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          # Imposed by android/app/capacitor.build.gradle.
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - run: npm ci
+
+      - name: Decode the upload keystore
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/upload-key.jks"
+
+      - name: Build the signed development APK
+        env:
+          ANDROID_RELEASE_STORE_FILE: ${{ runner.temp }}/upload-key.jks
+          ANDROID_RELEASE_STORE_PASSWORD: ${{ secrets.ANDROID_RELEASE_STORE_PASSWORD }}
+          ANDROID_RELEASE_KEY_ALIAS: ${{ secrets.ANDROID_RELEASE_KEY_ALIAS }}
+          ANDROID_RELEASE_KEY_PASSWORD: ${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}
+          ANDROID_DEV_BUILD_LABEL: ${{ github.run_number }}
+        run: |
+          # Let the Gradle cache restored by setup-gradle apply; the build
+          # script keeps any GRADLE_USER_HOME already set.
+          export GRADLE_USER_HOME="$HOME/.gradle"
+          make android-apk-dev
+
+      - name: Publish the prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          apk="$(find android/app/build/outputs/apk/devRelease -name '*.apk' -type f)"
+          if [ "$(printf '%s\n' "$apk" | wc -l)" -ne 1 ] || [ ! -f "$apk" ]; then
+            echo "Expected exactly one APK, got: $apk" >&2
+            exit 1
+          fi
+
+          version="$(node -p "require('./package.json').version")"
+          short_sha="$(git rev-parse --short HEAD)"
+          asset="$RUNNER_TEMP/pizza-maker-${version}-dev-${short_sha}.apk"
+          cp "$apk" "$asset"
+
+          cat > "$RUNNER_TEMP/notes.md" <<EOF
+          APK de test signé, à installer directement sur un appareil Android.
+
+          Cette version s'installe **à côté** de l'application du Play Store : elle utilise
+          l'identifiant com.pizzamaker.app.dev et porte le nom « Pizza Maker Dev ». Les données
+          de l'application publiée ne sont pas touchées.
+
+          Sur le téléphone, autoriser l'installation depuis le navigateur la première fois
+          (Paramètres → Applications → Accès spécial → Installer des applications inconnues).
+
+          Version : ${version} · build ${{ github.run_number }} · commit ${short_sha}
+          EOF
+
+          gh release create "dev-${{ github.run_number }}" "$asset" \
+            --prerelease \
+            --title "Build de test ${version} (#${{ github.run_number }})" \
+            --notes-file "$RUNNER_TEMP/notes.md"
+
+      - name: Purge older development releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release list --limit 100 --json tagName,createdAt \
+            --jq '[.[] | select(.tagName | startswith("dev-"))]
+                  | sort_by(.createdAt) | reverse | .[5:] | .[].tagName' \
+            | while read -r tag; do
+                [ -n "$tag" ] || continue
+                echo "Suppression de la release $tag"
+                gh release delete "$tag" --yes --cleanup-tag
+              done

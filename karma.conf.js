@@ -38,6 +38,13 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
+    customLaunchers: {
+      // CI runners provide no usable Chrome sandbox.
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox', '--disable-gpu']
+      }
+    },
     singleRun: false,
     restartOnFileChange: true
   });

@@ -17,6 +17,7 @@ def releaseTaskRequested = gradle.startParameter.taskNames.any {
     it.toLowerCase().contains('release')
 }
 def releaseStoreFile = null
+def devBuildLabel = System.getenv('ANDROID_DEV_BUILD_LABEL')
 
 if (releaseSigningConfigured) {
     releaseStoreFile = new File(releaseSigningSettings['ANDROID_RELEASE_STORE_FILE'])
@@ -61,6 +62,17 @@ android {
             }
             minifyEnabled = false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        // Sideloadable APK for device testing, never uploaded to Google Play.
+        // Play App Signing replaces the upload-key signature with Google's own,
+        // so this build can never match the Store install. The suffixed
+        // applicationId lets both sit on the same device instead of colliding.
+        devRelease {
+            initWith release
+            applicationIdSuffix = '.dev'
+            versionNameSuffix = devBuildLabel ? "-dev.${devBuildLabel}" : '-dev'
+            // Capacitor subprojects only declare debug and release variants.
+            matchingFallbacks = ['release']
         }
     }
 }

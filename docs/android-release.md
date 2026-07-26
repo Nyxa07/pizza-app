@@ -1,8 +1,9 @@
 # Android release
 
 Pizza Maker targets Android 16 (API 36) through Capacitor 8. The Google Play
-release artifact is a signed Android App Bundle (AAB). Debug APKs remain the
-artifact used for local installation and device testing.
+release artifact is a signed Android App Bundle (AAB). Device testing uses the
+signed `devRelease` APK described in
+[Development build for sideloading](#development-build-for-sideloading).
 
 ## Prerequisites
 
@@ -117,8 +118,78 @@ The resulting file is:
 android/app/build/outputs/bundle/release/app-release.aab
 ```
 
-An AAB is not installed directly on a device. Keep using `make android-build`
-for the existing local APK-oriented workflow.
+An AAB is not installed directly on a device: Google Play consumes it to
+generate per-device APKs. To install a build on a phone, use
+[Development build for sideloading](#development-build-for-sideloading), or
+`make android-build` for the existing debug workflow.
+
+## Development build for sideloading
+
+The `devRelease` build type produces a signed APK meant for device testing
+between developers. It is never uploaded to Google Play.
+
+### Why a separate application ID
+
+The app uses Play App Signing: the local JKS is the _upload_ key, and Google
+replaces its signature with the app signing key before distribution. An APK
+signed here therefore never matches the one installed from the Store. Installing
+it over a Store build fails with `INSTALL_FAILED_UPDATE_INCOMPATIBLE`, and
+uninstalling first would discard the user's saved doughs.
+
+`devRelease` sidesteps this by suffixing the application ID:
+
+|                | Google Play          | `devRelease`             |
+| -------------- | -------------------- | ------------------------ |
+| Application ID | `com.pizzamaker.app` | `com.pizzamaker.app.dev` |
+| Launcher name  | Pizza Maker          | Pizza Maker Dev          |
+| Version name   | `2.0.2`              | `2.0.2-dev.<build>`      |
+
+Both install side by side, each with its own storage. The name override lives in
+`android/app/src/devRelease/res/values/strings.xml`, a build-type source set, so
+the `release` build type is untouched.
+
+### Build it locally
+
+```bash
+make android-apk-dev
+```
+
+The command reuses the release signing configuration from `.env`, builds the
+Angular application, synchronizes the Capacitor project, runs
+`assembleDevRelease` and verifies the signature with `apksigner`. The APK lands
+in:
+
+```text
+android/app/build/outputs/apk/devRelease/
+```
+
+`versionCode` is not bumped: Android accepts reinstalling over an equal code,
+and `ANDROID_DEV_BUILD_LABEL` already distinguishes builds through the version
+name.
+
+### Continuous integration
+
+`.github/workflows/ci.yml` runs lint, unit tests and end-to-end tests on every
+pull request. On a push to `main`, or on manual dispatch, it additionally builds
+the APK through the same `make android-apk-dev` target and attaches it to a
+GitHub prerelease tagged `dev-<run number>`. The repository is public, so the
+asset downloads from a phone browser without authentication. Only the five most
+recent `dev-*` releases are kept.
+
+The workflow requires four repository secrets:
+
+| Secret                           | Value                               |
+| -------------------------------- | ----------------------------------- |
+| `ANDROID_KEYSTORE_BASE64`        | `base64 -w0` of the upload keystore |
+| `ANDROID_RELEASE_STORE_PASSWORD` | Same as `.env`                      |
+| `ANDROID_RELEASE_KEY_ALIAS`      | Same as `.env`                      |
+| `ANDROID_RELEASE_KEY_PASSWORD`   | Same as `.env`                      |
+
+Never commit the keystore or any of these values. Note that this `docs/`
+directory is the GitHub Pages source and is published publicly.
+
+The workflow never contacts Google Play. Uploading and promoting a release stay
+manual, as described below.
 
 ## Deploy through Google Play
 

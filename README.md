@@ -204,6 +204,9 @@ npm run build
 # Build the signed Android App Bundle for Google Play
 make android-bundle-release
 
+# Build a signed APK that installs next to the Play Store version
+make android-apk-dev
+
 # Keep the local APK-oriented Android workflow
 make android-build
 
@@ -212,8 +215,8 @@ ionic capacitor build ios
 ```
 
 See [docs/android-release.md](docs/android-release.md) for API 36 prerequisites,
-local upload-key configuration, signature verification and the manual Google
-Play internal-track workflow.
+local upload-key configuration, signature verification, the sideloadable
+development build and the manual Google Play internal-track workflow.
 
 ## 🔧 **Configuration**
 

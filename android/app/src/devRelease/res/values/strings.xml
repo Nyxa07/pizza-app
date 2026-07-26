@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+    Overrides for the devRelease build type. Both keys are needed: the launcher
+    shows the activity label, not the application one.
+-->
+<resources>
+    <string name="app_name">Pizza Maker Dev</string>
+    <string name="title_activity_main">Pizza Maker Dev</string>
+</resources>
