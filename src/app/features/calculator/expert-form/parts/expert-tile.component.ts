@@ -62,13 +62,22 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
   `,
   styles: `
     :host {
+      --stepper-size: 38px;
+
       position: relative;
       display: grid;
       grid-template-areas:
         'label label'
         'value controls';
       grid-template-columns: minmax(0, 1fr) auto;
+      // The label row stays at its own height so the gap below it never
+      // stretches; the content row takes the slack when a neighbour tile makes
+      // the row taller, and never collapses below a stepper.
+      grid-template-rows: auto minmax(var(--stepper-size), 1fr);
       column-gap: 6px;
+      // Guaranteed breathing room under the label, whatever the tile width or
+      // the height of its neighbours (#92).
+      row-gap: 12px;
       background: var(--surface);
       border: 1px solid var(--hairline);
       border-radius: var(--radius-m);
@@ -95,8 +104,8 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
 
     .value {
       grid-area: value;
+      align-self: center;
       min-width: 0;
-      padding: 4px 0 2px;
       font-size: 1.6rem;
       font-weight: 700;
       letter-spacing: -0.01em;
@@ -111,20 +120,19 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
     }
 
     .value.select {
-      padding-top: 8px;
       font-size: 1.05rem;
       font-weight: 600;
     }
 
     .ctrl {
       grid-area: controls;
-      align-self: end;
+      align-self: center;
       display: flex;
       gap: 4px;
 
       button {
-        width: 38px;
-        height: 38px;
+        width: var(--stepper-size);
+        height: var(--stepper-size);
         padding: 0;
         border: 1px solid var(--hairline);
         border-radius: var(--radius-s);
