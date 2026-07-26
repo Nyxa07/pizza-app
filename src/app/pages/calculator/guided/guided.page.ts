@@ -61,7 +61,7 @@ export class CalculatorGuidedPage implements ViewWillEnter {
   // Draft from persistence on every entry.
   ionViewWillEnter(): void {
     idleCallback(() => {
-      this.calculatorInitializer.initGuided();
+      this.calculatorInitializer.init(CalculatorPath.GUIDED);
       this.isInitialized.set(true);
     });
   }

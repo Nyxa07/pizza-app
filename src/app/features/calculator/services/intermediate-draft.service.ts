@@ -5,7 +5,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 
 import { IIntermediateCalculatorDraft } from '../interfaces/intermediate-calculator-draft.interface';
-import { clampSize, sizeForWeight } from '../pizza-format.model';
+import {
+  clampSize,
+  fallbackWeight,
+  sizeForWeight,
+} from '../pizza-format.model';
 import { INTERMEDIATE_DRAFT_STORAGE_KEY } from './calculator-draft-storage.constants';
 import { DoughDefaultsService } from './dough-defaults.service';
 
@@ -58,7 +62,11 @@ export class IntermediateDraftService {
     return {
       pizzaType: defaults.pizzaType,
       nbPizzas: defaults.nbPizzas,
-      sizeCm: sizeForWeight(defaults.pizzaType, defaults.pizzaWeight ?? 0),
+      sizeCm: sizeForWeight(
+        defaults.pizzaType,
+        // A Default carrying no weight falls back on the style's own.
+        defaults.pizzaWeight ?? fallbackWeight(defaults.pizzaType),
+      ),
       doughType: defaults.doughType,
       globalRestTime: defaults.globalRestTime ?? splitRestTime,
       temperature: defaults.temperature,

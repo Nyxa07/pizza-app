@@ -63,15 +63,10 @@
     },
     "hints": {
       "pizzaType": "Le style décide de l'hydratation, de l'huile et des tailles proposées.",
-      "size": "Nous en déduisons le poids de vos pâtons.",
-      "restTime": "Au-delà de 24 h, nous répartissons le repos entre l'ambiante et le froid.",
-      "temperature": "Une estimation suffit : elle ajuste le dosage de la levure.",
-      "yeastType": "Choisissez ce qui est écrit sur votre paquet."
+      "restTime": "Au-delà de 24 h, nous répartissons le repos entre l'ambiante et le froid."
     },
     "units": {
-      "size": "{size} cm",
-      "restTime": "{hours} h",
-      "temperature": "{temperature} °C"
+      "restTime": "{hours} h"
     },
     "readOnly": {
       "title": "Ce que nous avons décidé pour vous",

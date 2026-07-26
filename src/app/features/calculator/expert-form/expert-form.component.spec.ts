@@ -21,6 +21,7 @@ import frCalculator from 'src/assets/i18n/fr/calculator.json';
 
 import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
 
+import { CalculatorPath } from '../enums/calculator-path.enum';
 import { DoughType } from '../enums/dough-type.enum';
 import { CalculatorInitializerService } from '../services/calculator-initializer.service';
 import { ExpertDraftService } from '../services/expert-draft.service';
@@ -109,7 +110,7 @@ describe('ExpertFormComponent', () => {
       ],
     }).compileComponents();
 
-    TestBed.inject(CalculatorInitializerService).initExpert();
+    TestBed.inject(CalculatorInitializerService).init(CalculatorPath.EXPERT);
     state = TestBed.inject(ExpertDraftService);
     fixture = TestBed.createComponent(ExpertFormComponent);
     fixture.detectChanges();

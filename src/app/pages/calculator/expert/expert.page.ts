@@ -60,7 +60,7 @@ export class CalculatorExpertPage implements ViewWillEnter {
   // Draft from persistence on every entry.
   ionViewWillEnter(): void {
     idleCallback(() => {
-      this.calculatorInitializer.initExpert();
+      this.calculatorInitializer.init(CalculatorPath.EXPERT);
       this.isInitialized.set(true);
     });
   }

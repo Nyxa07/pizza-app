@@ -48,7 +48,7 @@ describe('CalculatorMethodPage (Dough saving)', () => {
 
   it('binds the resolved Guided input to the Dough saver', () => {
     configure(CalculatorPath.GUIDED);
-    TestBed.inject(CalculatorInitializerService).initGuided();
+    TestBed.inject(CalculatorInitializerService).init(CalculatorPath.GUIDED);
 
     const input = boundSaverInput(
       TestBed.createComponent(CalculatorMethodPage),
@@ -86,7 +86,7 @@ describe('CalculatorMethodPage (Dough saving)', () => {
 
   it('binds the Expert Draft input to the Dough saver', () => {
     configure(CalculatorPath.EXPERT);
-    TestBed.inject(CalculatorInitializerService).initExpert();
+    TestBed.inject(CalculatorInitializerService).init(CalculatorPath.EXPERT);
 
     const input = boundSaverInput(
       TestBed.createComponent(CalculatorMethodPage),

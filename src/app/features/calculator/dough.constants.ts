@@ -1,5 +1,13 @@
 import { PizzaType } from '../settings/enums/pizza-type.enum';
 
+/**
+ * The flour a calculator path assumes when it does not ask for one. The W
+ * value is absent from most flour bags, so the approachable paths apply this
+ * — exactly what the Guided « Je ne sais pas » answer produced before its
+ * step was removed (issue #99).
+ */
+export const ASSUMED_FLOUR_STRENGTH = 270;
+
 type HydrationCfg = {
   referenceW: number;
   baseHydration: number;

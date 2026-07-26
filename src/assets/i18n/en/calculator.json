@@ -63,15 +63,10 @@
     },
     "hints": {
       "pizzaType": "The style sets hydration, olive oil and the sizes on offer.",
-      "size": "We work out your dough-ball weight from it.",
-      "restTime": "Beyond 24 h we split the rest between ambient and cold.",
-      "temperature": "An estimate is enough: it tunes the yeast amount.",
-      "yeastType": "Choose what is written on your packet."
+      "restTime": "Beyond 24 h we split the rest between ambient and cold."
     },
     "units": {
-      "size": "{size} cm",
-      "restTime": "{hours} h",
-      "temperature": "{temperature} °C"
+      "restTime": "{hours} h"
     },
     "readOnly": {
       "title": "What we decided for you",

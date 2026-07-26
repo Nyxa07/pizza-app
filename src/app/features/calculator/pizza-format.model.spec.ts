@@ -6,7 +6,6 @@ import {
   fallbackWeight,
   PIZZA_FORMATS,
   sizeForWeight,
-  sizeOptions,
   sizeRange,
   weightForSize,
   weightOptions,
@@ -61,8 +60,15 @@ describe('Pizza format model', () => {
         });
       }
 
-      it('proposes exactly the sizes of its range, one centimetre apart', () => {
-        expect(sizeOptions(style)).toEqual(rows.map(([size]) => size));
+      it('proposes exactly the sizes of the published table', () => {
+        const { min, max } = sizeRange(style);
+        const sizes = rows.map(([size]) => size);
+
+        expect(min).toBe(sizes[0]);
+        expect(max).toBe(sizes[sizes.length - 1]);
+        expect(max - min + 1)
+          .withContext('one centimetre apart')
+          .toBe(sizes.length);
       });
 
       it('grows strictly with the diameter', () => {
@@ -137,6 +143,13 @@ describe('Pizza format model', () => {
     // A 35 cm Neapolitan ball turned Roman: 340 g is far above the style.
     expect(sizeForWeight(PizzaType.ROMAN, 340)).toBe(33);
     expect(clampWeight(PizzaType.ROMAN, 340)).toBe(210);
+  });
+
+  it('leaves the formula unbounded — the range is a separate datum', () => {
+    // The model stays numerically valid well beyond the style, which is why
+    // the business range has to be enforced by clampSize, not by the formula.
+    expect(weightForSize(PizzaType.NEAPOLITAN, 45)).toBe(510);
+    expect(clampSize(PizzaType.NEAPOLITAN, 45)).toBe(35);
   });
 
   it('describes the Roman as a rimless, purely surface-driven pizza', () => {

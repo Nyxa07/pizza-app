@@ -64,11 +64,15 @@ export const PIZZA_FORMATS: Readonly<Record<PizzaType, IPizzaFormat>> = {
  * The rounding is not cosmetic: it aligns every produced weight with the
  * Expert weight grid, which makes the size → weight → size round trip exact
  * and keeps a weight coming from the Intermediate path reachable in Expert.
+ *
+ * Pure formula, deliberately unbounded: bringing a size into range is
+ * {@link clampSize}'s job, and keeping the two apart is what lets a caller
+ * check what the model says beyond the style — 45 cm Neapolitan → 510 g,
+ * no divergence, which is precisely why the range exists as a separate datum.
  */
 export function weightForSize(pizzaType: PizzaType, sizeCm: number): number {
   const { baseCoefficient, rimCoefficient } = PIZZA_FORMATS[pizzaType];
-  const size = clampSize(pizzaType, sizeCm);
-  const raw = baseCoefficient * size * size + rimCoefficient * size;
+  const raw = baseCoefficient * sizeCm * sizeCm + rimCoefficient * sizeCm;
 
   return Math.round(raw / WEIGHT_STEP) * WEIGHT_STEP;
 }
@@ -87,13 +91,6 @@ export function sizeForWeight(pizzaType: PizzaType, grams: number): number {
     (-rim + Math.sqrt(rim * rim + 4 * base * Math.max(grams, 0))) / (2 * base);
 
   return clampSize(pizzaType, raw);
-}
-
-/** The sizes the style proposes, one centimetre apart. */
-export function sizeOptions(pizzaType: PizzaType): number[] {
-  const { minSize, maxSize } = PIZZA_FORMATS[pizzaType];
-
-  return range(minSize, maxSize);
 }
 
 /** The bounds of the sizes the style proposes, in centimetres. */

@@ -68,7 +68,7 @@ describe('GuidedFormComponent', () => {
       ],
     }).compileComponents();
 
-    TestBed.inject(CalculatorInitializerService).initGuided();
+    TestBed.inject(CalculatorInitializerService).init(CalculatorPath.GUIDED);
     draft = TestBed.inject(GuidedDraftService);
     fixture = TestBed.createComponent(GuidedFormComponent);
     fixture.detectChanges();
@@ -193,7 +193,7 @@ describe('GuidedFormComponent', () => {
 
   it('restores the persisted step when the Guided page is entered again', () => {
     prefs.set(GUIDED_STEP_STORAGE_KEY, 1);
-    TestBed.inject(CalculatorInitializerService).initGuided();
+    TestBed.inject(CalculatorInitializerService).init(CalculatorPath.GUIDED);
     fixture.detectChanges();
 
     expect(currentStepId()).toBe('quantity');

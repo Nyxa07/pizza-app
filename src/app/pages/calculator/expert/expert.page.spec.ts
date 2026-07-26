@@ -26,7 +26,7 @@ describe('CalculatorExpertPage', () => {
 
     initializer = jasmine.createSpyObj<CalculatorInitializerService>(
       'CalculatorInitializerService',
-      ['initExpert'],
+      ['init'],
     );
 
     TestBed.configureTestingModule({
@@ -43,7 +43,7 @@ describe('CalculatorExpertPage', () => {
   it('initializes the Expert Draft when the view is entered', () => {
     createPage().ionViewWillEnter();
 
-    expect(initializer.initExpert).toHaveBeenCalledTimes(1);
+    expect(initializer.init).toHaveBeenCalledTimes(1);
   });
 
   it('reloads the Expert Draft on every re-entry', () => {
@@ -52,6 +52,6 @@ describe('CalculatorExpertPage', () => {
     page.ionViewWillEnter();
     page.ionViewWillEnter();
 
-    expect(initializer.initExpert).toHaveBeenCalledTimes(2);
+    expect(initializer.init).toHaveBeenCalledTimes(2);
   });
 });

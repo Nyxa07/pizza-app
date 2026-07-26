@@ -1,12 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
+import { ASSUMED_FLOUR_STRENGTH } from '../dough.constants';
 import { IIntermediateCalculatorDraft } from '../interfaces/intermediate-calculator-draft.interface';
-import { weightForSize } from '../pizza-format.model';
+import { clampSize, weightForSize } from '../pizza-format.model';
 import { DoughDefaultsService } from './dough-defaults.service';
-
-/** The flour this path assumes — the value the Guided « I don't know » applies. */
-const INTERMEDIATE_FLOUR_STRENGTH = 270;
 
 /** The salt this path pins, the factory Default, never the user's own. */
 const INTERMEDIATE_SALT_RATIO = 0.028;
@@ -31,9 +29,13 @@ export class IntermediateInputAdapter {
       doughType: draft.doughType,
       yeastType: draft.yeastType,
       temperature: draft.temperature,
-      // The size is the answer, the weight its consequence.
-      pizzaWeight: weightForSize(draft.pizzaType, draft.sizeCm),
-      flourStrength: INTERMEDIATE_FLOUR_STRENGTH,
+      // The size is the answer, the weight its consequence. The clamp guards
+      // a size inherited from a style that stops earlier.
+      pizzaWeight: weightForSize(
+        draft.pizzaType,
+        clampSize(draft.pizzaType, draft.sizeCm),
+      ),
+      flourStrength: ASSUMED_FLOUR_STRENGTH,
       saltRatio: INTERMEDIATE_SALT_RATIO,
       honeyRatio: 0,
       // Left to derive: the engine applies the style's recommended hydration

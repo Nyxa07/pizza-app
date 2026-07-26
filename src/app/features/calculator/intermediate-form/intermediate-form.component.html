@@ -1,19 +1,5 @@
 @if (vm$ | async; as vm) {
-  <div class="livebar num">
-    <span class="total" aria-live="polite"
-      >{{ vm.total | number: "1.0-0" }} g</span
-    >
-    <span class="split">{{
-      "calculator.shared.livebar.split"
-        | translate
-          : {
-              flour: (vm.split.flour | number: "1.0-0"),
-              water: (vm.split.water | number: "1.0-0"),
-              salt: (vm.split.salt | number: "1.0-0"),
-              yeast: (vm.split.yeast | number: "1.0-1"),
-            }
-    }}</span>
-  </div>
+  <app-calculator-livebar [result]="vm.result" />
 
   <!-- 1. Pizza style — everything below adapts to it. -->
   <section class="field">
@@ -54,10 +40,10 @@
         'calculator.intermediate.a11y.balls'
           | translate: { count: vm.draft.nbPizzas }
       "
-      [canStepUp]="canStepBalls(vm, 1)"
-      [canStepDown]="canStepBalls(vm, -1)"
-      (stepUp)="stepBalls(vm, 1)"
-      (stepDown)="stepBalls(vm, -1)"
+      [canStepUp]="canStep(vm, 'nbPizzas', 1)"
+      [canStepDown]="canStep(vm, 'nbPizzas', -1)"
+      (stepUp)="step(vm, 'nbPizzas', 1)"
+      (stepDown)="step(vm, 'nbPizzas', -1)"
     />
     <!-- 3. The pizza size, and the ball weight it amounts to. -->
     <app-calculator-tile
@@ -65,15 +51,15 @@
       [label]="'calculator.intermediate.fields.size' | translate"
       [value]="vm.draft.sizeCm | number: '1.0-0'"
       unit="cm"
-      [caption]="(vm.weight | number: '1.0-0') + ' g'"
+      [caption]="(vm.result.weight | number: '1.0-0') + ' g'"
       [ariaLabel]="
         'calculator.intermediate.a11y.size'
           | translate: { size: vm.draft.sizeCm }
       "
-      [canStepUp]="canStepSize(vm, 1)"
-      [canStepDown]="canStepSize(vm, -1)"
-      (stepUp)="stepSize(vm, 1)"
-      (stepDown)="stepSize(vm, -1)"
+      [canStepUp]="canStep(vm, 'sizeCm', 1)"
+      [canStepDown]="canStep(vm, 'sizeCm', -1)"
+      (stepUp)="step(vm, 'sizeCm', 1)"
+      (stepDown)="step(vm, 'sizeCm', -1)"
     />
   </div>
 
@@ -114,9 +100,9 @@
       <button
         type="button"
         class="calculator-stepper"
-        [disabled]="!canStepRest(vm, -1)"
+        [disabled]="!canStep(vm, 'globalRestTime', -1)"
         [attr.aria-label]="'calculator.shared.tiles.decrease' | translate"
-        (click)="stepRest(vm, -1)"
+        (click)="step(vm, 'globalRestTime', -1)"
       >
         −
       </button>
@@ -137,9 +123,9 @@
       <button
         type="button"
         class="calculator-stepper"
-        [disabled]="!canStepRest(vm, 1)"
+        [disabled]="!canStep(vm, 'globalRestTime', 1)"
         [attr.aria-label]="'calculator.shared.tiles.increase' | translate"
-        (click)="stepRest(vm, 1)"
+        (click)="step(vm, 'globalRestTime', 1)"
       >
         +
       </button>
@@ -159,10 +145,10 @@
       [value]="vm.draft.temperature | number: '1.0-0'"
       unit="°C"
       [sheetId]="InfoSheetId.TEMPERATURE"
-      [canStepUp]="canStepTemperature(vm, 1)"
-      [canStepDown]="canStepTemperature(vm, -1)"
-      (stepUp)="stepTemperature(vm, 1)"
-      (stepDown)="stepTemperature(vm, -1)"
+      [canStepUp]="canStep(vm, 'temperature', 1)"
+      [canStepDown]="canStep(vm, 'temperature', -1)"
+      (stepUp)="step(vm, 'temperature', 1)"
+      (stepDown)="step(vm, 'temperature', -1)"
     />
     <!-- 7. The yeast in hand. -->
     <app-calculator-tile
@@ -184,11 +170,11 @@
     </app-calculator-tile>
   </div>
 
-  @if (vm.ambientHours + vm.coldHours > 0) {
+  @if (vm.result.ambientHours + vm.result.coldHours > 0) {
     <app-calculator-timeline
       class="timeline"
-      [ambientHours]="vm.ambientHours"
-      [coldHours]="vm.coldHours"
+      [ambientHours]="vm.result.ambientHours"
+      [coldHours]="vm.result.coldHours"
     />
   }
 
@@ -199,7 +185,7 @@
       <div>
         <dt>{{ "calculator.intermediate.readOnly.ballWeight" | translate }}</dt>
         <dd class="num" data-testid="ball-weight">
-          {{ vm.weight | number: "1.0-0" }} g
+          {{ vm.result.weight | number: "1.0-0" }} g
         </dd>
       </div>
       <div>
@@ -207,20 +193,24 @@
           {{ "calculator.intermediate.readOnly.hydration" | translate }}
           <app-info-sheet-button [sheetId]="InfoSheetId.HYDRATION" />
         </dt>
-        <dd class="num">{{ vm.hydrationPct | number: "1.0-0" }} %</dd>
+        <dd class="num">{{ vm.result.hydrationPct | number: "1.0-0" }} %</dd>
       </div>
       <div>
         <dt>{{ "calculator.intermediate.readOnly.restSplit" | translate }}</dt>
         <dd class="num" data-testid="rest-split">
-          @if (vm.coldHours > 0) {
+          @if (vm.result.coldHours > 0) {
             {{
               "calculator.intermediate.readOnly.restSplitValue"
-                | translate: { ambient: vm.ambientHours, cold: vm.coldHours }
+                | translate
+                  : {
+                      ambient: vm.result.ambientHours,
+                      cold: vm.result.coldHours,
+                    }
             }}
           } @else {
             {{
               "calculator.intermediate.readOnly.restSplitAmbientOnly"
-                | translate: { ambient: vm.ambientHours }
+                | translate: { ambient: vm.result.ambientHours }
             }}
           }
         </dd>
@@ -234,14 +224,5 @@
     (openFull)="goToMethod()"
   />
 
-  <button class="calculator-cta" type="button" (click)="goToMethod()">
-    {{
-      "calculator.shared.cta"
-        | translate
-          : {
-              day: (vm.preview.readyAt | relativeDay),
-              time: (vm.preview.readyAt | time),
-            }
-    }}
-  </button>
+  <app-calculator-cta [readyAt]="vm.preview.readyAt" (open)="goToMethod()" />
 }

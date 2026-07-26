@@ -142,16 +142,4 @@ export class CalculatorInitializerService {
   settingsFor(path: CalculatorPath): ICalculatorSettings {
     return this.registry[path].settings;
   }
-
-  initExpert(): void {
-    this.init(CalculatorPath.EXPERT);
-  }
-
-  initGuided(): void {
-    this.init(CalculatorPath.GUIDED);
-  }
-
-  initIntermediate(): void {
-    this.init(CalculatorPath.INTERMEDIATE);
-  }
 }

@@ -1,11 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 
+import { ASSUMED_FLOUR_STRENGTH } from '../dough.constants';
 import { IGuidedCalculatorDraft } from '../interfaces/guided-calculator-draft.interface';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import { DoughDefaultsService } from './dough-defaults.service';
-
-/** The flour this path assumes — what « Je ne sais pas » already applied. */
-const GUIDED_FLOUR_STRENGTH = 270;
 
 /**
  * Adapter at the Guided/engine seam. It resolves every hidden technical input
@@ -29,7 +27,7 @@ export class GuidedInputAdapter {
       globalRestTime: draft.globalRestTime,
       rtRestTime: null,
       coldRestTime: null,
-      flourStrength: GUIDED_FLOUR_STRENGTH,
+      flourStrength: ASSUMED_FLOUR_STRENGTH,
       pizzaWeight: null,
       oliveOilRatio: null,
     };
