@@ -311,6 +311,128 @@ summary:focus-visible {
 }
 
 // ============================================
+// CALCULATOR SHELL — shared by every calculator path
+// ============================================
+// The pinned live result bar, the dated CTA and the ± steppers read the same
+// on the Expert and Intermediate screens; they live here so the two can never
+// drift apart (issue #99).
+
+.livebar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 12px;
+  padding: 12px 16px;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: var(--radius-m);
+
+  .total {
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .split {
+    min-width: 0;
+    overflow: hidden;
+    font-size: 0.72rem;
+    text-align: right;
+    text-overflow: ellipsis;
+    color: color-mix(in srgb, currentColor 78%, transparent);
+  }
+}
+
+// Inverted on light (ink on paper) for contrast; a raised surface on dark.
+[data-appearance="dark"] .livebar {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--hairline);
+}
+
+.calculator-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 16px 0 0;
+  padding: 15px;
+  border: none;
+  border-radius: var(--radius-m);
+  background: var(--accent);
+  color: var(--on-accent);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition:
+    transform 0.08s,
+    filter 0.15s;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      filter: brightness(1.06);
+    }
+  }
+
+  &:active {
+    transform: scale(0.99);
+    filter: brightness(0.96);
+  }
+}
+
+.calculator-stepper {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-s);
+  background: var(--surface-sunken);
+  color: var(--ink-2);
+  font: inherit;
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform 0.08s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover:not(:disabled) {
+      border-color: var(--ink-3);
+      color: var(--ink);
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.92);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+}
+
+// The projected tile selects render as the tile's value, not as a form row.
+app-calculator-tile ion-select {
+  width: 100%;
+  min-height: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+// ============================================
 // EMPTY STATES — one shared centered pattern
 // ============================================
 .app-empty-state {

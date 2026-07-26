@@ -6,8 +6,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule, RefreshCwIcon } from 'lucide-angular';
 
 import { CalculatorPath } from '../enums/calculator-path.enum';
-import { ExpertDraftService } from '../services/expert-draft.service';
-import { GuidedDraftService } from '../services/guided-draft.service';
+import { CalculatorInitializerService } from '../services/calculator-initializer.service';
 
 @Component({
   selector: 'app-calculator-refresh-button',
@@ -17,8 +16,7 @@ import { GuidedDraftService } from '../services/guided-draft.service';
   standalone: true,
 })
 export class CalculatorRefreshButtonComponent {
-  private readonly expertDraft = inject(ExpertDraftService);
-  private readonly guidedDraft = inject(GuidedDraftService);
+  private readonly paths = inject(CalculatorInitializerService);
   private readonly alertController = inject(AlertController);
   private readonly translate = inject(TranslateService);
 
@@ -38,19 +36,11 @@ export class CalculatorRefreshButtonComponent {
         {
           text: this.translate.instant('common.actions.reset'),
           role: 'destructive',
-          handler: () => this.newCalculation(),
+          // Only the path this button sits on: the other calculations stay.
+          handler: () => this.paths.newCalculation(this.path()),
         },
       ],
     });
     await alert.present();
-  }
-
-  private newCalculation(): void {
-    if (this.path() === CalculatorPath.GUIDED) {
-      this.guidedDraft.newCalculation();
-      return;
-    }
-
-    this.expertDraft.newCalculation();
   }
 }

@@ -1,9 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 
-import {
-  IGuidedCalculatorDraft,
-  UNKNOWN_FLOUR_STRENGTH,
-} from '../interfaces/guided-calculator-draft.interface';
+import { ASSUMED_FLOUR_STRENGTH } from '../dough.constants';
+import { IGuidedCalculatorDraft } from '../interfaces/guided-calculator-draft.interface';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import { DoughDefaultsService } from './dough-defaults.service';
 
@@ -29,10 +27,7 @@ export class GuidedInputAdapter {
       globalRestTime: draft.globalRestTime,
       rtRestTime: null,
       coldRestTime: null,
-      flourStrength:
-        draft.flourStrengthChoice === UNKNOWN_FLOUR_STRENGTH
-          ? 270
-          : draft.flourStrengthChoice,
+      flourStrength: ASSUMED_FLOUR_STRENGTH,
       pizzaWeight: null,
       oliveOilRatio: null,
     };

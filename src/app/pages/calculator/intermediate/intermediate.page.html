@@ -1,0 +1,47 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-title>{{
+      "pages.calculator.intermediate.title" | translate
+    }}</ion-title>
+    <ion-buttons slot="end">
+      <app-calculator-refresh-button [path]="CalculatorPath.INTERMEDIATE" />
+      @if (isInitialized() && resolvedInput(); as input) {
+        <app-dough-saver [input]="input" />
+      }
+      <ion-button
+        [routerLink]="['/settings']"
+        [attr.aria-label]="'pages.settings.title' | translate"
+      >
+        <i-lucide slot="icon-only" [img]="SettingsIcon" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{
+        "pages.calculator.intermediate.title" | translate
+      }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="app-page-layout">
+    <app-calculator-path-switch />
+
+    @if (isInitialized()) {
+      <app-intermediate-form />
+    } @else {
+      <!-- Loading skeleton: mirrors the livebar + style choices + tiles -->
+      <div class="loading-skeleton intermediate-skeleton">
+        <ion-skeleton-text animated class="sk-livebar" />
+        <div class="sk-grid">
+          @for (tile of [1, 2, 3, 4]; track tile) {
+            <ion-skeleton-text animated class="sk-tile" />
+          }
+        </div>
+      </div>
+    }
+  </div>
+</ion-content>

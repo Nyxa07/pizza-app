@@ -34,7 +34,7 @@ export interface IMethodPreview {
   totalSteps: number;
 }
 
-const STEPS_KEY = 'calculator.expert.method.steps.';
+const STEPS_KEY = 'calculator.shared.method.steps.';
 
 const ALL_INGREDIENTS: MethodIngredientKey[] = [
   'flour',

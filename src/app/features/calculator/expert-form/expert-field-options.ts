@@ -6,10 +6,12 @@ import { ICalculatorInput } from '../interfaces/calculator-input.interface';
  * The value grids every steppable Expert tile walks through — the same
  * historic bounds the v1 selects offered. « Mes pâtes par défaut » consumes
  * the shared entries too, so the two forms can never drift apart.
+ *
+ * The ball weight is deliberately absent: it is the only grid that depends on
+ * the current style, and the pizza format model owns it (`weightOptions`).
  */
 export const EXPERT_FIELD_OPTIONS = {
   nbPizzas: range(1, 25),
-  pizzaWeight: range(150, 400, 10),
   hydrationRatio: range(0.55, 0.8, 0.01, 2),
   poolishRatio: range(0.3, 0.6, 0.01, 2),
   saltRatio: range(0.02, 0.04, 0.001, 3),

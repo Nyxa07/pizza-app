@@ -17,5 +17,10 @@ Expert keeps the complete technical input. Switching paths never copies values.
 - Saved Dough documents remain one shared library. « Ajuster » and Recipe
   suggestions explicitly replace the Expert Draft.
 - Existing shared Drafts migrate to Expert; Guided starts from its own Defaults.
-- The `calculator:draft` preference is replaced by
-  `calculator:draft:guided` and `calculator:draft:expert`.
+- The `calculator:draft` preference is replaced by one key per path:
+  `calculator:draft:guided`, `calculator:draft:intermediate` and
+  `calculator:draft:expert`.
+- A path is added in one place — the path registry
+  (`CalculatorInitializerService`), which owns for each path its Draft
+  initialisation, its reset, its resolved engine input and its engine
+  settings. Screens never reach for an individual Draft service.

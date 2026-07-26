@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
-import { UNKNOWN_FLOUR_STRENGTH } from '../interfaces/guided-calculator-draft.interface';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 import {
@@ -36,8 +35,15 @@ describe('GuidedDraftService', () => {
     service.init();
   });
 
-  it('starts independently with unknown flour resolved later as W270', () => {
-    expect(service.getDraft().flourStrengthChoice).toBe(UNKNOWN_FLOUR_STRENGTH);
+  it('starts independently, holding only the answers it asks for', () => {
+    expect(Object.keys(service.getDraft()).sort()).toEqual([
+      'doughType',
+      'globalRestTime',
+      'nbPizzas',
+      'pizzaType',
+      'temperature',
+      'yeastType',
+    ]);
     expect(prefs.get(GUIDED_DRAFT_STORAGE_KEY)).toEqual(service.getDraft());
   });
 
@@ -49,11 +55,11 @@ describe('GuidedDraftService', () => {
 
     service.update({
       pizzaType: PizzaType.ROMAN,
-      flourStrengthChoice: 320,
+      nbPizzas: 3,
     });
 
     expect(service.getDraft().pizzaType).toBe(PizzaType.ROMAN);
-    expect(service.getDraft().flourStrengthChoice).toBe(320);
+    expect(service.getDraft().nbPizzas).toBe(3);
     expect(
       prefs.get<{ flourStrength: number }>(EXPERT_DRAFT_STORAGE_KEY)
         ?.flourStrength,
@@ -63,14 +69,14 @@ describe('GuidedDraftService', () => {
   });
 
   it('new calculation resets only Guided answers and its step', () => {
-    service.update({ nbPizzas: 9, flourStrengthChoice: 350 });
-    service.setStepIndex(7);
+    service.update({ nbPizzas: 9, pizzaType: PizzaType.ROMAN });
+    service.setStepIndex(6);
     prefs.set(EXPERT_DRAFT_STORAGE_KEY, { nbPizzas: 12 });
 
     service.newCalculation();
 
     expect(service.getDraft().nbPizzas).toBe(5);
-    expect(service.getDraft().flourStrengthChoice).toBe(UNKNOWN_FLOUR_STRENGTH);
+    expect(service.getDraft().pizzaType).toBe(PizzaType.NEAPOLITAN);
     expect(stepIndex()).toBe(0);
     expect(prefs.get(GUIDED_STEP_STORAGE_KEY)).toBe(0);
     expect(prefs.get(EXPERT_DRAFT_STORAGE_KEY)).toEqual({ nbPizzas: 12 });

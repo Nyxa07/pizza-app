@@ -7,19 +7,19 @@ import { TranslatePipe } from '@ngx-translate/core';
  * segments, warm ambient rest then cold retard, labelled in hours.
  */
 @Component({
-  selector: 'app-expert-timeline',
+  selector: 'app-calculator-timeline',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [TranslatePipe],
   template: `
     <div class="labels num">
       <span>{{
-        'calculator.expert.timeline.ambient'
+        'calculator.shared.timeline.ambient'
           | translate: { hours: ambientHours() }
       }}</span>
       @if (coldHours() > 0) {
         <span>{{
-          'calculator.expert.timeline.cold' | translate: { hours: coldHours() }
+          'calculator.shared.timeline.cold' | translate: { hours: coldHours() }
         }}</span>
       }
     </div>
@@ -54,7 +54,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     }
   `,
 })
-export class ExpertTimelineComponent {
+export class CalculatorTimelineComponent {
   readonly ambientHours = input.required<number>();
   readonly coldHours = input.required<number>();
 }

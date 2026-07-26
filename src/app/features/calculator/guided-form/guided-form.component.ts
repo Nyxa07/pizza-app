@@ -19,17 +19,12 @@ import { InfoSheetButtonComponent } from '../../sheets/info-sheet-button/info-sh
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
-import {
-  GuidedFlourStrengthChoice,
-  IGuidedCalculatorDraft,
-  UNKNOWN_FLOUR_STRENGTH,
-} from '../interfaces/guided-calculator-draft.interface';
+import { IGuidedCalculatorDraft } from '../interfaces/guided-calculator-draft.interface';
 import { GuidedDraftService } from '../services/guided-draft.service';
 import { GuidedInputAdapter } from '../services/guided-input.adapter';
 
 type GuidedStepId =
   | 'pizzaType'
-  | 'flourStrength'
   | 'quantity'
   | 'doughType'
   | 'restTime'
@@ -50,12 +45,6 @@ const GUIDED_STEPS: readonly GuidedStep[] = [
     eyebrow: 'calculator.guided.steps.pizzaType.eyebrow',
     question: 'calculator.guided.steps.pizzaType.question',
     description: 'calculator.guided.steps.pizzaType.description',
-  },
-  {
-    id: 'flourStrength',
-    eyebrow: 'calculator.guided.steps.flourStrength.eyebrow',
-    question: 'calculator.guided.steps.flourStrength.question',
-    description: 'calculator.guided.steps.flourStrength.description',
   },
   {
     id: 'quantity',
@@ -121,7 +110,6 @@ export class GuidedFormComponent {
   protected readonly DoughType = DoughType;
   protected readonly InfoSheetId = InfoSheetId;
   protected readonly PizzaType = PizzaType;
-  protected readonly UNKNOWN_FLOUR_STRENGTH = UNKNOWN_FLOUR_STRENGTH;
   protected readonly YeastType = YeastType;
   protected readonly ChevronLeft = ChevronLeft;
   protected readonly ChevronRight = ChevronRight;
@@ -132,7 +120,6 @@ export class GuidedFormComponent {
     this.draft$.pipe(map((draft) => this.guidedInputAdapter.resolve(draft))),
     { initialValue: null },
   );
-  protected readonly flourStrengths = [270, 300, 320, 350] as const;
   protected readonly restTimes = [4, 8, 12, 24, 48] as const;
   protected readonly temperatures = [18, 20, 22, 24, 26] as const;
 
@@ -160,12 +147,6 @@ export class GuidedFormComponent {
 
   protected selectPizzaType(pizzaType: PizzaType): void {
     this.draft.update({ pizzaType });
-  }
-
-  protected selectFlourStrength(
-    flourStrengthChoice: GuidedFlourStrengthChoice,
-  ): void {
-    this.draft.update({ flourStrengthChoice });
   }
 
   protected changeQuantity(delta: 1 | -1): void {

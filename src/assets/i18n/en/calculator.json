@@ -2,12 +2,34 @@
   "paths": {
     "label": "Path",
     "guided": "Guided",
+    "intermediate": "Intermediate",
     "expert": "Expert"
   },
-  "expert": {
+  "shared": {
+    "tiles": {
+      "increase": "Increase",
+      "decrease": "Decrease"
+    },
+    "timeline": {
+      "ambient": "{hours} h ambient",
+      "cold": "{hours} h cold"
+    },
+    "method": {
+      "title": "The Method",
+      "fullMethod": "Full method — {count} steps",
+      "steps": {
+        "poolishMix": "Poolish: mix {ingredients}. Cover at room temperature.",
+        "poolishKnead": "Final dough: add {ingredients} to the poolish, then knead.",
+        "directMix": "Kneading: mix {ingredients}, then knead until smooth.",
+        "directBalls": "Shape {count} dough balls of {weight} g."
+      }
+    },
     "livebar": {
       "split": "{flour} g Flour · {water} g Water · {salt} g Salt · {yeast} g Yeast"
     },
+    "cta": "Start — ready {day} at {time}"
+  },
+  "expert": {
     "tiles": {
       "balls": "Dough balls",
       "weight": "Weight",
@@ -22,28 +44,43 @@
       "salt": "Salt",
       "flourStrength": "Flour (W)",
       "oliveOil": "Olive oil",
-      "honey": "Honey",
-      "increase": "Increase",
-      "decrease": "Decrease"
+      "honey": "Honey"
     },
-    "timeline": {
-      "ambient": "{hours} h ambient",
-      "cold": "{hours} h cold"
-    },
+    "sizeCaption": "≈ {size} cm",
     "advanced": {
       "summary": "Advanced — salt {salt}% · W {w} · oil {oil}% · honey {honey}%"
+    }
+  },
+  "intermediate": {
+    "fields": {
+      "pizzaType": "Pizza style",
+      "balls": "Number of dough balls",
+      "size": "Pizza size",
+      "doughType": "Dough type",
+      "restTime": "Resting time",
+      "temperature": "Room temperature",
+      "yeastType": "Yeast type"
     },
-    "method": {
-      "title": "The Method",
-      "fullMethod": "Full method — {count} steps",
-      "steps": {
-        "poolishMix": "Poolish: mix {ingredients}. Cover at room temperature.",
-        "poolishKnead": "Final dough: add {ingredients} to the poolish, then knead.",
-        "directMix": "Kneading: mix {ingredients}, then knead until smooth.",
-        "directBalls": "Shape {count} dough balls of {weight} g."
-      }
+    "hints": {
+      "pizzaType": "The style sets hydration, olive oil and the sizes on offer.",
+      "restTime": "Beyond 24 h we split the rest between ambient and cold."
     },
-    "cta": "Start — ready {day} at {time}"
+    "units": {
+      "restTime": "{hours} h"
+    },
+    "readOnly": {
+      "title": "What we decided for you",
+      "ballWeight": "Dough-ball weight",
+      "hydration": "Hydration",
+      "restSplit": "Rest split",
+      "restSplitValue": "{ambient} h ambient + {cold} h cold",
+      "restSplitAmbientOnly": "{ambient} h at room temperature"
+    },
+    "a11y": {
+      "size": "Pizza size, {size} centimetres",
+      "restTime": "Resting time, {hours} hours",
+      "balls": "Number of dough balls, {count}"
+    }
   },
   "guided": {
     "progress": "Step {current} of {total}",
@@ -54,11 +91,6 @@
         "eyebrow": "Your pizza",
         "question": "What result do you enjoy?",
         "description": "We will automatically adapt hydration and dough-ball weight."
-      },
-      "flourStrength": {
-        "eyebrow": "Your flour",
-        "question": "How strong is your flour?",
-        "description": "Look for the W value on the bag. If it is not listed, choose “I don’t know”."
       },
       "quantity": {
         "eyebrow": "Around the table",
@@ -95,8 +127,7 @@
       "neapolitan": "Soft, airy and tender",
       "roman": "Thin, light and crisp",
       "direct": "Mix everything in one go",
-      "poolish": "Make a preferment for deeper flavour",
-      "unknownFlourStrength": "I don’t know"
+      "poolish": "Make a preferment for deeper flavour"
     },
     "quantity": {
       "decrease": "Remove one pizza",
@@ -114,8 +145,6 @@
     },
     "summary": {
       "style": "Style",
-      "flourStrength": "Flour strength",
-      "unknownFlourStrength": "I don’t know (W270)",
       "quantity": "Pizzas",
       "dough": "Method",
       "rest": "Rest",

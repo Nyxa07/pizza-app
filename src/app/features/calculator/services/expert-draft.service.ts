@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
+import { clampWeight } from '../pizza-format.model';
 import { EXPERT_DRAFT_STORAGE_KEY } from './calculator-draft-storage.constants';
 import { DoughDefaultsService } from './dough-defaults.service';
 
@@ -55,7 +56,25 @@ export class ExpertDraftService {
   }
 
   private persist(input: ICalculatorInput): void {
-    this.input.next(input);
-    this.prefs.set(EXPERT_DRAFT_STORAGE_KEY, input);
+    const draft = this.withWeightInStyle(input);
+    this.input.next(draft);
+    this.prefs.set(EXPERT_DRAFT_STORAGE_KEY, draft);
+  }
+
+  /**
+   * A ball weight is always inside the bounds of its style: the Draft may
+   * arrive from an older release, from a Dough saved before the bounds
+   * existed, or from a style change. Idempotent, and it only ever rewrites
+   * the Draft — saved Doughs and Defaults keep whatever they hold.
+   */
+  private withWeightInStyle(input: ICalculatorInput): ICalculatorInput {
+    if (input.pizzaWeight === null) {
+      return input;
+    }
+
+    const pizzaWeight = clampWeight(input.pizzaType, input.pizzaWeight);
+    return pizzaWeight === input.pizzaWeight
+      ? input
+      : { ...input, pizzaWeight };
   }
 }

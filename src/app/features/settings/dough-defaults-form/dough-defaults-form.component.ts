@@ -17,6 +17,10 @@ import { debounceTime } from 'rxjs';
 import { EXPERT_FIELD_OPTIONS } from 'src/app/features/calculator/expert-form/expert-field-options';
 import { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
 import {
+  clampWeight,
+  weightOptions,
+} from 'src/app/features/calculator/pizza-format.model';
+import {
   DoughDefaultsService,
   FACTORY_DEFAULTS,
 } from 'src/app/features/calculator/services/dough-defaults.service';
@@ -52,11 +56,21 @@ export class DoughDefaultsFormComponent {
 
   // Shared with the Expert tiles so both forms walk the same value grids.
   protected readonly options = EXPERT_FIELD_OPTIONS;
+  /**
+   * The ball weight is the one grid bound to a style. This form does not
+   * expose the style, so it reads the one its own Defaults carry.
+   */
+  protected readonly weightOptions = weightOptions(this.seed.pizzaType);
 
   protected readonly form = this.fb.nonNullable.group({
     hydrationRatio: this.seed.hydrationRatio ?? FACTORY_DEFAULTS.hydrationRatio,
     saltRatio: this.seed.saltRatio,
-    pizzaWeight: this.seed.pizzaWeight ?? FACTORY_DEFAULTS.pizzaWeight,
+    // A Default saved before the style bounds existed opens on its bound,
+    // never on a value the grid below no longer offers.
+    pizzaWeight: clampWeight(
+      this.seed.pizzaType,
+      this.seed.pizzaWeight ?? FACTORY_DEFAULTS.pizzaWeight,
+    ),
   });
 
   constructor() {

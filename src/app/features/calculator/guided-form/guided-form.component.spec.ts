@@ -14,13 +14,15 @@ import { InfoSheetId } from '../../sheets/enums/info-sheet-id.enum';
 import { InfoSheetButtonComponent } from '../../sheets/info-sheet-button/info-sheet-button.component';
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
 import { CalculatorPath } from '../enums/calculator-path.enum';
-import { UNKNOWN_FLOUR_STRENGTH } from '../interfaces/guided-calculator-draft.interface';
 import { GUIDED_STEP_STORAGE_KEY } from '../services/calculator-draft-storage.constants';
 import { CalculatorInitializerService } from '../services/calculator-initializer.service';
 import { ExpertDraftService } from '../services/expert-draft.service';
 import { GuidedDraftService } from '../services/guided-draft.service';
 import { GuidedInputAdapter } from '../services/guided-input.adapter';
 import { GuidedFormComponent } from './guided-form.component';
+
+/** Seven steps since the flour question left the path (issue #99). */
+const GUIDED_STEP_COUNT = 7;
 
 describe('GuidedFormComponent', () => {
   let fixture: ComponentFixture<GuidedFormComponent>;
@@ -37,7 +39,7 @@ describe('GuidedFormComponent', () => {
 
   /** The last step, reached the way a user does: one answer at a time. */
   const goToSummary = (): void => {
-    for (let step = 0; step < 7; step += 1) {
+    for (let step = 0; step < GUIDED_STEP_COUNT - 1; step += 1) {
       next();
     }
   };
@@ -66,55 +68,57 @@ describe('GuidedFormComponent', () => {
       ],
     }).compileComponents();
 
-    TestBed.inject(CalculatorInitializerService).initGuided();
+    TestBed.inject(CalculatorInitializerService).init(CalculatorPath.GUIDED);
     draft = TestBed.inject(GuidedDraftService);
     fixture = TestBed.createComponent(GuidedFormComponent);
     fixture.detectChanges();
   }));
 
-  it('defines exactly the Guided and Expert paths', () => {
+  it('documents the three calculator paths', () => {
     expect(Object.values(CalculatorPath)).toEqual([
       CalculatorPath.GUIDED,
+      CalculatorPath.INTERMEDIATE,
       CalculatorPath.EXPERT,
     ]);
   });
 
-  it('starts from smart defaults and reaches the Method in eight steps', () => {
+  it('starts from smart defaults and reaches the Method in seven steps', () => {
     expect(
       fixture.nativeElement.querySelector(
         '[role="radio"][aria-checked="true"]',
       ),
     ).toBeTruthy();
-
     goToSummary();
 
     expect(
       fixture.nativeElement.querySelector('[data-testid="open-method"]'),
     ).toBeTruthy();
-    expect(fixture.nativeElement.textContent).toContain(
-      'calculator.guided.summary.unknownFlourStrength',
-    );
   });
 
-  it('offers the sampled flour strengths and defaults unknown to W270', () => {
-    next();
+  it('never asks for the flour strength — W270 is applied for the user', () => {
+    const asked: string[] = [];
+    for (let step = 0; step < GUIDED_STEP_COUNT; step += 1) {
+      asked.push(currentStepId());
+      if (step < GUIDED_STEP_COUNT - 1) {
+        next();
+      }
+    }
 
-    const choices = fixture.debugElement.queryAll(By.css('.pill'));
-    expect(choices.map(({ nativeElement }) => nativeElement.textContent.trim()))
-      .withContext('flour choices')
-      .toEqual([
-        'W270',
-        'W300',
-        'W320',
-        'W350',
-        'calculator.guided.options.unknownFlourStrength',
-      ]);
-    expect(draft.getDraft().flourStrengthChoice).toBe(UNKNOWN_FLOUR_STRENGTH);
-
-    (choices[3].nativeElement as HTMLButtonElement).click();
-    fixture.detectChanges();
-
-    expect(draft.getDraft().flourStrengthChoice).toBe(350);
+    expect(asked).toEqual([
+      'pizzaType',
+      'quantity',
+      'doughType',
+      'restTime',
+      'temperature',
+      'yeastType',
+      'summary',
+    ]);
+    expect(fixture.nativeElement.textContent).not.toContain('W2');
+    expect(fixture.nativeElement.textContent).not.toContain('flourStrength');
+    expect(
+      TestBed.inject(GuidedInputAdapter).resolve(draft.getDraft())
+        .flourStrength,
+    ).toBe(270);
   });
 
   it('never reads or mutates the Expert Draft', () => {
@@ -134,14 +138,12 @@ describe('GuidedFormComponent', () => {
     fixture.detectChanges();
 
     expect(draft.getDraft().pizzaType).toBe(PizzaType.ROMAN);
-    expect(draft.getDraft().flourStrengthChoice).toBe(UNKNOWN_FLOUR_STRENGTH);
     expect(draft.getDraft().globalRestTime).toBe(24);
     expect(expert.getInput().pizzaType).toBe(PizzaType.NEAPOLITAN);
     expect(expert.getInput().flourStrength).toBe(350);
   });
 
   it('places contextual Fiches on the moments of choice', () => {
-    next();
     next();
     next();
     expect(renderedSheetIds()).toEqual([
@@ -190,8 +192,8 @@ describe('GuidedFormComponent', () => {
   });
 
   it('restores the persisted step when the Guided page is entered again', () => {
-    prefs.set(GUIDED_STEP_STORAGE_KEY, 2);
-    TestBed.inject(CalculatorInitializerService).initGuided();
+    prefs.set(GUIDED_STEP_STORAGE_KEY, 1);
+    TestBed.inject(CalculatorInitializerService).init(CalculatorPath.GUIDED);
     fixture.detectChanges();
 
     expect(currentStepId()).toBe('quantity');

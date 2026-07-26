@@ -1,22 +1,8 @@
 @if (vm$ | async; as vm) {
-  <div class="livebar num">
-    <span class="total" aria-live="polite"
-      >{{ vm.total | number: "1.0-0" }} g</span
-    >
-    <span class="split">{{
-      "calculator.expert.livebar.split"
-        | translate
-          : {
-              flour: (vm.split.flour | number: "1.0-0"),
-              water: (vm.split.water | number: "1.0-0"),
-              salt: (vm.split.salt | number: "1.0-0"),
-              yeast: (vm.split.yeast | number: "1.0-1"),
-            }
-    }}</span>
-  </div>
+  <app-calculator-livebar [result]="vm.result" />
 
   <div class="grid">
-    <app-expert-tile
+    <app-calculator-tile
       [label]="'calculator.expert.tiles.balls' | translate"
       [value]="vm.input.nbPizzas | number: '1.0-0'"
       [canStepUp]="canStep(vm, 'nbPizzas', 1)"
@@ -24,18 +10,23 @@
       (stepUp)="stepField(vm, 'nbPizzas', 1)"
       (stepDown)="stepField(vm, 'nbPizzas', -1)"
     />
-    <app-expert-tile
+    <app-calculator-tile
+      data-testid="weight-tile"
       [label]="'calculator.expert.tiles.weight' | translate"
-      [value]="vm.weight | number: '1.0-0'"
+      [value]="vm.result.weight | number: '1.0-0'"
       unit="g"
+      [caption]="
+        'calculator.expert.sizeCaption'
+          | translate: { size: (vm.sizeCm | number: '1.0-0') }
+      "
       [canStepUp]="canStep(vm, 'pizzaWeight', 1)"
       [canStepDown]="canStep(vm, 'pizzaWeight', -1)"
       (stepUp)="stepField(vm, 'pizzaWeight', 1)"
       (stepDown)="stepField(vm, 'pizzaWeight', -1)"
     />
-    <app-expert-tile
+    <app-calculator-tile
       [label]="'calculator.expert.tiles.hydration' | translate"
-      [value]="vm.hydrationPct | number: '1.0-0'"
+      [value]="vm.result.hydrationPct | number: '1.0-0'"
       unit="%"
       [sheetId]="InfoSheetId.HYDRATION"
       [canStepUp]="canStep(vm, 'hydrationRatio', 1)"
@@ -44,7 +35,7 @@
       (stepDown)="stepField(vm, 'hydrationRatio', -1)"
     />
     @if (vm.isPoolish) {
-      <app-expert-tile
+      <app-calculator-tile
         [label]="'calculator.expert.tiles.poolishRatio' | translate"
         [value]="vm.poolishRatioPct | number: '1.0-0'"
         unit="%"
@@ -55,9 +46,9 @@
         (stepDown)="stepField(vm, 'poolishRatio', -1)"
       />
     }
-    <app-expert-tile
+    <app-calculator-tile
       [label]="'calculator.expert.tiles.ambientRest' | translate"
-      [value]="vm.ambientHours | number: '1.0-0'"
+      [value]="vm.result.ambientHours | number: '1.0-0'"
       unit="h"
       [sheetId]="InfoSheetId.WARM_REST"
       [canStepUp]="canStep(vm, 'rtRestTime', 1)"
@@ -65,9 +56,9 @@
       (stepUp)="stepRest(vm, 'rtRestTime', 1)"
       (stepDown)="stepRest(vm, 'rtRestTime', -1)"
     />
-    <app-expert-tile
+    <app-calculator-tile
       [label]="'calculator.expert.tiles.coldRest' | translate"
-      [value]="vm.coldHours | number: '1.0-0'"
+      [value]="vm.result.coldHours | number: '1.0-0'"
       unit="h"
       [sheetId]="InfoSheetId.COLD_REST"
       [canStepUp]="canStep(vm, 'coldRestTime', 1)"
@@ -75,7 +66,7 @@
       (stepUp)="stepRest(vm, 'coldRestTime', 1)"
       (stepDown)="stepRest(vm, 'coldRestTime', -1)"
     />
-    <app-expert-tile
+    <app-calculator-tile
       [label]="'calculator.expert.tiles.temperature' | translate"
       [value]="vm.input.temperature | number: '1.0-0'"
       unit="°C"
@@ -85,11 +76,14 @@
       (stepUp)="stepField(vm, 'temperature', 1)"
       (stepDown)="stepField(vm, 'temperature', -1)"
     />
-    <app-expert-tile [label]="'calculator.expert.tiles.pizzaType' | translate">
+    <app-calculator-tile
+      data-testid="pizza-type-tile"
+      [label]="'calculator.expert.tiles.pizzaType' | translate"
+    >
       <ion-select
         interface="action-sheet"
         [value]="vm.input.pizzaType"
-        (ionChange)="onPizzaType($event)"
+        (ionChange)="onPizzaType(vm, $event)"
         [cancelText]="'common.actions.cancel' | translate"
       >
         @for (pizzaType of pizzaTypes; track pizzaType.value) {
@@ -98,8 +92,8 @@
           }}</ion-select-option>
         }
       </ion-select>
-    </app-expert-tile>
-    <app-expert-tile
+    </app-calculator-tile>
+    <app-calculator-tile
       [label]="'calculator.expert.tiles.doughType' | translate"
       [sheetId]="vm.methodSheetId"
     >
@@ -115,8 +109,8 @@
           }}</ion-select-option>
         }
       </ion-select>
-    </app-expert-tile>
-    <app-expert-tile
+    </app-calculator-tile>
+    <app-calculator-tile
       [label]="'calculator.expert.tiles.yeast' | translate"
       [sheetId]="InfoSheetId.YEASTS"
     >
@@ -132,14 +126,14 @@
           }}</ion-select-option>
         }
       </ion-select>
-    </app-expert-tile>
+    </app-calculator-tile>
   </div>
 
-  @if (vm.ambientHours + vm.coldHours > 0) {
-    <app-expert-timeline
+  @if (vm.result.ambientHours + vm.result.coldHours > 0) {
+    <app-calculator-timeline
       class="timeline"
-      [ambientHours]="vm.ambientHours"
-      [coldHours]="vm.coldHours"
+      [ambientHours]="vm.result.ambientHours"
+      [coldHours]="vm.result.coldHours"
     />
   }
 
@@ -160,7 +154,7 @@
       </span>
     </summary>
     <div class="grid adv-grid">
-      <app-expert-tile
+      <app-calculator-tile
         [label]="'calculator.expert.tiles.salt' | translate"
         [value]="vm.input.saltRatio * 100 | number: '1.1-1'"
         unit="%"
@@ -169,7 +163,7 @@
         (stepUp)="stepField(vm, 'saltRatio', 1)"
         (stepDown)="stepField(vm, 'saltRatio', -1)"
       />
-      <app-expert-tile
+      <app-calculator-tile
         [label]="'calculator.expert.tiles.flourStrength' | translate"
         [value]="vm.input.flourStrength | number: '1.0-0'"
         [canStepUp]="canStep(vm, 'flourStrength', 1)"
@@ -177,7 +171,7 @@
         (stepUp)="stepField(vm, 'flourStrength', 1)"
         (stepDown)="stepField(vm, 'flourStrength', -1)"
       />
-      <app-expert-tile
+      <app-calculator-tile
         [label]="'calculator.expert.tiles.oliveOil' | translate"
         [value]="(vm.input.oliveOilRatio ?? 0) * 100 | number: '1.0-1'"
         unit="%"
@@ -186,7 +180,7 @@
         (stepUp)="stepField(vm, 'oliveOilRatio', 1)"
         (stepDown)="stepField(vm, 'oliveOilRatio', -1)"
       />
-      <app-expert-tile
+      <app-calculator-tile
         [label]="'calculator.expert.tiles.honey' | translate"
         [value]="vm.input.honeyRatio * 100 | number: '1.1-1'"
         unit="%"
@@ -198,20 +192,11 @@
     </div>
   </details>
 
-  <app-expert-method-preview
+  <app-calculator-method-preview
     class="method"
     [preview]="vm.preview"
     (openFull)="goToMethod()"
   />
 
-  <button class="cta" type="button" (click)="goToMethod()">
-    {{
-      "calculator.expert.cta"
-        | translate
-          : {
-              day: (vm.preview.readyAt | relativeDay),
-              time: (vm.preview.readyAt | time),
-            }
-    }}
-  </button>
+  <app-calculator-cta [readyAt]="vm.preview.readyAt" (open)="goToMethod()" />
 }

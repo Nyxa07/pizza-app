@@ -77,6 +77,16 @@ describe('App navigation (v2)', () => {
     expect(router.url).toBe('/tabs/calculator/guided');
   });
 
+  it('exposes the Intermediate path', async () => {
+    await harness.navigateByUrl('/tabs/calculator/intermediate');
+    expect(router.url).toBe('/tabs/calculator/intermediate');
+  });
+
+  it('keeps the Intermediate Method origin explicit', async () => {
+    await harness.navigateByUrl('/tabs/calculator/method/intermediate');
+    expect(router.url).toBe('/tabs/calculator/method/intermediate');
+  });
+
   it('keeps the Guided Method origin explicit', async () => {
     await harness.navigateByUrl('/tabs/calculator/method/guided');
     expect(router.url).toBe('/tabs/calculator/method/guided');

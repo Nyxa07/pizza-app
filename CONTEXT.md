@@ -11,7 +11,7 @@ A named, saved snapshot of calculator inputs, opened as a document (detail + its
 _Avoid_: calculator state, saved state
 
 **Draft**:
-An in-progress calculation owned and persisted by one calculator path. Guided and Expert each resume their own Draft; switching paths never copies values. A Dough is adjusted into the Expert Draft only. UI: « Calcul en cours », « Reprendre ».
+An in-progress calculation owned and persisted by one calculator path. Guided, Intermediate and Expert each resume their own Draft; switching paths never copies values. A Dough is adjusted into the Expert Draft only. UI: « Calcul en cours », « Reprendre ».
 _Avoid_: shared calculator state, scratchpad
 
 **Defaults**:
@@ -30,11 +30,23 @@ _Avoid_: using "recipe"/« recette » for anything dough-related
 A short contextual explanation of a dough concept (hydration, poolish, rest…), opened in place from the screen where the concept appears. UI: « Fiche ».
 _Avoid_: FAQ, guide
 
+**Pizza size**:
+The diameter of the finished pizza, in centimetres. It is the answer the user gives in the Intermediate path; the ball weight is derived from it. UI: « Taille de la pizza ».
+_Avoid_: diameter as a separate concept, pizza format (that is the model below)
+
+**Pizza format model**:
+The single module holding the size ↔ ball-weight conversion, the size range and the weight bounds of each style. Every screen and the engine read their ball weights from it; nothing else writes one.
+_Avoid_: weight table, ball-weight constants
+
 ### Calculator paths
 
 **Guided path**:
 The step-by-step calculator flow for general-public users; asks one thing at a time and applies smart defaults.
 _Avoid_: assistant, assist mode, wizard
+
+**Intermediate path**:
+The short single-screen calculator flow for users who reason in pizzas rather than in baker's percentages: style, count, size, method, rest, temperature and yeast. Everything else is pinned and invisible. UI: « Intermédiaire ».
+_Avoid_: standard mode, simple mode
 
 **Expert path**:
 The single dense calculator form for prosumers; advanced options are folded by default and revealed on demand.

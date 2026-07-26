@@ -16,7 +16,7 @@ import { TimePipe } from 'src/app/shared/pipes/time.pipe';
 import type {
   IMethodPreview,
   IMethodPreviewStep,
-} from '../../services/method-preview.service';
+} from '../services/method-preview.service';
 
 /**
  * The « aperçu de la Méthode » card (variant D): the two first dated
@@ -24,12 +24,12 @@ import type {
  * full method.
  */
 @Component({
-  selector: 'app-expert-method-preview',
+  selector: 'app-calculator-method-preview',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RelativeDayPipe, TimePipe, TranslatePipe],
   template: `
-    <h3>{{ 'calculator.expert.method.title' | translate }}</h3>
+    <h3>{{ 'calculator.shared.method.title' | translate }}</h3>
     @for (step of preview().steps; track step.bodyKey) {
       <div class="step">
         <span class="when">
@@ -41,7 +41,7 @@ import type {
     }
     <button class="more" type="button" (click)="openFull.emit()">
       {{
-        'calculator.expert.method.fullMethod'
+        'calculator.shared.method.fullMethod'
           | translate: { count: preview().totalSteps }
       }}
     </button>
@@ -118,7 +118,7 @@ import type {
     }
   `,
 })
-export class ExpertMethodPreviewComponent {
+export class CalculatorMethodPreviewComponent {
   readonly preview = input.required<IMethodPreview>();
   readonly openFull = output<void>();
 

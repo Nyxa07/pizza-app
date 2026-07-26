@@ -4,31 +4,28 @@ import {
   IProcessor,
   PartialCalculatorOutput,
 } from '../../interfaces/processor.interface';
-import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
+import { clampWeight, fallbackWeight } from '../../pizza-format.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PizzaBallsWeightProcessor implements IProcessor {
+  /**
+   * The ball weight, always inside what the style allows: an explicit weight
+   * may come from a Draft or a Dough saved before the style bounds existed,
+   * and the pizza format model is the only place that knows them.
+   */
   process(
     input: ICalculatorInput,
     acc: PartialCalculatorOutput,
   ): PartialCalculatorOutput {
     return {
       pizzaBalls: {
-        weight: input.pizzaWeight ?? this.computeFromPizzaType(input.pizzaType),
+        weight:
+          input.pizzaWeight === null
+            ? fallbackWeight(input.pizzaType)
+            : clampWeight(input.pizzaType, input.pizzaWeight),
       },
     };
-  }
-
-  private computeFromPizzaType(pizzaType: PizzaType): number {
-    switch (pizzaType) {
-      case PizzaType.NEAPOLITAN:
-        return 250;
-      case PizzaType.ROMAN:
-        return 180;
-      default:
-        return 250;
-    }
   }
 }

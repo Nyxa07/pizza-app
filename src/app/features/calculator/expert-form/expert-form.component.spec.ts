@@ -19,11 +19,14 @@ import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 import enCalculator from 'src/assets/i18n/en/calculator.json';
 import frCalculator from 'src/assets/i18n/fr/calculator.json';
 
+import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
+
+import { CalculatorPath } from '../enums/calculator-path.enum';
 import { DoughType } from '../enums/dough-type.enum';
 import { CalculatorInitializerService } from '../services/calculator-initializer.service';
 import { ExpertDraftService } from '../services/expert-draft.service';
 import { ExpertFormComponent } from './expert-form.component';
-import { ExpertTileComponent } from './parts/expert-tile.component';
+import { CalculatorTileComponent } from '../parts/calculator-tile.component';
 
 /**
  * The Expert screen (issue #71): a dense instrument over its own Draft,
@@ -35,10 +38,10 @@ describe('ExpertFormComponent', () => {
 
   const tile = (labelKey: string) =>
     fixture.debugElement
-      .queryAll(By.directive(ExpertTileComponent))
+      .queryAll(By.directive(CalculatorTileComponent))
       .find(
         (t) =>
-          (t.componentInstance as ExpertTileComponent).label() ===
+          (t.componentInstance as CalculatorTileComponent).label() ===
           `calculator.expert.tiles.${labelKey}`,
       );
 
@@ -107,11 +110,86 @@ describe('ExpertFormComponent', () => {
       ],
     }).compileComponents();
 
-    TestBed.inject(CalculatorInitializerService).initExpert();
+    TestBed.inject(CalculatorInitializerService).init(CalculatorPath.EXPERT);
     state = TestBed.inject(ExpertDraftService);
     fixture = TestBed.createComponent(ExpertFormComponent);
     fixture.detectChanges();
   }));
+
+  /** By test id, so a loaded catalog cannot hide the tile from the query. */
+  const tileByTestId = (testId: string) =>
+    fixture.debugElement.query(By.css(`[data-testid="${testId}"]`));
+
+  const weightTileText = (): string =>
+    tileByTestId('weight-tile').nativeElement.textContent as string;
+
+  const stepUpWeight = (): void => {
+    const buttons = tileByTestId('weight-tile').queryAll(
+      By.css('.ctrl button'),
+    );
+    (buttons[1].nativeElement as HTMLButtonElement).click();
+    fixture.detectChanges();
+  };
+
+  const choosePizzaType = (pizzaType: PizzaType): void => {
+    const select = tileByTestId('pizza-type-tile').query(By.css('ion-select'))
+      .nativeElement as HTMLIonSelectElement;
+    select.value = pizzaType;
+    select.dispatchEvent(
+      new CustomEvent('ionChange', { detail: { value: pizzaType } }),
+    );
+    fixture.detectChanges();
+  };
+
+  it('reads the ball weight back as the pizza size it makes', () => {
+    speaks(Locales.FR);
+
+    // 250 g of factory Default is a 28 cm Neapolitan.
+    expect(weightTileText()).toContain('250');
+    expect(weightTileText()).toContain('28');
+
+    stepUpWeight();
+
+    expect(weightTileText()).toContain('260');
+    expect(weightTileText()).toContain('29');
+  });
+
+  it('bounds the weight stepper by the current style', () => {
+    draftHolds({ pizzaType: PizzaType.NEAPOLITAN, pizzaWeight: 340 });
+    expect(
+      (
+        tileByTestId('weight-tile').componentInstance as CalculatorTileComponent
+      ).canStepUp(),
+    )
+      .withContext('top of the Neapolitan range')
+      .toBeFalse();
+
+    draftHolds({ pizzaType: PizzaType.NEAPOLITAN, pizzaWeight: 220 });
+    expect(
+      (
+        tileByTestId('weight-tile').componentInstance as CalculatorTileComponent
+      ).canStepDown(),
+    ).toBeFalse();
+  });
+
+  it('re-seats the weight in the new style when the style changes', () => {
+    speaks(Locales.FR);
+    draftHolds({ pizzaType: PizzaType.NEAPOLITAN, pizzaWeight: 340 });
+
+    choosePizzaType(PizzaType.ROMAN);
+
+    expect(state.getInput().pizzaWeight).toBe(210);
+    expect(weightTileText()).toContain('210');
+    expect(weightTileText()).toContain('33');
+  });
+
+  it('opens a Draft persisted outside the style on its nearest bound', () => {
+    // What a Draft written before the bounds existed still holds.
+    draftHolds({ pizzaType: PizzaType.ROMAN, pizzaWeight: 400 });
+
+    expect(state.getInput().pizzaWeight).toBe(210);
+    expect(weightTileText()).toContain('210');
+  });
 
   it('recomputes the pinned live bar through the real engine on every edit', () => {
     const grams = (text: string): number => Number(text.replace(/\D/g, ''));
@@ -179,17 +257,23 @@ describe('ExpertFormComponent', () => {
     const host = fixture.nativeElement as HTMLElement;
 
     expect(
-      host.querySelectorAll('app-expert-method-preview .step').length,
+      host.querySelectorAll('app-calculator-method-preview .step').length,
     ).toBe(2);
-    expect(host.querySelector('app-expert-method-preview .more')).toBeTruthy();
-    expect(host.querySelector('.cta')).toBeTruthy();
+    expect(
+      host.querySelector('app-calculator-method-preview .more'),
+    ).toBeTruthy();
+    expect(host.querySelector('.calculator-cta')).toBeTruthy();
   });
 
   it('opens the Expert Method explicitly', () => {
     const router = TestBed.inject(Router);
     spyOn(router, 'navigate').and.resolveTo(true);
 
-    (fixture.nativeElement.querySelector('.cta') as HTMLButtonElement).click();
+    (
+      fixture.nativeElement.querySelector(
+        '.calculator-cta',
+      ) as HTMLButtonElement
+    ).click();
 
     expect(router.navigate).toHaveBeenCalledWith([
       '/tabs/calculator/method/expert',

@@ -26,7 +26,7 @@ describe('CalculatorGuidedPage', () => {
 
     initializer = jasmine.createSpyObj<CalculatorInitializerService>(
       'CalculatorInitializerService',
-      ['initGuided'],
+      ['init'],
     );
 
     TestBed.configureTestingModule({
@@ -43,7 +43,7 @@ describe('CalculatorGuidedPage', () => {
   it('initializes the Guided Draft when the view is entered', () => {
     createPage().ionViewWillEnter();
 
-    expect(initializer.initGuided).toHaveBeenCalledTimes(1);
+    expect(initializer.init).toHaveBeenCalledTimes(1);
   });
 
   it('reloads the Guided Draft on every re-entry', () => {
@@ -52,6 +52,6 @@ describe('CalculatorGuidedPage', () => {
     page.ionViewWillEnter();
     page.ionViewWillEnter();
 
-    expect(initializer.initGuided).toHaveBeenCalledTimes(2);
+    expect(initializer.init).toHaveBeenCalledTimes(2);
   });
 });

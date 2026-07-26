@@ -1,0 +1,228 @@
+@if (vm$ | async; as vm) {
+  <app-calculator-livebar [result]="vm.result" />
+
+  <!-- 1. Pizza style — everything below adapts to it. -->
+  <section class="field">
+    <h2 class="field-label" id="intermediate-pizzaType">
+      {{ "calculator.intermediate.fields.pizzaType" | translate }}
+    </h2>
+    <p class="field-hint">
+      {{ "calculator.intermediate.hints.pizzaType" | translate }}
+    </p>
+    <div
+      class="choices"
+      role="radiogroup"
+      aria-labelledby="intermediate-pizzaType"
+    >
+      @for (pizzaType of pizzaTypes; track pizzaType.value) {
+        <button
+          type="button"
+          class="choice"
+          [class.selected]="vm.draft.pizzaType === pizzaType.value"
+          role="radio"
+          [attr.aria-checked]="vm.draft.pizzaType === pizzaType.value"
+          [attr.data-testid]="'pizza-type-' + pizzaType.value"
+          (click)="selectPizzaType(pizzaType.value)"
+        >
+          <strong>{{ pizzaType.label | translate }}</strong>
+          <span>{{ pizzaType.description | translate }}</span>
+        </button>
+      }
+    </div>
+  </section>
+
+  <div class="grid">
+    <!-- 2. How many dough balls. -->
+    <app-calculator-tile
+      [label]="'calculator.intermediate.fields.balls' | translate"
+      [value]="vm.draft.nbPizzas | number: '1.0-0'"
+      [ariaLabel]="
+        'calculator.intermediate.a11y.balls'
+          | translate: { count: vm.draft.nbPizzas }
+      "
+      [canStepUp]="canStep(vm, 'nbPizzas', 1)"
+      [canStepDown]="canStep(vm, 'nbPizzas', -1)"
+      (stepUp)="step(vm, 'nbPizzas', 1)"
+      (stepDown)="step(vm, 'nbPizzas', -1)"
+    />
+    <!-- 3. The pizza size, and the ball weight it amounts to. -->
+    <app-calculator-tile
+      data-testid="size-tile"
+      [label]="'calculator.intermediate.fields.size' | translate"
+      [value]="vm.draft.sizeCm | number: '1.0-0'"
+      unit="cm"
+      [caption]="(vm.result.weight | number: '1.0-0') + ' g'"
+      [ariaLabel]="
+        'calculator.intermediate.a11y.size'
+          | translate: { size: vm.draft.sizeCm }
+      "
+      [canStepUp]="canStep(vm, 'sizeCm', 1)"
+      [canStepDown]="canStep(vm, 'sizeCm', -1)"
+      (stepUp)="step(vm, 'sizeCm', 1)"
+      (stepDown)="step(vm, 'sizeCm', -1)"
+    />
+  </div>
+
+  <!-- 4. Direct or poolish — the preferment stays reachable here. -->
+  <div class="grid">
+    <app-calculator-tile
+      [label]="'calculator.intermediate.fields.doughType' | translate"
+      [sheetId]="vm.methodSheetId"
+    >
+      <ion-select
+        interface="action-sheet"
+        [value]="vm.draft.doughType"
+        (ionChange)="onDoughType($event)"
+        [cancelText]="'common.actions.cancel' | translate"
+      >
+        @for (doughType of doughTypes; track doughType.value) {
+          <ion-select-option [value]="doughType.value">{{
+            doughType.label | translate
+          }}</ion-select-option>
+        }
+      </ion-select>
+    </app-calculator-tile>
+  </div>
+
+  <!-- 5. One slider: how long do you have? -->
+  <section class="field rest">
+    <div class="field-heading">
+      <h2 class="field-label" id="intermediate-restTime">
+        {{ "calculator.intermediate.fields.restTime" | translate }}
+      </h2>
+      <app-info-sheet-button [sheetId]="InfoSheetId.WARM_REST" />
+      <app-info-sheet-button [sheetId]="InfoSheetId.COLD_REST" />
+    </div>
+    <p class="field-hint">
+      {{ "calculator.intermediate.hints.restTime" | translate }}
+    </p>
+    <div class="slider-row">
+      <button
+        type="button"
+        class="calculator-stepper"
+        [disabled]="!canStep(vm, 'globalRestTime', -1)"
+        [attr.aria-label]="'calculator.shared.tiles.decrease' | translate"
+        (click)="step(vm, 'globalRestTime', -1)"
+      >
+        −
+      </button>
+      <ion-range
+        class="rest-range"
+        [min]="restBounds.min"
+        [max]="restBounds.max"
+        [step]="1"
+        [snaps]="true"
+        [ticks]="false"
+        [value]="vm.draft.globalRestTime"
+        (ionChange)="onRestSlide($event)"
+        [attr.aria-label]="
+          'calculator.intermediate.a11y.restTime'
+            | translate: { hours: vm.draft.globalRestTime }
+        "
+      />
+      <button
+        type="button"
+        class="calculator-stepper"
+        [disabled]="!canStep(vm, 'globalRestTime', 1)"
+        [attr.aria-label]="'calculator.shared.tiles.increase' | translate"
+        (click)="step(vm, 'globalRestTime', 1)"
+      >
+        +
+      </button>
+      <span class="slider-value num" aria-hidden="true">
+        {{
+          "calculator.intermediate.units.restTime"
+            | translate: { hours: vm.draft.globalRestTime }
+        }}
+      </span>
+    </div>
+  </section>
+
+  <div class="grid">
+    <!-- 6. The kitchen, which sets the yeast dose. -->
+    <app-calculator-tile
+      [label]="'calculator.intermediate.fields.temperature' | translate"
+      [value]="vm.draft.temperature | number: '1.0-0'"
+      unit="°C"
+      [sheetId]="InfoSheetId.TEMPERATURE"
+      [canStepUp]="canStep(vm, 'temperature', 1)"
+      [canStepDown]="canStep(vm, 'temperature', -1)"
+      (stepUp)="step(vm, 'temperature', 1)"
+      (stepDown)="step(vm, 'temperature', -1)"
+    />
+    <!-- 7. The yeast in hand. -->
+    <app-calculator-tile
+      [label]="'calculator.intermediate.fields.yeastType' | translate"
+      [sheetId]="InfoSheetId.YEASTS"
+    >
+      <ion-select
+        interface="action-sheet"
+        [value]="vm.draft.yeastType"
+        (ionChange)="onYeastType($event)"
+        [cancelText]="'common.actions.cancel' | translate"
+      >
+        @for (yeastType of yeastTypes; track yeastType.value) {
+          <ion-select-option [value]="yeastType.value">{{
+            yeastType.label | translate
+          }}</ion-select-option>
+        }
+      </ion-select>
+    </app-calculator-tile>
+  </div>
+
+  @if (vm.result.ambientHours + vm.result.coldHours > 0) {
+    <app-calculator-timeline
+      class="timeline"
+      [ambientHours]="vm.result.ambientHours"
+      [coldHours]="vm.result.coldHours"
+    />
+  }
+
+  <!-- What the path decided in the user's place, in plain sight. -->
+  <section class="read-only">
+    <h2>{{ "calculator.intermediate.readOnly.title" | translate }}</h2>
+    <dl class="fact-grid">
+      <div>
+        <dt>{{ "calculator.intermediate.readOnly.ballWeight" | translate }}</dt>
+        <dd class="num" data-testid="ball-weight">
+          {{ vm.result.weight | number: "1.0-0" }} g
+        </dd>
+      </div>
+      <div>
+        <dt>
+          {{ "calculator.intermediate.readOnly.hydration" | translate }}
+          <app-info-sheet-button [sheetId]="InfoSheetId.HYDRATION" />
+        </dt>
+        <dd class="num">{{ vm.result.hydrationPct | number: "1.0-0" }} %</dd>
+      </div>
+      <div>
+        <dt>{{ "calculator.intermediate.readOnly.restSplit" | translate }}</dt>
+        <dd class="num" data-testid="rest-split">
+          @if (vm.result.coldHours > 0) {
+            {{
+              "calculator.intermediate.readOnly.restSplitValue"
+                | translate
+                  : {
+                      ambient: vm.result.ambientHours,
+                      cold: vm.result.coldHours,
+                    }
+            }}
+          } @else {
+            {{
+              "calculator.intermediate.readOnly.restSplitAmbientOnly"
+                | translate: { ambient: vm.result.ambientHours }
+            }}
+          }
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <app-calculator-method-preview
+    class="method"
+    [preview]="vm.preview"
+    (openFull)="goToMethod()"
+  />
+
+  <app-calculator-cta [readyAt]="vm.preview.readyAt" (open)="goToMethod()" />
+}

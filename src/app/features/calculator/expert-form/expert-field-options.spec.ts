@@ -12,7 +12,6 @@ describe('EXPERT_FIELD_OPTIONS', () => {
     ];
 
     expect(bounds(EXPERT_FIELD_OPTIONS.nbPizzas)).toEqual([1, 25]);
-    expect(bounds(EXPERT_FIELD_OPTIONS.pizzaWeight)).toEqual([150, 400]);
     expect(bounds(EXPERT_FIELD_OPTIONS.hydrationRatio)).toEqual([0.55, 0.8]);
     expect(bounds(EXPERT_FIELD_OPTIONS.poolishRatio)).toEqual([0.3, 0.6]);
     expect(bounds(EXPERT_FIELD_OPTIONS.saltRatio)).toEqual([0.02, 0.04]);
@@ -22,6 +21,12 @@ describe('EXPERT_FIELD_OPTIONS', () => {
     expect(bounds(EXPERT_FIELD_OPTIONS.temperature)).toEqual([19, 36]);
     expect(bounds(EXPERT_FIELD_OPTIONS.rtRestTime)).toEqual([1, 24]);
     expect(bounds(EXPERT_FIELD_OPTIONS.coldRestTime)).toEqual([0, 48]);
+  });
+
+  it('leaves the ball weight grid to the pizza format model', () => {
+    // It is the one grid that depends on the current style, so it cannot be
+    // a static constant shared by Expert and « Mes pâtes par défaut ».
+    expect('pizzaWeight' in EXPERT_FIELD_OPTIONS).toBeFalse();
   });
 
   it('steps ratios on exact select-style values (no floating drift)', () => {

@@ -120,7 +120,7 @@ describe('MethodPreviewService', () => {
       );
 
       expect(steps[0].bodyKey).toBe(
-        'calculator.expert.method.steps.poolishMix',
+        'calculator.shared.method.steps.poolishMix',
       );
       expect(steps[0].at).toEqual(new Date(2026, 6, 14, 21, 0));
     });
@@ -148,7 +148,7 @@ describe('MethodPreviewService', () => {
       );
 
       expect(steps[1].bodyKey).toBe(
-        'calculator.expert.method.steps.poolishKnead',
+        'calculator.shared.method.steps.poolishKnead',
       );
       // 21:00 + 26 h of poolish prep.
       expect(steps[1].at).toEqual(new Date(2026, 6, 15, 23, 0));
@@ -208,7 +208,7 @@ describe('MethodPreviewService', () => {
         now,
       );
 
-      expect(steps[0].bodyKey).toBe('calculator.expert.method.steps.directMix');
+      expect(steps[0].bodyKey).toBe('calculator.shared.method.steps.directMix');
       expect(steps[0].at).toEqual(new Date(2026, 6, 14, 21, 0));
       expect(steps[0].ingredients).toEqual([
         { key: 'flour', grams: 755 },
@@ -228,7 +228,7 @@ describe('MethodPreviewService', () => {
       );
 
       expect(steps[1].bodyKey).toBe(
-        'calculator.expert.method.steps.directBalls',
+        'calculator.shared.method.steps.directBalls',
       );
       // 21:00 + 9 h of dough prep.
       expect(steps[1].at).toEqual(new Date(2026, 6, 15, 6, 0));
