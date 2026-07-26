@@ -14,7 +14,8 @@ async function sleep(seconds: number) {
 const workflow = defineWorkflow({
   harness: claudeCode({ model: 'claude-opus-5', effort: 'xhigh' }),
   async run(context) {
-    for (let attempt = 0; attempt < 20; attempt++) {
+    let attempt = 0;
+    while (attempt < 20) {
       const initResult = await runInitialize(context);
       console.error('Init result', initResult);
 
@@ -43,6 +44,8 @@ const workflow = defineWorkflow({
 
         console.error('Implementation result', implementationResult);
       }
+
+      attempt++;
     }
   },
 });
