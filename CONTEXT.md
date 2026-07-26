@@ -15,7 +15,7 @@ An in-progress calculation owned and persisted by one calculator path. Guided an
 _Avoid_: shared calculator state, scratchpad
 
 **Defaults**:
-User-configurable seed values (hydration, salt, ball weight…) applied when starting a new calculation. Live in settings. UI: « Mes défauts de pâte ».
+User-configurable seed values (hydration, salt, ball weight…) applied when starting a new calculation. Live in settings. UI: « Mes pâtes par défaut ».
 _Avoid_: constants, DEFAULT_INPUT
 
 **Dough method**:

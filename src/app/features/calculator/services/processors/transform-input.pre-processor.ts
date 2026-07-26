@@ -16,7 +16,7 @@ export class FillMissingPreProcessor implements IPreProcessor {
     settings: ICalculatorSettings,
     input: ICalculatorInput,
   ): ICalculatorInput {
-    // Auto fields fall back to the user's Defaults (« Mes défauts de pâte »).
+    // Auto fields fall back to the user's Defaults (« Mes pâtes par défaut »).
     const defaultInput = this.defaults.getDefaults();
     return {
       nbPizzas: input.nbPizzas,

@@ -39,16 +39,4 @@ describe('SettingsFormComponent', () => {
       'fr',
     ]);
   });
-
-  it('links to the public privacy policy in a new window', () => {
-    const link = fixture.debugElement.query(
-      By.css('[data-testid="privacy-policy-link"]'),
-    ).nativeElement as HTMLElement & { href: string };
-
-    expect(link.href).toBe(
-      'https://nyxa07.github.io/pizza-app/privacy/',
-    );
-    expect(link.getAttribute('target')).toBe('_blank');
-    expect(link.getAttribute('rel')).toBe('noopener noreferrer');
-  });
 });

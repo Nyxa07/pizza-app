@@ -4,7 +4,7 @@ import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 
 /**
  * The value grids every steppable Expert tile walks through — the same
- * historic bounds the v1 selects offered. « Mes défauts de pâte » consumes
+ * historic bounds the v1 selects offered. « Mes pâtes par défaut » consumes
  * the shared entries too, so the two forms can never drift apart.
  */
 export const EXPERT_FIELD_OPTIONS = {

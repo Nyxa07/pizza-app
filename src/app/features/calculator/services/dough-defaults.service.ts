@@ -8,7 +8,7 @@ import { YeastType } from '../enums/yeast-type.enum';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 
 /**
- * Factory seed for the user's Defaults (« Mes défauts de pâte »). Only a
+ * Factory seed for the user's Defaults (« Mes pâtes par défaut »). Only a
  * fallback: user-customised values are persisted and win over these.
  * `satisfies` keeps the literal (non-null) field types for consumers.
  */
@@ -31,7 +31,7 @@ export const FACTORY_DEFAULTS = {
 } satisfies ICalculatorInput;
 
 /**
- * The user's Defaults (« Mes défauts de pâte ») — the seed values every new
+ * The user's Defaults (« Mes pâtes par défaut ») — the seed values every new
  * calculation starts from (ADR-0002). Editing a Default never touches the
  * current Draft; it only applies from the next new calculation on.
  */

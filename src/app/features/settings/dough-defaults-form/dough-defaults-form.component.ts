@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
@@ -21,9 +20,10 @@ import {
   DoughDefaultsService,
   FACTORY_DEFAULTS,
 } from 'src/app/features/calculator/services/dough-defaults.service';
+import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
 /**
- * « Mes défauts de pâte » — the user-editable seed values every new
+ * « Mes pâtes par défaut » — the user-editable seed values every new
  * calculation starts from (issue #68). Temporarily hosted in the current
  * settings screen; moves with the v2 navigation.
  */
@@ -34,13 +34,13 @@ import {
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    DecimalPipe,
     IonItem,
     IonList,
     IonListHeader,
     IonNote,
     IonSelect,
     IonSelectOption,
+    NumberPipe,
     ReactiveFormsModule,
     TranslatePipe,
   ],
