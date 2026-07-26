@@ -35,15 +35,12 @@ export type ImplementationResultSuccess = Extract<
 
 function getPrompt(input: ImplementInput) {
   return [
-    `/implement l'issue #${input.issue}, utilise la branche ${input.devBranch} qui à déjà étée créée. Si la branche est manquant ou stale, tu échoue immédiatement avec le statut "implementation_failed"`,
+    `L'issue est #${input.issue}. Utilise la branche ${input.devBranch} qui à déjà étée créée. Si la branche est manquant ou stale, tu échoue immédiatement avec le statut "implementation_failed"`,
     "Inutile de faire des captures d'écrans de l'application, elles seront générées le moment venu avant un déploiement",
     input.pullRequest
       ? `Une fois terminé, commit, push et ouvre une pull request (PR) GitHub.`
       : `La pull request existe déjà : ${input.pullRequest}, commit et push`,
     `Ajoute le 'Closes #${input.issue} à la PR pour que l'issue se clôture lors de du merge de la PR (que tu ne fais surtout pas toi meme).`,
-    // `Si les modifications impliquent des changements visuels / style etc.. Alors produit des screenshots que tu peux ajouter à la pull request pour faciliter les retours.`,
-    // `Ne commit jamais les screenshots temporaires (par exemple destinés à la PR). Ceux de fastlane sont commités (c'est normal)`,
-    // `Ne regénère pas les screenshots fastlane, ce sera fait au moment d'une release.`,
     `Retire le label 'ready-for-agent' et ajoute le label 'implemented' sur l'issue.`,
   ].join('\n');
 }
@@ -59,6 +56,7 @@ export default async function runImplementation(
     approval: 'deny',
     access: 'full',
     output: implementOutputSchema,
+    skill: 'implement',
   });
 
   return result;

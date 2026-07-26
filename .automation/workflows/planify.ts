@@ -25,7 +25,7 @@ type PlanifyInput = {
 
 function getPrompt(issue: number) {
   return [
-    `/to-spec ${issue}`,
+    `Créer la spec pour l'issue ${issue}.`,
     `N'oublie pas de lire les commentaires qui pourraient etre des retours a prendre en compte lors d'une deuxième passe de planification.`,
     "Une fois le plan achevé, écrit le dans le corps de l'issue GitHub puis ajoute un commentaire résumant en quelques phrases le plan / spec pour des utilisateurs moins techniques.",
     "Retire le label `ready-for-agent` ainsi que `to-planify` (si présent), et ajoute le label `ready-for-human` pour qu'on puisse valider le plan.",
@@ -44,6 +44,7 @@ export default async function runToPlanify(
     approval: 'deny',
     access: 'full',
     output: planifyOutputSchema,
+    skill: 'to-spec',
   });
 
   return result;
