@@ -58,5 +58,29 @@
       "Add the mozzarella, mushrooms and finally the strips of ham.",
       "Bake until the base is golden and serve with a twist of black pepper."
     ]
+  },
+  "quatre-fromages": {
+    "name": "Four cheeses",
+    "category": "The indulgent white one",
+    "summary": "Ricotta, fior di latte, camembert and roquefort, lifted by a drizzle of honey and crushed walnuts.",
+    "description": "A white pizza in two stages: the seasoned ricotta bakes with the dough, while the three other cheeses only go on at the end so they stay molten. Honey, walnuts and basil are added out of the oven.",
+    "imageAlt": "Top view of a white pizza with four melted cheeses on a wooden board",
+    "doughSuggestion": "Direct Neapolitan dough · 24 hours",
+    "ingredients": [
+      "40 g fresh ricotta per pizza",
+      "80 g well-drained fior di latte per pizza",
+      "25 g thinly sliced camembert per pizza (buffalo camembert if you can find it)",
+      "25 g crumbled roquefort per pizza",
+      "10 g roughly crushed walnuts",
+      "1 tbsp runny honey",
+      "Extra-virgin olive oil, pepper and a few basil leaves"
+    ],
+    "steps": [
+      "Loosen the ricotta with a drizzle of olive oil, salt and a twist of pepper.",
+      "Open the dough while keeping a puffy rim, then spread the ricotta to within two centimetres of the edge.",
+      "Bake very hot: the ricotta cooks with the dough and loses its excess water.",
+      "Take the pizza out, scatter over the fior di latte, camembert and roquefort, then return it to the oven just long enough to melt them.",
+      "Out of the oven, add the walnuts, drizzle over the honey, and finish with basil and a last thread of oil."
+    ]
   }
 }

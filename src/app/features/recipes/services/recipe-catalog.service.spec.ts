@@ -124,6 +124,17 @@ describe('The dough each Recipe recommends', () => {
       ambientHours: 24,
       coldHours: 0,
     },
+    {
+      id: 'quatre-fromages',
+      pizzaType: PizzaType.NEAPOLITAN,
+      doughType: DoughType.DIRECT,
+      hydrationRatio: 0.62,
+      flourStrength: 270,
+      balls: 4,
+      ballWeight: 250,
+      ambientHours: 24,
+      coldHours: 0,
+    },
   ] as const;
 
   let catalog: RecipeCatalogService;
@@ -191,6 +202,7 @@ describe('RecipeCatalogService', () => {
       'Margherita',
       'Marinara',
       'Reine',
+      '4 fromages',
     ]);
     expect(service.get('marinara')?.content.category).toBe(
       'La plus dépouillée',

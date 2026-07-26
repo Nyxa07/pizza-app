@@ -104,4 +104,15 @@ export const PIZZA_RECIPE_CATALOG = [
     },
     suggestedDoughId: 'roman-direct-24h-55',
   },
+  {
+    id: 'quatre-fromages',
+    image: {
+      path: 'assets/recipes/quatre-fromages.webp',
+      sourceUrl:
+        'https://www.pexels.com/photo/rustic-four-cheese-pizza-on-wooden-table-33592983/',
+      photographer: 'Anhelina Vasylyk',
+    },
+    // The 62 % preset again: a cheese-heavy topping asks for the drier dough.
+    suggestedDoughId: 'neapolitan-direct-24h-62',
+  },
 ] satisfies readonly PizzaRecipeDefinition[];

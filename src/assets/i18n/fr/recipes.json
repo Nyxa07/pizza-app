@@ -58,5 +58,29 @@
       "Ajouter la mozzarella, les champignons et enfin les lanières de jambon.",
       "Cuire jusqu'à obtenir un dessous doré et servir avec un tour de poivre."
     ]
+  },
+  "quatre-fromages": {
+    "name": "4 fromages",
+    "category": "La blanche gourmande",
+    "summary": "Ricotta, fior di latte, camembert et roquefort, relevés d'un filet de miel et de cerneaux de noix.",
+    "description": "Une pizza blanche en deux temps : la ricotta assaisonnée cuit avec la pâte, les trois autres fromages n'arrivent qu'en fin de cuisson pour rester fondants. Miel, noix et basilic se posent hors du four.",
+    "imageAlt": "Pizza blanche aux quatre fromages fondus, vue du dessus sur une planche en bois",
+    "doughSuggestion": "Pâte napolitaine directe · 24 h",
+    "ingredients": [
+      "40 g de ricotta fraîche par pizza",
+      "80 g de fior di latte bien égoutté par pizza",
+      "25 g de camembert en fines lamelles par pizza (de bufflonne si vous en trouvez)",
+      "25 g de roquefort émietté par pizza",
+      "10 g de cerneaux de noix grossièrement concassés",
+      "1 c. à s. de miel liquide",
+      "Huile d'olive vierge extra, poivre et quelques feuilles de basilic"
+    ],
+    "steps": [
+      "Détendre la ricotta avec un filet d'huile d'olive, du sel et un tour de poivre.",
+      "Étaler la pâte en gardant un bord gonflé, puis répartir la ricotta jusqu'à deux centimètres du bord.",
+      "Enfourner très chaud : la ricotta cuit avec la pâte et perd son excès d'eau.",
+      "Sortir la pizza, répartir le fior di latte, le camembert et le roquefort, puis remettre au four juste le temps de les faire fondre.",
+      "Hors du four, parsemer les noix, verser le miel en filet et terminer par le basilic et un dernier trait d'huile."
+    ]
   }
 }
