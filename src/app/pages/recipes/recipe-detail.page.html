@@ -44,25 +44,22 @@
             <p>{{ "pages.recipes.suggestedDough" | translate }}</p>
             <h2>{{ recipe.content.doughSuggestion }}</h2>
           </div>
-          <dl class="dough-facts num">
-            <div>
-              <dt>{{ "pages.recipes.balls" | translate }}</dt>
-              <dd>{{ recipe.suggestedDough.input.nbPizzas }}</dd>
-            </div>
-            <div>
-              <dt>{{ "pages.recipes.hydration" | translate }}</dt>
-              <dd>
-                {{
-                  (recipe.suggestedDough.input.hydrationRatio ?? 0) * 100
-                    | number: "1.0-0"
-                }}%
-              </dd>
-            </div>
-            <div>
-              <dt>{{ "pages.recipes.rest" | translate }}</dt>
-              <dd>{{ restHours | number: "1.0-0" }} h</dd>
-            </div>
-          </dl>
+          @if (summary) {
+            <dl class="dough-facts num">
+              <div>
+                <dt>{{ "pages.recipes.balls" | translate }}</dt>
+                <dd>{{ summary.balls }}</dd>
+              </div>
+              <div>
+                <dt>{{ "pages.recipes.hydration" | translate }}</dt>
+                <dd>{{ summary.hydrationRatio * 100 | number: "1.0-0" }}%</dd>
+              </div>
+              <div>
+                <dt>{{ "pages.recipes.rest" | translate }}</dt>
+                <dd>{{ summary.restHours | number: "1.0-0" }} h</dd>
+              </div>
+            </dl>
+          }
           <ion-button expand="block" (click)="prepareSuggestedDough()">
             {{ "pages.recipes.prepareDough" | translate }}
           </ion-button>

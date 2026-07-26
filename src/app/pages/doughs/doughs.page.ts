@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
   signal,
 } from '@angular/core';
@@ -28,6 +29,7 @@ import {
 } from 'lucide-angular';
 
 import type { Dough } from 'src/app/features/doughs/interfaces/dough.interface';
+import { DoughSummaryService } from 'src/app/features/doughs/services/dough-summary.service';
 import { DoughsService } from 'src/app/features/doughs/services/doughs.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
@@ -53,6 +55,7 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 })
 export class DoughsPage {
   private readonly doughsService = inject(DoughsService);
+  private readonly summaries = inject(DoughSummaryService);
   private readonly router = inject(Router);
   private readonly translate = inject(TranslateService);
   private readonly actionSheetController = inject(ActionSheetController);
@@ -65,6 +68,13 @@ export class DoughsPage {
   protected readonly doughs = toSignal(this.doughsService.getDoughs$(), {
     initialValue: this.doughsService.list(),
   });
+  /** Each document with its resolved facts: a card never reads a raw input. */
+  protected readonly cards = computed(() =>
+    this.doughs().map((dough) => ({
+      dough,
+      summary: this.summaries.forDough(dough),
+    })),
+  );
 
   protected open(dough: Dough): void {
     this.router.navigate(['/tabs/doughs', dough.id]);

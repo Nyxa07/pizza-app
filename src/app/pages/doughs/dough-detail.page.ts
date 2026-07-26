@@ -13,10 +13,10 @@ import {
 
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { DoughType } from 'src/app/features/calculator/enums/dough-type.enum';
 import { EXPERT_CALCULATOR_SETTINGS } from 'src/app/features/calculator/services/calculator-initializer.service';
 import { CalculatorService } from 'src/app/features/calculator/services/calculator.service';
 import { MethodService } from 'src/app/features/calculator/services/method.service';
+import { DoughSummaryService } from 'src/app/features/doughs/services/dough-summary.service';
 import { DoughsService } from 'src/app/features/doughs/services/doughs.service';
 import { MethodComponent } from 'src/app/features/method/method.component';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
@@ -45,34 +45,28 @@ export class DoughDetailPage {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly doughs = inject(DoughsService);
+  private readonly summaries = inject(DoughSummaryService);
   private readonly calculator = inject(CalculatorService);
   private readonly methodService = inject(MethodService);
 
   protected readonly dough = this.doughs.get(
     this.route.snapshot.paramMap.get('id') ?? '',
   );
-  protected readonly output = this.dough
+  private readonly output = this.dough
     ? this.calculator.process(EXPERT_CALCULATOR_SETTINGS, this.dough.input)
+    : null;
+  /** The document facts, resolved through the same seam as the library card. */
+  protected readonly summary = this.dough
+    ? this.summaries.forDough(this.dough)
     : null;
   protected readonly method =
     this.dough && this.output
       ? this.methodService.build(this.dough.input, this.output, new Date())
       : null;
-  protected readonly ambientHours = this.restPart()?.rtRestTime ?? 0;
-  protected readonly coldHours = this.restPart()?.coldRestTime ?? 0;
 
   protected adjust(): void {
     if (this.dough && this.doughs.adjust(this.dough.id)) {
       this.router.navigate(['/tabs/calculator/expert']);
     }
-  }
-
-  private restPart() {
-    if (!this.dough || !this.output) {
-      return null;
-    }
-    return this.dough.input.doughType === DoughType.POOLISH
-      ? this.output.poolish
-      : this.output.dough;
   }
 }
