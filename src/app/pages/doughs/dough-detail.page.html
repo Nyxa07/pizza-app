@@ -17,28 +17,28 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  @if (dough && output && method) {
+  @if (dough && summary && method) {
     <div class="app-page-layout">
       <div class="document-header">
         <p>{{ "pages.doughs.documentHint" | translate }}</p>
         <dl class="fact-grid summary num">
           <div>
             <dt>{{ "pages.doughs.summary.balls" | translate }}</dt>
-            <dd>{{ dough.input.nbPizzas }}</dd>
+            <dd>{{ summary.balls }}</dd>
           </div>
           <div>
             <dt>{{ "pages.doughs.summary.ballWeight" | translate }}</dt>
-            <dd>{{ output.pizzaBalls.weight | number: "1.0-0" }} g</dd>
+            <dd>{{ summary.ballWeight | number: "1.0-0" }} g</dd>
           </div>
           <div>
             <dt>{{ "pages.doughs.summary.hydration" | translate }}</dt>
-            <dd>{{ output.hydrationRatio * 100 | number: "1.0-0" }}%</dd>
+            <dd>{{ summary.hydrationRatio * 100 | number: "1.0-0" }}%</dd>
           </div>
           <div>
             <dt>{{ "pages.doughs.summary.rest" | translate }}</dt>
             <dd>
-              {{ ambientHours | number: "1.0-0" }} h +
-              {{ coldHours | number: "1.0-0" }} h
+              {{ summary.ambientHours | number: "1.0-0" }} h +
+              {{ summary.coldHours | number: "1.0-0" }} h
             </dd>
           </div>
         </dl>
