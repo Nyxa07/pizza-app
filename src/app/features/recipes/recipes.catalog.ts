@@ -1,10 +1,32 @@
 import { DoughType } from '../calculator/enums/dough-type.enum';
 import { YeastType } from '../calculator/enums/yeast-type.enum';
+import type { ICalculatorInput } from '../calculator/interfaces/calculator-input.interface';
 import { PizzaType } from '../settings/enums/pizza-type.enum';
 import type {
   PizzaRecipeDefinition,
   SuggestedDough,
 } from './interfaces/pizza-recipe.interface';
+
+/**
+ * Everything the two 24 h Neapolitan presets have in common. They differ on
+ * hydration alone, so hydration is the only value written per preset.
+ */
+const NEAPOLITAN_DIRECT_24H = {
+  nbPizzas: 4,
+  doughType: DoughType.DIRECT,
+  yeastType: YeastType.DRY_INSTANT,
+  temperature: 20,
+  globalRestTime: 24,
+  rtRestTime: null,
+  coldRestTime: null,
+  poolishRatio: 0.4,
+  flourStrength: 270,
+  saltRatio: 0.028,
+  honeyRatio: 0,
+  pizzaWeight: 250,
+  pizzaType: PizzaType.NEAPOLITAN,
+  oliveOilRatio: 0,
+} satisfies Omit<ICalculatorInput, 'hydrationRatio'>;
 
 /**
  * Curated dough presets referenced by Recipes. They are complete Drafts so
@@ -18,44 +40,12 @@ import type {
 export const SUGGESTED_DOUGHS = [
   {
     id: 'neapolitan-direct-24h-62',
-    input: {
-      nbPizzas: 4,
-      doughType: DoughType.DIRECT,
-      yeastType: YeastType.DRY_INSTANT,
-      hydrationRatio: 0.62,
-      temperature: 20,
-      globalRestTime: 24,
-      rtRestTime: null,
-      coldRestTime: null,
-      poolishRatio: 0.4,
-      flourStrength: 270,
-      saltRatio: 0.028,
-      honeyRatio: 0,
-      pizzaWeight: 250,
-      pizzaType: PizzaType.NEAPOLITAN,
-      oliveOilRatio: 0,
-    },
+    input: { ...NEAPOLITAN_DIRECT_24H, hydrationRatio: 0.62 },
   },
   {
-    // A cheeseless topping carries — and deserves — a wetter dough.
+    // The wetter of the two: a light, cheeseless topping carries more water.
     id: 'neapolitan-direct-24h-66',
-    input: {
-      nbPizzas: 4,
-      doughType: DoughType.DIRECT,
-      yeastType: YeastType.DRY_INSTANT,
-      hydrationRatio: 0.66,
-      temperature: 20,
-      globalRestTime: 24,
-      rtRestTime: null,
-      coldRestTime: null,
-      poolishRatio: 0.4,
-      flourStrength: 270,
-      saltRatio: 0.028,
-      honeyRatio: 0,
-      pizzaWeight: 250,
-      pizzaType: PizzaType.NEAPOLITAN,
-      oliveOilRatio: 0,
-    },
+    input: { ...NEAPOLITAN_DIRECT_24H, hydrationRatio: 0.66 },
   },
   {
     id: 'roman-direct-24h-55',

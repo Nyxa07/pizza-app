@@ -90,13 +90,15 @@ describe('The dough each Recipe recommends', () => {
    * method carried by the preset, plus the hydration and the rest split the
    * engine resolves. A silent preset edit fails here, not in production.
    */
-  const EXPECTED = [
+  const HOUSE_DOUGH_FACTS = [
     {
       id: 'margherita',
       pizzaType: PizzaType.NEAPOLITAN,
       doughType: DoughType.DIRECT,
       hydrationRatio: 0.62,
       flourStrength: 270,
+      balls: 4,
+      ballWeight: 250,
       ambientHours: 24,
       coldHours: 0,
     },
@@ -106,6 +108,8 @@ describe('The dough each Recipe recommends', () => {
       doughType: DoughType.DIRECT,
       hydrationRatio: 0.66,
       flourStrength: 270,
+      balls: 4,
+      ballWeight: 250,
       ambientHours: 24,
       coldHours: 0,
     },
@@ -115,6 +119,8 @@ describe('The dough each Recipe recommends', () => {
       doughType: DoughType.DIRECT,
       hydrationRatio: 0.55,
       flourStrength: 270,
+      balls: 4,
+      ballWeight: 260,
       ambientHours: 24,
       coldHours: 0,
     },
@@ -136,11 +142,11 @@ describe('The dough each Recipe recommends', () => {
 
   it('covers every shipped Recipe', () => {
     expect(PIZZA_RECIPE_CATALOG.map(({ id }) => id)).toEqual(
-      EXPECTED.map(({ id }) => id),
+      HOUSE_DOUGH_FACTS.map(({ id }) => id),
     );
   });
 
-  for (const expected of EXPECTED) {
+  for (const expected of HOUSE_DOUGH_FACTS) {
     it(`resolves the house dough facts of "${expected.id}"`, () => {
       const recipe = catalog.get(expected.id);
       if (!recipe) {
@@ -148,12 +154,15 @@ describe('The dough each Recipe recommends', () => {
       }
       const { input } = recipe.suggestedDough;
 
+      // The style and the flour are carried by the preset, not resolved.
       expect(input.pizzaType).toBe(expected.pizzaType);
-      expect(input.doughType).toBe(expected.doughType);
       expect(input.flourStrength).toBe(expected.flourStrength);
 
       const summary = summaries.summarize(input);
-      expect(summary.hydrationRatio).toBeCloseTo(expected.hydrationRatio, 10);
+      expect(summary.doughType).toBe(expected.doughType);
+      expect(summary.hydrationRatio).toBe(expected.hydrationRatio);
+      expect(summary.balls).toBe(expected.balls);
+      expect(summary.ballWeight).toBe(expected.ballWeight);
       expect(summary.ambientHours).toBe(expected.ambientHours);
       expect(summary.coldHours).toBe(expected.coldHours);
     });
