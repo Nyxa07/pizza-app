@@ -34,7 +34,25 @@
             "prefix": "app",
             "style": "camelCase"
           }
+        ],
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "@angular/common",
+                "importNames": ["DecimalPipe"],
+                "message": "Import NumberPipe from src/app/shared/pipes/number.pipe instead: DecimalPipe resolves its locale from LOCALE_ID, which this app never provides, so it prints en-US numbers to French users. Both are named `number` in templates, so the mistake compiles silently."
+              }
+            ]
+          }
         ]
+      }
+    },
+    {
+      "files": ["src/app/shared/pipes/number.pipe.ts"],
+      "rules": {
+        "no-restricted-imports": "off"
       }
     },
     {

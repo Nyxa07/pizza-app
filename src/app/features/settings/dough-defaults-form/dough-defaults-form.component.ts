@@ -40,8 +40,6 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
     IonNote,
     IonSelect,
     IonSelectOption,
-    // The app-wide number pipe: it follows the active language, unlike
-    // @angular/common's DecimalPipe which pins itself to LOCALE_ID.
     NumberPipe,
     ReactiveFormsModule,
     TranslatePipe,
