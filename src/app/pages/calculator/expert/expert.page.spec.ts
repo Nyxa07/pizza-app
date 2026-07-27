@@ -20,8 +20,17 @@ import { CalculatorExpertPage } from './expert.page';
  */
 describe('CalculatorExpertPage (Dough saving)', () => {
   let fixture: ComponentFixture<CalculatorExpertPage>;
+  let originalRequestIdleCallback: typeof window.requestIdleCallback;
 
   beforeEach(() => {
+    // The header defers past the first idle frame — run it synchronously so
+    // the assertions do not hinge on idle scheduling.
+    originalRequestIdleCallback = window.requestIdleCallback;
+    window.requestIdleCallback = ((cb: IdleRequestCallback) => {
+      cb({ didTimeout: false, timeRemaining: () => 0 } as IdleDeadline);
+      return 0;
+    }) as typeof window.requestIdleCallback;
+
     TestBed.configureTestingModule({
       imports: [CalculatorExpertPage],
       providers: [
@@ -32,6 +41,11 @@ describe('CalculatorExpertPage (Dough saving)', () => {
       ],
     });
     fixture = TestBed.createComponent(CalculatorExpertPage);
+    fixture.componentInstance.ionViewWillEnter();
+  });
+
+  afterEach(() => {
+    window.requestIdleCallback = originalRequestIdleCallback;
   });
 
   const boundSaverInput = (): unknown => {

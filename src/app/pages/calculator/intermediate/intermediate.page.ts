@@ -67,7 +67,7 @@ export class CalculatorIntermediatePage implements ViewWillEnter {
   );
 
   // A deferred-rendering flag, nothing more: the Draft is live from the
-  // moment the Calculator paths module hands its handle out.
+  // moment the Calculator paths module hands its Path draft out.
   ionViewWillEnter(): void {
     idleCallback(() => this.isInitialized.set(true));
   }

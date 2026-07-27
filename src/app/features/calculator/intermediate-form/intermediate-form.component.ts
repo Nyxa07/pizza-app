@@ -61,7 +61,7 @@ type SteppableAnswer = 'nbPizzas' | 'sizeCm' | 'temperature' | 'globalRestTime';
 
 /**
  * Everything the template shows, derived once per Draft/engine emission. The
- * screen never computes a recipe value itself: the adapter and the engine do.
+ * screen never computes a recipe value itself: the path and the engine do.
  */
 interface IntermediateVm {
   draft: IIntermediateCalculatorDraft;
@@ -101,7 +101,7 @@ interface IntermediateVm {
   ],
 })
 export class IntermediateFormComponent {
-  /** The handle of this path, captured once — never another path's Draft. */
+  /** The Path draft of this path, captured once — never another path's. */
   private readonly state = inject(CalculatorPaths).for(
     CalculatorPath.INTERMEDIATE,
   );

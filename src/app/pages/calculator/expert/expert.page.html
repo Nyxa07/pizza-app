@@ -5,7 +5,7 @@
       <app-calculator-refresh-button
         [path]="CalculatorPath.EXPERT"
       ></app-calculator-refresh-button>
-      @if (resolvedInput(); as input) {
+      @if (isInitialized() && resolvedInput(); as input) {
         <app-dough-saver [input]="input" />
       }
       <ion-button

@@ -100,7 +100,7 @@ const POOLISH_RATIO_FALLBACK = 0.3;
   ],
 })
 export class ExpertFormComponent {
-  /** The handle of this path, captured once — never another path's Draft. */
+  /** The Path draft of this path, captured once — never another path's. */
   private readonly state = inject(CalculatorPaths).for(CalculatorPath.EXPERT);
   private readonly calculator = inject(CalculatorService);
   private readonly methodPreview = inject(MethodPreviewService);

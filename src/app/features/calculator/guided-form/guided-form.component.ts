@@ -102,7 +102,7 @@ const GUIDED_STEPS: readonly GuidedStep[] = [
   ],
 })
 export class GuidedFormComponent {
-  /** The handle of this path, captured once — never another path's Draft. */
+  /** The Path draft of this path, captured once — never another path's. */
   private readonly draft = inject(CalculatorPaths).for(CalculatorPath.GUIDED);
   private readonly router = inject(Router);
 

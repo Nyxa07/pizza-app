@@ -7,7 +7,7 @@ clearest examples: the Guided path did not expose those inputs while its engine
 still consumed them.
 
 We now keep one persisted Draft per calculator path. Guided stores only the
-answers it asks for and uses an adapter to derive a complete engine input.
+answers it asks for; its path definition derives a complete engine input.
 Expert keeps the complete technical input. Switching paths never copies values.
 
 ## Consequences
@@ -23,7 +23,7 @@ Expert keeps the complete technical input. Switching paths never copies values.
 - A path is added in one place — one path definition read by the Calculator
   paths module, which owns for each path how its Draft is seeded, kept inside
   the bounds of its style, reset and resolved into an engine input. Screens
-  capture the handle of their own path and never reach for a Draft of their
-  own.
+  capture the Path draft of their own path and never reach for a Draft of
+  their own.
 - « Ajuster » and Recipe suggestions go through that module too: no caller
   outside it names the Draft they land in.

@@ -7,6 +7,7 @@ import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
 import { CalculatorPath } from '../enums/calculator-path.enum';
+import type { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import { DoughDefaultsService } from '../services/dough-defaults.service';
 import {
   EXPERT_DRAFT_STORAGE_KEY,
@@ -49,7 +50,7 @@ interface CommonDraft {
 interface PathCase {
   readonly path: CalculatorPath;
   readonly storageKey: string;
-  /** The typed handle, captured the way a screen captures it. */
+  /** The typed Path draft, captured the way a screen captures it. */
   open(paths: CalculatorPaths): PathDraft<CommonDraft>;
   /** A stored Draft that breaks the path's own invariant, if it has one. */
   readonly stored: Record<string, unknown>;
@@ -115,7 +116,7 @@ describe('CalculatorPaths', () => {
 
   for (const testCase of CASES) {
     describe(testCase.path, () => {
-      it('hands out the same handle every time it is asked', () => {
+      it('hands out the same Path draft every time it is asked', () => {
         expect(testCase.open(paths)).toBe(testCase.open(paths));
       });
 
@@ -262,14 +263,29 @@ describe('CalculatorPaths', () => {
       expect(paths.for(CalculatorPath.EXPERT).snapshot().nbPizzas).toBe(12);
     });
 
-    it('replaces the Draft rather than merging into it', () => {
-      paths.for(CalculatorPath.EXPERT).update({ flourStrength: 350 });
+    /**
+     * A Dough is JSON read back from storage: nothing guarantees it carries
+     * every field of today's engine input, whatever its type says. What it
+     * does not carry comes from « Mes pâtes par défaut », never from the
+     * calculation the user just asked to replace.
+     */
+    it('replaces the calculation in progress rather than merging into it', () => {
+      paths
+        .for(CalculatorPath.EXPERT)
+        .update({ flourStrength: 350, saltRatio: 0.04 });
+      const savedBeforeTheField = { ...dough() } as Partial<ICalculatorInput>;
+      delete savedBeforeTheField.flourStrength;
 
-      paths.startFrom(dough());
+      paths.startFrom(savedBeforeTheField as ICalculatorInput);
 
-      expect(paths.for(CalculatorPath.EXPERT).snapshot().flourStrength).toBe(
-        270,
-      );
+      const draft = paths.for(CalculatorPath.EXPERT).snapshot();
+      expect(draft.nbPizzas).withContext('what the Dough carries').toBe(12);
+      expect(draft.saltRatio)
+        .withContext('overwritten by the Dough, not kept')
+        .toBe(0.028);
+      expect(draft.flourStrength)
+        .withContext('filled from the Defaults, not from the old Draft')
+        .toBe(270);
     });
 
     it('brings a weight from an older release inside its style', () => {
