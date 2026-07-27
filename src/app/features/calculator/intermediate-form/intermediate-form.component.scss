@@ -20,8 +20,15 @@
   }
 }
 
+// The style question and the rest control: the block treatment of the shared
+// tile, declared once for both sections so they can never drift apart (#107).
 .field {
   margin: 0 0 10px;
+  padding: 12px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  box-shadow: var(--shadow);
 
   + .grid {
     margin-top: 10px;
@@ -62,7 +69,10 @@
   padding: 12px;
   border: 1px solid var(--hairline);
   border-radius: var(--radius-m);
-  background: var(--surface);
+  // A card inside a card drops one plane, the way the − / + buttons of every
+  // tile below already do: framed, the choices would otherwise read as nothing
+  // but their hairline.
+  background: var(--surface-sunken);
   color: var(--ink);
   font: inherit;
   text-align: left;
@@ -83,19 +93,16 @@
 
   &.selected {
     border-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+    // Rebased on the sunken plane, and lifted to 12 %: the same wash reads
+    // fainter over a darker base than it did over --surface. 12 % is the only
+    // step where both the selected/carrier and selected/unselected gaps clear
+    // the 1.1 floor in both appearances (1.37 / 1.16 light, 1.12 / 1.15 dark).
+    background: color-mix(in srgb, var(--accent) 12%, var(--surface-sunken));
   }
 }
 
 // The single rest control: a slider for the sweep, steppers for the last hour.
-.rest {
-  padding: 12px;
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-m);
-  background: var(--surface);
-  box-shadow: var(--shadow);
-}
-
+// Its frame comes from .field, so only the slider row is its own.
 .slider-row {
   display: flex;
   align-items: center;

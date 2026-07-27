@@ -182,6 +182,16 @@ describe('Design token contrast', () => {
       ).toBeGreaterThanOrEqual(SURFACE_SEPARATION);
     });
 
+    // A card nested on a card — the style choices of the Intermediate path,
+    // the − / + buttons of every tile — leans on this pair alone. Light is
+    // covered by the value lock below: both planes are pinned there, so the
+    // ratio cannot drift without the lock falling first (issue #107).
+    it('separates a nested plane from the card that carries it', () => {
+      expect(
+        contrastRatio(tokens['--surface-sunken'], tokens['--surface']),
+      ).toBeGreaterThanOrEqual(SURFACE_SEPARATION);
+    });
+
     it('keeps the elevation scale ordered: sunken < bg < surface', () => {
       const luminance = (token: SemanticToken) =>
         relativeLuminance(parseColor(tokens[token]));

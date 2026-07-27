@@ -69,6 +69,37 @@ describe('IntermediateFormComponent', () => {
   const textOf = (testId: string): string =>
     host().querySelector(`[data-testid="${testId}"]`)!.textContent!.trim();
 
+  /**
+   * The block that carries the style choices — found through them, so that
+   * asking what else it holds is a real question.
+   */
+  const styleSection = (): HTMLElement =>
+    host().querySelector('.choice')!.closest('section')!;
+
+  const restSection = (): HTMLElement => host().querySelector('section.rest')!;
+
+  /**
+   * What makes a block read as a card on this screen — stated as what the eye
+   * sees, never as the token or the rule that produces it, so the technique
+   * can change without the test moving.
+   */
+  interface BlockTreatment {
+    border: string;
+    radius: string;
+    background: string;
+    shadow: string;
+  }
+
+  const blockTreatment = (element: Element): BlockTreatment => {
+    const style = getComputedStyle(element);
+    return {
+      border: `${style.borderTopWidth} ${style.borderTopStyle}`,
+      radius: style.borderTopLeftRadius,
+      background: style.backgroundColor,
+      shadow: style.boxShadow,
+    };
+  };
+
   const sizeTileText = (): string =>
     host().querySelector('[data-testid="size-tile"]')!.textContent!;
 
@@ -266,6 +297,65 @@ describe('IntermediateFormComponent', () => {
         pizzaType: PizzaType.ROMAN,
       }),
     );
+  });
+
+  // The first question of the path is a question posed in a frame, like every
+  // other block of the screen — issue #107.
+  describe('the style question', () => {
+    it('gathers its label, its hint and both choices under one block', () => {
+      const framed = styleSection();
+
+      expect(framed.querySelector('#intermediate-pizzaType'))
+        .withContext('the label')
+        .toBeTruthy();
+      expect(framed.querySelector('.field-hint'))
+        .withContext('the hint')
+        .toBeTruthy();
+      expect(framed.querySelectorAll('[data-testid^="pizza-type-"]').length)
+        .withContext('both style choices')
+        .toBe(2);
+    });
+
+    it('presents itself as a card, like every other block of the screen', () => {
+      const framed = blockTreatment(styleSection());
+
+      // Anchored on the shared tile, which frames itself: comparing the two
+      // sections to each other alone would stay green if the frame they now
+      // share were dropped from both at once.
+      expect(framed)
+        .withContext('against the shared tile')
+        .toEqual(blockTreatment(host().querySelector('app-calculator-tile')!));
+      expect(framed)
+        .withContext('against the rest block')
+        .toEqual(blockTreatment(restSection()));
+      expect(getComputedStyle(styleSection()).paddingTop)
+        .withContext('the inner spacing of a block')
+        .toBe(getComputedStyle(restSection()).paddingTop);
+    });
+
+    it('keeps each style card distinguishable from the block carrying it', () => {
+      const carrier = getComputedStyle(styleSection()).backgroundColor;
+
+      for (const choice of Array.from(
+        styleSection().querySelectorAll('.choice'),
+      )) {
+        expect(getComputedStyle(choice).backgroundColor)
+          .withContext(choice.getAttribute('data-testid')!)
+          .not.toBe(carrier);
+      }
+    });
+
+    it('still names each style and says what it gives', () => {
+      speaksFrench();
+      const framed = styleSection().textContent!;
+
+      expect(framed).toContain('Type de pizza');
+      expect(framed).toContain("Le style décide de l'hydratation");
+      expect(framed).toContain('Napolitaine');
+      expect(framed).toContain('Souple, gonflée et moelleuse');
+      expect(framed).toContain('Romaine');
+      expect(framed).toContain('Fine, légère et croustillante');
+    });
   });
 
   it('previews the Method and opens the Intermediate one', () => {
