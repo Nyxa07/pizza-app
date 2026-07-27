@@ -1,0 +1,6 @@
+• New Intermediate calculator: choose pizza style, count and size, dough method, rest, temperature and yeast—no baker's percentages required.
+• Save a Dough from Guided or the Method screen; Guided Doughs now show the correct hydration.
+• New Four Cheese recipe and a tailored suggested Dough for every recipe.
+• Better readability with large system fonts and dark mode.
+• Clearer settings, units and spacing.
+• “New calculation” now returns to the first step.

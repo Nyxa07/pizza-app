@@ -1,0 +1,6 @@
+• Nouveau parcours Intermédiaire : choisissez style, nombre, taille, méthode, repos, température et levure, sans pourcentages.
+• Enregistrez une pâte depuis le Guidé ou l’écran Méthode ; hydratation des pâtes guidées corrigée.
+• Nouvelle recette 4 fromages et pâte suggérée adaptée à chaque recette.
+• Meilleure lisibilité : grandes polices, mode sombre, unités et espacements.
+• Réglages clarifiés : nombres français, mentions légales réorganisées.
+• « Nouveau calcul » repart de la première étape.

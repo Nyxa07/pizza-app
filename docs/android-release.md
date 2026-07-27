@@ -23,8 +23,8 @@ Android and Google Play use two version values from
 
 ```groovy
 defaultConfig {
-    versionCode 21
-    versionName "2.0.2"
+    versionCode 22
+    versionName "2.0.3"
 }
 ```
 
@@ -40,7 +40,7 @@ Before building a new AAB:
 3. Update the visible project version:
 
    ```bash
-   npm version 2.0.3 --no-git-tag-version
+   npm version 2.0.4 --no-git-tag-version
    ```
 
    This updates `package.json` and `package-lock.json`.
@@ -48,8 +48,8 @@ Before building a new AAB:
 4. Update both Android values in `android/app/build.gradle`:
 
    ```groovy
-   versionCode 22
-   versionName "2.0.3"
+   versionCode 23
+   versionName "2.0.4"
    ```
 
 The version in `package.json` is kept in sync for project consistency, but
@@ -142,7 +142,7 @@ uninstalling first would discard the user's saved doughs.
 | -------------- | -------------------- | ------------------------ |
 | Application ID | `com.pizzamaker.app` | `com.pizzamaker.app.dev` |
 | Launcher name  | Pizza Maker          | Pizza Maker Dev          |
-| Version name   | `2.0.2`              | `2.0.2-dev.<build>`      |
+| Version name   | `2.0.3`              | `2.0.3-dev.<build>`      |
 
 Both install side by side, each with its own storage. The name override lives in
 `android/app/src/devRelease/res/values/strings.xml`, a build-type source set, so

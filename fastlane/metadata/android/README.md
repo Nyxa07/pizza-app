@@ -1,4 +1,4 @@
-# Google Play metadata — Pizza Maker 2.0.0
+# Google Play metadata — Pizza Maker 2.0.3
 
 This directory is ready to import with Fastlane `supply` or copy into Google
 Play Console. The listing is maintained for every locale shipped by the app:
@@ -7,8 +7,8 @@ Play Console. The listing is maintained for every locale shipped by the app:
 ## Phone screenshots
 
 The four screenshots in each locale are captures of the real Angular app in
-the light appearance at 1080 × 1920 px. They cover both calculator paths and
-all three primary tabs:
+the light appearance at 1080 × 1920 px. They cover the Guided and Expert
+calculators and all three primary tabs:
 
 1. Expert calculator
 2. Guided calculator
@@ -31,9 +31,9 @@ For a dark-appearance QA pass without replacing Store assets, set
 
 ## Release checklist
 
-- Package version: `2.0.0` (`versionCode` 19)
+- Package version: `2.0.3` (`versionCode` 22)
 - Listing locales: English (United States), French (France)
-- Release notes: `changelogs/19.txt`
+- Release notes: `changelogs/22.txt`
 - Phone screenshots: four per locale, PNG, 1080 × 1920 px
 - App bundle/signing and physical-device QA remain release operations; no
   signing material is stored in this metadata directory.
