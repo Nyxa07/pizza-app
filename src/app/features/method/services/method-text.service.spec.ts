@@ -1,7 +1,11 @@
+import { registerLocaleData } from '@angular/common';
+import localeEn from '@angular/common/locales/en';
 import { TestBed } from '@angular/core/testing';
 
 import { TranslateService } from '@ngx-translate/core';
 import { FlameIcon } from 'lucide-angular';
+
+import { LocaleManagerService } from 'src/app/features/settings/services/locale-manager.service';
 
 import type { IMethod } from '../interfaces/method.interface';
 import { MethodTextService } from './method-text.service';
@@ -16,7 +20,7 @@ describe('MethodTextService', () => {
         title: 'calculator.method.titles.poolish',
         ingredients: [
           { key: 'flour', grams: 302 },
-          { key: 'yeast', grams: 0.8 },
+          { key: 'yeast', grams: 0.84 },
         ],
       },
     ],
@@ -57,10 +61,16 @@ describe('MethodTextService', () => {
       return values[key] ?? key;
     });
 
+    registerLocaleData(localeEn);
+
     TestBed.configureTestingModule({
       providers: [
         MethodTextService,
         { provide: TranslateService, useValue: translate },
+        {
+          provide: LocaleManagerService,
+          useValue: { getCurrentAngularLocale: () => 'en-US' },
+        },
       ],
     });
     service = TestBed.inject(MethodTextService);
@@ -72,7 +82,7 @@ describe('MethodTextService', () => {
       withHelperDescriptions: true,
     });
 
-    expect(text).toContain('Poolish:\n• Flour: 302 g\n• Yeast: 0.8 g');
+    expect(text).toContain('Poolish:\n• Flour: 302 g\n• Yeast: 0.84 g');
     expect(text).toContain('Steps:\n1. Bake\n   • Bake at full heat.');
     expect(text).not.toContain('<strong>');
   });
@@ -83,7 +93,7 @@ describe('MethodTextService', () => {
       withHelperDescriptions: true,
     });
 
-    expect(text).toContain('• Yeast: 0.8 g');
+    expect(text).toContain('• Yeast: 0.84 g');
     expect(text).not.toContain('Steps:');
     expect(text).not.toContain('Bake');
   });

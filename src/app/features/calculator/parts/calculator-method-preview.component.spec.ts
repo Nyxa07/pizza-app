@@ -59,7 +59,7 @@ describe('CalculatorMethodPreviewComponent', () => {
           ingredients: [
             { key: 'flour', grams: 755 },
             { key: 'water', grams: 468 },
-            { key: 'yeast', grams: 2.1 },
+            { key: 'yeast', grams: 2.14 },
             { key: 'salt', grams: 21 },
             { key: 'honey', grams: 3 },
             { key: 'oliveOil', grams: 12 },
@@ -82,7 +82,7 @@ describe('CalculatorMethodPreviewComponent', () => {
 
     expect(text).toContain('755\u00a0g de farine');
     expect(text).toContain("468\u00a0g d'eau");
-    expect(text).toContain('2,1\u00a0g de levure');
+    expect(text).toContain('2,14\u00a0g de levure');
     expect(text).toContain('21\u00a0g de sel');
     expect(text).toContain('3\u00a0g de miel');
     expect(text).toContain("12\u00a0g d'huile d'olive");

@@ -2,6 +2,9 @@ import { Injectable, inject } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
+
+import { ingredientGramsFormat } from '../ingredient-grams';
 import type {
   IMethod,
   IMethodIngredient,
@@ -16,6 +19,7 @@ export interface MethodTextOptions {
 @Injectable({ providedIn: 'root' })
 export class MethodTextService {
   private readonly translate = inject(TranslateService);
+  private readonly numberPipe = inject(NumberPipe);
 
   getText(method: IMethod, options: MethodTextOptions): string {
     const ingredientLines = method.sections.flatMap((section) => [
@@ -53,12 +57,9 @@ export class MethodTextService {
   }
 
   private grams(ingredient: IMethodIngredient): string {
-    return ingredient.grams.toLocaleString(
-      this.translate.currentLang || undefined,
-      {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: ingredient.key === 'yeast' ? 1 : 0,
-      },
+    return this.numberPipe.transform(
+      ingredient.grams,
+      ingredientGramsFormat(ingredient.key),
     );
   }
 

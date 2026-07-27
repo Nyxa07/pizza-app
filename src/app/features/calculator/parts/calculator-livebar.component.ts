@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import { TranslatePipe } from '@ngx-translate/core';
 
+import { ingredientGramsFormat } from 'src/app/features/method/ingredient-grams';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
 import type { ICalculatorResult } from './calculator-result';
@@ -28,11 +29,13 @@ import type { ICalculatorResult } from './calculator-result';
               flour: result().split.flour | number: '1.0-0',
               water: result().split.water | number: '1.0-0',
               salt: result().split.salt | number: '1.0-0',
-              yeast: result().split.yeast | number: '1.0-1',
+              yeast: result().split.yeast | number: yeastGramsFormat,
             }
     }}</span>
   `,
 })
 export class CalculatorLivebarComponent {
   readonly result = input.required<ICalculatorResult>();
+
+  protected readonly yeastGramsFormat = ingredientGramsFormat('yeast');
 }

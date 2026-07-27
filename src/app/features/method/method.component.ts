@@ -12,6 +12,7 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 import { RelativeDayPipe } from 'src/app/shared/pipes/relative-day.pipe';
 import { TimePipe } from 'src/app/shared/pipes/time.pipe';
 
+import { ingredientGramsFormat } from './ingredient-grams';
 import type { IMethod, IMethodStep } from './interfaces/method.interface';
 
 /**
@@ -36,6 +37,9 @@ import type { IMethod, IMethodStep } from './interfaces/method.interface';
 export class MethodComponent {
   readonly method = input.required<IMethod>();
 
+  /** The weigh-in reads its grams like the narrated steps below it. */
+  protected readonly gramsFormat = ingredientGramsFormat;
+
   private readonly translate = inject(TranslateService);
   private readonly numberPipe = inject(NumberPipe);
 
@@ -48,7 +52,7 @@ export class MethodComponent {
           {
             grams: this.numberPipe.transform(
               ingredient.grams,
-              ingredient.key === 'yeast' ? '1.0-1' : '1.0-0',
+              ingredientGramsFormat(ingredient.key),
             ),
           },
         ),

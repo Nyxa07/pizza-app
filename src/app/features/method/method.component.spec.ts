@@ -103,8 +103,9 @@ describe('MethodComponent', () => {
     expect(parts.length).toBe(2);
     expect(parts[0].textContent).toContain('Poolish');
     expect(parts[0].textContent).toContain('250');
-    // The pinch of yeast keeps its decimal, in the French notation.
-    expect(parts[0].textContent).toContain('0,1');
+    // The pinch of yeast is read to the centigram, in the French notation,
+    // while everything around it stays on the kitchen scale.
+    expect(parts[0].textContent).toContain('0,10');
     expect(parts[1].textContent).toContain('Pâte avec poolish');
     expect(parts[1].textContent).toContain('522');
   });
@@ -144,7 +145,7 @@ describe('MethodComponent', () => {
     expect(
       stepTitled('Mélanger')?.query(By.css('.quantities')).nativeElement
         .textContent,
-    ).toContain("250\u00a0g d'eau · 0,1\u00a0g de levure · 3\u00a0g de miel");
+    ).toContain("250\u00a0g d'eau · 0,10\u00a0g de levure · 3\u00a0g de miel");
     expect(stepTitled('Repos 1H')?.query(By.css('.quantities'))).toBeNull();
   });
 

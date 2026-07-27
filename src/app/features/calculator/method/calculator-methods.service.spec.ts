@@ -53,7 +53,7 @@ describe('CalculatorMethods', () => {
   beforeEach(() => configure());
 
   describe('the full method of a poolish dough through the fridge', () => {
-    it('weighs in the two parts, yeast to one decimal, zero grams skipped', () => {
+    it('weighs in the two parts, yeast to the centigram, zero grams skipped', () => {
       const { sections } = methodOf(POOLISH_INPUT);
 
       expect(sections.length).toBe(2);
@@ -166,7 +166,8 @@ describe('CalculatorMethods', () => {
 
     it('never rounds a tiny yeast down to nothing', () => {
       // 0.1 g of dry yeast for 250 g of poolish flour — the engine's own
-      // figure, and the one case where rounding would narrate a lie.
+      // figure, and the one a weigh-in to the gram would narrate as absent.
+      // The centigram floor itself is covered in `ingredient-grams.spec`.
       expect(methodOf(POOLISH_INPUT).sections[0].ingredients).toContain({
         key: 'yeast',
         grams: 0.1,
@@ -201,7 +202,7 @@ describe('CalculatorMethods', () => {
       expect(sections[0].ingredients).toEqual([
         { key: 'flour', grams: 772 },
         { key: 'water', grams: 478 },
-        { key: 'yeast', grams: 2 },
+        { key: 'yeast', grams: 1.99 },
         { key: 'salt', grams: 22 },
         { key: 'honey', grams: 3 },
       ]);
@@ -231,7 +232,7 @@ describe('CalculatorMethods', () => {
 
       expect(mix?.ingredients).toEqual([
         { key: 'water', grams: 478 },
-        { key: 'yeast', grams: 2 },
+        { key: 'yeast', grams: 1.99 },
         { key: 'honey', grams: 3 },
       ]);
       expect(flour?.ingredients).toEqual([

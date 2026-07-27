@@ -8,6 +8,7 @@ import {
 
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
+import { ingredientGramsFormat } from 'src/app/features/method/ingredient-grams';
 import type {
   IMethodPreview,
   IMethodPreviewStep,
@@ -138,7 +139,7 @@ export class CalculatorMethodPreviewComponent {
           {
             grams: this.numberPipe.transform(
               ingredient.grams,
-              ingredient.key === 'yeast' ? '1.0-1' : '1.0-0',
+              ingredientGramsFormat(ingredient.key),
             ),
           },
         )}</b>`,
