@@ -11,7 +11,7 @@ A named, saved snapshot of calculator inputs, opened as a document (detail + its
 _Avoid_: calculator state, saved state
 
 **Draft**:
-An in-progress calculation owned and persisted by one calculator path. Guided, Intermediate and Expert each resume their own Draft; switching paths never copies values. A Dough is adjusted into the Expert Draft only. UI: « Calcul en cours », « Reprendre ».
+An in-progress calculation owned and persisted by one calculator path. Guided, Intermediate and Expert each resume their own Draft; switching paths never copies values. A Dough is adjusted into the Expert Draft only. Reached only through the Calculator paths module, never from a service of its own. UI: « Calcul en cours », « Reprendre ».
 _Avoid_: shared calculator state, scratchpad
 
 **Defaults**:
@@ -39,6 +39,14 @@ The single module holding the size ↔ ball-weight conversion, the size range an
 _Avoid_: weight table, ball-weight constants
 
 ### Calculator paths
+
+**Calculator paths**:
+The single module holding every Draft. It hands out one Path draft per path — the only way to read, edit or restart a Draft — and it alone knows how a Draft is seeded, kept inside the bounds of its style, and resolved into a complete engine input. A path is added by declaring one definition; a new one costs no new module. Screens never reach for an individual Draft (ADR-0003).
+_Avoid_: calculator initializer, draft registry, path state
+
+**Path draft**:
+What the Calculator paths module hands out for a given path: the Draft of that path, its edits, its « Nouveau calcul », and its resolved engine input. Typed to its own path, so a value belonging to another path cannot be written into it.
+_Avoid_: draft handle, draft service
 
 **Guided path**:
 The step-by-step calculator flow for general-public users; asks one thing at a time and applies smart defaults.

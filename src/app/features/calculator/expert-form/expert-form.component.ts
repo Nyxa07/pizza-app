@@ -20,7 +20,6 @@ import {
   sizeForWeight,
   weightOptions,
 } from '../pizza-format.model';
-import { EXPERT_CALCULATOR_SETTINGS } from '../services/calculator-initializer.service';
 import { CalculatorService } from '../services/calculator.service';
 import { ExpertDraftService } from '../services/expert-draft.service';
 import {
@@ -131,10 +130,7 @@ export class ExpertFormComponent {
 
   protected readonly vm$: Observable<ExpertVm> = combineLatest([
     this.state.getInput$(),
-    this.calculator.resultsFor$(
-      EXPERT_CALCULATOR_SETTINGS,
-      this.state.getInput$(),
-    ),
+    this.calculator.resultsFor$(this.state.getInput$()),
   ]).pipe(map(([input, output]) => this.buildVm(input, output)));
 
   protected stepField(vm: ExpertVm, field: SteppableField, dir: 1 | -1): void {

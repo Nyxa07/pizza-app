@@ -13,7 +13,6 @@ import {
 
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { EXPERT_CALCULATOR_SETTINGS } from 'src/app/features/calculator/services/calculator-initializer.service';
 import { CalculatorService } from 'src/app/features/calculator/services/calculator.service';
 import { MethodService } from 'src/app/features/calculator/services/method.service';
 import { DoughSummaryService } from 'src/app/features/doughs/services/dough-summary.service';
@@ -53,7 +52,7 @@ export class DoughDetailPage {
     this.route.snapshot.paramMap.get('id') ?? '',
   );
   private readonly output = this.dough
-    ? this.calculator.process(EXPERT_CALCULATOR_SETTINGS, this.dough.input)
+    ? this.calculator.process(this.dough.input)
     : null;
   /** The document facts, resolved through the same seam as the library card. */
   protected readonly summary = this.dough

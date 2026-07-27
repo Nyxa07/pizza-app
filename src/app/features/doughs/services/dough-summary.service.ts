@@ -3,7 +3,6 @@ import { Injectable, inject } from '@angular/core';
 import { DoughType } from 'src/app/features/calculator/enums/dough-type.enum';
 import type { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
 import type { ICalculatorOutput } from 'src/app/features/calculator/interfaces/calculator-output.interface';
-import { EXPERT_CALCULATOR_SETTINGS } from 'src/app/features/calculator/services/calculator-initializer.service';
 import { CalculatorService } from 'src/app/features/calculator/services/calculator.service';
 
 import type { DoughSummary } from '../interfaces/dough-summary.interface';
@@ -18,15 +17,10 @@ import type { Dough } from '../interfaces/dough.interface';
  * It resolves nothing on its own: the engine (`CalculatorService`) owns the
  * formulas, this is a thin presentation layer above its output.
  *
- * A saved Dough is always computed with `EXPERT_CALCULATOR_SETTINGS`, whatever
- * the path it was saved from, and the model carries no `path` field:
- * – `GuidedInputAdapter` already materialises salt / honey / poolish / flour
- *   strength from the Defaults, so a saved input carries them hard-coded;
- * – the remaining fields (hydration, ball weight, olive oil, rest split) are
- *   `null` under both settings profiles, which therefore agree;
- * – the only divergence is that the Expert profile freezes salt / honey /
- *   poolish to the recorded values instead of re-reading the current Defaults,
- *   which is exactly the document semantics of ADR-0002.
+ * A saved Dough carries no `path` field and needs none: whatever path saved it,
+ * its input is complete, and the engine recomputes it from those values alone.
+ * The recorded values are used as recorded, never re-read from the current
+ * Defaults — which is exactly the document semantics of ADR-0002.
  */
 @Injectable({ providedIn: 'root' })
 export class DoughSummaryService {
@@ -35,7 +29,7 @@ export class DoughSummaryService {
 
   /** The resolved facts of any calculator input, saved as a document or not. */
   summarize(input: ICalculatorInput): DoughSummary {
-    const output = this.calculator.process(EXPERT_CALCULATOR_SETTINGS, input);
+    const output = this.calculator.process(input);
     const rest = this.restPart(input, output);
 
     return {

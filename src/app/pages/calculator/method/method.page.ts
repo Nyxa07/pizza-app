@@ -70,14 +70,11 @@ export class CalculatorMethodPage implements OnInit {
 
   private readonly methodStart = new Date();
   private readonly path = this.readPath();
-  // The path registry resolves the Draft and the engine settings, so this
-  // screen never has to know which Draft services exist.
+  // The path registry resolves the Draft, so this screen never has to know
+  // which Draft services exist.
   private readonly input$: Observable<ICalculatorInput> =
     this.calculatorInitializer.resolvedInput$(this.path);
-  private readonly output$ = this.calculator.resultsFor$(
-    this.calculatorInitializer.settingsFor(this.path),
-    this.input$,
-  );
+  private readonly output$ = this.calculator.resultsFor$(this.input$);
 
   protected readonly ChefHatIcon = ChefHatIcon;
   protected readonly backHref = `/tabs/calculator/${this.path}`;

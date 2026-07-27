@@ -29,7 +29,6 @@ import { CalculatorTileComponent } from '../parts/calculator-tile.component';
 import { CalculatorTimelineComponent } from '../parts/calculator-timeline.component';
 import { sizeRange } from '../pizza-format.model';
 import { EXPERT_FIELD_OPTIONS } from '../expert-form/expert-field-options';
-import { INTERMEDIATE_CALCULATOR_SETTINGS } from '../services/calculator-initializer.service';
 import { CalculatorService } from '../services/calculator.service';
 import { IntermediateDraftService } from '../services/intermediate-draft.service';
 import { IntermediateInputAdapter } from '../services/intermediate-input.adapter';
@@ -148,7 +147,7 @@ export class IntermediateFormComponent {
   protected readonly vm$: Observable<IntermediateVm> = combineLatest([
     this.state.getDraft$(),
     this.input$,
-    this.calculator.resultsFor$(INTERMEDIATE_CALCULATOR_SETTINGS, this.input$),
+    this.calculator.resultsFor$(this.input$),
   ]).pipe(map(([draft, input, output]) => this.buildVm(draft, input, output)));
 
   protected selectPizzaType(pizzaType: PizzaType): void {

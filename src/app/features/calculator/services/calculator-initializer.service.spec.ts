@@ -12,6 +12,25 @@ import { ExpertDraftService } from './expert-draft.service';
 import { GuidedDraftService } from './guided-draft.service';
 import { IntermediateDraftService } from './intermediate-draft.service';
 
+/** The complete engine input, sorted — what every path must resolve to. */
+const ENGINE_INPUT_FIELDS = [
+  'coldRestTime',
+  'doughType',
+  'flourStrength',
+  'globalRestTime',
+  'honeyRatio',
+  'hydrationRatio',
+  'nbPizzas',
+  'oliveOilRatio',
+  'pizzaType',
+  'pizzaWeight',
+  'poolishRatio',
+  'rtRestTime',
+  'saltRatio',
+  'temperature',
+  'yeastType',
+].sort();
+
 /**
  * The registry of calculator paths: each path resumes and resets its own
  * Draft, and no path ever copies another's values (ADR-0003).
@@ -49,12 +68,14 @@ describe('CalculatorInitializerService', () => {
     });
 
     for (const path of paths) {
-      it(`resolves a complete engine input and its settings for ${path}`, async () => {
+      it(`resolves a complete engine input for ${path}`, async () => {
         const input = await firstValueFrom(service.resolvedInput$(path));
 
         expect(input.nbPizzas).toBeGreaterThan(0);
         expect(input.pizzaType).toBe(PizzaType.NEAPOLITAN);
-        expect(service.settingsFor(path)).toBeTruthy();
+        // Every field is present: each path resolves its own input in full,
+        // and no field is left for the engine to fill in from the Defaults.
+        expect(Object.keys(input).sort()).toEqual(ENGINE_INPUT_FIELDS);
       });
     }
 
