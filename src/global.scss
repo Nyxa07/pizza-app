@@ -220,6 +220,29 @@ ion-toggle {
 }
 
 // ============================================
+// ICONS — an icon occupies exactly its own box
+// ============================================
+// `lucide-angular` drops a bare <svg> inside <i-lucide>, and an <svg> is an
+// inline element sitting on the text baseline: its host inherits a text line
+// taller than the drawing, by the room reserved for descenders. The icon then
+// floats at the top of a box that is a few pixels too tall, and reads as
+// off-centre inside a badge, a tab or a button. Removing that text line here
+// re-centres every icon in the app at once (issue #106) — do not drop these
+// two rules as "style with no effect".
+i-lucide {
+  // A layout box, not a run of text.
+  display: inline-flex;
+  // The host stays inline-level, so it still answers to the line around it:
+  // align it on the middle rather than on a baseline it no longer has.
+  vertical-align: middle;
+
+  > svg {
+    // A block has neither baseline nor descenders.
+    display: block;
+  }
+}
+
+// ============================================
 // OVERLAYS
 // ============================================
 
