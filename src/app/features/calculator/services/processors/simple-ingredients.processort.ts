@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IProcessor, OutputSlice } from '../../interfaces/processor.interface';
+import type { OutputSlice } from './output-field';
+import type { IProcessor } from './processor.interface';
 import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
 import { DoughType } from '../../enums/dough-type.enum';
 import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { IProcessor, OutputSlice } from '../../interfaces/processor.interface';
+import { DOUGH_BASE_TIME } from '../../dough.constants';
+import type { OutputSlice } from './output-field';
+import type { IProcessor } from './processor.interface';
 import { ITimings } from '../../interfaces/timing.interface';
 import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
 import { DoughType } from '../../enums/dough-type.enum';
-
-export const DOUGH_BASE_TIME = 1;
 
 const READS = ['pizzaBalls.rtRestTime'] as const;
 const WRITES = [

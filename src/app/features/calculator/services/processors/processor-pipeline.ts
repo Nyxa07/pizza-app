@@ -1,10 +1,8 @@
 import type { ICalculatorInput } from '../../interfaces/calculator-input.interface';
 import type { ICalculatorOutput } from '../../interfaces/calculator-output.interface';
-import {
-  OUTPUT_FIELDS,
-  type AnyProcessor,
-  type OutputField,
-} from '../../interfaces/processor.interface';
+import { OUTPUT_FIELDS, readField, writeField } from './output-field';
+import type { OutputField } from './output-field';
+import type { AnyProcessor } from './processor.interface';
 
 /**
  * The engine's processors, ordered by what they declare and run in that
@@ -37,7 +35,7 @@ export class ProcessorPipeline {
       );
 
       for (const field of processor.writes) {
-        const value = valueOf(produced, field);
+        const value = readField(produced, field);
         if (value === undefined) {
           throw new Error(
             `A processor declares it writes "${field}" but did not produce it.`,
@@ -117,7 +115,7 @@ function orderByDependencies(
 
     if (ready.length === 0) {
       throw new Error(
-        `The processors depend on each other in a cycle: ${remaining
+        `A cycle leaves these processors waiting on each other: ${remaining
           .map((processor) => processor.writes.join(', '))
           .join(' / ')}.`,
       );
@@ -140,34 +138,7 @@ function sliceOf(
 ): Record<string, unknown> {
   const slice: Record<string, unknown> = {};
   for (const field of fields) {
-    writeField(slice, field, valueOf(output, field));
+    writeField(slice, field, readField(output, field));
   }
   return slice;
-}
-
-function valueOf(source: Record<string, unknown>, field: OutputField): unknown {
-  const dot = field.indexOf('.');
-  if (dot === -1) {
-    return source[field];
-  }
-  const group = source[field.slice(0, dot)] as
-    | Record<string, unknown>
-    | undefined;
-  return group?.[field.slice(dot + 1)];
-}
-
-function writeField(
-  target: Record<string, unknown>,
-  field: OutputField,
-  value: unknown,
-): void {
-  const dot = field.indexOf('.');
-  if (dot === -1) {
-    target[field] = value;
-    return;
-  }
-  const name = field.slice(0, dot);
-  const group = (target[name] ?? {}) as Record<string, unknown>;
-  group[field.slice(dot + 1)] = value;
-  target[name] = group;
 }

@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { PizzaType } from '../../../settings/enums/pizza-type.enum';
-import { IProcessor, OutputSlice } from '../../interfaces/processor.interface';
+import type { OutputSlice } from './output-field';
+import type { IProcessor } from './processor.interface';
 import { CalculatorConfigService } from '../calculator-config.service';
 import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
 
@@ -17,10 +18,7 @@ export class HydrationProcessor implements IProcessor<Reads, Writes> {
 
   private readonly calculatorConfigService = inject(CalculatorConfigService);
 
-  process(
-    input: ICalculatorInput,
-    acc: OutputSlice<Reads>,
-  ): OutputSlice<Writes> {
+  process(input: ICalculatorInput): OutputSlice<Writes> {
     return {
       hydrationRatio:
         input.hydrationRatio ??

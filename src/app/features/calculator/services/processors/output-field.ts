@@ -1,5 +1,4 @@
-import type { ICalculatorInput } from './calculator-input.interface';
-import type { ICalculatorOutput } from './calculator-output.interface';
+import type { ICalculatorOutput } from '../../interfaces/calculator-output.interface';
 
 /** The output keys holding a group of values rather than a single one. */
 type OutputGroup = Extract<
@@ -53,46 +52,18 @@ export type OutputSlice<F extends OutputField> = {
   [K in Extract<F, keyof ICalculatorOutput>]: ICalculatorOutput[K];
 };
 
-/**
- * One step of the engine: what it reads of the output built so far, what it
- * adds to it, and the computation in between.
- *
- * The two lists are the whole contract. The pipeline derives the running
- * order from them — a processor is declared, never placed — and hands each
- * one exactly the slice it asked for. Declaring them once, `as const`, and
- * deriving both type parameters from that declaration is what keeps the two
- * from drifting apart.
- */
-export interface IProcessor<
-  Reads extends OutputField = never,
-  Writes extends OutputField = OutputField,
-> {
-  /** What this step needs; each of them must be written by another step. */
-  readonly reads: readonly Reads[];
-
-  /** What this step produces; no two steps may write the same field. */
-  readonly writes: readonly Writes[];
-
-  process(
-    input: ICalculatorInput,
-    acc: OutputSlice<Reads>,
-  ): OutputSlice<Writes>;
-}
-
-/**
- * A processor as the pipeline sees it. The pipeline works from the two lists
- * and addresses every value by path, so it sees the slices it passes and
- * receives as plain records; each processor still checks its own against its
- * own declarations.
- */
-export type AnyProcessor = {
-  readonly reads: readonly OutputField[];
-  readonly writes: readonly OutputField[];
-  process(
-    input: ICalculatorInput,
-    acc: Record<string, unknown>,
-  ): Record<string, unknown>;
-};
+/** The fields every quantity of the output is made of. */
+const QUANTITY = {
+  yeast: true,
+  flour: true,
+  water: true,
+  salt: true,
+  honey: true,
+  oliveOil: true,
+  coldRestTime: true,
+  rtRestTime: true,
+  prepTime: true,
+} as const;
 
 /**
  * The engine output, field by field, at runtime. Exhaustive by construction:
@@ -102,39 +73,9 @@ export type AnyProcessor = {
  */
 const OUTPUT_SHAPE = {
   hydrationRatio: true,
-  total: {
-    yeast: true,
-    flour: true,
-    water: true,
-    salt: true,
-    honey: true,
-    oliveOil: true,
-    coldRestTime: true,
-    rtRestTime: true,
-    prepTime: true,
-  },
-  poolish: {
-    yeast: true,
-    flour: true,
-    water: true,
-    salt: true,
-    honey: true,
-    oliveOil: true,
-    coldRestTime: true,
-    rtRestTime: true,
-    prepTime: true,
-  },
-  dough: {
-    yeast: true,
-    flour: true,
-    water: true,
-    salt: true,
-    honey: true,
-    oliveOil: true,
-    coldRestTime: true,
-    rtRestTime: true,
-    prepTime: true,
-  },
+  total: QUANTITY,
+  poolish: QUANTITY,
+  dough: QUANTITY,
   pizzaBalls: {
     weight: true,
     coldRestTime: true,
@@ -155,3 +96,35 @@ export const OUTPUT_FIELDS: readonly OutputField[] = Object.entries(
     ? [key as OutputField]
     : Object.keys(leaves).map((leaf) => `${key}.${leaf}` as OutputField),
 );
+
+/** The value a path points at, or `undefined` if nothing wrote it yet. */
+export function readField(
+  source: Record<string, unknown>,
+  field: OutputField,
+): unknown {
+  const dot = field.indexOf('.');
+  if (dot === -1) {
+    return source[field];
+  }
+  const group = source[field.slice(0, dot)] as
+    | Record<string, unknown>
+    | undefined;
+  return group?.[field.slice(dot + 1)];
+}
+
+/** Sets the value a path points at, creating the group it belongs to. */
+export function writeField(
+  target: Record<string, unknown>,
+  field: OutputField,
+  value: unknown,
+): void {
+  const dot = field.indexOf('.');
+  if (dot === -1) {
+    target[field] = value;
+    return;
+  }
+  const name = field.slice(0, dot);
+  const group = (target[name] ?? {}) as Record<string, unknown>;
+  group[field.slice(dot + 1)] = value;
+  target[name] = group;
+}

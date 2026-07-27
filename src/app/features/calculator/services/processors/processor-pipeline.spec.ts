@@ -1,10 +1,8 @@
 import type { ICalculatorInput } from '../../interfaces/calculator-input.interface';
-import {
-  OUTPUT_FIELDS,
-  type AnyProcessor,
-  type OutputField,
-} from '../../interfaces/processor.interface';
+import { OUTPUT_FIELDS, writeField } from './output-field';
+import type { OutputField } from './output-field';
 import { ProcessorPipeline } from './processor-pipeline';
+import type { AnyProcessor } from './processor.interface';
 
 /**
  * The pipeline knows nothing of dough: it orders steps by what they declare
@@ -175,15 +173,7 @@ describe('ProcessorPipeline', () => {
   function fragmentOf(fields: readonly OutputField[]): Record<string, unknown> {
     const fragment: Record<string, unknown> = {};
     for (const field of fields) {
-      const dot = field.indexOf('.');
-      if (dot === -1) {
-        fragment[field] = 1;
-        continue;
-      }
-      const name = field.slice(0, dot);
-      const group = (fragment[name] ?? {}) as Record<string, unknown>;
-      group[field.slice(dot + 1)] = 1;
-      fragment[name] = group;
+      writeField(fragment, field, 1);
     }
     return fragment;
   }

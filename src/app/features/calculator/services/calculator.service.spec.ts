@@ -11,7 +11,7 @@ import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
 import type { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import type { ICalculatorOutput } from '../interfaces/calculator-output.interface';
-import { OUTPUT_FIELDS } from '../interfaces/processor.interface';
+import { OUTPUT_FIELDS, readField } from './processors/output-field';
 import { CalculatorService } from './calculator.service';
 
 /**
@@ -63,7 +63,7 @@ describe('CalculatorService', () => {
 
       for (const result of values) {
         for (const field of OUTPUT_FIELDS) {
-          expect(valueAt(result, field))
+          expect(readField(asRecord(result), field))
             .withContext(field)
             .toEqual(jasmine.any(Number));
         }
@@ -241,14 +241,8 @@ describe('CalculatorService', () => {
     expect(await firstValueFrom(results)).toEqual(engine.process(POOLISH));
   });
 
-  /** Reads an output field by the path the processors declare it under. */
-  function valueAt(result: ICalculatorOutput, field: string): unknown {
-    const values = result as unknown as Record<string, unknown>;
-    const dot = field.indexOf('.');
-    if (dot === -1) {
-      return values[field];
-    }
-    const group = values[field.slice(0, dot)] as Record<string, unknown>;
-    return group[field.slice(dot + 1)];
+  /** The output as the fields address it. */
+  function asRecord(result: ICalculatorOutput): Record<string, unknown> {
+    return result as unknown as Record<string, unknown>;
   }
 });

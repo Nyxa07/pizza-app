@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
-import { IProcessor, OutputSlice } from '../../interfaces/processor.interface';
+import type { OutputSlice } from './output-field';
+import type { IProcessor } from './processor.interface';
 import { clampWeight, fallbackWeight } from '../../pizza-format.model';
 
 const READS = [] as const;
@@ -21,10 +22,7 @@ export class PizzaBallsWeightProcessor implements IProcessor<Reads, Writes> {
    * may come from a Draft or a Dough saved before the style bounds existed,
    * and the pizza format model is the only place that knows them.
    */
-  process(
-    input: ICalculatorInput,
-    acc: OutputSlice<Reads>,
-  ): OutputSlice<Writes> {
+  process(input: ICalculatorInput): OutputSlice<Writes> {
     return {
       pizzaBalls: {
         weight:

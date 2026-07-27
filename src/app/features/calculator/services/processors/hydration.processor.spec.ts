@@ -30,9 +30,8 @@ describe('HydrationProcessor', () => {
     oliveOilRatio: null,
   });
 
-  /** The step reads nothing of the output, so its slice is empty. */
   const hydrationOf = (draft: ICalculatorInput) =>
-    processor.process(draft, {}).hydrationRatio;
+    processor.process(draft).hydrationRatio;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

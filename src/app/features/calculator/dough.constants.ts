@@ -8,6 +8,9 @@ import { PizzaType } from '../settings/enums/pizza-type.enum';
  */
 export const ASSUMED_FLOUR_STRENGTH = 270;
 
+/** The hour the frasage takes, before any rest starts counting. */
+export const DOUGH_BASE_TIME = 1;
+
 type HydrationCfg = {
   referenceW: number;
   baseHydration: number;
