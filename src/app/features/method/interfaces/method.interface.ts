@@ -2,7 +2,7 @@ import type { LucideIconData } from 'lucide-angular';
 
 import type { MethodIngredientKey } from './method-def.interface';
 
-/** Display grams for one ingredient (yeast kept to one decimal). */
+/** Display grams for one ingredient (yeast kept to the centigram). */
 export interface IMethodIngredient {
   key: MethodIngredientKey;
   grams: number;

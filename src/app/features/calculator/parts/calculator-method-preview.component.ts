@@ -8,6 +8,7 @@ import {
 
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
+import { ingredientGramsFormat } from 'src/app/features/method/ingredient-grams';
 import { LocaleManagerService } from 'src/app/features/settings/services/locale-manager.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 import { RelativeDayPipe } from 'src/app/shared/pipes/relative-day.pipe';
@@ -139,7 +140,7 @@ export class CalculatorMethodPreviewComponent {
           {
             grams: this.numberPipe.transform(
               ingredient.grams,
-              ingredient.key === 'yeast' ? '1.0-1' : '1.0-0',
+              ingredientGramsFormat(ingredient.key),
             ),
           },
         )}</b>`,

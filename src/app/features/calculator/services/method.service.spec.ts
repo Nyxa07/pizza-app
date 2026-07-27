@@ -115,7 +115,7 @@ describe('MethodService', () => {
   });
 
   describe('with a poolish dough (cold rest)', () => {
-    it('weighs in the two parts, yeast to one decimal, zero grams skipped', () => {
+    it('weighs in the two parts, yeast to the centigram, zero grams skipped', () => {
       const method = service.build(makeInput(), makePoolishOutput(), now);
 
       expect(method.sections.length).toBe(2);
@@ -123,7 +123,7 @@ describe('MethodService', () => {
       expect(method.sections[0].ingredients).toEqual([
         { key: 'flour', grams: 302 },
         { key: 'water', grams: 302 },
-        { key: 'yeast', grams: 0.8 },
+        { key: 'yeast', grams: 0.84 },
         { key: 'honey', grams: 3 },
       ]);
       expect(method.sections[1].title).toBe(
@@ -205,7 +205,7 @@ describe('MethodService', () => {
 
       expect(mix.ingredients).toEqual([
         { key: 'water', grams: 302 },
-        { key: 'yeast', grams: 0.8 },
+        { key: 'yeast', grams: 0.84 },
         { key: 'honey', grams: 3 },
       ]);
       expect(mix.variables['hasHoney']).toBeTrue();
@@ -300,7 +300,7 @@ describe('MethodService', () => {
       expect(method.sections[0].ingredients).toEqual([
         { key: 'flour', grams: 755 },
         { key: 'water', grams: 468 },
-        { key: 'yeast', grams: 2.1 },
+        { key: 'yeast', grams: 2.14 },
         { key: 'salt', grams: 21 },
         { key: 'honey', grams: 3 },
         { key: 'oliveOil', grams: 12 },
@@ -341,7 +341,7 @@ describe('MethodService', () => {
 
       expect(mix?.ingredients).toEqual([
         { key: 'water', grams: 468 },
-        { key: 'yeast', grams: 2.1 },
+        { key: 'yeast', grams: 2.14 },
         { key: 'honey', grams: 3 },
       ]);
       expect(flour?.ingredients).toEqual([
@@ -388,13 +388,13 @@ describe('MethodService', () => {
 
   it('never rounds a tiny yeast down to nothing', () => {
     const output = makePoolishOutput();
-    output.poolish.yeast = 0.04;
+    output.poolish.yeast = 0.004;
 
     const method = service.build(makeInput(), output, now);
 
     expect(method.sections[0].ingredients).toContain({
       key: 'yeast',
-      grams: 0.1,
+      grams: 0.01,
     });
   });
 });

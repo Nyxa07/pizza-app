@@ -16,7 +16,7 @@ describe('MethodTextService', () => {
         title: 'calculator.method.titles.poolish',
         ingredients: [
           { key: 'flour', grams: 302 },
-          { key: 'yeast', grams: 0.8 },
+          { key: 'yeast', grams: 0.84 },
         ],
       },
     ],
@@ -72,7 +72,7 @@ describe('MethodTextService', () => {
       withHelperDescriptions: true,
     });
 
-    expect(text).toContain('Poolish:\n• Flour: 302 g\n• Yeast: 0.8 g');
+    expect(text).toContain('Poolish:\n• Flour: 302 g\n• Yeast: 0.84 g');
     expect(text).toContain('Steps:\n1. Bake\n   • Bake at full heat.');
     expect(text).not.toContain('<strong>');
   });
@@ -83,7 +83,7 @@ describe('MethodTextService', () => {
       withHelperDescriptions: true,
     });
 
-    expect(text).toContain('• Yeast: 0.8 g');
+    expect(text).toContain('• Yeast: 0.84 g');
     expect(text).not.toContain('Steps:');
     expect(text).not.toContain('Bake');
   });

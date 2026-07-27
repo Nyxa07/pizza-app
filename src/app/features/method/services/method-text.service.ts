@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
 
+import { ingredientGramsDecimals } from '../ingredient-grams';
 import type {
   IMethod,
   IMethodIngredient,
@@ -53,11 +54,13 @@ export class MethodTextService {
   }
 
   private grams(ingredient: IMethodIngredient): string {
+    const decimals = ingredientGramsDecimals(ingredient.key);
+
     return ingredient.grams.toLocaleString(
       this.translate.currentLang || undefined,
       {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: ingredient.key === 'yeast' ? 1 : 0,
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
       },
     );
   }

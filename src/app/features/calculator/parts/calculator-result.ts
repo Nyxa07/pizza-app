@@ -1,3 +1,5 @@
+import { roundIngredientGrams } from 'src/app/features/method/ingredient-grams';
+
 import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
 
 /**
@@ -39,11 +41,11 @@ export function summarizeOutput(
         total.oliveOil,
     ),
     split: {
-      flour: Math.round(total.flour),
-      water: Math.round(total.water),
-      salt: Math.round(total.salt),
-      // Yeast keeps one decimal: rounding it to the gram would narrate a lie.
-      yeast: Math.round(total.yeast * 10) / 10,
+      flour: roundIngredientGrams('flour', total.flour),
+      water: roundIngredientGrams('water', total.water),
+      salt: roundIngredientGrams('salt', total.salt),
+      // The live bar weighs its yeast exactly like the Méthode does.
+      yeast: roundIngredientGrams('yeast', total.yeast),
     },
     weight: Math.round(output.pizzaBalls.weight),
     hydrationPct: Math.round(output.hydrationRatio * 100),

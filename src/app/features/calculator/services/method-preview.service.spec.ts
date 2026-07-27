@@ -125,7 +125,7 @@ describe('MethodPreviewService', () => {
       expect(steps[0].at).toEqual(new Date(2026, 6, 14, 21, 0));
     });
 
-    it('lists the poolish ingredients (honey included), yeast kept to one decimal', () => {
+    it('lists the poolish ingredients (honey included), yeast kept to the centigram', () => {
       const { steps } = service.buildPreview(
         makeInput(),
         makePoolishOutput(),
@@ -135,7 +135,7 @@ describe('MethodPreviewService', () => {
       expect(steps[0].ingredients).toEqual([
         { key: 'flour', grams: 302 },
         { key: 'water', grams: 302 },
-        { key: 'yeast', grams: 0.8 },
+        { key: 'yeast', grams: 0.84 },
         { key: 'honey', grams: 3 },
       ]);
     });
@@ -186,11 +186,11 @@ describe('MethodPreviewService', () => {
 
     it('never rounds the tiny poolish yeast down to nothing', () => {
       const output = makePoolishOutput();
-      output.poolish.yeast = 0.04;
+      output.poolish.yeast = 0.004;
 
       const { steps } = service.buildPreview(makeInput(), output, now);
 
-      expect(steps[0].ingredients).toContain({ key: 'yeast', grams: 0.1 });
+      expect(steps[0].ingredients).toContain({ key: 'yeast', grams: 0.01 });
     });
   });
 
@@ -213,7 +213,7 @@ describe('MethodPreviewService', () => {
       expect(steps[0].ingredients).toEqual([
         { key: 'flour', grams: 755 },
         { key: 'water', grams: 468 },
-        { key: 'yeast', grams: 2.1 },
+        { key: 'yeast', grams: 2.14 },
         { key: 'salt', grams: 21 },
         { key: 'honey', grams: 3 },
         { key: 'oliveOil', grams: 12 },

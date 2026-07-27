@@ -22,10 +22,7 @@
             "common.ingredients." + ingredient.key | translate
           }}</span>
           <span class="qty num">
-            {{
-              ingredient.grams
-                | number: (ingredient.key === "yeast" ? "1.0-1" : "1.0-0")
-            }}
+            {{ ingredient.grams | number: gramsFormat(ingredient.key) }}
             g
           </span>
         </div>

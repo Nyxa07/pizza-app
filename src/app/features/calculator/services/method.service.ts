@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { roundIngredientGrams } from 'src/app/features/method/ingredient-grams';
 import type {
   IMethodDef,
   IMethodDefStep,
@@ -31,24 +32,18 @@ export const METHOD_INGREDIENT_KEYS: MethodIngredientKey[] = [
 
 /**
  * Display quantities for one weigh-in or narrated milestone, zero grams
- * skipped. Yeast keeps one decimal and never rounds down to nothing — a
- * poolish without its pinch of yeast would narrate a lie.
+ * skipped. How each ingredient is weighed — the yeast at the centigram,
+ * the rest at the gram — belongs to `roundIngredientGrams`.
  */
 export function toMethodIngredients(
   quantities: MethodQuantities,
   keys: MethodIngredientKey[] = METHOD_INGREDIENT_KEYS,
 ): IMethodIngredient[] {
   return keys
-    .map((key) => {
-      const grams = quantities[key] ?? 0;
-      return {
-        key,
-        grams:
-          key === 'yeast'
-            ? Math.max(0.1, Math.round(grams * 10) / 10)
-            : Math.round(grams),
-      };
-    })
+    .map((key) => ({
+      key,
+      grams: roundIngredientGrams(key, quantities[key] ?? 0),
+    }))
     .filter(({ key, grams }) => (quantities[key] ?? 0) > 0 && grams > 0);
 }
 
