@@ -156,7 +156,7 @@
               aria-checked="true"
               (click)="selectRestTime(draft.globalRestTime)"
             >
-              {{ draft.globalRestTime }} h
+              {{ draft.globalRestTime }}&nbsp;h
             </button>
           }
           @for (hours of restTimes; track hours) {
@@ -168,7 +168,7 @@
               [attr.aria-checked]="draft.globalRestTime === hours"
               (click)="selectRestTime(hours)"
             >
-              {{ hours }} h
+              {{ hours }}&nbsp;h
             </button>
           }
         </div>
@@ -191,7 +191,7 @@
               aria-checked="true"
               (click)="selectTemperature(draft.temperature)"
             >
-              {{ draft.temperature }} °C
+              {{ draft.temperature }}&nbsp;°C
             </button>
           }
           @for (temperature of temperatures; track temperature) {
@@ -203,7 +203,7 @@
               [attr.aria-checked]="draft.temperature === temperature"
               (click)="selectTemperature(temperature)"
             >
-              {{ temperature }} °C
+              {{ temperature }}&nbsp;°C
             </button>
           }
         </div>
@@ -276,11 +276,11 @@
           </div>
           <div>
             <dt>{{ "calculator.guided.summary.rest" | translate }}</dt>
-            <dd class="num">{{ draft.globalRestTime }} h</dd>
+            <dd class="num">{{ draft.globalRestTime }}&nbsp;h</dd>
           </div>
           <div>
             <dt>{{ "calculator.guided.summary.temperature" | translate }}</dt>
-            <dd class="num">{{ draft.temperature }} °C</dd>
+            <dd class="num">{{ draft.temperature }}&nbsp;°C</dd>
           </div>
           <div>
             <dt>{{ "calculator.guided.summary.yeast" | translate }}</dt>

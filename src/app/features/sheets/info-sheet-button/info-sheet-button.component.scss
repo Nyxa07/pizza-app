@@ -1,6 +1,11 @@
+// Inline by nature: the button follows the label it explains, wherever that
+// label lives — a flex heading, or plain text inside a <dt>. A block-level
+// host would push itself onto its own line in the second case (#104). Flex
+// containers blockify it back to `flex`, so their layout is unchanged.
 :host {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  vertical-align: middle;
 }
 
 ion-button {

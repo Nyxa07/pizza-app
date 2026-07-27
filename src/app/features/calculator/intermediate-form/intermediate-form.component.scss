@@ -9,6 +9,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  // The tiles read the width of their grid, not their own: below the point
+  // where a reading and its steppers stop fitting side by side, they all fold
+  // together rather than one at a time (#104).
+  container-type: inline-size;
 
   + .grid,
   + .field {
@@ -105,7 +109,10 @@
   }
 
   .slider-value {
-    min-width: 44px;
+    // Reserved in characters, not pixels, so the room follows the font scale
+    // of the device; the reading itself never breaks (#104).
+    min-width: 3.5ch;
+    white-space: nowrap;
     font-size: 1.05rem;
     font-weight: 700;
     text-align: right;
@@ -131,10 +138,6 @@
     font-weight: 600;
     font-size: 0.9rem;
     color: var(--ink-2);
-  }
-
-  dt app-info-sheet-button {
-    margin: -8px 0;
   }
 }
 

@@ -189,7 +189,7 @@ describe('IntermediateFormComponent', () => {
     speaksFrench();
     draftHolds({ globalRestTime: 8 });
 
-    expect(textOf('rest-split')).toBe("8 h à l'ambiante");
+    expect(textOf('rest-split')).toBe("8\u00a0h à l'ambiante");
     expect(fixture.debugElement.query(By.css('app-calculator-timeline')))
       .withContext('fermentation timeline')
       .toBeTruthy();
@@ -200,7 +200,7 @@ describe('IntermediateFormComponent', () => {
     draftHolds({ globalRestTime: 36 });
 
     // The engine caps a direct dough at 24 ambient hours, the rest goes cold.
-    expect(textOf('rest-split')).toBe('24 h ambiante + 12 h froid');
+    expect(textOf('rest-split')).toBe('24\u00a0h ambiante + 12\u00a0h froid');
   });
 
   it('steps the rest slider one hour at a time, within its bounds', () => {

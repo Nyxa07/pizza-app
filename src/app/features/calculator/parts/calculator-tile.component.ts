@@ -34,43 +34,45 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
         <app-info-sheet-button [sheetId]="sheet" />
       }
     </div>
-    @if (value() !== null) {
-      <div class="value-block">
+    <div class="content">
+      @if (value() !== null) {
         <div class="value num">
-          {{ value() }}
-          @if (unit(); as u) {
-            <small>{{ u }}</small>
-          }
+          <!-- One reading, one box: the unit can never be laid out apart from
+               the number it qualifies. -->
+          <span class="reading"
+            >{{ value() }}
+            @if (unit(); as u) {
+              <small>{{ u }}</small>
+            }
+          </span>
         </div>
-        @if (caption(); as text) {
-          <div class="caption num">{{ text }}</div>
-        }
-      </div>
-      <div class="ctrl">
-        <button
-          type="button"
-          [disabled]="!canStepDown()"
-          (click)="stepDown.emit()"
-          [attr.aria-label]="
-            ('calculator.shared.tiles.decrease' | translate) + ' ' + label()
-          "
-        >
-          −
-        </button>
-        <button
-          type="button"
-          [disabled]="!canStepUp()"
-          (click)="stepUp.emit()"
-          [attr.aria-label]="
-            ('calculator.shared.tiles.increase' | translate) + ' ' + label()
-          "
-        >
-          +
-        </button>
-      </div>
-    } @else {
-      <div class="value select"><ng-content /></div>
-    }
+        <div class="ctrl">
+          <button
+            type="button"
+            [disabled]="!canStepDown()"
+            (click)="stepDown.emit()"
+            [attr.aria-label]="
+              ('calculator.shared.tiles.decrease' | translate) + ' ' + label()
+            "
+          >
+            −
+          </button>
+          <button
+            type="button"
+            [disabled]="!canStepUp()"
+            (click)="stepUp.emit()"
+            [attr.aria-label]="
+              ('calculator.shared.tiles.increase' | translate) + ' ' + label()
+            "
+          >
+            +
+          </button>
+        </div>
+      } @else {
+        <div class="value select"><ng-content /></div>
+      }
+    </div>
+    <div class="caption num">{{ caption() }}</div>
   `,
   styles: `
     :host {
@@ -78,18 +80,14 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
 
       position: relative;
       display: grid;
-      grid-template-areas:
-        'label label'
-        'value controls';
-      grid-template-columns: minmax(0, 1fr) auto;
-      // The label row stays at its own height so the gap below it never
-      // stretches; the content row takes the slack when a neighbour tile makes
-      // the row taller, and never collapses below a stepper.
-      grid-template-rows: auto minmax(var(--stepper-size), 1fr);
-      column-gap: 6px;
-      // Guaranteed breathing room under the label, whatever the tile width or
-      // the height of its neighbours (#92).
-      row-gap: 12px;
+      grid-template-columns: minmax(0, 1fr);
+      // Three stacked rows. The label row stays at its own height so the gap
+      // below it never stretches; the content row takes the slack when a
+      // neighbour tile makes the tile taller, and never collapses below a
+      // stepper; the caption row is reserved in every tile — including the
+      // select ones — so two neighbouring tiles read their big numbers on the
+      // same line whether or not they carry a caption (#104).
+      grid-template-rows: auto minmax(var(--stepper-size), 1fr) auto;
       background: var(--surface);
       border: 1px solid var(--hairline);
       border-radius: var(--radius-m);
@@ -98,10 +96,12 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
     }
 
     .label {
-      grid-area: label;
       display: flex;
       align-items: center;
       gap: 2px;
+      // Guaranteed breathing room under the label, whatever the tile width or
+      // the height of its neighbours (#92).
+      margin-bottom: 12px;
       min-height: 18px;
       font-size: 0.66rem;
       font-weight: 600;
@@ -114,20 +114,44 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
       }
     }
 
-    .value-block {
-      grid-area: value;
-      align-self: center;
+    // The reading and its steppers share one line. When the font scale of the
+    // device leaves them too little room, the steppers drop below the value
+    // rather than squeezing it — the number is what the user came to read.
+    //
+    // Anchored to the top of its row, never centred in it: the value then sits
+    // a constant 12px under its own label, so two neighbouring tiles read on
+    // the same line whether one of them carries a caption or has had to fold
+    // its steppers (#104). What is left of a stretched tile shows as space
+    // below, which is the honest place for it.
+    .content {
+      align-self: start;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      column-gap: 6px;
+      row-gap: 8px;
       min-width: 0;
     }
 
     .caption {
       margin-top: 2px;
+      // Reserved even when empty, and never wrapped: the row must measure the
+      // same in every tile of a grid for the values above it to line up.
+      min-height: 1.3em;
+      line-height: 1.3;
+      white-space: nowrap;
       font-size: 0.7rem;
       font-weight: 500;
       color: var(--ink-2);
     }
 
+    // As tall as a stepper, with the reading centred in it: the value then
+    // starts at the same height whether its steppers sit beside it or have
+    // folded below, which is what keeps two neighbouring tiles in line.
     .value {
+      display: flex;
+      align-items: center;
+      min-height: var(--stepper-size);
       font-size: 1.6rem;
       font-weight: 700;
       letter-spacing: -0.01em;
@@ -141,18 +165,43 @@ import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-but
       }
     }
 
-    // The projected-select variant stands alone in the value cell.
+    .reading {
+      // A reading never breaks between its number and its unit (#104).
+      white-space: nowrap;
+    }
+
+    // The projected-select variant stands alone on the content row, and reads
+    // as a sentence — so it may wrap where a numeric value may not.
     .value.select {
-      grid-area: value;
-      align-self: center;
+      flex: 1;
       min-width: 0;
       font-size: 1.05rem;
       font-weight: 600;
     }
 
+    // Below the width where a reading and its steppers fit side by side, every
+    // tile of the grid folds at once — a tile that folded alone would leave a
+    // gaping hole in the one beside it. A reading needs about 64px and the
+    // steppers 80px, and each tile spends 26px on padding and borders, which
+    // puts the grid's floor at 2 × 150 + 62 ≈ 368px. Font-relative units are
+    // no help here: a container query resolves em and rem against the initial
+    // font size, not the current one — so this stays in px, and the wrapping
+    // content row below catches the tile that runs out of room on its own.
+    @container (max-width: 368px) {
+      .content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .value.select {
+        flex: none;
+        width: 100%;
+      }
+    }
+
     .ctrl {
-      grid-area: controls;
-      align-self: center;
+      // Stays flush right, on the wrapped line too.
+      margin-left: auto;
       display: flex;
       gap: 4px;
 

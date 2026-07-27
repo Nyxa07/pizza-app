@@ -19,7 +19,7 @@ import type { ICalculatorResult } from './calculator-result';
   host: { class: 'livebar num' },
   template: `
     <span class="total" aria-live="polite"
-      >{{ result().total | number: '1.0-0' }} g</span
+      >{{ result().total | number: '1.0-0' }}&nbsp;g</span
     >
     <span class="split">{{
       'calculator.shared.livebar.split'

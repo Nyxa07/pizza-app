@@ -49,6 +49,57 @@ test.describe('Intermediate calculator', () => {
     await expect(ballWeight).not.toHaveText(before ?? '');
   });
 
+  test('holds its layout at an enlarged system font size', async ({ page }) => {
+    await page.goto('/tabs/calculator/intermediate');
+    await waitForAppReady(page);
+
+    // Stands in for a phone whose system font scale is turned up: every type
+    // size in the app is in `rem`, the control boxes are in pixels (#104).
+    await page.addStyleTag({ content: ':root { font-size: 20px }' });
+
+    const form = page.locator('app-intermediate-form');
+    await expect(form).toBeVisible();
+
+    const overflowing = await form.evaluate((root) => {
+      const name = (element: Element) => element.className || element.tagName;
+      const escaped: string[] = [];
+
+      const viewport = document.documentElement.clientWidth + 1;
+      for (const element of root.querySelectorAll('*')) {
+        if (element.getBoundingClientRect().right > viewport) {
+          escaped.push(`past the viewport: ${name(element)}`);
+        }
+      }
+
+      // A tile that cannot fold its steppers pushes its reading out of its own
+      // card instead — invisible from the viewport, glaring on the screen.
+      for (const tile of root.querySelectorAll('app-calculator-tile')) {
+        const edge = tile.getBoundingClientRect().right + 0.5;
+        for (const element of tile.querySelectorAll('*')) {
+          if (element.getBoundingClientRect().right > edge) {
+            escaped.push(`out of its tile: ${name(element)}`);
+          }
+        }
+      }
+
+      return escaped;
+    });
+    expect(overflowing, 'everything stays inside its box').toEqual([]);
+
+    // The size reads on a single line, unit included — as tall as the bare
+    // count in the tile beside it, not twice that.
+    const heightOf = (selector: string): Promise<number> =>
+      page
+        .locator(selector)
+        .first()
+        .evaluate((element) => element.getBoundingClientRect().height);
+
+    expect(await heightOf('[data-testid="size-tile"] .reading')).toBeCloseTo(
+      await heightOf('app-calculator-tile .reading'),
+      0,
+    );
+  });
+
   test('opens its own Method from the CTA', async ({ page }) => {
     await page.goto('/tabs/calculator/intermediate');
     await waitForAppReady(page);

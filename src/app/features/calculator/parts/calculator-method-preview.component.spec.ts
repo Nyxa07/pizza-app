@@ -80,12 +80,12 @@ describe('CalculatorMethodPreviewComponent', () => {
 
     const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
 
-    expect(text).toContain('755 g de farine');
-    expect(text).toContain("468 g d'eau");
-    expect(text).toContain('2,1 g de levure');
-    expect(text).toContain('21 g de sel');
-    expect(text).toContain('3 g de miel');
-    expect(text).toContain("12 g d'huile d'olive");
+    expect(text).toContain('755\u00a0g de farine');
+    expect(text).toContain("468\u00a0g d'eau");
+    expect(text).toContain('2,1\u00a0g de levure');
+    expect(text).toContain('21\u00a0g de sel');
+    expect(text).toContain('3\u00a0g de miel');
+    expect(text).toContain("12\u00a0g d'huile d'olive");
     expect(text).not.toContain('calculator.');
   });
 });
