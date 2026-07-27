@@ -36,6 +36,7 @@ const workflow = defineWorkflow({
           issue: initResult.issue,
           devBranch: initResult.devBranch,
           pullRequest: initResult.existingPullRequest,
+          parentIssue: initResult.parentIssue,
         });
 
         if (implementationResult.status === 'implementation_failed') {

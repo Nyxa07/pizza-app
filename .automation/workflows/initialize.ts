@@ -9,6 +9,11 @@ const initializeOutputSchema = schema.union([
   schema.object({
     status: schema.literal('initialized'),
     issue: schema.integer().minimum(1).describe('La GitHub issue sélectionnée'),
+    parentIssue: schema
+      .integer()
+      .minimum(1)
+      .optional()
+      .describe("L'issue parente de l'issue sélectionnée"),
     devBranch: schema
       .string()
       .describe(
@@ -38,12 +43,15 @@ export default async function runInitialize(
   const result = await context.run(
     [
       "Ton rôle est de sélectionner une issue GitHub éligible à la plannification ou à l'implémentation.",
-      "Si une PR existe pour l'issue sélectionnée, ne créer pas de branche et réutilise celle existante (celle de la PR), sinon créer la branche de dev à utiliser à partir de origin/main.",
-      'La branche de dev doit suivre le modèle : `feat/[issue_number]-...`, `chore/[issue_number]-...`, `fix/[issue_number]-...`',
+      "Si l'issue séléctionné est une sous issue alors la branche de la pull request doivent etre associé à l'issue parente, sinon directement à l'issue quand elle est `standalone`",
+      "Si une PR existe pour l'issue sélectionnée (ou l'issue parente, le cas échéant), ne créer pas de branche et réutilise celle existante (celle de la PR), sinon créer la branche à partir de origin/main pour le développement.",
+      "La branche de developpement doit toujours être associée à l'issue parent quand il y en a une et doit suivre le modèle : `feat/[issue_number|parent_issue_number]-...`, `chore/[issue_number|parent_issue_number]-...`, `fix/[issue_number|parent_issue_number]-...`",
       "Ne push pas la branch immédiatement, ce sera fait lors de l'implémentation qui est hors scope ici.",
       'Une issue est éligible si elle à le label `ready-for-agent`',
+      "Si une issue est une sous issue et qu'elle a le label 'to-planify' (en plus de `ready-for-agent`), choisi toujours l'issue parente, on ne planifie jamais une sous issue seule mais toujours avec ses enfants.",
       'Elle peut ou non avoir le label `to-planify`',
-      'Si une issue `ready-for-agent` sans label `to-planify existe`, choisi la en priorité',
+      'Si une issue `ready-for-agent` sans label `to-planify existe`, choisi la en priorité.',
+      "Ne choisi jamais les issue ou sous issue d'un ensemble qui n'ont pas exactement les memes labels (parmis `ready-for-agent`, `to-planify`). Soient elles ont toutes to-planify, soient elles ont toutes 'ready-for-agent' sans 'to-planify'.",
     ].join('\n'),
     {
       harness,
