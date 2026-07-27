@@ -71,13 +71,15 @@ test.describe('Intermediate calculator', () => {
         }
       }
 
-      // A tile that cannot fold its steppers pushes its reading out of its own
-      // card instead — invisible from the viewport, glaring on the screen.
-      for (const tile of root.querySelectorAll('app-calculator-tile')) {
-        const edge = tile.getBoundingClientRect().right + 0.5;
-        for (const element of tile.querySelectorAll('*')) {
+      // A card that cannot fold its contents pushes them out of itself
+      // instead — invisible from the viewport, glaring on the screen. Every
+      // framed block of the screen is checked, the style question included
+      // now that it is one of them (#107).
+      for (const card of root.querySelectorAll('app-calculator-tile, .field')) {
+        const edge = card.getBoundingClientRect().right + 0.5;
+        for (const element of card.querySelectorAll('*')) {
           if (element.getBoundingClientRect().right > edge) {
-            escaped.push(`out of its tile: ${name(element)}`);
+            escaped.push(`out of its card: ${name(element)}`);
           }
         }
       }
