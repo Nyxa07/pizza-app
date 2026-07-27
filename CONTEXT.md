@@ -38,6 +38,10 @@ _Avoid_: diameter as a separate concept, pizza format (that is the model below)
 The single module holding the size ↔ ball-weight conversion, the size range and the weight bounds of each style. Every screen and the engine read their ball weights from it; nothing else writes one.
 _Avoid_: weight table, ball-weight constants
 
+**Dough engine**:
+The single module turning a complete calculator input into the quantities and rest times a Dough method is written from. Its whole interface is `process(input)`: a `null` field is a request to derive, every other value is used as given. The steps behind it declare which output fields they read and which they write, and the running order is derived from those declarations — never written down, and nothing outside the module names a step.
+_Avoid_: processor as a public concept, calling a processor directly, an ordered list of processors
+
 ### Calculator paths
 
 **Calculator paths**:

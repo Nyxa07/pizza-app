@@ -1,36 +1,40 @@
 import { Injectable, inject } from '@angular/core';
 import { YeastType } from 'src/app/features/calculator/enums/yeast-type.enum';
 import { CalculatorConfigService } from '../calculator-config.service';
-import { IProcessor } from '../../interfaces/processor.interface';
+import { IProcessor, OutputSlice } from '../../interfaces/processor.interface';
 import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
 import { DoughType } from '../../enums/dough-type.enum';
+
+const READS = [
+  'hydrationRatio',
+  'poolish.flour',
+  'poolish.rtRestTime',
+  'poolish.coldRestTime',
+  'poolish.honey',
+  'dough.flour',
+  'dough.rtRestTime',
+  'dough.coldRestTime',
+  'dough.honey',
+  'dough.salt',
+] as const;
+const WRITES = ['total.yeast', 'poolish.yeast', 'dough.yeast'] as const;
+
+type Reads = (typeof READS)[number];
+type Writes = (typeof WRITES)[number];
 
 @Injectable({
   providedIn: 'root',
 })
-export class YeastProcessor implements IProcessor {
+export class YeastProcessor implements IProcessor<Reads, Writes> {
+  readonly reads = READS;
+  readonly writes = WRITES;
+
   private readonly calculatorConfig = inject(CalculatorConfigService);
 
   process(
     input: ICalculatorInput,
-    acc: {
-      hydrationRatio: number;
-      total: { flour: number };
-      poolish: {
-        flour: number;
-        rtRestTime: number;
-        coldRestTime: number;
-        honey: number;
-      };
-      dough: {
-        flour: number;
-        rtRestTime: number;
-        coldRestTime: number;
-        honey: number;
-        salt: number;
-      };
-    },
-  ) {
+    acc: OutputSlice<Reads>,
+  ): OutputSlice<Writes> {
     let yeast = 0;
     if (input.doughType === DoughType.POOLISH) {
       yeast = this.yeastForPoolish(

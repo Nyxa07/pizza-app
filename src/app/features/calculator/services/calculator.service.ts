@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 
 import { map, Observable, shareReplay } from 'rxjs';
 
-import { runProcessors } from './processors/run-processors';
+import { ProcessorPipeline } from './processors/processor-pipeline';
 import { HydrationProcessor } from './processors/hydration.processor';
 import { YeastProcessor } from './processors/yeast.processor';
 import { TimingsProcessor } from './processors/timings.processor';
@@ -17,19 +17,22 @@ import { PizzaBallsWeightProcessor } from './processors/pizza-balls-weight.proce
   providedIn: 'root',
 })
 export class CalculatorService {
-  private readonly pizzaBallsWeightProcessor = inject(
-    PizzaBallsWeightProcessor,
-  );
-  private readonly hydrationProcessor = inject(HydrationProcessor);
-  private readonly flourWaterQuantityProcessor = inject(
-    FlourWaterQuantityProcessor,
-  );
-  private readonly simpleIngredientsProcessor = inject(
-    SimpleIngredientsProcessor,
-  );
-  private readonly ballsRestTimeProcessor = inject(PizzaBallsRestTimeProcessor);
-  private readonly timingsProcessor = inject(TimingsProcessor);
-  private readonly yeastProcessor = inject(YeastProcessor);
+  /**
+   * The steps the engine is made of, as a set: each one declares the output
+   * fields it reads and the ones it writes, and the pipeline derives the
+   * running order from those declarations. Nothing here is an order — moving
+   * a line changes nothing, and a step that read what no other step writes
+   * would throw at the first injection.
+   */
+  private readonly pipeline = new ProcessorPipeline([
+    inject(PizzaBallsWeightProcessor),
+    inject(HydrationProcessor),
+    inject(FlourWaterQuantityProcessor),
+    inject(SimpleIngredientsProcessor),
+    inject(PizzaBallsRestTimeProcessor),
+    inject(TimingsProcessor),
+    inject(YeastProcessor),
+  ]);
 
   resultsFor$(
     input$: Observable<ICalculatorInput>,
@@ -46,16 +49,6 @@ export class CalculatorService {
    * computes for itself.
    */
   process(input: ICalculatorInput): ICalculatorOutput {
-    const output = runProcessors(input, [
-      this.pizzaBallsWeightProcessor,
-      this.hydrationProcessor,
-      this.flourWaterQuantityProcessor,
-      this.simpleIngredientsProcessor,
-      this.ballsRestTimeProcessor,
-      this.timingsProcessor,
-      this.yeastProcessor,
-    ]);
-
-    return output as ICalculatorOutput;
+    return this.pipeline.run(input);
   }
 }

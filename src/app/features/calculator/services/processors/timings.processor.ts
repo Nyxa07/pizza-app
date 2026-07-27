@@ -1,19 +1,40 @@
 import { Injectable } from '@angular/core';
-import { IProcessor } from '../../interfaces/processor.interface';
+import { IProcessor, OutputSlice } from '../../interfaces/processor.interface';
 import { ITimings } from '../../interfaces/timing.interface';
 import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
 import { DoughType } from '../../enums/dough-type.enum';
 
 export const DOUGH_BASE_TIME = 1;
 
+const READS = ['pizzaBalls.rtRestTime'] as const;
+const WRITES = [
+  'poolish.coldRestTime',
+  'poolish.rtRestTime',
+  'poolish.prepTime',
+  'dough.coldRestTime',
+  'dough.rtRestTime',
+  'dough.prepTime',
+  'pizzaBalls.coldRestTime',
+  'pizzaBalls.prepTime',
+  'total.coldRestTime',
+  'total.rtRestTime',
+  'total.prepTime',
+] as const;
+
+type Reads = (typeof READS)[number];
+type Writes = (typeof WRITES)[number];
+
 @Injectable({
   providedIn: 'root',
 })
-export class TimingsProcessor implements IProcessor {
+export class TimingsProcessor implements IProcessor<Reads, Writes> {
+  readonly reads = READS;
+  readonly writes = WRITES;
+
   process(
     input: ICalculatorInput,
-    acc: { pizzaBalls: { rtRestTime: number } },
-  ): ITimings {
+    acc: OutputSlice<Reads>,
+  ): OutputSlice<Writes> {
     const pizzaBallsRest = acc.pizzaBalls.rtRestTime;
     const timings = this.computeTimingsFromRestTimes({
       globalRestTime: input.globalRestTime,
@@ -24,7 +45,17 @@ export class TimingsProcessor implements IProcessor {
       pizzaBallsRestTime: pizzaBallsRest,
     });
 
-    return timings;
+    return {
+      poolish: timings.poolish,
+      dough: timings.dough,
+      // The balls' own rest is read, not written: it belongs to the step that
+      // derives it from the temperature, and a field has one author.
+      pizzaBalls: {
+        coldRestTime: timings.pizzaBalls.coldRestTime,
+        prepTime: timings.pizzaBalls.prepTime,
+      },
+      total: timings.total,
+    };
   }
 
   computeTimingsFromRestTimes(input: {

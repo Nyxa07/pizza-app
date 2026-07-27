@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
 import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
-import {
-  IProcessor,
-  PartialCalculatorOutput,
-} from '../../interfaces/processor.interface';
+import { IProcessor, OutputSlice } from '../../interfaces/processor.interface';
 import { clampWeight, fallbackWeight } from '../../pizza-format.model';
+
+const READS = [] as const;
+const WRITES = ['pizzaBalls.weight'] as const;
+
+type Reads = (typeof READS)[number];
+type Writes = (typeof WRITES)[number];
 
 @Injectable({
   providedIn: 'root',
 })
-export class PizzaBallsWeightProcessor implements IProcessor {
+export class PizzaBallsWeightProcessor implements IProcessor<Reads, Writes> {
+  readonly reads = READS;
+  readonly writes = WRITES;
+
   /**
    * The ball weight, always inside what the style allows: an explicit weight
    * may come from a Draft or a Dough saved before the style bounds existed,
@@ -17,8 +23,8 @@ export class PizzaBallsWeightProcessor implements IProcessor {
    */
   process(
     input: ICalculatorInput,
-    acc: PartialCalculatorOutput,
-  ): PartialCalculatorOutput {
+    acc: OutputSlice<Reads>,
+  ): OutputSlice<Writes> {
     return {
       pizzaBalls: {
         weight:
