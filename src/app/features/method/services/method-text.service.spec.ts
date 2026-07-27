@@ -1,7 +1,11 @@
+import { registerLocaleData } from '@angular/common';
+import localeEn from '@angular/common/locales/en';
 import { TestBed } from '@angular/core/testing';
 
 import { TranslateService } from '@ngx-translate/core';
 import { FlameIcon } from 'lucide-angular';
+
+import { LocaleManagerService } from 'src/app/features/settings/services/locale-manager.service';
 
 import type { IMethod } from '../interfaces/method.interface';
 import { MethodTextService } from './method-text.service';
@@ -57,10 +61,16 @@ describe('MethodTextService', () => {
       return values[key] ?? key;
     });
 
+    registerLocaleData(localeEn);
+
     TestBed.configureTestingModule({
       providers: [
         MethodTextService,
         { provide: TranslateService, useValue: translate },
+        {
+          provide: LocaleManagerService,
+          useValue: { getCurrentAngularLocale: () => 'en-US' },
+        },
       ],
     });
     service = TestBed.inject(MethodTextService);

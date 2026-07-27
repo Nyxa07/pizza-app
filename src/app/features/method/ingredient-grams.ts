@@ -12,12 +12,12 @@ import type { MethodIngredientKey } from './interfaces/method-def.interface';
  * fermentation. It is weighed and read at the centigram, everywhere;
  * everything else is read off a kitchen scale to the gram.
  */
-const YEAST_DECIMALS = 2;
-const SCALE_DECIMALS = 0;
+const PRECISION_SCALE_DECIMALS = 2;
+const KITCHEN_SCALE_DECIMALS = 0;
 
 /** How many decimals an ingredient's grams are weighed and read with. */
-export function ingredientGramsDecimals(key: MethodIngredientKey): number {
-  return key === 'yeast' ? YEAST_DECIMALS : SCALE_DECIMALS;
+function ingredientGramsDecimals(key: MethodIngredientKey): number {
+  return key === 'yeast' ? PRECISION_SCALE_DECIMALS : KITCHEN_SCALE_DECIMALS;
 }
 
 /** The `NumberPipe` format an ingredient's grams are displayed with. */

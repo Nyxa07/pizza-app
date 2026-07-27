@@ -121,9 +121,8 @@ export class MethodPreviewService {
   }
 
   /**
-   * Display quantities for one narrated step, zero ingredients skipped.
-   * Yeast keeps one decimal and never rounds down to nothing — a poolish
-   * without its pinch of yeast would narrate a lie.
+   * Display quantities for one narrated step, zero ingredients skipped —
+   * weighed exactly like the full Méthode weighs them.
    */
   private ingredients(
     quantity: MethodQuantities,

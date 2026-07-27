@@ -29,7 +29,7 @@ import type { ICalculatorResult } from './calculator-result';
               flour: result().split.flour | number: '1.0-0',
               water: result().split.water | number: '1.0-0',
               salt: result().split.salt | number: '1.0-0',
-              yeast: result().split.yeast | number: yeastFormat,
+              yeast: result().split.yeast | number: yeastGramsFormat,
             }
     }}</span>
   `,
@@ -37,5 +37,5 @@ import type { ICalculatorResult } from './calculator-result';
 export class CalculatorLivebarComponent {
   readonly result = input.required<ICalculatorResult>();
 
-  protected readonly yeastFormat = ingredientGramsFormat('yeast');
+  protected readonly yeastGramsFormat = ingredientGramsFormat('yeast');
 }
