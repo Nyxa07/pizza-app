@@ -48,10 +48,9 @@ export default async function runInitialize(
       "La branche de developpement doit toujours être associée à l'issue parent quand il y en a une et doit suivre le modèle : `feat/[issue_number|parent_issue_number]-...`, `chore/[issue_number|parent_issue_number]-...`, `fix/[issue_number|parent_issue_number]-...`",
       "Ne push pas la branch immédiatement, ce sera fait lors de l'implémentation qui est hors scope ici.",
       'Une issue est éligible si elle à le label `ready-for-agent`',
-      "Si une issue est une sous issue et qu'elle a le label 'to-planify' (en plus de `ready-for-agent`), choisi toujours l'issue parente, on ne planifie jamais une sous issue seule mais toujours avec ses enfants.",
       'Elle peut ou non avoir le label `to-planify`',
+      "Ne choisie des issues faisant partie d'un lot (sous issues + parent) uniquement quand elles sont toutes `ready-for-agent` et aucune en `to-planify`, `needs-triage` ou `ready-for-human`. On veut que le lot soit entierement ready avant de le commencer.",
       'Si une issue `ready-for-agent` sans label `to-planify existe`, choisi la en priorité.',
-      "Ne choisi jamais les issue ou sous issue d'un ensemble si l'une d'entre elles à un label `read-for-human` ou `needs-triage`.",
     ].join('\n'),
     {
       harness,
