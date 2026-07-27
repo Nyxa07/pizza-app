@@ -5,7 +5,7 @@
     }}</ion-title>
     <ion-buttons slot="end">
       <app-calculator-refresh-button [path]="CalculatorPath.INTERMEDIATE" />
-      @if (isInitialized() && resolvedInput(); as input) {
+      @if (resolvedInput(); as input) {
         <app-dough-saver [input]="input" />
       }
       <ion-button

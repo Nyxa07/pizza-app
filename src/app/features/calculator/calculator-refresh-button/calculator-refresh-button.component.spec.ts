@@ -9,14 +9,14 @@ import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 
 import { CalculatorPath } from '../enums/calculator-path.enum';
-import { ExpertDraftService } from '../services/expert-draft.service';
-import { GuidedDraftService } from '../services/guided-draft.service';
+import { CalculatorPaths } from '../paths/calculator-paths.service';
+import type { PathDraft } from '../paths/path-draft.interface';
 import { CalculatorRefreshButtonComponent } from './calculator-refresh-button.component';
 
 describe('CalculatorRefreshButtonComponent', () => {
   let fixture: ComponentFixture<CalculatorRefreshButtonComponent>;
-  let guided: GuidedDraftService;
-  let expert: ExpertDraftService;
+  let guided: PathDraft<{ nbPizzas: number }>;
+  let expert: PathDraft<{ nbPizzas: number }>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -27,10 +27,9 @@ describe('CalculatorRefreshButtonComponent', () => {
       ],
     }).compileComponents();
 
-    guided = TestBed.inject(GuidedDraftService);
-    expert = TestBed.inject(ExpertDraftService);
-    guided.init();
-    expert.init();
+    const paths = TestBed.inject(CalculatorPaths);
+    guided = paths.for(CalculatorPath.GUIDED);
+    expert = paths.for(CalculatorPath.EXPERT);
 
     fixture = TestBed.createComponent(CalculatorRefreshButtonComponent);
     fixture.componentRef.setInput('path', CalculatorPath.GUIDED);
@@ -53,8 +52,8 @@ describe('CalculatorRefreshButtonComponent', () => {
 
     expect(create).toHaveBeenCalled();
     expect(present).toHaveBeenCalled();
-    expect(guided.getDraft().nbPizzas).toBe(9);
-    expect(expert.getInput().nbPizzas).toBe(12);
+    expect(guided.snapshot().nbPizzas).toBe(9);
+    expect(expert.snapshot().nbPizzas).toBe(12);
   });
 
   it('confirming resets only the requested path', async () => {
@@ -81,7 +80,7 @@ describe('CalculatorRefreshButtonComponent', () => {
     await fixture.whenStable();
     confirmHandler?.();
 
-    expect(guided.getDraft().nbPizzas).toBe(5);
-    expect(expert.getInput().nbPizzas).toBe(12);
+    expect(guided.snapshot().nbPizzas).toBe(5);
+    expect(expert.snapshot().nbPizzas).toBe(12);
   });
 });

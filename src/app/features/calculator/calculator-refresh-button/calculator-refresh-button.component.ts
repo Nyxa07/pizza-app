@@ -6,7 +6,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule, RefreshCwIcon } from 'lucide-angular';
 
 import { CalculatorPath } from '../enums/calculator-path.enum';
-import { CalculatorInitializerService } from '../services/calculator-initializer.service';
+import { CalculatorPaths } from '../paths/calculator-paths.service';
 
 @Component({
   selector: 'app-calculator-refresh-button',
@@ -16,7 +16,7 @@ import { CalculatorInitializerService } from '../services/calculator-initializer
   standalone: true,
 })
 export class CalculatorRefreshButtonComponent {
-  private readonly paths = inject(CalculatorInitializerService);
+  private readonly paths = inject(CalculatorPaths);
   private readonly alertController = inject(AlertController);
   private readonly translate = inject(TranslateService);
 
@@ -37,7 +37,7 @@ export class CalculatorRefreshButtonComponent {
           text: this.translate.instant('common.actions.reset'),
           role: 'destructive',
           // Only the path this button sits on: the other calculations stay.
-          handler: () => this.paths.newCalculation(this.path()),
+          handler: () => this.paths.for(this.path()).newCalculation(),
         },
       ],
     });

@@ -10,18 +10,17 @@ import { Router } from '@angular/router';
 
 import { TranslatePipe } from '@ngx-translate/core';
 import { ChevronLeft, ChevronRight, LucideAngularModule } from 'lucide-angular';
-import { map } from 'rxjs';
 
 import { DoughSaverComponent } from 'src/app/features/doughs/dough-saver/dough-saver.component';
 
 import { InfoSheetId } from '../../sheets/enums/info-sheet-id.enum';
 import { InfoSheetButtonComponent } from '../../sheets/info-sheet-button/info-sheet-button.component';
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
+import { CalculatorPath } from '../enums/calculator-path.enum';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
 import { IGuidedCalculatorDraft } from '../interfaces/guided-calculator-draft.interface';
-import { GuidedDraftService } from '../services/guided-draft.service';
-import { GuidedInputAdapter } from '../services/guided-input.adapter';
+import { CalculatorPaths } from '../paths/calculator-paths.service';
 
 type GuidedStepId =
   | 'pizzaType'
@@ -86,7 +85,7 @@ const GUIDED_STEPS: readonly GuidedStep[] = [
 
 /**
  * The Guided path: one plain-language decision at a time, persisted in its
- * own Draft. Hidden technical inputs are derived later by GuidedInputAdapter.
+ * own Draft. Hidden technical inputs are derived by the path definition.
  */
 @Component({
   selector: 'app-guided-form',
@@ -103,8 +102,8 @@ const GUIDED_STEPS: readonly GuidedStep[] = [
   ],
 })
 export class GuidedFormComponent {
-  private readonly draft = inject(GuidedDraftService);
-  private readonly guidedInputAdapter = inject(GuidedInputAdapter);
+  /** The handle of this path, captured once — never another path's Draft. */
+  private readonly draft = inject(CalculatorPaths).for(CalculatorPath.GUIDED);
   private readonly router = inject(Router);
 
   protected readonly DoughType = DoughType;
@@ -114,20 +113,19 @@ export class GuidedFormComponent {
   protected readonly ChevronLeft = ChevronLeft;
   protected readonly ChevronRight = ChevronRight;
 
-  protected readonly draft$ = this.draft.getDraft$();
+  protected readonly draft$ = this.draft.draft$;
   /** The Guided draft resolved to a full input, saved as-is by the Dough saver. */
-  protected readonly resolvedInput = toSignal(
-    this.draft$.pipe(map((draft) => this.guidedInputAdapter.resolve(draft))),
-    { initialValue: null },
-  );
+  protected readonly resolvedInput = toSignal(this.draft.resolvedInput$(), {
+    initialValue: null,
+  });
   protected readonly restTimes = [4, 8, 12, 24, 48] as const;
   protected readonly temperatures = [18, 20, 22, 24, 26] as const;
 
-  /** The step lives in the Draft service, so a reset brings the form back here. */
-  private readonly draftStepIndex = toSignal(this.draft.getStepIndex$(), {
+  /** The step lives with the Draft, so a reset brings the form back here. */
+  private readonly draftStepIndex = toSignal(this.draft.stepIndex$, {
     initialValue: 0,
   });
-  /** The service knows nothing of the steps, so the upper bound is clamped here. */
+  /** The module knows nothing of the steps, so the upper bound is clamped here. */
   protected readonly currentStepIndex = computed(() =>
     Math.min(this.draftStepIndex(), GUIDED_STEPS.length - 1),
   );
@@ -150,7 +148,7 @@ export class GuidedFormComponent {
   }
 
   protected changeQuantity(delta: 1 | -1): void {
-    const nbPizzas = Math.max(1, this.draft.getDraft().nbPizzas + delta);
+    const nbPizzas = Math.max(1, this.draft.snapshot().nbPizzas + delta);
     this.draft.update({ nbPizzas });
   }
 

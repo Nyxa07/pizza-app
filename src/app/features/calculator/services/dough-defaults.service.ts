@@ -23,8 +23,10 @@ export const FACTORY_DEFAULTS = {
   hydrationRatio: 0.62,
   temperature: 20,
   globalRestTime: 24,
-  rtRestTime: 16,
-  coldRestTime: 0,
+  // The total rest is the answer; the engine owns the ambient/cold split and
+  // no screen ever writes these two into the Defaults.
+  rtRestTime: null,
+  coldRestTime: null,
   poolishRatio: 0.4,
   flourStrength: 270,
   saltRatio: 0.028,

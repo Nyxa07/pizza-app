@@ -14,11 +14,11 @@ import { InfoSheetId } from '../../sheets/enums/info-sheet-id.enum';
 import { InfoSheetButtonComponent } from '../../sheets/info-sheet-button/info-sheet-button.component';
 import { PizzaType } from '../../settings/enums/pizza-type.enum';
 import { CalculatorPath } from '../enums/calculator-path.enum';
-import { GUIDED_STEP_STORAGE_KEY } from '../services/calculator-draft-storage.constants';
-import { CalculatorInitializerService } from '../services/calculator-initializer.service';
-import { ExpertDraftService } from '../services/expert-draft.service';
-import { GuidedDraftService } from '../services/guided-draft.service';
-import { GuidedInputAdapter } from '../services/guided-input.adapter';
+import { GUIDED_STEP_STORAGE_KEY } from '../paths/calculator-draft-storage.constants';
+import { CalculatorPaths } from '../paths/calculator-paths.service';
+import { GUIDED_PATH } from '../paths/guided.path';
+import type { GuidedPathDraft } from '../paths/path-draft.interface';
+import { DoughDefaultsService } from '../services/dough-defaults.service';
 import { GuidedFormComponent } from './guided-form.component';
 
 /** Seven steps since the flour question left the path (issue #99). */
@@ -26,8 +26,15 @@ const GUIDED_STEP_COUNT = 7;
 
 describe('GuidedFormComponent', () => {
   let fixture: ComponentFixture<GuidedFormComponent>;
-  let draft: GuidedDraftService;
+  let draft: GuidedPathDraft;
   let prefs: FakePrefsStorage;
+
+  /** The Guided input, resolved the way the path definition resolves it. */
+  const resolvedInput = () =>
+    GUIDED_PATH.toInput(
+      draft.snapshot(),
+      TestBed.inject(DoughDefaultsService).getDefaults(),
+    );
 
   const next = (): void => {
     const button = fixture.debugElement.query(
@@ -68,8 +75,7 @@ describe('GuidedFormComponent', () => {
       ],
     }).compileComponents();
 
-    TestBed.inject(CalculatorInitializerService).init(CalculatorPath.GUIDED);
-    draft = TestBed.inject(GuidedDraftService);
+    draft = TestBed.inject(CalculatorPaths).for(CalculatorPath.GUIDED);
     fixture = TestBed.createComponent(GuidedFormComponent);
     fixture.detectChanges();
   }));
@@ -115,15 +121,11 @@ describe('GuidedFormComponent', () => {
     ]);
     expect(fixture.nativeElement.textContent).not.toContain('W2');
     expect(fixture.nativeElement.textContent).not.toContain('flourStrength');
-    expect(
-      TestBed.inject(GuidedInputAdapter).resolve(draft.getDraft())
-        .flourStrength,
-    ).toBe(270);
+    expect(resolvedInput().flourStrength).toBe(270);
   });
 
   it('never reads or mutates the Expert Draft', () => {
-    const expert = TestBed.inject(ExpertDraftService);
-    expert.init();
+    const expert = TestBed.inject(CalculatorPaths).for(CalculatorPath.EXPERT);
     expert.update({
       pizzaType: PizzaType.NEAPOLITAN,
       flourStrength: 350,
@@ -137,10 +139,10 @@ describe('GuidedFormComponent', () => {
     (pizzaChoices[1].nativeElement as HTMLButtonElement).click();
     fixture.detectChanges();
 
-    expect(draft.getDraft().pizzaType).toBe(PizzaType.ROMAN);
-    expect(draft.getDraft().globalRestTime).toBe(24);
-    expect(expert.getInput().pizzaType).toBe(PizzaType.NEAPOLITAN);
-    expect(expert.getInput().flourStrength).toBe(350);
+    expect(draft.snapshot().pizzaType).toBe(PizzaType.ROMAN);
+    expect(draft.snapshot().globalRestTime).toBe(24);
+    expect(expert.snapshot().pizzaType).toBe(PizzaType.NEAPOLITAN);
+    expect(expert.snapshot().flourStrength).toBe(350);
   });
 
   it('places contextual Fiches on the moments of choice', () => {
@@ -191,12 +193,16 @@ describe('GuidedFormComponent', () => {
     expect(prefs.get(GUIDED_STEP_STORAGE_KEY)).toBe(0);
   });
 
-  it('restores the persisted step when the Guided page is entered again', () => {
-    prefs.set(GUIDED_STEP_STORAGE_KEY, 1);
-    TestBed.inject(CalculatorInitializerService).init(CalculatorPath.GUIDED);
+  /**
+   * The upper bound of the step index belongs here: only this form knows how
+   * many questions it asks, so a step left behind by a release that had more
+   * of them lands on the summary rather than on nothing at all.
+   */
+  it('clamps a stored step beyond its last question', () => {
+    draft.setStepIndex(GUIDED_STEP_COUNT + 3);
     fixture.detectChanges();
 
-    expect(currentStepId()).toBe('quantity');
+    expect(currentStepId()).toBe('summary');
   });
 
   it('offers Dough saving from the summary with the resolved Guided input', () => {
@@ -204,11 +210,8 @@ describe('GuidedFormComponent', () => {
 
     const saver = fixture.debugElement.query(By.directive(DoughSaverComponent));
     expect(saver).toBeTruthy();
-    const expected = TestBed.inject(GuidedInputAdapter).resolve(
-      draft.getDraft(),
-    );
     expect((saver.componentInstance as DoughSaverComponent).input()).toEqual(
-      expected,
+      resolvedInput(),
     );
   });
 });

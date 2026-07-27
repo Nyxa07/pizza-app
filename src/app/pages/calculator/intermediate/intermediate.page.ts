@@ -25,7 +25,7 @@ import { CalculatorPathSwitchComponent } from 'src/app/features/calculator/calcu
 import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
 import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
 import { IntermediateFormComponent } from 'src/app/features/calculator/intermediate-form/intermediate-form.component';
-import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
+import { CalculatorPaths } from 'src/app/features/calculator/paths/calculator-paths.service';
 import { DoughSaverComponent } from 'src/app/features/doughs/dough-saver/dough-saver.component';
 import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 
@@ -57,23 +57,18 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
   ],
 })
 export class CalculatorIntermediatePage implements ViewWillEnter {
-  private readonly calculatorInitializer = inject(CalculatorInitializerService);
-
   protected readonly SettingsIcon = SettingsIcon;
   protected readonly CalculatorPath = CalculatorPath;
   protected readonly isInitialized = signal(false);
   /** The resolved Intermediate input, saved as-is by the Dough saver. */
   protected readonly resolvedInput = toSignal(
-    this.calculatorInitializer.resolvedInput$(CalculatorPath.INTERMEDIATE),
+    inject(CalculatorPaths).for(CalculatorPath.INTERMEDIATE).resolvedInput$(),
     { initialValue: null },
   );
 
-  // Ionic caches this page in the router-outlet stack, so reload the
-  // Intermediate Draft from persistence on every entry.
+  // A deferred-rendering flag, nothing more: the Draft is live from the
+  // moment the Calculator paths module hands its handle out.
   ionViewWillEnter(): void {
-    idleCallback(() => {
-      this.calculatorInitializer.init(CalculatorPath.INTERMEDIATE);
-      this.isInitialized.set(true);
-    });
+    idleCallback(() => this.isInitialized.set(true));
   }
 }

@@ -20,7 +20,10 @@ Expert keeps the complete technical input. Switching paths never copies values.
 - The `calculator:draft` preference is replaced by one key per path:
   `calculator:draft:guided`, `calculator:draft:intermediate` and
   `calculator:draft:expert`.
-- A path is added in one place — the path registry
-  (`CalculatorInitializerService`), which owns for each path its Draft
-  initialisation, its reset, its resolved engine input and its engine
-  settings. Screens never reach for an individual Draft service.
+- A path is added in one place — one path definition read by the Calculator
+  paths module, which owns for each path how its Draft is seeded, kept inside
+  the bounds of its style, reset and resolved into an engine input. Screens
+  capture the handle of their own path and never reach for a Draft of their
+  own.
+- « Ajuster » and Recipe suggestions go through that module too: no caller
+  outside it names the Draft they land in.

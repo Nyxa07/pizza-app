@@ -11,8 +11,8 @@ import { provideIonicAngular } from '@ionic/angular/standalone';
 
 import { provideTranslateService } from '@ngx-translate/core';
 
-import { GuidedDraftService } from 'src/app/features/calculator/services/guided-draft.service';
-import { GuidedInputAdapter } from 'src/app/features/calculator/services/guided-input.adapter';
+import { GUIDED_PATH } from 'src/app/features/calculator/paths/guided.path';
+import { DoughDefaultsService } from 'src/app/features/calculator/services/dough-defaults.service';
 import type { Dough } from 'src/app/features/doughs/interfaces/dough.interface';
 import { DOUGHS_STORAGE_KEY } from 'src/app/features/doughs/services/doughs.service';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
@@ -68,12 +68,11 @@ describe('DoughDetailPage (the document and its card cannot diverge)', () => {
     TestBed.configureTestingModule({
       providers: [{ provide: PrefsStorage, useValue: prefs }],
     });
+    const defaults = TestBed.inject(DoughDefaultsService).getDefaults();
     const dough: Dough = {
       id: DOUGH_ID,
       name: 'Samedi',
-      input: TestBed.inject(GuidedInputAdapter).resolve(
-        TestBed.inject(GuidedDraftService).getDraft(),
-      ),
+      input: GUIDED_PATH.toInput(GUIDED_PATH.seed(defaults), defaults),
       createdAt: '2026-07-26T10:00:00.000Z',
       updatedAt: '2026-07-26T10:00:00.000Z',
     };

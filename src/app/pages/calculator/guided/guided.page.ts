@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import {
@@ -24,7 +19,6 @@ import { CalculatorPathSwitchComponent } from 'src/app/features/calculator/calcu
 import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/calculator-refresh-button/calculator-refresh-button.component';
 import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
 import { GuidedFormComponent } from 'src/app/features/calculator/guided-form/guided-form.component';
-import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
 import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 
 /** The approachable, one-question-at-a-time calculator path. */
@@ -51,18 +45,13 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
   ],
 })
 export class CalculatorGuidedPage implements ViewWillEnter {
-  private readonly calculatorInitializer = inject(CalculatorInitializerService);
-
   protected readonly SettingsIcon = SettingsIcon;
   protected readonly CalculatorPath = CalculatorPath;
   protected readonly isInitialized = signal(false);
 
-  // Ionic caches this page in the router-outlet stack, so reload the Guided
-  // Draft from persistence on every entry.
+  // A deferred-rendering flag, nothing more: the Draft is live from the
+  // moment the Calculator paths module hands its handle out.
   ionViewWillEnter(): void {
-    idleCallback(() => {
-      this.calculatorInitializer.init(CalculatorPath.GUIDED);
-      this.isInitialized.set(true);
-    });
+    idleCallback(() => this.isInitialized.set(true));
   }
 }

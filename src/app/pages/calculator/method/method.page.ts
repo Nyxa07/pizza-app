@@ -26,7 +26,7 @@ import { combineLatest, filter, map, Observable } from 'rxjs';
 import { CalculatorStateShareComponent } from 'src/app/features/calculator/calculator-state-share/calculator-state-share.component';
 import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
 import { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
-import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
+import { CalculatorPaths } from 'src/app/features/calculator/paths/calculator-paths.service';
 import { CalculatorService } from 'src/app/features/calculator/services/calculator.service';
 import { MethodService } from 'src/app/features/calculator/services/method.service';
 import { DoughSaverComponent } from 'src/app/features/doughs/dough-saver/dough-saver.component';
@@ -66,14 +66,15 @@ export class CalculatorMethodPage implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly calculator = inject(CalculatorService);
   private readonly methodService = inject(MethodService);
-  private readonly calculatorInitializer = inject(CalculatorInitializerService);
+  private readonly paths = inject(CalculatorPaths);
 
   private readonly methodStart = new Date();
   private readonly path = this.readPath();
-  // The path registry resolves the Draft, so this screen never has to know
-  // which Draft services exist.
-  private readonly input$: Observable<ICalculatorInput> =
-    this.calculatorInitializer.resolvedInput$(this.path);
+  // The path is only known at runtime, so the module hands back controls the
+  // screen can drive but not edit — which is all a Method ever needs.
+  private readonly input$: Observable<ICalculatorInput> = this.paths
+    .for(this.path)
+    .resolvedInput$();
   private readonly output$ = this.calculator.resultsFor$(this.input$);
 
   protected readonly ChefHatIcon = ChefHatIcon;
@@ -94,10 +95,7 @@ export class CalculatorMethodPage implements OnInit {
   );
 
   ngOnInit() {
-    idleCallback(() => {
-      this.calculatorInitializer.init(this.path);
-      this.isInitialized.set(true);
-    });
+    idleCallback(() => this.isInitialized.set(true));
   }
 
   /** Unrouted or unknown Method links land on Expert, as they always have. */

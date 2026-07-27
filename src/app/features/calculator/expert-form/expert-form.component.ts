@@ -11,17 +11,18 @@ import { InfoSheetId } from 'src/app/features/sheets/enums/info-sheet-id.enum';
 import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
+import { CalculatorPath } from '../enums/calculator-path.enum';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
+import { CalculatorPaths } from '../paths/calculator-paths.service';
 import {
   clampWeight,
   sizeForWeight,
   weightOptions,
 } from '../pizza-format.model';
 import { CalculatorService } from '../services/calculator.service';
-import { ExpertDraftService } from '../services/expert-draft.service';
 import {
   IMethodPreview,
   MethodPreviewService,
@@ -99,7 +100,8 @@ const POOLISH_RATIO_FALLBACK = 0.3;
   ],
 })
 export class ExpertFormComponent {
-  private readonly state = inject(ExpertDraftService);
+  /** The handle of this path, captured once — never another path's Draft. */
+  private readonly state = inject(CalculatorPaths).for(CalculatorPath.EXPERT);
   private readonly calculator = inject(CalculatorService);
   private readonly methodPreview = inject(MethodPreviewService);
   private readonly router = inject(Router);
@@ -129,8 +131,8 @@ export class ExpertFormComponent {
   ];
 
   protected readonly vm$: Observable<ExpertVm> = combineLatest([
-    this.state.getInput$(),
-    this.calculator.resultsFor$(this.state.getInput$()),
+    this.state.draft$,
+    this.calculator.resultsFor$(this.state.draft$),
   ]).pipe(map(([input, output]) => this.buildVm(input, output)));
 
   protected stepField(vm: ExpertVm, field: SteppableField, dir: 1 | -1): void {

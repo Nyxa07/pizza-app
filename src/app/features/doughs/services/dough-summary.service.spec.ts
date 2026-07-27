@@ -2,10 +2,9 @@ import { TestBed } from '@angular/core/testing';
 
 import { DoughType } from 'src/app/features/calculator/enums/dough-type.enum';
 import type { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
+import { GUIDED_PATH } from 'src/app/features/calculator/paths/guided.path';
 import { CalculatorConfigService } from 'src/app/features/calculator/services/calculator-config.service';
 import { DoughDefaultsService } from 'src/app/features/calculator/services/dough-defaults.service';
-import { GuidedDraftService } from 'src/app/features/calculator/services/guided-draft.service';
-import { GuidedInputAdapter } from 'src/app/features/calculator/services/guided-input.adapter';
 import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
@@ -18,10 +17,11 @@ describe('DoughSummaryService (the displayable facts of a Dough)', () => {
   let service: DoughSummaryService;
 
   /** An input as the Guided path resolves it: every hidden field on auto. */
-  const guidedInput = (): ICalculatorInput =>
-    TestBed.inject(GuidedInputAdapter).resolve(
-      TestBed.inject(GuidedDraftService).getDraft(),
-    );
+  const guidedInput = (): ICalculatorInput => {
+    const defaults = TestBed.inject(DoughDefaultsService).getDefaults();
+
+    return GUIDED_PATH.toInput(GUIDED_PATH.seed(defaults), defaults);
+  };
 
   /** An input as the Expert path holds it: every field materialised. */
   const expertInput = (

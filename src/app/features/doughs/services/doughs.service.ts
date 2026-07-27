@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
 import type { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
-import { ExpertDraftService } from 'src/app/features/calculator/services/expert-draft.service';
+import { CalculatorPaths } from 'src/app/features/calculator/paths/calculator-paths.service';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 
 import type { Dough } from '../interfaces/dough.interface';
@@ -14,7 +14,7 @@ export const DOUGHS_STORAGE_KEY = 'calculator:doughs';
 @Injectable({ providedIn: 'root' })
 export class DoughsService {
   private readonly prefs = inject(PrefsStorage);
-  private readonly state = inject(ExpertDraftService);
+  private readonly paths = inject(CalculatorPaths);
   private readonly doughs = new BehaviorSubject<Dough[]>(this.read());
 
   getDoughs$(): Observable<Dough[]> {
@@ -50,11 +50,6 @@ export class DoughsService {
 
     this.persist([...this.doughs.value, dough]);
     return this.clone(dough);
-  }
-
-  /** Saves a snapshot of the Expert Draft; later edits cannot mutate it. */
-  saveDraft(name: string): Dough {
-    return this.save(name, this.state.getInput());
   }
 
   rename(id: string, name: string): boolean {
@@ -106,13 +101,17 @@ export class DoughsService {
     return true;
   }
 
-  /** Loads a copy into the Expert Draft; the saved Dough stays immutable. */
+  /**
+   * Starts a calculation from a copy of this Dough; the saved document stays
+   * immutable. Which Draft receives the copy is the Calculator paths module's
+   * business, not this library's (ADR-0003).
+   */
   adjust(id: string): boolean {
     const dough = this.doughs.value.find((item) => item.id === id);
     if (!dough) {
       return false;
     }
-    this.state.replaceWithCopy(dough.input);
+    this.paths.startFrom(dough.input);
     return true;
   }
 

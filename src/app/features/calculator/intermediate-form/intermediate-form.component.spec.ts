@@ -21,8 +21,9 @@ import frCalculator from 'src/assets/i18n/fr/calculator.json';
 
 import { CalculatorPath } from '../enums/calculator-path.enum';
 import { CalculatorTileComponent } from '../parts/calculator-tile.component';
-import { CalculatorInitializerService } from '../services/calculator-initializer.service';
-import { IntermediateDraftService } from '../services/intermediate-draft.service';
+import type { IIntermediateCalculatorDraft } from '../interfaces/intermediate-calculator-draft.interface';
+import { CalculatorPaths } from '../paths/calculator-paths.service';
+import type { PathDraft } from '../paths/path-draft.interface';
 import { IntermediateFormComponent } from './intermediate-form.component';
 
 /**
@@ -31,7 +32,7 @@ import { IntermediateFormComponent } from './intermediate-form.component';
  */
 describe('IntermediateFormComponent', () => {
   let fixture: ComponentFixture<IntermediateFormComponent>;
-  let draft: IntermediateDraftService;
+  let draft: PathDraft<IIntermediateCalculatorDraft>;
 
   const host = (): HTMLElement => fixture.nativeElement as HTMLElement;
 
@@ -105,9 +106,7 @@ describe('IntermediateFormComponent', () => {
 
   const grams = (text: string): number => Number(text.replace(/\D/g, ''));
 
-  const draftHolds = (
-    partial: Parameters<IntermediateDraftService['update']>[0],
-  ): void => {
+  const draftHolds = (partial: Partial<IIntermediateCalculatorDraft>): void => {
     draft.update(partial);
     fixture.detectChanges();
   };
@@ -137,10 +136,7 @@ describe('IntermediateFormComponent', () => {
       ],
     }).compileComponents();
 
-    TestBed.inject(CalculatorInitializerService).init(
-      CalculatorPath.INTERMEDIATE,
-    );
-    draft = TestBed.inject(IntermediateDraftService);
+    draft = TestBed.inject(CalculatorPaths).for(CalculatorPath.INTERMEDIATE);
     fixture = TestBed.createComponent(IntermediateFormComponent);
     fixture.detectChanges();
   }));
@@ -180,7 +176,7 @@ describe('IntermediateFormComponent', () => {
 
     step('size', 'up');
 
-    expect(draft.getDraft().sizeCm).toBe(29);
+    expect(draft.snapshot().sizeCm).toBe(29);
     expect(textOf('ball-weight')).toContain('260');
     expect(sizeTileText()).toContain('260');
   });
@@ -191,7 +187,7 @@ describe('IntermediateFormComponent', () => {
 
     chooseStyle(PizzaType.ROMAN);
 
-    expect(draft.getDraft().sizeCm).toBe(33);
+    expect(draft.snapshot().sizeCm).toBe(33);
     expect(textOf('ball-weight')).toContain('210');
   });
 
@@ -245,7 +241,7 @@ describe('IntermediateFormComponent', () => {
     up.click();
     fixture.detectChanges();
 
-    expect(draft.getDraft().globalRestTime).toBe(2);
+    expect(draft.snapshot().globalRestTime).toBe(2);
 
     draftHolds({ globalRestTime: 48 });
     expect(
@@ -291,7 +287,7 @@ describe('IntermediateFormComponent', () => {
     step('size', 'up');
     chooseStyle(PizzaType.ROMAN);
 
-    expect(draft.getDraft()).toEqual(
+    expect(draft.snapshot()).toEqual(
       jasmine.objectContaining({
         nbPizzas: 6,
         pizzaType: PizzaType.ROMAN,

@@ -8,12 +8,10 @@ import { provideTranslateService } from '@ngx-translate/core';
 
 import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
 import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
-import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
-import { ExpertDraftService } from 'src/app/features/calculator/services/expert-draft.service';
-import { GuidedDraftService } from 'src/app/features/calculator/services/guided-draft.service';
-import { GuidedInputAdapter } from 'src/app/features/calculator/services/guided-input.adapter';
-import { IntermediateDraftService } from 'src/app/features/calculator/services/intermediate-draft.service';
-import { IntermediateInputAdapter } from 'src/app/features/calculator/services/intermediate-input.adapter';
+import { CalculatorPaths } from 'src/app/features/calculator/paths/calculator-paths.service';
+import { GUIDED_PATH } from 'src/app/features/calculator/paths/guided.path';
+import { INTERMEDIATE_PATH } from 'src/app/features/calculator/paths/intermediate.path';
+import { DoughDefaultsService } from 'src/app/features/calculator/services/dough-defaults.service';
 import { DoughSaverComponent } from 'src/app/features/doughs/dough-saver/dough-saver.component';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
@@ -46,27 +44,28 @@ describe('CalculatorMethodPage (Dough saving)', () => {
     return (saver.componentInstance as DoughSaverComponent).input();
   };
 
+  /** « Mes pâtes par défaut », as the path definitions read them. */
+  const defaults = () => TestBed.inject(DoughDefaultsService).getDefaults();
+
   it('binds the resolved Guided input to the Dough saver', () => {
     configure(CalculatorPath.GUIDED);
-    TestBed.inject(CalculatorInitializerService).init(CalculatorPath.GUIDED);
+    const draft = TestBed.inject(CalculatorPaths).for(CalculatorPath.GUIDED);
 
     const input = boundSaverInput(
       TestBed.createComponent(CalculatorMethodPage),
     );
 
-    const expected = TestBed.inject(GuidedInputAdapter).resolve(
-      TestBed.inject(GuidedDraftService).getDraft(),
-    );
-    expect(input).toEqual(expected);
+    expect(input).toEqual(GUIDED_PATH.toInput(draft.snapshot(), defaults()));
   });
 
   it('reads the Intermediate Draft and binds its resolved input', () => {
     configure(CalculatorPath.INTERMEDIATE);
-    const initializer = TestBed.inject(CalculatorInitializerService);
-    initializer.init(CalculatorPath.INTERMEDIATE);
+    const draft = TestBed.inject(CalculatorPaths).for(
+      CalculatorPath.INTERMEDIATE,
+    );
     // A 33 cm Roman: the grammes must follow the Intermediate answers, not
     // the Expert Draft.
-    TestBed.inject(IntermediateDraftService).update({
+    draft.update({
       pizzaType: PizzaType.ROMAN,
       sizeCm: 33,
       nbPizzas: 4,
@@ -77,21 +76,19 @@ describe('CalculatorMethodPage (Dough saving)', () => {
     );
 
     expect(input).toEqual(
-      TestBed.inject(IntermediateInputAdapter).resolve(
-        TestBed.inject(IntermediateDraftService).getDraft(),
-      ),
+      INTERMEDIATE_PATH.toInput(draft.snapshot(), defaults()),
     );
     expect((input as { pizzaWeight: number }).pizzaWeight).toBe(210);
   });
 
   it('binds the Expert Draft input to the Dough saver', () => {
     configure(CalculatorPath.EXPERT);
-    TestBed.inject(CalculatorInitializerService).init(CalculatorPath.EXPERT);
+    const draft = TestBed.inject(CalculatorPaths).for(CalculatorPath.EXPERT);
 
     const input = boundSaverInput(
       TestBed.createComponent(CalculatorMethodPage),
     );
 
-    expect(input).toEqual(TestBed.inject(ExpertDraftService).getInput());
+    expect(input).toEqual(draft.snapshot());
   });
 });
