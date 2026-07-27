@@ -21,16 +21,14 @@ import {
 
 import { TranslatePipe } from '@ngx-translate/core';
 import { ChefHatIcon, LucideAngularModule } from 'lucide-angular';
-import { combineLatest, filter, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { CalculatorStateShareComponent } from 'src/app/features/calculator/calculator-state-share/calculator-state-share.component';
 import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
 import { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
+import { CalculatorMethods } from 'src/app/features/calculator/method/calculator-methods.service';
 import { CalculatorPaths } from 'src/app/features/calculator/paths/calculator-paths.service';
-import { CalculatorService } from 'src/app/features/calculator/services/calculator.service';
-import { MethodService } from 'src/app/features/calculator/services/method.service';
 import { DoughSaverComponent } from 'src/app/features/doughs/dough-saver/dough-saver.component';
-import { IMethod } from 'src/app/features/method/interfaces/method.interface';
 import { MethodComponent } from 'src/app/features/method/method.component';
 import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 
@@ -64,18 +62,15 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 })
 export class CalculatorMethodPage implements OnInit {
   private readonly route = inject(ActivatedRoute);
-  private readonly calculator = inject(CalculatorService);
-  private readonly methodService = inject(MethodService);
+  private readonly methods = inject(CalculatorMethods);
   private readonly paths = inject(CalculatorPaths);
 
-  private readonly methodStart = new Date();
   private readonly path = this.readPath();
   // The path is only known at runtime, so the module hands back controls the
   // screen can drive but not edit — which is all a Method ever needs.
   private readonly input$: Observable<ICalculatorInput> = this.paths
     .for(this.path)
     .resolvedInput$();
-  private readonly output$ = this.calculator.resultsFor$(this.input$);
 
   protected readonly ChefHatIcon = ChefHatIcon;
   protected readonly backHref = `/tabs/calculator/${this.path}`;
@@ -84,13 +79,9 @@ export class CalculatorMethodPage implements OnInit {
   protected readonly currentInput = toSignal(this.input$, {
     initialValue: null,
   });
+  /** `null` while the Draft holds nothing to narrate — the empty state. */
   protected readonly method = toSignal(
-    combineLatest([this.input$, this.output$]).pipe(
-      filter(([, output]) => output.total.flour > 0),
-      map(([input, output]) =>
-        this.methodService.build(input, output, this.methodStart),
-      ),
-    ),
+    this.input$.pipe(map((input) => this.methods.methodFor(input))),
     { initialValue: null },
   );
 

@@ -7,6 +7,7 @@ import { IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { TranslatePipe } from '@ngx-translate/core';
 import { combineLatest, map, Observable } from 'rxjs';
 
+import type { IMethodPreview } from 'src/app/features/method/interfaces/method-preview.interface';
 import { InfoSheetId } from 'src/app/features/sheets/enums/info-sheet-id.enum';
 import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
@@ -16,6 +17,7 @@ import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
+import { CalculatorMethods } from '../method/calculator-methods.service';
 import { CalculatorPaths } from '../paths/calculator-paths.service';
 import {
   clampWeight,
@@ -23,10 +25,6 @@ import {
   weightOptions,
 } from '../pizza-format.model';
 import { CalculatorService } from '../services/calculator.service';
-import {
-  IMethodPreview,
-  MethodPreviewService,
-} from '../services/method-preview.service';
 import {
   EXPERT_FIELD_OPTIONS,
   restTimePatch,
@@ -103,7 +101,7 @@ export class ExpertFormComponent {
   /** The Path draft of this path, captured once — never another path's. */
   private readonly state = inject(CalculatorPaths).for(CalculatorPath.EXPERT);
   private readonly calculator = inject(CalculatorService);
-  private readonly methodPreview = inject(MethodPreviewService);
+  private readonly methods = inject(CalculatorMethods);
   private readonly router = inject(Router);
 
   protected readonly InfoSheetId = InfoSheetId;
@@ -228,7 +226,7 @@ export class ExpertFormComponent {
       poolishRatioPct: Math.round(
         (input.poolishRatio ?? POOLISH_RATIO_FALLBACK) * 100,
       ),
-      preview: this.methodPreview.buildPreview(input, output, new Date()),
+      preview: this.methods.previewFor(input),
     };
   }
 

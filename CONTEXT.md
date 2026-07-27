@@ -22,6 +22,14 @@ _Avoid_: constants, DEFAULT_INPUT
 The instructions (ingredient weights + steps) the calculator generates for a Dough. UI: « Méthode ».
 _Avoid_: recipe (never for dough output), protocol
 
+**Method module**:
+The single module going from a calculator input to a Dough method: `methodFor(input)` for the full run, `previewFor(input)` for the aperçu. It runs the engine, assembles the steps and dates them; nothing outside names a step definition, an engine output or a clock. The aperçu and the Method screen are two readings of the same run, so they cannot disagree on the times, the grams or the number of steps.
+_Avoid_: a method builder per screen, passing an engine output or a time to it
+
+**Method clock**:
+When a Method starts counting, as a seam: the wall clock in the app, an instant pinned by a spec. Times land on quarter-hours — a Method narrates a plan, not a stopwatch. Only the Method module reads it.
+_Avoid_: `new Date()` in a screen, a start time captured per screen
+
 **Pizza recipe**:
 A topped-pizza composition (e.g. Reine, 3 fromages) offered as browsable content, decoupled from the calculator. UI: « Recette ».
 _Avoid_: using "recipe"/« recette » for anything dough-related

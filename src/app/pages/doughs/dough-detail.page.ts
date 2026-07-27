@@ -13,8 +13,7 @@ import {
 
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { CalculatorService } from 'src/app/features/calculator/services/calculator.service';
-import { MethodService } from 'src/app/features/calculator/services/method.service';
+import { CalculatorMethods } from 'src/app/features/calculator/method/calculator-methods.service';
 import { DoughSummaryService } from 'src/app/features/doughs/services/dough-summary.service';
 import { DoughsService } from 'src/app/features/doughs/services/doughs.service';
 import { MethodComponent } from 'src/app/features/method/method.component';
@@ -45,23 +44,19 @@ export class DoughDetailPage {
   private readonly router = inject(Router);
   private readonly doughs = inject(DoughsService);
   private readonly summaries = inject(DoughSummaryService);
-  private readonly calculator = inject(CalculatorService);
-  private readonly methodService = inject(MethodService);
+  private readonly methods = inject(CalculatorMethods);
 
   protected readonly dough = this.doughs.get(
     this.route.snapshot.paramMap.get('id') ?? '',
   );
-  private readonly output = this.dough
-    ? this.calculator.process(this.dough.input)
-    : null;
   /** The document facts, resolved through the same seam as the library card. */
   protected readonly summary = this.dough
     ? this.summaries.forDough(this.dough)
     : null;
-  protected readonly method =
-    this.dough && this.output
-      ? this.methodService.build(this.dough.input, this.output, new Date())
-      : null;
+  /** The saved input read as a method, through the same seam as the screens. */
+  protected readonly method = this.dough
+    ? this.methods.methodFor(this.dough.input)
+    : null;
 
   protected adjust(): void {
     if (this.dough && this.doughs.adjust(this.dough.id)) {

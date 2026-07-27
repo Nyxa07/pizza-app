@@ -11,6 +11,7 @@ import {
 import { TranslatePipe } from '@ngx-translate/core';
 import { combineLatest, map, Observable } from 'rxjs';
 
+import type { IMethodPreview } from 'src/app/features/method/interfaces/method-preview.interface';
 import { InfoSheetId } from 'src/app/features/sheets/enums/info-sheet-id.enum';
 import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-button/info-sheet-button.component';
 import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
@@ -22,6 +23,7 @@ import { YeastType } from '../enums/yeast-type.enum';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
 import { IIntermediateCalculatorDraft } from '../interfaces/intermediate-calculator-draft.interface';
+import { CalculatorMethods } from '../method/calculator-methods.service';
 import { CalculatorCtaComponent } from '../parts/calculator-cta.component';
 import { CalculatorLivebarComponent } from '../parts/calculator-livebar.component';
 import { CalculatorMethodPreviewComponent } from '../parts/calculator-method-preview.component';
@@ -32,10 +34,6 @@ import { CalculatorPaths } from '../paths/calculator-paths.service';
 import { sizeRange } from '../pizza-format.model';
 import { EXPERT_FIELD_OPTIONS } from '../expert-form/expert-field-options';
 import { CalculatorService } from '../services/calculator.service';
-import {
-  IMethodPreview,
-  MethodPreviewService,
-} from '../services/method-preview.service';
 
 /**
  * The rest slider: one question — how long do you have? — in whole hours.
@@ -106,7 +104,7 @@ export class IntermediateFormComponent {
     CalculatorPath.INTERMEDIATE,
   );
   private readonly calculator = inject(CalculatorService);
-  private readonly methodPreview = inject(MethodPreviewService);
+  private readonly methods = inject(CalculatorMethods);
   private readonly router = inject(Router);
 
   protected readonly InfoSheetId = InfoSheetId;
@@ -231,7 +229,7 @@ export class IntermediateFormComponent {
       methodSheetId: isPoolish ? InfoSheetId.POOLISH : InfoSheetId.DIRECT,
       result: summarizeOutput(output, isPoolish),
       sizeBounds: sizeRange(draft.pizzaType),
-      preview: this.methodPreview.buildPreview(input, output, new Date()),
+      preview: this.methods.previewFor(input),
     };
   }
 }
