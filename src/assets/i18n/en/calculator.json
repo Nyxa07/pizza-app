@@ -11,8 +11,8 @@
       "decrease": "Decrease"
     },
     "timeline": {
-      "ambient": "{hours} h ambient",
-      "cold": "{hours} h cold"
+      "ambient": "{hours}\u00a0h ambient",
+      "cold": "{hours}\u00a0h cold"
     },
     "method": {
       "title": "The Method",
@@ -21,11 +21,11 @@
         "poolishMix": "Poolish: mix {ingredients}. Cover at room temperature.",
         "poolishKnead": "Final dough: add {ingredients} to the poolish, then knead.",
         "directMix": "Kneading: mix {ingredients}, then knead until smooth.",
-        "directBalls": "Shape {count} dough balls of {weight} g."
+        "directBalls": "Shape {count} dough balls of {weight}\u00a0g."
       }
     },
     "livebar": {
-      "split": "{flour} g Flour · {water} g Water · {salt} g Salt · {yeast} g Yeast"
+      "split": "{flour}\u00a0g\u00a0Flour · {water}\u00a0g\u00a0Water · {salt}\u00a0g\u00a0Salt · {yeast}\u00a0g\u00a0Yeast"
     },
     "cta": "Start — ready {day} at {time}"
   },
@@ -46,7 +46,7 @@
       "oliveOil": "Olive oil",
       "honey": "Honey"
     },
-    "sizeCaption": "≈ {size} cm",
+    "sizeCaption": "≈\u00a0{size}\u00a0cm",
     "advanced": {
       "summary": "Advanced — salt {salt}% · W {w} · oil {oil}% · honey {honey}%"
     }
@@ -63,18 +63,18 @@
     },
     "hints": {
       "pizzaType": "The style sets hydration, olive oil and the sizes on offer.",
-      "restTime": "Beyond 24 h we split the rest between ambient and cold."
+      "restTime": "Beyond 24\u00a0h we split the rest between ambient and cold."
     },
     "units": {
-      "restTime": "{hours} h"
+      "restTime": "{hours}\u00a0h"
     },
     "readOnly": {
       "title": "What we decided for you",
       "ballWeight": "Dough-ball weight",
       "hydration": "Hydration",
       "restSplit": "Rest split",
-      "restSplitValue": "{ambient} h ambient + {cold} h cold",
-      "restSplitAmbientOnly": "{ambient} h at room temperature"
+      "restSplitValue": "{ambient}\u00a0h ambient + {cold}\u00a0h cold",
+      "restSplitAmbientOnly": "{ambient}\u00a0h at room temperature"
     },
     "a11y": {
       "size": "Pizza size, {size} centimetres",
@@ -201,12 +201,12 @@
     "ingredientsTitle": "Ingredients",
     "stepsTitle": "Steps",
     "ingredients": {
-      "flour": "{grams} g flour",
-      "water": "{grams} g water",
-      "yeast": "{grams} g yeast",
-      "salt": "{grams} g salt",
-      "honey": "{grams} g honey",
-      "oliveOil": "{grams} g olive oil"
+      "flour": "{grams}\u00a0g flour",
+      "water": "{grams}\u00a0g water",
+      "yeast": "{grams}\u00a0g yeast",
+      "salt": "{grams}\u00a0g salt",
+      "honey": "{grams}\u00a0g honey",
+      "oliveOil": "{grams}\u00a0g olive oil"
     },
     "titles": {
       "poolish": "Poolish",
@@ -298,7 +298,7 @@
         "helper": {
           "title": "Kneading",
           "descriptions": [
-            "Work the dough by kneading it for about 10 min, flour must be completely integrated",
+            "Work the dough by kneading it for about 10\u00a0min, flour must be completely integrated",
             "Use the palm of your hands to knead",
             "You can also use a stand mixer with its dough hook, but it's less fun 😉"
           ]
@@ -317,7 +317,7 @@
         }
       },
       "shortRestPoolishDough": {
-        "title": "Rest 10 – 15 min under a bowl",
+        "title": "Rest 10 – 15\u00a0min under a bowl",
         "helper": {
           "title": "Rest",
           "descriptions": [
@@ -349,7 +349,7 @@
           "title": "Forming dough balls",
           "descriptions": [
             "Take the dough and with the help of a dough cutter or spatula",
-            "Form dough balls (well stretched) of about <strong>{ pizzaWeight } g</strong>",
+            "Form dough balls (well stretched) of about <strong>{ pizzaWeight }\u00a0g</strong>",
             "Put a thin layer of fine semolina in a dish (this will prevent them from sticking to the dish)",
             "Place dough balls in a dish leaving space between them (they will still grow)",
             "Close the dish or put plastic wrap"
@@ -376,7 +376,7 @@
         }
       },
       "shortRestDirectDough": {
-        "title": "Rest 25 min under a bowl",
+        "title": "Rest 25\u00a0min under a bowl",
         "helper": {
           "title": "Rest",
           "descriptions": [

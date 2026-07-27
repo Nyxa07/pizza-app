@@ -11,8 +11,8 @@
       "decrease": "Diminuer"
     },
     "timeline": {
-      "ambient": "{hours} h ambiante",
-      "cold": "{hours} h froid"
+      "ambient": "{hours}\u00a0h ambiante",
+      "cold": "{hours}\u00a0h froid"
     },
     "method": {
       "title": "La Méthode",
@@ -21,11 +21,11 @@
         "poolishMix": "Poolish : mélanger {ingredients}. Couvrir à température ambiante.",
         "poolishKnead": "Frasage : ajouter {ingredients} à la poolish, puis pétrir.",
         "directMix": "Pétrissage : mélanger {ingredients}, puis pétrir jusqu'à une pâte lisse.",
-        "directBalls": "Façonner {count} pâtons de {weight} g."
+        "directBalls": "Façonner {count} pâtons de {weight}\u00a0g."
       }
     },
     "livebar": {
-      "split": "{flour} g Farine · {water} g Eau · {salt} g Sel · {yeast} g Levure"
+      "split": "{flour}\u00a0g\u00a0Farine · {water}\u00a0g\u00a0Eau · {salt}\u00a0g\u00a0Sel · {yeast}\u00a0g\u00a0Levure"
     },
     "cta": "Commencer — prêt {day} à {time}"
   },
@@ -46,9 +46,9 @@
       "oliveOil": "Huile d'olive",
       "honey": "Miel"
     },
-    "sizeCaption": "≈ {size} cm",
+    "sizeCaption": "≈\u00a0{size}\u00a0cm",
     "advanced": {
-      "summary": "Avancé — sel {salt} % · W {w} · huile {oil} % · miel {honey} %"
+      "summary": "Avancé — sel {salt}\u00a0% · W\u00a0{w} · huile {oil}\u00a0% · miel {honey}\u00a0%"
     }
   },
   "intermediate": {
@@ -63,18 +63,18 @@
     },
     "hints": {
       "pizzaType": "Le style décide de l'hydratation, de l'huile et des tailles proposées.",
-      "restTime": "Au-delà de 24 h, nous répartissons le repos entre l'ambiante et le froid."
+      "restTime": "Au-delà de 24\u00a0h, nous répartissons le repos entre l'ambiante et le froid."
     },
     "units": {
-      "restTime": "{hours} h"
+      "restTime": "{hours}\u00a0h"
     },
     "readOnly": {
       "title": "Ce que nous avons décidé pour vous",
       "ballWeight": "Poids du pâton",
       "hydration": "Hydratation",
       "restSplit": "Répartition du repos",
-      "restSplitValue": "{ambient} h ambiante + {cold} h froid",
-      "restSplitAmbientOnly": "{ambient} h à l'ambiante"
+      "restSplitValue": "{ambient}\u00a0h ambiante + {cold}\u00a0h froid",
+      "restSplitAmbientOnly": "{ambient}\u00a0h à l'ambiante"
     },
     "a11y": {
       "size": "Taille de la pizza, {size} centimètres",
@@ -201,12 +201,12 @@
     "ingredientsTitle": "Ingrédients",
     "stepsTitle": "Étapes",
     "ingredients": {
-      "flour": "{grams} g de farine",
-      "water": "{grams} g d'eau",
-      "yeast": "{grams} g de levure",
-      "salt": "{grams} g de sel",
-      "honey": "{grams} g de miel",
-      "oliveOil": "{grams} g d'huile d'olive"
+      "flour": "{grams}\u00a0g de farine",
+      "water": "{grams}\u00a0g d'eau",
+      "yeast": "{grams}\u00a0g de levure",
+      "salt": "{grams}\u00a0g de sel",
+      "honey": "{grams}\u00a0g de miel",
+      "oliveOil": "{grams}\u00a0g d'huile d'olive"
     },
     "titles": {
       "poolish": "Poolish",
@@ -298,7 +298,7 @@
         "helper": {
           "title": "Pétrissage",
           "descriptions": [
-            "Travailler la pâte en la pétrissant environ 10 min, il faut que la farine soit complètement intégrée",
+            "Travailler la pâte en la pétrissant environ 10\u00a0min, il faut que la farine soit complètement intégrée",
             "Utiliser la paume de vos mains pour pétrir",
             "Vous pouvez aussi utiliser un robot pâtissier avec son crochet pétrisseur, mais c'est quand même moins drôle 😉"
           ]
@@ -317,7 +317,7 @@
         }
       },
       "shortRestPoolishDough": {
-        "title": "Repos 10 – 15 min sous un saladier",
+        "title": "Repos 10 – 15\u00a0min sous un saladier",
         "helper": {
           "title": "Repos",
           "descriptions": [
@@ -349,7 +349,7 @@
           "title": "Formation des pâtons",
           "descriptions": [
             "Récupérer la pâte et avec l'aide d'un coupe pâte ou d'une spatule",
-            "Former des pâtons (bien tendu) d'environ <strong>{ pizzaWeight } g</strong>",
+            "Former des pâtons (bien tendu) d'environ <strong>{ pizzaWeight }\u00a0g</strong>",
             "Mettre une fine couche de semoule fine dans un plat (cela évitera qu'ils collent au plat)",
             "Déposer les pâtons dans un plat en laissant de l'espace entre eux (ils vont encore grossir)",
             "Fermer le plat ou mettre un film plastique"
@@ -376,7 +376,7 @@
         }
       },
       "shortRestDirectDough": {
-        "title": "Repos 25 min sous un saladier",
+        "title": "Repos 25\u00a0min sous un saladier",
         "helper": {
           "title": "Repos",
           "descriptions": [

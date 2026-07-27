@@ -9,6 +9,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  // The tiles read the width of their grid, not their own: below the point
+  // where a reading and its steppers stop fitting side by side, they all fold
+  // together rather than one at a time (#104).
+  container-type: inline-size;
 }
 
 .timeline {

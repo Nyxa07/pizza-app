@@ -185,7 +185,7 @@
       <div>
         <dt>{{ "calculator.intermediate.readOnly.ballWeight" | translate }}</dt>
         <dd class="num" data-testid="ball-weight">
-          {{ vm.result.weight | number: "1.0-0" }} g
+          {{ vm.result.weight | number: "1.0-0" }}&nbsp;g
         </dd>
       </div>
       <div>
@@ -193,7 +193,9 @@
           {{ "calculator.intermediate.readOnly.hydration" | translate }}
           <app-info-sheet-button [sheetId]="InfoSheetId.HYDRATION" />
         </dt>
-        <dd class="num">{{ vm.result.hydrationPct | number: "1.0-0" }} %</dd>
+        <dd class="num">
+          {{ vm.result.hydrationPct | number: "1.0-0" }}&nbsp;%
+        </dd>
       </div>
       <div>
         <dt>{{ "calculator.intermediate.readOnly.restSplit" | translate }}</dt>

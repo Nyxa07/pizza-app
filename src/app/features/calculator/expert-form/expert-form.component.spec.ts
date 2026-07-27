@@ -75,9 +75,13 @@ describe('ExpertFormComponent', () => {
   // loose enough for whichever separators the locale-aware `number` pipe uses.
   const QUANTITY = '[\\d.,\\u00a0\\u202f ]+';
 
+  // A quantity never breaks away from its unit, nor the unit from what it
+  // weighs: the live bar may wrap, but only at the separators (#104).
   const splitReads = (...ingredients: string[]): RegExp =>
     new RegExp(
-      `^${ingredients.map((name) => `${QUANTITY}g ${name}`).join(' · ')}$`,
+      `^${ingredients
+        .map((name) => `${QUANTITY}\\u00a0g\\u00a0${name}`)
+        .join(' · ')}$`,
     );
 
   const renderedSheetIds = (): InfoSheetId[] =>

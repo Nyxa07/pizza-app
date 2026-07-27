@@ -281,9 +281,14 @@ summary:focus-visible {
 // FACT GRID — hairline-separated summary cells
 // ============================================
 
+// A cell has to hold a term and, sometimes, the ⓘ that explains it — a pair
+// that needs about 9rem side by side. Stating that floor in rem rather than
+// splitting the grid in two fixed halves is what lets the facts fall back to a
+// single column on a device whose system font is enlarged, instead of dropping
+// the ⓘ under its term (#104).
 .fact-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
   gap: 1px;
   overflow: hidden;
   border: 1px solid var(--hairline);
@@ -296,11 +301,27 @@ summary:focus-visible {
     background: var(--surface);
   }
 
+  // An odd number of facts would otherwise leave the last cell empty, showing
+  // the hairline background through the grid (#104).
+  > div:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
   dt {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 2px;
     margin-bottom: 4px;
     color: var(--ink-2);
     font-size: 0.7rem;
     text-transform: uppercase;
+
+    // The info button is taller than this line; let it overlap rather than
+    // push the value down.
+    app-info-sheet-button {
+      margin: -8px 0;
+    }
   }
 
   dd {
@@ -338,12 +359,13 @@ summary:focus-visible {
     white-space: nowrap;
   }
 
+  // The split may wrap onto a second line; the non-breaking spaces of its
+  // translation keep each quantity with its ingredient (#104). No ellipsis
+  // here — truncating would drop an ingredient from the reading.
   .split {
     min-width: 0;
-    overflow: hidden;
     font-size: 0.72rem;
     text-align: right;
-    text-overflow: ellipsis;
     color: color-mix(in srgb, currentColor 78%, transparent);
   }
 }
