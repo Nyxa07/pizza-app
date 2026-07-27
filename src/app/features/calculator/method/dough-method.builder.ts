@@ -40,9 +40,17 @@ export function methodDefsFor(
     : [new DirectDoughMethod(output)];
 }
 
-/** Every step the reader will actually see, definitions included. */
-export function visibleSteps(defs: IMethodDef[]): IMethodDefStep[] {
-  return defs.flatMap((def) => def.steps.filter((step) => !step.hide));
+/**
+ * Every step the reader will actually see, each with the part it belongs to.
+ * The single place a step is decided visible: the aperçu counts what the full
+ * method renders, so the « voir les N étapes » can never promise another run.
+ */
+export function visibleSteps(
+  defs: IMethodDef[],
+): { def: IMethodDef; step: IMethodDefStep }[] {
+  return defs.flatMap((def) =>
+    def.steps.filter((step) => !step.hide).map((step) => ({ def, step })),
+  );
 }
 
 /**
@@ -85,10 +93,8 @@ export function buildDoughMethod(
       title: def.title,
       ingredients: toMethodIngredients(def.quantities),
     })),
-    steps: defs.flatMap((def) =>
-      def.steps
-        .filter((step) => !step.hide)
-        .map((step) => toStep(def, step, startAt)),
+    steps: visibleSteps(defs).map(({ def, step }) =>
+      toStep(def, step, startAt),
     ),
     startAt,
     readyAt: after(startAt, output.total.prepTime),

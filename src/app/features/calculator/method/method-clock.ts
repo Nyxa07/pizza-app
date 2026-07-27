@@ -8,8 +8,9 @@ const HOUR_MS = 60 * 60 * 1000;
  *
  * The seam exists so that no caller ever passes a time: the aperçu and the
  * full Method screen read the same clock through the same module, which is
- * the only way they can tell the same times. In the app it is the wall clock;
- * a spec pins it to an instant and asserts on real dates.
+ * the only way they can tell the same times. In the app it is the wall clock
+ * held still (see {@link SystemMethodClock}); a spec pins it to an instant
+ * and asserts on real dates.
  */
 @Injectable({
   providedIn: 'root',
@@ -19,17 +20,33 @@ export abstract class MethodClock {
   abstract now(): Date;
 }
 
-/** The wall clock — the only adapter the app ever runs on. */
+/**
+ * The wall clock, held still for one step of the grid — the only adapter the
+ * app ever runs on.
+ *
+ * Read twice inside that step — the aperçu of a form, then the Method screen
+ * its CTA opens — it answers the same instant, so the two narrate one plan.
+ * Reading the wall each time would break exactly that promise for the user
+ * who taps « voir les 16 étapes » a minute after 21:00. Past a step the plan
+ * is genuinely out of date, and re-reading is the honest answer.
+ */
 export class SystemMethodClock extends MethodClock {
+  private pinned = new Date();
+
   now(): Date {
-    return new Date();
+    const wall = new Date();
+
+    if (wall.getTime() - this.pinned.getTime() >= QUARTER_HOUR_MS) {
+      this.pinned = wall;
+    }
+
+    return new Date(this.pinned);
   }
 }
 
 /**
  * The Method's clock lands on quarter-hours — it narrates a plan, not a
- * stopwatch. Which is also what keeps a wall clock from moving the times
- * under the user between two edits.
+ * stopwatch.
  */
 export function ceilToQuarterHour(date: Date): Date {
   return new Date(

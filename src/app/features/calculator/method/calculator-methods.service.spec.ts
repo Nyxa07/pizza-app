@@ -3,7 +3,6 @@ import { TestBed } from '@angular/core/testing';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 
-import { DoughType } from '../enums/dough-type.enum';
 import type { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import {
   DIRECT_INPUT,
@@ -317,8 +316,10 @@ describe('CalculatorMethods', () => {
   /**
    * What the single interface buys: the aperçu is a reading of the very run
    * the Method screen renders, so the two cannot drift apart — not on the
-   * clock, not on the grams, not on the number of steps promised by the
-   * « voir les N étapes » of the card.
+   * grams, not on the number of steps promised by the « voir les N étapes »
+   * of the card, and not on the clock. That last one only holds because the
+   * app's clock holds still between the two readings, which is the subject
+   * of `method-clock.spec.ts`; here it is pinned outright.
    */
   describe('the aperçu and the full method, on the same run', () => {
     for (const [label, input] of [
@@ -339,17 +340,6 @@ describe('CalculatorMethods', () => {
         expect(preview.totalSteps).toBe(method.steps.length);
       });
     }
-
-    it('reads one clock, however many times a screen asks', () => {
-      // Two screens, two questions, one instant — the module owns the clock
-      // and nobody passes it a time.
-      expect(methods.previewFor(POOLISH_INPUT).steps[0].at).toEqual(
-        methods.previewFor(POOLISH_INPUT).steps[0].at,
-      );
-      expect(methodOf(POOLISH_INPUT).startAt).toEqual(
-        methods.previewFor(POOLISH_INPUT).steps[0].at,
-      );
-    });
   });
 
   describe('an input with nothing to narrate', () => {
@@ -357,11 +347,7 @@ describe('CalculatorMethods', () => {
       // Not a ball weight of zero: the engine re-seats that one inside the
       // style. Zero pizzas is the one input that weighs out no flour at all.
       expect(methods.methodFor(inputWith({ nbPizzas: 0 }))).toBeNull();
-      expect(
-        methods.methodFor(
-          inputWith({ doughType: DoughType.DIRECT, nbPizzas: 0 }),
-        ),
-      ).toBeNull();
+      expect(methods.methodFor(inputWith({ pizzaWeight: 0 }))).not.toBeNull();
     });
   });
 });

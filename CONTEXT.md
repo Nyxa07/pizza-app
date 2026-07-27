@@ -27,7 +27,7 @@ The single module going from a calculator input to a Dough method: `methodFor(in
 _Avoid_: a method builder per screen, passing an engine output or a time to it
 
 **Method clock**:
-When a Method starts counting, as a seam: the wall clock in the app, an instant pinned by a spec. Times land on quarter-hours — a Method narrates a plan, not a stopwatch. Only the Method module reads it.
+When a Method starts counting, as a seam: in the app the wall clock held still for one quarter-hour, in a spec an instant pinned outright. Holding it is what lets the aperçu and the Method screen its CTA opens narrate one plan; times land on quarter-hours because a Method narrates a plan, not a stopwatch. Only the Method module reads it.
 _Avoid_: `new Date()` in a screen, a start time captured per screen
 
 **Pizza recipe**:

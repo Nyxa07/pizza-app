@@ -1,10 +1,5 @@
 import type {
-  MethodIngredientKey,
-  MethodQuantities,
-} from 'src/app/features/method/interfaces/method-def.interface';
-import type {
   IMethodPreview,
-  IMethodPreviewIngredient,
   IMethodPreviewStep,
 } from 'src/app/features/method/interfaces/method-preview.interface';
 
@@ -13,7 +8,6 @@ import type { ICalculatorInput } from '../interfaces/calculator-input.interface'
 import type { ICalculatorOutput } from '../interfaces/calculator-output.interface';
 import { after } from './method-clock';
 import {
-  METHOD_INGREDIENT_KEYS,
   methodDefsFor,
   toMethodIngredients,
   visibleSteps,
@@ -38,8 +32,6 @@ export function buildMethodPreview(
       ? poolishSteps(output, start)
       : directSteps(input, output, start),
     readyAt: after(start, output.total.prepTime),
-    // Counted off the very definitions the full method is built from, so the
-    // « voir les N étapes » of the aperçu can never promise a different run.
     totalSteps: visibleSteps(methodDefsFor(input.doughType, output)).length,
   };
 }
@@ -54,7 +46,7 @@ function poolishSteps(
       bodyKey: STEPS_KEY + 'poolishMix',
       bodyParams: {},
       // The engine sends the honey into the poolish, not the frasage.
-      ingredients: ingredients(output.poolish, [
+      ingredients: toMethodIngredients(output.poolish, [
         'flour',
         'water',
         'yeast',
@@ -65,7 +57,7 @@ function poolishSteps(
       at: after(start, output.poolish.prepTime),
       bodyKey: STEPS_KEY + 'poolishKnead',
       bodyParams: {},
-      ingredients: ingredients(output.dough, METHOD_INGREDIENT_KEYS),
+      ingredients: toMethodIngredients(output.dough),
     },
   ];
 }
@@ -80,7 +72,7 @@ function directSteps(
       at: start,
       bodyKey: STEPS_KEY + 'directMix',
       bodyParams: {},
-      ingredients: ingredients(output.dough, METHOD_INGREDIENT_KEYS),
+      ingredients: toMethodIngredients(output.dough),
     },
     {
       at: after(start, output.dough.prepTime),
@@ -92,15 +84,4 @@ function directSteps(
       ingredients: [],
     },
   ];
-}
-
-/**
- * Display quantities for one narrated step, zero ingredients skipped — the
- * same rounding as the full method, so both tell the same grams.
- */
-function ingredients(
-  quantity: MethodQuantities,
-  keys: MethodIngredientKey[],
-): IMethodPreviewIngredient[] {
-  return toMethodIngredients(quantity, keys);
 }

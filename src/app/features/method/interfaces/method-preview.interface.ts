@@ -1,16 +1,11 @@
-import type { MethodIngredientKey } from './method-def.interface';
-
-/** Display grams for one ingredient of a narrated step. */
-export interface IMethodPreviewIngredient {
-  key: MethodIngredientKey;
-  grams: number;
-}
+import type { IMethodIngredient } from './method.interface';
 
 export interface IMethodPreviewStep {
   at: Date;
   bodyKey: string;
   bodyParams: Record<string, number>;
-  ingredients: IMethodPreviewIngredient[];
+  /** The same grams, rounded the same way, as the full method's. */
+  ingredients: IMethodIngredient[];
 }
 
 /**
