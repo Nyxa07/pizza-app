@@ -9,34 +9,31 @@ import {
 } from '@ionic/angular/standalone';
 
 import { TranslatePipe } from '@ngx-translate/core';
-import { combineLatest, map, Observable, shareReplay } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 
+import type { IMethodPreview } from 'src/app/features/method/interfaces/method-preview.interface';
 import { InfoSheetId } from 'src/app/features/sheets/enums/info-sheet-id.enum';
 import { InfoSheetButtonComponent } from 'src/app/features/sheets/info-sheet-button/info-sheet-button.component';
 import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
+import { CalculatorPath } from '../enums/calculator-path.enum';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
 import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
 import { IIntermediateCalculatorDraft } from '../interfaces/intermediate-calculator-draft.interface';
+import { CalculatorMethods } from '../method/calculator-methods.service';
 import { CalculatorCtaComponent } from '../parts/calculator-cta.component';
 import { CalculatorLivebarComponent } from '../parts/calculator-livebar.component';
 import { CalculatorMethodPreviewComponent } from '../parts/calculator-method-preview.component';
 import { ICalculatorResult, summarizeOutput } from '../parts/calculator-result';
 import { CalculatorTileComponent } from '../parts/calculator-tile.component';
 import { CalculatorTimelineComponent } from '../parts/calculator-timeline.component';
+import { CalculatorPaths } from '../paths/calculator-paths.service';
 import { sizeRange } from '../pizza-format.model';
 import { EXPERT_FIELD_OPTIONS } from '../expert-form/expert-field-options';
-import { INTERMEDIATE_CALCULATOR_SETTINGS } from '../services/calculator-initializer.service';
 import { CalculatorService } from '../services/calculator.service';
-import { IntermediateDraftService } from '../services/intermediate-draft.service';
-import { IntermediateInputAdapter } from '../services/intermediate-input.adapter';
-import {
-  IMethodPreview,
-  MethodPreviewService,
-} from '../services/method-preview.service';
 
 /**
  * The rest slider: one question — how long do you have? — in whole hours.
@@ -62,7 +59,7 @@ type SteppableAnswer = 'nbPizzas' | 'sizeCm' | 'temperature' | 'globalRestTime';
 
 /**
  * Everything the template shows, derived once per Draft/engine emission. The
- * screen never computes a recipe value itself: the adapter and the engine do.
+ * screen never computes a recipe value itself: the path and the engine do.
  */
 interface IntermediateVm {
   draft: IIntermediateCalculatorDraft;
@@ -78,7 +75,7 @@ interface IntermediateVm {
  * The Intermediate path (issue #99): one short form for the user who thinks
  * in pizzas rather than in baker's percentages. Style, count, size, method,
  * rest, temperature and yeast — everything else is pinned and invisible, and
- * derived by IntermediateInputAdapter.
+ * derived by the path definition.
  */
 @Component({
   selector: 'app-intermediate-form',
@@ -102,10 +99,12 @@ interface IntermediateVm {
   ],
 })
 export class IntermediateFormComponent {
-  private readonly state = inject(IntermediateDraftService);
-  private readonly adapter = inject(IntermediateInputAdapter);
+  /** The Path draft of this path, captured once — never another path's. */
+  private readonly state = inject(CalculatorPaths).for(
+    CalculatorPath.INTERMEDIATE,
+  );
   private readonly calculator = inject(CalculatorService);
-  private readonly methodPreview = inject(MethodPreviewService);
+  private readonly methods = inject(CalculatorMethods);
   private readonly router = inject(Router);
 
   protected readonly InfoSheetId = InfoSheetId;
@@ -138,17 +137,13 @@ export class IntermediateFormComponent {
     { value: YeastType.FRESH, label: 'calculator.enums.yeastTypes.fresh' },
   ];
 
-  private readonly input$: Observable<ICalculatorInput> = this.state
-    .getDraft$()
-    .pipe(
-      map((draft) => this.adapter.resolve(draft)),
-      shareReplay({ refCount: true, bufferSize: 1 }),
-    );
+  private readonly input$: Observable<ICalculatorInput> =
+    this.state.resolvedInput$();
 
   protected readonly vm$: Observable<IntermediateVm> = combineLatest([
-    this.state.getDraft$(),
+    this.state.draft$,
     this.input$,
-    this.calculator.resultsFor$(INTERMEDIATE_CALCULATOR_SETTINGS, this.input$),
+    this.calculator.resultsFor$(this.input$),
   ]).pipe(map(([draft, input, output]) => this.buildVm(draft, input, output)));
 
   protected selectPizzaType(pizzaType: PizzaType): void {
@@ -234,7 +229,7 @@ export class IntermediateFormComponent {
       methodSheetId: isPoolish ? InfoSheetId.POOLISH : InfoSheetId.DIRECT,
       result: summarizeOutput(output, isPoolish),
       sizeBounds: sizeRange(draft.pizzaType),
-      preview: this.methodPreview.buildPreview(input, output, new Date()),
+      preview: this.methods.previewFor(input),
     };
   }
 }

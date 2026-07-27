@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 
 import {
@@ -19,7 +20,7 @@ import { CalculatorRefreshButtonComponent } from 'src/app/features/calculator/ca
 import { CalculatorPathSwitchComponent } from 'src/app/features/calculator/calculator-path-switch/calculator-path-switch.component';
 import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
 import { ExpertFormComponent } from 'src/app/features/calculator/expert-form/expert-form.component';
-import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
+import { CalculatorPaths } from 'src/app/features/calculator/paths/calculator-paths.service';
 import { DoughSaverComponent } from 'src/app/features/doughs/dough-saver/dough-saver.component';
 import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
 
@@ -50,18 +51,18 @@ import { idleCallback } from 'src/app/shared/helpers/request-idle-cb';
   ],
 })
 export class CalculatorExpertPage implements ViewWillEnter {
-  private readonly calculatorInitializer = inject(CalculatorInitializerService);
-
   protected readonly SettingsIcon = SettingsIcon;
   protected readonly CalculatorPath = CalculatorPath;
   protected isInitialized = signal(false);
+  /** The resolved Expert input, saved as-is by the Dough saver. */
+  protected readonly resolvedInput = toSignal(
+    inject(CalculatorPaths).for(CalculatorPath.EXPERT).resolvedInput$(),
+    { initialValue: null },
+  );
 
-  // Ionic caches this page in the router-outlet stack, so reload the Expert
-  // Draft from persistence on every entry.
+  // A deferred-rendering flag, nothing more: the Draft is live from the
+  // moment the Calculator paths module hands its Path draft out.
   ionViewWillEnter(): void {
-    idleCallback(() => {
-      this.calculatorInitializer.init(CalculatorPath.EXPERT);
-      this.isInitialized.set(true);
-    });
+    idleCallback(() => this.isInitialized.set(true));
   }
 }

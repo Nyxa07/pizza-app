@@ -30,6 +30,9 @@ describe('HydrationProcessor', () => {
     oliveOilRatio: null,
   });
 
+  const hydrationOf = (draft: ICalculatorInput) =>
+    processor.process(draft).hydrationRatio;
+
   beforeEach(() => {
     TestBed.configureTestingModule({});
     processor = TestBed.inject(HydrationProcessor);
@@ -42,30 +45,25 @@ describe('HydrationProcessor', () => {
     { strength: 350, neapolitan: 0.663, roman: 0.6 },
   ].forEach(({ strength, neapolitan, roman }) => {
     it(`recommends the sampled hydration for W${strength}`, () => {
-      expect(
-        processor.process(input(PizzaType.NEAPOLITAN, strength)).hydrationRatio,
-      ).toBeCloseTo(neapolitan, 6);
-      expect(
-        processor.process(input(PizzaType.ROMAN, strength)).hydrationRatio,
-      ).toBeCloseTo(roman, 6);
+      expect(hydrationOf(input(PizzaType.NEAPOLITAN, strength))).toBeCloseTo(
+        neapolitan,
+        6,
+      );
+      expect(hydrationOf(input(PizzaType.ROMAN, strength))).toBeCloseTo(
+        roman,
+        6,
+      );
     });
   });
 
   it('clamps Roman hydration to the 55–60% product range', () => {
-    expect(processor.process(input(PizzaType.ROMAN, 200)).hydrationRatio).toBe(
-      0.55,
-    );
-    expect(processor.process(input(PizzaType.ROMAN, 400)).hydrationRatio).toBe(
-      0.6,
-    );
+    expect(hydrationOf(input(PizzaType.ROMAN, 200))).toBe(0.55);
+    expect(hydrationOf(input(PizzaType.ROMAN, 400))).toBe(0.6);
   });
 
   it('keeps an explicit Expert hydration unchanged', () => {
     expect(
-      processor.process({
-        ...input(PizzaType.ROMAN, 350),
-        hydrationRatio: 0.71,
-      }).hydrationRatio,
+      hydrationOf({ ...input(PizzaType.ROMAN, 350), hydrationRatio: 0.71 }),
     ).toBe(0.71);
   });
 });

@@ -17,7 +17,7 @@ import {
 } from 'src/app/features/method/interfaces/method-def.interface';
 
 import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
-import { DOUGH_BASE_TIME } from '../services/processors/timings.processor';
+import { DOUGH_BASE_TIME } from '../dough.constants';
 
 const STEPS_KEY = 'calculator.method.steps.';
 

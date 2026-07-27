@@ -1,18 +1,25 @@
 import { Injectable, inject } from '@angular/core';
 import { CalculatorConfigService } from '../calculator-config.service';
-import {
-  IProcessor,
-  PartialCalculatorOutput,
-} from '../../interfaces/processor.interface';
+import type { OutputSlice } from './output-field';
+import type { IProcessor } from './processor.interface';
 import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
+
+const READS = [] as const;
+const WRITES = ['pizzaBalls.rtRestTime'] as const;
+
+type Reads = (typeof READS)[number];
+type Writes = (typeof WRITES)[number];
 
 @Injectable({
   providedIn: 'root',
 })
-export class PizzaBallsRestTimeProcessor implements IProcessor {
+export class PizzaBallsRestTimeProcessor implements IProcessor<Reads, Writes> {
+  readonly reads = READS;
+  readonly writes = WRITES;
+
   private readonly calculatorConfigService = inject(CalculatorConfigService);
 
-  process(input: ICalculatorInput, acc?: PartialCalculatorOutput) {
+  process(input: ICalculatorInput): OutputSlice<Writes> {
     const constants = this.calculatorConfigService.constants.pizzaBallsRestTime;
     const coefMinTime = constants.minRestTimeCoef;
     const coefMaxTime = constants.maxRestTimeCoef;

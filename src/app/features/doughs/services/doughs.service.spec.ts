@@ -1,8 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
 import type { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
-import { GUIDED_DRAFT_STORAGE_KEY } from 'src/app/features/calculator/services/calculator-draft-storage.constants';
-import { ExpertDraftService } from 'src/app/features/calculator/services/expert-draft.service';
+import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
+import { GUIDED_DRAFT_STORAGE_KEY } from 'src/app/features/calculator/paths/calculator-draft-storage.constants';
+import { CalculatorPaths } from 'src/app/features/calculator/paths/calculator-paths.service';
+import type { PathDraft } from 'src/app/features/calculator/paths/path-draft.interface';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 
@@ -10,23 +12,26 @@ import { DOUGHS_STORAGE_KEY, DoughsService } from './doughs.service';
 
 describe('DoughsService (Doughs are documents)', () => {
   let prefs: FakePrefsStorage;
-  let state: ExpertDraftService;
+  /** Where « Ajuster » lands, as the Calculator paths module decides. */
+  let state: PathDraft<ICalculatorInput>;
   let service: DoughsService;
+
+  /** What a screen hands the Dough saver: the input its path resolved. */
+  const saveDraft = (name: string) => service.save(name, state.snapshot());
 
   beforeEach(() => {
     prefs = new FakePrefsStorage();
     TestBed.configureTestingModule({
       providers: [{ provide: PrefsStorage, useValue: prefs }],
     });
-    state = TestBed.inject(ExpertDraftService);
-    state.init();
+    state = TestBed.inject(CalculatorPaths).for(CalculatorPath.EXPERT);
     service = TestBed.inject(DoughsService);
   });
 
   it('saves the Draft as an independent named Dough snapshot', () => {
     state.update({ nbPizzas: 8, hydrationRatio: 0.68 });
 
-    const dough = service.saveDraft('Saturday dough');
+    const dough = saveDraft('Saturday dough');
     state.update({ nbPizzas: 2, hydrationRatio: 0.55 });
 
     expect(service.get(dough.id)?.input.nbPizzas).toBe(8);
@@ -36,23 +41,23 @@ describe('DoughsService (Doughs are documents)', () => {
 
   it('opening a Dough never touches the current Draft', () => {
     state.update({ nbPizzas: 8 });
-    const dough = service.saveDraft('Document');
+    const dough = saveDraft('Document');
     state.update({ nbPizzas: 3 });
 
     const opened = service.get(dough.id);
 
     expect(opened?.input.nbPizzas).toBe(8);
-    expect(state.getInput().nbPizzas).toBe(3);
+    expect(state.snapshot().nbPizzas).toBe(3);
   });
 
   it('Adjust loads a copy into the Draft and leaves the original intact', () => {
     state.update({ nbPizzas: 8, hydrationRatio: 0.68 });
-    const dough = service.saveDraft('Document');
+    const dough = saveDraft('Document');
     state.update({ nbPizzas: 3, hydrationRatio: 0.55 });
     prefs.set(GUIDED_DRAFT_STORAGE_KEY, { nbPizzas: 6 });
 
     expect(service.adjust(dough.id)).toBeTrue();
-    expect(state.getInput().nbPizzas).toBe(8);
+    expect(state.snapshot().nbPizzas).toBe(8);
     expect(prefs.get(GUIDED_DRAFT_STORAGE_KEY)).toEqual({ nbPizzas: 6 });
 
     state.update({ nbPizzas: 12 });
@@ -60,7 +65,7 @@ describe('DoughsService (Doughs are documents)', () => {
   });
 
   it('renames, duplicates and deletes Dough documents', () => {
-    const original = service.saveDraft('Saturday');
+    const original = saveDraft('Saturday');
 
     expect(service.rename(original.id, 'Sunday')).toBeTrue();
     const duplicate = service.duplicate(original.id, 'Sunday — copy');
@@ -77,7 +82,7 @@ describe('DoughsService (Doughs are documents)', () => {
   });
 
   it('save() stores an arbitrary input without touching the Expert Draft', () => {
-    const before = state.getInput();
+    const before = state.snapshot();
     const input: ICalculatorInput = {
       ...before,
       nbPizzas: 4,
@@ -92,11 +97,11 @@ describe('DoughsService (Doughs are documents)', () => {
     expect(dough.createdAt).not.toBeNull();
     expect(dough.updatedAt).toBe(dough.createdAt);
     expect(service.nameExists('from the method')).toBeTrue();
-    expect(state.getInput()).toEqual(before);
+    expect(state.snapshot()).toEqual(before);
   });
 
   it('save() snapshots the input so later caller mutations cannot leak in', () => {
-    const input: ICalculatorInput = { ...state.getInput(), nbPizzas: 4 };
+    const input: ICalculatorInput = { ...state.snapshot(), nbPizzas: 4 };
     const dough = service.save('Snapshot', input);
 
     input.nbPizzas = 99;

@@ -11,7 +11,7 @@ A named, saved snapshot of calculator inputs, opened as a document (detail + its
 _Avoid_: calculator state, saved state
 
 **Draft**:
-An in-progress calculation owned and persisted by one calculator path. Guided, Intermediate and Expert each resume their own Draft; switching paths never copies values. A Dough is adjusted into the Expert Draft only. UI: « Calcul en cours », « Reprendre ».
+An in-progress calculation owned and persisted by one calculator path. Guided, Intermediate and Expert each resume their own Draft; switching paths never copies values. A Dough is adjusted into the Expert Draft only. Reached only through the Calculator paths module, never from a service of its own. UI: « Calcul en cours », « Reprendre ».
 _Avoid_: shared calculator state, scratchpad
 
 **Defaults**:
@@ -21,6 +21,14 @@ _Avoid_: constants, DEFAULT_INPUT
 **Dough method**:
 The instructions (ingredient weights + steps) the calculator generates for a Dough. UI: « Méthode ».
 _Avoid_: recipe (never for dough output), protocol
+
+**Method module**:
+The single module going from a calculator input to a Dough method: `methodFor(input)` for the full run, `previewFor(input)` for the aperçu. It runs the engine, assembles the steps and dates them; nothing outside names a step definition, an engine output or a clock. The aperçu and the Method screen are two readings of the same run, so they cannot disagree on the times, the grams or the number of steps.
+_Avoid_: a method builder per screen, passing an engine output or a time to it
+
+**Method clock**:
+When a Method starts counting, as a seam: in the app the wall clock held still for one quarter-hour, in a spec an instant pinned outright. Holding it is what lets the aperçu and the Method screen its CTA opens narrate one plan; times land on quarter-hours because a Method narrates a plan, not a stopwatch. Only the Method module reads it.
+_Avoid_: `new Date()` in a screen, a start time captured per screen
 
 **Pizza recipe**:
 A topped-pizza composition (e.g. Reine, 3 fromages) offered as browsable content, decoupled from the calculator. UI: « Recette ».
@@ -38,7 +46,19 @@ _Avoid_: diameter as a separate concept, pizza format (that is the model below)
 The single module holding the size ↔ ball-weight conversion, the size range and the weight bounds of each style. Every screen and the engine read their ball weights from it; nothing else writes one.
 _Avoid_: weight table, ball-weight constants
 
+**Dough engine**:
+The single module turning a complete calculator input into the quantities and rest times a Dough method is written from. Its whole interface is `process(input)`: a `null` field is a request to derive, every other value is used as given. The steps behind it declare which output fields they read and which they write, and the running order is derived from those declarations — never written down, and nothing outside the module names a step.
+_Avoid_: processor as a public concept, calling a processor directly, an ordered list of processors
+
 ### Calculator paths
+
+**Calculator paths**:
+The single module holding every Draft. It hands out one Path draft per path — the only way to read, edit or restart a Draft — and it alone knows how a Draft is seeded, kept inside the bounds of its style, and resolved into a complete engine input. A path is added by declaring one definition; a new one costs no new module. Screens never reach for an individual Draft (ADR-0003).
+_Avoid_: calculator initializer, draft registry, path state
+
+**Path draft**:
+What the Calculator paths module hands out for a given path: the Draft of that path, its edits, its « Nouveau calcul », and its resolved engine input. Typed to its own path, so a value belonging to another path cannot be written into it.
+_Avoid_: draft handle, draft service
 
 **Guided path**:
 The step-by-step calculator flow for general-public users; asks one thing at a time and applies smart defaults.

@@ -3,8 +3,9 @@ import { TestBed } from '@angular/core/testing';
 import { provideTranslateService } from '@ngx-translate/core';
 
 import { DoughType } from 'src/app/features/calculator/enums/dough-type.enum';
-import { GUIDED_DRAFT_STORAGE_KEY } from 'src/app/features/calculator/services/calculator-draft-storage.constants';
-import { ExpertDraftService } from 'src/app/features/calculator/services/expert-draft.service';
+import { GUIDED_DRAFT_STORAGE_KEY } from 'src/app/features/calculator/paths/calculator-draft-storage.constants';
+import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
+import { CalculatorPaths } from 'src/app/features/calculator/paths/calculator-paths.service';
 import { DoughSummaryService } from 'src/app/features/doughs/services/dough-summary.service';
 import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
@@ -217,27 +218,25 @@ describe('RecipeCatalogService', () => {
     expect(service.get('reine')?.content.category).toBe('The French classic');
   });
 
-  it('explicitly replaces the Expert Draft with the detached suggested dough', () => {
-    const state = TestBed.inject(ExpertDraftService);
-    state.init();
+  it('explicitly starts a calculation from the detached suggested dough', () => {
+    const state = TestBed.inject(CalculatorPaths).for(CalculatorPath.EXPERT);
     state.update({ nbPizzas: 9, hydrationRatio: 0.8 });
     prefs.set('calculator:guided:step', 5);
     prefs.set(GUIDED_DRAFT_STORAGE_KEY, { nbPizzas: 6 });
 
     expect(service.prepareSuggestedDough('margherita')).toBeTrue();
-    expect(state.getInput().nbPizzas).toBe(4);
-    expect(state.getInput().hydrationRatio).toBe(0.62);
+    expect(state.snapshot().nbPizzas).toBe(4);
+    expect(state.snapshot().hydrationRatio).toBe(0.62);
     expect(prefs.get('calculator:guided:step')).toBe(5);
     expect(prefs.get(GUIDED_DRAFT_STORAGE_KEY)).toEqual({ nbPizzas: 6 });
-    expect(prefs.get('calculator:draft:expert')).toEqual(state.getInput());
+    expect(prefs.get('calculator:draft:expert')).toEqual(state.snapshot());
   });
 
-  it('leaves the Expert Draft untouched for an unknown Recipe', () => {
-    const state = TestBed.inject(ExpertDraftService);
-    state.init();
+  it('leaves the Draft untouched for an unknown Recipe', () => {
+    const state = TestBed.inject(CalculatorPaths).for(CalculatorPath.EXPERT);
     state.update({ nbPizzas: 7 });
 
     expect(service.prepareSuggestedDough('missing')).toBeFalse();
-    expect(state.getInput().nbPizzas).toBe(7);
+    expect(state.snapshot().nbPizzas).toBe(7);
   });
 });

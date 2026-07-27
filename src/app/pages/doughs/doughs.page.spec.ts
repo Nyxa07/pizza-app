@@ -7,9 +7,8 @@ import { provideIonicAngular } from '@ionic/angular/standalone';
 import { provideTranslateService } from '@ngx-translate/core';
 
 import type { ICalculatorInput } from 'src/app/features/calculator/interfaces/calculator-input.interface';
+import { GUIDED_PATH } from 'src/app/features/calculator/paths/guided.path';
 import { DoughDefaultsService } from 'src/app/features/calculator/services/dough-defaults.service';
-import { GuidedDraftService } from 'src/app/features/calculator/services/guided-draft.service';
-import { GuidedInputAdapter } from 'src/app/features/calculator/services/guided-input.adapter';
 import type { Dough } from 'src/app/features/doughs/interfaces/dough.interface';
 import { DOUGHS_STORAGE_KEY } from 'src/app/features/doughs/services/doughs.service';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
@@ -29,13 +28,9 @@ describe('DoughsPage (a saved Dough is never shown incomplete)', () => {
   });
 
   const seedLibrary = (): void => {
-    const guided = TestBed.inject(GuidedInputAdapter).resolve(
-      TestBed.inject(GuidedDraftService).getDraft(),
-    );
-    const expert = {
-      ...TestBed.inject(DoughDefaultsService).getDefaults(),
-      hydrationRatio: 0.68,
-    };
+    const defaults = TestBed.inject(DoughDefaultsService).getDefaults();
+    const guided = GUIDED_PATH.toInput(GUIDED_PATH.seed(defaults), defaults);
+    const expert = { ...defaults, hydrationRatio: 0.68 };
 
     prefs.set(DOUGHS_STORAGE_KEY, [
       savedDough('from-guided', guided),

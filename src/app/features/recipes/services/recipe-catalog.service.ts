@@ -5,7 +5,7 @@ import { LocaleManagerService } from 'src/app/features/settings/services/locale-
 import enRecipes from 'src/assets/i18n/en/recipes.json';
 import frRecipes from 'src/assets/i18n/fr/recipes.json';
 
-import { ExpertDraftService } from '../../calculator/services/expert-draft.service';
+import { CalculatorPaths } from '../../calculator/paths/calculator-paths.service';
 import type {
   PizzaRecipe,
   PizzaRecipeContent,
@@ -24,7 +24,7 @@ const CONTENT: Record<Locales, PizzaRecipeTranslations> = {
 @Injectable({ providedIn: 'root' })
 export class RecipeCatalogService {
   private readonly localeManager = inject(LocaleManagerService);
-  private readonly expertDraft = inject(ExpertDraftService);
+  private readonly paths = inject(CalculatorPaths);
 
   list(): readonly PizzaRecipe[] {
     return PIZZA_RECIPE_CATALOG.map((definition) => this.localize(definition));
@@ -37,13 +37,13 @@ export class RecipeCatalogService {
     return definition ? this.localize(definition) : undefined;
   }
 
-  /** Explicitly replaces the Expert Draft with the detached dough preset. */
+  /** Explicitly starts a calculation from the detached dough preset. */
   prepareSuggestedDough(id: string): boolean {
     const recipe = this.get(id);
     if (!recipe) {
       return false;
     }
-    this.expertDraft.replaceWithCopy({ ...recipe.suggestedDough.input });
+    this.paths.startFrom(recipe.suggestedDough.input);
     return true;
   }
 

@@ -17,7 +17,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  @if (dough && summary && method) {
+  @if (dough && summary) {
     <div class="app-page-layout">
       <div class="document-header">
         <p>{{ "pages.doughs.documentHint" | translate }}</p>
@@ -44,7 +44,10 @@
         </dl>
       </div>
 
-      <app-method [method]="method"></app-method>
+      <!-- A saved input with nothing to narrate still opens as a document. -->
+      @if (method) {
+        <app-method [method]="method"></app-method>
+      }
 
       <div class="adjust">
         <ion-button expand="block" (click)="adjust()">

@@ -8,15 +8,14 @@ import {
 
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
+import type {
+  IMethodPreview,
+  IMethodPreviewStep,
+} from 'src/app/features/method/interfaces/method-preview.interface';
 import { LocaleManagerService } from 'src/app/features/settings/services/locale-manager.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 import { RelativeDayPipe } from 'src/app/shared/pipes/relative-day.pipe';
 import { TimePipe } from 'src/app/shared/pipes/time.pipe';
-
-import type {
-  IMethodPreview,
-  IMethodPreviewStep,
-} from '../services/method-preview.service';
 
 /**
  * The « aperçu de la Méthode » card (variant D): the two first dated

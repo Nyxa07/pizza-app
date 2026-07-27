@@ -14,8 +14,8 @@ import {
   weightOptions,
   weightRange,
 } from './pizza-format.model';
+import { CalculatorService } from './services/calculator.service';
 import { FACTORY_DEFAULTS } from './services/dough-defaults.service';
-import { PizzaBallsWeightProcessor } from './services/processors/pizza-balls-weight.processor';
 
 /**
  * The net that keeps the four historic ball-weight sources of truth from
@@ -41,7 +41,7 @@ describe('The single source of truth for ball weights', () => {
   }
 
   describe('the engine fallback', () => {
-    let processor: PizzaBallsWeightProcessor;
+    let engine: CalculatorService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -49,16 +49,14 @@ describe('The single source of truth for ball weights', () => {
           { provide: PrefsStorage, useValue: new FakePrefsStorage() },
         ],
       });
-      processor = TestBed.inject(PizzaBallsWeightProcessor);
+      engine = TestBed.inject(CalculatorService);
     });
 
+    // Through the engine's own interface: which of its steps settles the ball
+    // weight is not this net's business.
     const weightOf = (pizzaType: PizzaType, pizzaWeight: number | null) =>
-      processor.process(
-        { pizzaType, pizzaWeight } as Parameters<
-          PizzaBallsWeightProcessor['process']
-        >[0],
-        {},
-      ).pizzaBalls!.weight;
+      engine.process({ ...FACTORY_DEFAULTS, pizzaType, pizzaWeight }).pizzaBalls
+        .weight;
 
     it('keeps the historic values while reading them from the model', () => {
       expect(weightOf(PizzaType.NEAPOLITAN, null)).toBe(250);
