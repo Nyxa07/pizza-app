@@ -28,8 +28,8 @@ import type { ICalculatorInput } from 'src/app/features/calculator/interfaces/ca
 import { DoughsService } from '../services/doughs.service';
 
 /**
- * Saves a calculator input as a new named Dough document. With no `input`
- * bound, it snapshots the Expert Draft (the Expert screen behavior).
+ * Saves a calculator input as a new named Dough document. Every screen hands
+ * it the input its own path resolved, so this component names no Draft.
  */
 @Component({
   selector: 'app-dough-saver',
@@ -53,8 +53,8 @@ import { DoughsService } from '../services/doughs.service';
   ],
 })
 export class DoughSaverComponent {
-  /** The input to save; when null, the Expert Draft is snapshotted instead. */
-  readonly input = input<ICalculatorInput | null>(null);
+  /** The calculation to save, as the hosting screen resolved it. */
+  readonly input = input.required<ICalculatorInput>();
 
   @ViewChild(IonModal) private modal!: IonModal;
   @ViewChild(IonToast) private toast!: IonToast;
@@ -86,13 +86,7 @@ export class DoughSaverComponent {
     if (this.form.invalid) {
       return;
     }
-    const name = this.form.controls.name.value;
-    const input = this.input();
-    if (input) {
-      this.doughs.save(name, input);
-    } else {
-      this.doughs.saveDraft(name);
-    }
+    this.doughs.save(this.form.controls.name.value, this.input());
     this.form.reset();
     this.modal.dismiss();
     this.toast.present();

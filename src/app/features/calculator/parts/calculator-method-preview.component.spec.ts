@@ -10,11 +10,11 @@ import {
 import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 import { firstValueFrom } from 'rxjs';
 
+import type { IMethodPreview } from 'src/app/features/method/interfaces/method-preview.interface';
 import { Locales } from 'src/app/features/settings/enums/locales.enum';
 import { LocaleManagerService } from 'src/app/features/settings/services/locale-manager.service';
 import frCalculator from 'src/assets/i18n/fr/calculator.json';
 
-import type { IMethodPreview } from '../services/method-preview.service';
 import { CalculatorMethodPreviewComponent } from './calculator-method-preview.component';
 
 describe('CalculatorMethodPreviewComponent', () => {

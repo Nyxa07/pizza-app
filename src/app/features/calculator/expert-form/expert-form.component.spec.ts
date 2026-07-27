@@ -23,8 +23,9 @@ import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
 
 import { CalculatorPath } from '../enums/calculator-path.enum';
 import { DoughType } from '../enums/dough-type.enum';
-import { CalculatorInitializerService } from '../services/calculator-initializer.service';
-import { ExpertDraftService } from '../services/expert-draft.service';
+import type { ICalculatorInput } from '../interfaces/calculator-input.interface';
+import { CalculatorPaths } from '../paths/calculator-paths.service';
+import type { PathDraft } from '../paths/path-draft.interface';
 import { ExpertFormComponent } from './expert-form.component';
 import { CalculatorTileComponent } from '../parts/calculator-tile.component';
 
@@ -34,7 +35,7 @@ import { CalculatorTileComponent } from '../parts/calculator-tile.component';
  */
 describe('ExpertFormComponent', () => {
   let fixture: ComponentFixture<ExpertFormComponent>;
-  let state: ExpertDraftService;
+  let state: PathDraft<ICalculatorInput>;
 
   const tile = (labelKey: string) =>
     fixture.debugElement
@@ -91,7 +92,7 @@ describe('ExpertFormComponent', () => {
         (button.componentInstance as InfoSheetButtonComponent).sheetId(),
       );
 
-  const draftHolds = (partial: Parameters<ExpertDraftService['update']>[0]) => {
+  const draftHolds = (partial: Partial<ICalculatorInput>) => {
     state.update(partial);
     fixture.detectChanges();
   };
@@ -114,8 +115,7 @@ describe('ExpertFormComponent', () => {
       ],
     }).compileComponents();
 
-    TestBed.inject(CalculatorInitializerService).init(CalculatorPath.EXPERT);
-    state = TestBed.inject(ExpertDraftService);
+    state = TestBed.inject(CalculatorPaths).for(CalculatorPath.EXPERT);
     fixture = TestBed.createComponent(ExpertFormComponent);
     fixture.detectChanges();
   }));
@@ -182,7 +182,7 @@ describe('ExpertFormComponent', () => {
 
     choosePizzaType(PizzaType.ROMAN);
 
-    expect(state.getInput().pizzaWeight).toBe(210);
+    expect(state.snapshot().pizzaWeight).toBe(210);
     expect(weightTileText()).toContain('210');
     expect(weightTileText()).toContain('33');
   });
@@ -191,7 +191,7 @@ describe('ExpertFormComponent', () => {
     // What a Draft written before the bounds existed still holds.
     draftHolds({ pizzaType: PizzaType.ROMAN, pizzaWeight: 400 });
 
-    expect(state.getInput().pizzaWeight).toBe(210);
+    expect(state.snapshot().pizzaWeight).toBe(210);
     expect(weightTileText()).toContain('210');
   });
 
@@ -307,7 +307,7 @@ describe('ExpertFormComponent', () => {
 
     stepUp('ambientRest');
 
-    const input = state.getInput();
+    const input = state.snapshot();
     expect(input.rtRestTime).toBe(2);
     expect(input.coldRestTime).toBe(23);
     expect(input.globalRestTime).toBeNull();

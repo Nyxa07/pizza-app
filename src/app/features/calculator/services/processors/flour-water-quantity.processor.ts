@@ -1,18 +1,33 @@
 import { Injectable } from '@angular/core';
-import { IProcessor } from '../../interfaces/processor.interface';
+import type { OutputSlice } from './output-field';
+import type { IProcessor } from './processor.interface';
 import { DoughType } from '../../enums/dough-type.enum';
 import { ICalculatorInput } from '../../interfaces/calculator-input.interface';
 
-interface FlourWaterQuantityProcessorPrevAcc {
-  hydrationRatio: number;
-  pizzaBalls: { weight: number };
-}
+const READS = ['hydrationRatio', 'pizzaBalls.weight'] as const;
+const WRITES = [
+  'total.flour',
+  'total.water',
+  'poolish.flour',
+  'poolish.water',
+  'dough.flour',
+  'dough.water',
+] as const;
+
+type Reads = (typeof READS)[number];
+type Writes = (typeof WRITES)[number];
 
 @Injectable({
   providedIn: 'root',
 })
-export class FlourWaterQuantityProcessor implements IProcessor {
-  process(input: ICalculatorInput, acc: FlourWaterQuantityProcessorPrevAcc) {
+export class FlourWaterQuantityProcessor implements IProcessor<Reads, Writes> {
+  readonly reads = READS;
+  readonly writes = WRITES;
+
+  process(
+    input: ICalculatorInput,
+    acc: OutputSlice<Reads>,
+  ): OutputSlice<Writes> {
     const hydrationRatio = acc.hydrationRatio;
     const flourPerPizza = acc.pizzaBalls.weight / (1 + hydrationRatio);
     const waterPerPizza = acc.pizzaBalls.weight - flourPerPizza;

@@ -6,7 +6,7 @@ import {
   GUIDED_DRAFT_STORAGE_KEY,
   GUIDED_STEP_STORAGE_KEY,
   LEGACY_CALCULATOR_DRAFT_STORAGE_KEY,
-} from 'src/app/features/calculator/services/calculator-draft-storage.constants';
+} from 'src/app/features/calculator/paths/calculator-draft-storage.constants';
 import type { Dough } from 'src/app/features/doughs/interfaces/dough.interface';
 
 import { PrefsStorage } from './prefs-storage.service';

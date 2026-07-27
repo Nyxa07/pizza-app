@@ -1,57 +1,74 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
 
-import { CalculatorInitializerService } from 'src/app/features/calculator/services/calculator-initializer.service';
+import { provideIonicAngular } from '@ionic/angular/standalone';
+
+import { provideTranslateService } from '@ngx-translate/core';
+
+import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
+import { CalculatorPaths } from 'src/app/features/calculator/paths/calculator-paths.service';
+import { DoughSaverComponent } from 'src/app/features/doughs/dough-saver/dough-saver.component';
+import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
+import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 
 import { CalculatorExpertPage } from './expert.page';
 
 /**
- * The Expert page reloads its own Draft on every view entry because Ionic
- * caches pages in the router-outlet stack.
+ * The Expert screen names no Draft: it hands the Dough saver the input its
+ * own path resolved, exactly like the three other calculator screens.
  */
-describe('CalculatorExpertPage', () => {
-  let initializer: jasmine.SpyObj<CalculatorInitializerService>;
+describe('CalculatorExpertPage (Dough saving)', () => {
+  let fixture: ComponentFixture<CalculatorExpertPage>;
   let originalRequestIdleCallback: typeof window.requestIdleCallback;
 
-  const createPage = (): CalculatorExpertPage =>
-    TestBed.runInInjectionContext(() => new CalculatorExpertPage());
-
   beforeEach(() => {
-    // idleCallback() defers through requestIdleCallback — run it synchronously
-    // so the assertions do not hinge on idle scheduling.
+    // The header defers past the first idle frame — run it synchronously so
+    // the assertions do not hinge on idle scheduling.
     originalRequestIdleCallback = window.requestIdleCallback;
     window.requestIdleCallback = ((cb: IdleRequestCallback) => {
       cb({ didTimeout: false, timeRemaining: () => 0 } as IdleDeadline);
       return 0;
     }) as typeof window.requestIdleCallback;
 
-    initializer = jasmine.createSpyObj<CalculatorInitializerService>(
-      'CalculatorInitializerService',
-      ['init'],
-    );
-
     TestBed.configureTestingModule({
+      imports: [CalculatorExpertPage],
       providers: [
-        { provide: CalculatorInitializerService, useValue: initializer },
+        provideIonicAngular({ animated: false }),
+        provideTranslateService(),
+        provideRouter([]),
+        { provide: PrefsStorage, useValue: new FakePrefsStorage() },
       ],
     });
+    fixture = TestBed.createComponent(CalculatorExpertPage);
+    fixture.componentInstance.ionViewWillEnter();
   });
 
   afterEach(() => {
     window.requestIdleCallback = originalRequestIdleCallback;
   });
 
-  it('initializes the Expert Draft when the view is entered', () => {
-    createPage().ionViewWillEnter();
+  const boundSaverInput = (): unknown => {
+    fixture.detectChanges();
+    const saver = fixture.debugElement.query(By.directive(DoughSaverComponent));
+    expect(saver).withContext('dough saver in the header').toBeTruthy();
+    return (saver.componentInstance as DoughSaverComponent).input();
+  };
 
-    expect(initializer.init).toHaveBeenCalledTimes(1);
+  it('binds the resolved Expert input to the Dough saver', () => {
+    const draft = TestBed.inject(CalculatorPaths).for(CalculatorPath.EXPERT);
+    draft.update({ nbPizzas: 9, hydrationRatio: 0.71 });
+
+    expect(boundSaverInput()).toEqual(draft.snapshot());
   });
 
-  it('reloads the Expert Draft on every re-entry', () => {
-    const page = createPage();
+  it('follows the Draft, so a saved Dough carries the last edit', () => {
+    const draft = TestBed.inject(CalculatorPaths).for(CalculatorPath.EXPERT);
+    boundSaverInput();
 
-    page.ionViewWillEnter();
-    page.ionViewWillEnter();
+    draft.update({ nbPizzas: 12 });
+    fixture.detectChanges();
 
-    expect(initializer.init).toHaveBeenCalledTimes(2);
+    expect((boundSaverInput() as { nbPizzas: number }).nbPizzas).toBe(12);
   });
 });
