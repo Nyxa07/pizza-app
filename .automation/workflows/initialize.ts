@@ -51,7 +51,7 @@ export default async function runInitialize(
       "Si une issue est une sous issue et qu'elle a le label 'to-planify' (en plus de `ready-for-agent`), choisi toujours l'issue parente, on ne planifie jamais une sous issue seule mais toujours avec ses enfants.",
       'Elle peut ou non avoir le label `to-planify`',
       'Si une issue `ready-for-agent` sans label `to-planify existe`, choisi la en priorité.',
-      "Ne choisi jamais les issue ou sous issue d'un ensemble qui n'ont pas exactement les memes labels (parmis `ready-for-agent`, `to-planify`). Soient elles ont toutes to-planify, soient elles ont toutes 'ready-for-agent' sans 'to-planify'.",
+      "Ne choisi jamais les issue ou sous issue d'un ensemble si l'une d'entre elles à un label `read-for-human` ou `needs-triage`.",
     ].join('\n'),
     {
       harness,
