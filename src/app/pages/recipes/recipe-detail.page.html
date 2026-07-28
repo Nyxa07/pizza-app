@@ -44,19 +44,19 @@
             <p>{{ "pages.recipes.suggestedDough" | translate }}</p>
             <h2>{{ recipe.content.doughSuggestion }}</h2>
           </div>
-          @if (summary) {
+          @if (facts) {
             <dl class="dough-facts num">
               <div>
                 <dt>{{ "pages.recipes.balls" | translate }}</dt>
-                <dd>{{ summary.balls }}</dd>
+                <dd>{{ facts.balls }}</dd>
               </div>
               <div>
                 <dt>{{ "pages.recipes.hydration" | translate }}</dt>
-                <dd>{{ summary.hydrationRatio * 100 | number: "1.0-0" }}%</dd>
+                <dd>{{ facts.hydrationPct | number: "1.0-0" }}%</dd>
               </div>
               <div>
                 <dt>{{ "pages.recipes.rest" | translate }}</dt>
-                <dd>{{ summary.restHours | number: "1.0-0" }} h</dd>
+                <dd>{{ facts.restHours | number: "1.0-0" }} h</dd>
               </div>
             </dl>
           }

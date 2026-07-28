@@ -1,7 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 
-import { firstValueFrom, of } from 'rxjs';
-
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 
@@ -233,12 +231,6 @@ describe('CalculatorService', () => {
         6,
       );
     });
-  });
-
-  it('recomputes what a stream of inputs is worth', async () => {
-    const results = engine.resultsFor$(of(POOLISH));
-
-    expect(await firstValueFrom(results)).toEqual(engine.process(POOLISH));
   });
 
   /** The output as the fields address it. */

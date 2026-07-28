@@ -23,8 +23,12 @@ The instructions (ingredient weights + steps) the calculator generates for a Dou
 _Avoid_: recipe (never for dough output), protocol
 
 **Method module**:
-The single module going from a calculator input to a Dough method: `methodFor(input)` for the full run, `previewFor(input)` for the aperçu. It runs the engine, assembles the steps and dates them; nothing outside names a step definition, an engine output or a clock. The aperçu and the Method screen are two readings of the same run, so they cannot disagree on the times, the grams or the number of steps.
+The single module going from a calculator input to a Dough method: `methodFor(input)` for the full run, `previewFor(input)` for the aperçu. It runs the engine, assembles the steps and dates them; nothing outside names a step definition or a clock, and it and the Dough facts module are the only two that name an engine output. The aperçu and the Method screen are two readings of the same run, so they cannot disagree on the times, the grams or the number of steps.
 _Avoid_: a method builder per screen, passing an engine output or a time to it
+
+**Dough facts**:
+The single module going from a calculator input to the figures a surface shows of a dough: `factsOf(input)`. It runs the engine and decides the precision each figure carries — hydration as a whole percentage, weights to the gram, rests to the hour, yeast to the centigram — leaving the pipes the language alone. The two calculator live bars, the library card, the document of a Dough and the dough a Recipe suggests read it, so no two of them can announce different figures for the same dough. It holds no state and publishes one raw figure, the resolved hydration ratio, for the Expert hydration step.
+_Avoid_: summary, result, view model, rounding a dough figure in a screen or a pipe
 
 **Method clock**:
 When a Method starts counting, as a seam: in the app the wall clock held still for one quarter-hour, in a spec an instant pinned outright. Holding it is what lets the aperçu and the Method screen its CTA opens narrate one plan; times land on quarter-hours because a Method narrates a plan, not a stopwatch. Only the Method module reads it.

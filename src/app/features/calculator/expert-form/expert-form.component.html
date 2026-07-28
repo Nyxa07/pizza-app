@@ -1,5 +1,5 @@
 @if (vm$ | async; as vm) {
-  <app-calculator-livebar [result]="vm.result" />
+  <app-calculator-livebar [facts]="vm.facts" />
 
   <div class="grid">
     <app-calculator-tile
@@ -13,7 +13,7 @@
     <app-calculator-tile
       data-testid="weight-tile"
       [label]="'calculator.expert.tiles.weight' | translate"
-      [value]="vm.result.weight | number: '1.0-0'"
+      [value]="vm.facts.ballWeight | number: '1.0-0'"
       unit="g"
       [caption]="
         'calculator.expert.sizeCaption'
@@ -26,7 +26,7 @@
     />
     <app-calculator-tile
       [label]="'calculator.expert.tiles.hydration' | translate"
-      [value]="vm.result.hydrationPct | number: '1.0-0'"
+      [value]="vm.facts.hydrationPct | number: '1.0-0'"
       unit="%"
       [sheetId]="InfoSheetId.HYDRATION"
       [canStepUp]="canStep(vm, 'hydrationRatio', 1)"
@@ -48,7 +48,7 @@
     }
     <app-calculator-tile
       [label]="'calculator.expert.tiles.ambientRest' | translate"
-      [value]="vm.result.ambientHours | number: '1.0-0'"
+      [value]="vm.facts.ambientHours | number: '1.0-0'"
       unit="h"
       [sheetId]="InfoSheetId.WARM_REST"
       [canStepUp]="canStep(vm, 'rtRestTime', 1)"
@@ -58,7 +58,7 @@
     />
     <app-calculator-tile
       [label]="'calculator.expert.tiles.coldRest' | translate"
-      [value]="vm.result.coldHours | number: '1.0-0'"
+      [value]="vm.facts.coldHours | number: '1.0-0'"
       unit="h"
       [sheetId]="InfoSheetId.COLD_REST"
       [canStepUp]="canStep(vm, 'coldRestTime', 1)"
@@ -129,11 +129,11 @@
     </app-calculator-tile>
   </div>
 
-  @if (vm.result.ambientHours + vm.result.coldHours > 0) {
+  @if (vm.facts.ambientHours + vm.facts.coldHours > 0) {
     <app-calculator-timeline
       class="timeline"
-      [ambientHours]="vm.result.ambientHours"
-      [coldHours]="vm.result.coldHours"
+      [ambientHours]="vm.facts.ambientHours"
+      [coldHours]="vm.facts.coldHours"
     />
   }
 

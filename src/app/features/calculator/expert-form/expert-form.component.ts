@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 
 import { TranslatePipe } from '@ngx-translate/core';
-import { combineLatest, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import type { IMethodPreview } from 'src/app/features/method/interfaces/method-preview.interface';
 import { InfoSheetId } from 'src/app/features/sheets/enums/info-sheet-id.enum';
@@ -15,8 +15,9 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 import { CalculatorPath } from '../enums/calculator-path.enum';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
+import type { IDoughFacts } from '../facts/dough-facts.interface';
+import { DoughFacts } from '../facts/dough-facts.service';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
-import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
 import { CalculatorMethods } from '../method/calculator-methods.service';
 import { CalculatorPaths } from '../paths/calculator-paths.service';
 import {
@@ -24,7 +25,6 @@ import {
   sizeForWeight,
   weightOptions,
 } from '../pizza-format.model';
-import { CalculatorService } from '../services/calculator.service';
 import {
   EXPERT_FIELD_OPTIONS,
   restTimePatch,
@@ -33,7 +33,6 @@ import {
 import { CalculatorCtaComponent } from '../parts/calculator-cta.component';
 import { CalculatorLivebarComponent } from '../parts/calculator-livebar.component';
 import { CalculatorMethodPreviewComponent } from '../parts/calculator-method-preview.component';
-import { ICalculatorResult, summarizeOutput } from '../parts/calculator-result';
 import { CalculatorTileComponent } from '../parts/calculator-tile.component';
 import { CalculatorTimelineComponent } from '../parts/calculator-timeline.component';
 
@@ -50,17 +49,16 @@ type SteppableField =
   | 'temperature';
 
 /**
- * Everything the template shows, derived once per Expert Draft/engine
- * emission. Tiles display the engine's effective values and edits write
- * explicit values back into the Expert Draft.
+ * Everything the template shows, derived once per Expert Draft emission.
+ * Tiles display the engine's effective values and edits write explicit values
+ * back into the Expert Draft.
  */
 interface ExpertVm {
   input: ICalculatorInput;
-  output: ICalculatorOutput;
   isPoolish: boolean;
   methodSheetId: InfoSheetId;
-  /** What every path reads off one engine run. */
-  result: ICalculatorResult;
+  /** The figures every surface shows of this dough, off one engine run. */
+  facts: IDoughFacts;
   /** The pizza the current ball weight amounts to, shown as a caption. */
   sizeCm: number;
   /** The weight grid of the current style — the only style-dependent grid. */
@@ -100,7 +98,7 @@ const POOLISH_RATIO_FALLBACK = 0.3;
 export class ExpertFormComponent {
   /** The Path draft of this path, captured once — never another path's. */
   private readonly state = inject(CalculatorPaths).for(CalculatorPath.EXPERT);
-  private readonly calculator = inject(CalculatorService);
+  private readonly doughFacts = inject(DoughFacts);
   private readonly methods = inject(CalculatorMethods);
   private readonly router = inject(Router);
 
@@ -128,10 +126,14 @@ export class ExpertFormComponent {
     { value: YeastType.FRESH, label: 'calculator.enums.yeastTypes.fresh' },
   ];
 
-  protected readonly vm$: Observable<ExpertVm> = combineLatest([
-    this.state.draft$,
-    this.calculator.resultsFor$(this.state.draft$),
-  ]).pipe(map(([input, output]) => this.buildVm(input, output)));
+  /**
+   * One stream, one image: the Draft is the whole subject, and the figures
+   * are derived from it here rather than combined back in from a second
+   * stream — which would render an edit against the figures preceding it.
+   */
+  protected readonly vm$: Observable<ExpertVm> = this.state.draft$.pipe(
+    map((input) => this.buildVm(input)),
+  );
 
   protected stepField(vm: ExpertVm, field: SteppableField, dir: 1 | -1): void {
     const next = stepInList(
@@ -149,13 +151,13 @@ export class ExpertFormComponent {
   ): void {
     const next = stepInList(
       EXPERT_FIELD_OPTIONS[field],
-      field === 'rtRestTime' ? vm.result.ambientHours : vm.result.coldHours,
+      field === 'rtRestTime' ? vm.facts.ambientHours : vm.facts.coldHours,
       dir,
     );
     this.state.update(
       restTimePatch(field, next, {
-        rtRestTime: vm.result.ambientHours,
-        coldRestTime: vm.result.coldHours,
+        rtRestTime: vm.facts.ambientHours,
+        coldRestTime: vm.facts.coldHours,
       }),
     );
   }
@@ -169,9 +171,9 @@ export class ExpertFormComponent {
     const values = this.optionsFor(vm, field);
     const current =
       field === 'rtRestTime'
-        ? vm.result.ambientHours
+        ? vm.facts.ambientHours
         : field === 'coldRestTime'
-          ? vm.result.coldHours
+          ? vm.facts.coldHours
           : this.effectiveValue(vm, field);
     return dir === 1
       ? values[values.length - 1] > current
@@ -198,7 +200,7 @@ export class ExpertFormComponent {
     const pizzaType = (event as CustomEvent<{ value: PizzaType }>).detail.value;
     this.state.update({
       pizzaType,
-      pizzaWeight: clampWeight(pizzaType, vm.result.weight),
+      pizzaWeight: clampWeight(pizzaType, vm.facts.ballWeight),
     });
   }
 
@@ -206,22 +208,18 @@ export class ExpertFormComponent {
     this.router.navigate(['/tabs/calculator/method/expert']);
   }
 
-  private buildVm(
-    input: ICalculatorInput,
-    output: ICalculatorOutput,
-  ): ExpertVm {
+  private buildVm(input: ICalculatorInput): ExpertVm {
     const isPoolish = input.doughType === DoughType.POOLISH;
     // The engine already clamped the weight to the style, so the screen shows
     // — and steps from — a value the style can actually produce.
-    const result = summarizeOutput(output, isPoolish);
+    const facts = this.doughFacts.factsOf(input);
 
     return {
       input,
-      output,
       isPoolish,
       methodSheetId: isPoolish ? InfoSheetId.POOLISH : InfoSheetId.DIRECT,
-      result,
-      sizeCm: sizeForWeight(input.pizzaType, result.weight),
+      facts,
+      sizeCm: sizeForWeight(input.pizzaType, facts.ballWeight),
       weightOptions: weightOptions(input.pizzaType),
       poolishRatioPct: Math.round(
         (input.poolishRatio ?? POOLISH_RATIO_FALLBACK) * 100,
@@ -244,9 +242,11 @@ export class ExpertFormComponent {
   private effectiveValue(vm: ExpertVm, field: SteppableField): number {
     switch (field) {
       case 'pizzaWeight':
-        return vm.result.weight;
+        return vm.facts.ballWeight;
       case 'hydrationRatio':
-        return vm.output.hydrationRatio;
+        // The resolved ratio, not the percentage shown: the grid is in
+        // hundredths and a rounded ratio would skip a value.
+        return vm.facts.hydrationRatio;
       case 'poolishRatio':
         return vm.input.poolishRatio ?? POOLISH_RATIO_FALLBACK;
       case 'oliveOilRatio':

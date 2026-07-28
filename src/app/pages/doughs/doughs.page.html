@@ -38,11 +38,11 @@
           >
             <span class="document-name">{{ card.dough.name }}</span>
             <span class="document-meta num">
-              {{ card.summary.balls }}
+              {{ card.facts.balls }}
               {{ "pages.doughs.balls" | translate }} ·
-              {{ card.summary.hydrationRatio * 100 | number: "1.0-0" }}% ·
+              {{ card.facts.hydrationPct | number: "1.0-0" }}% ·
               {{
-                "calculator.enums.doughTypes." + card.summary.doughType
+                "calculator.enums.doughTypes." + card.facts.doughType
                   | translate
               }}
             </span>

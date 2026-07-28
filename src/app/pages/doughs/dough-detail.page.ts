@@ -13,8 +13,8 @@ import {
 
 import { TranslatePipe } from '@ngx-translate/core';
 
+import { DoughFacts } from 'src/app/features/calculator/facts/dough-facts.service';
 import { CalculatorMethods } from 'src/app/features/calculator/method/calculator-methods.service';
-import { DoughSummaryService } from 'src/app/features/doughs/services/dough-summary.service';
 import { DoughsService } from 'src/app/features/doughs/services/doughs.service';
 import { MethodComponent } from 'src/app/features/method/method.component';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
@@ -43,15 +43,15 @@ export class DoughDetailPage {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly doughs = inject(DoughsService);
-  private readonly summaries = inject(DoughSummaryService);
+  private readonly doughFacts = inject(DoughFacts);
   private readonly methods = inject(CalculatorMethods);
 
   protected readonly dough = this.doughs.get(
     this.route.snapshot.paramMap.get('id') ?? '',
   );
   /** The document facts, resolved through the same seam as the library card. */
-  protected readonly summary = this.dough
-    ? this.summaries.forDough(this.dough)
+  protected readonly facts = this.dough
+    ? this.doughFacts.factsOf(this.dough.input)
     : null;
   /** The saved input read as a method, through the same seam as the screens. */
   protected readonly method = this.dough

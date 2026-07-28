@@ -1,4 +1,3 @@
-import type { Provider, Type } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import {
@@ -18,49 +17,40 @@ import { DOUGHS_STORAGE_KEY } from 'src/app/features/doughs/services/doughs.serv
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { FakePrefsStorage } from 'src/app/shared/testing/fake-prefs-storage';
 
-import { DoughsPage } from './doughs.page';
 import { DoughDetailPage } from './dough-detail.page';
 
 const DOUGH_ID = 'from-guided';
 
-describe('DoughDetailPage (the document and its card cannot diverge)', () => {
+/**
+ * The document a saved Dough opens as. Whether its figures agree with the ones
+ * on the library card is no longer a question a screen can answer: both read
+ * the Dough facts module, and its own spec pins the figures.
+ */
+describe('DoughDetailPage', () => {
   let prefs: FakePrefsStorage;
 
-  /**
-   * Both surfaces are mounted in turn against the same stored library, so the
-   * comparison below is between two real renderings, not between two readings
-   * of the same service.
-   */
-  const mount = <T>(
-    page: Type<T>,
-    providers: Provider[] = [],
-  ): ComponentFixture<T> => {
+  const openedDocument = (): ComponentFixture<DoughDetailPage> => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
-      imports: [page],
+      imports: [DoughDetailPage],
       providers: [
         provideIonicAngular({ animated: false }),
         provideTranslateService(),
         provideRouter([]),
         { provide: PrefsStorage, useValue: prefs },
-        ...providers,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { paramMap: convertToParamMap({ id: DOUGH_ID }) },
+          },
+        },
       ],
     });
 
-    const fixture = TestBed.createComponent(page);
+    const fixture = TestBed.createComponent(DoughDetailPage);
     fixture.detectChanges();
     return fixture;
   };
-
-  const openedDocument = (): ComponentFixture<DoughDetailPage> =>
-    mount(DoughDetailPage, [
-      {
-        provide: ActivatedRoute,
-        useValue: {
-          snapshot: { paramMap: convertToParamMap({ id: DOUGH_ID }) },
-        },
-      },
-    ]);
 
   /** Seeds the library with a single Dough saved from the Guided path. */
   const seedGuidedDough = (): void => {
@@ -79,39 +69,15 @@ describe('DoughDetailPage (the document and its card cannot diverge)', () => {
     prefs.set(DOUGHS_STORAGE_KEY, [dough]);
   };
 
-  const textsOf = <T>(
-    fixture: ComponentFixture<T>,
-    selector: string,
-  ): string[] =>
-    fixture.debugElement
-      .queryAll(By.css(selector))
-      .map((element) =>
-        ((element.nativeElement as HTMLElement).textContent ?? '').trim(),
-      );
-
-  const percentIn = (texts: string[]): string => {
-    const match = /([\d\s.,]+)%/.exec(texts.join(' '));
-    expect(match)
-      .withContext(`a percentage in "${texts.join(' ')}"`)
-      .not.toBeNull();
-    return (match?.[1] ?? '').trim();
-  };
-
   beforeEach(() => {
     prefs = new FakePrefsStorage();
     seedGuidedDough();
   });
 
-  it('announces the same hydration as the library card', () => {
-    const onTheCard = percentIn(textsOf(mount(DoughsPage), '.document-meta'));
-
-    const onTheDocument = percentIn(textsOf(openedDocument(), '.fact-grid dd'));
-
-    expect(onTheDocument).toBe(onTheCard);
-  });
-
   it('fills its four facts without a hole', () => {
-    const facts = textsOf(openedDocument(), '.fact-grid dd');
+    const facts = openedDocument()
+      .debugElement.queryAll(By.css('.fact-grid dd'))
+      .map((dd) => ((dd.nativeElement as HTMLElement).textContent ?? '').trim());
 
     expect(facts.length).toBe(4);
     for (const fact of facts) {
