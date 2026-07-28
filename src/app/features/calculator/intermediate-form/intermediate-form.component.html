@@ -1,5 +1,5 @@
 @if (vm$ | async; as vm) {
-  <app-calculator-livebar [result]="vm.result" />
+  <app-calculator-livebar [facts]="vm.facts" />
 
   <!-- 1. Pizza style — everything below adapts to it. -->
   <section class="field">
@@ -51,7 +51,7 @@
       [label]="'calculator.intermediate.fields.size' | translate"
       [value]="vm.draft.sizeCm | number: '1.0-0'"
       unit="cm"
-      [caption]="(vm.result.weight | number: '1.0-0') + ' g'"
+      [caption]="(vm.facts.ballWeight | number: '1.0-0') + ' g'"
       [ariaLabel]="
         'calculator.intermediate.a11y.size'
           | translate: { size: vm.draft.sizeCm }
@@ -170,11 +170,11 @@
     </app-calculator-tile>
   </div>
 
-  @if (vm.result.ambientHours + vm.result.coldHours > 0) {
+  @if (vm.facts.restHours > 0) {
     <app-calculator-timeline
       class="timeline"
-      [ambientHours]="vm.result.ambientHours"
-      [coldHours]="vm.result.coldHours"
+      [ambientHours]="vm.facts.ambientHours"
+      [coldHours]="vm.facts.coldHours"
     />
   }
 
@@ -185,7 +185,7 @@
       <div>
         <dt>{{ "calculator.intermediate.readOnly.ballWeight" | translate }}</dt>
         <dd class="num" data-testid="ball-weight">
-          {{ vm.result.weight | number: "1.0-0" }}&nbsp;g
+          {{ vm.facts.ballWeight | number: "1.0-0" }}&nbsp;g
         </dd>
       </div>
       <div>
@@ -194,25 +194,25 @@
           <app-info-sheet-button [sheetId]="InfoSheetId.HYDRATION" />
         </dt>
         <dd class="num">
-          {{ vm.result.hydrationPct | number: "1.0-0" }}&nbsp;%
+          {{ vm.facts.hydrationPct | number: "1.0-0" }}&nbsp;%
         </dd>
       </div>
       <div>
         <dt>{{ "calculator.intermediate.readOnly.restSplit" | translate }}</dt>
         <dd class="num" data-testid="rest-split">
-          @if (vm.result.coldHours > 0) {
+          @if (vm.facts.coldHours > 0) {
             {{
               "calculator.intermediate.readOnly.restSplitValue"
                 | translate
                   : {
-                      ambient: vm.result.ambientHours,
-                      cold: vm.result.coldHours,
+                      ambient: vm.facts.ambientHours,
+                      cold: vm.facts.coldHours,
                     }
             }}
           } @else {
             {{
               "calculator.intermediate.readOnly.restSplitAmbientOnly"
-                | translate: { ambient: vm.result.ambientHours }
+                | translate: { ambient: vm.facts.ambientHours }
             }}
           }
         </dd>

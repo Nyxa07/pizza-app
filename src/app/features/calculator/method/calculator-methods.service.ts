@@ -13,8 +13,9 @@ import { buildMethodPreview } from './method-preview.builder';
  * The single module going from a calculator input to a Dough method.
  *
  * It runs the engine, assembles the steps and dates them — nothing outside
- * names a step, an engine output or a clock. A screen that wants the aperçu
- * or the full method hands over an input and gets back what it renders.
+ * names a step or a clock, and only this module and the Dough facts module
+ * name an engine output. A screen that wants the aperçu or the full method
+ * hands over an input and gets back what it renders.
  *
  * The aperçu and the full Method screen are two readings of the same run at
  * two levels of detail, which is why they live behind one interface: they

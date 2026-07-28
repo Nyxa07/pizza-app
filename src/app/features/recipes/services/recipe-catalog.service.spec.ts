@@ -6,7 +6,7 @@ import { DoughType } from 'src/app/features/calculator/enums/dough-type.enum';
 import { GUIDED_DRAFT_STORAGE_KEY } from 'src/app/features/calculator/paths/calculator-draft-storage.constants';
 import { CalculatorPath } from 'src/app/features/calculator/enums/calculator-path.enum';
 import { CalculatorPaths } from 'src/app/features/calculator/paths/calculator-paths.service';
-import { DoughSummaryService } from 'src/app/features/doughs/services/dough-summary.service';
+import { DoughFacts } from 'src/app/features/calculator/facts/dough-facts.service';
 import { PizzaType } from 'src/app/features/settings/enums/pizza-type.enum';
 import { PrefsStorage } from 'src/app/shared/services/prefs-storage.service';
 import { collectKeys } from 'src/app/shared/testing/collect-keys';
@@ -141,7 +141,7 @@ describe('The dough each Recipe recommends', () => {
   ] as const;
 
   let catalog: RecipeCatalogService;
-  let summaries: DoughSummaryService;
+  let doughFacts: DoughFacts;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -151,7 +151,7 @@ describe('The dough each Recipe recommends', () => {
       ],
     });
     catalog = TestBed.inject(RecipeCatalogService);
-    summaries = TestBed.inject(DoughSummaryService);
+    doughFacts = TestBed.inject(DoughFacts);
   });
 
   it('covers every shipped Recipe', () => {
@@ -172,13 +172,13 @@ describe('The dough each Recipe recommends', () => {
       expect(input.pizzaType).toBe(expected.pizzaType);
       expect(input.flourStrength).toBe(expected.flourStrength);
 
-      const summary = summaries.summarize(input);
-      expect(summary.doughType).toBe(expected.doughType);
-      expect(summary.hydrationRatio).toBe(expected.hydrationRatio);
-      expect(summary.balls).toBe(expected.balls);
-      expect(summary.ballWeight).toBe(expected.ballWeight);
-      expect(summary.ambientHours).toBe(expected.ambientHours);
-      expect(summary.coldHours).toBe(expected.coldHours);
+      const facts = doughFacts.factsOf(input);
+      expect(facts.doughType).toBe(expected.doughType);
+      expect(facts.hydrationRatio).toBe(expected.hydrationRatio);
+      expect(facts.balls).toBe(expected.balls);
+      expect(facts.ballWeight).toBe(expected.ballWeight);
+      expect(facts.ambientHours).toBe(expected.ambientHours);
+      expect(facts.coldHours).toBe(expected.coldHours);
     });
   }
 });

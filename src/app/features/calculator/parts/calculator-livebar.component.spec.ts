@@ -16,20 +16,25 @@ import { LocaleManagerService } from 'src/app/features/settings/services/locale-
 import enCalculator from 'src/assets/i18n/en/calculator.json';
 import frCalculator from 'src/assets/i18n/fr/calculator.json';
 
+import { DoughType } from '../enums/dough-type.enum';
+import type { IDoughFacts } from '../facts/dough-facts.interface';
 import { CalculatorLivebarComponent } from './calculator-livebar.component';
-import type { ICalculatorResult } from './calculator-result';
 
 describe('CalculatorLivebarComponent', () => {
   let fixture: ComponentFixture<CalculatorLivebarComponent>;
   let locale = Locales.FR;
 
-  const resultWith = (yeast: number): ICalculatorResult => ({
-    total: 1000,
-    split: { flour: 604, water: 375, salt: 18, yeast },
-    weight: 250,
+  const factsWith = (yeast: number): IDoughFacts => ({
+    balls: 4,
+    ballWeight: 250,
     hydrationPct: 62,
+    hydrationRatio: 0.62,
+    doughType: DoughType.DIRECT,
     ambientHours: 2,
     coldHours: 24,
+    restHours: 26,
+    totalWeight: 1000,
+    split: { flour: 604, water: 375, salt: 18, yeast },
   });
 
   /** What the split of the live bar reads, in the given language. */
@@ -41,7 +46,7 @@ describe('CalculatorLivebarComponent', () => {
     await firstValueFrom(TestBed.inject(TranslateService).use(spoken));
 
     fixture = TestBed.createComponent(CalculatorLivebarComponent);
-    fixture.componentRef.setInput('result', resultWith(yeast));
+    fixture.componentRef.setInput('facts', factsWith(yeast));
     fixture.detectChanges();
 
     return (

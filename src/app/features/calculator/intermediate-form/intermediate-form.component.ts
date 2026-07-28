@@ -9,7 +9,7 @@ import {
 } from '@ionic/angular/standalone';
 
 import { TranslatePipe } from '@ngx-translate/core';
-import { combineLatest, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import type { IMethodPreview } from 'src/app/features/method/interfaces/method-preview.interface';
 import { InfoSheetId } from 'src/app/features/sheets/enums/info-sheet-id.enum';
@@ -20,20 +20,19 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 import { CalculatorPath } from '../enums/calculator-path.enum';
 import { DoughType } from '../enums/dough-type.enum';
 import { YeastType } from '../enums/yeast-type.enum';
+import type { IDoughFacts } from '../facts/dough-facts.interface';
+import { DoughFacts } from '../facts/dough-facts.service';
 import { ICalculatorInput } from '../interfaces/calculator-input.interface';
-import { ICalculatorOutput } from '../interfaces/calculator-output.interface';
 import { IIntermediateCalculatorDraft } from '../interfaces/intermediate-calculator-draft.interface';
 import { CalculatorMethods } from '../method/calculator-methods.service';
 import { CalculatorCtaComponent } from '../parts/calculator-cta.component';
 import { CalculatorLivebarComponent } from '../parts/calculator-livebar.component';
 import { CalculatorMethodPreviewComponent } from '../parts/calculator-method-preview.component';
-import { ICalculatorResult, summarizeOutput } from '../parts/calculator-result';
 import { CalculatorTileComponent } from '../parts/calculator-tile.component';
 import { CalculatorTimelineComponent } from '../parts/calculator-timeline.component';
 import { CalculatorPaths } from '../paths/calculator-paths.service';
 import { sizeRange } from '../pizza-format.model';
 import { EXPERT_FIELD_OPTIONS } from '../expert-form/expert-field-options';
-import { CalculatorService } from '../services/calculator.service';
 
 /**
  * The rest slider: one question — how long do you have? — in whole hours.
@@ -58,14 +57,14 @@ const BALLS_BOUNDS = { min: 1, max: Number.POSITIVE_INFINITY } as const;
 type SteppableAnswer = 'nbPizzas' | 'sizeCm' | 'temperature' | 'globalRestTime';
 
 /**
- * Everything the template shows, derived once per Draft/engine emission. The
- * screen never computes a recipe value itself: the path and the engine do.
+ * Everything the template shows, derived once per Draft emission. The screen
+ * never computes a dough figure itself: the path and the engine do.
  */
 interface IntermediateVm {
   draft: IIntermediateCalculatorDraft;
   methodSheetId: InfoSheetId;
-  /** What every path reads off one engine run. */
-  result: ICalculatorResult;
+  /** The figures every surface shows of this dough, off one engine run. */
+  facts: IDoughFacts;
   /** The size bounds of the current style — 10 steps Neapolitan, 8 Roman. */
   sizeBounds: { min: number; max: number };
   preview: IMethodPreview;
@@ -103,7 +102,7 @@ export class IntermediateFormComponent {
   private readonly state = inject(CalculatorPaths).for(
     CalculatorPath.INTERMEDIATE,
   );
-  private readonly calculator = inject(CalculatorService);
+  private readonly doughFacts = inject(DoughFacts);
   private readonly methods = inject(CalculatorMethods);
   private readonly router = inject(Router);
 
@@ -140,11 +139,15 @@ export class IntermediateFormComponent {
   private readonly input$: Observable<ICalculatorInput> =
     this.state.resolvedInput$();
 
-  protected readonly vm$: Observable<IntermediateVm> = combineLatest([
-    this.state.draft$,
-    this.input$,
-    this.calculator.resultsFor$(this.input$),
-  ]).pipe(map(([draft, input, output]) => this.buildVm(draft, input, output)));
+  /**
+   * One stream, one image. The resolved input is derived from the Draft, so
+   * reading the Draft back on emission is reading the very one the input was
+   * resolved from — where combining the two streams would render an edit
+   * against the input preceding it.
+   */
+  protected readonly vm$: Observable<IntermediateVm> = this.input$.pipe(
+    map((input) => this.buildVm(this.state.snapshot(), input)),
+  );
 
   protected selectPizzaType(pizzaType: PizzaType): void {
     // The Draft re-seats the size in the new style; the weight follows.
@@ -220,14 +223,13 @@ export class IntermediateFormComponent {
   private buildVm(
     draft: IIntermediateCalculatorDraft,
     input: ICalculatorInput,
-    output: ICalculatorOutput,
   ): IntermediateVm {
     const isPoolish = draft.doughType === DoughType.POOLISH;
 
     return {
       draft,
       methodSheetId: isPoolish ? InfoSheetId.POOLISH : InfoSheetId.DIRECT,
-      result: summarizeOutput(output, isPoolish),
+      facts: this.doughFacts.factsOf(input),
       sizeBounds: sizeRange(draft.pizzaType),
       preview: this.methods.previewFor(input),
     };

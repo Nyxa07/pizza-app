@@ -13,7 +13,7 @@ import {
 
 import { TranslatePipe } from '@ngx-translate/core';
 
-import { DoughSummaryService } from 'src/app/features/doughs/services/dough-summary.service';
+import { DoughFacts } from 'src/app/features/calculator/facts/dough-facts.service';
 import { RecipeCatalogService } from 'src/app/features/recipes/services/recipe-catalog.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
@@ -39,14 +39,14 @@ export class RecipeDetailPage {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly catalog = inject(RecipeCatalogService);
-  private readonly summaries = inject(DoughSummaryService);
+  private readonly doughFacts = inject(DoughFacts);
 
   protected readonly recipe = this.catalog.get(
     this.route.snapshot.paramMap.get('id') ?? '',
   );
   /** The suggested dough facts, resolved through the same seam as a Dough. */
-  protected readonly summary = this.recipe
-    ? this.summaries.summarize(this.recipe.suggestedDough.input)
+  protected readonly facts = this.recipe
+    ? this.doughFacts.factsOf(this.recipe.suggestedDough.input)
     : null;
 
   protected prepareSuggestedDough(): void {

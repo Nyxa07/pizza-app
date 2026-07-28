@@ -5,7 +5,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { ingredientGramsFormat } from 'src/app/features/method/ingredient-grams';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
-import type { ICalculatorResult } from './calculator-result';
+import type { IDoughFacts } from '../facts/dough-facts.interface';
 
 /**
  * The pinned live result bar: the total dough weight and how it splits across
@@ -20,22 +20,22 @@ import type { ICalculatorResult } from './calculator-result';
   host: { class: 'livebar num' },
   template: `
     <span class="total" aria-live="polite"
-      >{{ result().total | number: '1.0-0' }}&nbsp;g</span
+      >{{ facts().totalWeight | number: '1.0-0' }}&nbsp;g</span
     >
     <span class="split">{{
       'calculator.shared.livebar.split'
         | translate
           : {
-              flour: result().split.flour | number: '1.0-0',
-              water: result().split.water | number: '1.0-0',
-              salt: result().split.salt | number: '1.0-0',
-              yeast: result().split.yeast | number: yeastGramsFormat,
+              flour: facts().split.flour | number: '1.0-0',
+              water: facts().split.water | number: '1.0-0',
+              salt: facts().split.salt | number: '1.0-0',
+              yeast: facts().split.yeast | number: yeastGramsFormat,
             }
     }}</span>
   `,
 })
 export class CalculatorLivebarComponent {
-  readonly result = input.required<ICalculatorResult>();
+  readonly facts = input.required<IDoughFacts>();
 
   protected readonly yeastGramsFormat = ingredientGramsFormat('yeast');
 }

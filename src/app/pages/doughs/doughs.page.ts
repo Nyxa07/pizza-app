@@ -28,8 +28,8 @@ import {
   SettingsIcon,
 } from 'lucide-angular';
 
+import { DoughFacts } from 'src/app/features/calculator/facts/dough-facts.service';
 import type { Dough } from 'src/app/features/doughs/interfaces/dough.interface';
-import { DoughSummaryService } from 'src/app/features/doughs/services/dough-summary.service';
 import { DoughsService } from 'src/app/features/doughs/services/doughs.service';
 import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 
@@ -55,7 +55,7 @@ import { NumberPipe } from 'src/app/shared/pipes/number.pipe';
 })
 export class DoughsPage {
   private readonly doughsService = inject(DoughsService);
-  private readonly summaries = inject(DoughSummaryService);
+  private readonly doughFacts = inject(DoughFacts);
   private readonly router = inject(Router);
   private readonly translate = inject(TranslateService);
   private readonly actionSheetController = inject(ActionSheetController);
@@ -72,7 +72,7 @@ export class DoughsPage {
   protected readonly cards = computed(() =>
     this.doughs().map((dough) => ({
       dough,
-      summary: this.summaries.forDough(dough),
+      facts: this.doughFacts.factsOf(dough.input),
     })),
   );
 

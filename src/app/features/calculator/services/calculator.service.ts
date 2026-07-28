@@ -1,7 +1,5 @@
 import { Injectable, inject } from '@angular/core';
 
-import { map, Observable, shareReplay } from 'rxjs';
-
 import { ProcessorPipeline } from './processors/processor-pipeline';
 import { HydrationProcessor } from './processors/hydration.processor';
 import { YeastProcessor } from './processors/yeast.processor';
@@ -33,15 +31,6 @@ export class CalculatorService {
     inject(TimingsProcessor),
     inject(YeastProcessor),
   ]);
-
-  resultsFor$(
-    input$: Observable<ICalculatorInput>,
-  ): Observable<ICalculatorOutput> {
-    return input$.pipe(
-      map((input) => this.process(input)),
-      shareReplay({ refCount: true, bufferSize: 1 }),
-    );
-  }
 
   /**
    * A `null` input field is a request to derive addressed to the processors;
