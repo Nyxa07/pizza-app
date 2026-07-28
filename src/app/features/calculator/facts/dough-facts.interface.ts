@@ -1,13 +1,5 @@
 import type { DoughType } from '../enums/dough-type.enum';
 
-/** The grams a dough splits into, as the scale — and so the screen — reads them. */
-export interface IDoughSplit {
-  readonly flour: number;
-  readonly water: number;
-  readonly salt: number;
-  readonly yeast: number;
-}
-
 /**
  * The figures every surface shows of a dough, fully resolved and carrying the
  * precision they are read with: a hydration is a whole percentage, a weight a
@@ -31,10 +23,10 @@ export interface IDoughFacts {
    * The hydration ratio in `0..1` the engine resolved, unrounded — the one
    * raw figure this module publishes.
    *
-   * It has a single caller: the Expert hydration step, which walks a grid of
-   * hundredths. A resolved ratio can carry three decimals, and stepping from
-   * {@link hydrationPct} would land off the grid and skip a value. It moves to
-   * a calculator field model the day one exists.
+   * It has a single caller in the app: the Expert hydration step, which walks
+   * a grid of hundredths. A resolved ratio can carry three decimals, and
+   * stepping from {@link hydrationPct} would land off the grid and skip a
+   * value. It moves to a calculator field model the day one exists.
    */
   readonly hydrationRatio: number;
   readonly doughType: DoughType;
@@ -49,5 +41,11 @@ export interface IDoughFacts {
   readonly restHours: number;
   /** Total dough weight in whole grams, every ingredient included. */
   readonly totalWeight: number;
-  readonly split: IDoughSplit;
+  /** The grams the dough splits into, as the scale — and so the screen — reads them. */
+  readonly split: {
+    readonly flour: number;
+    readonly water: number;
+    readonly salt: number;
+    readonly yeast: number;
+  };
 }

@@ -129,7 +129,7 @@
     </app-calculator-tile>
   </div>
 
-  @if (vm.facts.ambientHours + vm.facts.coldHours > 0) {
+  @if (vm.facts.restHours > 0) {
     <app-calculator-timeline
       class="timeline"
       [ambientHours]="vm.facts.ambientHours"

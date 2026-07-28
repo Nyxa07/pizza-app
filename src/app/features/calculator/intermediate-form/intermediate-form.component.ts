@@ -9,7 +9,7 @@ import {
 } from '@ionic/angular/standalone';
 
 import { TranslatePipe } from '@ngx-translate/core';
-import { combineLatest, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import type { IMethodPreview } from 'src/app/features/method/interfaces/method-preview.interface';
 import { InfoSheetId } from 'src/app/features/sheets/enums/info-sheet-id.enum';
@@ -139,10 +139,15 @@ export class IntermediateFormComponent {
   private readonly input$: Observable<ICalculatorInput> =
     this.state.resolvedInput$();
 
-  protected readonly vm$: Observable<IntermediateVm> = combineLatest([
-    this.state.draft$,
-    this.input$,
-  ]).pipe(map(([draft, input]) => this.buildVm(draft, input)));
+  /**
+   * One stream, one image. The resolved input is derived from the Draft, so
+   * reading the Draft back on emission is reading the very one the input was
+   * resolved from — where combining the two streams would render an edit
+   * against the input preceding it.
+   */
+  protected readonly vm$: Observable<IntermediateVm> = this.input$.pipe(
+    map((input) => this.buildVm(this.state.snapshot(), input)),
+  );
 
   protected selectPizzaType(pizzaType: PizzaType): void {
     // The Draft re-seats the size in the new style; the weight follows.

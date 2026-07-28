@@ -210,8 +210,8 @@ export class ExpertFormComponent {
 
   private buildVm(input: ICalculatorInput): ExpertVm {
     const isPoolish = input.doughType === DoughType.POOLISH;
-    // The engine already clamped the weight to the style, so the screen shows
-    // — and steps from — a value the style can actually produce.
+    // The ball weight comes back clamped to the style, so the screen shows —
+    // and steps from — a value the style can actually produce.
     const facts = this.doughFacts.factsOf(input);
 
     return {
