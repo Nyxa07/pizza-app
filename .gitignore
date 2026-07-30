@@ -76,3 +76,6 @@ testem.log
 Thumbs.db
 .nyxagent/runner.json
 .nyxagent/artifacts/
+
+# Agent automation workflows: standalone clone, see `make automation-clone`
+/.automation/

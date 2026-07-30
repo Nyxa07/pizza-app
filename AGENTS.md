@@ -159,6 +159,17 @@ Use blank lines between groups.
 - The ESLint config enforces Angular selector conventions; existing pages may not fully align.
   - When adding new components, prefer `app-*` selectors unless matching an existing page pattern.
 
+## Automation workflows
+
+`.automation/` holds the agent-automation workflows. It is a standalone clone of
+its own repository (`Nyxa07/automation-workflows`), ignored by this checkout:
+updating it never produces a commit here. Run `make automation-clone` once to
+create it, then `make automation-update` to fast-forward it — both refuse to
+touch a dirty clone or one sitting on another branch, and reinstall its npm
+dependencies only when they moved. Override the source with `AUTOMATION_REPO` /
+`AUTOMATION_REF`. This project's workflows live under
+`.automation/workflows/pizza-app/`.
+
 ## Agent skills
 
 ### Issue tracker
