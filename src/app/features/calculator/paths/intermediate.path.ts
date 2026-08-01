@@ -67,7 +67,7 @@ export const INTERMEDIATE_PATH: PathDefinition<IIntermediateCalculatorDraft> = {
     flourStrength: ASSUMED_FLOUR_STRENGTH,
     saltRatio: INTERMEDIATE_SALT_RATIO,
     honeyRatio: 0,
-    // One slider, and the engine owns the ambient/cold split.
+    // One total, and the engine owns the ambient/cold split.
     globalRestTime: draft.globalRestTime,
     rtRestTime: null,
     coldRestTime: null,

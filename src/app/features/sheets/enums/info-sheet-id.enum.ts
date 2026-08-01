@@ -1,5 +1,5 @@
 /**
- * The nine contextual Fiches (info sheets) — the v1 FAQ content reshaped
+ * The eight contextual Fiches (info sheets) — the v1 FAQ content reshaped
  * into in-place concept explanations (issue #70).
  */
 export enum InfoSheetId {
@@ -10,6 +10,5 @@ export enum InfoSheetId {
   HYDRATION = 'hydration',
   POOLISH_RATIO = 'poolishRatio',
   TEMPERATURE = 'temperature',
-  WARM_REST = 'warmRest',
-  COLD_REST = 'coldRest',
+  REST = 'rest',
 }

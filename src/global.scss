@@ -205,13 +205,6 @@ ion-select::part(icon) {
   opacity: 1;
 }
 
-ion-range {
-  --bar-background: var(--surface-sunken);
-  --bar-background-active: var(--accent);
-  --knob-background: var(--accent);
-  --knob-box-shadow: var(--shadow);
-}
-
 ion-toggle {
   --track-background: var(--surface-sunken);
   --track-background-checked: var(--accent);
@@ -429,41 +422,6 @@ summary:focus-visible {
   &:active {
     transform: scale(0.99);
     filter: brightness(0.96);
-  }
-}
-
-.calculator-stepper {
-  flex-shrink: 0;
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-s);
-  background: var(--surface-sunken);
-  color: var(--ink-2);
-  font: inherit;
-  font-size: 1.05rem;
-  line-height: 1;
-  cursor: pointer;
-  transition:
-    transform 0.08s ease,
-    border-color 0.15s ease,
-    color 0.15s ease;
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover:not(:disabled) {
-      border-color: var(--ink-3);
-      color: var(--ink);
-    }
-  }
-
-  &:active:not(:disabled) {
-    transform: scale(0.92);
-  }
-
-  &:disabled {
-    opacity: 0.35;
-    cursor: default;
   }
 }
 
