@@ -63,8 +63,8 @@
     />
   </div>
 
-  <!-- 4. Direct or poolish — the preferment stays reachable here. -->
   <div class="grid">
+    <!-- 4. Direct or poolish — the preferment stays reachable here. -->
     <app-calculator-tile
       [label]="'calculator.intermediate.fields.doughType' | translate"
       [sheetId]="vm.methodSheetId"
@@ -82,75 +82,7 @@
         }
       </ion-select>
     </app-calculator-tile>
-  </div>
-
-  <!-- 5. One slider: how long do you have? -->
-  <section class="field rest">
-    <div class="field-heading">
-      <h2 class="field-label" id="intermediate-restTime">
-        {{ "calculator.intermediate.fields.restTime" | translate }}
-      </h2>
-      <app-info-sheet-button [sheetId]="InfoSheetId.WARM_REST" />
-      <app-info-sheet-button [sheetId]="InfoSheetId.COLD_REST" />
-    </div>
-    <p class="field-hint">
-      {{ "calculator.intermediate.hints.restTime" | translate }}
-    </p>
-    <div class="slider-row">
-      <button
-        type="button"
-        class="calculator-stepper"
-        [disabled]="!canStep(vm, 'globalRestTime', -1)"
-        [attr.aria-label]="'calculator.shared.tiles.decrease' | translate"
-        (click)="step(vm, 'globalRestTime', -1)"
-      >
-        −
-      </button>
-      <ion-range
-        class="rest-range"
-        [min]="restBounds.min"
-        [max]="restBounds.max"
-        [step]="1"
-        [snaps]="true"
-        [ticks]="false"
-        [value]="vm.draft.globalRestTime"
-        (ionChange)="onRestSlide($event)"
-        [attr.aria-label]="
-          'calculator.intermediate.a11y.restTime'
-            | translate: { hours: vm.draft.globalRestTime }
-        "
-      />
-      <button
-        type="button"
-        class="calculator-stepper"
-        [disabled]="!canStep(vm, 'globalRestTime', 1)"
-        [attr.aria-label]="'calculator.shared.tiles.increase' | translate"
-        (click)="step(vm, 'globalRestTime', 1)"
-      >
-        +
-      </button>
-      <span class="slider-value num" aria-hidden="true">
-        {{
-          "calculator.intermediate.units.restTime"
-            | translate: { hours: vm.draft.globalRestTime }
-        }}
-      </span>
-    </div>
-  </section>
-
-  <div class="grid">
-    <!-- 6. The kitchen, which sets the yeast dose. -->
-    <app-calculator-tile
-      [label]="'calculator.intermediate.fields.temperature' | translate"
-      [value]="vm.draft.temperature | number: '1.0-0'"
-      unit="°C"
-      [sheetId]="InfoSheetId.TEMPERATURE"
-      [canStepUp]="canStep(vm, 'temperature', 1)"
-      [canStepDown]="canStep(vm, 'temperature', -1)"
-      (stepUp)="step(vm, 'temperature', 1)"
-      (stepDown)="step(vm, 'temperature', -1)"
-    />
-    <!-- 7. The yeast in hand. -->
+    <!-- 5. The yeast in hand. -->
     <app-calculator-tile
       [label]="'calculator.intermediate.fields.yeastType' | translate"
       [sheetId]="InfoSheetId.YEASTS"
@@ -168,6 +100,36 @@
         }
       </ion-select>
     </app-calculator-tile>
+  </div>
+
+  <div class="grid">
+    <!-- 6. One question: how long do you have? The engine owns the split. -->
+    <app-calculator-tile
+      data-testid="rest-tile"
+      [label]="'calculator.intermediate.fields.restTime' | translate"
+      [value]="vm.draft.globalRestTime | number: '1.0-0'"
+      unit="h"
+      [sheetId]="InfoSheetId.REST"
+      [ariaLabel]="
+        'calculator.intermediate.a11y.restTime'
+          | translate: { hours: vm.draft.globalRestTime }
+      "
+      [canStepUp]="canStep(vm, 'globalRestTime', 1)"
+      [canStepDown]="canStep(vm, 'globalRestTime', -1)"
+      (stepUp)="step(vm, 'globalRestTime', 1)"
+      (stepDown)="step(vm, 'globalRestTime', -1)"
+    />
+    <!-- 7. The kitchen, which sets the yeast dose. -->
+    <app-calculator-tile
+      [label]="'calculator.intermediate.fields.temperature' | translate"
+      [value]="vm.draft.temperature | number: '1.0-0'"
+      unit="°C"
+      [sheetId]="InfoSheetId.TEMPERATURE"
+      [canStepUp]="canStep(vm, 'temperature', 1)"
+      [canStepDown]="canStep(vm, 'temperature', -1)"
+      (stepUp)="step(vm, 'temperature', 1)"
+      (stepDown)="step(vm, 'temperature', -1)"
+    />
   </div>
 
   @if (vm.facts.restHours > 0) {

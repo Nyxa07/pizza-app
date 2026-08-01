@@ -16,7 +16,7 @@ export interface IIntermediateCalculatorDraft {
   /** Diameter in centimetres, inside the range of the style (format model). */
   sizeCm: number;
   doughType: DoughType;
-  /** Total rest in hours, the single slider this path exposes. */
+  /** Total rest in hours, the single rest answer this path exposes. */
   globalRestTime: number;
   temperature: number;
   yeastType: YeastType;

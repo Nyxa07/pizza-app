@@ -154,10 +154,7 @@ describe('GuidedFormComponent', () => {
     ]);
 
     next();
-    expect(renderedSheetIds()).toEqual([
-      InfoSheetId.WARM_REST,
-      InfoSheetId.COLD_REST,
-    ]);
+    expect(renderedSheetIds()).toEqual([InfoSheetId.REST]);
 
     next();
     expect(renderedSheetIds()).toEqual([InfoSheetId.TEMPERATURE]);

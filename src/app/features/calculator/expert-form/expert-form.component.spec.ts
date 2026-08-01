@@ -230,8 +230,7 @@ describe('ExpertFormComponent', () => {
         InfoSheetId.DIRECT,
         InfoSheetId.HYDRATION,
         InfoSheetId.TEMPERATURE,
-        InfoSheetId.WARM_REST,
-        InfoSheetId.COLD_REST,
+        InfoSheetId.REST,
         InfoSheetId.YEASTS,
       ]),
     );

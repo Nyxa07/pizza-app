@@ -67,16 +67,13 @@
       "Elle sert au calcul du repos à chaud."
     ]
   },
-  "warmRest": {
-    "title": "Le repos à chaud",
-    "subtitle": "Le temps passé à température ambiante",
+  "rest": {
+    "title": "Le repos",
+    "subtitle": "Le temps à l'ambiante et le temps au réfrigérateur",
     "body": [
-      "Le temps de repos des différentes préparations à la température ambiante sélectionnée."
+      "Le temps de repos des différentes préparations à la température ambiante sélectionnée.",
+      "Le temps de repos des différentes préparations au réfrigérateur.",
+      "Au-delà de 24 h de repos total, nous répartissons nous-mêmes le temps entre l'ambiante et le froid."
     ]
-  },
-  "coldRest": {
-    "title": "Le repos à froid",
-    "subtitle": "Le temps passé au réfrigérateur",
-    "body": ["Le temps de repos des différentes préparations au réfrigérateur."]
   }
 }

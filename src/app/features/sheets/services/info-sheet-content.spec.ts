@@ -13,7 +13,7 @@ import type { IInfoSheetContent } from '../interfaces/info-sheet-content.interfa
 import { InfoSheetContentService } from './info-sheet-content.service';
 
 /**
- * Every Fiche ships complete in both locales (issue #70): all nine ids
+ * Every Fiche ships complete in both locales (issue #70): all eight ids
  * present, no empty or padded text, and FR/EN structural parity.
  */
 describe('Fiches content (FR + EN)', () => {
@@ -28,7 +28,7 @@ describe('Fiches content (FR + EN)', () => {
 
   for (const { name, catalog } of catalogs) {
     describe(`"${name}" catalog`, () => {
-      it('ships exactly the nine Fiches', () => {
+      it('ships exactly the eight Fiches', () => {
         expect(Object.keys(catalog).sort()).toEqual([...ids].sort());
       });
 

@@ -57,16 +57,12 @@
       "balls": "Nombre de pâtons",
       "size": "Taille de la pizza",
       "doughType": "Type de pâte",
-      "restTime": "Temps de repos",
-      "temperature": "Température de la pièce",
+      "restTime": "Repos",
+      "temperature": "Température",
       "yeastType": "Type de levure"
     },
     "hints": {
-      "pizzaType": "Le style décide de l'hydratation, de l'huile et des tailles proposées.",
-      "restTime": "Au-delà de 24\u00a0h, nous répartissons le repos entre l'ambiante et le froid."
-    },
-    "units": {
-      "restTime": "{hours}\u00a0h"
+      "pizzaType": "Le style décide de l'hydratation, de l'huile et des tailles proposées."
     },
     "readOnly": {
       "title": "Ce que nous avons décidé pour vous",

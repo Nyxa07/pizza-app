@@ -67,16 +67,13 @@
       "It is used to compute the warm rest."
     ]
   },
-  "warmRest": {
-    "title": "Warm rest",
-    "subtitle": "The time spent at room temperature",
+  "rest": {
+    "title": "The rest",
+    "subtitle": "The time at room temperature and the time in the fridge",
     "body": [
-      "The rest time of the various preparations at the selected room temperature."
+      "The rest time of the various preparations at the selected room temperature.",
+      "The rest time of the various preparations in the fridge.",
+      "Beyond 24 h of total rest, we split the time between ambient and cold ourselves."
     ]
-  },
-  "coldRest": {
-    "title": "Cold rest",
-    "subtitle": "The time spent in the fridge",
-    "body": ["The rest time of the various preparations in the fridge."]
   }
 }

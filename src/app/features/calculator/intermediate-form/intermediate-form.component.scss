@@ -14,14 +14,13 @@
   // together rather than one at a time (#104).
   container-type: inline-size;
 
-  + .grid,
-  + .field {
+  + .grid {
     margin-top: 10px;
   }
 }
 
-// The style question and the rest control: the block treatment of the shared
-// tile, declared once for both sections so they can never drift apart (#107).
+// The style question: the block treatment of the shared tile, declared here
+// too so the question and the tiles below it can never drift apart (#107).
 .field {
   margin: 0 0 10px;
   padding: 12px;
@@ -33,12 +32,6 @@
   + .grid {
     margin-top: 10px;
   }
-}
-
-.field-heading {
-  display: flex;
-  align-items: center;
-  gap: 2px;
 }
 
 .field-label {
@@ -98,32 +91,6 @@
     // step where both the selected/carrier and selected/unselected gaps clear
     // the 1.1 floor in both appearances (1.37 / 1.16 light, 1.12 / 1.15 dark).
     background: color-mix(in srgb, var(--accent) 12%, var(--surface-sunken));
-  }
-}
-
-// The single rest control: a slider for the sweep, steppers for the last hour.
-// Its frame comes from .field, so only the slider row is its own.
-.slider-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-
-  .rest-range {
-    flex: 1;
-    min-width: 0;
-    padding: 0;
-    --bar-height: 4px;
-  }
-
-  .slider-value {
-    // Reserved in characters, not pixels, so the room follows the font scale
-    // of the device; the reading itself never breaks (#104).
-    min-width: 3.5ch;
-    white-space: nowrap;
-    font-size: 1.05rem;
-    font-weight: 700;
-    text-align: right;
-    color: var(--ink);
   }
 }
 

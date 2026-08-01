@@ -2,11 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {
-  IonRange,
-  IonSelect,
-  IonSelectOption,
-} from '@ionic/angular/standalone';
+import { IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 
 import { TranslatePipe } from '@ngx-translate/core';
 import { map, Observable } from 'rxjs';
@@ -35,7 +31,7 @@ import { sizeRange } from '../pizza-format.model';
 import { EXPERT_FIELD_OPTIONS } from '../expert-form/expert-field-options';
 
 /**
- * The rest slider: one question — how long do you have? — in whole hours.
+ * The rest stepper: one question — how long do you have? — in whole hours.
  * It starts at 1 h, not 0: on a null rest the yeast model diverges and gets
  * capped at its ceiling, narrating a Method nobody should follow.
  */
@@ -84,7 +80,6 @@ interface IntermediateVm {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AsyncPipe,
-    IonRange,
     IonSelect,
     IonSelectOption,
     TranslatePipe,
@@ -107,7 +102,6 @@ export class IntermediateFormComponent {
   private readonly router = inject(Router);
 
   protected readonly InfoSheetId = InfoSheetId;
-  protected readonly restBounds = REST_TIME_BOUNDS;
 
   /**
    * The style comes first and is chosen on the result in the mouth, not on a
@@ -184,19 +178,6 @@ export class IntermediateFormComponent {
   ): boolean {
     const { min, max } = this.boundsOf(vm, answer);
     return dir === 1 ? vm.draft[answer] < max : vm.draft[answer] > min;
-  }
-
-  protected onRestSlide(event: Event): void {
-    const { value } = (
-      event as CustomEvent<{ value: number | { lower: number } }>
-    ).detail;
-    const hours = typeof value === 'number' ? value : value.lower;
-    this.state.update({
-      globalRestTime: Math.min(
-        REST_TIME_BOUNDS.max,
-        Math.max(REST_TIME_BOUNDS.min, Math.round(hours)),
-      ),
-    });
   }
 
   protected goToMethod(): void {

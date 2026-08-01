@@ -77,8 +77,6 @@ describe('IntermediateFormComponent', () => {
   const styleSection = (): HTMLElement =>
     host().querySelector('.choice')!.closest('section')!;
 
-  const restSection = (): HTMLElement => host().querySelector('section.rest')!;
-
   /**
    * What makes a block read as a card on this screen — stated as what the eye
    * sees, never as the token or the rule that produces it, so the technique
@@ -148,15 +146,17 @@ describe('IntermediateFormComponent', () => {
       'calculator.intermediate.fields.balls',
       'calculator.intermediate.fields.size',
       'calculator.intermediate.fields.doughType',
-      'calculator.intermediate.fields.temperature',
       'calculator.intermediate.fields.yeastType',
+      'calculator.intermediate.fields.restTime',
+      'calculator.intermediate.fields.temperature',
     ]);
     // The style comes first, above the tiles, as plain-language choices.
     expect(host().querySelector('[data-testid="pizza-type-neapolitan"]'))
       .withContext('style choices')
       .toBeTruthy();
-    // The rest slider sits between the dough type and the temperature.
-    expect(host().querySelector('.rest ion-range')).toBeTruthy();
+    // Every answer below the style is a tile of a two-column row: the rest
+    // slider that stood alone in a full-width block is gone (#120).
+    expect(host().querySelector('ion-range')).toBeNull();
   });
 
   it('shows no salt, honey, olive oil or flour-strength control', () => {
@@ -230,29 +230,21 @@ describe('IntermediateFormComponent', () => {
     expect(textOf('rest-split')).toBe('24\u00a0h ambiante + 12\u00a0h froid');
   });
 
-  it('steps the rest slider one hour at a time, within its bounds', () => {
+  it('steps the rest one hour at a time, within its bounds', () => {
     draftHolds({ globalRestTime: 1 });
-    const [down, up] = Array.from(
-      host().querySelectorAll('.rest .calculator-stepper'),
-    ) as HTMLButtonElement[];
 
-    expect(down.disabled).withContext('at the lower bound').toBeTrue();
+    expect(tile('restTime')!.componentInstance.canStepDown())
+      .withContext('at the lower bound')
+      .toBeFalse();
 
-    up.click();
-    fixture.detectChanges();
+    step('restTime', 'up');
 
     expect(draft.snapshot().globalRestTime).toBe(2);
 
     draftHolds({ globalRestTime: 48 });
-    expect(
-      (
-        host().querySelectorAll(
-          '.rest .calculator-stepper',
-        )[1] as HTMLButtonElement
-      ).disabled,
-    )
+    expect(tile('restTime')!.componentInstance.canStepUp())
       .withContext('at the upper bound')
-      .toBeTrue();
+      .toBeFalse();
   });
 
   it('shows the hydration the style implies, without letting it be set', () => {
@@ -273,8 +265,7 @@ describe('IntermediateFormComponent', () => {
     expect(ids).toEqual(
       jasmine.arrayContaining([
         InfoSheetId.DIRECT,
-        InfoSheetId.WARM_REST,
-        InfoSheetId.COLD_REST,
+        InfoSheetId.REST,
         InfoSheetId.TEMPERATURE,
         InfoSheetId.YEASTS,
         InfoSheetId.HYDRATION,
@@ -313,20 +304,16 @@ describe('IntermediateFormComponent', () => {
     });
 
     it('presents itself as a card, like every other block of the screen', () => {
-      const framed = blockTreatment(styleSection());
+      const tile = host().querySelector('app-calculator-tile')!;
 
-      // Anchored on the shared tile, which frames itself: comparing the two
-      // sections to each other alone would stay green if the frame they now
-      // share were dropped from both at once.
-      expect(framed)
+      // Anchored on the shared tile, which frames itself: the style question
+      // is now the only block of the screen that is not one.
+      expect(blockTreatment(styleSection()))
         .withContext('against the shared tile')
-        .toEqual(blockTreatment(host().querySelector('app-calculator-tile')!));
-      expect(framed)
-        .withContext('against the rest block')
-        .toEqual(blockTreatment(restSection()));
+        .toEqual(blockTreatment(tile));
       expect(getComputedStyle(styleSection()).paddingTop)
         .withContext('the inner spacing of a block')
-        .toBe(getComputedStyle(restSection()).paddingTop);
+        .toBe(getComputedStyle(tile).paddingTop);
     });
 
     it('keeps each style card distinguishable from the block carrying it', () => {

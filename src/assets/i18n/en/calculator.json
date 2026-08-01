@@ -58,15 +58,11 @@
       "size": "Pizza size",
       "doughType": "Dough type",
       "restTime": "Resting time",
-      "temperature": "Room temperature",
+      "temperature": "Temperature",
       "yeastType": "Yeast type"
     },
     "hints": {
-      "pizzaType": "The style sets hydration, olive oil and the sizes on offer.",
-      "restTime": "Beyond 24\u00a0h we split the rest between ambient and cold."
-    },
-    "units": {
-      "restTime": "{hours}\u00a0h"
+      "pizzaType": "The style sets hydration, olive oil and the sizes on offer."
     },
     "readOnly": {
       "title": "What we decided for you",
