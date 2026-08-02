@@ -54,6 +54,8 @@ export const SUGGESTED_DOUGHS = [
   },
   {
     // The wetter of the two: a light, cheeseless topping carries more water.
+    // A Recipe that only dresses the pizza out of the oven still bakes bare,
+    // so it belongs here rather than with the cheese-laden 62 %.
     id: 'neapolitan-direct-24h-66',
     input: { ...NEAPOLITAN_DIRECT_24H, hydrationRatio: 0.66 },
   },
@@ -102,6 +104,18 @@ export const PIZZA_RECIPE_CATALOG = [
         'https://www.pexels.com/photo/authentic-artisan-pizza-on-rustic-wooden-table-34775818/',
       photographer: 'Rene Strgar',
     },
+    suggestedDoughId: 'neapolitan-direct-24h-66',
+  },
+  {
+    id: 'marinara-garnie',
+    image: {
+      path: 'assets/recipes/marinara-garnie.webp',
+      sourceUrl:
+        'https://www.pexels.com/photo/artisan-italian-pizza-with-fresh-ingredients-35009066/',
+      photographer: 'Tom Lanoe',
+    },
+    // The same preset as the plain Marinara: it bakes as a bare Marinara and
+    // is only dressed out of the oven, so the dough asked of it is unchanged.
     suggestedDoughId: 'neapolitan-direct-24h-66',
   },
   {

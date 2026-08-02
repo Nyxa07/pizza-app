@@ -39,6 +39,33 @@
       "Cuire très chaud et ajouter le basilic frais à la sortie du four."
     ]
   },
+  "marinara-garnie": {
+    "name": "Marinara garnie",
+    "category": "La marinara habillée",
+    "summary": "Une marinara cuite nature, couverte à la sortie du four de stracciatella, de tomates cerises et de roquette.",
+    "description": "Tout se joue hors du four. La pizza cuit en marinara, sans fromage, et ne reçoit sa garniture qu'une fois sortie : la stracciatella reste crémeuse, la roquette croquante et les tomates cerises fraîches.",
+    "imageAlt": "Pizza à la tomate couverte de roquette et de tomates cerises, avec une boule de mozzarella au centre",
+    "doughSuggestion": "Pâte napolitaine directe · 24 h",
+    "ingredients": [
+      "90 g de tomates pelées concassées par pizza",
+      "1 petite gousse d'ail finement émincée",
+      "Une pincée d'origan séché",
+      "100 g de stracciatella par pizza (ou une mozzarella très fondante, cœur de burrata compris)",
+      "8 tomates cerises coupées en deux par pizza",
+      "Une grosse poignée de roquette par pizza",
+      "3 à 4 tranches de jambon de Parme ou de speck par pizza (facultatif)",
+      "Copeaux de parmesan et vinaigre balsamique, à volonté (facultatif)",
+      "Huile d'olive vierge extra et poivre du moulin"
+    ],
+    "steps": [
+      "Assaisonner légèrement les tomates concassées avec du sel.",
+      "Étaler la pâte, puis répartir la tomate jusqu'à deux centimètres du bord.",
+      "Parsemer l'ail et l'origan, puis cuire très chaud comme une marinara nature.",
+      "Hors du four, déposer la stracciatella en cuillerées espacées pour qu'elle reste crémeuse.",
+      "Couvrir généreusement de roquette et de tomates cerises, puis ajouter le jambon de Parme ou le speck.",
+      "Toujours hors du four, terminer par un filet d'huile d'olive, un tour de poivre et, à volonté, des copeaux de parmesan et quelques gouttes de balsamique, puis servir aussitôt."
+    ]
+  },
   "reine": {
     "name": "Reine",
     "category": "Le classique français",
