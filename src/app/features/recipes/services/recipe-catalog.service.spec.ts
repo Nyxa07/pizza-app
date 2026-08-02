@@ -115,6 +115,18 @@ describe('The dough each Recipe recommends', () => {
       coldHours: 0,
     },
     {
+      // Dressed out of the oven, so it asks for the same dough as the Marinara.
+      id: 'marinara-garnie',
+      pizzaType: PizzaType.NEAPOLITAN,
+      doughType: DoughType.DIRECT,
+      hydrationRatio: 0.66,
+      flourStrength: 270,
+      balls: 4,
+      ballWeight: 250,
+      ambientHours: 24,
+      coldHours: 0,
+    },
+    {
       id: 'reine',
       pizzaType: PizzaType.ROMAN,
       doughType: DoughType.DIRECT,
@@ -204,6 +216,7 @@ describe('RecipeCatalogService', () => {
     expect(service.list().map((recipe) => recipe.content.name)).toEqual([
       'Margherita',
       'Marinara',
+      'Marinara garnie',
       'Reine',
       '4 fromages',
     ]);

@@ -39,6 +39,32 @@
       "Bake very hot and add the fresh basil as the pizza leaves the oven."
     ]
   },
+  "marinara-garnie": {
+    "name": "Dressed marinara",
+    "category": "The dressed-up one",
+    "summary": "A marinara baked bare, then covered out of the oven with stracciatella, cherry tomatoes and rocket.",
+    "description": "Everything happens out of the oven. The pizza bakes as a marinara, without cheese, and is only dressed once it comes out: the stracciatella stays creamy, the rocket crisp and the cherry tomatoes fresh.",
+    "imageAlt": "Tomato pizza covered with rocket and cherry tomatoes, with a ball of mozzarella at the centre",
+    "doughSuggestion": "Direct Neapolitan dough · 24 hours",
+    "ingredients": [
+      "90 g hand-crushed peeled tomatoes per pizza",
+      "1 small garlic clove, finely sliced",
+      "A pinch of dried oregano",
+      "100 g stracciatella per pizza (or a very melty mozzarella, burrata heart included)",
+      "8 cherry tomatoes, halved, per pizza",
+      "A large handful of rocket per pizza",
+      "3 to 4 slices of Parma ham or speck per pizza (optional)",
+      "Extra-virgin olive oil and freshly ground pepper"
+    ],
+    "steps": [
+      "Season the crushed tomatoes lightly with salt.",
+      "Open the dough, then spread the tomato to within two centimetres of the rim.",
+      "Scatter over the garlic and oregano, then bake very hot like a plain marinara.",
+      "Out of the oven, spoon over spaced dollops of stracciatella so it stays creamy.",
+      "Cover generously with rocket and cherry tomatoes, then add the Parma ham or speck.",
+      "Finish with a drizzle of olive oil and a twist of pepper, and serve straight away."
+    ]
+  },
   "reine": {
     "name": "Reine",
     "category": "The French classic",
