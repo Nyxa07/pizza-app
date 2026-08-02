@@ -11,7 +11,7 @@ Attribution is not required, but the detail screen links back to each source.
 | ---------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `margherita.webp`      | Giona Mason      | [Top View of Pizza](https://www.pexels.com/photo/top-view-of-pizza-19260786/)                                                           |
 | `marinara.webp`        | Rene Strgar      | [Authentic Artisan Pizza on Rustic Wooden Table](https://www.pexels.com/photo/authentic-artisan-pizza-on-rustic-wooden-table-34775818/) |
-| `marinara-garnie.webp` | Tom Lanoe        | [Pexels photo 35009066](https://www.pexels.com/photo/35009066/)                                                                         |
+| `marinara-garnie.webp` | Tom Lanoe        | [Artisan Italian Pizza With Fresh Ingredients](https://www.pexels.com/photo/artisan-italian-pizza-with-fresh-ingredients-35009066/)     |
 | `reine.webp`           | Nadin Sh         | [Pizza With Ham and Mushroom Toppings](https://www.pexels.com/photo/pizza-with-ham-and-mushroom-toppings-12288354/)                     |
 | `quatre-fromages.webp` | Anhelina Vasylyk | [Rustic Four Cheese Pizza on Wooden Table](https://www.pexels.com/photo/rustic-four-cheese-pizza-on-wooden-table-33592983/)             |
 

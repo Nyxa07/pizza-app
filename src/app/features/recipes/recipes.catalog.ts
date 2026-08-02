@@ -110,7 +110,8 @@ export const PIZZA_RECIPE_CATALOG = [
     id: 'marinara-garnie',
     image: {
       path: 'assets/recipes/marinara-garnie.webp',
-      sourceUrl: 'https://www.pexels.com/photo/35009066/',
+      sourceUrl:
+        'https://www.pexels.com/photo/artisan-italian-pizza-with-fresh-ingredients-35009066/',
       photographer: 'Tom Lanoe',
     },
     // The same preset as the plain Marinara: it bakes as a bare Marinara and
