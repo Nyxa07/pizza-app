@@ -88,7 +88,7 @@
   },
   "quatre-fromages": {
     "name": "4 fromages",
-    "category": "La blanche gourmande",
+    "category": "La plus fondante",
     "summary": "Ricotta, fior di latte, camembert et roquefort, relevés d'un filet de miel et de cerneaux de noix.",
     "description": "Une pizza blanche en deux temps : la ricotta assaisonnée cuit avec la pâte, les trois autres fromages n'arrivent qu'en fin de cuisson pour rester fondants. Miel, noix et basilic se posent hors du four.",
     "imageAlt": "Pizza blanche aux quatre fromages fondus, vue du dessus sur une planche en bois",
@@ -183,6 +183,31 @@
       "Enfourner très chaud avec la tomate seule : la base prend sa couleur avant que la garniture n'arrive.",
       "Sortir la pizza, répartir le fior di latte, la spianata, le parmesan, l'oignon confit et deux ou trois feuilles de basilic, puis remettre au four juste le temps de faire fondre le fromage et de perler le gras du salami.",
       "Hors du four, verser un filet d'huile d'olive et poser le reste du basilic, puis servir aussitôt."
+    ]
+  },
+  "la-gourmande": {
+    "name": "La gourmande",
+    "category": "La blanche d'automne",
+    "summary": "Crème de courge, fior di latte et girolles poêlées, couronnées de stracciatella et d'une pincée de piment d'Espelette.",
+    "description": "Une blanche d'automne en trois temps : la crème de courge et le fior di latte cuisent avec la pâte, les girolles ne font que passer au four pour rester fermes, et la stracciatella n'arrive qu'à la sortie, encore froide et crémeuse.",
+    "imageAlt": "Gros plan d'une garniture blanche crémeuse aux champignons effilochés et au persil haché",
+    "doughSuggestion": "Pâte napolitaine directe · 24 h",
+    "ingredients": [
+      "120 g de courge butternut en cubes par pizza (pour environ 80 g de crème)",
+      "80 g de fior di latte bien égoutté par pizza",
+      "80 g de girolles nettoyées par pizza (des pleurotes hors saison)",
+      "1 petite échalote émincée et une noisette de beurre par pizza",
+      "100 g de stracciatella par pizza",
+      "1 bonne pincée de piment d'Espelette par pizza",
+      "Persil plat haché, huile d'olive vierge extra, sel et poivre"
+    ],
+    "steps": [
+      "Rôtir la courge avec un filet d'huile, du sel et du poivre jusqu'à ce qu'elle soit fondante, puis la mixer : la crème doit se tenir à la cuillère, sans couler.",
+      "Poêler les girolles à feu vif avec le beurre et l'échalote jusqu'à ce que toute leur eau soit partie, puis saler, poivrer et parsemer de persil hors du feu.",
+      "Étaler la pâte en gardant un bord gonflé, puis répartir la crème de courge jusqu'à deux centimètres du bord.",
+      "Ajouter le fior di latte en petits morceaux espacés et enfourner très chaud.",
+      "Sortir la pizza dès que le fromage est fondu, parsemer les girolles et la remettre au four juste le temps de les réchauffer.",
+      "Hors du four, déposer la stracciatella en cuillerées, terminer par le piment d'Espelette et un filet d'huile d'olive, puis servir aussitôt."
     ]
   }
 }

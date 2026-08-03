@@ -1,10 +1,11 @@
 # Provisional Recipe photos
 
-The eight bundled photos are distributed by Pexels under the
+The nine bundled photos are distributed by Pexels under the
 [Pexels licence](https://www.pexels.com/license/), which permits free use in an
 app and commercial projects. They were downloaded and resized on 2026-07-18,
 except `quatre-fromages.webp` (2026-07-26), `marinara-garnie.webp` (2026-08-02),
-`pesto.webp`, `la-regalade.webp` and `diavola.webp` (2026-08-03).
+`pesto.webp`, `la-regalade.webp`, `diavola.webp` and `la-gourmande.webp`
+(2026-08-03).
 Attribution is not required, but the detail screen links back to each source.
 
 | Asset                  | Photographer      | Source                                                                                                                                            |
@@ -17,6 +18,7 @@ Attribution is not required, but the detail screen links back to each source.
 | `pesto.webp`           | Esma Kır          | [Gourmet Pizza With Burrata and Pesto Topping](https://www.pexels.com/photo/gourmet-pizza-with-burrata-and-pesto-topping-31899406/)               |
 | `la-regalade.webp`     | Gotta Be Worth It | [Delicious Italian Pizza With Prosciutto and Burrata](https://www.pexels.com/photo/delicious-italian-pizza-with-prosciutto-and-burrata-31357689/) |
 | `diavola.webp`         | Valeria Boltneva  | [Pizza Pepperoni With Salami and Basil on Top](https://www.pexels.com/photo/pizza-pepperoni-with-salami-and-basil-on-top-10875202/)               |
+| `la-gourmande.webp`    | Nadin Sh          | [Close-up of a Creamy Dish Topped with Parsley](https://www.pexels.com/photo/close-up-of-a-creamy-dish-topped-with-parsley-17402716/)             |
 
 These visuals are intentionally replaceable: keep the same asset names to swap
 them without changing application code, then update this provenance table.

@@ -177,4 +177,16 @@ export const PIZZA_RECIPE_CATALOG = [
     // the cheese-laden side, with the Margherita and the 4 fromages.
     suggestedDoughId: 'neapolitan-direct-24h-62',
   },
+  {
+    id: 'la-gourmande',
+    image: {
+      path: 'assets/recipes/la-gourmande.webp',
+      sourceUrl:
+        'https://www.pexels.com/photo/close-up-of-a-creamy-dish-topped-with-parsley-17402716/',
+      photographer: 'Nadin Sh',
+    },
+    // The 62 % preset once more: squash cream and fior di latte bake on the
+    // dough, so it carries as much water as the Four cheeses does.
+    suggestedDoughId: 'neapolitan-direct-24h-62',
+  },
 ] satisfies readonly PizzaRecipeDefinition[];
