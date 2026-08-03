@@ -35,6 +35,7 @@
     "ingredients": "Pour la garniture",
     "preparation": "Préparation",
     "photoCredit": "Photo : {photographer} · Pexels",
+    "photoDisclaimer": "Photo d'illustration, non contractuelle.",
     "notFoundTitle": "Recette introuvable",
     "notFoundBody": "Cette Recette n'existe pas dans le catalogue embarqué.",
     "emptyTitle": "Aucune recette",

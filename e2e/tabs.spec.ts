@@ -43,6 +43,17 @@ test.describe('Primary tabs', () => {
     }
   });
 
+  test('a recipe detail credits its photo and calls it illustrative', async ({
+    page,
+  }) => {
+    await page.goto('/tabs/recipes');
+    await page.getByRole('button', { name: /La Régalade/ }).click();
+
+    const caption = page.locator('app-recipe-detail-page figcaption');
+    await expect(caption).toContainText('Gotta Be Worth It');
+    await expect(caption).toContainText('Illustrative photo');
+  });
+
   test('doughs tab lists the seeded doughs', async ({ page }) => {
     await page.goto('/tabs/doughs');
 

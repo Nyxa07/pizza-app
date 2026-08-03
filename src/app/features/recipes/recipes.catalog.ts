@@ -151,4 +151,42 @@ export const PIZZA_RECIPE_CATALOG = [
     // parmesan make the finished pizza as cheese-heavy as the Four cheeses.
     suggestedDoughId: 'neapolitan-direct-24h-62',
   },
+  {
+    id: 'la-regalade',
+    image: {
+      path: 'assets/recipes/la-regalade.webp',
+      sourceUrl:
+        'https://www.pexels.com/photo/delicious-italian-pizza-with-prosciutto-and-burrata-31357689/',
+      photographer: 'Gotta Be Worth It',
+    },
+    // The drier of the two Neapolitans, like the four-cheese one. This Recipe
+    // is dressed out of the oven, which would otherwise point at the 66 %, but
+    // 140 g of buffalo mozzarella and provolone per pizza is the heaviest
+    // cheese load of the notebook and the cheese wins the arbitration.
+    suggestedDoughId: 'neapolitan-direct-24h-62',
+  },
+  {
+    id: 'diavola',
+    image: {
+      path: 'assets/recipes/diavola.webp',
+      sourceUrl:
+        'https://www.pexels.com/photo/pizza-pepperoni-with-salami-and-basil-on-top-10875202/',
+      photographer: 'Valeria Boltneva',
+    },
+    // Fior di latte, parmesan and the fat rendered by the spianata put it on
+    // the cheese-laden side, with the Margherita and the 4 fromages.
+    suggestedDoughId: 'neapolitan-direct-24h-62',
+  },
+  {
+    id: 'la-gourmande',
+    image: {
+      path: 'assets/recipes/la-gourmande.webp',
+      sourceUrl:
+        'https://www.pexels.com/photo/close-up-of-a-creamy-dish-topped-with-parsley-17402716/',
+      photographer: 'Nadin Sh',
+    },
+    // The 62 % preset once more: squash cream and fior di latte bake on the
+    // dough, so it carries as much water as the Four cheeses does.
+    suggestedDoughId: 'neapolitan-direct-24h-62',
+  },
 ] satisfies readonly PizzaRecipeDefinition[];

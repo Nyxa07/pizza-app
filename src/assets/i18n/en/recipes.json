@@ -88,7 +88,7 @@
   },
   "quatre-fromages": {
     "name": "Four cheeses",
-    "category": "The indulgent white one",
+    "category": "The meltiest one",
     "summary": "Ricotta, fior di latte, camembert and roquefort, lifted by a drizzle of honey and crushed walnuts.",
     "description": "A white pizza in two stages: the seasoned ricotta bakes with the dough, while the three other cheeses only go on at the end so they stay molten. Honey, walnuts and basil are added out of the oven.",
     "imageAlt": "Top view of a white pizza with four melted cheeses on a wooden board",
@@ -132,6 +132,82 @@
       "Take the pizza out, spread the pesto, then scatter over the confit tomatoes, the fior di latte and the parmesan.",
       "Return it to the oven just long enough to melt the mozzarella, without letting the pesto colour.",
       "Out of the oven, spoon over spaced dollops of stracciatella, then finish with fresh basil and a last drizzle of oil."
+    ]
+  },
+  "la-regalade": {
+    "name": "La Régalade",
+    "category": "The sweet-and-savoury one",
+    "summary": "Yellow cherry tomato sauce, buffalo mozzarella, Parma ham, provolone, fig jam and toasted almonds.",
+    "description": "The base bakes with the yellow sauce alone: cheeses, ham, jam and almonds are all added out of the oven. Sweet answers savoury and nothing is cooked twice.",
+    "imageAlt": "Close-up of a white pizza generously topped with cured ham, a ball of burrata, cream and basil leaves",
+    "doughSuggestion": "Direct Neapolitan dough · 24 hours",
+    "ingredients": [
+      "100 g yellow cherry tomatoes per pizza (red ones if you cannot find them)",
+      "100 g well-drained buffalo mozzarella per pizza",
+      "50 g sliced Parma ham per pizza",
+      "40 g thinly sliced provolone per pizza",
+      "15 g fig jam per pizza, about one heaped teaspoon",
+      "15 g dry-toasted, roughly crushed almonds per pizza",
+      "4 to 5 fresh basil leaves",
+      "Extra-virgin olive oil, salt and fine semolina for opening the dough"
+    ],
+    "steps": [
+      "Blend the raw yellow cherry tomatoes with a pinch of salt and a drizzle of olive oil: that is the whole sauce, and it never cooks.",
+      "Dry-toast the almonds in a pan until fragrant, then crush them roughly.",
+      "Open the dough on a semolina-dusted surface, keeping a good puffy rim.",
+      "Spread the sauce to within two centimetres of the edge, add a drizzle of oil, then bake very hot in the lower part of the oven, about 8 minutes at 250 °C fan.",
+      "Out of the oven, scatter over the hand-torn buffalo mozzarella, the slices of Parma ham and the provolone.",
+      "Still out of the oven, dot over the fig jam, scatter the almonds, add the basil and a last thread of oil, then serve straight away."
+    ]
+  },
+  "diavola": {
+    "name": "Diavola",
+    "category": "The spicy one",
+    "summary": "Tomato, fior di latte and spicy spianata, softened by slow-cooked red onion.",
+    "description": "The heat of a Diavola never burns, it builds. The spianata only goes on after the tomato base has had a first bake, just long enough for its fat to bead over the cheese, while the slow-cooked red onion answers with a sweet note.",
+    "imageAlt": "Tomato and mozzarella pizza covered with slices of spicy salami and basil leaves",
+    "doughSuggestion": "Direct Neapolitan dough · 24 hours",
+    "ingredients": [
+      "80 g hand-crushed peeled tomatoes per pizza",
+      "80 g well-drained fior di latte per pizza",
+      "50 g thinly sliced spicy spianata per pizza (failing that, a hot salami such as ventricina)",
+      "25 g slow-cooked red onion per pizza",
+      "15 g grated parmesan per pizza",
+      "5 basil leaves",
+      "Extra-virgin olive oil, a little fine semolina and a pinch of salt"
+    ],
+    "steps": [
+      "Soften the sliced red onion gently in olive oil with a pinch of salt until it turns jammy, then leave it to cool.",
+      "Season the crushed tomatoes with a pinch of salt; do not cook them.",
+      "Open the dough on a semolina-dusted surface, keeping a rim of about two centimetres, then spread over the tomato.",
+      "Bake very hot with the tomato alone: the base takes on its colour before any topping arrives.",
+      "Take the pizza out, scatter over the fior di latte, the spianata, the parmesan, the slow-cooked onion and two or three basil leaves, then return it to the oven just long enough to melt the cheese and bead the fat of the salami.",
+      "Out of the oven, drizzle over some olive oil, add the remaining basil and serve straight away."
+    ]
+  },
+  "la-gourmande": {
+    "name": "The indulgent one",
+    "category": "The autumn white one",
+    "summary": "Squash cream, fior di latte and pan-fried chanterelles, crowned with stracciatella and a pinch of Espelette pepper.",
+    "description": "An autumn white pizza in three stages: the squash cream and the fior di latte bake with the dough, the chanterelles only pass through the oven so they stay firm, and the stracciatella goes on as the pizza comes out, still cold and creamy.",
+    "imageAlt": "Close-up of a creamy white topping with pulled mushrooms and chopped parsley",
+    "doughSuggestion": "Direct Neapolitan dough · 24 hours",
+    "ingredients": [
+      "120 g diced butternut squash per pizza (for about 80 g of cream)",
+      "80 g well-drained fior di latte per pizza",
+      "80 g cleaned chanterelles per pizza (oyster mushrooms out of season)",
+      "1 small shallot, finely sliced, and a knob of butter per pizza",
+      "100 g stracciatella per pizza",
+      "1 generous pinch of Espelette pepper per pizza",
+      "Chopped flat-leaf parsley, extra-virgin olive oil, salt and pepper"
+    ],
+    "steps": [
+      "Roast the squash with a drizzle of oil, salt and pepper until meltingly soft, then blend it: the cream should hold on a spoon without running.",
+      "Pan-fry the chanterelles over high heat with the butter and the shallot until all their water has gone, then season and scatter over the parsley off the heat.",
+      "Open the dough while keeping a puffy rim, then spread the squash cream to within two centimetres of the edge.",
+      "Add small, spaced pieces of fior di latte and bake very hot.",
+      "Take the pizza out as soon as the cheese has melted, scatter over the chanterelles and return it to the oven just long enough to warm them through.",
+      "Out of the oven, spoon over the stracciatella, finish with the Espelette pepper and a drizzle of olive oil, then serve straight away."
     ]
   }
 }

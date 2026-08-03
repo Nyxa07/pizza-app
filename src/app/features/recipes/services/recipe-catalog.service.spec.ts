@@ -163,6 +163,44 @@ describe('The dough each Recipe recommends', () => {
       ambientHours: 24,
       coldHours: 0,
     },
+    {
+      // The heaviest cheese load of the notebook, so the drier of the two
+      // Neapolitans, exactly like the four-cheese one.
+      id: 'la-regalade',
+      pizzaType: PizzaType.NEAPOLITAN,
+      doughType: DoughType.DIRECT,
+      hydrationRatio: 0.62,
+      flourStrength: 270,
+      balls: 4,
+      ballWeight: 250,
+      ambientHours: 24,
+      coldHours: 0,
+    },
+    {
+      // Cheese and cured fat on top, so it asks for the drier of the two.
+      id: 'diavola',
+      pizzaType: PizzaType.NEAPOLITAN,
+      doughType: DoughType.DIRECT,
+      hydrationRatio: 0.62,
+      flourStrength: 270,
+      balls: 4,
+      ballWeight: 250,
+      ambientHours: 24,
+      coldHours: 0,
+    },
+    {
+      // Squash cream and fior di latte bake on the dough: the same drier
+      // Neapolitan the Margherita and the Four cheeses ask for.
+      id: 'la-gourmande',
+      pizzaType: PizzaType.NEAPOLITAN,
+      doughType: DoughType.DIRECT,
+      hydrationRatio: 0.62,
+      flourStrength: 270,
+      balls: 4,
+      ballWeight: 250,
+      ambientHours: 24,
+      coldHours: 0,
+    },
   ] as const;
 
   let catalog: RecipeCatalogService;
@@ -233,9 +271,17 @@ describe('RecipeCatalogService', () => {
       'Reine',
       '4 fromages',
       'Pesto',
+      'La Régalade',
+      'Diavola',
+      'La gourmande',
     ]);
     expect(service.get('marinara')?.content.category).toBe(
       'La plus dépouillée',
+    );
+    // No card may claim a word another card is named after: the Four cheeses
+    // gave up "gourmande" when "La gourmande" joined the notebook.
+    expect(service.get('quatre-fromages')?.content.category).toBe(
+      'La plus fondante',
     );
   });
 
