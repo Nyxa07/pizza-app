@@ -88,7 +88,7 @@
   },
   "quatre-fromages": {
     "name": "Four cheeses",
-    "category": "The indulgent white one",
+    "category": "The meltiest one",
     "summary": "Ricotta, fior di latte, camembert and roquefort, lifted by a drizzle of honey and crushed walnuts.",
     "description": "A white pizza in two stages: the seasoned ricotta bakes with the dough, while the three other cheeses only go on at the end so they stay molten. Honey, walnuts and basil are added out of the oven.",
     "imageAlt": "Top view of a white pizza with four melted cheeses on a wooden board",
@@ -108,6 +108,31 @@
       "Bake very hot: the ricotta cooks with the dough and loses its excess water.",
       "Take the pizza out, scatter over the fior di latte, camembert and roquefort, then return it to the oven just long enough to melt them.",
       "Out of the oven, add the walnuts, drizzle over the honey, and finish with basil and a last thread of oil."
+    ]
+  },
+  "la-gourmande": {
+    "name": "The indulgent one",
+    "category": "The autumn white one",
+    "summary": "Squash cream, fior di latte and pan-fried chanterelles, crowned with stracciatella and a pinch of Espelette pepper.",
+    "description": "An autumn white pizza in three stages: the squash cream and the fior di latte bake with the dough, the chanterelles only pass through the oven so they stay firm, and the stracciatella goes on as the pizza comes out, still cold and creamy.",
+    "imageAlt": "Close-up of a creamy white topping with pulled mushrooms and chopped parsley",
+    "doughSuggestion": "Direct Neapolitan dough · 24 hours",
+    "ingredients": [
+      "120 g diced butternut squash per pizza (for about 80 g of cream)",
+      "80 g well-drained fior di latte per pizza",
+      "80 g cleaned chanterelles per pizza (oyster mushrooms out of season)",
+      "1 small shallot, finely sliced, and a knob of butter per pizza",
+      "100 g stracciatella per pizza",
+      "1 generous pinch of Espelette pepper per pizza",
+      "Chopped flat-leaf parsley, extra-virgin olive oil, salt and pepper"
+    ],
+    "steps": [
+      "Roast the squash with a drizzle of oil, salt and pepper until meltingly soft, then blend it: the cream should hold on a spoon without running.",
+      "Pan-fry the chanterelles over high heat with the butter and the shallot until all their water has gone, then season and scatter over the parsley off the heat.",
+      "Open the dough while keeping a puffy rim, then spread the squash cream to within two centimetres of the edge.",
+      "Add small, spaced pieces of fior di latte and bake very hot.",
+      "Take the pizza out as soon as the cheese has melted, scatter over the chanterelles and return it to the oven just long enough to warm them through.",
+      "Out of the oven, spoon over the stracciatella, finish with the Espelette pepper and a drizzle of olive oil, then serve straight away."
     ]
   }
 }
