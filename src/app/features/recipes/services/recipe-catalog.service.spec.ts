@@ -150,6 +150,18 @@ describe('The dough each Recipe recommends', () => {
       ambientHours: 24,
       coldHours: 0,
     },
+    {
+      // Cheese and cured fat on top, so it asks for the drier of the two.
+      id: 'diavola',
+      pizzaType: PizzaType.NEAPOLITAN,
+      doughType: DoughType.DIRECT,
+      hydrationRatio: 0.62,
+      flourStrength: 270,
+      balls: 4,
+      ballWeight: 250,
+      ambientHours: 24,
+      coldHours: 0,
+    },
   ] as const;
 
   let catalog: RecipeCatalogService;
@@ -219,6 +231,7 @@ describe('RecipeCatalogService', () => {
       'Marinara garnie',
       'Reine',
       '4 fromages',
+      'Diavola',
     ]);
     expect(service.get('marinara')?.content.category).toBe(
       'La plus dépouillée',

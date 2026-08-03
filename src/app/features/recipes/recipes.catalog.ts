@@ -139,4 +139,16 @@ export const PIZZA_RECIPE_CATALOG = [
     // The 62 % preset again: a cheese-heavy topping asks for the drier dough.
     suggestedDoughId: 'neapolitan-direct-24h-62',
   },
+  {
+    id: 'diavola',
+    image: {
+      path: 'assets/recipes/diavola.webp',
+      sourceUrl:
+        'https://www.pexels.com/photo/pizza-pepperoni-with-salami-and-basil-on-top-10875202/',
+      photographer: 'Valeria Boltneva',
+    },
+    // Fior di latte, parmesan and the fat rendered by the spianata put it on
+    // the cheese-laden side, with the Margherita and the 4 fromages.
+    suggestedDoughId: 'neapolitan-direct-24h-62',
+  },
 ] satisfies readonly PizzaRecipeDefinition[];

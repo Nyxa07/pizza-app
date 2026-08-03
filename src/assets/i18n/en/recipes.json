@@ -109,5 +109,30 @@
       "Take the pizza out, scatter over the fior di latte, camembert and roquefort, then return it to the oven just long enough to melt them.",
       "Out of the oven, add the walnuts, drizzle over the honey, and finish with basil and a last thread of oil."
     ]
+  },
+  "diavola": {
+    "name": "Diavola",
+    "category": "The spicy one",
+    "summary": "Tomato, fior di latte and spicy spianata, softened by slow-cooked red onion.",
+    "description": "The heat of a Diavola never burns, it builds. The spianata only goes on after the tomato base has had a first bake, just long enough for its fat to bead over the cheese, while the slow-cooked red onion answers with a sweet note.",
+    "imageAlt": "Tomato and mozzarella pizza covered with slices of spicy salami and basil leaves",
+    "doughSuggestion": "Direct Neapolitan dough · 24 hours",
+    "ingredients": [
+      "80 g hand-crushed peeled tomatoes per pizza",
+      "80 g well-drained fior di latte per pizza",
+      "50 g thinly sliced spicy spianata per pizza (failing that, a hot salami such as ventricina)",
+      "25 g slow-cooked red onion per pizza",
+      "15 g grated parmesan per pizza",
+      "5 basil leaves",
+      "Extra-virgin olive oil, a little fine semolina and a pinch of salt"
+    ],
+    "steps": [
+      "Soften the sliced red onion gently in olive oil with a pinch of salt until it turns jammy, then leave it to cool.",
+      "Season the crushed tomatoes with a pinch of salt; do not cook them.",
+      "Open the dough on a semolina-dusted surface, keeping a rim of about two centimetres, then spread over the tomato.",
+      "Bake very hot with the tomato alone: the base takes on its colour before any topping arrives.",
+      "Take the pizza out, scatter over the fior di latte, the spianata, the parmesan, the slow-cooked onion and two or three basil leaves, then return it to the oven just long enough to melt the cheese and bead the fat of the salami.",
+      "Out of the oven, drizzle over some olive oil, add the remaining basil and serve straight away."
+    ]
   }
 }
