@@ -139,4 +139,16 @@ export const PIZZA_RECIPE_CATALOG = [
     // The 62 % preset again: a cheese-heavy topping asks for the drier dough.
     suggestedDoughId: 'neapolitan-direct-24h-62',
   },
+  {
+    id: 'pesto',
+    image: {
+      path: 'assets/recipes/pesto.webp',
+      sourceUrl:
+        'https://www.pexels.com/photo/gourmet-pizza-with-burrata-and-pesto-topping-31899406/',
+      photographer: 'Esma Kır',
+    },
+    // The 62 % preset again: the base bakes bare, but two mozzarellas and
+    // parmesan make the finished pizza as cheese-heavy as the Four cheeses.
+    suggestedDoughId: 'neapolitan-direct-24h-62',
+  },
 ] satisfies readonly PizzaRecipeDefinition[];

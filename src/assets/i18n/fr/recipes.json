@@ -109,5 +109,29 @@
       "Sortir la pizza, répartir le fior di latte, le camembert et le roquefort, puis remettre au four juste le temps de les faire fondre.",
       "Hors du four, parsemer les noix, verser le miel en filet et terminer par le basilic et un dernier trait d'huile."
     ]
+  },
+  "pesto": {
+    "name": "Pesto",
+    "category": "La verte crémeuse",
+    "summary": "Une base cuite nue, puis du pesto qui ne voit presque pas le four et deux mozzarellas ajoutées à la fin.",
+    "description": "Le pesto ne cuit pas. La pâte part seule au four, badigeonnée d'huile d'olive, et ne reçoit le pesto, les tomates confites et le fior di latte qu'à la reprise ; la stracciatella, elle, attend la sortie du four pour rester crémeuse.",
+    "imageAlt": "Gros plan d'une pizza au pesto, avec une boule de mozzarella crémeuse nappée de pesto sur la gauche et un bord très coloré",
+    "doughSuggestion": "Pâte napolitaine directe · 24 h",
+    "ingredients": [
+      "60 g de pesto au basilic par pizza, maison ou de bonne qualité",
+      "50 g de tomates cerises confites par pizza (ou des tomates cerises rôties au four avec un filet d'huile)",
+      "40 g de fior di latte bien égoutté par pizza",
+      "10 g de parmesan râpé par pizza",
+      "80 g de stracciatella par pizza",
+      "Semoule remoulue pour le plan de travail",
+      "Huile d'olive vierge extra et quelques feuilles de basilic frais"
+    ],
+    "steps": [
+      "Fariner le plan de travail de semoule et étaler la pâte à la main en gardant un bord gonflé.",
+      "Badigeonner toute la surface d'huile d'olive, puis enfourner très chaud et cuire la pâte nue jusqu'à ce que le dessous soit doré.",
+      "Sortir la pizza, étaler le pesto, puis répartir les tomates confites, le fior di latte et le parmesan.",
+      "Remettre au four juste le temps de faire fondre la mozzarella, sans laisser le pesto colorer.",
+      "Hors du four, déposer la stracciatella en cuillerées espacées, puis terminer par le basilic frais et un dernier filet d'huile."
+    ]
   }
 }
