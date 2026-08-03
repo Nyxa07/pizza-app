@@ -109,5 +109,31 @@
       "Sortir la pizza, répartir le fior di latte, le camembert et le roquefort, puis remettre au four juste le temps de les faire fondre.",
       "Hors du four, parsemer les noix, verser le miel en filet et terminer par le basilic et un dernier trait d'huile."
     ]
+  },
+  "la-regalade": {
+    "name": "La Régalade",
+    "category": "La sucrée-salée",
+    "summary": "Sauce de tomates cerises jaunes, bufflonne, jambon de Parme, provolone, confiture de figues et amandes grillées.",
+    "description": "La base cuit avec la seule sauce jaune : fromages, charcuterie, confiture et amandes se posent hors du four. Le sucré répond au salé et rien ne recuit.",
+    "imageAlt": "Gros plan d'une pizza blanche généreusement garnie de jambon cru, d'une boule de burrata, de crème et de feuilles de basilic",
+    "doughSuggestion": "Pâte napolitaine directe · 24 h",
+    "ingredients": [
+      "100 g de tomates cerises jaunes par pizza (des rouges à défaut)",
+      "100 g de mozzarella di bufala bien égouttée par pizza",
+      "50 g de jambon de Parme en tranches par pizza",
+      "40 g de provolone en fines tranches par pizza",
+      "15 g de confiture de figues par pizza, soit une cuillère à café bombée",
+      "15 g d'amandes grillées à sec et concassées par pizza",
+      "4 à 5 feuilles de basilic frais",
+      "Huile d'olive vierge extra, sel et semoule remoulue pour l'abaisse"
+    ],
+    "steps": [
+      "Mixer les tomates cerises jaunes crues avec une pincée de sel et un filet d'huile d'olive : c'est toute la sauce, elle ne cuit pas.",
+      "Griller les amandes à sec à la poêle jusqu'à ce qu'elles embaument, puis les concasser grossièrement.",
+      "Étaler la pâte sur un plan fariné de semoule en gardant un bord bien gonflé.",
+      "Napper de sauce jusqu'à deux centimètres du bord, ajouter un filet d'huile, puis cuire très chaud dans la partie basse du four, environ 8 minutes à 250 °C en chaleur tournante.",
+      "Hors du four, répartir la bufflonne déchirée à la main, les tranches de jambon de Parme et le provolone.",
+      "Toujours hors du four, poser la confiture en petites touches, parsemer les amandes, ajouter le basilic et un dernier trait d'huile, puis servir aussitôt."
+    ]
   }
 }

@@ -139,4 +139,18 @@ export const PIZZA_RECIPE_CATALOG = [
     // The 62 % preset again: a cheese-heavy topping asks for the drier dough.
     suggestedDoughId: 'neapolitan-direct-24h-62',
   },
+  {
+    id: 'la-regalade',
+    image: {
+      path: 'assets/recipes/la-regalade.webp',
+      sourceUrl:
+        'https://www.pexels.com/photo/delicious-italian-pizza-with-prosciutto-and-burrata-31357689/',
+      photographer: 'Gotta Be Worth It',
+    },
+    // The drier of the two Neapolitans, like the four-cheese one. This Recipe
+    // is dressed out of the oven, which would otherwise point at the 66 %, but
+    // 140 g of buffalo mozzarella and provolone per pizza is the heaviest
+    // cheese load of the notebook and the cheese wins the arbitration.
+    suggestedDoughId: 'neapolitan-direct-24h-62',
+  },
 ] satisfies readonly PizzaRecipeDefinition[];

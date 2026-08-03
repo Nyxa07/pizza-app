@@ -35,6 +35,7 @@
     "ingredients": "For the topping",
     "preparation": "Preparation",
     "photoCredit": "Photo: {photographer} · Pexels",
+    "photoDisclaimer": "Illustrative photo — not the finished Recipe.",
     "notFoundTitle": "Recipe not found",
     "notFoundBody": "This Recipe does not exist in the bundled catalog.",
     "emptyTitle": "No recipes yet",
