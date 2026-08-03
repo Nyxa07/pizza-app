@@ -109,5 +109,30 @@
       "Take the pizza out, scatter over the fior di latte, camembert and roquefort, then return it to the oven just long enough to melt them.",
       "Out of the oven, add the walnuts, drizzle over the honey, and finish with basil and a last thread of oil."
     ]
+  },
+  "pesto": {
+    "name": "Pesto",
+    "category": "The green basil one",
+    "summary": "Basil pesto, confit cherry tomatoes and stracciatella on a base baked bare, with nothing but olive oil.",
+    "description": "Nothing goes into the oven with the dough: it bakes on its own, brushed with olive oil. The pesto, confit tomatoes, fior di latte and parmesan only join halfway through, and the stracciatella and basil not until the pizza is out.",
+    "imageAlt": "Gourmet pizza topped with burrata and pesto",
+    "doughSuggestion": "Direct Neapolitan dough · 24 hours",
+    "ingredients": [
+      "80 g basil pesto per pizza",
+      "60 g confit cherry tomatoes per pizza",
+      "50 g well-drained fior di latte per pizza",
+      "15 g grated parmesan per pizza",
+      "100 g stracciatella per pizza",
+      "5 fresh basil leaves",
+      "Extra-virgin olive oil and a little fine semolina for shaping"
+    ],
+    "steps": [
+      "Heat the oven to 250 °C on fan mode, with the baking stone inside if you have one.",
+      "Dust the worktop with semolina, then open the dough by hand.",
+      "Slide the dough onto a semolina-dusted peel or onto a tray brushed with olive oil.",
+      "Brush the whole surface with olive oil, then bake for 8 minutes low in the oven.",
+      "Take the pizza out, spread over the pesto, confit tomatoes, fior di latte and parmesan, then return it for 5 minutes on conventional heat.",
+      "Out of the oven, finish with spoonfuls of stracciatella and the fresh basil leaves."
+    ]
   }
 }

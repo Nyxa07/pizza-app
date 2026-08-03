@@ -109,5 +109,30 @@
       "Sortir la pizza, répartir le fior di latte, le camembert et le roquefort, puis remettre au four juste le temps de les faire fondre.",
       "Hors du four, parsemer les noix, verser le miel en filet et terminer par le basilic et un dernier trait d'huile."
     ]
+  },
+  "pesto": {
+    "name": "Pesto",
+    "category": "La verte au basilic",
+    "summary": "Pesto au basilic, tomates cerises confites et stracciatella sur une pâte cuite nue, simplement huilée.",
+    "description": "Rien ne part au four avec la pâte : elle cuit seule, badigeonnée d'huile d'olive. Le pesto, les tomates confites, la fior di latte et le parmesan n'arrivent qu'à mi-cuisson, la stracciatella et le basilic seulement hors du four.",
+    "imageAlt": "Pizza gastronomique garnie de burrata et de pesto",
+    "doughSuggestion": "Pâte napolitaine directe · 24 h",
+    "ingredients": [
+      "80 g de pesto au basilic par pizza",
+      "60 g de tomates cerises confites par pizza",
+      "50 g de fior di latte bien égoutté par pizza",
+      "15 g de parmesan râpé par pizza",
+      "100 g de stracciatella par pizza",
+      "5 feuilles de basilic frais",
+      "Huile d'olive vierge extra et un peu de semoule remoulue pour l'abaisse"
+    ],
+    "steps": [
+      "Préchauffer le four à 250 °C en chaleur tournante, pierre réfractaire à l'intérieur si vous en avez une.",
+      "Fariner le plan de travail de semoule, puis étaler la pâte à la main.",
+      "Transférer la pâte sur une pelle farinée de semoule ou sur une plaque badigeonnée d'huile d'olive.",
+      "Badigeonner toute la surface d'huile d'olive, puis cuire 8 minutes dans le bas du four.",
+      "Sortir la pizza, répartir le pesto, les tomates confites, la fior di latte et le parmesan, puis remettre 5 minutes en chaleur statique.",
+      "Hors du four, terminer par la stracciatella en cuillerées et les feuilles de basilic frais."
+    ]
   }
 }

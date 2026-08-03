@@ -139,4 +139,18 @@ export const PIZZA_RECIPE_CATALOG = [
     // The 62 % preset again: a cheese-heavy topping asks for the drier dough.
     suggestedDoughId: 'neapolitan-direct-24h-62',
   },
+  {
+    id: 'pesto',
+    image: {
+      path: 'assets/recipes/pesto.webp',
+      sourceUrl:
+        'https://www.pexels.com/photo/pizza-gastronomique-avec-garniture-de-burrata-et-pesto-31899406/',
+      photographer: 'Esma kir',
+    },
+    // The bare first bake it shares with the Marinara garnie is not what the
+    // presets separate: the fior di latte and the parmesan do go back into the
+    // oven, exactly as the 4 fromages does. Only the stracciatella and the
+    // basil stay out, so this is the cheese-laden 62 %, not the wetter 66 %.
+    suggestedDoughId: 'neapolitan-direct-24h-62',
+  },
 ] satisfies readonly PizzaRecipeDefinition[];

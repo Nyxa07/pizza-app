@@ -150,6 +150,19 @@ describe('The dough each Recipe recommends', () => {
       ambientHours: 24,
       coldHours: 0,
     },
+    {
+      // Bakes bare, but the cheese goes back in: the drier dough, as for the
+      // 4 fromages.
+      id: 'pesto',
+      pizzaType: PizzaType.NEAPOLITAN,
+      doughType: DoughType.DIRECT,
+      hydrationRatio: 0.62,
+      flourStrength: 270,
+      balls: 4,
+      ballWeight: 250,
+      ambientHours: 24,
+      coldHours: 0,
+    },
   ] as const;
 
   let catalog: RecipeCatalogService;
@@ -219,6 +232,7 @@ describe('RecipeCatalogService', () => {
       'Marinara garnie',
       'Reine',
       '4 fromages',
+      'Pesto',
     ]);
     expect(service.get('marinara')?.content.category).toBe(
       'La plus dépouillée',
