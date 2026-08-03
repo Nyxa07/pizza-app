@@ -159,5 +159,30 @@
       "Hors du four, répartir la bufflonne déchirée à la main, les tranches de jambon de Parme et le provolone.",
       "Toujours hors du four, poser la confiture en petites touches, parsemer les amandes, ajouter le basilic et un dernier trait d'huile, puis servir aussitôt."
     ]
+  },
+  "diavola": {
+    "name": "Diavola",
+    "category": "La piquante",
+    "summary": "Tomate, fior di latte et spianata piquante, adoucies par l'oignon rouge confit.",
+    "description": "Le piquant de la Diavola ne brûle pas, il monte. La spianata n'arrive qu'après une première cuisson de la base tomate, juste le temps de perler son gras sur le fromage, et l'oignon rouge confit pose une note sucrée en contrepoint.",
+    "imageAlt": "Pizza à la tomate et à la mozzarella couverte de tranches de salami piquant et de feuilles de basilic",
+    "doughSuggestion": "Pâte napolitaine directe · 24 h",
+    "ingredients": [
+      "80 g de tomates pelées concassées par pizza",
+      "80 g de fior di latte bien égoutté par pizza",
+      "50 g de spianata piquante en fines tranches par pizza (à défaut, un salami piquant type ventricina)",
+      "25 g d'oignon rouge confit par pizza",
+      "15 g de parmesan râpé par pizza",
+      "5 feuilles de basilic",
+      "Huile d'olive vierge extra, un peu de semoule remoulue et une pincée de sel"
+    ],
+    "steps": [
+      "Faire fondre doucement l'oignon rouge émincé à l'huile d'olive avec une pincée de sel, jusqu'à ce qu'il devienne confit, puis laisser refroidir.",
+      "Assaisonner les tomates concassées d'une pincée de sel, sans les cuire.",
+      "Étaler la pâte sur un plan fariné de semoule en gardant un bord d'environ deux centimètres, puis napper de tomate.",
+      "Enfourner très chaud avec la tomate seule : la base prend sa couleur avant que la garniture n'arrive.",
+      "Sortir la pizza, répartir le fior di latte, la spianata, le parmesan, l'oignon confit et deux ou trois feuilles de basilic, puis remettre au four juste le temps de faire fondre le fromage et de perler le gras du salami.",
+      "Hors du four, verser un filet d'huile d'olive et poser le reste du basilic, puis servir aussitôt."
+    ]
   }
 }
