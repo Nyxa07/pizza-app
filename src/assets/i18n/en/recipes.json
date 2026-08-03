@@ -109,5 +109,29 @@
       "Take the pizza out, scatter over the fior di latte, camembert and roquefort, then return it to the oven just long enough to melt them.",
       "Out of the oven, add the walnuts, drizzle over the honey, and finish with basil and a last thread of oil."
     ]
+  },
+  "pesto": {
+    "name": "Pesto",
+    "category": "The creamy green one",
+    "summary": "A base baked bare, then pesto that barely sees the oven and two mozzarellas added at the end.",
+    "description": "The pesto does not bake. The dough goes into the oven on its own, brushed with olive oil, and only takes the pesto, the confit tomatoes and the fior di latte on its second stint; the stracciatella waits until the pizza is out of the oven so it stays creamy.",
+    "imageAlt": "Close-up of a pesto pizza with a ball of creamy mozzarella topped with pesto on the left and a deeply coloured rim",
+    "doughSuggestion": "Direct Neapolitan dough · 24 hours",
+    "ingredients": [
+      "60 g basil pesto per pizza, homemade or good quality",
+      "50 g confit cherry tomatoes per pizza (or cherry tomatoes roasted in the oven with a drizzle of oil)",
+      "40 g well-drained fior di latte per pizza",
+      "10 g grated parmesan per pizza",
+      "80 g stracciatella per pizza",
+      "Fine semolina for the work surface",
+      "Extra-virgin olive oil and a few fresh basil leaves"
+    ],
+    "steps": [
+      "Dust the work surface with semolina and open the dough by hand, keeping a puffy rim.",
+      "Brush the whole surface with olive oil, then bake very hot, bare, until the base is golden.",
+      "Take the pizza out, spread the pesto, then scatter over the confit tomatoes, the fior di latte and the parmesan.",
+      "Return it to the oven just long enough to melt the mozzarella, without letting the pesto colour.",
+      "Out of the oven, spoon over spaced dollops of stracciatella, then finish with fresh basil and a last drizzle of oil."
+    ]
   }
 }
