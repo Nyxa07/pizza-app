@@ -133,5 +133,31 @@
       "Return it to the oven just long enough to melt the mozzarella, without letting the pesto colour.",
       "Out of the oven, spoon over spaced dollops of stracciatella, then finish with fresh basil and a last drizzle of oil."
     ]
+  },
+  "la-regalade": {
+    "name": "La Régalade",
+    "category": "The sweet-and-savoury one",
+    "summary": "Yellow cherry tomato sauce, buffalo mozzarella, Parma ham, provolone, fig jam and toasted almonds.",
+    "description": "The base bakes with the yellow sauce alone: cheeses, ham, jam and almonds are all added out of the oven. Sweet answers savoury and nothing is cooked twice.",
+    "imageAlt": "Close-up of a white pizza generously topped with cured ham, a ball of burrata, cream and basil leaves",
+    "doughSuggestion": "Direct Neapolitan dough · 24 hours",
+    "ingredients": [
+      "100 g yellow cherry tomatoes per pizza (red ones if you cannot find them)",
+      "100 g well-drained buffalo mozzarella per pizza",
+      "50 g sliced Parma ham per pizza",
+      "40 g thinly sliced provolone per pizza",
+      "15 g fig jam per pizza, about one heaped teaspoon",
+      "15 g dry-toasted, roughly crushed almonds per pizza",
+      "4 to 5 fresh basil leaves",
+      "Extra-virgin olive oil, salt and fine semolina for opening the dough"
+    ],
+    "steps": [
+      "Blend the raw yellow cherry tomatoes with a pinch of salt and a drizzle of olive oil: that is the whole sauce, and it never cooks.",
+      "Dry-toast the almonds in a pan until fragrant, then crush them roughly.",
+      "Open the dough on a semolina-dusted surface, keeping a good puffy rim.",
+      "Spread the sauce to within two centimetres of the edge, add a drizzle of oil, then bake very hot in the lower part of the oven, about 8 minutes at 250 °C fan.",
+      "Out of the oven, scatter over the hand-torn buffalo mozzarella, the slices of Parma ham and the provolone.",
+      "Still out of the oven, dot over the fig jam, scatter the almonds, add the basil and a last thread of oil, then serve straight away."
+    ]
   }
 }

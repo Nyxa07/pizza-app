@@ -29,6 +29,9 @@
                 | translate: { photographer: recipe.image.photographer }
             }}
           </a>
+          <!-- Every bundled visual is a provisional stock photo, so the
+               disclaimer belongs to the screen, not to a single Recipe. -->
+          <small>{{ "pages.recipes.photoDisclaimer" | translate }}</small>
         </figcaption>
       </figure>
 
